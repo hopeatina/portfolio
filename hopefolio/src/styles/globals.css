@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold mb-6;
+  }
+  h2 {
+    @apply text-3xl font-bold mb-4;
+  }
+  h3 {
+    @apply text-2xl font-bold mb-3;
+  }
+  a {
+    @apply text-primary hover:text-hover transition-colors;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+} 

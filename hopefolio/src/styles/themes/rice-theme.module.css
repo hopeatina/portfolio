@@ -1,0 +1,11 @@
+:root[data-theme="rice"] {
+  --primary: #00205b;
+  --secondary: #c1c1c1;
+  --background: #ffffff;
+  --text: #2d3748;
+  --accent: #8391a2;
+  
+  --header-bg: rgba(255, 255, 255, 0.8);
+  --card-bg: #f7fafc;
+  --hover: #001845;
+} 

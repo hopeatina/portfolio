@@ -1,0 +1,13 @@
+:root[data-theme="base"] {
+  --primary: #6d28d9;
+  --secondary: #ec4899;
+  --background: #ffffff;
+  --text: #1f2937;
+  --accent: #8b5cf6;
+  
+  --header-bg: rgba(255, 255, 255, 0.8);
+  --card-bg: #f3f4f6;
+  --hover: #7c3aed;
+}
+
+/* Add any theme-specific component styles here */ 

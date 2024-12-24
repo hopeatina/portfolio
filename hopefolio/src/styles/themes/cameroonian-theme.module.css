@@ -1,0 +1,11 @@
+:root[data-theme="cameroonian"] {
+  --primary: #c53030;
+  --secondary: #805ad5;
+  --background: #fffaf0;
+  --text: #2d3748;
+  --accent: #dd6b20;
+  
+  --header-bg: rgba(255, 250, 240, 0.8);
+  --card-bg: #fff5eb;
+  --hover: #9b2c2c;
+} 

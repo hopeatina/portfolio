@@ -1,0 +1,11 @@
+:root[data-theme="futuristic"] {
+  --primary: #00ff9d;
+  --secondary: #ff00ff;
+  --background: #0a0a0a;
+  --text: #ffffff;
+  --accent: #00ffff;
+  
+  --header-bg: rgba(10, 10, 10, 0.8);
+  --card-bg: #1a1a1a;
+  --hover: #00cc7d;
+} 
