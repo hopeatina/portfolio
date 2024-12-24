@@ -1,11 +1,87 @@
-:root[data-theme="cameroonian"] {
-  --primary: #c53030;
-  --secondary: #805ad5;
-  --background: #fffaf0;
-  --text: #2d3748;
-  --accent: #dd6b20;
+.theme {
+  /* Colors */
+  --primary: #9C5C38;
+  --accent: #0B6E4F;
+  --secondary: #EC6E4C;
+  --background: #F9F5F1;
+  --text: #2D1810;
+  --highlight: #CFAE58;
   
-  --header-bg: rgba(255, 250, 240, 0.8);
-  --card-bg: #fff5eb;
-  --hover: #9b2c2c;
+  /* UI Elements */
+  --header-bg: rgba(249, 245, 241, 0.8);
+  --card-bg: #FFF5EB;
+  --hover: #7D4A2D;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #9C5C38 0%, #0B6E4F 100%);
+  --gradient-secondary: linear-gradient(45deg, #EC6E4C 0%, #CFAE58 100%);
+  
+  /* Typography */
+  --font-heading: 'Ubuntu Condensed', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+  --letter-spacing-heading: 0.01em;
+  --line-height-body: 1.7;
+  
+  /* Borders & Shadows */
+  --border-radius: 0.75rem;
+  --box-shadow: 0 4px 6px -1px rgba(156, 92, 56, 0.1), 0 2px 4px -1px rgba(156, 92, 56, 0.06);
+  
+  /* Animations */
+  --transition-base: all 0.4s ease-in-out;
+  --hover-scale: scale(1.03);
+  --hover-rotate: rotate(2deg);
+  --button-pulse: weave 3s ease infinite;
+}
+
+/* Animations */
+@keyframes weave {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes tapestry {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Background Patterns */
+.kentePattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm20 20h20v20H20V20zM0 20h20v20H0V20z' fill='%239C5C38' fill-opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Utility Classes */
+.heading {
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  font-weight: 700;
+}
+
+.body {
+  font-family: var(--font-body);
+  line-height: var(--line-height-body);
+  font-weight: 400;
+}
+
+.transitionBase {
+  transition: var(--transition-base);
+}
+
+.hoverScale:hover {
+  transform: var(--hover-scale) var(--hover-rotate);
+}
+
+.buttonPulse {
+  animation: var(--button-pulse);
+}
+
+.gradientText {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.geometricIcon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 } 

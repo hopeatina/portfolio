@@ -1,8 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
@@ -16,8 +14,6 @@ export default function BrainBuffet() {
           content="LLM-powered course creation platform for personalized learning experiences"
         />
       </Head>
-
-      <Header />
 
       <main className="container py-12">
         <Link
@@ -101,8 +97,6 @@ export default function BrainBuffet() {
           </div>
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

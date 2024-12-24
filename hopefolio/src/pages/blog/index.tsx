@@ -1,8 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Card from "@/components/ui/Card";
 import { getAllPosts } from "@/modules/blog/posts";
 
@@ -28,8 +26,6 @@ export default function Blog({ posts }: BlogProps) {
         />
       </Head>
 
-      <Header />
-
       <main className="container py-12">
         <h1>Blog</h1>
         <div className="grid gap-8">
@@ -46,8 +42,6 @@ export default function Blog({ posts }: BlogProps) {
           ))}
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

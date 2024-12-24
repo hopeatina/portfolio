@@ -1,8 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import { GetStaticProps, GetStaticPaths } from "next";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import { getAllPosts, getPostBySlug } from "@/modules/blog/posts";
 import { marked } from "marked";
 
@@ -22,8 +20,6 @@ export default function Post({ post }: PostProps) {
         <title>{post.title} | Emerging Hope</title>
       </Head>
 
-      <Header />
-
       <main className="container py-12">
         <article className="prose lg:prose-xl mx-auto">
           <h1>{post.title}</h1>
@@ -33,8 +29,6 @@ export default function Post({ post }: PostProps) {
           <div dangerouslySetInnerHTML={{ __html: marked(post.content) }} />
         </article>
       </main>
-
-      <Footer />
     </>
   );
 }

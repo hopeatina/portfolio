@@ -1,7 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Card from "@/components/ui/Card";
 
 export default function About() {
@@ -15,9 +13,7 @@ export default function About() {
         />
       </Head>
 
-      <Header />
-
-      <main className="container py-12">
+      <main className="container py-12 mt-24">
         <h1>About Me</h1>
 
         <div className="grid gap-8">
@@ -52,8 +48,6 @@ export default function About() {
           </Card>
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

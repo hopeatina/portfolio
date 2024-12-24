@@ -1,7 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
@@ -20,8 +18,6 @@ export default function Contact() {
           content="Get in touch to discuss collaborations, projects, or just to say hello"
         />
       </Head>
-
-      <Header />
 
       <main className="container py-12">
         <h1>Contact</h1>
@@ -118,8 +114,6 @@ export default function Contact() {
           </Card>
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

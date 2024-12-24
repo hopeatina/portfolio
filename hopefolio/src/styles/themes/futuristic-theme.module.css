@@ -1,11 +1,131 @@
-:root[data-theme="futuristic"] {
-  --primary: #00ff9d;
-  --secondary: #ff00ff;
-  --background: #0a0a0a;
-  --text: #ffffff;
-  --accent: #00ffff;
+.theme {
+  /* Colors */
+  --primary: #111111;
+  --accent: #9D00FF;
+  --secondary: #FF0080;
+  --background: #1A1A1A;
+  --text: #FFFFFF;
+  --highlight: #00FF66;
   
-  --header-bg: rgba(10, 10, 10, 0.8);
-  --card-bg: #1a1a1a;
-  --hover: #00cc7d;
+  /* UI Elements */
+  --header-bg: rgba(26, 26, 26, 0.8);
+  --card-bg: #1A1A1A;
+  --hover: #9D00FF;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #9D00FF 0%, #FF0080 100%);
+  --gradient-secondary: linear-gradient(45deg, #00FF66 0%, #00FFFF 100%);
+  
+  /* Typography */
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Titillium Web', sans-serif;
+  --letter-spacing-heading: 0.05em;
+  --line-height-body: 1.6;
+  
+  /* Borders & Shadows */
+  --border-radius: 0.125rem;
+  --box-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
+  
+  /* Animations */
+  --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --hover-scale: scale(1.1);
+  --hover-rotate: rotate(-2deg);
+  --button-pulse: neonPulse 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes neonPulse {
+  0% {
+    text-shadow: 0 0 7px #9D00FF;
+  }
+  50% {
+    text-shadow: 0 0 20px #9D00FF, 0 0 30px #FF0080;
+  }
+  100% {
+    text-shadow: 0 0 7px #9D00FF;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Background Patterns */
+.cyberPattern {
+  background: linear-gradient(0deg, rgba(157, 0, 255, 0.1) 0%, rgba(255, 0, 128, 0.1) 100%);
+  position: relative;
+}
+
+.cyberPattern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239D00FF' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.1;
+  z-index: 1;
+}
+
+/* Utility Classes */
+.heading {
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.body {
+  font-family: var(--font-body);
+  line-height: var(--line-height-body);
+  font-weight: 400;
+}
+
+.transitionBase {
+  transition: var(--transition-base);
+}
+
+.hoverScale:hover {
+  transform: var(--hover-scale) var(--hover-rotate);
+}
+
+.buttonPulse {
+  animation: var(--button-pulse);
+}
+
+.gradientText {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.neonIcon {
+  filter: drop-shadow(0 0 5px var(--accent));
+}
+
+.glitchEffect {
+  animation: glitch 1s ease-in-out infinite;
+}
+
+.neonBorder {
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 10px var(--accent), inset 0 0 10px var(--accent);
 } 

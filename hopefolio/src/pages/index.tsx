@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import Header from "@/components/layout/Header";
+import Hero from "@/components/ui/Hero";
 
 export default function Home() {
   return (
@@ -15,9 +15,8 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen">
-        <Header />
-        {/* Hero section will go here */}
-        {/* Rest of homepage content */}
+        <Hero />
+        {/* Additional sections will be added here */}
       </main>
     </>
   );

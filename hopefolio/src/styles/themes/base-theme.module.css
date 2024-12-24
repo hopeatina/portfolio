@@ -1,13 +1,83 @@
-:root[data-theme="base"] {
-  --primary: #6d28d9;
-  --secondary: #ec4899;
-  --background: #ffffff;
-  --text: #1f2937;
-  --accent: #8b5cf6;
+.theme {
+  /* Colors */
+  --primary: #6D28D9;
+  --accent: #EC4899;
+  --secondary: #F3E8FF;
+  --background: #FFFFFF;
+  --text: #1F2937;
+  --highlight: #FBBF24;
   
+  /* UI Elements */
   --header-bg: rgba(255, 255, 255, 0.8);
-  --card-bg: #f3f4f6;
-  --hover: #7c3aed;
+  --card-bg: #F3F4F6;
+  --hover: #7C3AED;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #6D28D9 0%, #EC4899 100%);
+  
+  /* Typography */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --letter-spacing-heading: -0.02em;
+  --line-height-body: 1.6;
+  
+  /* Borders & Shadows */
+  --border-radius: 0.5rem;
+  --box-shadow: 0 4px 6px -1px rgba(109, 40, 217, 0.1), 0 2px 4px -1px rgba(109, 40, 217, 0.06);
+  
+  /* Animations */
+  --transition-base: all 0.3s ease;
+  --hover-scale: scale(1.05);
+  --button-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Add any theme-specific component styles here */ 
+/* Animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px #6D28D9, 0 0 10px #6D28D9, 0 0 15px #EC4899;
+  }
+  to {
+    box-shadow: 0 0 10px #6D28D9, 0 0 20px #6D28D9, 0 0 30px #EC4899;
+  }
+}
+
+/* Background Patterns */
+.starfieldPattern {
+  background-image: radial-gradient(circle at 50% 50%, rgba(109, 40, 217, 0.1) 0%, transparent 50%);
+}
+
+/* Utility Classes */
+.heading {
+  font-family: var(--font-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  font-weight: 700;
+}
+
+.body {
+  font-family: var(--font-body);
+  line-height: var(--line-height-body);
+  font-weight: 400;
+}
+
+.transitionBase {
+  transition: var(--transition-base);
+}
+
+.hoverScale:hover {
+  transform: var(--hover-scale);
+}
+
+.buttonPulse {
+  animation: var(--button-pulse);
+}
+
+.gradientText {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+} 

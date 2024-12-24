@@ -2,8 +2,6 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Card from "@/components/ui/Card";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 const projects = [
   {
@@ -33,8 +31,6 @@ export default function Projects() {
         />
       </Head>
 
-      <Header />
-
       <main className="container py-12">
         <h1>Projects</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -53,8 +49,6 @@ export default function Projects() {
           ))}
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }
