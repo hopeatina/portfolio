@@ -1,8 +1,11 @@
 import React from "react";
-import Head from "next/head";
 import { GetStaticProps, GetStaticPaths } from "next";
+import BlogLayout from "@/components/blog/BlogLayout";
+import BlogPostHeader from "@/components/blog/BlogPostHeader";
+import BlogPostContent from "@/components/blog/BlogPostContent";
+import BlogPostCTA from "@/components/blog/BlogPostCTA";
 import { getAllPosts, getPostBySlug } from "@/modules/blog/posts";
-import { marked } from "marked";
+import { UserCircleIcon, PhoneIcon, RssIcon } from "@heroicons/react/24/solid";
 
 interface PostProps {
   post: {
@@ -10,26 +13,45 @@ interface PostProps {
     title: string;
     date: string;
     content: string;
+    excerpt?: string;
+    category?: string;
   };
 }
 
 export default function Post({ post }: PostProps) {
-  return (
-    <>
-      <Head>
-        <title>{post.title} | Emerging Hope</title>
-      </Head>
+  const socialLinks = [
+    {
+      platform: "LinkedIn",
+      url: "https://linkedin.com/in/yourusername",
+      icon: <UserCircleIcon className="w-5 h-5" />,
+    },
+    {
+      platform: "TikTok",
+      url: "https://tiktok.com/@yourusername",
+      icon: <PhoneIcon className="w-5 h-5" />,
+    },
+    {
+      platform: "RSS Feed",
+      url: "/rss.xml",
+      icon: <RssIcon className="w-5 h-5" />,
+    },
+  ];
 
-      <main className="container py-12">
-        <article className="prose lg:prose-xl mx-auto">
-          <h1>{post.title}</h1>
-          <time className="text-gray-500 block mb-8">
-            {new Date(post.date).toLocaleDateString()}
-          </time>
-          <div dangerouslySetInnerHTML={{ __html: marked(post.content) }} />
-        </article>
-      </main>
-    </>
+  return (
+    <BlogLayout title={post.title} description={post.excerpt} isPost={true}>
+      <article>
+        <BlogPostHeader
+          title={post.title}
+          date={post.date}
+          category={post.category}
+          excerpt={post.excerpt}
+        />
+
+        <BlogPostContent content={post.content} />
+
+        <BlogPostCTA socialLinks={socialLinks} />
+      </article>
+    </BlogLayout>
   );
 }
 

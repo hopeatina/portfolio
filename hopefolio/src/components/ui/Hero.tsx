@@ -1,139 +1,101 @@
 import React from "react";
-import Link from "next/link";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
-import baseStyles from "@/styles/themes/base-theme.module.css";
-import cameroonianStyles from "@/styles/themes/cameroonian-theme.module.css";
-import riceStyles from "@/styles/themes/rice-theme.module.css";
-import futuristicStyles from "@/styles/themes/futuristic-theme.module.css";
+import { BiBrain } from "react-icons/bi";
+import { FaGraduationCap } from "react-icons/fa";
+
+interface ProjectHighlight {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+}
+
+const projectHighlights: ProjectHighlight[] = [
+  {
+    title: "AI Research",
+    description: "Exploring the frontiers of artificial intelligence",
+    icon: <BiBrain size={24} />,
+  },
+  {
+    title: "Education",
+    description: "Building tools for better learning experiences",
+    icon: <FaGraduationCap size={24} />,
+  },
+];
 
 export default function Hero() {
-  const { theme } = useTheme();
-
-  // Get the current theme's styles
-  const getThemeStyles = () => {
-    switch (theme) {
-      case "cameroonian":
-        return cameroonianStyles;
-      case "rice":
-        return riceStyles;
-      case "futuristic":
-        return futuristicStyles;
-      default:
-        return baseStyles;
-    }
-  };
-
+  const { theme, getThemeStyles } = useTheme();
   const styles = getThemeStyles();
 
-  // Get the appropriate pattern class based on theme
-  const getPatternClass = () => {
-    switch (theme) {
-      case "cameroonian":
-        return styles.kentePattern;
-      case "rice":
-        return styles.academicPattern;
-      case "futuristic":
-        return styles.cyberPattern;
-      default:
-        return styles.starfieldPattern;
-    }
-  };
-
   return (
-    <div
-      className={`min-h-[80vh] flex items-center justify-center relative overflow-hidden ${styles.theme}`}
-    >
-      {/* Background Pattern */}
-      <div className={`absolute inset-0 z-0 ${getPatternClass()}`} />
-
-      <div className="container mx-auto px-6 relative z-10">
+    <section className="py-16 md:py-24">
+      <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
+          {/* Main Heading */}
           <h1
-            className={`text-5xl md:text-6xl mb-6 ${styles.heading} ${styles.gradientText}`}
+            className={`text-4xl md:text-6xl mb-6 ${styles.headingH1} ${styles.gradientText}`}
           >
-            Transforming Ideas into Digital Reality
+            Building, Creating, and Rethinking Possibility
           </h1>
 
-          <p
-            className={`text-xl md:text-2xl mb-8 ${styles.body}`}
-            style={{ color: "var(--text)" }}
+          {/* Subtitle */}
+          <h2
+            className={`text-xl md:text-2xl mb-8 ${styles.headingH2}`}
+            style={{
+              color: "var(--text)",
+              opacity: theme === "futuristic" ? 0.85 : 0.9,
+            }}
           >
-            From Cameroon to Houston, I bring a unique perspective to software
-            engineering, blending cultural richness with technical excellence to
-            create impactful solutions.
+            Engineer, Artist, and Futurist—transforming ideas into reality
+          </h2>
+
+          {/* Tagline */}
+          <p
+            className={`text-lg md:text-xl mb-12 ${styles.body}`}
+            style={{
+              color: "var(--text)",
+              opacity: theme === "futuristic" ? 0.85 : 0.9,
+            }}
+          >
+            No one can beat you at being you
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/projects"
-              className={`px-8 py-3 ${styles.transitionBase} ${styles.buttonPulse}`}
-              style={{
-                background: "var(--gradient-primary)",
-                color: "var(--background)",
-                borderRadius: "var(--border-radius)",
-                fontFamily: "var(--font-heading)",
-                fontWeight: "600",
-              }}
-            >
-              Explore My Projects
-            </Link>
-            <Link
-              href="/contact"
-              className={`px-8 py-3 ${styles.transitionBase} ${styles.hoverScale}`}
-              style={{
-                border: "2px solid var(--accent)",
-                color: "var(--accent)",
-                borderRadius: "var(--border-radius)",
-                fontFamily: "var(--font-heading)",
-                fontWeight: "600",
-              }}
-            >
-              Work With Me
-            </Link>
-          </div>
-
-          {/* Quick Intro Section */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-            {[
-              {
-                title: "Software Engineer",
-                description:
-                  "Building scalable solutions with modern technologies",
-              },
-              {
-                title: "Creative Artist",
-                description: "Blending technology with artistic expression",
-              },
-              {
-                title: "Cultural Bridge",
-                description:
-                  "Connecting diverse perspectives through technology",
-              },
-            ].map((item, index) => (
+          {/* Project Highlights */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            {projectHighlights.map((project, index) => (
               <div
                 key={index}
-                className={`p-6 ${styles.transitionBase} ${styles.hoverScale}`}
-                style={{
-                  background: "var(--card-bg)",
-                  borderRadius: "var(--border-radius)",
-                  boxShadow: "var(--box-shadow)",
-                  backdropFilter: "blur(8px)",
-                }}
+                className={`p-6 rounded-lg ${styles.card} group`}
               >
+                <div className="flex items-center justify-center mb-4">
+                  <span
+                    className={`${styles.icon} transition-transform group-hover:scale-110`}
+                    style={{
+                      color: "var(--text)",
+                      opacity: theme === "futuristic" ? 0.85 : 0.9,
+                    }}
+                  >
+                    {project.icon}
+                  </span>
+                </div>
                 <h3
-                  className={`text-xl mb-2 ${styles.heading}`}
-                  style={{ color: "var(--primary)" }}
+                  className={`text-xl mb-2 ${styles.headingH3} ${styles.gradientText}`}
                 >
-                  {item.title}
+                  {project.title}
                 </h3>
-                <p className={styles.body} style={{ color: "var(--text)" }}>
-                  {item.description}
+                <p
+                  className={styles.body}
+                  style={{
+                    color: "var(--text)",
+                    opacity: theme === "futuristic" ? 0.85 : 0.9,
+                  }}
+                >
+                  {project.description}
                 </p>
               </div>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

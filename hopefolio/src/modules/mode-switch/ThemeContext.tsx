@@ -5,6 +5,10 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
+import baseStyles from "@/styles/themes/base-theme.module.css";
+import cameroonianStyles from "@/styles/themes/cameroonian-theme.module.css";
+import riceStyles from "@/styles/themes/rice-theme.module.css";
+import futuristicStyles from "@/styles/themes/futuristic-theme.module.css";
 
 export type Theme = "base" | "cameroonian" | "rice" | "futuristic";
 
@@ -213,32 +217,46 @@ export const themeProperties: Record<Theme, ThemeProperties> = {
 interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
-  themeProps: ThemeProperties;
+  getThemeStyles: () => typeof baseStyles;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme") as Theme;
-      return savedTheme || "base";
-    }
-    return "base";
-  });
+  const [theme, setTheme] = useState<Theme>("base");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("theme", theme);
+    // Get theme from localStorage if available
+    const savedTheme = localStorage.getItem("theme") as Theme;
+    if (savedTheme) {
+      setTheme(savedTheme);
     }
-  }, [theme]);
+  }, []);
 
-  const themeProps = themeProperties[theme];
+  const getThemeStyles = () => {
+    switch (theme) {
+      case "cameroonian":
+        return cameroonianStyles;
+      case "rice":
+        return riceStyles;
+      case "futuristic":
+        return futuristicStyles;
+      default:
+        return baseStyles;
+    }
+  };
+
+  const value = {
+    theme,
+    setTheme: (newTheme: Theme) => {
+      setTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
+    },
+    getThemeStyles,
+  };
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, themeProps }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }
 
