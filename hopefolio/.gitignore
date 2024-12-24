@@ -64,3 +64,4 @@ pnpm-*.yaml
 
 # node_modules
 node_modules
+hopefolio/node_modules
