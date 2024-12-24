@@ -39,3 +39,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# eslint
+.eslintcache
+
+# prettier
+.prettierrc
+
+# vscode
+.vscode
+
+# pnpm
+pnpm-lock.yaml
+pnpm-*.yaml
+pnpm-*.lock
+pnpm-*.json
+pnpm-*.lock
+pnpm-*.json
+pnpm-*.yaml
+pnpm-*.yaml
+pnpm-*.yaml
+pnpm-*.yaml
+pnpm-*.yaml
+
+# node_modules
+node_modules
