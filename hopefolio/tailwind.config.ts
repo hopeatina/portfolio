@@ -9,10 +9,16 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: "var(--primary)",
+        secondary: "var(--secondary)",
         background: "var(--background)",
-        foreground: "var(--foreground)",
+        text: "var(--text)",
+        accent: "var(--accent)",
+        hover: "var(--hover)",
+        "header-bg": "var(--header-bg)",
+        "card-bg": "var(--card-bg)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 } satisfies Config;
