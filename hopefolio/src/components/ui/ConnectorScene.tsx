@@ -8,6 +8,7 @@ import {
   MeshTransmissionMaterial,
   Environment,
   Lightformer,
+  OrbitControls,
 } from "@react-three/drei";
 import {
   CuboidCollider,
@@ -326,6 +327,7 @@ const ConnectorScene = () => {
           />
         </group>
       </Environment>
+      {/* <OrbitControls /> */}
     </Canvas>
   );
 };

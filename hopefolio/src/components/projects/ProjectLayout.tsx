@@ -139,7 +139,7 @@ export default function ProjectLayout({
           >
             {/* Decorative Top Border */}
             <div
-              className="absolute top-0 left-0 right-0 h-1"
+              className="absolute inset-x-0 top-0 h-1 overflow-hidden rounded-t-[inherit]"
               style={{
                 background: "var(--gradient-primary)",
                 opacity: isDarkTheme ? 1 : 0.8,

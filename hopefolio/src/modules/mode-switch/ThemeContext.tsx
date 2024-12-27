@@ -124,15 +124,17 @@ export const themeProperties: Record<Theme, ThemeProperties> = {
   },
   cameroonian: {
     colors: {
-      primary: "#9C5C38",
-      accent: "#0B6E4F",
-      secondary: "#EC6E4C",
-      background: "#F9F5F1",
-      text: "#2D1810",
-      highlight: "#CFAE58",
+      primary: "#009639",
+      accent: "#C71F02",
+      secondary: "#f5e900",
+      background: "#FFFFFF",
+      text: "#1A1A1A",
+      highlight: "#f5e900",
       gradients: {
-        primary: "linear-gradient(135deg, #9C5C38 0%, #0B6E4F 100%)",
-        secondary: "linear-gradient(45deg, #EC6E4C 0%, #CFAE58 100%)",
+        primary:
+          "linear-gradient(120deg, rgba(0, 150, 57, 0.9) 0%, rgba(199, 31, 2, 0.8) 50%, rgba(245, 233, 0, 0.9) 100%)",
+        secondary:
+          "linear-gradient(45deg, rgba(0, 150, 57, 0.85) 0%, rgba(199, 31, 2, 0.75) 50%, rgba(0, 150, 57, 0.85) 100%)",
       },
     },
     typography: {
@@ -182,13 +184,16 @@ export const themeProperties: Record<Theme, ThemeProperties> = {
   rice: {
     colors: {
       primary: "#00205B",
-      accent: "#336699",
-      secondary: "#9FA2A5",
-      background: "#F7F9FC",
-      text: "#1A1A1A",
-      highlight: "#00205B",
+      accent: "#7C7E7F",
+      secondary: "#ADC7DC",
+      background: "#FFFFFF",
+      text: "#44474F",
+      highlight: "#4D9AD4",
       gradients: {
-        primary: "linear-gradient(135deg, #00205B 0%, #336699 100%)",
+        primary:
+          "linear-gradient(120deg, rgba(0, 32, 91, 0.9) 0%, rgba(10, 80, 158, 0.8) 50%, rgba(77, 154, 212, 0.9) 100%)",
+        secondary:
+          "linear-gradient(45deg, rgba(0, 32, 91, 0.85) 0%, rgba(48, 59, 97, 0.75) 50%, rgba(173, 199, 220, 0.85) 100%)",
       },
     },
     typography: {
@@ -234,15 +239,17 @@ export const themeProperties: Record<Theme, ThemeProperties> = {
   },
   futuristic: {
     colors: {
-      primary: "#111111",
-      accent: "#9D00FF",
-      secondary: "#FF0080",
-      background: "#1A1A1A",
+      primary: "#00EE5C",
+      accent: "#00B34A",
+      secondary: "#33FF99",
+      background: "#0A0A0A",
       text: "#FFFFFF",
-      highlight: "#00FF66",
+      highlight: "#00FF99",
       gradients: {
-        primary: "linear-gradient(135deg, #9D00FF 0%, #FF0080 100%)",
-        secondary: "linear-gradient(45deg, #00FF66 0%, #00FFFF 100%)",
+        primary:
+          "linear-gradient(120deg, rgba(0, 238, 92, 0.9) 0%, rgba(0, 179, 74, 0.8) 50%, rgba(51, 255, 153, 0.9) 100%)",
+        secondary:
+          "linear-gradient(45deg, rgba(0, 238, 92, 0.85) 0%, rgba(0, 179, 74, 0.75) 50%, rgba(51, 255, 153, 0.85) 100%)",
       },
     },
     typography: {

@@ -189,7 +189,7 @@ const TechStack = () => {
         >
           {/* Decorative Top Border */}
           <div
-            className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl"
+            className="absolute inset-x-0 top-0 h-1 rounded-t-[inherit]"
             style={{
               background: "var(--gradient-primary)",
               opacity: isDarkTheme ? 1 : 0.8,

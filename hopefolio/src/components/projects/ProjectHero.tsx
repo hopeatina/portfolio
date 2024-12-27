@@ -6,14 +6,14 @@ import styles from "@/styles/themes/base-theme.module.css";
 interface ProjectHeroProps {
   title: string;
   description: string;
-  tags: string[];
+  tags?: string[];
   image?: string;
 }
 
 export default function ProjectHero({
   title,
   description,
-  tags,
+  tags = [],
   image,
 }: ProjectHeroProps) {
   const { theme, getThemeStyles } = useTheme();

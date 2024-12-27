@@ -47,10 +47,13 @@ const CTASection = () => {
         >
           {/* Decorative Top Border */}
           <div
-            className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl"
+            className="absolute -top-[1px] left-0 right-0 h-1 overflow-hidden"
             style={{
+              borderTopLeftRadius: "1rem",
+              borderTopRightRadius: "1rem",
               background: "var(--gradient-primary)",
               opacity: isDarkTheme ? 1 : 0.8,
+              transform: "translateY(1px)",
             }}
           />
 

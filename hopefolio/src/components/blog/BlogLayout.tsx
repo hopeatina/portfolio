@@ -63,10 +63,12 @@ export default function BlogLayout({
         >
           {/* Decorative Top Border */}
           <div
-            className="absolute top-0 left-0 right-0 h-1 rounded-t-lg overflow-hidden"
+            className="absolute inset-x-0 top-0 h-1 overflow-hidden"
             style={{
               background: "var(--gradient-primary)",
               opacity: theme === "futuristic" ? 1 : 0.8,
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+              width: "100%",
             }}
           />
 

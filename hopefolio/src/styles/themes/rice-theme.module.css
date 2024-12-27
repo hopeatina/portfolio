@@ -30,28 +30,24 @@
 }
 
 .theme {
-  /* Colors 
-     Use #00205B (Rice Blue) as the main brand color, 
-     keep gold/bronze as accent/secondary.
-  */
+  /* Colors */
   --primary: #00205B;
-  /* Rice Blue */
-  --accent: #8C7355;
-  /* Deeper bronze */
-  --secondary: #D4C1A6;
-  /* Soft gold/bronze tone */
-  --background: #FAF7F2;
-  /* Light background */
-  --text: #2C1810;
-  /* Dark brown text */
-  --highlight: #E5DDD0;
-  /* Lighter neutral highlight */
-  --text-muted: rgba(44, 24, 16, 0.85);
+  /* Rice University Blue */
+  --accent: #7C7E7F;
+  /* Rice University Gray */
+  --secondary: #ADC7DC;
+  /* Light Blue Gray */
+  --background: #FFFFFF;
+  --text: #44474F;
+  /* Dark Gray */
+  --highlight: #4D9AD4;
+  /* Medium Blue */
+  --text-muted: rgba(68, 71, 79, 0.85);
 
   /* Text colors relative to background */
-  --text-on-light: #1A1A1A;
+  --text-on-light: #44474F;
   --text-on-dark: #FFFFFF;
-  --text-muted-on-light: rgba(26, 26, 26, 0.85);
+  --text-muted-on-light: rgba(68, 71, 79, 0.85);
   --text-muted-on-dark: rgba(255, 255, 255, 0.85);
 
   /* UI Elements */
@@ -60,8 +56,47 @@
   --card-hover: rgba(247, 250, 252, 0.98);
   --icon-bg: rgba(0, 32, 91, 0.08);
   --icon-border: rgba(0, 32, 91, 0.15);
-  --hover: #001845;
-  /* A darker shade of Rice Blue for hover states */
+  --hover: #0A509E;
+  /* Rich Blue for hover states */
+
+  /* Gradients */
+  --gradient-angle: 120deg;
+  --gradient-primary: linear-gradient(
+    var(--gradient-angle),
+    rgba(0, 32, 91, 0.9) 0%,
+    rgba(10, 80, 158, 0.8) 50%,
+    rgba(77, 154, 212, 0.9) 100%
+  );
+  --gradient-secondary: linear-gradient(
+    45deg,
+    rgba(0, 32, 91, 0.85) 0%,
+    rgba(48, 59, 97, 0.75) 50%,
+    rgba(173, 199, 220, 0.85) 100%
+  );
+  --gradient-twilight: linear-gradient(
+    var(--gradient-angle),
+    rgba(0, 32, 91, 0.8) 0%,
+    rgba(10, 80, 158, 0.7) 50%,
+    rgba(77, 154, 212, 0.8) 100%
+  );
+  --gradient-primary-hover: linear-gradient(
+    var(--gradient-angle),
+    #00205B 0%,
+    #0A509E 100%
+  );
+  --gradient-overlay: linear-gradient(
+    var(--gradient-angle),
+    rgba(0, 32, 91, 0.15) 0%,
+    rgba(10, 80, 158, 0.1) 50%,
+    rgba(77, 154, 212, 0.15) 100%
+  );
+  --cosmic-swirl: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 32, 91, 0.15) 0%,
+    rgba(10, 80, 158, 0.1) 35%,
+    rgba(77, 154, 212, 0.08) 70%,
+    transparent 100%
+  );
 
   /* Font Sizes */
   --font-size-h1: clamp(2.5rem, 5vw, 3.5rem);
