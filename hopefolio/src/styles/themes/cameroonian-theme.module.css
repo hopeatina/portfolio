@@ -1,20 +1,39 @@
+/* Shape Motifs */
+.primaryShape {
+  clip-path: var(--shape-motif-primary);
+}
+
+.secondaryShape {
+  clip-path: var(--shape-motif-secondary);
+}
+
+.dividerShape {
+  clip-path: var(--shape-motif-divider);
+}
+
 .theme {
   /* Colors */
-  --primary: #9C5C38;
-  --accent: #0B6E4F;
-  --secondary: #EC6E4C;
+  --primary: #F5BA00;  /* Warm yellow */
+  --accent: #C71F02;   /* Deep red */
+  --secondary: #009639; /* Green */
   --background: #FFFFFF;
-  --text: #2D1810;
-  --highlight: #CFAE58;
-  --text-muted: rgba(45, 24, 16, 0.85);
+  --text: #1A1A1A;
+  --highlight: #F5BA00;
+  --text-muted: rgba(26, 26, 26, 0.85);
+  
+  /* Text colors relative to background */
+  --text-on-light: #1A1A1A;
+  --text-on-dark: #FFFFFF;
+  --text-muted-on-light: rgba(26, 26, 26, 0.85);
+  --text-muted-on-dark: rgba(255, 255, 255, 0.85);
   
   /* UI Elements */
   --header-bg: rgba(255, 255, 255, 0.95);
   --card-bg: rgba(255, 255, 255, 0.98);
-  --card-hover: rgba(255, 245, 235, 0.98);
-  --icon-bg: rgba(156, 92, 56, 0.12);
-  --icon-border: rgba(156, 92, 56, 0.2);
-  --hover: #7D4A2D;
+  --card-hover: rgba(252, 249, 241, 0.98);
+  --icon-bg: rgba(245, 186, 0, 0.08);
+  --icon-border: rgba(245, 186, 0, 0.15);
+  --hover: #C71F02;
 
   /* Font Sizes */
   --font-size-h1: clamp(2.5rem, 5vw, 3.5rem);
@@ -32,17 +51,37 @@
   --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Gradients */
-  --gradient-angle: 135deg;
-  --gradient-primary: linear-gradient(var(--gradient-angle), #9C5C38 0%, #0B6E4F 100%);
-  --gradient-secondary: linear-gradient(45deg, #EC6E4C 0%, #CFAE58 100%);
-  --gradient-twilight: linear-gradient(var(--gradient-angle), #9C5C38 0%, #0B6E4F 50%, #9C5C38 100%);
-  --gradient-primary-hover: linear-gradient(var(--gradient-angle), #7D4A2D 0%, #095C42 100%);
-  --gradient-overlay: linear-gradient(var(--gradient-angle), rgba(156, 92, 56, 0.15) 0%, rgba(11, 110, 79, 0.15) 100%);
+  --gradient-angle: 120deg;
+  --gradient-primary: linear-gradient(
+    var(--gradient-angle),
+    rgba(245, 186, 0, 0.9) 0%,
+    rgba(199, 31, 2, 0.8) 50%,
+    rgba(0, 150, 57, 0.9) 100%
+  );
+  --gradient-secondary: linear-gradient(
+    45deg,
+    rgba(245, 186, 0, 0.85) 0%,
+    rgba(199, 31, 2, 0.75) 50%,
+    rgba(245, 186, 0, 0.85) 100%
+  );
+  --gradient-twilight: linear-gradient(
+    var(--gradient-angle),
+    rgba(245, 186, 0, 0.8) 0%,
+    rgba(0, 150, 57, 0.7) 50%,
+    rgba(199, 31, 2, 0.8) 100%
+  );
+  --gradient-primary-hover: linear-gradient(var(--gradient-angle), #DBA600 0%, #B01A02 100%);
+  --gradient-overlay: linear-gradient(
+    var(--gradient-angle),
+    rgba(245, 186, 0, 0.15) 0%,
+    rgba(199, 31, 2, 0.1) 50%,
+    rgba(0, 150, 57, 0.15) 100%
+  );
   --cosmic-swirl: radial-gradient(
     circle at 50% 50%,
-    rgba(156, 92, 56, 0.15) 0%,
-    rgba(11, 110, 79, 0.12) 25%,
-    rgba(156, 92, 56, 0.1) 50%,
+    rgba(245, 186, 0, 0.15) 0%,
+    rgba(199, 31, 2, 0.1) 35%,
+    rgba(0, 150, 57, 0.08) 70%,
     transparent 100%
   );
   
@@ -74,12 +113,12 @@
   --border-radius: 0.75rem;
   --border-radius-lg: 1rem;
   --border-radius-full: 9999px;
-  --box-shadow: 0 4px 6px -1px rgba(156, 92, 56, 0.1),
-                0 2px 4px -1px rgba(156, 92, 56, 0.06);
-  --box-shadow-hover: 0 10px 15px -3px rgba(156, 92, 56, 0.15),
-                     0 4px 6px -2px rgba(156, 92, 56, 0.1);
-  --box-shadow-card: 0 2px 4px rgba(156, 92, 56, 0.05);
-  --box-shadow-card-hover: 0 8px 16px rgba(156, 92, 56, 0.1);
+  --box-shadow: 0 4px 6px -1px rgba(245, 186, 0, 0.1),
+                0 2px 4px -1px rgba(245, 186, 0, 0.06);
+  --box-shadow-hover: 0 10px 15px -3px rgba(245, 186, 0, 0.15),
+                     0 4px 6px -2px rgba(245, 186, 0, 0.1);
+  --box-shadow-card: 0 2px 4px rgba(245, 186, 0, 0.05);
+  --box-shadow-card-hover: 0 8px 16px rgba(245, 186, 0, 0.1);
   
   /* Animations */
   --transition-base: all 0.4s ease-in-out;
@@ -90,13 +129,40 @@
   --hover-rotate: rotate(2deg);
   --hover-lift: translateY(-2px);
   --button-pulse: weave 3s ease infinite;
+
+  /* Pattern System Variables */
+  --background-pattern: url('/patterns/cameroonian-diamond-pattern.svg');
+  
+  --overlay-pattern: url('/patterns/cameroonian-arc-overlay.svg');
+  
+  --shape-motif-primary: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  --shape-motif-secondary: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  --shape-motif-divider: path('M0 40 C20 20, 40 60, 60 20, 80 60, 100 40');
+  
+  --icon-glow: 0 0 10px rgba(245, 186, 0, 0.3);
+
+  /* Hero Upgrades: Bigger text, added vertical spacing, and soft gradient */
+  --hero-heading-size: clamp(3rem, 7vw, 5rem);
+  --hero-line-height-expanded: 1.3;
+  --hero-bg-gradient: linear-gradient(
+    135deg,
+    rgba(245, 186, 0, 0.15) 0%,
+    rgba(0, 150, 57, 0.15) 100%
+  );
+  --hero-padding-y: 8rem;
+
+  /* Newly added */
+  --hero-padding-y-large: 10rem;
+  --hero-heading-size-large: clamp(3.5rem, 7vw, 5.5rem);
+  --hero-subheading-size: clamp(1.75rem, 3vw, 2.5rem);
+  --hero-body-size: 1.25rem;
+  --cta-font-size: 1rem;
 }
 
 /* Animations */
 @keyframes weave {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% { transform: translateX(-100%) skewX(45deg); }
+  100% { transform: translateX(100%) skewX(-45deg); }
 }
 
 @keyframes tapestry {
@@ -138,9 +204,25 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--cosmic-swirl);
-  opacity: 1;
+  background: url('/patterns/cameroonian-diamond-pattern.svg') repeat;
+  background-size: 80px 80px;
+  opacity: 0.08;
   z-index: 0;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: url('/patterns/cameroonian-arc-overlay.svg') no-repeat center;
+  background-size: 50% auto;
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
 }
 
 /* Container Styles */
@@ -241,23 +323,30 @@
 }
 
 .gradientText {
-  background: var(--gradient-primary);
+  background: var(--gradient-twilight);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradientShift 8s ease infinite;
+  display: inline-block;
 }
 
 .card {
-  background: var(--card-bg);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(245, 186, 0, 0.1);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow-card);
-  transition: var(--transition-slow);
-  backdrop-filter: blur(8px);
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
 }
 
 .cardHover:hover {
-  background: var(--card-hover);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(245, 186, 0, 0.2);
   box-shadow: var(--box-shadow-card-hover);
-  transform: var(--hover-scale-sm);
+  transform: var(--hover-lift);
 }
 
 .iconWrapper {
@@ -317,11 +406,12 @@
 
 /* Footer Styles */
 .footer {
-  background: var(--card-bg);
+  background: var(--background);
   backdrop-filter: blur(8px);
   border-top: 1px solid var(--icon-border);
   padding: calc(var(--section-spacing-y) * 0.75) 0;
   position: relative;
+  color: var(--text);
 }
 
 .footer::before {
@@ -339,6 +429,16 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--content-spacing-y);
+  color: var(--text);
+}
+
+.link {
+  color: var(--text);
+  transition: var(--transition-base);
+}
+
+.link:hover {
+  color: var(--accent);
 }
 
 .socialIcon {
@@ -384,8 +484,475 @@
 }
 
 .tagHover:hover {
-  background: var(--primary);
+  background: var(--gradient-primary);
   color: var(--background);
   border-color: transparent;
   box-shadow: var(--box-shadow-hover);
+}
+
+/* Pattern System */
+.backgroundPattern {
+  background: var(--background-pattern);
+  position: relative;
+}
+
+/* Geometric Diamond Background */
+.diamondBackground {
+  background-image: url('/patterns/cameroonian-diamond-pattern.svg');
+  background-repeat: repeat;
+  background-size: 80px 80px;
+  opacity: 0.1;
+  position: relative;
+}
+
+/* Embroidered Loop Divider */
+.loopDivider {
+  position: relative;
+  height: 80px;
+  width: 100%;
+  overflow: hidden;
+  background: url('/shapes/cameroonian-loop-divider.svg') no-repeat center;
+  background-size: contain;
+}
+
+/* Star/Crescent Icons */
+.iconStar {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.iconStar::before {
+  content: url('/icons/cameroonian-star.svg');
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  transform: translateY(-10%);
+}
+
+.iconCrescent {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.iconCrescent::before {
+  content: url('/icons/cameroonian-crescent.svg');
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  transform: translateY(-10%);
+}
+
+/* Embroidered Arc Overlay */
+.arcOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url('/patterns/cameroonian-arc-overlay.svg') no-repeat center;
+  background-size: 50% auto;
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+}
+
+/* Decorative Shape */
+.decorativeShape {
+  composes: primaryShape;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  opacity: 0.15;
+  pointer-events: none;
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+}
+
+/* Pattern Utility Classes */
+.sectionBackground {
+  composes: diamondBackground;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.heroOverlay {
+  composes: arcOverlay;
+  position: relative;
+  overflow: hidden;
+}
+
+.sectionDivider {
+  composes: loopDivider;
+  margin: 2rem 0;
+}
+
+.bulletListStar {
+  composes: iconStar;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bulletListCrescent {
+  composes: iconCrescent;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base Icon */
+.icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon Wrapper */
+.iconWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  animation: rotate 6s linear infinite;
+}
+
+/* Icon Styles */
+.iconBullet {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.iconBullet::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 1em;
+  line-height: 1;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: rotate(45deg);
+}
+
+/* Section Dividers */
+.sectionDivider {
+  position: relative;
+  height: 80px;
+  width: 100%;
+  overflow: hidden;
+  background: url('/shapes/cameroonian-loop-divider.svg') no-repeat center;
+  background-size: contain;
+  margin: 2rem 0;
+}
+
+/* Card Patterns */
+.featureCard {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: var(--card-padding);
+  transition: var(--transition-base);
+}
+
+.featureCard::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+  background: url('/patterns/cameroonian-diamond-pattern.svg') no-repeat;
+  background-size: contain;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Button Styles */
+.ctaButton {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  background: var(--gradient-primary);
+  color: var(--background);
+  transition: var(--transition-bounce);
+  overflow: hidden;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/shapes/cameroonian-loop-divider.svg') no-repeat;
+  background-size: 200% auto;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ctaButton:hover::before {
+  opacity: 0.1;
+  animation: weave 3s linear infinite;
+}
+
+/* Feature Lists */
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureListStar {
+  composes: featureList;
+}
+
+.featureListStar li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.featureListStar li::before {
+  content: url('/icons/cameroonian-star.svg');
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  transform: translateY(-10%);
+}
+
+/* Testimonial Section */
+.testimonialSection {
+  position: relative;
+  padding: 4rem 0;
+  overflow: hidden;
+}
+
+.testimonialSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/patterns/cameroonian-diamond-pattern.svg') repeat;
+  background-size: 80px 80px;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.testimonialContent {
+  position: relative;
+  z-index: 1;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--box-shadow-card);
+}
+
+/* 5.1 Home (Landing) Page */
+.homePage {
+  position: relative;
+}
+
+/* Hero Section */
+.heroBackground {
+  position: relative;
+  background: var(--background);
+  min-height: calc(100vh - 5rem);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.heroBackground::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/patterns/cameroonian-diamond-pattern.svg') repeat;
+  background-size: 80px 80px;
+  opacity: 0.08;
+  z-index: 0;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: url('/patterns/cameroonian-arc-overlay.svg') no-repeat center;
+  background-size: 50% auto;
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+}
+
+/* Featured Projects Section */
+.featuredProject {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--card-padding);
+  transition: var(--transition-bounce);
+}
+
+.featuredProject::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 120px;
+  height: 120px;
+  background: url('/patterns/cameroonian-diamond-pattern.svg') no-repeat;
+  background-size: contain;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* 5.2 Projects Page */
+.projectBanner {
+  position: relative;
+  padding: 4rem 0;
+  background: linear-gradient(180deg, 
+    rgba(245, 186, 0, 0.05) 0%,
+    transparent 100%
+  );
+}
+
+.projectBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/patterns/cameroonian-diamond-pattern.svg') repeat;
+  background-size: 60px 60px;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.projectSection {
+  position: relative;
+  padding: 3rem 0;
+}
+
+.projectDivider {
+  composes: loopDivider;
+  transform: scale(0.8);
+  opacity: 0.8;
+}
+
+/* 5.3 About Page */
+.aboutHero {
+  composes: heroBackground;
+  min-height: 60vh;
+}
+
+.aboutHero::before {
+  opacity: 0.05;
+}
+
+.quoteBlock {
+  position: relative;
+  padding: 2rem;
+  margin: 2rem 0;
+  border-radius: var(--border-radius);
+  background: var(--card-bg);
+}
+
+.quoteBlock::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/patterns/cameroonian-arc-overlay.svg') no-repeat right center;
+  background-size: contain;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+}
+
+/* 5.4 Blog Pages */
+.blogHeader {
+  position: relative;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+}
+
+.blogHeader::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 100px;
+  background: url('/patterns/cameroonian-arc-overlay.svg') no-repeat;
+  background-size: contain;
+  opacity: 0.08;
+  transform: rotate(180deg);
+}
+
+.blogPost {
+  position: relative;
+}
+
+.blogPostList {
+  composes: featureListStar;
+}
+
+/* 5.5 Contact Page */
+.contactPage {
+  position: relative;
+  min-height: calc(100vh - 5rem);
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(245, 186, 0, 0.03) 100%
+  );
+}
+
+.contactBox {
+  position: relative;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-card);
+}
+
+.contactBox::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: url('/patterns/cameroonian-diamond-pattern.svg') no-repeat;
+  background-size: contain;
+  opacity: 0.05;
+  transform: rotate(-90deg);
+}
+
+/* Common Components */
+.sectionDivider {
+  composes: loopDivider;
+  margin: 4rem 0;
+}
+
+.decorativeCorner {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: url('/patterns/cameroonian-diamond-pattern.svg') no-repeat;
+  background-size: contain;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.cornerTopRight {
+  composes: decorativeCorner;
+  top: 1rem;
+  right: 1rem;
+  transform: rotate(90deg);
+}
+
+.cornerBottomLeft {
+  composes: decorativeCorner;
+  bottom: 1rem;
+  left: 1rem;
+  transform: rotate(-90deg);
 } 

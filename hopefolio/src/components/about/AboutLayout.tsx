@@ -25,33 +25,21 @@ export default function AboutLayout({ children }: AboutLayoutProps) {
         };
       case "cameroonian":
         return {
-          background: themeProps.patterns.backgroundPattern,
-          backgroundImage: `
-            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A373' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-            linear-gradient(45deg, rgba(212, 163, 115, 0.05) 25%, transparent 25%, transparent 75%, rgba(212, 163, 115, 0.05) 75%),
-            linear-gradient(-45deg, rgba(212, 163, 115, 0.05) 25%, transparent 25%, transparent 75%, rgba(212, 163, 115, 0.05) 75%)
-          `,
+          background: "var(--background)",
+          backgroundImage: themeProps.patterns.backgroundPattern,
           backgroundSize: "60px 60px, 40px 40px, 40px 40px",
           backgroundBlendMode: "overlay",
         };
       case "rice":
         return {
-          background: themeProps.patterns.backgroundPattern,
-          backgroundImage: `
-            radial-gradient(circle at 50% 50%, rgba(247, 249, 252, 0.8) 0%, rgba(247, 249, 252, 0.4) 100%),
-            linear-gradient(45deg, rgba(26, 26, 26, 0.03) 25%, transparent 25%, transparent 75%, rgba(26, 26, 26, 0.03) 75%),
-            linear-gradient(-45deg, rgba(26, 26, 26, 0.03) 25%, transparent 25%, transparent 75%, rgba(26, 26, 26, 0.03) 75%)
-          `,
+          background: "var(--background)",
+          backgroundImage: themeProps.patterns.backgroundPattern,
           backgroundSize: "cover, 30px 30px, 30px 30px",
         };
       default:
         return {
-          background: themeProps.patterns.backgroundPattern,
-          backgroundImage: `
-            linear-gradient(0deg, rgba(31, 41, 55, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(31, 41, 55, 0.03) 1px, transparent 1px),
-            radial-gradient(circle at 50% 50%, rgba(31, 41, 55, 0.03) 0%, transparent 70%)
-          `,
+          background: "var(--background)",
+          backgroundImage: themeProps.patterns.backgroundPattern,
           backgroundSize: "20px 20px, 20px 20px, 100% 100%",
         };
     }

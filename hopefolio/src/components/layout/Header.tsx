@@ -109,10 +109,13 @@ export default function Header() {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 ${styles.theme}`}>
         <div
-          className={`w-full py-4 px-6 ${styles.transitionBase} backdrop-blur-sm`}
+          className={`w-full py-4 px-6 ${styles.transitionBase}`}
           style={{
             background: "var(--header-bg)",
             boxShadow: "var(--box-shadow)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            borderBottom: "1px solid rgba(var(--text), 0.1)",
           }}
         >
           <nav className="max-w-7xl mx-auto flex justify-between items-center">
@@ -122,21 +125,16 @@ export default function Header() {
                 href="/"
                 className={`text-2xl ${styles.heading} ${styles.gradientText} ${styles.hoverScale}`}
               >
-                Emerging Hope
+                Hope Atina
               </Link>
-              <span
-                className={`text-sm ${styles.body} hidden sm:block`}
-                style={{ color: "var(--text)" }}
-              >
-                Transforming Ideas into Digital Reality
-              </span>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-opacity-10 hover:bg-current"
+              className={`lg:hidden p-2 rounded-lg ${styles.transitionBase} hover:bg-opacity-10 hover:bg-current`}
               aria-label="Toggle mobile menu"
+              style={{ color: "var(--text)" }}
             >
               <svg
                 className="w-6 h-6"
@@ -168,7 +166,7 @@ export default function Header() {
                 <Link
                   key={link.name}
                   href={link.path}
-                  className={`${styles.transitionBase} ${styles.body}`}
+                  className={`${styles.transitionBase} ${styles.body} hover:opacity-80`}
                   style={{
                     color: "var(--text)",
                     position: "relative",
@@ -197,7 +195,7 @@ export default function Header() {
                   }`}
                   style={{
                     background: "var(--gradient-primary)",
-                    color: "var(--background)",
+                    color: "var(--text-on-dark)",
                     borderRadius: "var(--border-radius)",
                     border: "none",
                     boxShadow: "var(--box-shadow)",
@@ -232,6 +230,8 @@ export default function Header() {
                     borderRadius: "var(--border-radius)",
                     zIndex: 50,
                     backdropFilter: "blur(8px)",
+                    WebkitBackdropFilter: "blur(8px)",
+                    border: "1px solid rgba(var(--text), 0.1)",
                   }}
                 >
                   <div className="py-1">
@@ -274,6 +274,10 @@ export default function Header() {
             className={`lg:hidden ${
               isMobileMenuOpen ? "block" : "hidden"
             } pt-4 pb-3`}
+            style={{
+              background: "var(--card-bg)",
+              borderTop: "1px solid rgba(var(--text), 0.1)",
+            }}
           >
             <div className="space-y-1 px-2">
               {navLinks.map((link) => (
@@ -303,12 +307,13 @@ export default function Header() {
                           handleThemeChange(mode);
                           handleMobileNavClick();
                         }}
-                        className={`w-full text-left px-3 py-2 rounded-md ${
-                          styles.transitionBase
-                        } ${styles.body} ${
-                          theme === mode ? "bg-opacity-10 bg-current" : ""
-                        }`}
-                        style={{ color: "var(--text)" }}
+                        className={`w-full text-left px-3 py-2 rounded-md ${styles.transitionBase} ${styles.body} hover:bg-opacity-10 hover:bg-current`}
+                        style={{
+                          color: "var(--text)",
+                          background:
+                            theme === mode ? "var(--accent)" : "transparent",
+                          opacity: theme === mode ? 0.9 : 1,
+                        }}
                       >
                         <div className="flex items-center gap-3">
                           <span className="text-xl">

@@ -49,7 +49,7 @@ export default function BlogPostCTA({ socialLinks }: BlogPostCTAProps) {
           >
             {link.icon && (
               <span className="mr-2 transition-transform group-hover:scale-110">
-                {link.icon}
+                {}
               </span>
             )}
             {link.platform}

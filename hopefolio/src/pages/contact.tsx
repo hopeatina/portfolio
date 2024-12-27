@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import styles from "@/styles/themes/base-theme.module.css";
 
 export default function Contact() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
     // Form submission logic will be implemented later
+    setTimeout(() => setIsSubmitting(false), 1000); // Temporary simulation
   };
 
   return (
@@ -19,16 +24,26 @@ export default function Contact() {
         />
       </Head>
 
-      <main className="container py-12">
-        <h1>Contact</h1>
-        <div className="grid md:grid-cols-2 gap-8">
-          <Card>
-            <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
+      <main
+        className={`${styles.container} py-16 min-h-screen ${styles.fadeIn}`}
+      >
+        <h1
+          className={`${styles.headingH1} text-4xl font-bold mb-8 text-center ${styles.gradientText}`}
+        >
+          Let's Connect
+        </h1>
+        <div className="grid md:grid-cols-2 gap-8 items-start">
+          <Card
+            className={`p-6 shadow-lg border border-accent/10 ${styles.fadeUp}`}
+          >
+            <h2 className={`${styles.headingH1} text-2xl font-bold mb-6`}>
+              Send a Message
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm font-medium mb-2"
                 >
                   Name
                 </label>
@@ -37,13 +52,21 @@ export default function Contact() {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-2 rounded-lg border border-input
+                           focus:ring-2 focus:ring-primary focus:border-transparent
+                           bg-background transition-colors
+                           disabled:opacity-60 disabled:cursor-not-allowed"
+                  disabled={isSubmitting}
+                  aria-describedby="name-required"
                 />
+                <span id="name-required" className="sr-only">
+                  Required field
+                </span>
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm font-medium mb-2"
                 >
                   Email
                 </label>
@@ -52,13 +75,21 @@ export default function Contact() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-2 rounded-lg border border-input
+                           focus:ring-2 focus:ring-primary focus:border-transparent
+                           bg-background transition-colors
+                           disabled:opacity-60 disabled:cursor-not-allowed"
+                  disabled={isSubmitting}
+                  aria-describedby="email-required"
                 />
+                <span id="email-required" className="sr-only">
+                  Required field
+                </span>
               </div>
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium mb-1"
+                  className="block text-sm font-medium mb-2"
                 >
                   Message
                 </label>
@@ -67,28 +98,50 @@ export default function Contact() {
                   name="message"
                   rows={4}
                   required
-                  className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-2 rounded-lg border border-input
+                           focus:ring-2 focus:ring-primary focus:border-transparent
+                           bg-background transition-colors resize-vertical
+                           disabled:opacity-60 disabled:cursor-not-allowed"
+                  disabled={isSubmitting}
+                  aria-describedby="message-required"
                 />
+                <span id="message-required" className="sr-only">
+                  Required field
+                </span>
               </div>
-              <Button type="submit">Send Message</Button>
+              <Button type="submit" disabled={isSubmitting} className="w-full">
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </Button>
             </form>
           </Card>
 
-          <Card>
-            <h2 className="text-2xl font-bold mb-4">Connect</h2>
-            <div className="space-y-4">
+          <Card
+            className={`p-6 shadow-lg ${styles.fadeUp} ${styles.delayBase}`}
+          >
+            <h2 className={`${styles.headingH1} text-2xl font-bold mb-6`}>
+              Other Ways to Connect
+            </h2>
+            <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold">Email</h3>
-                <p className="text-gray-600">hello@emerginghope.dev</p>
+                <h3 className="text-lg font-semibold mb-2">Email</h3>
+                <a
+                  href="mailto:hello@emerginghope.dev"
+                  className={`${styles.gradientText} hover:opacity-80 transition-opacity`}
+                >
+                  hello@emerginghope.dev
+                </a>
               </div>
               <div>
-                <h3 className="text-lg font-semibold">Social Media</h3>
-                <div className="flex space-x-4 mt-2">
+                <h3 className="text-lg font-semibold mb-3">Social Media</h3>
+                <div className="flex flex-wrap gap-4">
                   <a
                     href="https://github.com/yourusername"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-primary"
+                    className="px-6 py-2 rounded-full bg-gradient-to-r from-primary to-accent 
+                             text-white font-medium hover:opacity-90 transition-all 
+                             hover:transform hover:scale-105"
+                    aria-label="GitHub Profile"
                   >
                     GitHub
                   </a>
@@ -96,7 +149,10 @@ export default function Contact() {
                     href="https://linkedin.com/in/yourusername"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-primary"
+                    className="px-6 py-2 rounded-full bg-gradient-to-r from-accent to-primary 
+                             text-white font-medium hover:opacity-90 transition-all 
+                             hover:transform hover:scale-105"
+                    aria-label="LinkedIn Profile"
                   >
                     LinkedIn
                   </a>
@@ -104,7 +160,10 @@ export default function Contact() {
                     href="https://twitter.com/yourusername"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-primary"
+                    className="px-6 py-2 rounded-full bg-gradient-to-r from-primary-light to-accent-light 
+                             text-white font-medium hover:opacity-90 transition-all 
+                             hover:transform hover:scale-105"
+                    aria-label="Twitter Profile"
                   >
                     Twitter
                   </a>

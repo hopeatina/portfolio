@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import Card from "@/components/ui/Card";
-import styles from "@/styles/themes/futuristic-theme.module.css";
+import Tag from "@/components/ui/Tag";
+import styles from "@/styles/themes/base-theme.module.css";
 
 interface BlogPostCardProps {
   slug: string;
@@ -19,61 +22,37 @@ export default function BlogPostCard({
   excerpt,
   category,
 }: BlogPostCardProps) {
-  const { themeProps, theme } = useTheme();
+  const { theme, getThemeStyles } = useTheme();
+  const themeStyles = getThemeStyles();
 
   return (
     <Link href={`/blog/${slug}`}>
       <Card
-        className={`group cursor-pointer ${
-          theme === "futuristic" ? styles.card : ""
-        } ${theme === "futuristic" ? styles.cardHover : "hover-card"}`}
+        className={`group cursor-pointer ${styles.card} ${styles.cardHover}`}
+        style={{
+          background: "var(--card-bg)",
+          boxShadow: "var(--box-shadow-card)",
+          border: "1px solid var(--icon-border)",
+        }}
       >
         {category && (
-          <span
-            className={`inline-block px-3 py-1 rounded-full text-sm mb-4 ${
-              theme === "futuristic" ? styles.tag : ""
-            }`}
-            style={{
-              backgroundColor:
-                theme === "futuristic"
-                  ? "var(--icon-bg)"
-                  : themeProps.colors.secondary,
-              color: themeProps.colors.primary,
-              fontFamily: themeProps.typography.bodyFont,
-              border:
-                theme === "futuristic"
-                  ? "1px solid var(--icon-border)"
-                  : "none",
-            }}
-          >
-            {category}
-          </span>
+          <div className="mb-4">
+            <Tag variant="default" size="sm">
+              {category}
+            </Tag>
+          </div>
         )}
 
         <h2
-          className={`text-2xl mb-2 ${
-            theme === "futuristic" ? styles.gradientText : ""
-          }`}
-          style={{
-            color:
-              theme === "futuristic"
-                ? "transparent"
-                : themeProps.colors.primary,
-            fontFamily: themeProps.typography.headingFont,
-            fontWeight: themeProps.typography.headingWeight,
-            letterSpacing: themeProps.typography.letterSpacing,
-          }}
+          className={`text-2xl mb-2 ${styles.headingH3}`}
+          style={{ color: "var(--text-on-light)" }}
         >
           {title}
         </h2>
 
         <time
           className="text-sm block mb-4"
-          style={{
-            color: themeProps.colors.accent,
-            fontFamily: themeProps.typography.bodyFont,
-            opacity: theme === "futuristic" ? 0.85 : 1,
-          }}
+          style={{ color: "var(--text-muted-on-light)" }}
         >
           {new Date(date).toLocaleDateString("en-US", {
             year: "numeric",
@@ -83,34 +62,18 @@ export default function BlogPostCard({
         </time>
 
         <p
-          className={theme === "futuristic" ? styles.body : ""}
-          style={{
-            color: themeProps.colors.text,
-            fontFamily: themeProps.typography.bodyFont,
-            lineHeight: themeProps.typography.lineHeight,
-            opacity: theme === "futuristic" ? 0.85 : 1,
-          }}
+          className={styles.body}
+          style={{ color: "var(--text-muted-on-light)" }}
         >
           {excerpt}
         </p>
 
-        {theme === "futuristic" && (
-          <div className="mt-4">
-            <span className={`${styles.tag} ${styles.tagHover}`}>
-              Read More →
-            </span>
-          </div>
-        )}
+        <div className="mt-4">
+          <Tag variant="muted" size="sm">
+            Read More →
+          </Tag>
+        </div>
       </Card>
-      <style jsx global>{`
-        .hover-card {
-          transition: ${themeProps.animation.transition};
-        }
-        .hover-card:hover {
-          transform: ${themeProps.animation.hoverScale};
-          box-shadow: ${themeProps.boxShadow};
-        }
-      `}</style>
     </Link>
   );
 }

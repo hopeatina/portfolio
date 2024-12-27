@@ -1,0 +1,19 @@
+<svg width="1920" height="80" viewBox="0 0 1920 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<!-- Example: Repeating chain in two colors (yellow + red) -->
+	<path d="M0 40 C100 80, 140 0, 240 40 
+       S 380 80, 480 40 
+       S 620 0, 720 40
+       S 860 80, 960 40
+       S 1100 0, 1200 40
+       S 1340 80, 1440 40
+       S 1580 0, 1680 40
+       S 1820 80, 1920 40" stroke="#F5BA00" stroke-width="8" fill="none" />
+	<path d="M0 40 C100 0, 140 80, 240 40 
+       S 380 0, 480 40 
+       S 620 80, 720 40
+       S 860 0, 960 40
+       S 1100 80, 1200 40
+       S 1340 0, 1440 40
+       S 1580 80, 1680 40
+       S 1820 0, 1920 40" stroke="#C71F02" stroke-width="8" fill="none" />
+</svg>

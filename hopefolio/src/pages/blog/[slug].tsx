@@ -23,17 +23,17 @@ export default function Post({ post }: PostProps) {
     {
       platform: "LinkedIn",
       url: "https://linkedin.com/in/yourusername",
-      icon: <UserCircleIcon className="w-5 h-5" />,
+      icon: UserCircleIcon,
     },
     {
       platform: "TikTok",
       url: "https://tiktok.com/@yourusername",
-      icon: <PhoneIcon className="w-5 h-5" />,
+      icon: PhoneIcon,
     },
     {
       platform: "RSS Feed",
       url: "/rss.xml",
-      icon: <RssIcon className="w-5 h-5" />,
+      icon: RssIcon,
     },
   ];
 

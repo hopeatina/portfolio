@@ -12,9 +12,9 @@ export default function Neuromosaic() {
     >
       <ProjectHero
         title="Neuromosaic"
-        subtitle="A distributed machine learning research platform that enables scalable neural network training across multiple nodes, with a focus on reproducibility and collaboration."
-        imageSrc="/images/projects/neuromosaic.jpg"
-        imageAlt="Neuromosaic Platform Screenshot"
+        description="A distributed machine learning research platform that enables scalable neural network training across multiple nodes, with a focus on reproducibility and collaboration."
+        tags={["Machine Learning", "Distributed Systems", "Python", "React"]}
+        image="/images/projects/neuromosaic.jpg"
       />
 
       <ProjectSection title="Overview">
@@ -49,18 +49,8 @@ export default function Neuromosaic() {
       </ProjectSection>
 
       <ProjectCTA
-        buttons={[
-          {
-            text: "View on GitHub",
-            href: "https://github.com/yourusername/neuromosaic",
-            variant: "primary",
-          },
-          {
-            text: "Visit Website",
-            href: "https://neuromosaic.dev",
-            variant: "outline",
-          },
-        ]}
+        demoUrl="https://neuromosaic.dev"
+        githubUrl="https://github.com/yourusername/neuromosaic"
       />
     </ProjectLayout>
   );
