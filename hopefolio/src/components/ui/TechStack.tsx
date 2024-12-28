@@ -191,7 +191,7 @@ const TechStack = () => {
 
         {/* Tech Grid */}
         <div
-          className="relative p-8 rounded-2xl"
+          className="relative p-8 rounded-2xl overflow-hidden"
           style={{
             background: isDarkTheme
               ? "rgba(10, 10, 10, 0.5)"
@@ -206,10 +206,12 @@ const TechStack = () => {
         >
           {/* Decorative Top Border */}
           <div
-            className="absolute inset-x-0 top-0 h-1 rounded-t-[inherit]"
+            className="absolute top-0 left-0 right-0 h-1"
             style={{
               background: "var(--gradient-primary)",
               opacity: isDarkTheme ? 1 : 0.8,
+              borderTopLeftRadius: "inherit",
+              borderTopRightRadius: "inherit",
             }}
           />
 

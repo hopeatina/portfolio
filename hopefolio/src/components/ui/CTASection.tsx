@@ -38,7 +38,7 @@ const CTASection = () => {
       {/* Content Container */}
       <div className={`${styles.container} relative z-10`}>
         <div
-          className="max-w-4xl mx-auto text-center p-12 rounded-2xl relative"
+          className="max-w-4xl mx-auto text-center p-12 rounded-2xl relative overflow-hidden"
           style={{
             background: isRiceTheme
               ? "rgba(255, 255, 255, 0.95)"
@@ -59,13 +59,12 @@ const CTASection = () => {
         >
           {/* Decorative Top Border */}
           <div
-            className="absolute -top-[1px] left-0 right-0 h-1 overflow-hidden"
+            className="absolute top-0 left-0 right-0 h-1"
             style={{
-              borderTopLeftRadius: "1rem",
-              borderTopRightRadius: "1rem",
               background: "var(--gradient-primary)",
               opacity: isRiceTheme ? 0.8 : bgIsDark ? 1 : 0.8,
-              transform: "translateY(1px)",
+              borderTopLeftRadius: "inherit",
+              borderTopRightRadius: "inherit",
             }}
           />
 
