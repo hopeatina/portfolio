@@ -4,6 +4,8 @@ import React, {
   useState,
   ReactNode,
   useEffect,
+  useMemo,
+  useCallback,
 } from "react";
 import baseStyles from "@/styles/themes/base-theme.module.css";
 import cameroonianStyles from "@/styles/themes/cameroonian-theme.module.css";
@@ -22,6 +24,7 @@ interface ThemeColors {
   gradients: {
     primary: string;
     secondary?: string;
+    text?: string;
   };
 }
 
@@ -306,6 +309,9 @@ interface ThemeContextType {
   setTheme: (theme: Theme) => void;
   getThemeStyles: () => any;
   themeProps: ThemeProperties;
+  isDarkMode: boolean;
+  getTextColor: (isDarkBg?: boolean) => string;
+  getTextGradient: () => string;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
@@ -313,10 +319,41 @@ const ThemeContext = createContext<ThemeContextType>({
   setTheme: () => {},
   getThemeStyles: () => ({}),
   themeProps: themeProperties.base,
+  isDarkMode: false,
+  getTextColor: () => "#000000",
+  getTextGradient: () => "",
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("base");
+
+  // Determine if current theme is dark mode
+  const isDarkMode = useMemo(() => {
+    return (
+      theme === "futuristic" || theme === "rice" || theme === "cameroonian"
+    );
+  }, [theme]);
+
+  // Get appropriate text color based on background context
+  const getTextColor = useCallback(
+    (isDarkBg?: boolean) => {
+      const currentTheme = themeProperties[theme];
+      const isContextDark = isDarkBg ?? isDarkMode;
+      return isContextDark
+        ? currentTheme.colors.text
+        : currentTheme.colors.text;
+    },
+    [theme, isDarkMode]
+  );
+
+  // Get theme-specific text gradient
+  const getTextGradient = useCallback(() => {
+    const currentTheme = themeProperties[theme];
+    return (
+      currentTheme.colors.gradients.text ||
+      currentTheme.colors.gradients.primary
+    );
+  }, [theme]);
 
   useEffect(() => {
     // Get theme from localStorage if available
@@ -347,6 +384,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     },
     getThemeStyles,
     themeProps: themeProperties[theme],
+    isDarkMode,
+    getTextColor,
+    getTextGradient,
   };
 
   return (

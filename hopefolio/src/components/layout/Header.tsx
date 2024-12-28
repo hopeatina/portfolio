@@ -27,11 +27,13 @@ const themeLabels = {
 };
 
 export default function Header() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, isDarkMode, getTextColor } = useTheme();
   const [isChangingReality, setIsChangingReality] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayColor, setOverlayColor] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isDarkTheme = theme === "futuristic";
+  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
 
   // Get the current theme's styles
   const getThemeStyles = () => {
@@ -111,11 +113,17 @@ export default function Header() {
         <div
           className={`w-full py-4 px-6 ${styles.transitionBase}`}
           style={{
-            background: "var(--header-bg)",
+            background: bgIsDark
+              ? "rgba(10, 10, 10, 0.85)"
+              : "rgba(255, 255, 255, 0.85)",
             boxShadow: "var(--box-shadow)",
             backdropFilter: "blur(8px)",
             WebkitBackdropFilter: "blur(8px)",
-            borderBottom: "1px solid rgba(var(--text), 0.1)",
+            borderBottom: `1px solid ${
+              bgIsDark
+                ? "rgba(var(--primary-rgb), 0.2)"
+                : "rgba(var(--text-rgb), 0.1)"
+            }`,
           }}
         >
           <nav className="max-w-7xl mx-auto flex justify-between items-center">
@@ -124,6 +132,20 @@ export default function Header() {
               <Link
                 href="/"
                 className={`text-2xl ${styles.heading} ${styles.gradientText} ${styles.hoverScale}`}
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "var(--letter-spacing-heading)",
+                  color:
+                    theme === "rice"
+                      ? "var(--primary)"
+                      : bgIsDark
+                      ? "var(--text-on-dark)"
+                      : "var(--text)",
+                  textShadow:
+                    theme === "rice"
+                      ? "0 2px 4px rgba(0, 32, 91, 0.1)"
+                      : "none",
+                }}
               >
                 Hope Atina
               </Link>
@@ -132,9 +154,14 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-lg ${styles.transitionBase} hover:bg-opacity-10 hover:bg-current`}
+              className={`lg:hidden p-2 rounded-lg ${styles.transitionBase}`}
               aria-label="Toggle mobile menu"
-              style={{ color: "var(--text)" }}
+              style={{
+                color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
+                background: bgIsDark
+                  ? "rgba(var(--primary-rgb), 0.1)"
+                  : "rgba(var(--text-rgb), 0.05)",
+              }}
             >
               <svg
                 className="w-6 h-6"
@@ -168,7 +195,7 @@ export default function Header() {
                   href={link.path}
                   className={`${styles.transitionBase} ${styles.body} hover:opacity-80`}
                   style={{
-                    color: "var(--text)",
+                    color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
                     position: "relative",
                     padding: "0.25rem 0",
                   }}
@@ -192,13 +219,31 @@ export default function Header() {
                 <button
                   className={`px-4 py-2 ${styles.transitionBase} ${
                     isChangingReality ? styles.buttonPulse : ""
-                  }`}
+                  } group-hover:shadow-lg`}
                   style={{
-                    background: "var(--gradient-primary)",
-                    color: "var(--text-on-dark)",
+                    background: (() => {
+                      if (theme === "rice") {
+                        return "var(--primary)";
+                      }
+                      return bgIsDark
+                        ? "rgba(var(--primary-rgb), 0.1)"
+                        : "var(--gradient-primary)";
+                    })(),
+                    color: (() => {
+                      if (theme === "rice") {
+                        return "var(--text-on-dark)";
+                      }
+                      return bgIsDark
+                        ? "var(--primary)"
+                        : "var(--text-on-dark)";
+                    })(),
                     borderRadius: "var(--border-radius)",
-                    border: "none",
+                    border:
+                      bgIsDark && theme !== "rice"
+                        ? "1px solid var(--primary)"
+                        : "none",
                     boxShadow: "var(--box-shadow)",
+                    transition: "all 0.3s ease",
                   }}
                 >
                   <span className="flex items-center gap-2">
@@ -220,18 +265,34 @@ export default function Header() {
                       />
                     </svg>
                   </span>
+                  <style jsx>{`
+                    button:hover {
+                      transform: translateY(-1px);
+                      ${theme === "rice"
+                        ? "background: var(--hover);"
+                        : bgIsDark
+                        ? "background: rgba(var(--primary-rgb), 0.2);"
+                        : "filter: brightness(1.1);"}
+                    }
+                  `}</style>
                 </button>
 
                 <div
                   className={`absolute right-0 mt-2 w-56 ${styles.transitionBase} opacity-0 invisible group-hover:opacity-100 group-hover:visible`}
                   style={{
-                    background: "var(--card-bg)",
+                    background: bgIsDark
+                      ? "rgba(10, 10, 10, 0.95)"
+                      : "rgba(255, 255, 255, 0.95)",
                     boxShadow: "var(--box-shadow)",
                     borderRadius: "var(--border-radius)",
                     zIndex: 50,
                     backdropFilter: "blur(8px)",
                     WebkitBackdropFilter: "blur(8px)",
-                    border: "1px solid rgba(var(--text), 0.1)",
+                    border: `1px solid ${
+                      bgIsDark
+                        ? "rgba(var(--primary-rgb), 0.2)"
+                        : "rgba(var(--text-rgb), 0.1)"
+                    }`,
                   }}
                 >
                   <div className="py-1">
@@ -241,9 +302,15 @@ export default function Header() {
                         onClick={() => handleThemeChange(mode)}
                         className={`w-full text-left px-4 py-3 ${styles.transitionBase} ${styles.body} hover:scale-[0.98]`}
                         style={{
-                          color: "var(--text)",
+                          color: bgIsDark
+                            ? "var(--text-on-dark)"
+                            : "var(--text)",
                           background:
-                            theme === mode ? "var(--accent)" : "transparent",
+                            theme === mode
+                              ? bgIsDark
+                                ? "rgba(var(--primary-rgb), 0.2)"
+                                : "rgba(var(--accent-rgb), 0.1)"
+                              : "transparent",
                           opacity: theme === mode ? 0.9 : 1,
                         }}
                       >
@@ -275,8 +342,14 @@ export default function Header() {
               isMobileMenuOpen ? "block" : "hidden"
             } pt-4 pb-3`}
             style={{
-              background: "var(--card-bg)",
-              borderTop: "1px solid rgba(var(--text), 0.1)",
+              background: bgIsDark
+                ? "rgba(10, 10, 10, 0.95)"
+                : "rgba(255, 255, 255, 0.95)",
+              borderTop: `1px solid ${
+                bgIsDark
+                  ? "rgba(var(--primary-rgb), 0.2)"
+                  : "rgba(var(--text-rgb), 0.1)"
+              }`,
             }}
           >
             <div className="space-y-1 px-2">
@@ -285,8 +358,11 @@ export default function Header() {
                   key={link.name}
                   href={link.path}
                   onClick={handleMobileNavClick}
-                  className={`block px-3 py-2 rounded-md ${styles.transitionBase} ${styles.body} hover:bg-opacity-10 hover:bg-current`}
-                  style={{ color: "var(--text)" }}
+                  className={`block px-3 py-2 rounded-md ${styles.transitionBase} ${styles.body} hover:bg-opacity-10`}
+                  style={{
+                    color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
+                    background: "transparent",
+                  }}
                 >
                   {link.name}
                 </Link>
@@ -295,7 +371,9 @@ export default function Header() {
                 <div className="px-3">
                   <p
                     className="text-sm font-medium"
-                    style={{ color: "var(--text)" }}
+                    style={{
+                      color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
+                    }}
                   >
                     Theme
                   </p>
@@ -307,11 +385,17 @@ export default function Header() {
                           handleThemeChange(mode);
                           handleMobileNavClick();
                         }}
-                        className={`w-full text-left px-3 py-2 rounded-md ${styles.transitionBase} ${styles.body} hover:bg-opacity-10 hover:bg-current`}
+                        className={`w-full text-left px-3 py-2 rounded-md ${styles.transitionBase} ${styles.body}`}
                         style={{
-                          color: "var(--text)",
+                          color: bgIsDark
+                            ? "var(--text-on-dark)"
+                            : "var(--text)",
                           background:
-                            theme === mode ? "var(--accent)" : "transparent",
+                            theme === mode
+                              ? bgIsDark
+                                ? "rgba(var(--primary-rgb), 0.2)"
+                                : "rgba(var(--accent-rgb), 0.1)"
+                              : "transparent",
                           opacity: theme === mode ? 0.9 : 1,
                         }}
                       >

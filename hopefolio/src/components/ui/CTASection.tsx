@@ -6,25 +6,31 @@ import styles from "@/styles/themes/base-theme.module.css";
 const CTASection = () => {
   const { theme, getThemeStyles } = useTheme();
   const isDarkTheme = theme === "futuristic";
+  const isRiceTheme = theme === "rice";
+  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
 
   return (
     <section
       className={`py-24 relative overflow-hidden ${styles.fadeUp}`}
       style={{
-        background: isDarkTheme ? "var(--background)" : "var(--surface)",
+        background: isRiceTheme
+          ? "var(--background)"
+          : bgIsDark
+          ? "var(--background)"
+          : "var(--surface)",
       }}
     >
       {/* Background Pattern */}
       <div
         className="absolute inset-0"
         style={{
-          background: isDarkTheme
+          background: bgIsDark
             ? `
               radial-gradient(circle at 20% 20%, rgba(var(--primary-rgb), 0.15) 0%, transparent 40%),
               radial-gradient(circle at 80% 80%, rgba(var(--accent-rgb), 0.15) 0%, transparent 40%)
             `
             : "var(--gradient-surface)",
-          opacity: isDarkTheme ? 1 : 0.5,
+          opacity: isRiceTheme ? 0.05 : bgIsDark ? 1 : 0.5,
           mixBlendMode: "overlay",
         }}
       />
@@ -34,15 +40,21 @@ const CTASection = () => {
         <div
           className="max-w-4xl mx-auto text-center p-12 rounded-2xl relative"
           style={{
-            background: isDarkTheme
+            background: isRiceTheme
+              ? "rgba(255, 255, 255, 0.95)"
+              : bgIsDark
               ? "rgba(10, 10, 10, 0.5)"
               : "var(--card-bg)",
             border: `1px solid ${
-              isDarkTheme
+              isRiceTheme
+                ? "rgba(var(--primary-rgb), 0.2)"
+                : bgIsDark
                 ? "rgba(var(--primary-rgb), 0.2)"
                 : "var(--icon-border)"
             }`,
-            boxShadow: "var(--box-shadow-card)",
+            boxShadow: isRiceTheme
+              ? "0 4px 6px rgba(0, 32, 91, 0.1)"
+              : "var(--box-shadow-card)",
           }}
         >
           {/* Decorative Top Border */}
@@ -52,7 +64,7 @@ const CTASection = () => {
               borderTopLeftRadius: "1rem",
               borderTopRightRadius: "1rem",
               background: "var(--gradient-primary)",
-              opacity: isDarkTheme ? 1 : 0.8,
+              opacity: isRiceTheme ? 0.8 : bgIsDark ? 1 : 0.8,
               transform: "translateY(1px)",
             }}
           />
@@ -60,12 +72,19 @@ const CTASection = () => {
           <h2
             className={`text-4xl md:text-5xl font-bold mb-6 ${
               styles.headingH2
-            } ${isDarkTheme ? styles.gradientText : ""}`}
+            } ${bgIsDark && !isRiceTheme ? styles.gradientText : ""}`}
             style={{
-              color: isDarkTheme ? "transparent" : "var(--text)",
+              color: isRiceTheme
+                ? "var(--primary)"
+                : bgIsDark
+                ? "transparent"
+                : "var(--text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-heading)",
               lineHeight: "var(--line-height-heading)",
+              textShadow: isRiceTheme
+                ? "0 2px 4px rgba(0, 32, 91, 0.1)"
+                : "none",
             }}
           >
             Ready to Build Something Incredible?
@@ -74,7 +93,11 @@ const CTASection = () => {
           <p
             className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto ${styles.bodyLarge}`}
             style={{
-              color: isDarkTheme ? "var(--text-on-dark)" : "var(--text)",
+              color: isRiceTheme
+                ? "var(--text)"
+                : bgIsDark
+                ? "var(--text-on-dark)"
+                : "var(--text)",
               fontFamily: "var(--font-body)",
               lineHeight: "var(--line-height-body)",
               opacity: 0.9,
@@ -88,19 +111,22 @@ const CTASection = () => {
             href="/contact"
             className="inline-flex items-center group relative overflow-hidden rounded-full"
             style={{
-              background: isDarkTheme
+              background: isRiceTheme
+                ? "var(--primary)"
+                : bgIsDark
                 ? "rgba(var(--primary-rgb), 0.1)"
                 : "var(--gradient-primary)",
-              color: isDarkTheme ? "var(--primary)" : "white",
+              color: isRiceTheme || !bgIsDark ? "white" : "var(--primary)",
               padding: "1rem 3rem",
-              border: isDarkTheme ? "1px solid var(--primary)" : "none",
+              border:
+                bgIsDark && !isRiceTheme ? "1px solid var(--primary)" : "none",
               transition: "var(--transition-base)",
             }}
           >
             <span className="relative z-10 font-medium text-lg">
               Let's Talk
             </span>
-            {isDarkTheme && (
+            {bgIsDark && !isRiceTheme && (
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100"
                 style={{
@@ -112,7 +138,7 @@ const CTASection = () => {
             <span
               className="ml-2 transform transition-transform group-hover:translate-x-1"
               style={{
-                color: isDarkTheme ? "var(--primary)" : "white",
+                color: isRiceTheme || !bgIsDark ? "white" : "var(--primary)",
               }}
             >
               →
@@ -120,7 +146,7 @@ const CTASection = () => {
           </Link>
 
           {/* Corner Accents */}
-          {isDarkTheme && (
+          {(bgIsDark || isRiceTheme) && (
             <>
               <div
                 className="absolute top-0 left-0 w-24 h-24"

@@ -38,12 +38,13 @@ const projects: Project[] = [
 const FeaturedProjects = () => {
   const { theme, getThemeStyles } = useTheme();
   const isDarkTheme = theme === "futuristic";
+  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
 
   return (
     <section
       className={`py-24 relative overflow-hidden ${styles.fadeUp}`}
       style={{
-        background: isDarkTheme ? "var(--background)" : "var(--surface)",
+        background: bgIsDark ? "var(--background)" : "var(--surface)",
       }}
     >
       {/* Background Pattern */}
@@ -51,7 +52,7 @@ const FeaturedProjects = () => {
         className="absolute inset-0"
         style={{
           background: "var(--overlay-pattern)",
-          opacity: isDarkTheme ? 0.15 : 0.1,
+          opacity: bgIsDark ? 0.15 : 0.1,
           mixBlendMode: "overlay",
         }}
       />
@@ -63,9 +64,9 @@ const FeaturedProjects = () => {
           <h2
             className={`text-4xl md:text-5xl font-bold mb-6 ${
               styles.headingH2
-            } ${isDarkTheme ? styles.gradientText : ""}`}
+            } ${bgIsDark ? styles.gradientText : ""}`}
             style={{
-              color: isDarkTheme ? "transparent" : "var(--text)",
+              color: bgIsDark ? "transparent" : "var(--text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-heading)",
               lineHeight: "var(--line-height-heading)",
@@ -76,7 +77,7 @@ const FeaturedProjects = () => {
           <p
             className={`text-lg md:text-xl max-w-2xl mx-auto ${styles.bodyLarge}`}
             style={{
-              color: isDarkTheme ? "var(--text-on-dark)" : "var(--text)",
+              color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
               fontFamily: "var(--font-body)",
               lineHeight: "var(--line-height-body)",
               opacity: 0.9,
@@ -97,11 +98,11 @@ const FeaturedProjects = () => {
               <div
                 className="relative rounded-2xl overflow-hidden transition-all duration-500 group-hover:transform group-hover:scale-[1.02]"
                 style={{
-                  background: isDarkTheme
+                  background: bgIsDark
                     ? "rgba(10, 10, 10, 0.5)"
                     : "var(--card-bg)",
                   border: `1px solid ${
-                    isDarkTheme
+                    bgIsDark
                       ? "rgba(var(--primary-rgb), 0.2)"
                       : "var(--icon-border)"
                   }`,
@@ -120,7 +121,7 @@ const FeaturedProjects = () => {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
-                      background: isDarkTheme
+                      background: bgIsDark
                         ? "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%)"
                         : "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 100%)",
                     }}
@@ -136,14 +137,12 @@ const FeaturedProjects = () => {
                         key={tag}
                         className="px-3 py-1 text-sm rounded-full"
                         style={{
-                          background: isDarkTheme
+                          background: bgIsDark
                             ? "rgba(var(--primary-rgb), 0.1)"
                             : "rgba(var(--accent-rgb), 0.1)",
-                          color: isDarkTheme
-                            ? "var(--primary)"
-                            : "var(--accent)",
+                          color: bgIsDark ? "var(--primary)" : "var(--accent)",
                           border: `1px solid ${
-                            isDarkTheme ? "var(--primary)" : "var(--accent)"
+                            bgIsDark ? "var(--primary)" : "var(--accent)"
                           }`,
                         }}
                       >
@@ -155,10 +154,10 @@ const FeaturedProjects = () => {
                   {/* Title */}
                   <h3
                     className={`text-2xl font-bold mb-2 ${styles.headingH3} ${
-                      isDarkTheme ? styles.gradientText : ""
+                      bgIsDark ? styles.gradientText : ""
                     }`}
                     style={{
-                      color: isDarkTheme ? "transparent" : "var(--text)",
+                      color: bgIsDark ? "transparent" : "var(--text)",
                       fontFamily: "var(--font-heading)",
                     }}
                   >
@@ -169,9 +168,7 @@ const FeaturedProjects = () => {
                   <p
                     className={`${styles.body}`}
                     style={{
-                      color: isDarkTheme
-                        ? "var(--text-on-dark)"
-                        : "var(--text)",
+                      color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
                       opacity: 0.9,
                     }}
                   >
@@ -182,7 +179,7 @@ const FeaturedProjects = () => {
                   <div
                     className="mt-4 inline-flex items-center group/link"
                     style={{
-                      color: isDarkTheme ? "var(--primary)" : "var(--accent)",
+                      color: bgIsDark ? "var(--primary)" : "var(--accent)",
                     }}
                   >
                     <span className="font-medium">View Case Study</span>
@@ -193,7 +190,7 @@ const FeaturedProjects = () => {
                 </div>
 
                 {/* Corner Accents */}
-                {isDarkTheme && (
+                {bgIsDark && (
                   <>
                     <div
                       className="absolute top-0 left-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"

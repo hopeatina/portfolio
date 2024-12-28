@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="-150 -150 300 300" xmlns="http://www.w3.org/2000/svg" version="1.1">
+	<!-- 
+    1) OPTIONAL BACKGROUND:
+       Uncomment if you want a black or transparent background for clarity.
+       <rect x="-150" y="-150" width="300" height="300" fill="black" />
+       or fill="none" for no background.
+  -->
+
+	<!-- 
+    2) DEFINE A SINGLE QUADRANT (#quarter):
+       We'll create an 'S-curve' path from (120,0) to (0,120).
+       Inside this group, we place multiple copies of that path, 
+       each scaled a bit smaller and filled with a different color 
+       to simulate the layered arcs: red → black → gold → black → red.
+  -->
+	<g id="quarter">
+
+		<!-- A) Outer Red Arc (largest) -->
+		<path d="
+        M 120,0 
+        C 120,50  50,120   0,120
+        C 10,110  20,80   120,0
+        Z
+      " fill="red" />
+
+		<!-- B) Thin Black Arc (scaled down a bit) -->
+		<path d="
+        M 120,0 
+        C 120,50  50,120   0,120
+        C 10,110  20,80   120,0
+        Z
+      " fill="black" transform="scale(0.90)" />
+
+		<!-- C) Gold Arc (further scaled down) -->
+		<path d="
+        M 120,0 
+        C 120,50  50,120   0,120
+        C 10,110  20,80   120,0
+        Z
+      " fill="gold" transform="scale(0.70)" />
+
+		<!-- D) Another Thin Black Arc -->
+		<path d="
+        M 120,0 
+        C 120,50  50,120   0,120
+        C 10,110  20,80   120,0
+        Z
+      " fill="black" transform="scale(0.65)" />
+
+		<!-- E) Inner Red Arc -->
+		<path d="
+        M 120,0 
+        C 120,50  50,120   0,120
+        C 10,110  20,80   120,0
+        Z
+      " fill="red" transform="scale(0.45)" />
+
+	</g>
+
+	<!-- 
+    3) REPLICATE THE QUADRANT 4 TIMES:
+       Rotate the #quarter group around (0,0) by 0°, 90°, 180°, 270°.
+       This yields a full 4-lobed circular pattern.
+  -->
+	<use href="#quarter" transform="rotate(0)" />
+	<use href="#quarter" transform="rotate(90)" />
+	<use href="#quarter" transform="rotate(180)" />
+	<use href="#quarter" transform="rotate(270)" />
+
+	<!-- 
+    4) (OPTIONAL) CENTER DIAMOND:
+       A small square, rotated 45° to appear as a diamond.
+       Stroke in gold, fill in black.
+       Adjust size as desired.
+  -->
+	<rect x="-10" y="-10" width="20" height="20" fill="black" stroke="gold" stroke-width="2" transform="rotate(45)" />
+</svg>

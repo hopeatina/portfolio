@@ -37,14 +37,14 @@ export default function About() {
       <Quote
         text={PERSONAL_QUOTE.text}
         attribution={PERSONAL_QUOTE.attribution}
-        className="mb-8"
+        className="mb-6"
       />
 
       {/* Journey Section */}
       <div className={styles.container}>
         <AboutSection
           title="My Journey"
-          className={`${styles.fadeUp} ${styles.delayBase} mb-10`}
+          className={`${styles.fadeUp} ${styles.delayBase} mb-8`}
         >
           <div className="grid md:grid-cols-2 gap-6 items-start">
             <div className="space-y-4">

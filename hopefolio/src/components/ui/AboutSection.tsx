@@ -7,12 +7,18 @@ import styles from "@/styles/themes/base-theme.module.css";
 const AboutSection = () => {
   const { theme, getThemeStyles } = useTheme();
   const isDarkTheme = theme === "futuristic";
+  const isRiceTheme = theme === "rice";
+  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
 
   return (
     <section
       className={`py-24 relative overflow-hidden ${styles.fadeUp}`}
       style={{
-        background: isDarkTheme ? "var(--background)" : "var(--surface)",
+        background: isRiceTheme
+          ? "var(--background)"
+          : bgIsDark
+          ? "var(--background)"
+          : "var(--surface)",
       }}
     >
       {/* Background Pattern */}
@@ -20,7 +26,7 @@ const AboutSection = () => {
         className="absolute inset-0"
         style={{
           background: "var(--background-pattern)",
-          opacity: isDarkTheme ? 0.15 : 0.1,
+          opacity: isRiceTheme ? 0.05 : bgIsDark ? 0.15 : 0.1,
           mixBlendMode: "overlay",
         }}
       />
@@ -35,7 +41,7 @@ const AboutSection = () => {
               className="absolute -left-4 top-0 bottom-0 w-1 rounded-full"
               style={{
                 background: "var(--gradient-primary)",
-                opacity: isDarkTheme ? 0.8 : 0.6,
+                opacity: isRiceTheme ? 0.8 : bgIsDark ? 0.8 : 0.6,
               }}
             />
 
@@ -43,12 +49,19 @@ const AboutSection = () => {
               <h2
                 className={`text-4xl md:text-5xl font-bold ${
                   styles.headingH2
-                } ${isDarkTheme ? styles.gradientText : ""}`}
+                } ${bgIsDark && !isRiceTheme ? styles.gradientText : ""}`}
                 style={{
-                  color: isDarkTheme ? "transparent" : "var(--text)",
+                  color: isRiceTheme
+                    ? "var(--text-on-dark)"
+                    : bgIsDark
+                    ? "transparent"
+                    : "var(--text)",
                   fontFamily: "var(--font-heading)",
                   letterSpacing: "var(--letter-spacing-heading)",
                   lineHeight: "var(--line-height-heading)",
+                  textShadow: isRiceTheme
+                    ? "0 2px 4px rgba(0, 32, 91, 0.1)"
+                    : "none",
                 }}
               >
                 About Me
@@ -58,7 +71,11 @@ const AboutSection = () => {
                 <p
                   className={`text-lg md:text-xl ${styles.bodyLarge}`}
                   style={{
-                    color: isDarkTheme ? "var(--text-on-dark)" : "var(--text)",
+                    color: isRiceTheme
+                      ? "var(--text-on-dark)"
+                      : bgIsDark
+                      ? "var(--text-on-dark)"
+                      : "var(--text)",
                     fontFamily: "var(--font-body)",
                     lineHeight: "var(--line-height-body)",
                     opacity: 0.9,
@@ -70,7 +87,11 @@ const AboutSection = () => {
                 <p
                   className={`text-lg md:text-xl ${styles.bodyLarge}`}
                   style={{
-                    color: isDarkTheme ? "var(--text-on-dark)" : "var(--text)",
+                    color: isRiceTheme
+                      ? "var(--text-on-dark)"
+                      : bgIsDark
+                      ? "var(--text-on-dark)"
+                      : "var(--text)",
                     fontFamily: "var(--font-body)",
                     lineHeight: "var(--line-height-body)",
                     opacity: 0.9,
@@ -86,17 +107,22 @@ const AboutSection = () => {
                 href="/about"
                 className="inline-flex items-center group relative overflow-hidden rounded-full"
                 style={{
-                  background: isDarkTheme
+                  background: isRiceTheme
+                    ? "var(--primary)"
+                    : bgIsDark
                     ? "rgba(var(--primary-rgb), 0.1)"
                     : "var(--gradient-primary)",
-                  color: isDarkTheme ? "var(--primary)" : "white",
+                  color: isRiceTheme || !bgIsDark ? "white" : "var(--primary)",
                   padding: "0.75rem 2rem",
-                  border: isDarkTheme ? "1px solid var(--primary)" : "none",
+                  border:
+                    bgIsDark && !isRiceTheme
+                      ? "1px solid var(--primary)"
+                      : "none",
                   transition: "var(--transition-base)",
                 }}
               >
                 <span className="relative z-10 font-medium">Learn More</span>
-                {isDarkTheme && (
+                {bgIsDark && !isRiceTheme && (
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100"
                     style={{
@@ -108,7 +134,8 @@ const AboutSection = () => {
                 <span
                   className="ml-2 transform transition-transform group-hover:translate-x-1"
                   style={{
-                    color: isDarkTheme ? "var(--primary)" : "white",
+                    color:
+                      isRiceTheme || !bgIsDark ? "white" : "var(--primary)",
                   }}
                 >
                   →
@@ -123,14 +150,18 @@ const AboutSection = () => {
             <div
               className="relative rounded-2xl overflow-hidden"
               style={{
-                boxShadow: "var(--box-shadow-card)",
+                boxShadow: isRiceTheme
+                  ? "0 4px 6px rgba(0, 32, 91, 0.1)"
+                  : "var(--box-shadow-card)",
               }}
             >
               {/* Background Glow */}
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
-                  background: isDarkTheme
+                  background: isRiceTheme
+                    ? "radial-gradient(circle at center, rgba(0, 32, 91, 0.2) 0%, transparent 70%)"
+                    : bgIsDark
                     ? "radial-gradient(circle at center, rgba(var(--primary-rgb), 0.2) 0%, transparent 70%)"
                     : "radial-gradient(circle at center, var(--gradient-start) 0%, transparent 70%)",
                   mixBlendMode: "overlay",
@@ -145,7 +176,9 @@ const AboutSection = () => {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   style={{
-                    border: isDarkTheme
+                    border: isRiceTheme
+                      ? "1px solid rgba(0, 32, 91, 0.2)"
+                      : bgIsDark
                       ? "1px solid rgba(var(--primary-rgb), 0.2)"
                       : "none",
                   }}
@@ -156,14 +189,14 @@ const AboutSection = () => {
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
-                  background: isDarkTheme
+                  background: bgIsDark
                     ? "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 100%)"
                     : "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.2) 100%)",
                 }}
               />
 
               {/* Corner Accents */}
-              {isDarkTheme && (
+              {(bgIsDark || isRiceTheme) && (
                 <>
                   <div
                     className="absolute top-0 left-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"

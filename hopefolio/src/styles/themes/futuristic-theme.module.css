@@ -16,6 +16,37 @@
   --icon-border: rgba(0, 238, 92, 0.25);
   --hover: #00B34A;
 
+  /* Text Gradients */
+  --text-gradient: linear-gradient(
+    135deg,
+    rgba(0, 238, 92, 1) 0%,
+    rgba(0, 255, 153, 0.9) 100%
+  );
+  --text-gradient-hover: linear-gradient(
+    135deg,
+    rgba(0, 255, 153, 1) 0%,
+    rgba(0, 238, 92, 0.9) 100%
+  );
+  --text-gradient-muted: linear-gradient(
+    135deg,
+    rgba(0, 238, 92, 0.8) 0%,
+    rgba(0, 255, 153, 0.7) 100%
+  );
+
+  /* UI Gradients - Keep these more vibrant for buttons and accents */
+  --gradient-primary: linear-gradient(
+    var(--gradient-angle),
+    rgba(0, 238, 92, 0.9) 0%,
+    rgba(51, 255, 153, 0.8) 35%,
+    rgba(0, 179, 74, 0.9) 100%
+  );
+  --gradient-secondary: linear-gradient(
+    45deg,
+    rgba(51, 255, 153, 0.9) 0%,
+    rgba(0, 255, 153, 0.8) 50%,
+    rgba(51, 255, 153, 0.9) 100%
+  );
+  
   /* Font Sizes */
   --font-size-h1: clamp(2.5rem, 5vw, 3.5rem);
   --font-size-h2: clamp(2rem, 4vw, 2.5rem);
@@ -339,12 +370,24 @@
 }
 
 .gradientText {
-  background: var(--gradient-twilight);
+  background: var(--text-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 200% auto;
-  animation: gradientShift 8s ease infinite;
-  display: inline-block;
+  background-size: 100% 100%;
+  background-position: 0 0;
+  transition: background-position 0.3s ease;
+}
+
+.gradientText:hover {
+  background: var(--text-gradient-hover);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradientTextMuted {
+  background: var(--text-gradient-muted);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .card {

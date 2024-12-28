@@ -44,7 +44,7 @@ export default function Blog() {
     <BlogLayout title="Blog" description={BLOG_DESCRIPTION}>
       <main className={`${styles.backgroundPattern} min-h-screen bg-opacity-2`}>
         {/* Header Section */}
-        <section className="relative py-12 md:py-16">
+        <section className="relative pt-24 pb-12 md:pb-16">
           <div className={`${styles.container} relative z-10 text-center`}>
             <h1 className={`${styles.headingH1} ${styles.gradientText} mb-4`}>
               Blog

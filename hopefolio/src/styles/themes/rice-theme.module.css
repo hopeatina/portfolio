@@ -50,6 +50,23 @@
   --text-muted-on-light: rgba(68, 71, 79, 0.85);
   --text-muted-on-dark: rgba(255, 255, 255, 0.85);
 
+  /* Text Gradients */
+  --text-gradient: linear-gradient(
+    135deg,
+    rgba(0, 32, 91, 1) 0%,
+    rgba(77, 154, 212, 0.9) 100%
+  );
+  --text-gradient-hover: linear-gradient(
+    135deg,
+    rgba(77, 154, 212, 1) 0%,
+    rgba(0, 32, 91, 0.9) 100%
+  );
+  --text-gradient-muted: linear-gradient(
+    135deg,
+    rgba(0, 32, 91, 0.8) 0%,
+    rgba(77, 154, 212, 0.7) 100%
+  );
+
   /* UI Elements */
   --header-bg: rgba(255, 255, 255, 0.95);
   --card-bg: rgba(255, 255, 255, 0.98);
@@ -414,26 +431,24 @@
 }
 
 .gradientText {
-  background: var(--gradient-twilight);
+  background: var(--text-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 200% auto;
-  animation: gradientShift 8s ease infinite;
-  display: inline-block;
+  background-size: 100% 100%;
+  background-position: 0 0;
+  transition: background-position 0.3s ease;
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
+.gradientText:hover {
+  background: var(--text-gradient-hover);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+.gradientTextMuted {
+  background: var(--text-gradient-muted);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Card Styles */

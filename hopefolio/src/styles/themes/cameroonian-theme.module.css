@@ -24,6 +24,23 @@
   --highlight: #f5e900;
   --text-muted: rgba(26, 26, 26, 0.85);
 
+  /* Text Gradients */
+  --text-gradient: linear-gradient(
+    135deg,
+    rgba(0, 150, 57, 1) 0%,
+    rgba(199, 31, 2, 0.9) 100%
+  );
+  --text-gradient-hover: linear-gradient(
+    135deg,
+    rgba(199, 31, 2, 1) 0%,
+    rgba(0, 150, 57, 0.9) 100%
+  );
+  --text-gradient-muted: linear-gradient(
+    135deg,
+    rgba(0, 150, 57, 0.8) 0%,
+    rgba(199, 31, 2, 0.7) 100%
+  );
+
   /* Text colors relative to background */
   --text-on-light: #1A1A1A;
   --text-on-dark: #FFFFFF;
@@ -343,12 +360,24 @@
 }
 
 .gradientText {
-  background: var(--gradient-twilight);
+  background: var(--text-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 200% auto;
-  animation: gradientShift 8s ease infinite;
-  display: inline-block;
+  background-size: 100% 100%;
+  background-position: 0 0;
+  transition: background-position 0.3s ease;
+}
+
+.gradientText:hover {
+  background: var(--text-gradient-hover);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradientTextMuted {
+  background: var(--text-gradient-muted);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .card {

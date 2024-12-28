@@ -33,7 +33,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className={styles.theme}>
       <Header />
-      <main className="pt-20">{children}</main>
+      <main className="">{children}</main>
       <Footer />
     </div>
   );

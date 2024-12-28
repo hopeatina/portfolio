@@ -71,6 +71,8 @@ const techCategories: TechCategory[] = [
 const TechStack = () => {
   const { theme, getThemeStyles } = useTheme();
   const isDarkTheme = theme === "futuristic";
+  const isRiceTheme = theme === "rice";
+  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
   const [activeTab, setActiveTab] = useState(0);
 
   // Calculate the maximum number of rows needed for any tab
@@ -83,15 +85,19 @@ const TechStack = () => {
     <section
       className={`py-24 relative overflow-hidden ${styles.fadeUp}`}
       style={{
-        background: isDarkTheme ? "var(--background)" : "var(--surface)",
+        background: isRiceTheme
+          ? "var(--background)"
+          : bgIsDark
+          ? "var(--background)"
+          : "var(--surface)",
       }}
     >
       {/* Background Pattern */}
       <div
         className="absolute inset-0"
         style={{
-          background: "var(--starry-pattern)",
-          opacity: isDarkTheme ? 0.15 : 0.1,
+          background: "var(--background-pattern)",
+          opacity: isRiceTheme ? 0.05 : bgIsDark ? 0.15 : 0.1,
           mixBlendMode: "overlay",
         }}
       />
@@ -103,12 +109,19 @@ const TechStack = () => {
           <h2
             className={`text-4xl md:text-5xl font-bold mb-6 ${
               styles.headingH2
-            } ${isDarkTheme ? styles.gradientText : ""}`}
+            } ${bgIsDark && !isRiceTheme ? styles.gradientText : ""}`}
             style={{
-              color: isDarkTheme ? "transparent" : "var(--text)",
+              color: isRiceTheme
+                ? "var(--text-on-dark)"
+                : bgIsDark
+                ? "transparent"
+                : "var(--text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-heading)",
               lineHeight: "var(--line-height-heading)",
+              textShadow: isRiceTheme
+                ? "0 2px 4px rgba(0, 32, 91, 0.1)"
+                : "none",
             }}
           >
             Tech Stack
@@ -116,7 +129,11 @@ const TechStack = () => {
           <p
             className={`text-lg md:text-xl max-w-2xl mx-auto ${styles.bodyLarge}`}
             style={{
-              color: isDarkTheme ? "var(--text-on-dark)" : "var(--text)",
+              color: isRiceTheme
+                ? "var(--text-on-dark)"
+                : bgIsDark
+                ? "var(--text-on-dark)"
+                : "var(--text)",
               fontFamily: "var(--font-body)",
               lineHeight: "var(--line-height-body)",
               opacity: 0.9,

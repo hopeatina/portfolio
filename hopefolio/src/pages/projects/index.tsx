@@ -45,7 +45,7 @@ export default function Projects() {
 
       <main className={`min-h-screen ${styles.heroBackground}`}>
         {/* Header Section */}
-        <div className={`${styles.container} py-12 md:py-16 relative`}>
+        <div className={`${styles.container} pt-24 pb-12 md:pb-16 relative`}>
           <div className="relative z-10">
             <h1
               className={`text-4xl md:text-5xl font-bold mb-4 ${styles.gradientText}`}

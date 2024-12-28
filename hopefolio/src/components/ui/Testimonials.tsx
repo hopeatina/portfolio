@@ -36,12 +36,18 @@ const testimonials: Testimonial[] = [
 const Testimonials = () => {
   const { theme, getThemeStyles } = useTheme();
   const isDarkTheme = theme === "futuristic";
+  const isRiceTheme = theme === "rice";
+  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
 
   return (
     <section
       className={`py-24 relative overflow-hidden ${styles.fadeUp}`}
       style={{
-        background: isDarkTheme ? "var(--background)" : "var(--surface)",
+        background: isRiceTheme
+          ? "var(--background)"
+          : bgIsDark
+          ? "var(--background)"
+          : "var(--surface)",
       }}
     >
       {/* Background Pattern */}
@@ -49,7 +55,7 @@ const Testimonials = () => {
         className="absolute inset-0"
         style={{
           background: "var(--cosmic-swirl)",
-          opacity: isDarkTheme ? 0.15 : 0.1,
+          opacity: isRiceTheme ? 0.05 : bgIsDark ? 0.15 : 0.1,
           mixBlendMode: "overlay",
         }}
       />
@@ -61,12 +67,19 @@ const Testimonials = () => {
           <h2
             className={`text-4xl md:text-5xl font-bold mb-6 ${
               styles.headingH2
-            } ${isDarkTheme ? styles.gradientText : ""}`}
+            } ${bgIsDark && !isRiceTheme ? styles.gradientText : ""}`}
             style={{
-              color: isDarkTheme ? "transparent" : "var(--text)",
+              color: isRiceTheme
+                ? "var(--text-on-dark)"
+                : bgIsDark
+                ? "transparent"
+                : "var(--text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-heading)",
               lineHeight: "var(--line-height-heading)",
+              textShadow: isRiceTheme
+                ? "0 2px 4px rgba(0, 32, 91, 0.1)"
+                : "none",
             }}
           >
             What People Say
@@ -74,7 +87,11 @@ const Testimonials = () => {
           <p
             className={`text-lg md:text-xl max-w-2xl mx-auto ${styles.bodyLarge}`}
             style={{
-              color: isDarkTheme ? "var(--text-on-dark)" : "var(--text)",
+              color: isRiceTheme
+                ? "var(--text-on-dark)"
+                : bgIsDark
+                ? "var(--text-on-dark)"
+                : "var(--text)",
               fontFamily: "var(--font-body)",
               lineHeight: "var(--line-height-body)",
               opacity: 0.9,
@@ -91,22 +108,32 @@ const Testimonials = () => {
               <div
                 className="relative p-8 rounded-2xl h-full transition-all duration-500 group-hover:transform group-hover:scale-[1.02]"
                 style={{
-                  background: isDarkTheme
+                  background: isRiceTheme
+                    ? "rgba(255, 255, 255, 0.95)"
+                    : bgIsDark
                     ? "rgba(10, 10, 10, 0.5)"
                     : "var(--card-bg)",
                   border: `1px solid ${
-                    isDarkTheme
+                    isRiceTheme
+                      ? "rgba(var(--primary-rgb), 0.2)"
+                      : bgIsDark
                       ? "rgba(var(--primary-rgb), 0.2)"
                       : "var(--icon-border)"
                   }`,
-                  boxShadow: "var(--box-shadow-card)",
+                  boxShadow: isRiceTheme
+                    ? "0 4px 6px rgba(0, 32, 91, 0.1)"
+                    : "var(--box-shadow-card)",
                 }}
               >
                 {/* Quote Icon */}
                 <div
                   className="absolute -top-4 left-8"
                   style={{
-                    color: isDarkTheme ? "var(--primary)" : "var(--accent)",
+                    color: isRiceTheme
+                      ? "var(--primary)"
+                      : bgIsDark
+                      ? "var(--primary)"
+                      : "var(--accent)",
                     opacity: 0.2,
                     fontSize: "4rem",
                   }}
@@ -118,7 +145,11 @@ const Testimonials = () => {
                 <p
                   className={`mb-6 relative ${styles.body}`}
                   style={{
-                    color: isDarkTheme ? "var(--text-on-dark)" : "var(--text)",
+                    color: isRiceTheme
+                      ? "var(--text)"
+                      : bgIsDark
+                      ? "var(--text-on-dark)"
+                      : "var(--text)",
                     opacity: 0.9,
                     fontStyle: "italic",
                   }}
@@ -131,7 +162,11 @@ const Testimonials = () => {
                   <h4
                     className="font-semibold mb-1"
                     style={{
-                      color: isDarkTheme ? "var(--primary)" : "var(--accent)",
+                      color: isRiceTheme
+                        ? "var(--primary)"
+                        : bgIsDark
+                        ? "var(--primary)"
+                        : "var(--accent)",
                     }}
                   >
                     {testimonial.name}
@@ -139,7 +174,9 @@ const Testimonials = () => {
                   <p
                     className="text-sm"
                     style={{
-                      color: isDarkTheme
+                      color: isRiceTheme
+                        ? "var(--text-muted)"
+                        : bgIsDark
                         ? "var(--text-muted-on-dark)"
                         : "var(--text-muted)",
                     }}
@@ -155,7 +192,7 @@ const Testimonials = () => {
                 </div>
 
                 {/* Corner Accents */}
-                {isDarkTheme && (
+                {(bgIsDark || isRiceTheme) && (
                   <>
                     <div
                       className="absolute top-0 left-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"

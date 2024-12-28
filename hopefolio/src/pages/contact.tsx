@@ -25,7 +25,7 @@ export default function Contact() {
       </Head>
 
       <main
-        className={`${styles.container} py-16 min-h-screen ${styles.fadeIn}`}
+        className={`${styles.container} pt-24 pb-16 min-h-screen ${styles.fadeIn}`}
       >
         <h1
           className={`${styles.headingH1} text-4xl font-bold mb-8 text-center ${styles.gradientText}`}

@@ -26,12 +26,13 @@ const companies: Company[] = [
 const CompanyLogos = () => {
   const { theme, getThemeStyles } = useTheme();
   const isDarkTheme = theme === "futuristic";
+  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
 
   return (
     <section
       className={`py-16 relative overflow-hidden ${styles.fadeUp}`}
       style={{
-        background: isDarkTheme ? "var(--background)" : "var(--surface)",
+        background: bgIsDark ? "var(--background)" : "var(--surface)",
       }}
     >
       {/* Background Pattern */}
@@ -39,7 +40,7 @@ const CompanyLogos = () => {
         className="absolute inset-0"
         style={{
           background: "var(--overlay-pattern)",
-          opacity: isDarkTheme ? 0.1 : 0.05,
+          opacity: bgIsDark ? 0.1 : 0.05,
           mixBlendMode: "overlay",
         }}
       />
@@ -51,9 +52,9 @@ const CompanyLogos = () => {
           <h2
             className={`text-2xl md:text-3xl font-bold mb-4 ${
               styles.headingH3
-            } ${isDarkTheme ? styles.gradientText : ""}`}
+            } ${bgIsDark ? styles.gradientText : ""}`}
             style={{
-              color: isDarkTheme ? "transparent" : "var(--text)",
+              color: bgIsDark ? "transparent" : "var(--text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-heading)",
               lineHeight: "var(--line-height-heading)",
@@ -67,7 +68,7 @@ const CompanyLogos = () => {
         <div
           className="relative p-8 rounded-2xl"
           style={{
-            background: isDarkTheme
+            background: bgIsDark
               ? "rgba(10, 10, 10, 0.3)"
               : "rgba(255, 255, 255, 0.7)",
             backdropFilter: "blur(8px)",
@@ -78,7 +79,7 @@ const CompanyLogos = () => {
             className="absolute inset-0 rounded-2xl opacity-20"
             style={{
               border: `1px solid ${
-                isDarkTheme ? "var(--primary)" : "var(--accent)"
+                bgIsDark ? "var(--primary)" : "var(--accent)"
               }`,
             }}
           />
@@ -96,9 +97,7 @@ const CompanyLogos = () => {
                 <div
                   className="relative w-full h-full transition-transform duration-300 group-hover:scale-110"
                   style={{
-                    filter: isDarkTheme
-                      ? "brightness(0.9) contrast(1.1)"
-                      : "none",
+                    filter: bgIsDark ? "brightness(0.9) contrast(1.1)" : "none",
                   }}
                 >
                   <Image
@@ -107,7 +106,7 @@ const CompanyLogos = () => {
                     fill
                     className="object-contain"
                     style={{
-                      opacity: isDarkTheme ? 0.9 : 1,
+                      opacity: bgIsDark ? 0.9 : 1,
                     }}
                   />
                 </div>
@@ -116,7 +115,7 @@ const CompanyLogos = () => {
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"
                   style={{
-                    background: isDarkTheme
+                    background: bgIsDark
                       ? "radial-gradient(circle at center, rgba(var(--primary-rgb), 0.15) 0%, transparent 70%)"
                       : "radial-gradient(circle at center, rgba(var(--accent-rgb), 0.1) 0%, transparent 70%)",
                   }}
@@ -126,7 +125,7 @@ const CompanyLogos = () => {
           </div>
 
           {/* Corner Accents */}
-          {isDarkTheme && (
+          {bgIsDark && (
             <>
               <div
                 className="absolute top-0 left-0 w-16 h-16"

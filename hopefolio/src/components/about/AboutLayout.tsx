@@ -55,38 +55,12 @@ export default function AboutLayout({ children }: AboutLayoutProps) {
         />
       </Head>
 
-      <main className="min-h-screen py-12 mt-24" style={getBackgroundStyles()}>
+      <main className="min-h-screen pt-24 pb-12" style={getBackgroundStyles()}>
         <div
           className={`max-w-4xl mx-auto px-4 ${
             theme === "futuristic" ? styles.fadeIn : ""
           }`}
         >
-          <h1
-            className={`text-4xl mb-8 text-center ${
-              theme === "futuristic" ? styles.gradientText : ""
-            }`}
-            style={{
-              color:
-                theme === "futuristic"
-                  ? "transparent"
-                  : themeProps.colors.primary,
-              fontFamily: themeProps.typography.headingFont,
-              fontWeight: themeProps.typography.headingWeight,
-              letterSpacing: themeProps.typography.letterSpacing,
-              background:
-                theme === "futuristic" ? "var(--gradient-primary)" : "none",
-              WebkitBackgroundClip: theme === "futuristic" ? "text" : "none",
-              WebkitTextFillColor:
-                theme === "futuristic" ? "transparent" : "inherit",
-              animation:
-                theme === "futuristic"
-                  ? "glitch 3s infinite linear alternate-reverse"
-                  : "none",
-            }}
-          >
-            No one can beat me at being me—and the same goes for you.
-          </h1>
-
           <div
             className={`grid gap-12 relative z-10 ${
               theme === "futuristic" ? styles.fadeUp : ""

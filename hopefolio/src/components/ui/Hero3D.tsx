@@ -30,8 +30,8 @@ const Hero3D: React.FC = () => {
       <div className="absolute inset-0">
         <ConnectorScene />
       </div>
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
-        <div className="backdrop-blur-sm bg-black/5 p-8 rounded-2xl">
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10 pointer-events-none">
+        <div className="backdrop-blur-sm bg-black/5 p-8 rounded-2xl pointer-events-auto">
           <h1
             className="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-lg"
             style={{
