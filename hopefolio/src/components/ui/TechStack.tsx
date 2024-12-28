@@ -1,13 +1,44 @@
 import React, { useState } from "react";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import styles from "@/styles/themes/base-theme.module.css";
+import {
+  SiPython,
+  SiJavascript,
+  SiTypescript,
+  SiHtml5,
+  SiCss3,
+  SiPostgresql,
+  SiReact,
+  SiNextdotjs,
+  SiSpring,
+  SiAngular,
+  SiFlask,
+  SiDjango,
+  SiExpress,
+  SiNodedotjs,
+  SiApachekafka,
+  SiApachespark,
+  SiCelery,
+  SiVercel,
+  SiGit,
+  SiGithubactions,
+  SiUnity,
+  SiSupabase,
+  SiRetool,
+  SiSentry,
+  SiOpenai,
+  SiDatadog,
+} from "react-icons/si";
+import { FaJava, FaAws } from "react-icons/fa";
+import { DiScala } from "react-icons/di";
+import { TbBrandMysql } from "react-icons/tb";
+import { GrOracle } from "react-icons/gr";
 
 type TechCategory = {
   name: string;
   items: {
     name: string;
-    icon?: string;
-    proficiency?: "expert" | "advanced" | "intermediate";
+    icon?: React.ComponentType<any>;
   }[];
 };
 
@@ -15,71 +46,64 @@ const techCategories: TechCategory[] = [
   {
     name: "Languages",
     items: [
-      { name: "Python", proficiency: "expert" },
-      { name: "JavaScript", proficiency: "expert" },
-      { name: "TypeScript", proficiency: "expert" },
-      { name: "Java", proficiency: "advanced" },
-      { name: "Scala", proficiency: "advanced" },
-      { name: "HTML5", proficiency: "expert" },
-      { name: "CSS", proficiency: "expert" },
-      { name: "SQL", proficiency: "expert" },
-      { name: "MATLAB", proficiency: "intermediate" },
+      { name: "Python", icon: SiPython },
+      { name: "JavaScript", icon: SiJavascript },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "Java", icon: FaJava },
+      { name: "Scala", icon: DiScala },
+      { name: "HTML5", icon: SiHtml5 },
+      { name: "CSS", icon: SiCss3 },
+      { name: "SQL", icon: TbBrandMysql },
     ],
   },
   {
     name: "Frameworks",
     items: [
-      { name: "React", proficiency: "expert" },
-      { name: "Next.js", proficiency: "expert" },
-      { name: "Spring Boot", proficiency: "advanced" },
-      { name: "Angular", proficiency: "advanced" },
-      { name: "React Native", proficiency: "advanced" },
-      { name: "Flask", proficiency: "expert" },
-      { name: "Django", proficiency: "expert" },
-      { name: "Express", proficiency: "advanced" },
-      { name: "Node.js", proficiency: "expert" },
-      { name: "Kafka", proficiency: "intermediate" },
-      { name: "Apache Spark", proficiency: "advanced" },
-      { name: "Celery", proficiency: "advanced" },
+      { name: "React", icon: SiReact },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "Spring Boot", icon: SiSpring },
+      { name: "Angular", icon: SiAngular },
+      { name: "React Native", icon: SiReact },
+      { name: "Flask", icon: SiFlask },
+      { name: "Django", icon: SiDjango },
+      { name: "Express", icon: SiExpress },
+      { name: "Node.js", icon: SiNodedotjs },
+      { name: "Kafka", icon: SiApachekafka },
+      { name: "Apache Spark", icon: SiApachespark },
+      { name: "Celery", icon: SiCelery },
     ],
   },
   {
     name: "Tools & Services",
     items: [
-      { name: "AWS Lambda", proficiency: "expert" },
-      { name: "Vercel", proficiency: "expert" },
-      { name: "DynamoDB", proficiency: "advanced" },
-      { name: "Git", proficiency: "expert" },
-      { name: "GitHub Actions", proficiency: "advanced" },
-      { name: "EMR", proficiency: "intermediate" },
-      { name: "Modal", proficiency: "advanced" },
-      { name: "Unity", proficiency: "intermediate" },
-      { name: "Langtrace", proficiency: "advanced" },
-      { name: "Supabase", proficiency: "advanced" },
-      { name: "PostgreSQL", proficiency: "expert" },
-      { name: "Retool", proficiency: "intermediate" },
-      { name: "Sentry", proficiency: "advanced" },
-      { name: "Rollbar", proficiency: "advanced" },
-      { name: "OpenAI", proficiency: "expert" },
-      { name: "Anthropic", proficiency: "advanced" },
-      { name: "Fal.ai", proficiency: "advanced" },
-      { name: "Datadog", proficiency: "advanced" },
+      { name: "AWS Lambda", icon: FaAws },
+      { name: "Vercel", icon: SiVercel },
+      { name: "DynamoDB", icon: FaAws },
+      { name: "Git", icon: SiGit },
+      { name: "GitHub Actions", icon: SiGithubactions },
+      { name: "EMR", icon: FaAws },
+      { name: "Modal" },
+      { name: "Unity", icon: SiUnity },
+      { name: "Langtrace" },
+      { name: "Supabase", icon: SiSupabase },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "Retool", icon: SiRetool },
+      { name: "Sentry", icon: SiSentry },
+      { name: "Oracle", icon: GrOracle },
+      { name: "OpenAI", icon: SiOpenai },
+      { name: "Anthropic" },
+      { name: "Fal.ai" },
+      { name: "Datadog", icon: SiDatadog },
     ],
   },
 ];
 
 const TechStack = () => {
-  const { theme, getThemeStyles } = useTheme();
+  const { theme } = useTheme();
   const isDarkTheme = theme === "futuristic";
   const isRiceTheme = theme === "rice";
   const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
   const [activeTab, setActiveTab] = useState(0);
-
-  // Calculate the maximum number of rows needed for any tab
-  const maxRows = Math.max(
-    ...techCategories.map((cat) => Math.ceil(cat.items.length / 4))
-  );
-  const gridHeight = maxRows * 64; // 64px per row (adjust as needed)
 
   return (
     <section
@@ -215,28 +239,43 @@ const TechStack = () => {
             }}
           />
 
-          <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4"
-            style={{ minHeight: `${gridHeight}px` }}
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {techCategories[activeTab].items.map((item) => (
               <div
                 key={item.name}
-                className="group relative p-4 rounded-xl transition-all duration-300 hover:transform hover:scale-105"
+                className={`group relative flex items-center justify-center p-6 rounded-xl transition-all duration-500 hover:scale-[1.02] overflow-hidden ${styles.shimmerEffectHover}`}
                 style={{
-                  background: isDarkTheme
-                    ? "rgba(var(--primary-rgb), 0.05)"
-                    : "white",
+                  background: isDarkTheme ? "rgba(30, 30, 30, 0.6)" : "white",
                   border: `1px solid ${
                     isDarkTheme
                       ? "rgba(var(--primary-rgb), 0.1)"
                       : "var(--icon-border)"
                   }`,
+                  height: "100px",
+                  boxShadow: isDarkTheme
+                    ? "0 4px 6px rgba(0, 0, 0, 0.2)"
+                    : "0 4px 6px rgba(0, 0, 0, 0.05)",
+                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                 }}
               >
-                <div className="text-center space-y-1">
+                {/* Shimmer Effect */}
+                <div className={styles.shimmerEffect} />
+
+                <div className="flex flex-col items-center justify-center gap-3 relative z-10">
+                  {item.icon && (
+                    <div className="flex justify-center transition-transform duration-500 group-hover:scale-110">
+                      {React.createElement(item.icon, {
+                        className: "w-7 h-7 transition-all duration-500",
+                        style: {
+                          color: isDarkTheme
+                            ? "var(--primary)"
+                            : "var(--accent)",
+                        },
+                      })}
+                    </div>
+                  )}
                   <div
-                    className="font-medium"
+                    className="font-medium text-center transition-all duration-500"
                     style={{
                       color: isDarkTheme
                         ? "var(--text-on-dark)"
@@ -245,32 +284,46 @@ const TechStack = () => {
                   >
                     {item.name}
                   </div>
-                  {item.proficiency && (
-                    <div
-                      className="text-sm"
-                      style={{
-                        color: isDarkTheme
-                          ? "var(--text-muted-on-dark)"
-                          : "var(--text-muted)",
-                      }}
-                    >
-                      {item.proficiency}
-                    </div>
-                  )}
                 </div>
 
-                {/* Hover Effect */}
+                {/* Glow Effect */}
                 <div
-                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"
                   style={{
                     background: isDarkTheme
-                      ? "linear-gradient(135deg, rgba(var(--primary-rgb), 0.1) 0%, transparent 100%)"
-                      : "linear-gradient(135deg, rgba(var(--accent-rgb), 0.1) 0%, transparent 100%)",
+                      ? "radial-gradient(circle at center, rgba(var(--primary-rgb), 0.15) 0%, transparent 70%)"
+                      : "radial-gradient(circle at center, rgba(var(--accent-rgb), 0.15) 0%, transparent 70%)",
+                    zIndex: 1,
                   }}
                 />
               </div>
             ))}
           </div>
+
+          <style jsx>{`
+            .group {
+              will-change: transform, box-shadow;
+            }
+
+            .group:hover {
+              box-shadow: ${isDarkTheme
+                ? "0 10px 40px -10px rgba(var(--primary-rgb), 0.3), 0 8px 16px -8px rgba(0, 0, 0, 0.2)"
+                : "0 10px 40px -10px rgba(var(--accent-rgb), 0.3), 0 8px 16px -8px rgba(0, 0, 0, 0.2)"};
+            }
+
+            @keyframes shimmer {
+              0% {
+                transform: translateX(-100%);
+              }
+              100% {
+                transform: translateX(100%);
+              }
+            }
+
+            .group:hover .shimmer {
+              animation: shimmer 2s infinite;
+            }
+          `}</style>
         </div>
       </div>
     </section>

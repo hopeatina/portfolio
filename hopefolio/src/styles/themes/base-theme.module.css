@@ -1110,4 +1110,31 @@
   100% {
     transform: rotateX(360deg) rotateY(360deg);
   }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmerEffect {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--primary-rgb), 0.2) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.shimmerEffectHover:hover .shimmerEffect {
+  animation: shimmer 1.5s ease-in-out infinite;
 } 
