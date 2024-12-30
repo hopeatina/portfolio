@@ -12,9 +12,8 @@ export default function BrainBuffet() {
     >
       <ProjectHero
         title="Brain Buffet"
-        subtitle="An AI-powered platform that revolutionizes course creation by leveraging large language models to generate personalized learning experiences."
-        imageSrc="/images/projects/brain-buffet.jpg"
-        imageAlt="Brain Buffet Platform Screenshot"
+        description="An AI-powered platform that revolutionizes course creation by leveraging large language models to generate personalized learning experiences."
+        image="/images/projects/brain-buffet.jpg"
       />
 
       <ProjectSection title="Overview">
@@ -49,18 +48,8 @@ export default function BrainBuffet() {
       </ProjectSection>
 
       <ProjectCTA
-        buttons={[
-          {
-            text: "View on GitHub",
-            href: "https://github.com/yourusername/brain-buffet",
-            variant: "primary",
-          },
-          {
-            text: "Visit Website",
-            href: "https://brainbuffet.ai",
-            variant: "outline",
-          },
-        ]}
+        githubUrl="https://github.com/yourusername/brain-buffet"
+        demoUrl="https://brainbuffet.co"
       />
     </ProjectLayout>
   );

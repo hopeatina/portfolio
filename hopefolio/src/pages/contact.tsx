@@ -482,7 +482,7 @@ export default function Contact() {
                   </h3>
                   <div className="flex flex-wrap gap-4">
                     <a
-                      href="https://github.com/yourusername"
+                      href="https://github.com/hopeatina"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all hover:transform hover:scale-105 ${
@@ -498,7 +498,7 @@ export default function Contact() {
                       GitHub
                     </a>
                     <a
-                      href="https://linkedin.com/in/yourusername"
+                      href="https://linkedin.com/in/hopeatina"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all hover:transform hover:scale-105 ${
@@ -514,7 +514,7 @@ export default function Contact() {
                       LinkedIn
                     </a>
                     <a
-                      href="https://twitter.com/yourusername"
+                      href="https://x.com/emerginghope_"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all hover:transform hover:scale-105 ${
@@ -524,10 +524,9 @@ export default function Contact() {
                         ...getButtonStyle(),
                         fontFamily: bgIsDark ? "var(--font-mono)" : "inherit",
                       }}
-                      aria-label="Twitter Profile"
+                      aria-label="X Profile"
                     >
-                      <FiTwitter className="w-5 h-5" />
-                      Twitter
+                      <FiTwitter className="w-5 h-5" />X
                     </a>
                   </div>
                 </div>

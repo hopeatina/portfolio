@@ -17,14 +17,14 @@ const socialLinks: SocialLink[] = [
     icon: FiGithub,
   },
   {
-    platform: "Twitter",
-    url: "https://twitter.com/hopeatina",
-    icon: FiTwitter,
-  },
-  {
     platform: "LinkedIn",
     url: "https://linkedin.com/in/hopeatina",
     icon: FiLinkedin,
+  },
+  {
+    platform: "X",
+    url: "https://x.com/emerginghope_",
+    icon: FiTwitter,
   },
 ];
 
@@ -86,7 +86,19 @@ export default function Footer() {
               Connect
             </h3>
             <div className="flex space-x-4">
-              {/* Social links commented out as requested */}
+              {socialLinks.map((link) => (
+                <a
+                  key={link.platform}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.link} hover:transform hover:scale-110 transition-transform`}
+                  style={{ color: "var(--text-muted-on-light)" }}
+                  aria-label={`${link.platform} Profile`}
+                >
+                  {createElement(link.icon, { size: 20 })}
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -99,7 +111,7 @@ export default function Footer() {
             aria-label="Back to top"
           >
             <span className="transition-transform hover:scale-110">
-              {/* Arrow icon commented out as requested */}
+              <FiArrowUp size={20} />
             </span>
           </button>
         </div>
