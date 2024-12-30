@@ -52,7 +52,9 @@ const AboutSection = () => {
                 } ${bgIsDark && !isRiceTheme ? styles.gradientText : ""}`}
                 style={{
                   color: isRiceTheme
-                    ? "var(--text-on-dark)"
+                    ? "var(--text)"
+                    : theme === "cameroonian"
+                    ? "var(--color-heading)"
                     : bgIsDark
                     ? "transparent"
                     : "var(--text)",
@@ -72,7 +74,9 @@ const AboutSection = () => {
                   className={`text-lg md:text-xl ${styles.bodyLarge}`}
                   style={{
                     color: isRiceTheme
-                      ? "var(--text-on-dark)"
+                      ? "var(--text)"
+                      : theme === "cameroonian"
+                      ? "var(--color-body)"
                       : bgIsDark
                       ? "var(--text-on-dark)"
                       : "var(--text)",
@@ -88,7 +92,9 @@ const AboutSection = () => {
                   className={`text-lg md:text-xl ${styles.bodyLarge}`}
                   style={{
                     color: isRiceTheme
-                      ? "var(--text-on-dark)"
+                      ? "var(--text)"
+                      : theme === "cameroonian"
+                      ? "var(--color-body)"
                       : bgIsDark
                       ? "var(--text-on-dark)"
                       : "var(--text)",
@@ -109,14 +115,19 @@ const AboutSection = () => {
                 style={{
                   background: isRiceTheme
                     ? "var(--primary)"
+                    : theme === "cameroonian"
+                    ? "var(--button-primary-bg)"
                     : bgIsDark
                     ? "rgba(var(--primary-rgb), 0.1)"
                     : "var(--gradient-primary)",
-                  color: isRiceTheme || !bgIsDark ? "white" : "var(--primary)",
+                  color:
+                    isRiceTheme || !bgIsDark
+                      ? "var(--button-primary-text)"
+                      : "var(--primary)",
                   padding: "0.75rem 2rem",
                   border:
                     bgIsDark && !isRiceTheme
-                      ? "1px solid var(--primary)"
+                      ? "1px solid var(--button-secondary-border)"
                       : "none",
                   transition: "var(--transition-base)",
                 }}

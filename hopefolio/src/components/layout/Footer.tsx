@@ -33,25 +33,40 @@ export default function Footer() {
   const { theme, getThemeStyles } = useTheme();
   const themeStyles = getThemeStyles();
   const isDarkTheme = theme === "futuristic";
+  const isRiceTheme = theme === "rice";
+  const isCameroonianTheme = theme === "cameroonian";
+  const bgIsDark = isDarkTheme || isRiceTheme || isCameroonianTheme;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className={`${styles.footer} py-8 border-t border-accent/10`}>
+    <footer
+      className={`${styles.footer} py-8`}
+      style={{
+        background: "var(--footer-bg)",
+        borderTop: "1px solid var(--footer-border)",
+      }}
+    >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3
               className={`text-xl mb-4 ${styles.headingH3}`}
-              style={{ color: "var(--text-on-light)" }}
+              style={{
+                color: "var(--color-heading)",
+                fontFamily: "var(--font-heading)",
+              }}
             >
               Hope Atina
             </h3>
             <p
               className={`${styles.body}`}
-              style={{ color: "var(--text-muted-on-light)" }}
+              style={{
+                color: "var(--color-body)",
+                opacity: 0.9,
+              }}
             >
               Building innovative solutions at the intersection of technology
               and creativity.
@@ -61,7 +76,10 @@ export default function Footer() {
           <div>
             <h3
               className={`text-xl mb-4 ${styles.headingH3}`}
-              style={{ color: "var(--text-on-light)" }}
+              style={{
+                color: "var(--color-heading)",
+                fontFamily: "var(--font-heading)",
+              }}
             >
               Quick Links
             </h3>
@@ -70,10 +88,18 @@ export default function Footer() {
                 <li key={link} className="mb-2">
                   <a
                     href={`#${link.toLowerCase()}`}
-                    className={`${styles.link}`}
-                    style={{ color: "var(--text-muted-on-light)" }}
+                    className={`${styles.link} relative inline-block transition-all duration-300`}
+                    style={{
+                      color: "var(--color-link)",
+                    }}
                   >
-                    {link}
+                    <span className="relative z-10">{link}</span>
+                    <div
+                      className="absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"
+                      style={{
+                        background: "var(--color-link-hover)",
+                      }}
+                    />
                   </a>
                 </li>
               ))}
@@ -83,7 +109,10 @@ export default function Footer() {
           <div>
             <h3
               className={`text-xl mb-4 ${styles.headingH3}`}
-              style={{ color: "var(--text-on-light)" }}
+              style={{
+                color: "var(--color-heading)",
+                fontFamily: "var(--font-heading)",
+              }}
             >
               Connect
             </h3>
@@ -94,25 +123,23 @@ export default function Footer() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${styles.link} hover:transform hover:scale-110 transition-transform relative w-10 h-10 flex items-center justify-center rounded-full overflow-hidden`}
+                  className="relative w-10 h-10 flex items-center justify-center rounded-full overflow-hidden group transition-all duration-300 hover:scale-105"
                   style={{
                     background: "var(--gradient-primary)",
-                    boxShadow: isDarkTheme
-                      ? "0 0 20px rgba(var(--primary-rgb), 0.2)"
-                      : "0 0 20px rgba(var(--accent-rgb), 0.1)",
+                    boxShadow: "var(--box-shadow)",
                   }}
                   aria-label={`${link.platform} Profile`}
                 >
                   <div
-                    className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
                     style={{
                       background: "var(--gradient-primary-hover)",
                     }}
                   />
                   <span
-                    className="relative z-[1]"
+                    className="relative z-10 transition-transform duration-300 group-hover:scale-110"
                     style={{
-                      color: "var(--text-on-accent)",
+                      color: "var(--text-on-dark)",
                     }}
                   >
                     {createElement(link.icon, { size: 20 })}
@@ -126,30 +153,26 @@ export default function Footer() {
         <div className="text-center mt-8">
           <button
             onClick={scrollToTop}
-            className={`${styles.link} w-10 h-10 flex items-center justify-center rounded-full overflow-hidden`}
+            className="relative w-10 h-10 flex items-center justify-center rounded-full overflow-hidden group transition-all duration-300 hover:scale-105"
             style={{
               background: "var(--gradient-primary)",
-              boxShadow: isDarkTheme
-                ? "0 0 20px rgba(var(--primary-rgb), 0.2)"
-                : "0 0 20px rgba(var(--accent-rgb), 0.1)",
+              boxShadow: "var(--box-shadow)",
             }}
             aria-label="Back to top"
           >
-            <span className="transition-transform hover:scale-110 relative">
-              <div
-                className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: "var(--gradient-primary-hover)",
-                }}
-              />
-              <FiArrowUp
-                size={20}
-                style={{
-                  position: "relative",
-                  zIndex: 1,
-                  color: "var(--text-on-accent)",
-                }}
-              />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
+              style={{
+                background: "var(--gradient-primary-hover)",
+              }}
+            />
+            <span
+              className="relative z-10 transition-transform duration-300 group-hover:scale-110"
+              style={{
+                color: "var(--text-on-dark)",
+              }}
+            >
+              <FiArrowUp size={20} />
             </span>
           </button>
         </div>
@@ -157,7 +180,10 @@ export default function Footer() {
         <div className="text-center mt-8">
           <p
             className={`${styles.body}`}
-            style={{ color: "var(--text-muted-on-light)" }}
+            style={{
+              color: "var(--color-body)",
+              opacity: 0.9,
+            }}
           >
             © {new Date().getFullYear()} Hope Atina. All rights reserved.
           </p>

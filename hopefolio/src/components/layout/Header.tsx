@@ -131,23 +131,26 @@ export default function Header() {
             <div className="flex flex-col">
               <Link
                 href="/"
-                className={`text-2xl ${styles.heading} ${styles.gradientText} ${styles.hoverScale}`}
+                className={`text-2xl ${styles.heading} ${styles.hoverScale} group`}
                 style={{
                   fontFamily: "var(--font-heading)",
                   letterSpacing: "var(--letter-spacing-heading)",
-                  color:
-                    theme === "rice"
-                      ? "var(--primary)"
-                      : bgIsDark
-                      ? "var(--text-on-dark)"
-                      : "var(--text)",
                   textShadow:
                     theme === "rice"
                       ? "0 2px 4px rgba(0, 32, 91, 0.1)"
                       : "none",
                 }}
               >
-                Hope Atina
+                <span className="relative">
+                  <span
+                    className="gradient-shift text-transparent relative z-10"
+                    style={{
+                      backgroundImage: "var(--gradient-primary)",
+                    }}
+                  >
+                    Hope Atina
+                  </span>
+                </span>
               </Link>
             </div>
 

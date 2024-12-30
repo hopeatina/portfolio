@@ -66,7 +66,12 @@ const FeaturedProjects = () => {
               styles.headingH2
             } ${bgIsDark ? styles.gradientText : ""}`}
             style={{
-              color: bgIsDark ? "transparent" : "var(--text)",
+              color:
+                theme === "rice"
+                  ? "var(--text)"
+                  : bgIsDark
+                  ? "transparent"
+                  : "var(--text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-heading)",
               lineHeight: "var(--line-height-heading)",
@@ -77,7 +82,12 @@ const FeaturedProjects = () => {
           <p
             className={`text-lg md:text-xl max-w-2xl mx-auto ${styles.bodyLarge}`}
             style={{
-              color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
+              color:
+                theme === "rice"
+                  ? "var(--text)"
+                  : bgIsDark
+                  ? "var(--text-on-dark)"
+                  : "var(--text)",
               fontFamily: "var(--font-body)",
               lineHeight: "var(--line-height-body)",
               opacity: 0.9,

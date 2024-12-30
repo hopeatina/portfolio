@@ -12,19 +12,66 @@
 }
 
 .theme {
-  /* Colors */
+  /* Legacy Colors - Keeping for backward compatibility */
   --primary: #009639;
-  /* (Cameroon) green */
   --accent: #C71F02;
-  /* Deep (Cameroon) red */
   --secondary: #f5e900;
-  /* Warm (Cameroon) yellow */
   --background: #FFFFFF;
   --text: #1A1A1A;
   --highlight: #f5e900;
   --text-muted: rgba(26, 26, 26, 0.85);
 
-  /* Text Gradients */
+  /* Semantic Colors - New system */
+  --color-heading: var(--primary);
+  --color-body: var(--text);
+  --color-link: var(--accent);
+  --color-link-hover: var(--primary);
+  --color-border: rgba(0, 150, 57, 0.15);
+  --color-border-hover: var(--accent);
+  --color-success: var(--primary);
+  --color-warning: var(--secondary);
+  --color-error: var(--accent);
+
+  /* Interactive States */
+  --state-hover: var(--accent);
+  --state-active: var(--primary);
+  --state-focus: var(--secondary);
+  
+  /* Text colors relative to background */
+  --text-on-light: #1A1A1A;
+  --text-on-dark: #FFFFFF;
+  --text-muted-on-light: rgba(26, 26, 26, 0.85);
+  --text-muted-on-dark: rgba(255, 255, 255, 0.85);
+
+  /* UI Elements */
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --card-bg: rgba(255, 255, 255, 0.98);
+  --card-hover: rgba(252, 249, 241, 0.98);
+  --icon-bg: rgba(0, 150, 57, 0.08);
+  --icon-border: rgba(0, 150, 57, 0.15);
+  --hover: #C71F02;
+
+  /* Component-Specific Colors */
+  --button-primary-bg: var(--primary);
+  --button-primary-text: var(--text-on-dark);
+  --button-primary-hover: var(--accent);
+  --button-secondary-bg: transparent;
+  --button-secondary-border: var(--primary);
+  --button-secondary-text: var(--primary);
+  
+  --tag-bg: rgba(0, 150, 57, 0.08);
+  --tag-text: var(--primary);
+  --tag-border: var(--color-border);
+  --tag-hover-bg: var(--primary);
+  --tag-hover-text: var(--text-on-dark);
+
+  /* Card and Section Colors */
+  --card-shadow: rgba(0, 150, 57, 0.1);
+  --card-border: var(--color-border);
+  --card-hover-border: var(--color-border-hover);
+  --section-divider: var(--secondary);
+
+  /* Gradients - Legacy */
   --text-gradient: linear-gradient(
     135deg,
     rgba(0, 150, 57, 1) 0%,
@@ -37,24 +84,96 @@
   );
   --text-gradient-muted: linear-gradient(
     135deg,
-    rgba(0, 150, 57, 0.8) 0%,
-    rgba(199, 31, 2, 0.7) 100%
+    rgba(0, 150, 57, 0.9) 0%,
+    rgba(199, 31, 2, 0.8) 100%
   );
 
-  /* Text colors relative to background */
-  --text-on-light: #1A1A1A;
-  --text-on-dark: #FFFFFF;
-  --text-muted-on-light: rgba(26, 26, 26, 0.85);
-  --text-muted-on-dark: rgba(255, 255, 255, 0.85);
+  /* New Semantic Gradients */
+  --gradient-brand: linear-gradient(
+    var(--gradient-angle),
+    var(--primary) 0%,
+    rgba(0, 120, 45, 0.95) 100%
+  );
+  --gradient-accent: linear-gradient(
+    45deg,
+    var(--accent) 0%,
+    var(--secondary) 100%
+  );
+  --gradient-decorative: linear-gradient(
+    var(--gradient-angle),
+    rgba(0, 150, 57, 0.15) 0%,
+    rgba(245, 233, 0, 0.1) 100%
+  );
 
-  /* UI Elements */
-  --header-bg: rgba(255, 255, 255, 0.95);
-  --card-bg: rgba(255, 255, 255, 0.98);
-  --card-hover: rgba(252, 249, 241, 0.98);
-  /* Updated these to use primary color (green) */
-  --icon-bg: rgba(0, 150, 57, 0.08);
-  --icon-border: rgba(0, 150, 57, 0.15);
-  --hover: #C71F02;
+  /* Existing Gradients - Keeping for compatibility */
+  --gradient-angle: 120deg;
+  --gradient-primary: linear-gradient(
+    var(--gradient-angle),
+    rgba(0, 150, 57, 1) 0%,
+    rgba(0, 120, 45, 0.95) 100%
+  );
+  --gradient-secondary: linear-gradient(
+    45deg,
+    rgba(199, 31, 2, 0.95) 0%,
+    rgba(245, 233, 0, 0.95) 100%
+  );
+  --gradient-twilight: linear-gradient(
+    var(--gradient-angle),
+    rgba(0, 150, 57, 0.9) 0%,
+    rgba(245, 233, 0, 0.8) 100%
+  );
+  --gradient-primary-hover: linear-gradient(
+    var(--gradient-angle),
+    rgba(199, 31, 2, 1) 0%,
+    rgba(245, 233, 0, 0.9) 100%
+  );
+  --gradient-overlay: linear-gradient(
+    var(--gradient-angle),
+    rgba(0, 150, 57, 0.15) 0%,
+    rgba(245, 233, 0, 0.1) 100%
+  );
+
+  /* Pattern System */
+  --pattern-opacity: 0.1;
+  --pattern-opacity-light: 0.05;
+  --pattern-opacity-dark: 0.15;
+  
+  /* Overlay System */
+  --overlay-opacity: 0.15;
+  --overlay-opacity-light: 0.1;
+  --overlay-opacity-dark: 0.2;
+  
+  /* Glow Effects */
+  --glow-opacity: 0.2;
+  --glow-radius: 20px;
+  --glow-color-primary: rgba(0, 150, 57, var(--glow-opacity));
+  --glow-color-accent: rgba(199, 31, 2, var(--glow-opacity));
+  --glow-color-secondary: rgba(245, 233, 0, var(--glow-opacity));
+
+  /* Footer Specific */
+  --footer-text: var(--text);
+  --footer-link: var(--primary);
+  --footer-link-hover: var(--accent);
+  --footer-bg: var(--background);
+  --footer-border: rgba(0, 150, 57, 0.1);
+  --footer-icon-bg: rgba(0, 150, 57, 0.05);
+  --footer-icon-hover: var(--accent);
+
+  /* Interactive Elements */
+  --button-primary-bg: var(--primary);
+  --button-primary-text: white;
+  --button-primary-hover: var(--accent);
+  --button-secondary-bg: transparent;
+  --button-secondary-border: var(--primary);
+  --button-secondary-text: var(--primary);
+  --button-secondary-hover-bg: var(--primary);
+  --button-secondary-hover-text: white;
+
+  /* Card and Section Accents */
+  --card-accent-primary: var(--primary);
+  --card-accent-secondary: var(--secondary);
+  --section-accent: var(--highlight);
+  --divider-accent: var(--secondary);
 
   /* Font Sizes */
   --font-size-h1: clamp(2.5rem, 5vw, 3.5rem);
@@ -75,32 +194,28 @@
   --gradient-angle: 120deg;
   --gradient-primary: linear-gradient(
     var(--gradient-angle),
-    rgba(0, 150, 57, 0.9) 0%,
-    rgba(199, 31, 2, 0.8) 50%,
-    rgba(245, 233, 0, 0.9) 100%
+    rgba(0, 150, 57, 1) 0%,
+    rgba(0, 120, 45, 1) 100%
   );
   --gradient-secondary: linear-gradient(
     45deg,
-    rgba(0, 150, 57, 0.85) 0%,
-    rgba(199, 31, 2, 0.75) 50%,
-    rgba(0, 150, 57, 0.85) 100%
+    rgba(0, 150, 57, 0.95) 0%,
+    rgba(0, 120, 45, 0.95) 100%
   );
   --gradient-twilight: linear-gradient(
     var(--gradient-angle),
-    rgba(0, 150, 57, 0.8) 0%,
-    rgba(199, 31, 2, 0.7) 50%,
-    rgba(245, 233, 0, 0.8) 100%
+    rgba(0, 150, 57, 0.9) 0%,
+    rgba(0, 120, 45, 0.9) 100%
   );
   --gradient-primary-hover: linear-gradient(
     var(--gradient-angle),
-    rgba(0, 150, 57, 1) 0%,
-    rgba(199, 31, 2, 1) 100%
+    rgba(0, 120, 45, 1) 0%,
+    rgba(0, 150, 57, 1) 100%
   );
   --gradient-overlay: linear-gradient(
     var(--gradient-angle),
     rgba(0, 150, 57, 0.15) 0%,
-    rgba(199, 31, 2, 0.1) 50%,
-    rgba(245, 233, 0, 0.15) 100%
+    rgba(0, 120, 45, 0.1) 100%
   );
   --cosmic-swirl: radial-gradient(
     circle at 50% 50%,

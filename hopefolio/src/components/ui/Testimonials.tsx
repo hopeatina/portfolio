@@ -70,7 +70,9 @@ const Testimonials = () => {
             } ${bgIsDark && !isRiceTheme ? styles.gradientText : ""}`}
             style={{
               color: isRiceTheme
-                ? "var(--text-on-dark)"
+                ? "var(--text)"
+                : theme === "cameroonian"
+                ? "var(--primary)"
                 : bgIsDark
                 ? "transparent"
                 : "var(--text)",
@@ -88,7 +90,9 @@ const Testimonials = () => {
             className={`text-lg md:text-xl max-w-2xl mx-auto ${styles.bodyLarge}`}
             style={{
               color: isRiceTheme
-                ? "var(--text-on-dark)"
+                ? "var(--text)"
+                : theme === "cameroonian"
+                ? "var(--text)"
                 : bgIsDark
                 ? "var(--text-on-dark)"
                 : "var(--text)",
