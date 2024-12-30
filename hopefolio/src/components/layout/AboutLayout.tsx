@@ -1,1 +1,0 @@
-  <main className="min-h-screen pt-24 pb-12" style={getBackgroundStyles()}> 
