@@ -3,6 +3,7 @@
 import React, { createElement } from "react";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import { FiGithub, FiTwitter, FiLinkedin, FiArrowUp } from "react-icons/fi";
+import styles from "@/styles/themes/base-theme.module.css";
 
 interface SocialLink {
   platform: string;
@@ -30,7 +31,8 @@ const socialLinks: SocialLink[] = [
 
 export default function Footer() {
   const { theme, getThemeStyles } = useTheme();
-  const styles = getThemeStyles();
+  const themeStyles = getThemeStyles();
+  const isDarkTheme = theme === "futuristic";
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -92,11 +94,29 @@ export default function Footer() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${styles.link} hover:transform hover:scale-110 transition-transform`}
-                  style={{ color: "var(--text-muted-on-light)" }}
+                  className={`${styles.link} hover:transform hover:scale-110 transition-transform relative w-10 h-10 flex items-center justify-center rounded-full overflow-hidden`}
+                  style={{
+                    background: "var(--gradient-primary)",
+                    boxShadow: isDarkTheme
+                      ? "0 0 20px rgba(var(--primary-rgb), 0.2)"
+                      : "0 0 20px rgba(var(--accent-rgb), 0.1)",
+                  }}
                   aria-label={`${link.platform} Profile`}
                 >
-                  {createElement(link.icon, { size: 20 })}
+                  <div
+                    className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      background: "var(--gradient-primary-hover)",
+                    }}
+                  />
+                  <span
+                    className="relative z-[1]"
+                    style={{
+                      color: "var(--text-on-accent)",
+                    }}
+                  >
+                    {createElement(link.icon, { size: 20 })}
+                  </span>
                 </a>
               ))}
             </div>
@@ -106,12 +126,30 @@ export default function Footer() {
         <div className="text-center mt-8">
           <button
             onClick={scrollToTop}
-            className={`${styles.link}`}
-            style={{ color: "var(--text-muted-on-light)" }}
+            className={`${styles.link} w-10 h-10 flex items-center justify-center rounded-full overflow-hidden`}
+            style={{
+              background: "var(--gradient-primary)",
+              boxShadow: isDarkTheme
+                ? "0 0 20px rgba(var(--primary-rgb), 0.2)"
+                : "0 0 20px rgba(var(--accent-rgb), 0.1)",
+            }}
             aria-label="Back to top"
           >
-            <span className="transition-transform hover:scale-110">
-              <FiArrowUp size={20} />
+            <span className="transition-transform hover:scale-110 relative">
+              <div
+                className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: "var(--gradient-primary-hover)",
+                }}
+              />
+              <FiArrowUp
+                size={20}
+                style={{
+                  position: "relative",
+                  zIndex: 1,
+                  color: "var(--text-on-accent)",
+                }}
+              />
             </span>
           </button>
         </div>

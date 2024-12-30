@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import { FiChevronDown } from "react-icons/fi";
 
 const ConnectorScene = dynamic(() => import("./ConnectorScene"), {
   ssr: false,
@@ -81,6 +82,50 @@ const Hero3D: React.FC = () => {
           </Link>
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none">
+        <div className="flex flex-col items-center">
+          <p
+            className="text-white/70 text-sm mb-2"
+            style={{
+              fontFamily: bodyFont,
+              textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
+            }}
+          >
+            Scroll to explore
+          </p>
+          <div className="animate-bounce">
+            <div
+              className="w-10 h-10 rounded-full flex items-center justify-center"
+              style={{
+                background: "var(--gradient-primary)",
+                boxShadow: "0 0 20px rgba(var(--primary-rgb), 0.3)",
+              }}
+            >
+              <FiChevronDown
+                className="text-white"
+                size={24}
+                style={{ filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))" }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes pulse {
+          0%,
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.5;
+            transform: scale(0.95);
+          }
+        }
+      `}</style>
     </div>
   );
 };
