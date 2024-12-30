@@ -5,7 +5,11 @@ import BlogPostHeader from "@/components/blog/BlogPostHeader";
 import BlogPostContent from "@/components/blog/BlogPostContent";
 import BlogPostCTA from "@/components/blog/BlogPostCTA";
 import { getAllPosts, getPostBySlug } from "@/modules/blog/posts";
-import { UserCircleIcon, PhoneIcon, RssIcon } from "@heroicons/react/24/solid";
+import {
+  UserCircleIcon as UserCircleIconBase,
+  PhoneIcon as PhoneIconBase,
+  RssIcon as RssIconBase,
+} from "@heroicons/react/24/solid";
 
 interface PostProps {
   post: {
@@ -19,21 +23,27 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps) {
+  const UserCircleIcon = UserCircleIconBase as React.FC<
+    React.SVGProps<SVGSVGElement>
+  >;
+  const PhoneIcon = PhoneIconBase as React.FC<React.SVGProps<SVGSVGElement>>;
+  const RssIcon = RssIconBase as React.FC<React.SVGProps<SVGSVGElement>>;
+
   const socialLinks = [
     {
       platform: "LinkedIn",
       url: "https://linkedin.com/in/yourusername",
-      icon: UserCircleIcon,
+      icon: <UserCircleIcon className="w-5 h-5" />,
     },
     {
       platform: "TikTok",
       url: "https://tiktok.com/@yourusername",
-      icon: PhoneIcon,
+      icon: <PhoneIcon className="w-5 h-5" />,
     },
     {
       platform: "RSS Feed",
       url: "/rss.xml",
-      icon: RssIcon,
+      icon: <RssIcon className="w-5 h-5" />,
     },
   ];
 
