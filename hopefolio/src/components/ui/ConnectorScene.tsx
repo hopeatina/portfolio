@@ -1,7 +1,7 @@
 "use client";
 
 import * as THREE from "three";
-import { useRef, useReducer, useMemo, useEffect } from "react";
+import { useRef, useReducer, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   useGLTF,
@@ -26,12 +26,22 @@ import {
   Color,
   Group,
   Box3,
+  Material,
 } from "three";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 // Default fallback gradient
 const defaultGradient =
   "linear-gradient(120deg, rgba(0, 238, 92, 0.9) 0%, rgba(51, 255, 153, 0.8) 35%, rgba(0, 179, 74, 0.9) 100%)";
+
+// Model paths configuration
+const MODEL_PATHS = {
+  default: "/models/c-transformed.glb",
+  base: "/models/c-transformed.glb",
+  cameroonian: "/models/emblem.glb",
+  rice: "/models/rice_logo.glb",
+  futuristic: "/models/c-transformed.glb",
+} as const;
 
 // -------------- Helpers to get & set color ranges --------------
 
@@ -241,137 +251,94 @@ interface ModelProps {
 
 function Model({ children, color = "white", roughness = 0 }: ModelProps) {
   const groupRef = useRef<Group>(null);
-
   const { theme } = useTheme();
-  const modelPath = (() => {
-    switch (theme) {
-      case "cameroonian":
-        return "/models/emblem.glb";
-      case "rice":
-        return "/models/rice_logo.glb";
-      default:
-        return "/models/c-transformed.glb";
-    }
-  })();
+  const [modelError, setModelError] = useState(false);
 
-  // 1. Load the entire GLTF (which may contain multiple meshes)
-  const gltf = useGLTF(modelPath);
+  // Memoize model path
+  const modelPath = useMemo(() => {
+    const path =
+      MODEL_PATHS[theme as keyof typeof MODEL_PATHS] || MODEL_PATHS.default;
+    return path;
+  }, [theme]);
 
-  // 2. Gather all meshes and also compute bounding box for the entire scene
-  const { allMeshes, sceneScale } = useMemo(() => {
-    // Collect all Meshes
-    const meshes: Mesh[] = [];
-    gltf.scene.traverse((child) => {
-      if (child instanceof Mesh) meshes.push(child);
-    });
-    if (meshes.length === 0) {
-      console.error("No Meshes found in GLTF!");
-      return { allMeshes: [], sceneScale: 1 };
-    }
-
-    // Compute a bounding box on the entire GLTF scene
-    const box = new Box3().setFromObject(gltf.scene);
-    const size = box.getSize(new Vector3());
-    const diagonal = Math.sqrt(
-      size.x * size.x + size.y * size.y + size.z * size.z
-    );
-
-    // We'll scale so that the diagonal is ~2 units
-    const targetDiagonal = 3;
-    const scale = diagonal > 0 ? targetDiagonal / diagonal : 1;
-
-    return { allMeshes: meshes, sceneScale: scale };
-  }, [gltf]);
-
-  // 3. Perform color remapping across ALL mesh geometry
-  //    - We'll do a two-pass approach so that minHue/maxHue is consistent for all.
-  useEffect(() => {
-    if (!allMeshes.length) return;
-
-    // First pass: find global minHue & maxHue
-    const globalRange = { minHue: Infinity, maxHue: -Infinity };
-    for (const mesh of allMeshes) {
-      if (!mesh.geometry) continue;
-      const colorAttr = mesh.geometry.getAttribute("color");
-      if (!colorAttr) continue;
-      auditColorRange(colorAttr, globalRange);
-    }
-    if (globalRange.minHue === Infinity || globalRange.maxHue === -Infinity) {
-      // Means no color attributes exist at all
-      console.log("No vertex colors found in any mesh. Skipping hue remap.");
-      return;
-    }
-
-    console.log(
-      `Global hue range across all submeshes: minHue=${globalRange.minHue.toFixed(
-        3
-      )} maxHue=${globalRange.maxHue.toFixed(3)}`
-    );
-
-    // Define your new hue range. Example: [0.7..0.9] (purple to pink).
-    const newRange = { start: 0.7, end: 0.9 };
-
-    // Second pass: apply that remap
-    for (const mesh of allMeshes) {
-      const colorAttr = mesh.geometry.getAttribute("color");
-      if (!colorAttr) continue;
-      console.log(`Remapping vertex colors in mesh: ${mesh.name || mesh.uuid}`);
-      remapColorAttr(colorAttr, globalRange, newRange);
-    }
-  }, [allMeshes]);
-
-  // 4. Animate the *material* color to match passed-in `color` (existing logic).
-  useFrame((state, delta) => {
-    if (!groupRef.current) return;
-    groupRef.current.traverse((child) => {
-      if (
-        child instanceof Mesh &&
-        child.material instanceof MeshStandardMaterial
-      ) {
-        easing.dampC(child.material.color, color, 0.2, delta);
-      }
-    });
+  // Load model with error handling and optimization
+  const { nodes, materials } = useGLTF(modelPath, true, undefined, (error) => {
+    console.error(`Error loading model ${modelPath}:`, error);
+    setModelError(true);
   });
 
-  // 5. Return a <group> with sub-meshes
-  //    - We replicate the original structure or simply re-render them
-  if (!allMeshes.length) return null;
+  // Memoize material
+  const material = useMemo(
+    () =>
+      new MeshStandardMaterial({
+        color,
+        roughness,
+        transparent: true,
+        opacity: 0.8,
+      }),
+    [color, roughness]
+  );
+
+  useEffect(() => {
+    if (groupRef.current) {
+      // Optimize geometry
+      groupRef.current.traverse((child: THREE.Object3D) => {
+        if (child instanceof Mesh) {
+          child.geometry.computeBoundingBox();
+          child.geometry.computeBoundingSphere();
+          // Only update when necessary
+          child.matrixAutoUpdate = false;
+          child.updateMatrix();
+        }
+      });
+    }
+
+    // Cleanup
+    return () => {
+      if (groupRef.current) {
+        groupRef.current.traverse((child: THREE.Object3D) => {
+          if (child instanceof Mesh) {
+            child.geometry.dispose();
+            if (child.material instanceof Material) {
+              child.material.dispose();
+            }
+          }
+        });
+      }
+    };
+  }, []);
+
+  // If model fails to load, render a simple cube as fallback
+  if (modelError) {
+    return (
+      <mesh>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color={color} roughness={roughness} />
+      </mesh>
+    );
+  }
+
+  // If no nodes, return null
+  if (!nodes) return null;
 
   return (
-    <group
-      ref={groupRef}
-      scale={sceneScale}
-      rotation={(() => {
-        switch (theme) {
-          case "cameroonian":
-            return [0, 0, 0];
-          default:
-            return [0, Math.PI / 4, 0]; // Original 90-degree rotation for other models
-        }
-      })()}
-    >
-      {allMeshes.map((origMesh) => {
-        const geo = origMesh.geometry;
-        return (
-          <mesh
-            key={origMesh.uuid}
-            geometry={geo}
-            castShadow
-            receiveShadow
-            // Maintain local transform offsets from original gltf, if needed:
-            position={origMesh.position}
-            quaternion={origMesh.quaternion}
-            scale={origMesh.scale} // Usually 0.01 for your case, etc.
-          >
-            <meshStandardMaterial
-              metalness={0.2}
-              roughness={roughness}
-              vertexColors // use the updated vertex colors
+    <group ref={groupRef}>
+      {Object.values(nodes).map((node: THREE.Object3D) => {
+        if (node instanceof Mesh) {
+          return (
+            <mesh
+              key={node.uuid}
+              geometry={node.geometry}
+              material={material}
+              position={node.position}
+              rotation={node.rotation}
+              scale={node.scale}
             />
-            {children}
-          </mesh>
-        );
+          );
+        }
+        return null;
       })}
+      {children}
     </group>
   );
 }

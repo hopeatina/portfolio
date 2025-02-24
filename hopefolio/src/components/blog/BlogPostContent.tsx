@@ -13,7 +13,7 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
 
   return (
     <article
-      className={`prose lg:prose-xl mx-auto relative ${
+      className={`prose lg:prose-xl mx-auto relative px-4 sm:px-6 lg:px-8 ${
         theme === "futuristic" ? styles.fadeIn : ""
       }`}
       style={{
@@ -23,24 +23,42 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
         maxWidth: "65ch",
       }}
     >
-      {/* Decorative Side Line */}
+      {/* Decorative Side Lines */}
       {theme === "futuristic" && (
-        <div
-          className="absolute -left-8 top-0 bottom-0 w-px"
-          style={{
-            background:
-              "linear-gradient(to bottom, var(--primary), transparent)",
-            opacity: 0.3,
-          }}
-        />
+        <>
+          <div
+            className="absolute -left-8 top-0 bottom-0 w-px"
+            style={{
+              background:
+                "linear-gradient(to bottom, var(--primary), transparent)",
+              opacity: 0.3,
+            }}
+          />
+          <div
+            className="absolute -right-8 top-0 bottom-0 w-px"
+            style={{
+              background:
+                "linear-gradient(to bottom, var(--primary), transparent)",
+              opacity: 0.15,
+            }}
+          />
+        </>
       )}
 
-      <div dangerouslySetInnerHTML={{ __html: marked(content) }} />
+      <div
+        className="relative"
+        dangerouslySetInnerHTML={{ __html: marked(content) }}
+      />
+
       <style jsx global>{`
         .prose {
           color: ${theme === "futuristic"
             ? "var(--text-on-dark)"
             : "var(--text)"};
+        }
+
+        .prose > * + * {
+          margin-top: 1.5em;
         }
 
         .prose h2,
@@ -51,7 +69,7 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
           font-weight: var(--font-weight-heading-h2);
           letter-spacing: var(--letter-spacing-heading);
           line-height: 1.3;
-          margin-top: 2.5em;
+          margin-top: 3em;
           margin-bottom: 1em;
           position: relative;
           ${theme === "futuristic"
@@ -68,17 +86,18 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
           font-size: 2.25em;
           ${theme === "futuristic"
             ? `
-            padding-left: 1em;
+            padding-left: 1.5em;
             &::before {
               content: "";
               position: absolute;
               left: 0;
               top: 50%;
-              width: 0.5em;
+              width: 1em;
               height: 2px;
-              background: var(--primary);
+              background: var(--gradient-primary);
               transform: translateY(-50%);
               opacity: 0.8;
+              box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
             }
             `
             : ""}
@@ -90,6 +109,12 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
             ? "var(--text-on-dark)"
             : "var(--text)"};
           opacity: 0.9;
+          margin-top: 2.5em;
+        }
+
+        .prose h4 {
+          font-size: 1.5em;
+          margin-top: 2em;
         }
 
         .prose p {
@@ -99,6 +124,7 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
             : "var(--text)"};
           line-height: 1.8;
           font-size: 1.125rem;
+          max-width: 65ch;
         }
 
         .prose a {
@@ -106,114 +132,32 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
           text-decoration: none;
           transition: var(--transition-base);
           position: relative;
-          ${theme === "futuristic"
-            ? `
+          padding-bottom: 2px;
+          border-bottom: 1px solid transparent;
+
+          &:hover {
             color: var(--primary);
-            padding: 0.1em 0.2em;
-            margin: 0 -0.2em;
-            border-radius: var(--border-radius-sm);
-            background: rgba(var(--primary-rgb), 0.1);
-            `
-            : `
-            border-bottom: 1px solid var(--accent);
-            `}
-        }
-
-        .prose a:hover {
-          color: var(--primary);
-          ${theme === "futuristic"
-            ? `
-            background: rgba(var(--primary-rgb), 0.2);
-            text-shadow: 0 0 8px rgba(var(--primary-rgb), 0.4);
-            `
-            : `
             border-bottom-color: var(--primary);
-            `}
-        }
+          }
 
-        .prose code {
-          background-color: ${theme === "futuristic"
-            ? "rgba(var(--card-bg-rgb), 0.8)"
-            : "var(--icon-bg)"};
-          color: ${theme === "futuristic" ? "var(--primary)" : "var(--text)"};
-          padding: 0.2em 0.4em;
-          border-radius: var(--border-radius-sm);
-          font-family: var(--font-mono);
-          font-size: 0.875em;
           ${theme === "futuristic"
             ? `
-            border: 1px solid rgba(var(--primary-rgb), 0.2);
-            text-shadow: 0 0 8px rgba(var(--primary-rgb), 0.3);
-            `
-            : ""}
-        }
-
-        .prose pre {
-          background-color: ${theme === "futuristic"
-            ? "rgba(var(--card-bg-rgb), 0.8)"
-            : "var(--icon-bg)"};
-          border-radius: var(--border-radius);
-          padding: 1.5em;
-          overflow-x: auto;
-          font-size: 0.875em;
-          ${theme === "futuristic"
-            ? `
-            border: 1px solid rgba(var(--primary-rgb), 0.2);
-            box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.1);
-            backdrop-filter: blur(4px);
-            `
-            : ""}
-        }
-
-        .prose pre code {
-          background: none;
-          border: none;
-          padding: 0;
-          color: inherit;
-          font-size: inherit;
-          text-shadow: none;
-        }
-
-        .prose blockquote {
-          border-left: 4px solid
-            ${theme === "futuristic" ? "var(--primary)" : "var(--accent)"};
-          color: ${theme === "futuristic"
-            ? "var(--text-muted-on-dark)"
-            : "var(--text-muted)"};
-          font-style: italic;
-          margin: 2em 0;
-          padding: 1em 0 1em 2em;
-          position: relative;
-          ${theme === "futuristic"
-            ? `
-            background: rgba(var(--card-bg-rgb), 0.5);
-            padding: 1.5em 2em;
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-            backdrop-filter: blur(4px);
-            &::before {
-              content: """;
+            &::after {
+              content: "";
               position: absolute;
-              top: -0.5em;
-              left: 0.5em;
-              font-size: 3em;
-              color: var(--primary);
-              opacity: 0.2;
+              bottom: -2px;
+              left: 0;
+              width: 100%;
+              height: 1px;
+              background: var(--gradient-primary);
+              transform: scaleX(0);
+              transform-origin: right;
+              transition: transform 0.3s ease;
             }
-            `
-            : ""}
-        }
 
-        .prose img {
-          border-radius: var(--border-radius);
-          box-shadow: var(--box-shadow);
-          margin: 2em 0;
-          ${theme === "futuristic"
-            ? `
-            border: 1px solid rgba(var(--primary-rgb), 0.2);
-            transition: var(--transition-base);
-            &:hover {
-              transform: scale(1.02);
-              box-shadow: 0 0 30px rgba(var(--primary-rgb), 0.2);
+            &:hover::after {
+              transform: scaleX(1);
+              transform-origin: left;
             }
             `
             : ""}
@@ -227,51 +171,86 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
 
         .prose li {
           margin: 0.5em 0;
-          padding-left: 0.5em;
           position: relative;
+          ${theme === "futuristic"
+            ? `
+            &::before {
+              content: "•";
+              color: var(--primary);
+              position: absolute;
+              left: -1em;
+              opacity: 0.8;
+            }
+            `
+            : ""}
         }
 
-        .prose ul li::before {
-          content: "•";
-          color: ${theme === "futuristic" ? "var(--primary)" : "var(--accent)"};
-          display: inline-block;
-          width: 1em;
-          margin-left: -1em;
-          opacity: ${theme === "futuristic" ? "0.8" : "1"};
+        .prose blockquote {
+          margin: 2em 0;
+          padding: 1em 1.5em;
+          border-left: 4px solid var(--primary);
+          background: ${theme === "futuristic"
+            ? "rgba(var(--primary-rgb), 0.1)"
+            : "rgba(var(--accent-rgb), 0.1)"};
+          border-radius: 0.5em;
+          font-style: italic;
+
+          p {
+            margin: 0;
+            opacity: 0.9;
+          }
+        }
+
+        .prose code {
+          background: ${theme === "futuristic"
+            ? "rgba(var(--primary-rgb), 0.1)"
+            : "rgba(var(--accent-rgb), 0.1)"};
+          padding: 0.2em 0.4em;
+          border-radius: 0.3em;
+          font-size: 0.9em;
+          font-family: var(--font-mono);
+          color: var(--primary);
+        }
+
+        .prose pre {
+          margin: 2em 0;
+          padding: 1.5em;
+          background: ${theme === "futuristic"
+            ? "rgba(0, 0, 0, 0.5)"
+            : "var(--code-bg)"};
+          border-radius: 0.5em;
+          overflow-x: auto;
+          border: 1px solid var(--border-color);
+
+          code {
+            background: none;
+            padding: 0;
+            font-size: 0.9em;
+            color: ${theme === "futuristic"
+              ? "var(--text-on-dark)"
+              : "var(--text)"};
+          }
+        }
+
+        .prose img {
+          margin: 2em 0;
+          border-radius: 0.5em;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          ${theme === "futuristic"
+            ? `
+            border: 1px solid rgba(var(--primary-rgb), 0.2);
+            `
+            : ""}
         }
 
         .prose hr {
+          margin: 3em 0;
           border: none;
           height: 1px;
           background: ${theme === "futuristic"
-            ? "linear-gradient(to right, var(--primary), transparent)"
-            : "var(--accent)"};
-          margin: 3em 0;
-          opacity: 0.2;
-        }
-
-        .prose table {
-          width: 100%;
-          border-collapse: collapse;
-          margin: 2em 0;
-          font-size: 0.875em;
-        }
-
-        .prose th,
-        .prose td {
-          padding: 0.75em;
-          border: 1px solid
-            ${theme === "futuristic"
-              ? "rgba(var(--primary-rgb), 0.2)"
-              : "var(--accent)"};
-        }
-
-        .prose th {
-          background: ${theme === "futuristic"
-            ? "rgba(var(--card-bg-rgb), 0.8)"
-            : "var(--icon-bg)"};
-          font-weight: var(--font-weight-body-medium);
-          ${theme === "futuristic" ? "backdrop-filter: blur(4px);" : ""}
+            ? "var(--gradient-primary)"
+            : "var(--border-color)"};
+          opacity: 0.3;
         }
       `}</style>
     </article>

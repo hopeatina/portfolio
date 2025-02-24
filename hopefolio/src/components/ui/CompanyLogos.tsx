@@ -5,27 +5,39 @@ import styles from "@/styles/themes/base-theme.module.css";
 
 type Company = {
   name: string;
-  logo: string;
+  logo?: string;
   url: string;
+  shortName?: string;
 };
 
 const companies: Company[] = [
   {
-    name: "Rice University",
-    logo: "/images/logos/rice.png",
-    url: "https://www.rice.edu",
+    name: "Alma",
+    logo: "/images/logos/alma.png",
+    url: "https://helloalma.com",
   },
   {
-    name: "Cursor",
-    logo: "/images/logos/cursor.png",
-    url: "https://cursor.sh",
+    name: "Vessel",
+    logo: "/images/logos/vessel.png",
+    url: "https://wearevessel.co",
   },
-  // Add more companies as needed
+  {
+    name: "Capital One",
+    logo: "/images/logos/capital-one.png",
+    url: "https://www.capitalone.com",
+  },
+  {
+    name: "MD Anderson Cancer Center",
+    shortName: "MD Anderson",
+    logo: "/images/logos/md-anderson.png",
+    url: "https://www.mdanderson.org",
+  },
 ];
 
 const CompanyLogos = () => {
-  const { theme, getThemeStyles } = useTheme();
+  const { theme } = useTheme();
   const isDarkTheme = theme === "futuristic";
+  const isRiceTheme = theme === "rice";
   const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
 
   return (
@@ -66,7 +78,7 @@ const CompanyLogos = () => {
 
         {/* Logos Grid */}
         <div
-          className="relative p-8 rounded-2xl"
+          className="relative p-8 rounded-2xl overflow-hidden"
           style={{
             background: bgIsDark
               ? "rgba(10, 10, 10, 0.3)"
@@ -84,7 +96,7 @@ const CompanyLogos = () => {
             }}
           />
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+          <div className="flex items-center justify-center space-x-8">
             {companies.map((company) => (
               <a
                 key={company.name}
@@ -93,23 +105,41 @@ const CompanyLogos = () => {
                 rel="noopener noreferrer"
                 className="group relative w-32 h-16 flex items-center justify-center"
               >
-                {/* Logo Container */}
-                <div
-                  className="relative w-full h-full transition-transform duration-300 group-hover:scale-110"
-                  style={{
-                    filter: bgIsDark ? "brightness(0.9) contrast(1.1)" : "none",
-                  }}
-                >
-                  <Image
-                    src={company.logo}
-                    alt={company.name}
-                    fill
-                    className="object-contain"
-                    style={{
-                      opacity: bgIsDark ? 0.9 : 1,
-                    }}
-                  />
-                </div>
+                {company.logo ? (
+                  <>
+                    {/* Logo Container */}
+                    <div
+                      className="relative w-full h-full transition-transform duration-300 group-hover:scale-110"
+                      style={{
+                        filter: bgIsDark
+                          ? "brightness(0.9) contrast(1.1)"
+                          : "none",
+                      }}
+                    >
+                      <Image
+                        src={company.logo}
+                        alt={company.name}
+                        fill
+                        className="object-contain"
+                        style={{
+                          opacity: bgIsDark ? 0.9 : 1,
+                        }}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  // Text Fallback for Missing Logos
+                  <div className="relative w-full h-full flex items-center justify-center text-center transition-transform duration-300 group-hover:scale-110 px-2">
+                    <span
+                      className="font-semibold text-sm"
+                      style={{
+                        color: bgIsDark ? "var(--primary)" : "var(--accent)",
+                      }}
+                    >
+                      {company.shortName || company.name}
+                    </span>
+                  </div>
+                )}
 
                 {/* Hover Glow Effect */}
                 <div
@@ -152,3 +182,10 @@ const CompanyLogos = () => {
 };
 
 export default CompanyLogos;
+
+<style jsx>{`
+  .animate-scroll {
+    display: flex;
+    animation: none;
+  }
+`}</style>;

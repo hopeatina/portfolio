@@ -208,6 +208,12 @@
   --box-shadow-hover: 0 4px 8px rgba(0, 32, 91, 0.1);
   --box-shadow-card: 0 1px 3px rgba(0, 32, 91, 0.05);
   --box-shadow-card-hover: 0 4px 6px rgba(0, 32, 91, 0.1);
+  --focus-ring: 0 0 0 2px rgba(0, 32, 91, 0.5);
+  
+  /* Border Colors */
+  --border-color: rgba(0, 32, 91, 0.15);
+  --border-color-hover: rgba(0, 32, 91, 0.25);
+  --border-color-focus: rgba(0, 32, 91, 0.5);
 
   /* Animations */
   --transition-base: all 0.3s ease;

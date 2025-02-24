@@ -11,18 +11,20 @@ import {
   RssIcon as RssIconBase,
 } from "@heroicons/react/24/solid";
 
-interface PostProps {
-  post: {
-    slug: string;
-    title: string;
-    date: string;
-    content: string;
-    excerpt?: string;
-    category?: string;
-  };
+interface PostData {
+  slug: string;
+  title: string;
+  date: string;
+  content: string;
+  excerpt: string;
+  category: string;
 }
 
-export default function Post({ post }: PostProps) {
+interface PostProps {
+  post: PostData;
+}
+
+const Post: React.FC<PostProps> = ({ post }) => {
   const UserCircleIcon = UserCircleIconBase as React.FC<
     React.SVGProps<SVGSVGElement>
   >;
@@ -47,6 +49,10 @@ export default function Post({ post }: PostProps) {
     },
   ];
 
+  if (!post) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <BlogLayout title={post.title} description={post.excerpt} isPost={true}>
       <article>
@@ -63,21 +69,48 @@ export default function Post({ post }: PostProps) {
       </article>
     </BlogLayout>
   );
-}
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = getAllPosts();
-  return {
-    paths: posts.map((post) => ({
+  try {
+    const posts = getAllPosts();
+    const paths = posts.map((post) => ({
       params: { slug: post.slug },
-    })),
-    fallback: false,
-  };
+    }));
+
+    return {
+      paths,
+      fallback: false,
+    };
+  } catch (error) {
+    console.error("Error in getStaticPaths:", error);
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = getPostBySlug(params?.slug as string);
-  return {
-    props: { post },
-  };
+export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
+  if (!params?.slug || typeof params.slug !== "string") {
+    return { notFound: true };
+  }
+
+  try {
+    const post = getPostBySlug(params.slug);
+
+    return {
+      props: {
+        post,
+      },
+      revalidate: 60, // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error("Error in getStaticProps:", error);
+    return {
+      notFound: true,
+    };
+  }
 };
+
+export default Post;

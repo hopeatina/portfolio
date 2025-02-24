@@ -12,7 +12,7 @@
 }
 
 .theme {
-  /* Legacy Colors - Keeping for backward compatibility */
+  /* Colors */
   --primary: #009639;
   --accent: #C71F02;
   --secondary: #f5e900;
@@ -248,17 +248,23 @@
   --card-padding: 1.5rem;
   --hero-text-spacing: 1.5;
 
-  /* Borders & Shadows */
+  /* Borders & Shadows - Updated for consistency */
   --border-radius-sm: 0.5rem;
   --border-radius: 0.75rem;
   --border-radius-lg: 1rem;
   --border-radius-full: 9999px;
   --box-shadow: 0 4px 6px -1px rgba(245, 233, 0, 0.1),
-    0 2px 4px -1px rgba(245, 233, 0, 0.06);
+                0 2px 4px -1px rgba(245, 233, 0, 0.06);
   --box-shadow-hover: 0 10px 15px -3px rgba(245, 233, 0, 0.15),
-    0 4px 6px -2px rgba(245, 233, 0, 0.1);
+                     0 4px 6px -2px rgba(245, 233, 0, 0.1);
   --box-shadow-card: 0 2px 4px rgba(245, 233, 0, 0.05);
   --box-shadow-card-hover: 0 8px 16px rgba(245, 233, 0, 0.1);
+  --focus-ring: 0 0 0 2px rgba(0, 150, 57, 0.5);
+  
+  /* Border Colors */
+  --border-color: rgba(0, 150, 57, 0.15);
+  --border-color-hover: rgba(0, 150, 57, 0.25);
+  --border-color-focus: rgba(0, 150, 57, 0.5);
 
   /* Animations */
   --transition-base: all 0.4s ease-in-out;

@@ -44,20 +44,34 @@ export default function Blog() {
     <BlogLayout title="Blog" description={BLOG_DESCRIPTION}>
       <main className={`${styles.backgroundPattern} min-h-screen bg-opacity-2`}>
         {/* Header Section */}
-        <section className="relative pt-24 pb-12 md:pb-16">
-          <div className={`${styles.container} relative z-10 text-center`}>
-            <h1 className={`${styles.headingH1} ${styles.gradientText} mb-4`}>
-              Blog
+        <section className="relative pt-32 pb-16 md:pt-40 md:pb-24">
+          <div
+            className={`${styles.container} relative z-10 text-center max-w-4xl mx-auto px-4`}
+          >
+            <h1
+              className={`${styles.headingH1} ${styles.gradientText} mb-6 text-4xl md:text-5xl lg:text-6xl`}
+              style={{
+                letterSpacing: "-0.02em",
+                lineHeight: "1.2",
+              }}
+            >
+              Thoughts on Engineering, Art & Future
             </h1>
 
             {/* Divider */}
             <div
-              className={`${styles.dividerShape} w-16 h-0.5 mx-auto mb-4 opacity-60`}
+              className={`${styles.dividerShape} w-24 h-1 mx-auto mb-8 opacity-60`}
+              style={{
+                background: "var(--gradient-primary)",
+              }}
             />
 
             <p
-              className={`${styles.bodyLarge} max-w-2xl mx-auto`}
-              style={{ color: "var(--text-on-dark)" }}
+              className={`${styles.bodyLarge} max-w-2xl mx-auto text-lg md:text-xl leading-relaxed`}
+              style={{
+                color: "var(--text-on-dark)",
+                opacity: 0.9,
+              }}
             >
               {BLOG_DESCRIPTION}
             </p>
@@ -69,19 +83,19 @@ export default function Blog() {
             style={{
               background: "var(--cosmic-swirl)",
               backgroundBlendMode: "overlay",
-              opacity: "0.05",
+              opacity: "0.1",
             }}
           />
         </section>
 
         {/* Posts Grid */}
-        <section className="py-6 md:py-8">
-          <div className={`${styles.container} px-4 sm:px-6`}>
-            <div className="grid gap-6 max-w-3xl mx-auto">
+        <section className="py-12 md:py-16">
+          <div className={`${styles.container} px-4 sm:px-6 lg:px-8`}>
+            <div className="grid gap-12 max-w-3xl mx-auto">
               {posts.map((post, index) => (
                 <article
                   key={post.slug}
-                  className={`${styles.fadeUp}`}
+                  className={`${styles.fadeUp} relative`}
                   style={{
                     animationDelay: `${index * 0.1}s`,
                   }}
@@ -91,7 +105,10 @@ export default function Blog() {
                   {/* Only add divider if not last item */}
                   {index !== posts.length - 1 && (
                     <div
-                      className={`${styles.dividerShape} h-px mt-6 opacity-20`}
+                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 h-px opacity-10"
+                      style={{
+                        background: "var(--gradient-primary)",
+                      }}
                     />
                   )}
                 </article>
@@ -100,32 +117,46 @@ export default function Blog() {
 
             {/* Newsletter Section */}
             <div
-              className={`${styles.card} mt-10 py-6 px-4 sm:px-6 text-center max-w-2xl mx-auto`}
+              className={`${styles.card} mt-20 py-12 px-6 sm:px-8 text-center max-w-2xl mx-auto rounded-2xl`}
+              style={{
+                background:
+                  theme === "futuristic"
+                    ? "rgba(0, 0, 0, 0.3)"
+                    : "var(--card-bg)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid var(--border-color)",
+              }}
             >
               <h2
-                className={`${styles.headingH3} mb-3`}
+                className={`${styles.headingH3} mb-4 text-2xl md:text-3xl`}
                 style={{
                   color:
                     theme === "futuristic"
                       ? "var(--text-on-dark)"
                       : "var(--text)",
+                  letterSpacing: "-0.01em",
                 }}
               >
                 Stay Updated
               </h2>
               <p
-                className={`${styles.body} mb-4`}
+                className={`${styles.body} mb-8 text-lg max-w-xl mx-auto`}
                 style={{
                   color:
                     theme === "futuristic"
                       ? "var(--text-muted-on-dark)"
                       : "var(--text-muted)",
+                  lineHeight: "1.6",
                 }}
               >
-                Get notified when I publish new articles and insights
+                Get notified when I publish new articles about engineering,
+                creativity, and the future of technology.
               </p>
               <button
-                className={`${styles.primaryButton} ${styles.primaryButtonHover}`}
+                className={`${styles.primaryButton} ${styles.primaryButtonHover} px-8 py-3 text-lg`}
+                style={{
+                  fontWeight: 500,
+                }}
               >
                 Subscribe to Newsletter
               </button>
