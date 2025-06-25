@@ -19,21 +19,21 @@ type Project = {
 const projects: Project[] = [
   {
     id: "1",
-    title: "Neuromosaic",
+    title: "Deep Human",
     description:
-      "A revolutionary AI-powered learning platform that adapts to individual learning styles.",
-    image: "/images/neuromosaic.jpg",
-    slug: "neuromosaic",
-    tags: ["AI", "Education", "React", "Python"],
+      "Creating personalized AI personas that feel real enough to meaningfully interact with – exploring what makes us human through technology.",
+    image: "/images/projects/deep-human.jpg",
+    slug: "deep-human",
+    tags: ["AI Personas", "MCP Protocol", "Python", "Multi-Agent"],
   },
   {
     id: "2",
-    title: "Brain Buffet",
+    title: "OrgX",
     description:
-      "Democratizing access to quality education through interactive learning experiences.",
-    image: "/images/brain-buffet.jpg",
-    slug: "brain-buffet",
-    tags: ["EdTech", "Web Development", "NextJS"],
+      "AI-accelerated product development platform where human creativity meets AI speed – turning great ideas into great products faster.",
+    image: "/images/projects/orgx.jpg",
+    slug: "orgx",
+    tags: ["AI Collaboration", "Project Management", "Next.js"],
   },
 ];
 

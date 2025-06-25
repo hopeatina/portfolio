@@ -57,11 +57,13 @@ export function createDefaultConnector() {
   const exporter = new GLTFExporter();
   exporter.parse(
     scene,
-    (gltf: GLTFResult) => {
+    (gltf: ArrayBuffer | { [key: string]: any }) => {
       const output = JSON.stringify(gltf);
       const outputPath = path.join(process.cwd(), 'public/models/connector.glb');
       fs.writeFileSync(outputPath, Buffer.from(output));
     },
-    { binary: true }
+    (error: ErrorEvent) => {
+      console.error('Error exporting GLTF:', error);
+    }
   );
 } 
