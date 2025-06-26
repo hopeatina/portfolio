@@ -11,106 +11,123 @@ import MermaidDiagram from "@/components/projects/MermaidDiagram";
 
 export default function BrainBuffet() {
   const techStack = [
-    { category: "Frontend", technologies: "Next.js, React, TypeScript" },
-    { category: "Backend", technologies: "Node.js, Express, GraphQL" },
-    { category: "Database", technologies: "PostgreSQL, Redis" },
-    { category: "AI/ML", technologies: "OpenAI GPT-4, Claude, Custom NLP" },
-    { category: "Analytics", technologies: "Mixpanel, Custom Dashboards" },
-    { category: "Infrastructure", technologies: "AWS, Vercel, Docker" },
-    { category: "Payment", technologies: "Stripe, Revenue Analytics" },
-    { category: "Content", technologies: "Markdown, Video Processing" },
+    {
+      category: "Frontend",
+      technologies: "Next.js, React, TypeScript, Mobile-First Design",
+    },
+    { category: "Backend", technologies: "Node.js, Express, REST APIs" },
+    { category: "Database", technologies: "PostgreSQL, Course Management" },
+    { category: "AI/ML", technologies: "OpenAI GPT-4, Content Generation" },
+    {
+      category: "Media",
+      technologies: "Video Processing, Mobile Optimization",
+    },
+    {
+      category: "UI/UX",
+      technologies: "Responsive Design, Progressive Web App",
+    },
+    {
+      category: "Content",
+      technologies: "Interactive Quizzes, Chapter-based Learning",
+    },
+    {
+      category: "Analytics",
+      technologies: "Progress Tracking, Completion Metrics",
+    },
   ];
 
   const coreFeatures = [
     {
-      title: "🎯 Core Innovation",
+      title: "📱 Mobile-First Learning",
       description:
-        "AI-Driven Course Generation: Advanced LLM integration creates personalized learning paths that adapt in real-time based on student progress, learning style, and comprehension levels.",
+        "Designed specifically for mobile consumption with optimized video content, responsive design, and seamless touch interactions. Perfect for learning on-the-go with offline capabilities.",
     },
     {
-      title: "📚 Dynamic Content Engine",
+      title: "🎯 Interactive Course Experience",
       description:
-        "Adaptive Learning System: Intelligent content recommendation engine that personalizes difficulty, pacing, and teaching methods based on individual student performance analytics.",
+        "Chapter-based learning with integrated quizzes, progress tracking, and completion rewards. Features interactive elements like star completion icons and engagement metrics.",
     },
   ];
 
   const platformFeatures = [
     {
-      title: "🎨 Course Creation Studio",
+      title: "💰 Financial Freedom Courses",
       description:
-        "Advanced tools for creating personalized educational content",
+        "Comprehensive personal finance education with practical applications",
       items: [
-        "AI Content Generation: Automated lesson creation with customizable depth and complexity",
-        "Interactive Elements: Built-in quizzes, assignments, and interactive exercises",
-        "Multi-format Support: Text, video, audio, and interactive simulations",
-        "Template Library: Pre-built course structures for different subjects and learning goals",
+        "Chapter-based Financial Literacy: Structured lessons covering budgeting, investing, and wealth building",
+        "Mobile-Optimized Content: Video lessons designed for smartphone viewing with clear, engaging visuals",
+        "Interactive Examples: Real-world financial scenarios and calculators",
+        "Progress Tracking: Visual progress indicators and completion rewards",
       ],
     },
     {
-      title: "🧠 Personalization Engine",
+      title: "📱 Digital Wellness Programs",
       description:
-        "Intelligent systems that adapt to individual learning styles",
+        "Courses focused on healthy technology habits and digital detox",
       items: [
-        "Learning Style Analysis: AI-powered assessment of visual, auditory, and kinesthetic preferences",
-        "Adaptive Pacing: Dynamic adjustment of content delivery based on comprehension rates",
-        "Knowledge Gap Detection: Intelligent identification and targeted remediation of learning gaps",
-        "Progress Prediction: ML models forecast student success and suggest interventions",
+        "iPhone Addiction Recovery: Structured program for reducing phone dependency",
+        "Mindful Technology Use: Strategies for balanced digital consumption",
+        "Habit Formation: Evidence-based approaches to building healthier tech habits",
+        "Community Support: Progress sharing and peer accountability features",
       ],
     },
     {
-      title: "📊 Analytics & Insights",
-      description: "Comprehensive tracking and reporting capabilities",
+      title: "🎮 Gamified Learning Experience",
+      description: "Engaging features that motivate continued learning",
       items: [
-        "Real-time Dashboards: Comprehensive analytics for educators and administrators",
-        "Engagement Metrics: Detailed tracking of student interaction and participation",
-        "Performance Analytics: Advanced reporting on learning outcomes and course effectiveness",
-        "Predictive Insights: Early warning systems for at-risk students",
+        "Quiz Integration: Built-in knowledge checks with instant feedback",
+        "Star Completion System: Visual rewards for completing chapters and courses",
+        "Progress Visualization: Clear indicators of learning journey advancement",
+        "Achievement Badges: Recognition system for reaching learning milestones",
       ],
     },
   ];
 
   const impactMetrics = [
     {
-      title: "📈 Market Validation",
+      title: "📱 Mobile-First Design",
       description:
-        "Global education technology sector targeting corporate training and higher education with SaaS subscription and usage-based pricing model. Competitive advantage through AI-first personalization approach.",
+        "Responsive platform optimized for smartphone learning with touch-friendly interfaces, optimized video playback, and offline capabilities for learning anywhere.",
     },
     {
-      title: "🎯 User Engagement",
+      title: "🎯 Focused Course Content",
       description:
-        "Significant improvement in course completion rates over traditional platforms. Substantial reduction in course development time with positive feedback from early users and strong engagement metrics.",
+        "Specialized courses in high-demand areas like financial literacy and digital wellness, with practical applications and real-world scenarios for immediate implementation.",
     },
     {
-      title: "🚀 Technical Excellence",
+      title: "🎮 Interactive Learning",
       description:
-        "Reliable uptime with CDN distribution, auto-scaling infrastructure for concurrent users, enterprise-grade data protection, and responsive design with optimized mobile experience.",
+        "Gamified experience with integrated quizzes, progress tracking, star completion rewards, and chapter-based progression to maintain learner engagement.",
     },
     {
-      title: "💡 Innovation",
+      title: "🚀 Accessibility Focus",
       description:
-        "Novel adaptive learning algorithm implementation, research focus on personalized learning methodologies, active participation in EdTech innovation, and contributions to open-source education tools.",
+        "Designed for busy professionals and students who need flexible, mobile-accessible education that fits into their daily routines and lifestyles.",
     },
   ];
 
   const useCases = [
     {
-      title: "🏢 Corporate Training",
+      title: "💼 Personal Development Learners",
       description:
-        "Corporate Training Implementation: Designed for employee technical skills training, focusing on faster certification completion and improved satisfaction rates.",
+        "Individuals seeking to improve their financial literacy and digital wellness habits through mobile-accessible courses.",
       items: [
-        "Accelerated onboarding processes",
-        "Improved compliance training completion rates",
-        "Custom learning paths for different roles and departments",
+        "Professionals building financial independence",
+        "Young adults learning money management",
+        "People struggling with technology addiction",
+        "Anyone seeking structured personal growth",
       ],
     },
     {
-      title: "🎓 Higher Education",
+      title: "🎯 Mobile-First Education",
       description:
-        "Academic Integration: Platform designed to support personalized STEM education with focus on improving course completion rates and accessibility.",
+        "Optimized for busy lifestyles with bite-sized lessons that fit into daily routines.",
       items: [
-        "Improved course completion rates",
-        "Support for diverse learning needs",
-        "Enhanced accessibility for students with learning differences",
+        "Commute-friendly learning sessions",
+        "Quick daily progress tracking",
+        "Offline-capable content for anywhere access",
+        "Progressive course completion over time",
       ],
     },
   ];
@@ -153,14 +170,14 @@ export default function BrainBuffet() {
     >
       <ProjectHero
         title="Brain Buffet"
-        description="An innovative EdTech platform that leverages advanced AI to create personalized learning experiences, transforming how courses are designed, delivered, and consumed in the digital age."
+        description="A mobile-first educational platform offering interactive courses on personal development topics like financial freedom and digital wellness. Features AI-powered content generation, chapter-based learning, and integrated quizzes for enhanced engagement."
         tags={[
           "EdTech",
-          "LLM Integration",
+          "Mobile Learning",
           "Next.js",
-          "Personalized Learning",
-          "Course Creation",
-          "AI",
+          "Interactive Courses",
+          "AI Content",
+          "Personal Development",
         ]}
         image="/images/projects/brain-buffet.jpg"
       />
@@ -170,29 +187,29 @@ export default function BrainBuffet() {
       <ProjectSection title="The Problem">
         <p className="text-lg mb-4">
           <strong>
-            Traditional course creation is time-intensive and produces
-            one-size-fits-all content.
+            Personal development education is often inaccessible, overwhelming,
+            and designed for desktop consumption.
           </strong>{" "}
-          Educators spend months creating static courses that fail to adapt to
-          individual learning styles, resulting in poor engagement and
-          completion rates.
+          People struggle to find practical, mobile-friendly courses that fit
+          into their busy lives, especially for topics like financial literacy
+          and digital wellness.
         </p>
         <ul className="space-y-2 list-disc list-inside">
           <li>
-            <strong>Time barriers</strong>: Creating quality courses takes 100+
-            hours of manual work
+            <strong>Mobile accessibility</strong>: Most educational content
+            isn't optimized for smartphone learning
           </li>
           <li>
-            <strong>Static content</strong>: Traditional courses can't adapt to
-            individual learning patterns
+            <strong>Time constraints</strong>: Traditional courses require large
+            time commitments that busy people can't maintain
           </li>
           <li>
-            <strong>Low engagement</strong>: Average online course completion
-            rates hover around 15%
+            <strong>Practical application</strong>: Many courses lack actionable
+            steps for real-world implementation
           </li>
           <li>
-            <strong>Accessibility gaps</strong>: Content doesn't accommodate
-            diverse learning needs and preferences
+            <strong>Engagement barriers</strong>: Static content without
+            interactive elements leads to course abandonment
           </li>
         </ul>
       </ProjectSection>

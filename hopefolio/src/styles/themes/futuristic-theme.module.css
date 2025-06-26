@@ -6,7 +6,8 @@
   --background: #0A0A0A;
   --text: #FFFFFF;
   --highlight: #00FF99;
-  --text-muted: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(229, 231, 235, 0.9); /* Improved contrast */
+  --text-secondary: rgba(243, 244, 246, 0.95); /* High contrast secondary text */
   
   /* UI Elements */
   --header-bg: rgba(10, 10, 10, 0.95);

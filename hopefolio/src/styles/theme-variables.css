@@ -368,8 +368,8 @@
   --color-surface-light: #1A1A1A;
   --color-surface-dark: #050505;
   --color-text: #FFFFFF;
-  --color-text-muted: #B8B8B8;
-  --color-text-light: #888888;
+  --color-text-muted: #E5E7EB; /* Improved from #B8B8B8 for better contrast */
+  --color-text-light: #D1D5DB; /* Improved from #888888 for better contrast */
   --color-text-on-primary: #0A0A0A;
   --color-text-on-secondary: #0A0A0A;
   --color-text-on-accent: #FFFFFF;

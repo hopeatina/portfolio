@@ -102,6 +102,44 @@ const projects = [
     tags: ["Full Stack", "React", "Node.js"],
     color: "red",
   },
+  {
+    id: "evalvybes",
+    title: "EvalVybes",
+    description:
+      "Conversational AI evaluation platform for comparing multiple AI models with voice control.",
+    longDescription:
+      "Compare AI models through natural conversation. Test prompts across GPT-4, Claude, and more using voice commands, with real-time comparison and smart rating systems.",
+    link: "/projects/evalvybes",
+    image: "/images/projects/evalvybes.jpg",
+    tags: ["Voice AI", "Model Comparison", "Next.js", "WebRTC"],
+    color: "pink",
+    featured: true,
+  },
+  {
+    id: "bodyfx",
+    title: "BodyFX",
+    description:
+      "AI video segmentation for After Effects rotoscoping and OBS real-time streaming.",
+    longDescription:
+      "Eliminate manual rotoscoping and green screens. BodyFX uses Meta's SAM2 for automated After Effects workflows and real-time background removal in OBS Studio - perfect for VFX artists and streamers.",
+    link: "/projects/bodyfx",
+    image: "/images/projects/bodyfx.jpg",
+    tags: ["Computer Vision", "Video Effects", "Python", "OBS Plugin"],
+    color: "purple",
+  },
+  {
+    id: "theaicookup",
+    title: "The AI Cook-Up",
+    description:
+      "Community platform for AI hackathon events in Houston with intelligent team matching.",
+    longDescription:
+      "Fostering Houston's AI community through organized events, LLM-powered team formation, and collaborative project development – making team formation intelligent and inclusive.",
+    link: "/projects/theaicookup",
+    image: "/images/projects/theaicookup.jpg",
+    tags: ["Event Platform", "Team Matching", "Supabase", "AI Integration"],
+    color: "teal",
+    featured: true,
+  },
 ];
 
 // Project Card Component

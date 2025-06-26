@@ -8,8 +8,11 @@ import FeatureGrid from "@/components/projects/FeatureGrid";
 import MermaidDiagram from "@/components/projects/MermaidDiagram";
 import StatsDisplay from "@/components/projects/StatsDisplay";
 import ProjectCard from "@/components/projects/ProjectCard";
+import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 export default function DeepHuman() {
+  const { themeProps } = useTheme();
+
   const techStack = [
     { category: "Core", technologies: "Python, FastMCP Framework" },
     {
@@ -200,22 +203,218 @@ export default function DeepHuman() {
   return (
     <ProjectLayout
       title="Deep Human"
-      description="Advanced multi-agent AI persona framework with 2000+ lines of Python, sophisticated MCP architecture, dynamic content generation, and human compatibility algorithms"
+      description="Advanced AI persona framework with multi-agent systems, human compatibility algorithms, and sophisticated personality modeling"
     >
       <ProjectHero
         title="Deep Human"
-        description="A sophisticated framework for creating personalized, human-like AI personas using advanced MCP server architecture. Features dynamic content generation, multi-domain intelligence, compatibility algorithms, and collaborative AI agents for meaningful human-AI interaction."
+        description="A sophisticated multi-agent AI system that creates personalized MCP servers representing digital twins. Features advanced compatibility algorithms, dynamic personality modeling, and intelligent collaboration between AI agents and humans."
         tags={[
           "Multi-Agent AI",
           "MCP Protocol",
           "Python",
-          "LLM Integration",
-          "Advanced Algorithms",
+          "Persona Framework",
+          "Digital Twin",
         ]}
-        image="/images/projects/deep-human.jpg"
+        image="/images/projects/deep-human/hero-landing.png"
       />
 
       <TechStack items={techStack} />
+
+      <ProjectSection title="Product Vision">
+        <div className="grid md:grid-cols-2 gap-8 items-center mb-12">
+          <div>
+            <h3
+              className="text-2xl font-semibold mb-4"
+              style={{ color: themeProps.colors.primary }}
+            >
+              Create Your Digital Twin in 90 Seconds
+            </h3>
+            <p className="text-lg mb-4">
+              Deep Human revolutionizes personal AI by creating digital twins
+              that network and negotiate on your behalf while you stay human.
+              The platform combines sophisticated multi-agent systems with
+              intuitive user experiences.
+            </p>
+            <ul className="space-y-2">
+              <li className="flex items-start gap-3">
+                <span className="text-primary mt-1">•</span>
+                <span>
+                  <strong>Instant Setup</strong>: Create your digital twin in
+                  just 90 seconds
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-primary mt-1">•</span>
+                <span>
+                  <strong>Autonomous Networking</strong>: Your twin connects
+                  with others based on compatibility
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-primary mt-1">•</span>
+                <span>
+                  <strong>Stay in Control</strong>: Review and guide your twin's
+                  learning over time
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div className="rounded-lg overflow-hidden shadow-xl">
+            <img
+              src="/images/projects/deep-human/hero-landing.png"
+              alt="Deep Human Landing Page"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      </ProjectSection>
+
+      <ProjectSection title="How Deep Human Works">
+        <p className="text-lg mb-8">
+          Deep Human creates a personalized MCP server that represents you in
+          the digital world. Here's the elegant 4-step process that brings your
+          digital twin to life:
+        </p>
+
+        <div className="space-y-12">
+          {/* Step 1 & 2 */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <ProjectCard variant="default">
+              <div className="mb-4">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">
+                  1
+                </span>
+              </div>
+              <h4 className="text-xl font-semibold mb-3">
+                Create Your Profile
+              </h4>
+              <p className="mb-4">
+                Complete your profile with your interests, skills, goals, and
+                conversation style. This information forms the foundation of
+                your digital twin's personality and capabilities.
+              </p>
+              <div className="rounded-lg overflow-hidden mt-4">
+                <img
+                  src="/images/projects/deep-human/how-it-works-1.png"
+                  alt="Create Profile Step"
+                  className="w-full h-auto"
+                />
+              </div>
+            </ProjectCard>
+
+            <ProjectCard variant="default">
+              <div className="mb-4">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">
+                  2
+                </span>
+              </div>
+              <h4 className="text-xl font-semibold mb-3">
+                Deploy Your MCP Server
+              </h4>
+              <p className="mb-4">
+                With a single click, deploy your MCP server that hosts your
+                digital twin. Your server runs continuously, representing you
+                even when you're offline.
+              </p>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mt-4">
+                <code className="text-sm">
+                  Deployment Status: 37s remaining...
+                </code>
+              </div>
+            </ProjectCard>
+          </div>
+
+          {/* Step 3 & 4 */}
+          <div className="rounded-lg overflow-hidden shadow-xl">
+            <img
+              src="/images/projects/deep-human/how-it-works-2.png"
+              alt="Connect and Review Steps"
+              className="w-full h-auto"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <ProjectCard variant="accent">
+              <div className="mb-4">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">
+                  3
+                </span>
+              </div>
+              <h4 className="text-xl font-semibold mb-3">
+                Connect & Collaborate
+              </h4>
+              <p>
+                Your digital twin finds and connects with other humans and AI
+                agents based on shared interests and compatibility, initiating
+                meaningful conversations and building your network autonomously.
+              </p>
+            </ProjectCard>
+
+            <ProjectCard variant="accent">
+              <div className="mb-4">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">
+                  4
+                </span>
+              </div>
+              <h4 className="text-xl font-semibold mb-3">Review & Guide</h4>
+              <p>
+                Stay in control by reviewing conversations, answering questions
+                when your twin is unsure, and guiding its learning to better
+                represent you over time. Your twin evolves with your feedback.
+              </p>
+            </ProjectCard>
+          </div>
+        </div>
+      </ProjectSection>
+
+      <ProjectSection title="Interactive Demo Experience">
+        <div className="mb-8">
+          <p className="text-lg mb-6">
+            Experience how Deep Human represents you in the digital world,
+            making connections and managing your interactions while you focus on
+            what matters.
+          </p>
+
+          <div className="rounded-lg overflow-hidden shadow-xl mb-8">
+            <img
+              src="/images/projects/deep-human/demo-interface.png"
+              alt="Deep Human Demo Interface"
+              className="w-full h-auto"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6 text-center">
+            <div>
+              <div className="text-4xl mb-2">🧠</div>
+              <h5 className="font-semibold">Personalized AI</h5>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Tailored to your unique personality
+              </p>
+            </div>
+            <div>
+              <div className="text-4xl mb-2">👥</div>
+              <h5 className="font-semibold">Smart Matching</h5>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Connects with compatible people
+              </p>
+            </div>
+            <div>
+              <div className="text-4xl mb-2">💬</div>
+              <h5 className="font-semibold">Meaningful Conversations</h5>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Engages in relevant discussions
+              </p>
+            </div>
+            <div>
+              <div className="text-4xl mb-2">📅</div>
+              <h5 className="font-semibold">Event Coordination</h5>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Manages your digital presence
+              </p>
+            </div>
+          </div>
+        </div>
+      </ProjectSection>
 
       <ProjectSection title="Cutting-Edge AI Persona Development">
         <p className="text-lg mb-6">

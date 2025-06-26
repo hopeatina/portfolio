@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useCallback } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
@@ -124,6 +124,23 @@ const Hero3D: React.FC = () => {
   const bodyFont =
     themeProps.typography.bodyFont || "'Titillium Web', sans-serif";
 
+  // Scroll to next section functionality
+  const scrollToNextSection = useCallback(() => {
+    const nextSection = document.querySelector("main section:nth-child(2)");
+    if (nextSection) {
+      nextSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      // Fallback: scroll to the height of the viewport
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <Suspense fallback={<LoadingScene />}>
@@ -133,64 +150,116 @@ const Hero3D: React.FC = () => {
       </Suspense>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10"
       >
-        <div
-          className="backdrop-blur-sm bg-black/5 p-8 rounded-2xl max-w-4xl mx-auto"
-          style={{
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-lg"
-            style={{
-              fontFamily: headingFont,
-              textShadow: "0 4px 12px rgba(0, 0, 0, 0.5)",
-            }}
-          >
-            Hope Atina
-            <br />
-            <span className="text-3xl md:text-5xl">
-              Building, Creating, & Rethinking Possibility
-            </span>
-          </motion.h1>
+        {/* Main content container with improved spacing and hierarchy */}
+        <div className="relative max-w-6xl mx-auto text-center">
+          {/* Eyebrow text - establishes context */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl md:text-2xl mb-8 text-white/90"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-sm md:text-base font-medium tracking-wider uppercase mb-4 text-white/80"
             style={{
               fontFamily: bodyFont,
+              letterSpacing: "var(--letter-spacing-wider)",
               textShadow: "0 2px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
-            Software Developer, Bioengineer, and Musician. Building innovative
-            solutions at the intersection of technology, science, and
-            creativity.
+            Software Developer • Bioengineer • Musician
           </motion.p>
+
+          {/* Primary heading with better scale progression */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mb-6"
+            style={{
+              fontFamily: headingFont,
+            }}
+          >
+            <span
+              className="block text-6xl md:text-7xl lg:text-8xl font-bold text-white"
+              style={{
+                fontSize:
+                  "clamp(var(--font-size-5xl), 10vw, var(--font-size-6xl))",
+                lineHeight: "var(--line-height-none)",
+                textShadow:
+                  "0 4px 20px rgba(0, 0, 0, 0.5), 0 8px 40px rgba(var(--primary-rgb), 0.3)",
+                letterSpacing: "var(--letter-spacing-tight)",
+              }}
+            >
+              Hope Atina
+            </span>
+          </motion.h1>
+
+          {/* Tagline with visual separation */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-wrap gap-4 justify-center"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-8"
           >
-            <Link
-              href="/projects"
-              className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 group"
+            <h2
+              className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white/95"
               style={{
-                background: "var(--gradient-primary)",
-                color: "white",
-                fontFamily: bodyFont,
-                boxShadow: "0 4px 12px rgba(var(--primary-rgb), 0.3)",
+                fontFamily: headingFont,
+                fontSize:
+                  "clamp(var(--font-size-2xl), 5vw, var(--font-size-4xl))",
+                lineHeight: "var(--line-height-tight)",
+                textShadow: "0 3px 12px rgba(0, 0, 0, 0.4)",
+                background:
+                  "linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
-              View Projects
+              Building, Creating, & Rethinking Possibility
+            </h2>
+          </motion.div>
+
+          {/* Description with improved readability */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto text-white/80"
+            style={{
+              fontFamily: bodyFont,
+              lineHeight: "var(--line-height-relaxed)",
+              textShadow: "0 2px 8px rgba(0, 0, 0, 0.4)",
+            }}
+          >
+            Building innovative solutions at the intersection of technology,
+            science, and creativity.
+          </motion.p>
+
+          {/* CTAs with improved visual prominence */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            {/* Primary CTA */}
+            <Link
+              href="/projects"
+              className="group relative inline-flex items-center px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
+              style={{
+                fontSize: "var(--font-size-lg)",
+                fontFamily: bodyFont,
+                background: "var(--gradient-primary)",
+                color: "white",
+                boxShadow:
+                  "0 4px 20px rgba(var(--primary-rgb), 0.4), 0 8px 32px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              <span className="relative z-10">View Projects</span>
               <svg
                 className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
                 fill="none"
@@ -204,51 +273,113 @@ const Hero3D: React.FC = () => {
                   d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
+              {/* Hover effect overlay */}
+              <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
+
+            {/* Secondary CTA */}
             <Link
               href="/about"
-              className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 border-2 border-white/30 backdrop-blur-sm"
+              className="group relative inline-flex items-center px-8 py-4 rounded-full font-medium transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
               style={{
-                color: "white",
+                fontSize: "var(--font-size-base)",
                 fontFamily: bodyFont,
+                border: "2px solid rgba(255, 255, 255, 0.3)",
+                color: "white",
+                background: "rgba(255, 255, 255, 0.05)",
               }}
             >
-              About Me
+              <span className="relative z-10">Learn More About Me</span>
+              {/* Hover effect */}
+              <div className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
             </Link>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Improved scroll indicator with functionality */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1 }}
-        className="absolute bottom-8 inset-x-0 mx-auto z-20 flex flex-col items-center justify-center"
+        transition={{ duration: 0.8, delay: 0.8 }}
+        className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20"
       >
-        <p
-          className="text-white/70 text-sm mb-2"
-          style={{
-            fontFamily: bodyFont,
-            textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          Scroll to explore
-        </p>
-        <div className="animate-bounce">
-          <div
-            className="w-10 h-10 rounded-full flex items-center justify-center"
+        <div className="flex flex-col items-center">
+          {/* Text label */}
+          <motion.p
+            className="text-white/70 text-xs md:text-sm mb-3 font-medium select-none"
             style={{
-              background: "var(--gradient-primary)",
-              boxShadow: "0 0 20px rgba(var(--primary-rgb), 0.3)",
+              fontFamily: bodyFont,
+              letterSpacing: "var(--letter-spacing-wide)",
+              textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
+            }}
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
             }}
           >
-            <FiChevronDown
-              className="text-white"
-              size={24}
-              style={{ filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))" }}
+            Scroll to explore
+          </motion.p>
+
+          {/* Clickable scroll button */}
+          <motion.button
+            onClick={scrollToNextSection}
+            className="group relative"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Scroll to next section"
+          >
+            {/* Outer pulse ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-white/20"
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.8, 0, 0.8],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeOut",
+              }}
+              style={{
+                width: "60px",
+                height: "60px",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
             />
-          </div>
+
+            {/* Main button */}
+            <motion.div
+              className="relative w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer transition-all duration-300"
+              style={{
+                background: "rgba(255, 255, 255, 0.1)",
+                border: "2px solid rgba(255, 255, 255, 0.25)",
+                boxShadow:
+                  "0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+              }}
+              animate={{ y: [0, 6, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              whileHover={{
+                background: "rgba(255, 255, 255, 0.2)",
+                borderColor: "rgba(255, 255, 255, 0.4)",
+                boxShadow:
+                  "0 6px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+              }}
+            >
+              <FiChevronDown
+                className="text-white transition-transform duration-300 group-hover:translate-y-1"
+                size={20}
+              />
+            </motion.div>
+          </motion.button>
         </div>
       </motion.div>
 
