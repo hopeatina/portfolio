@@ -182,7 +182,7 @@ const AboutSection = () => {
               {/* Main Image */}
               <div className="relative aspect-square">
                 <Image
-                  src="/images/hope-profile.png"
+                  src="/images/hope-profile.jpg"
                   alt="Hope Atina"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"

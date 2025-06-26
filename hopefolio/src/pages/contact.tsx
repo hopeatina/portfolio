@@ -12,6 +12,7 @@ import {
   FiLinkedin,
   FiTwitter,
 } from "react-icons/fi";
+import { FaMedium } from "react-icons/fa";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -527,6 +528,22 @@ export default function Contact() {
                       aria-label="X Profile"
                     >
                       <FiTwitter className="w-5 h-5" />X
+                    </a>
+                    <a
+                      href="https://medium.com/@hopeatina"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all hover:transform hover:scale-105 ${
+                        bgIsDark ? "hover:glow-primary" : ""
+                      }`}
+                      style={{
+                        ...getButtonStyle(),
+                        fontFamily: bgIsDark ? "var(--font-mono)" : "inherit",
+                      }}
+                      aria-label="Medium Profile"
+                    >
+                      <FaMedium className="w-5 h-5" />
+                      Medium
                     </a>
                   </div>
                 </div>

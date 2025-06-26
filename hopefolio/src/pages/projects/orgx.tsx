@@ -35,29 +35,30 @@ export default function OrgX() {
         <h3>Advanced Canvas Implementation</h3>
         <ul>
           <li>
-            **React Flow Integration**: Sophisticated node-based workflow
-            visualization with custom components and advanced interactions
+            <strong>React Flow Integration</strong>: Sophisticated node-based
+            workflow visualization with custom components and advanced
+            interactions
           </li>
           <li>
-            **Critical Path Algorithms**: Real-time calculation and
+            <strong>Critical Path Algorithms</strong>: Real-time calculation and
             visualization of project critical paths with animated edge
             highlighting
           </li>
           <li>
-            **Dynamic Node Positioning**: Intelligent auto-layout algorithms
-            with collision detection and optimization
+            <strong>Dynamic Node Positioning</strong>: Intelligent auto-layout
+            algorithms with collision detection and optimization
           </li>
           <li>
-            **Real-time Collaboration**: Multi-user canvas editing with conflict
-            resolution and live cursor tracking
+            <strong>Real-time Collaboration</strong>: Multi-user canvas editing
+            with conflict resolution and live cursor tracking
           </li>
           <li>
-            **Advanced Animations**: Framer Motion integration for smooth
-            transitions, node state changes, and path highlighting
+            <strong>Advanced Animations</strong>: Framer Motion integration for
+            smooth transitions, node state changes, and path highlighting
           </li>
           <li>
-            **Performance Optimization**: Virtualized rendering for large-scale
-            project visualization with 1000+ nodes
+            <strong>Performance Optimization</strong>: Virtualized rendering for
+            large-scale project visualization with 1000+ nodes
           </li>
         </ul>
 
@@ -74,92 +75,94 @@ export default function OrgX() {
         <h3>Canvas Visualization Engine</h3>
         <ul>
           <li>
-            **React Flow Framework**: Advanced implementation with custom node
-            types, edge renderers, and interaction handlers
+            <strong>React Flow Framework</strong>: Advanced implementation with
+            custom node types, edge renderers, and interaction handlers
           </li>
           <li>
-            **Critical Path Algorithm**: Sophisticated longest path calculation
-            with dependency graph analysis and bottleneck identification
+            <strong>Critical Path Algorithm</strong>: Sophisticated longest path
+            calculation with dependency graph analysis and bottleneck
+            identification
           </li>
           <li>
-            **Custom Node Components**: Specialized task nodes with status
-            indicators, progress tracking, and contextual information
+            <strong>Custom Node Components</strong>: Specialized task nodes with
+            status indicators, progress tracking, and contextual information
           </li>
           <li>
-            **Animated Edge System**: Dynamic edge rendering with critical path
-            highlighting, progress indicators, and status animations
+            <strong>Animated Edge System</strong>: Dynamic edge rendering with
+            critical path highlighting, progress indicators, and status
+            animations
           </li>
           <li>
-            **Real-time Updates**: WebSocket integration for live collaboration
-            with optimistic updates and conflict resolution
+            <strong>Real-time Updates</strong>: WebSocket integration for live
+            collaboration with optimistic updates and conflict resolution
           </li>
         </ul>
 
         <h3>Project Management Core</h3>
         <ul>
           <li>
-            **Advanced Task System**: Comprehensive task management with
-            dependencies, milestones, and resource allocation
+            <strong>Advanced Task System</strong>: Comprehensive task management
+            with dependencies, milestones, and resource allocation
           </li>
           <li>
-            **Zustand State Management**: Sophisticated global state with
-            persistence, undo/redo, and real-time synchronization
+            <strong>Zustand State Management</strong>: Sophisticated global
+            state with persistence, undo/redo, and real-time synchronization
           </li>
           <li>
-            **Timeline Analysis**: Critical path calculation with slack time
-            analysis and schedule optimization
+            <strong>Timeline Analysis</strong>: Critical path calculation with
+            slack time analysis and schedule optimization
           </li>
           <li>
-            **Resource Management**: Team allocation, workload balancing, and
-            capacity planning algorithms
+            <strong>Resource Management</strong>: Team allocation, workload
+            balancing, and capacity planning algorithms
           </li>
           <li>
-            **Risk Assessment**: Automated identification of project risks with
-            mitigation recommendations
+            <strong>Risk Assessment</strong>: Automated identification of
+            project risks with mitigation recommendations
           </li>
         </ul>
 
         <h3>Enterprise Features</h3>
         <ul>
           <li>
-            **Next.js App Router**: Modern React 18 implementation with server
-            components and streaming
+            <strong>Next.js App Router</strong>: Modern React 18 implementation
+            with server components and streaming
           </li>
           <li>
-            **TypeScript Integration**: Full type safety with complex data
-            models and strict validation
+            <strong>TypeScript Integration</strong>: Full type safety with
+            complex data models and strict validation
           </li>
           <li>
-            **Supabase Backend**: Real-time database with row-level security and
-            advanced querying
+            <strong>Supabase Backend</strong>: Real-time database with row-level
+            security and advanced querying
           </li>
           <li>
-            **Authentication System**: Enterprise SSO integration with
-            role-based access control
+            <strong>Authentication System</strong>: Enterprise SSO integration
+            with role-based access control
           </li>
           <li>
-            **API Integration**: RESTful API design with comprehensive endpoint
-            coverage and documentation
+            <strong>API Integration</strong>: RESTful API design with
+            comprehensive endpoint coverage and documentation
           </li>
         </ul>
 
         <h3>Performance & Scalability</h3>
         <ul>
           <li>
-            **Virtualized Rendering**: Efficient rendering of large project
-            graphs with viewport optimization
+            <strong>Virtualized Rendering</strong>: Efficient rendering of large
+            project graphs with viewport optimization
           </li>
           <li>
-            **Edge Computing**: Cloudflare Workers integration for global
-            low-latency performance
+            <strong>Edge Computing</strong>: Cloudflare Workers integration for
+            global low-latency performance
           </li>
           <li>
-            **Caching Strategy**: Multi-layer caching with Redis for session
-            data and computed results
+            <strong>Caching Strategy</strong>: Multi-layer caching with Redis
+            for session data and computed results
           </li>
           <li>
-            **Database Optimization**: Optimized queries with indexing
-            strategies for complex project relationships
+            <strong>Database Optimization</strong>: Optimized queries with
+            indexing strategies for complex project relationships
           </li>
         </ul>
       </ProjectSection>
@@ -168,60 +171,60 @@ export default function OrgX() {
         <h3>Critical Path Visualization Innovation</h3>
         <ul>
           <li>
-            **Animated Critical Paths**: Real-time animated highlighting of
-            critical project paths with dynamic stroke patterns
+            <strong>Animated Critical Paths</strong>: Real-time animated
+            highlighting of critical project paths with dynamic stroke patterns
           </li>
           <li>
-            **Intelligent Node Layout**: Advanced auto-positioning algorithms
-            minimizing edge crossings and optimizing readability
+            <strong>Intelligent Node Layout</strong>: Advanced auto-positioning
+            algorithms minimizing edge crossings and optimizing readability
           </li>
           <li>
-            **Interactive Timeline**: Drag-and-drop task scheduling with
-            automatic dependency validation and conflict resolution
+            <strong>Interactive Timeline</strong>: Drag-and-drop task scheduling
+            with automatic dependency validation and conflict resolution
           </li>
           <li>
-            **Multi-Level Zoom**: Seamless navigation from high-level project
-            overview to detailed task implementation
+            <strong>Multi-Level Zoom</strong>: Seamless navigation from
+            high-level project overview to detailed task implementation
           </li>
         </ul>
 
         <h3>AI-Powered Insights</h3>
         <ul>
           <li>
-            **Predictive Analytics**: Machine learning models predicting project
-            completion times and identifying risks
+            <strong>Predictive Analytics</strong>: Machine learning models
+            predicting project completion times and identifying risks
           </li>
           <li>
-            **Resource Optimization**: AI-driven recommendations for optimal
-            team allocation and workload distribution
+            <strong>Resource Optimization</strong>: AI-driven recommendations
+            for optimal team allocation and workload distribution
           </li>
           <li>
-            **Bottleneck Detection**: Automated identification of workflow
-            bottlenecks with suggested optimizations
+            <strong>Bottleneck Detection</strong>: Automated identification of
+            workflow bottlenecks with suggested optimizations
           </li>
           <li>
-            **Pattern Recognition**: Historical project analysis to identify
-            recurring patterns and improvement opportunities
+            <strong>Pattern Recognition</strong>: Historical project analysis to
+            identify recurring patterns and improvement opportunities
           </li>
         </ul>
 
         <h3>Advanced Collaboration</h3>
         <ul>
           <li>
-            **Real-time Multiplayer**: Multi-user canvas editing with live
-            cursors, selection sharing, and conflict resolution
+            <strong>Real-time Multiplayer</strong>: Multi-user canvas editing
+            with live cursors, selection sharing, and conflict resolution
           </li>
           <li>
-            **Version Control**: Git-like versioning for project states with
-            branching and merging capabilities
+            <strong>Version Control</strong>: Git-like versioning for project
+            states with branching and merging capabilities
           </li>
           <li>
-            **Comment System**: Contextual commenting on tasks and project
-            elements with threaded discussions
+            <strong>Comment System</strong>: Contextual commenting on tasks and
+            project elements with threaded discussions
           </li>
           <li>
-            **Activity Streams**: Real-time activity feeds with intelligent
-            filtering and notification systems
+            <strong>Activity Streams</strong>: Real-time activity feeds with
+            intelligent filtering and notification systems
           </li>
         </ul>
 
@@ -240,24 +243,24 @@ export default function OrgX() {
             <h3>Technical Complexity</h3>
             <ul>
               <li>
-                **Advanced Algorithms**: Critical path calculation and
-                optimization
+                <strong>Advanced Algorithms</strong>: Critical path calculation
+                and optimization
               </li>
               <li>
-                **Real-time Systems**: Multi-user collaboration with conflict
-                resolution
+                <strong>Real-time Systems</strong>: Multi-user collaboration
+                with conflict resolution
               </li>
               <li>
-                **Performance Engineering**: Virtualized rendering for large
-                datasets
+                <strong>Performance Engineering</strong>: Virtualized rendering
+                for large datasets
               </li>
               <li>
-                **Complex State Management**: Sophisticated global state with
-                persistence
+                <strong>Complex State Management</strong>: Sophisticated global
+                state with persistence
               </li>
               <li>
-                **Advanced Animations**: Smooth, performant UI transitions and
-                indicators
+                <strong>Advanced Animations</strong>: Smooth, performant UI
+                transitions and indicators
               </li>
             </ul>
           </div>
@@ -265,24 +268,24 @@ export default function OrgX() {
             <h3>Enterprise Value</h3>
             <ul>
               <li>
-                **Visual Project Management**: Intuitive canvas interface
-                reducing cognitive load
+                <strong>Visual Project Management</strong>: Intuitive canvas
+                interface reducing cognitive load
               </li>
               <li>
-                **Critical Path Analysis**: Automated identification of project
-                bottlenecks
+                <strong>Critical Path Analysis</strong>: Automated
+                identification of project bottlenecks
               </li>
               <li>
-                **Team Collaboration**: Real-time editing improving team
-                coordination
+                <strong>Team Collaboration</strong>: Real-time editing improving
+                team coordination
               </li>
               <li>
-                **Performance Insights**: Data-driven project optimization
-                recommendations
+                <strong>Performance Insights</strong>: Data-driven project
+                optimization recommendations
               </li>
               <li>
-                **Scalable Architecture**: Support for enterprise-scale project
-                portfolios
+                <strong>Scalable Architecture</strong>: Support for
+                enterprise-scale project portfolios
               </li>
             </ul>
           </div>

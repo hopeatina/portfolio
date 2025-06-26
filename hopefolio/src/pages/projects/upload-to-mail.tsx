@@ -36,28 +36,28 @@ export default function UploadToMail() {
         <h3>Key Technical Achievements</h3>
         <ul>
           <li>
-            **Production Infrastructure**: Docker containerization, PostgreSQL
+            <strong>Production Infrastructure</strong>: Docker containerization, PostgreSQL
             database with Drizzle ORM, automated setup scripts
           </li>
           <li>
-            **Advanced File Processing**: Support for PDF, DOC, DOCX, JPG, PNG
+            <strong>Advanced File Processing</strong>: Support for PDF, DOC, DOCX, JPG, PNG
             with server-side validation and secure storage
           </li>
           <li>
-            **Comprehensive Testing Suite**: 95%+ code coverage with unit,
+            <strong>Comprehensive Testing Suite</strong>: 95%+ code coverage with unit,
             integration, and E2E tests using Jest, React Testing Library,
             Playwright
           </li>
           <li>
-            **Enterprise Security**: Rate limiting, hCaptcha integration, secure
+            <strong>Enterprise Security</strong>: Rate limiting, hCaptcha integration, secure
             session management, payment tokenization
           </li>
           <li>
-            **Real-time Payment Processing**: Full Stripe integration with
+            <strong>Real-time Payment Processing</strong>: Full Stripe integration with
             webhook handling, refund capabilities, alternative payment methods
           </li>
           <li>
-            **Advanced UX**: Multi-step wizard, address verification API,
+            <strong>Advanced UX</strong>: Multi-step wizard, address verification API,
             document preview with navigation, guided onboarding
           </li>
         </ul>
@@ -76,23 +76,23 @@ export default function UploadToMail() {
         <h3>Backend Architecture</h3>
         <ul>
           <li>
-            **Express.js Server**: Custom middleware stack with request logging,
+            <strong>Express.js Server</strong>: Custom middleware stack with request logging,
             error handling, and performance monitoring
           </li>
           <li>
-            **Database Design**: PostgreSQL with Drizzle ORM, optimized schema
+            <strong>Database Design</strong>: PostgreSQL with Drizzle ORM, optimized schema
             for document tracking and user management
           </li>
           <li>
-            **File Upload System**: Multer-based upload handling with
+            <strong>File Upload System</strong>: Multer-based upload handling with
             validation, virus scanning preparation, and S3-ready storage
           </li>
           <li>
-            **Payment Integration**: Complete Stripe implementation with webhook
+            <strong>Payment Integration</strong>: Complete Stripe implementation with webhook
             verification, idempotency keys, and dispute handling
           </li>
           <li>
-            **Email System**: Nodemailer integration with templated emails for
+            <strong>Email System</strong>: Nodemailer integration with templated emails for
             order confirmations and status updates
           </li>
         </ul>
@@ -100,23 +100,23 @@ export default function UploadToMail() {
         <h3>Frontend Architecture</h3>
         <ul>
           <li>
-            **React/TypeScript**: Fully typed components with custom hooks for
+            <strong>React/TypeScript</strong>: Fully typed components with custom hooks for
             state management and API integration
           </li>
           <li>
-            **UI Components**: Radix UI component library with Tailwind CSS for
+            <strong>UI Components</strong>: Radix UI component library with Tailwind CSS for
             consistent, accessible design
           </li>
           <li>
-            **Form Management**: React Hook Form with Zod validation for complex
+            <strong>Form Management</strong>: React Hook Form with Zod validation for complex
             multi-step workflows
           </li>
           <li>
-            **State Management**: TanStack Query for server state, custom
+            <strong>State Management</strong>: TanStack Query for server state, custom
             context for wizard state persistence
           </li>
           <li>
-            **Performance**: Code splitting, lazy loading, optimized bundling
+            <strong>Performance</strong>: Code splitting, lazy loading, optimized bundling
             with Vite
           </li>
         </ul>
@@ -124,19 +124,19 @@ export default function UploadToMail() {
         <h3>Testing & Quality Assurance</h3>
         <ul>
           <li>
-            **Comprehensive Test Coverage**: 95%+ coverage across components,
+            <strong>Comprehensive Test Coverage</strong>: 95%+ coverage across components,
             hooks, API routes, and user flows
           </li>
           <li>
-            **Testing Strategy**: Unit tests for isolated logic, integration
+            <strong>Testing Strategy</strong>: Unit tests for isolated logic, integration
             tests for API endpoints, E2E tests for critical paths
           </li>
           <li>
-            **CI/CD Pipeline**: Automated testing on every commit with coverage
+            <strong>CI/CD Pipeline</strong>: Automated testing on every commit with coverage
             reporting and deployment checks
           </li>
           <li>
-            **Performance Testing**: Load testing for file uploads and payment
+            <strong>Performance Testing</strong>: Load testing for file uploads and payment
             processing under concurrent users
           </li>
         </ul>
@@ -144,19 +144,19 @@ export default function UploadToMail() {
         <h3>DevOps & Deployment</h3>
         <ul>
           <li>
-            **Docker Containerization**: Multi-stage builds for production
+            <strong>Docker Containerization</strong>: Multi-stage builds for production
             deployment with optimized image sizes
           </li>
           <li>
-            **Environment Management**: Comprehensive .env configuration with
+            <strong>Environment Management</strong>: Comprehensive .env configuration with
             production/staging/development variants
           </li>
           <li>
-            **Monitoring**: Request logging, error tracking, performance metrics
+            <strong>Monitoring</strong>: Request logging, error tracking, performance metrics
             collection
           </li>
           <li>
-            **Security**: Rate limiting, CORS configuration, secure headers,
+            <strong>Security</strong>: Rate limiting, CORS configuration, secure headers,
             input sanitization
           </li>
         </ul>
@@ -166,23 +166,23 @@ export default function UploadToMail() {
         <h3>Technical Challenges Solved</h3>
         <ul>
           <li>
-            **Large File Upload Optimization**: Implemented chunked uploads with
+            <strong>Large File Upload Optimization</strong>: Implemented chunked uploads with
             progress tracking and resume capability
           </li>
           <li>
-            **Address Verification Integration**: Built custom API wrapper for
+            <strong>Address Verification Integration</strong>: Built custom API wrapper for
             real-time address validation with suggestion handling
           </li>
           <li>
-            **Payment Flow Resilience**: Designed idempotent payment processing
+            <strong>Payment Flow Resilience</strong>: Designed idempotent payment processing
             with automatic retry logic and failure recovery
           </li>
           <li>
-            **Multi-format Document Processing**: Created unified processing
+            <strong>Multi-format Document Processing</strong>: Created unified processing
             pipeline supporting diverse document types
           </li>
           <li>
-            **Real-time Wizard State**: Built persistent wizard state that
+            <strong>Real-time Wizard State</strong>: Built persistent wizard state that
             survives page refreshes and browser crashes
           </li>
         </ul>
@@ -190,19 +190,19 @@ export default function UploadToMail() {
         <h3>User Experience Innovation</h3>
         <ul>
           <li>
-            **Guided Onboarding**: Context-aware tutorial system with
+            <strong>Guided Onboarding</strong>: Context-aware tutorial system with
             progressive disclosure and skip options
           </li>
           <li>
-            **Document Preview**: Advanced PDF/image preview with zoom,
+            <strong>Document Preview</strong>: Advanced PDF/image preview with zoom,
             navigation, and mobile optimization
           </li>
           <li>
-            **Smart Address Completion**: Geoapify integration with intelligent
+            <strong>Smart Address Completion</strong>: Geoapify integration with intelligent
             address suggestions and validation
           </li>
           <li>
-            **Order Tracking**: Real-time status updates with email
+            <strong>Order Tracking</strong>: Real-time status updates with email
             notifications and tracking integration
           </li>
         </ul>
@@ -221,19 +221,19 @@ export default function UploadToMail() {
           <div>
             <h3>Technical Metrics</h3>
             <ul>
-              <li>**95%+ Test Coverage** across all critical paths</li>
-              <li>**Sub-2s Page Load** times with optimized bundles</li>
-              <li>**10MB+ File Processing** with real-time progress</li>
-              <li>**Zero Downtime** deployment architecture</li>
+              <li><strong>95%+ Test Coverage</strong> across all critical paths</li>
+              <li><strong>Sub-2s Page Load</strong> times with optimized bundles</li>
+              <li><strong>10MB+ File Processing</strong> with real-time progress</li>
+              <li><strong>Zero Downtime</strong> deployment architecture</li>
             </ul>
           </div>
           <div>
             <h3>Development Achievements</h3>
             <ul>
-              <li>**Complete SDLC** from requirements to production</li>
-              <li>**Advanced DevOps** with automated CI/CD</li>
-              <li>**Security Best Practices** throughout stack</li>
-              <li>**Comprehensive Documentation** for maintainability</li>
+              <li><strong>Complete SDLC</strong> from requirements to production</li>
+              <li><strong>Advanced DevOps</strong> with automated CI/CD</li>
+              <li><strong>Security Best Practices</strong> throughout stack</li>
+              <li><strong>Comprehensive Documentation</strong> for maintainability</li>
             </ul>
           </div>
         </div>

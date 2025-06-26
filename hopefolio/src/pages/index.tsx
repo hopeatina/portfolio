@@ -31,10 +31,12 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Emerging Hope Portfolio</title>
+        <title>
+          Hope Atina - Software Developer, Bioengineer, and Musician
+        </title>
         <meta
           name="description"
-          content="Portfolio showcasing engineering, creativity, and entrepreneurship"
+          content="Hi, I'm Hope - Software Developer, Bioengineer, and Musician. Building innovative solutions at the intersection of technology, science, and creativity."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

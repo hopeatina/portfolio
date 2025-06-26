@@ -3,6 +3,7 @@
 import React, { createElement } from "react";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import { FiGithub, FiTwitter, FiLinkedin, FiArrowUp } from "react-icons/fi";
+import { FaMedium } from "react-icons/fa";
 import styles from "@/styles/themes/base-theme.module.css";
 
 interface SocialLink {
@@ -26,6 +27,11 @@ const socialLinks: SocialLink[] = [
     platform: "X",
     url: "https://x.com/emerginghope_",
     icon: FiTwitter,
+  },
+  {
+    platform: "Medium",
+    url: "https://medium.com/@hopeatina",
+    icon: FaMedium,
   },
 ];
 

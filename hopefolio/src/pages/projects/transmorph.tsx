@@ -35,27 +35,27 @@ export default function Transmorph() {
         <h3>Technical Scale & Complexity</h3>
         <ul>
           <li>
-            **2000+ Lines of Core Logic**: Complex Python server implementation
+            <strong>2000+ Lines of Core Logic</strong>: Complex Python server implementation
             with advanced MCP protocol handling
           </li>
           <li>
-            **Monorepo Architecture**: Multi-package system with CLI, core
+            <strong>Monorepo Architecture</strong>: Multi-package system with CLI, core
             libraries, documentation, and web interface
           </li>
           <li>
-            **Multi-Language Code Generation**: TypeScript and Python output
+            <strong>Multi-Language Code Generation</strong>: TypeScript and Python output
             with framework-specific optimizations
           </li>
           <li>
-            **LLM Integration**: OpenAI and Anthropic Claude integration for
+            <strong>LLM Integration</strong>: OpenAI and Anthropic Claude integration for
             intelligent code analysis and generation
           </li>
           <li>
-            **Hosted Platform**: Complete SaaS offering with Railway
+            <strong>Hosted Platform</strong>: Complete SaaS offering with Railway
             integration, Supabase database, and GraphQL API
           </li>
           <li>
-            **Enterprise Documentation**: 15+ detailed documentation files with
+            <strong>Enterprise Documentation</strong>: 15+ detailed documentation files with
             tutorials, guides, and troubleshooting
           </li>
         </ul>
@@ -74,23 +74,23 @@ export default function Transmorph() {
         <h3>Core Generation Engine</h3>
         <ul>
           <li>
-            **OpenAPI Parser**: Robust parsing engine supporting v2 and v3
+            <strong>OpenAPI Parser</strong>: Robust parsing engine supporting v2 and v3
             specifications with comprehensive validation
           </li>
           <li>
-            **LLM Orchestration**: Intelligent prompt engineering system with
+            <strong>LLM Orchestration</strong>: Intelligent prompt engineering system with
             context-aware code generation
           </li>
           <li>
-            **Template System**: Advanced templating with language-specific
+            <strong>Template System</strong>: Advanced templating with language-specific
             optimizations and security configurations
           </li>
           <li>
-            **Schema Generation**: Automatic Zod (TypeScript) and Pydantic
+            <strong>Schema Generation</strong>: Automatic Zod (TypeScript) and Pydantic
             (Python) schema creation from OpenAPI definitions
           </li>
           <li>
-            **Validation Pipeline**: Multi-stage validation ensuring generated
+            <strong>Validation Pipeline</strong>: Multi-stage validation ensuring generated
             code quality and MCP protocol compliance
           </li>
         </ul>
@@ -98,23 +98,23 @@ export default function Transmorph() {
         <h3>CLI Framework & Developer Experience</h3>
         <ul>
           <li>
-            **OCLIF Framework**: Professional CLI built with industry-standard
+            <strong>OCLIF Framework</strong>: Professional CLI built with industry-standard
             framework and comprehensive command structure
           </li>
           <li>
-            **Interactive Generation**: Step-by-step guided generation with
+            <strong>Interactive Generation</strong>: Step-by-step guided generation with
             real-time feedback and error handling
           </li>
           <li>
-            **Configuration Management**: YAML-based configuration with
+            <strong>Configuration Management</strong>: YAML-based configuration with
             environment variable support and validation
           </li>
           <li>
-            **Progress Tracking**: Real-time generation progress with detailed
+            <strong>Progress Tracking</strong>: Real-time generation progress with detailed
             logging and debugging capabilities
           </li>
           <li>
-            **Error Recovery**: Sophisticated error handling with fallback
+            <strong>Error Recovery</strong>: Sophisticated error handling with fallback
             mechanisms and detailed troubleshooting guidance
           </li>
         </ul>
@@ -122,23 +122,23 @@ export default function Transmorph() {
         <h3>Hosted Deployment Platform</h3>
         <ul>
           <li>
-            **Railway Integration**: Complete GraphQL API integration for
+            <strong>Railway Integration</strong>: Complete GraphQL API integration for
             automated project deployment and management
           </li>
           <li>
-            **Supabase Backend**: PostgreSQL database with row-level security,
+            <strong>Supabase Backend</strong>: PostgreSQL database with row-level security,
             custom functions, and real-time subscriptions
           </li>
           <li>
-            **RESTful API**: Comprehensive deployment management API with
+            <strong>RESTful API</strong>: Comprehensive deployment management API with
             authentication and plan-based resource allocation
           </li>
           <li>
-            **Resource Management**: Sophisticated deployment lifecycle
+            <strong>Resource Management</strong>: Sophisticated deployment lifecycle
             management with monitoring and cost tracking
           </li>
           <li>
-            **Security Layer**: Token-based authentication, user plan
+            <strong>Security Layer</strong>: Token-based authentication, user plan
             validation, and secure deployment isolation
           </li>
         </ul>
@@ -146,23 +146,23 @@ export default function Transmorph() {
         <h3>Multi-Package Ecosystem</h3>
         <ul>
           <li>
-            **Core Library**: Shared utilities and interfaces used across all
+            <strong>Core Library</strong>: Shared utilities and interfaces used across all
             packages
           </li>
           <li>
-            **CLI Package**: OCLIF-based command-line interface with
+            <strong>CLI Package</strong>: OCLIF-based command-line interface with
             comprehensive testing
           </li>
           <li>
-            **Web Interface**: React-based frontend for drag-and-drop OpenAPI
+            <strong>Web Interface</strong>: React-based frontend for drag-and-drop OpenAPI
             specification processing
           </li>
           <li>
-            **Documentation Site**: Comprehensive documentation with tutorials
+            <strong>Documentation Site</strong>: Comprehensive documentation with tutorials
             and API references
           </li>
           <li>
-            **Testing Suite**: End-to-end testing framework validating generated
+            <strong>Testing Suite</strong>: End-to-end testing framework validating generated
             code functionality
           </li>
         </ul>
@@ -172,19 +172,19 @@ export default function Transmorph() {
         <h3>Advanced LLM Integration</h3>
         <ul>
           <li>
-            **Multi-Provider Support**: Seamless switching between OpenAI and
+            <strong>Multi-Provider Support</strong>: Seamless switching between OpenAI and
             Anthropic Claude with optimized prompts for each
           </li>
           <li>
-            **Context-Aware Generation**: Intelligent analysis of API patterns
+            <strong>Context-Aware Generation</strong>: Intelligent analysis of API patterns
             to generate semantically meaningful tool descriptions
           </li>
           <li>
-            **Fallback Mechanisms**: Template-based generation when LLM services
+            <strong>Fallback Mechanisms</strong>: Template-based generation when LLM services
             are unavailable, ensuring reliability
           </li>
           <li>
-            **Cost Optimization**: Token usage optimization with intelligent
+            <strong>Cost Optimization</strong>: Token usage optimization with intelligent
             prompt compression and response caching
           </li>
         </ul>
@@ -192,19 +192,19 @@ export default function Transmorph() {
         <h3>Code Quality & Standards</h3>
         <ul>
           <li>
-            **TypeScript Integration**: Full type safety with generated
+            <strong>TypeScript Integration</strong>: Full type safety with generated
             TypeScript definitions and strict validation
           </li>
           <li>
-            **Security-First Design**: Multiple security levels
+            <strong>Security-First Design</strong>: Multiple security levels
             (basic/enhanced/strict) with configurable validation
           </li>
           <li>
-            **Docker Optimization**: Multi-stage Docker builds with
+            <strong>Docker Optimization</strong>: Multi-stage Docker builds with
             production-optimized configurations
           </li>
           <li>
-            **Documentation Generation**: Automatic README creation with usage
+            <strong>Documentation Generation</strong>: Automatic README creation with usage
             examples and deployment instructions
           </li>
         </ul>
@@ -212,19 +212,19 @@ export default function Transmorph() {
         <h3>Deployment Innovation</h3>
         <ul>
           <li>
-            **Multi-Platform Deployment**: Support for Netlify, Railway, AWS,
+            <strong>Multi-Platform Deployment</strong>: Support for Netlify, Railway, AWS,
             and Cloudflare Workers with optimized configurations
           </li>
           <li>
-            **Environment Management**: Sophisticated environment variable
+            <strong>Environment Management</strong>: Sophisticated environment variable
             handling with validation and security
           </li>
           <li>
-            **Monitoring Integration**: Built-in logging and monitoring setup
+            <strong>Monitoring Integration</strong>: Built-in logging and monitoring setup
             for production deployments
           </li>
           <li>
-            **Version Management**: Semantic versioning with automated changelog
+            <strong>Version Management</strong>: Semantic versioning with automated changelog
             generation and migration support
           </li>
         </ul>
@@ -243,23 +243,23 @@ export default function Transmorph() {
           <div>
             <h3>Technical Metrics</h3>
             <ul>
-              <li>**2000+ Lines** of core implementation</li>
-              <li>**15+ Documentation Files** with comprehensive guides</li>
-              <li>**Multi-Language Support** (TypeScript, Python)</li>
-              <li>**Enterprise Security** levels and compliance</li>
-              <li>**Hosted Platform** with SaaS deployment</li>
+              <li><strong>2000+ Lines</strong> of core implementation</li>
+              <li><strong>15+ Documentation Files</strong> with comprehensive guides</li>
+              <li><strong>Multi-Language Support</strong> (TypeScript, Python)</li>
+              <li><strong>Enterprise Security</strong> levels and compliance</li>
+              <li><strong>Hosted Platform</strong> with SaaS deployment</li>
             </ul>
           </div>
           <div>
             <h3>Innovation Achievements</h3>
             <ul>
-              <li>**LLM-Powered Code Generation** at scale</li>
-              <li>**OpenAPI to MCP Bridge** - novel protocol translation</li>
+              <li><strong>LLM-Powered Code Generation</strong> at scale</li>
+              <li><strong>OpenAPI to MCP Bridge</strong> - novel protocol translation</li>
               <li>
-                **Complete Developer Ecosystem** from CLI to hosted platform
+                <strong>Complete Developer Ecosystem</strong> from CLI to hosted platform
               </li>
-              <li>**Advanced Prompt Engineering** for code generation</li>
-              <li>**Production-Ready Output** with zero manual editing</li>
+              <li><strong>Advanced Prompt Engineering</strong> for code generation</li>
+              <li><strong>Production-Ready Output</strong> with zero manual editing</li>
             </ul>
           </div>
         </div>

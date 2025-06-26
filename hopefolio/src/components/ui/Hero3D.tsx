@@ -56,8 +56,11 @@ const FallbackContent = () => {
             textShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
           }}
         >
-          Building, Creating,
-          <br />& Rethinking Possibility
+          Hi, I'm Hope
+          <br />
+          <span className="text-3xl md:text-5xl">
+            Building, Creating, & Rethinking Possibility
+          </span>
         </h1>
         <p
           className="text-xl md:text-2xl mb-8 opacity-90"
@@ -65,7 +68,7 @@ const FallbackContent = () => {
             color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
           }}
         >
-          Engineering Leader, Artist, Futurist
+          Software Developer, Bioengineer, and Musician
         </p>
         <Link
           href="/projects"
@@ -125,8 +128,11 @@ const Hero3D: React.FC = () => {
               textShadow: "0 4px 12px rgba(0, 0, 0, 0.5)",
             }}
           >
-            Building, Creating,
-            <br />& Rethinking Possibility
+            Hi, I'm Hope
+            <br />
+            <span className="text-3xl md:text-5xl">
+              Building, Creating, & Rethinking Possibility
+            </span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -138,7 +144,7 @@ const Hero3D: React.FC = () => {
               textShadow: "0 2px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
-            Engineering Leader, Artist, Futurist
+            Software Developer, Bioengineer, and Musician
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
