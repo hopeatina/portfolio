@@ -77,22 +77,10 @@ export default function BlogPostCTA({ socialLinks }: BlogPostCTAProps) {
           {socialLinks.map((link, index) => (
             <Button
               key={index}
-              as="a"
               href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="outline"
-              className={`${styles.secondaryButton} ${styles.secondaryButtonHover} group transition-all duration-300 ease-in-out`}
-              style={{
-                background:
-                  theme === "futuristic"
-                    ? "rgba(var(--primary-rgb), 0.1)"
-                    : "rgba(var(--accent-rgb), 0.1)",
-                borderColor: "var(--primary)",
-                backdropFilter: "blur(4px)",
-                padding: "0.75rem 1.5rem",
-                minWidth: "140px",
-              }}
+              external
+              variant="secondary"
+              className="group transition-all duration-300 ease-in-out min-w-[140px]"
             >
               {link.icon && (
                 <span

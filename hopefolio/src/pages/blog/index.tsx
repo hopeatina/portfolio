@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-import BlogLayout from "@/components/blog/BlogLayout";
+import Head from "next/head";
+import Link from "next/link";
 import BlogPostCard from "@/components/blog/BlogPostCard";
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
-import styles from "@/styles/themes/base-theme.module.css";
 
 const BLOG_DESCRIPTION = "Thoughts on technology, culture, and innovation";
 
@@ -17,6 +19,9 @@ const posts = [
     excerpt:
       "Exploring the intersection of technology, creativity, and social impact through code.",
     category: "Engineering",
+    readTime: "5 min read",
+    author: "Hope Atina",
+    tags: ["Engineering", "Technology", "Impact"],
   },
   {
     slug: "cultural-tech",
@@ -25,6 +30,9 @@ const posts = [
     excerpt:
       "How my Cameroonian heritage influences my approach to software development and innovation.",
     category: "Culture",
+    readTime: "7 min read",
+    author: "Hope Atina",
+    tags: ["Culture", "Innovation", "Technology"],
   },
   {
     slug: "ai-ethics",
@@ -33,81 +41,103 @@ const posts = [
     excerpt:
       "Reflecting on the responsibilities we have as builders of AI-powered solutions.",
     category: "AI & Ethics",
+    readTime: "10 min read",
+    author: "Hope Atina",
+    tags: ["AI", "Ethics", "Development"],
   },
 ];
 
 export default function Blog() {
-  const { theme, getThemeStyles } = useTheme();
-  const themeStyles = getThemeStyles();
+  const { theme } = useTheme();
+  const isDarkTheme = theme === "futuristic";
 
   return (
-    <BlogLayout title="Blog" description={BLOG_DESCRIPTION}>
-      <main className={`${styles.backgroundPattern} min-h-screen bg-opacity-2`}>
+    <>
+      <Head>
+        <title>Blog | Hope Atina</title>
+        <meta name="description" content={BLOG_DESCRIPTION} />
+      </Head>
+
+      <main
+        className="min-h-screen"
+        style={{ paddingTop: "var(--spacing-24)" }}
+      >
         {/* Header Section */}
-        <section className="relative pt-32 pb-16 md:pt-40 md:pb-24">
-          <div
-            className={`${styles.container} relative z-10 text-center max-w-4xl mx-auto px-4`}
-          >
+        <section
+          className="relative py-24 md:py-32"
+          style={{
+            background: isDarkTheme
+              ? "linear-gradient(to bottom, var(--background), var(--background-secondary))"
+              : "linear-gradient(to bottom, var(--surface), var(--background))",
+          }}
+        >
+          <div className="container mx-auto px-4 text-center">
             <h1
-              className={`${styles.headingH1} ${styles.gradientText} mb-6 text-4xl md:text-5xl lg:text-6xl`}
+              className="text-5xl md:text-7xl font-bold mb-6"
               style={{
-                letterSpacing: "-0.02em",
-                lineHeight: "1.2",
+                fontFamily: "var(--font-heading)",
+                color: "var(--primary)",
+                lineHeight: "var(--line-height-heading)",
               }}
             >
               Thoughts on Engineering, Art & Future
             </h1>
 
-            {/* Divider */}
+            {/* Decorative element */}
             <div
-              className={`${styles.dividerShape} w-24 h-1 mx-auto mb-8 opacity-60`}
+              className="w-24 h-1 mx-auto mb-8 rounded-full"
               style={{
                 background: "var(--gradient-primary)",
+                opacity: 0.8,
               }}
             />
 
             <p
-              className={`${styles.bodyLarge} max-w-2xl mx-auto text-lg md:text-xl leading-relaxed`}
+              className="text-xl md:text-2xl max-w-2xl mx-auto"
               style={{
-                color: "var(--text-on-dark)",
-                opacity: 0.9,
+                fontFamily: "var(--font-body)",
+                color: isDarkTheme
+                  ? "var(--text-on-dark-secondary)"
+                  : "var(--text-secondary)",
+                lineHeight: "var(--line-height-body)",
               }}
             >
               {BLOG_DESCRIPTION}
             </p>
           </div>
 
-          {/* Background Pattern */}
+          {/* Background pattern */}
           <div
-            className="absolute inset-0 z-0"
+            className="absolute inset-0 -z-10 opacity-5"
             style={{
-              background: "var(--cosmic-swirl)",
-              backgroundBlendMode: "overlay",
-              opacity: "0.1",
+              backgroundImage: `radial-gradient(circle at 50% 0%, var(--primary) 0%, transparent 70%)`,
             }}
           />
         </section>
 
         {/* Posts Grid */}
-        <section className="py-12 md:py-16">
-          <div className={`${styles.container} px-4 sm:px-6 lg:px-8`}>
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4">
             <div className="grid gap-12 max-w-3xl mx-auto">
               {posts.map((post, index) => (
                 <article
                   key={post.slug}
-                  className={`${styles.fadeUp} relative`}
+                  className="relative"
                   style={{
+                    animation: `fadeInUp 0.6s ease-out forwards`,
                     animationDelay: `${index * 0.1}s`,
+                    opacity: 0,
                   }}
                 >
                   <BlogPostCard {...post} />
 
-                  {/* Only add divider if not last item */}
+                  {/* Divider between posts */}
                   {index !== posts.length - 1 && (
                     <div
-                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 h-px opacity-10"
+                      className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-1/2 h-px"
                       style={{
-                        background: "var(--gradient-primary)",
+                        background: "var(--border)",
+                        opacity: 0.3,
                       }}
                     />
                   )}
@@ -116,54 +146,78 @@ export default function Blog() {
             </div>
 
             {/* Newsletter Section */}
-            <div
-              className={`${styles.card} mt-20 py-12 px-6 sm:px-8 text-center max-w-2xl mx-auto rounded-2xl`}
-              style={{
-                background:
-                  theme === "futuristic"
-                    ? "rgba(0, 0, 0, 0.3)"
-                    : "var(--card-bg)",
-                backdropFilter: "blur(10px)",
-                border: "1px solid var(--border-color)",
-              }}
-            >
-              <h2
-                className={`${styles.headingH3} mb-4 text-2xl md:text-3xl`}
-                style={{
-                  color:
-                    theme === "futuristic"
-                      ? "var(--text-on-dark)"
-                      : "var(--text)",
-                  letterSpacing: "-0.01em",
-                }}
+            <div className="mt-24 max-w-2xl mx-auto">
+              <Card
+                variant={isDarkTheme ? "glass" : "elevated"}
+                className="text-center p-12"
               >
-                Stay Updated
-              </h2>
-              <p
-                className={`${styles.body} mb-8 text-lg max-w-xl mx-auto`}
-                style={{
-                  color:
-                    theme === "futuristic"
-                      ? "var(--text-muted-on-dark)"
-                      : "var(--text-muted)",
-                  lineHeight: "1.6",
-                }}
-              >
-                Get notified when I publish new articles about engineering,
-                creativity, and the future of technology.
-              </p>
-              <button
-                className={`${styles.primaryButton} ${styles.primaryButtonHover} px-8 py-3 text-lg`}
-                style={{
-                  fontWeight: 500,
-                }}
-              >
-                Subscribe to Newsletter
-              </button>
+                <h2
+                  className="text-3xl md:text-4xl font-bold mb-4"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--primary)",
+                  }}
+                >
+                  Stay Updated
+                </h2>
+                <p
+                  className="text-lg mb-8 max-w-xl mx-auto"
+                  style={{
+                    color: isDarkTheme
+                      ? "var(--text-on-dark-secondary)"
+                      : "var(--text-secondary)",
+                    lineHeight: "var(--line-height-body)",
+                  }}
+                >
+                  Get notified when I publish new articles about engineering,
+                  creativity, and the future of technology.
+                </p>
+
+                <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-3 rounded-lg transition-all duration-200"
+                    style={{
+                      background: isDarkTheme
+                        ? "rgba(255, 255, 255, 0.05)"
+                        : "var(--background)",
+                      border: "1px solid var(--border)",
+                      color: "var(--text)",
+                      fontFamily: "var(--font-body)",
+                    }}
+                  />
+                  <Button variant="primary" size="lg" type="submit">
+                    Subscribe
+                  </Button>
+                </form>
+              </Card>
+            </div>
+
+            {/* View All Posts */}
+            <div className="mt-16 text-center">
+              <Link href="/blog/archive">
+                <Button variant="secondary" size="lg">
+                  View All Posts
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
       </main>
-    </BlogLayout>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </>
   );
 }

@@ -3,8 +3,176 @@ import ProjectLayout from "@/components/projects/ProjectLayout";
 import ProjectHero from "@/components/projects/ProjectHero";
 import ProjectSection from "@/components/projects/ProjectSection";
 import ProjectCTA from "@/components/projects/ProjectCTA";
+import TechStack from "@/components/projects/TechStack";
+import FeatureGrid from "@/components/projects/FeatureGrid";
+import SystemDiagram from "@/components/projects/SystemDiagram";
+import StatsDisplay from "@/components/projects/StatsDisplay";
+import ProjectCard from "@/components/projects/ProjectCard";
+import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 export default function Transmorph() {
+  const { themeProps } = useTheme();
+
+  const techStack = [
+    { category: "Core", technologies: "Python, TypeScript, OCLIF Framework" },
+    { category: "AI/LLM", technologies: "OpenAI GPT-4, Anthropic Claude" },
+    {
+      category: "Architecture",
+      technologies: "Monorepo, Multi-Package System",
+    },
+    {
+      category: "Generation",
+      technologies: "Template Engine, Schema Validation",
+    },
+    { category: "Platform", technologies: "Railway, Supabase, GraphQL" },
+    { category: "Deployment", technologies: "Docker, Multi-Platform Support" },
+    {
+      category: "Validation",
+      technologies: "Zod, Pydantic, Schema Generation",
+    },
+    {
+      category: "Documentation",
+      technologies: "15+ Guides, Tutorials, API Docs",
+    },
+  ];
+
+  const architectureFeatures = [
+    {
+      title: "🔧 Core Generation Engine",
+      description:
+        "Sophisticated pipeline transforming OpenAPI specs into production-ready MCP servers",
+      items: [
+        "OpenAPI Parser: Robust parsing engine supporting v2 and v3 specifications with comprehensive validation",
+        "LLM Orchestration: Intelligent prompt engineering system with context-aware code generation",
+        "Template System: Advanced templating with language-specific optimizations and security configurations",
+        "Schema Generation: Automatic Zod (TypeScript) and Pydantic (Python) schema creation",
+        "Validation Pipeline: Multi-stage validation ensuring generated code quality and MCP protocol compliance",
+      ],
+    },
+    {
+      title: "💻 CLI Framework & Developer Experience",
+      description:
+        "Professional-grade command-line interface with comprehensive developer tooling",
+      items: [
+        "OCLIF Framework: Professional CLI built with industry-standard framework and comprehensive command structure",
+        "Interactive Generation: Step-by-step guided generation with real-time feedback and error handling",
+        "Configuration Management: YAML-based configuration with environment variable support and validation",
+        "Progress Tracking: Real-time generation progress with detailed logging and debugging capabilities",
+        "Error Recovery: Sophisticated error handling with fallback mechanisms and detailed troubleshooting guidance",
+      ],
+    },
+    {
+      title: "🚀 Hosted Deployment Platform",
+      description:
+        "Complete SaaS offering with automated deployment and resource management",
+      items: [
+        "Railway Integration: Complete GraphQL API integration for automated project deployment and management",
+        "Supabase Backend: PostgreSQL database with row-level security, custom functions, and real-time subscriptions",
+        "RESTful API: Comprehensive deployment management API with authentication and plan-based resource allocation",
+        "Resource Management: Sophisticated deployment lifecycle management with monitoring and cost tracking",
+        "Security Layer: Token-based authentication, user plan validation, and secure deployment isolation",
+      ],
+    },
+  ];
+
+  const innovationFeatures = [
+    {
+      title: "🤖 Advanced LLM Integration",
+      description:
+        "Cutting-edge AI integration for intelligent code generation and analysis",
+      items: [
+        "Multi-Provider Support: Seamless switching between OpenAI and Anthropic Claude with optimized prompts",
+        "Context-Aware Generation: Intelligent analysis of API patterns to generate semantically meaningful tool descriptions",
+        "Fallback Mechanisms: Template-based generation when LLM services are unavailable, ensuring reliability",
+        "Cost Optimization: Token usage optimization with intelligent prompt compression and response caching",
+      ],
+    },
+    {
+      title: "🏗️ Code Quality & Standards",
+      description:
+        "Enterprise-grade code generation with security and maintainability focus",
+      items: [
+        "TypeScript Integration: Full type safety with generated TypeScript definitions and strict validation",
+        "Security-First Design: Multiple security levels (basic/enhanced/strict) with configurable validation",
+        "Docker Optimization: Multi-stage Docker builds with production-optimized configurations",
+        "Documentation Generation: Automatic README creation with usage examples and deployment instructions",
+      ],
+    },
+    {
+      title: "🌐 Deployment Innovation",
+      description:
+        "Multi-platform deployment support with advanced environment management",
+      items: [
+        "Multi-Platform Deployment: Support for Netlify, Railway, AWS, and Cloudflare Workers with optimized configurations",
+        "Environment Management: Sophisticated environment variable handling with validation and security",
+        "Monitoring Integration: Built-in logging and monitoring setup for production deployments",
+        "Version Management: Semantic versioning with automated changelog generation and migration support",
+      ],
+    },
+  ];
+
+  const ecosystemComponents = [
+    {
+      title: "📦 Core Library",
+      description: "Shared utilities and interfaces used across all packages",
+    },
+    {
+      title: "⌨️ CLI Package",
+      description:
+        "OCLIF-based command-line interface with comprehensive testing",
+    },
+    {
+      title: "🌐 Web Interface",
+      description:
+        "React-based frontend for drag-and-drop OpenAPI specification processing",
+    },
+    {
+      title: "📚 Documentation Site",
+      description:
+        "Comprehensive documentation with tutorials and API references",
+    },
+    {
+      title: "🧪 Testing Suite",
+      description:
+        "End-to-end testing framework validating generated code functionality",
+    },
+  ];
+
+  const systemFlow = `OpenAPI Spec → LLM Analysis → Code Generation → Schema Validation → MCP Server → Docker Package → Deployment
+     ↑                                                                                        ↓
+Configuration Management ←―――――――――――――――――――――――――――――――――――――――――――――――――――――――――→ Monitoring & Analytics`;
+
+  const impactMetrics = [
+    {
+      value: "2000+",
+      label: "Lines of Code",
+      description: "Core implementation",
+    },
+    {
+      value: "15+",
+      label: "Documentation Files",
+      description: "Comprehensive guides",
+    },
+    {
+      value: "Multi-Lang",
+      label: "Code Generation",
+      description: "TypeScript & Python",
+    },
+    {
+      value: "Enterprise",
+      label: "Security Levels",
+      description: "Configurable compliance",
+    },
+  ];
+
+  const innovationAchievements = [
+    "LLM-Powered Code Generation: Scalable AI-driven code generation with multi-provider support",
+    "OpenAPI to MCP Bridge: Novel protocol translation enabling traditional APIs to work with AI agents",
+    "Complete Developer Ecosystem: End-to-end solution from CLI tool to hosted deployment platform",
+    "Advanced Prompt Engineering: Sophisticated prompt optimization for reliable code generation output",
+    "Production-Ready Output: Generated code requires zero manual editing for immediate deployment",
+  ];
+
   return (
     <ProjectLayout
       title="MCP-Gen"
@@ -24,262 +192,148 @@ export default function Transmorph() {
         image="/images/projects/transmorph.jpg"
       />
 
+      <TechStack items={techStack} />
+
       <ProjectSection title="Enterprise-Scale Architecture">
-        <p>
+        <p className="text-lg mb-6">
           MCP-Gen represents a sophisticated software generation platform built
           with enterprise-grade architecture. The system transforms OpenAPI
           specifications into complete, production-ready MCP servers through
           advanced LLM integration and comprehensive code generation pipelines.
         </p>
 
-        <h3>Technical Scale & Complexity</h3>
-        <ul>
-          <li>
-            <strong>2000+ Lines of Core Logic</strong>: Complex Python server implementation
-            with advanced MCP protocol handling
-          </li>
-          <li>
-            <strong>Monorepo Architecture</strong>: Multi-package system with CLI, core
-            libraries, documentation, and web interface
-          </li>
-          <li>
-            <strong>Multi-Language Code Generation</strong>: TypeScript and Python output
-            with framework-specific optimizations
-          </li>
-          <li>
-            <strong>LLM Integration</strong>: OpenAI and Anthropic Claude integration for
-            intelligent code analysis and generation
-          </li>
-          <li>
-            <strong>Hosted Platform</strong>: Complete SaaS offering with Railway
-            integration, Supabase database, and GraphQL API
-          </li>
-          <li>
-            <strong>Enterprise Documentation</strong>: 15+ detailed documentation files with
-            tutorials, guides, and troubleshooting
-          </li>
-        </ul>
+        <SystemDiagram
+          title="Code Generation Pipeline"
+          diagram={systemFlow}
+          type="text"
+          description="Complete workflow from OpenAPI specification analysis to deployed MCP server, with intelligent LLM-powered code generation and comprehensive validation."
+        />
 
-        <h3>Advanced Code Generation Pipeline</h3>
-        <p>
-          The system employs sophisticated prompt engineering and template
-          systems to analyze OpenAPI specifications, generate MCP tool
-          definitions, create comprehensive validation schemas, and output
-          production-ready server code with Docker configurations and deployment
-          instructions.
-        </p>
+        <ProjectCard variant="secondary" className="mt-8">
+          <h3
+            className="text-xl font-semibold mb-4"
+            style={{
+              color: themeProps.colors.primary,
+              fontFamily: themeProps.typography.headingFont,
+            }}
+          >
+            Advanced Code Generation Pipeline
+          </h3>
+          <p>
+            The system employs sophisticated prompt engineering and template
+            systems to analyze OpenAPI specifications, generate MCP tool
+            definitions, create comprehensive validation schemas, and output
+            production-ready server code with Docker configurations and
+            deployment instructions.
+          </p>
+        </ProjectCard>
       </ProjectSection>
 
       <ProjectSection title="Technical Architecture Deep-Dive">
-        <h3>Core Generation Engine</h3>
-        <ul>
-          <li>
-            <strong>OpenAPI Parser</strong>: Robust parsing engine supporting v2 and v3
-            specifications with comprehensive validation
-          </li>
-          <li>
-            <strong>LLM Orchestration</strong>: Intelligent prompt engineering system with
-            context-aware code generation
-          </li>
-          <li>
-            <strong>Template System</strong>: Advanced templating with language-specific
-            optimizations and security configurations
-          </li>
-          <li>
-            <strong>Schema Generation</strong>: Automatic Zod (TypeScript) and Pydantic
-            (Python) schema creation from OpenAPI definitions
-          </li>
-          <li>
-            <strong>Validation Pipeline</strong>: Multi-stage validation ensuring generated
-            code quality and MCP protocol compliance
-          </li>
-        </ul>
+        <FeatureGrid features={architectureFeatures} columns={1} />
 
-        <h3>CLI Framework & Developer Experience</h3>
-        <ul>
-          <li>
-            <strong>OCLIF Framework</strong>: Professional CLI built with industry-standard
-            framework and comprehensive command structure
-          </li>
-          <li>
-            <strong>Interactive Generation</strong>: Step-by-step guided generation with
-            real-time feedback and error handling
-          </li>
-          <li>
-            <strong>Configuration Management</strong>: YAML-based configuration with
-            environment variable support and validation
-          </li>
-          <li>
-            <strong>Progress Tracking</strong>: Real-time generation progress with detailed
-            logging and debugging capabilities
-          </li>
-          <li>
-            <strong>Error Recovery</strong>: Sophisticated error handling with fallback
-            mechanisms and detailed troubleshooting guidance
-          </li>
-        </ul>
-
-        <h3>Hosted Deployment Platform</h3>
-        <ul>
-          <li>
-            <strong>Railway Integration</strong>: Complete GraphQL API integration for
-            automated project deployment and management
-          </li>
-          <li>
-            <strong>Supabase Backend</strong>: PostgreSQL database with row-level security,
-            custom functions, and real-time subscriptions
-          </li>
-          <li>
-            <strong>RESTful API</strong>: Comprehensive deployment management API with
-            authentication and plan-based resource allocation
-          </li>
-          <li>
-            <strong>Resource Management</strong>: Sophisticated deployment lifecycle
-            management with monitoring and cost tracking
-          </li>
-          <li>
-            <strong>Security Layer</strong>: Token-based authentication, user plan
-            validation, and secure deployment isolation
-          </li>
-        </ul>
-
-        <h3>Multi-Package Ecosystem</h3>
-        <ul>
-          <li>
-            <strong>Core Library</strong>: Shared utilities and interfaces used across all
-            packages
-          </li>
-          <li>
-            <strong>CLI Package</strong>: OCLIF-based command-line interface with
-            comprehensive testing
-          </li>
-          <li>
-            <strong>Web Interface</strong>: React-based frontend for drag-and-drop OpenAPI
-            specification processing
-          </li>
-          <li>
-            <strong>Documentation Site</strong>: Comprehensive documentation with tutorials
-            and API references
-          </li>
-          <li>
-            <strong>Testing Suite</strong>: End-to-end testing framework validating generated
-            code functionality
-          </li>
-        </ul>
+        <div className="mt-8">
+          <h3
+            className="text-xl font-semibold mb-6"
+            style={{
+              color: themeProps.colors.primary,
+              fontFamily: themeProps.typography.headingFont,
+            }}
+          >
+            Multi-Package Ecosystem
+          </h3>
+          <FeatureGrid features={ecosystemComponents} columns={3} />
+        </div>
       </ProjectSection>
 
       <ProjectSection title="Innovation & Technical Achievements">
-        <h3>Advanced LLM Integration</h3>
-        <ul>
-          <li>
-            <strong>Multi-Provider Support</strong>: Seamless switching between OpenAI and
-            Anthropic Claude with optimized prompts for each
-          </li>
-          <li>
-            <strong>Context-Aware Generation</strong>: Intelligent analysis of API patterns
-            to generate semantically meaningful tool descriptions
-          </li>
-          <li>
-            <strong>Fallback Mechanisms</strong>: Template-based generation when LLM services
-            are unavailable, ensuring reliability
-          </li>
-          <li>
-            <strong>Cost Optimization</strong>: Token usage optimization with intelligent
-            prompt compression and response caching
-          </li>
-        </ul>
+        <FeatureGrid features={innovationFeatures} columns={1} />
 
-        <h3>Code Quality & Standards</h3>
-        <ul>
-          <li>
-            <strong>TypeScript Integration</strong>: Full type safety with generated
-            TypeScript definitions and strict validation
-          </li>
-          <li>
-            <strong>Security-First Design</strong>: Multiple security levels
-            (basic/enhanced/strict) with configurable validation
-          </li>
-          <li>
-            <strong>Docker Optimization</strong>: Multi-stage Docker builds with
-            production-optimized configurations
-          </li>
-          <li>
-            <strong>Documentation Generation</strong>: Automatic README creation with usage
-            examples and deployment instructions
-          </li>
-        </ul>
-
-        <h3>Deployment Innovation</h3>
-        <ul>
-          <li>
-            <strong>Multi-Platform Deployment</strong>: Support for Netlify, Railway, AWS,
-            and Cloudflare Workers with optimized configurations
-          </li>
-          <li>
-            <strong>Environment Management</strong>: Sophisticated environment variable
-            handling with validation and security
-          </li>
-          <li>
-            <strong>Monitoring Integration</strong>: Built-in logging and monitoring setup
-            for production deployments
-          </li>
-          <li>
-            <strong>Version Management</strong>: Semantic versioning with automated changelog
-            generation and migration support
-          </li>
-        </ul>
-
-        <p className="mt-4 italic text-gray-600 dark:text-gray-400">
-          "MCP-Gen demonstrates my ability to architect and implement complex
-          developer tools that bridge traditional APIs with cutting-edge LLM
-          technology. The comprehensive testing, documentation, and hosted
-          platform showcase enterprise-level software engineering and product
-          development skills."
-        </p>
+        <ProjectCard variant="highlight" className="mt-8">
+          <p
+            className="italic text-center text-lg"
+            style={{
+              color: themeProps.colors.text,
+              fontFamily: themeProps.typography.bodyFont,
+              lineHeight: themeProps.typography.lineHeight,
+            }}
+          >
+            "MCP-Gen demonstrates my ability to architect and implement complex
+            developer tools that bridge traditional APIs with cutting-edge LLM
+            technology. The comprehensive testing, documentation, and hosted
+            platform showcase enterprise-level software engineering and product
+            development skills."
+          </p>
+        </ProjectCard>
       </ProjectSection>
 
       <ProjectSection title="Measurable Impact & Industry Recognition">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h3>Technical Metrics</h3>
-            <ul>
-              <li><strong>2000+ Lines</strong> of core implementation</li>
-              <li><strong>15+ Documentation Files</strong> with comprehensive guides</li>
-              <li><strong>Multi-Language Support</strong> (TypeScript, Python)</li>
-              <li><strong>Enterprise Security</strong> levels and compliance</li>
-              <li><strong>Hosted Platform</strong> with SaaS deployment</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Innovation Achievements</h3>
-            <ul>
-              <li><strong>LLM-Powered Code Generation</strong> at scale</li>
-              <li><strong>OpenAPI to MCP Bridge</strong> - novel protocol translation</li>
-              <li>
-                <strong>Complete Developer Ecosystem</strong> from CLI to hosted platform
+        <StatsDisplay stats={impactMetrics} columns={4} className="mb-8" />
+
+        <ProjectCard variant="accent" className="mb-6">
+          <h3
+            className="text-xl font-semibold mb-4"
+            style={{
+              color: themeProps.colors.primary,
+              fontFamily: themeProps.typography.headingFont,
+            }}
+          >
+            Innovation Achievements
+          </h3>
+          <ul className="space-y-3">
+            {innovationAchievements.map((achievement, index) => (
+              <li key={index} className="flex items-start gap-3">
+                <span
+                  className="flex-shrink-0 w-2 h-2 rounded-full mt-2"
+                  style={{ backgroundColor: themeProps.colors.primary }}
+                />
+                <span style={{ color: themeProps.colors.text }}>
+                  <strong>{achievement.split(":")[0]}:</strong>{" "}
+                  {achievement.split(":")[1]}
+                </span>
               </li>
-              <li><strong>Advanced Prompt Engineering</strong> for code generation</li>
-              <li><strong>Production-Ready Output</strong> with zero manual editing</li>
-            </ul>
-          </div>
+            ))}
+          </ul>
+        </ProjectCard>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <ProjectCard variant="secondary">
+            <h3
+              className="text-xl font-semibold mb-3"
+              style={{
+                color: themeProps.colors.primary,
+                fontFamily: themeProps.typography.headingFont,
+              }}
+            >
+              What is MCP?
+            </h3>
+            <p>
+              Model Context Protocol (MCP) is an emerging standard for AI agent
+              communication developed by Anthropic. MCP-Gen bridges the gap
+              between traditional REST APIs and this new LLM-driven ecosystem,
+              enabling developers to expose their existing services as
+              AI-accessible tools with minimal effort.
+            </p>
+          </ProjectCard>
+
+          <ProjectCard variant="accent">
+            <h3
+              className="text-xl font-semibold mb-3"
+              style={{
+                color: themeProps.colors.primary,
+                fontFamily: themeProps.typography.headingFont,
+              }}
+            >
+              Market Positioning
+            </h3>
+            <p>
+              As one of the first comprehensive tools in the MCP ecosystem,
+              MCP-Gen positions itself at the forefront of AI agent development,
+              providing essential infrastructure for the next generation of
+              LLM-powered applications.
+            </p>
+          </ProjectCard>
         </div>
-
-        <h3>What is MCP?</h3>
-        <p>
-          Model Context Protocol (MCP) is an emerging standard for AI agent
-          communication developed by Anthropic. MCP-Gen bridges the gap between
-          traditional REST APIs and this new LLM-driven ecosystem, enabling
-          developers to expose their existing services as AI-accessible tools
-          with minimal effort.
-        </p>
-
-        <h3>Market Positioning</h3>
-        <p>
-          As one of the first comprehensive tools in the MCP ecosystem, MCP-Gen
-          positions itself at the forefront of AI agent development, providing
-          essential infrastructure for the next generation of LLM-powered
-          applications.
-        </p>
       </ProjectSection>
 
       <ProjectCTA

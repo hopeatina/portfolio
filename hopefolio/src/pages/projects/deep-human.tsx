@@ -3,8 +3,173 @@ import ProjectLayout from "@/components/projects/ProjectLayout";
 import ProjectHero from "@/components/projects/ProjectHero";
 import ProjectSection from "@/components/projects/ProjectSection";
 import ProjectCTA from "@/components/projects/ProjectCTA";
+import TechStack from "@/components/projects/TechStack";
+import FeatureGrid from "@/components/projects/FeatureGrid";
+import SystemDiagram from "@/components/projects/SystemDiagram";
+import StatsDisplay from "@/components/projects/StatsDisplay";
+import ProjectCard from "@/components/projects/ProjectCard";
+import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 export default function DeepHuman() {
+  const { themeProps } = useTheme();
+
+  const techStack = [
+    { category: "Core", technologies: "Python, FastMCP Framework" },
+    {
+      category: "Architecture",
+      technologies: "Multi-Agent Systems, MCP Protocol",
+    },
+    { category: "AI/LLM", technologies: "OpenAI GPT-4, Anthropic Claude" },
+    {
+      category: "Algorithms",
+      technologies: "Compatibility Scoring, Domain Intelligence",
+    },
+    { category: "Configuration", technologies: "YAML Schema, Template Engine" },
+    {
+      category: "Communication",
+      technologies: "Inter-Agent Protocol, Event-Driven",
+    },
+    {
+      category: "Intelligence",
+      technologies: "3-Level Hybrid, Dynamic Generation",
+    },
+    {
+      category: "Control",
+      technologies: "User Management, Kill Switch Systems",
+    },
+  ];
+
+  const architectureFeatures = [
+    {
+      title: "🤖 MCP Server Implementation (2000+ Lines)",
+      description:
+        "Advanced multi-agent server with sophisticated persona interaction capabilities",
+      items: [
+        "FastMCP Framework: Advanced server implementation with 50+ custom tools for persona interaction",
+        "Dynamic Content Engine: Real-time generation of interests, skills, and goals using configurable prompts",
+        "Multi-Domain Intelligence: Hierarchical domain detection system with core/emerging/LLM classification",
+        "Compatibility Algorithms: Mathematical models analyzing shared interests, skill complementarity, and goal alignment",
+        "Conversation Engine: Context-aware dialogue system with personality-consistent response generation",
+      ],
+    },
+    {
+      title: "⚙️ Advanced Configuration System",
+      description:
+        "Comprehensive configuration framework with sophisticated templating and domain management",
+      items: [
+        "Persona Definition: Comprehensive YAML schemas defining personality, expertise, and interaction patterns",
+        "Prompt Template Engine: Sophisticated templating system for domain-specific content generation",
+        "Matching Weight Algorithms: Configurable algorithms for computing human compatibility scores",
+        "LLM Configuration: Multi-provider support (OpenAI, Anthropic) with optimized prompts per persona",
+        "Domain Architecture: Structured knowledge domains with aliases, keywords, and specialized behaviors",
+      ],
+    },
+    {
+      title: "🔗 Multi-Agent Coordination",
+      description:
+        "Sophisticated orchestration system enabling collaborative AI agent interactions",
+      items: [
+        "Inter-Agent Communication: Protocol for multiple AI personas to interact and collaborate",
+        "Collaborative Intelligence: System for combining multiple AI perspectives on complex problems",
+        "Resource Management: Sophisticated orchestration of multiple MCP servers with load balancing",
+        "User Control Interface: Advanced 'kill switch' and persona management capabilities",
+        "Event-Driven Architecture: Real-time coordination between agents using event pub/sub patterns",
+      ],
+    },
+  ];
+
+  const innovationFeatures = [
+    {
+      title: "🧠 Novel AI Persona Architecture",
+      description:
+        "Revolutionary approach to AI persona development with hybrid intelligence systems",
+      items: [
+        "3-Level Hybrid Intelligence: Core domains (predefined), emerging domains (keyword-based), and pure LLM generation",
+        "Domain-Specific Expertise: Dynamic adaptation to technical, creative, and interpersonal contexts",
+        "Personality Consistency: Advanced prompt engineering ensuring authentic, consistent persona responses",
+        "Context Preservation: Sophisticated memory systems maintaining conversation context across sessions",
+      ],
+    },
+    {
+      title: "🤝 Human-AI Compatibility Research",
+      description:
+        "Advanced algorithms for optimizing human-AI collaboration and relationship dynamics",
+      items: [
+        "Multi-Dimensional Scoring: Algorithms considering interests (weighted overlap), skills (complementarity), and goals (alignment)",
+        "Temporal Compatibility: Timezone analysis for optimal collaboration scheduling",
+        "Communication Style Matching: Analysis of personality styles for effective collaboration",
+        "Collaboration Opportunity Detection: AI-driven identification of productive partnership opportunities",
+      ],
+    },
+    {
+      title: "🚀 Advanced Use Cases",
+      description:
+        "Sophisticated applications demonstrating real-world impact of AI persona technology",
+      items: [
+        "Meeting Preparation: AI personas simulating specific individuals for practice and preparation",
+        "Team Formation: Intelligent matching algorithms for optimal team composition",
+        "Startup Collaboration: AI-generated business ideas based on skill and interest intersection analysis",
+        "Social Networking: Sophisticated algorithms for meaningful human connection facilitation",
+        "Knowledge Archiving: Persona-based preservation of individual expertise and communication patterns",
+      ],
+    },
+  ];
+
+  const algorithmFeatures = [
+    {
+      title: "📊 Compatibility Scoring",
+      description:
+        "Multi-dimensional analysis considering interests, skills, goals, and timezones",
+    },
+    {
+      title: "⚖️ Skill Complementarity",
+      description:
+        "Mathematical models identifying synergistic skill combinations",
+    },
+    {
+      title: "🎯 Goal Alignment Analysis",
+      description:
+        "Sophisticated algorithms for measuring shared objectives and motivations",
+    },
+    {
+      title: "💡 Startup Ideation Engine",
+      description:
+        "AI system generating business concepts from skill and interest intersections",
+    },
+    {
+      title: "🌐 Social Network Modeling",
+      description:
+        "Algorithms for relationship mapping and social connection optimization",
+    },
+  ];
+
+  const systemFlow = `Human Input → Persona Engine → Domain Intelligence → Compatibility Analysis → Multi-Agent Coordination → Response Generation
+     ↑                                                                                              ↓
+Configuration System ←―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――→ User Control Interface`;
+
+  const implementationMetrics = [
+    {
+      value: "2000+",
+      label: "Lines of Python",
+      description: "Sophisticated implementation",
+    },
+    { value: "50+", label: "Custom Tools", description: "Persona interaction" },
+    { value: "900+", label: "Config Lines", description: "Schema definitions" },
+    {
+      value: "3-Level",
+      label: "Hybrid Intelligence",
+      description: "Advanced architecture",
+    },
+  ];
+
+  const researchInnovations = [
+    "Novel Compatibility Algorithms: Mathematical models for human-AI matching with multi-dimensional analysis",
+    "Advanced Prompt Engineering: Sophisticated techniques ensuring personality consistency across interactions",
+    "Dynamic Content Generation: Real-time creation of contextual interests, skills, and goals with domain awareness",
+    "Multi-Modal Intelligence: Comprehensive expertise coverage across diverse technical and interpersonal areas",
+    "Ethical AI Framework: User control mechanisms with comprehensive oversight and 'kill switch' capabilities",
+  ];
+
   return (
     <ProjectLayout
       title="Deep Human"
@@ -23,8 +188,10 @@ export default function DeepHuman() {
         image="/images/projects/deep-human.jpg"
       />
 
+      <TechStack items={techStack} />
+
       <ProjectSection title="Advanced Multi-Agent Architecture">
-        <p>
+        <p className="text-lg mb-6">
           Deep Human represents cutting-edge research in AI persona development,
           featuring a sophisticated multi-agent system built on Model Context
           Protocol (MCP) servers. The framework implements advanced algorithms
@@ -32,261 +199,143 @@ export default function DeepHuman() {
           intelligent collaboration between AI agents.
         </p>
 
-        <h3>Technical Scale & Innovation</h3>
-        <ul>
-          <li>
-            <strong>2000+ Lines of Python</strong>: Complex multi-agent server implementation
-            with advanced MCP protocol handling
-          </li>
-          <li>
-            <strong>Multi-Agent Orchestration</strong>: Framework supporting simultaneous AI
-            personas with inter-agent communication
-          </li>
-          <li>
-            <strong>Dynamic Content Generation</strong>: LLM-powered systems for generating
-            contextual interests, skills, and goals
-          </li>
-          <li>
-            <strong>Compatibility Algorithms</strong>: Sophisticated mathematical models for
-            human relationship assessment
-          </li>
-          <li>
-            <strong>Domain-Aware Intelligence</strong>: 3-level hybrid architecture
-            (core/emerging/LLM-generated domains)
-          </li>
-          <li>
-            <strong>Advanced Configuration System</strong>: YAML-based persona definition
-            with 900+ line configuration schemas
-          </li>
-        </ul>
+        <SystemDiagram
+          title="Multi-Agent Persona Framework"
+          diagram={systemFlow}
+          type="text"
+          description="Comprehensive AI persona system with multi-agent coordination, domain intelligence, and sophisticated compatibility analysis for human-AI collaboration."
+        />
 
-        <h3>Research-Grade AI Implementation</h3>
-        <p>
-          The system employs advanced prompt engineering, context-aware
-          generation, and sophisticated algorithms for personality modeling.
-          Each persona can dynamically generate authentic responses based on
-          configurable personality traits, expertise domains, and interaction
-          styles.
-        </p>
+        <ProjectCard variant="secondary" className="mt-8">
+          <h3
+            className="text-xl font-semibold mb-4"
+            style={{
+              color: themeProps.colors.primary,
+              fontFamily: themeProps.typography.headingFont,
+            }}
+          >
+            Research-Grade AI Implementation
+          </h3>
+          <p>
+            The system employs advanced prompt engineering, context-aware
+            generation, and sophisticated algorithms for personality modeling.
+            Each persona can dynamically generate authentic responses based on
+            configurable personality traits, expertise domains, and interaction
+            styles.
+          </p>
+        </ProjectCard>
       </ProjectSection>
 
       <ProjectSection title="Technical Architecture Deep-Dive">
-        <h3>MCP Server Implementation (2000+ Lines)</h3>
-        <ul>
-          <li>
-            <strong>FastMCP Framework</strong>: Advanced server implementation with 50+
-            custom tools for persona interaction
-          </li>
-          <li>
-            <strong>Dynamic Content Engine</strong>: Real-time generation of interests,
-            skills, and goals using configurable prompts
-          </li>
-          <li>
-            <strong>Multi-Domain Intelligence</strong>: Hierarchical domain detection system
-            with core/emerging/LLM classification
-          </li>
-          <li>
-            <strong>Compatibility Algorithms</strong>: Mathematical models analyzing shared
-            interests, skill complementarity, and goal alignment
-          </li>
-          <li>
-            <strong>Conversation Engine</strong>: Context-aware dialogue system with
-            personality-consistent response generation
-          </li>
-        </ul>
+        <FeatureGrid features={architectureFeatures} columns={1} />
 
-        <h3>Advanced Configuration System</h3>
-        <ul>
-          <li>
-            <strong>Persona Definition</strong>: Comprehensive YAML schemas defining
-            personality, expertise, and interaction patterns
-          </li>
-          <li>
-            <strong>Prompt Template Engine</strong>: Sophisticated templating system for
-            domain-specific content generation
-          </li>
-          <li>
-            <strong>Matching Weight Algorithms</strong>: Configurable algorithms for
-            computing human compatibility scores
-          </li>
-          <li>
-            <strong>LLM Configuration</strong>: Multi-provider support (OpenAI, Anthropic)
-            with optimized prompts per persona
-          </li>
-          <li>
-            <strong>Domain Architecture</strong>: Structured knowledge domains with aliases,
-            keywords, and specialized behaviors
-          </li>
-        </ul>
-
-        <h3>Multi-Agent Coordination</h3>
-        <ul>
-          <li>
-            <strong>Inter-Agent Communication</strong>: Protocol for multiple AI personas to
-            interact and collaborate
-          </li>
-          <li>
-            <strong>Collaborative Intelligence</strong>: System for combining multiple AI
-            perspectives on complex problems
-          </li>
-          <li>
-            <strong>Resource Management</strong>: Sophisticated orchestration of multiple MCP
-            servers with load balancing
-          </li>
-          <li>
-            <strong>User Control Interface</strong>: Advanced "kill switch" and persona
-            management capabilities
-          </li>
-          <li>
-            <strong>Event-Driven Architecture</strong>: Real-time coordination between agents
-            using event pub/sub patterns
-          </li>
-        </ul>
-
-        <h3>Advanced Algorithms & AI Features</h3>
-        <ul>
-          <li>
-            <strong>Compatibility Scoring</strong>: Multi-dimensional analysis considering
-            interests, skills, goals, and timezones
-          </li>
-          <li>
-            <strong>Skill Complementarity</strong>: Mathematical models identifying
-            synergistic skill combinations
-          </li>
-          <li>
-            <strong>Goal Alignment Analysis</strong>: Sophisticated algorithms for measuring
-            shared objectives and motivations
-          </li>
-          <li>
-            <strong>Startup Ideation Engine</strong>: AI system generating business concepts
-            from skill and interest intersections
-          </li>
-          <li>
-            <strong>Social Network Modeling</strong>: Algorithms for relationship mapping and
-            social connection optimization
-          </li>
-        </ul>
+        <div className="mt-8">
+          <h3
+            className="text-xl font-semibold mb-6"
+            style={{
+              color: themeProps.colors.primary,
+              fontFamily: themeProps.typography.headingFont,
+            }}
+          >
+            Advanced Algorithms & AI Features
+          </h3>
+          <FeatureGrid features={algorithmFeatures} columns={3} />
+        </div>
       </ProjectSection>
 
       <ProjectSection title="Innovation & Research Contributions">
-        <h3>Novel AI Persona Architecture</h3>
-        <ul>
-          <li>
-            <strong>3-Level Hybrid Intelligence</strong>: Core domains (predefined), emerging
-            domains (keyword-based), and pure LLM generation
-          </li>
-          <li>
-            <strong>Domain-Specific Expertise</strong>: Dynamic adaptation to technical,
-            creative, and interpersonal contexts
-          </li>
-          <li>
-            <strong>Personality Consistency</strong>: Advanced prompt engineering ensuring
-            authentic, consistent persona responses
-          </li>
-          <li>
-            <strong>Context Preservation</strong>: Sophisticated memory systems maintaining
-            conversation context across sessions
-          </li>
-        </ul>
+        <FeatureGrid features={innovationFeatures} columns={1} />
 
-        <h3>Human-AI Compatibility Research</h3>
-        <ul>
-          <li>
-            <strong>Multi-Dimensional Scoring</strong>: Algorithms considering interests
-            (weighted overlap), skills (complementarity), and goals (alignment)
-          </li>
-          <li>
-            <strong>Temporal Compatibility</strong>: Timezone analysis for optimal
-            collaboration scheduling
-          </li>
-          <li>
-            <strong>Communication Style Matching</strong>: Analysis of personality styles for
-            effective collaboration
-          </li>
-          <li>
-            <strong>Collaboration Opportunity Detection</strong>: AI-driven identification of
-            productive partnership opportunities
-          </li>
-        </ul>
-
-        <h3>Advanced Use Cases</h3>
-        <ul>
-          <li>
-            <strong>Meeting Preparation</strong>: AI personas simulating specific individuals
-            for practice and preparation
-          </li>
-          <li>
-            <strong>Team Formation</strong>: Intelligent matching algorithms for optimal team
-            composition
-          </li>
-          <li>
-            <strong>Startup Collaboration</strong>: AI-generated business ideas based on
-            skill and interest intersection analysis
-          </li>
-          <li>
-            <strong>Social Networking</strong>: Sophisticated algorithms for meaningful human
-            connection facilitation
-          </li>
-          <li>
-            <strong>Knowledge Archiving</strong>: Persona-based preservation of individual
-            expertise and communication patterns
-          </li>
-        </ul>
-
-        <p className="mt-4 italic text-gray-600 dark:text-gray-400">
-          "Deep Human represents pioneering research in AI persona development,
-          combining advanced algorithms, sophisticated architecture, and
-          human-centered design. The project demonstrates my ability to tackle
-          complex AI challenges while maintaining ethical considerations and
-          user control."
-        </p>
+        <ProjectCard variant="highlight" className="mt-8">
+          <p
+            className="italic text-center text-lg"
+            style={{
+              color: themeProps.colors.text,
+              fontFamily: themeProps.typography.bodyFont,
+              lineHeight: themeProps.typography.lineHeight,
+            }}
+          >
+            "Deep Human represents pioneering research in AI persona
+            development, combining advanced algorithms, sophisticated
+            architecture, and human-centered design. The project demonstrates my
+            ability to tackle complex AI challenges while maintaining ethical
+            considerations and user control."
+          </p>
+        </ProjectCard>
       </ProjectSection>
 
       <ProjectSection title="Measurable Technical Achievements">
+        <StatsDisplay
+          stats={implementationMetrics}
+          columns={4}
+          className="mb-8"
+        />
+
+        <ProjectCard variant="accent" className="mb-6">
+          <h3
+            className="text-xl font-semibold mb-4"
+            style={{
+              color: themeProps.colors.primary,
+              fontFamily: themeProps.typography.headingFont,
+            }}
+          >
+            Research Innovation
+          </h3>
+          <ul className="space-y-3">
+            {researchInnovations.map((innovation, index) => (
+              <li key={index} className="flex items-start gap-3">
+                <span
+                  className="flex-shrink-0 w-2 h-2 rounded-full mt-2"
+                  style={{ backgroundColor: themeProps.colors.primary }}
+                />
+                <span style={{ color: themeProps.colors.text }}>
+                  <strong>{innovation.split(":")[0]}:</strong>{" "}
+                  {innovation.split(":")[1]}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </ProjectCard>
+
         <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h3>Implementation Metrics</h3>
-            <ul>
-              <li><strong>2000+ Lines</strong> of sophisticated Python code</li>
-              <li><strong>50+ Custom Tools</strong> for persona interaction</li>
-              <li><strong>900+ Line</strong> configuration schemas</li>
-              <li><strong>Multi-Agent</strong> orchestration system</li>
-              <li><strong>3-Level Hybrid</strong> intelligence architecture</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Research Innovation</h3>
-            <ul>
-              <li><strong>Novel Compatibility Algorithms</strong> for human-AI matching</li>
-              <li>
-                <strong>Advanced Prompt Engineering</strong> for personality consistency
-              </li>
-              <li><strong>Dynamic Content Generation</strong> with domain awareness</li>
-              <li>
-                <strong>Multi-Modal Intelligence</strong> across diverse expertise areas
-              </li>
-              <li><strong>Ethical AI Framework</strong> with user control mechanisms</li>
-            </ul>
-          </div>
+          <ProjectCard variant="secondary">
+            <h3
+              className="text-xl font-semibold mb-3"
+              style={{
+                color: themeProps.colors.primary,
+                fontFamily: themeProps.typography.headingFont,
+              }}
+            >
+              Vision & Ethical Considerations
+            </h3>
+            <p>
+              Deep Human explores the intersection of technology and humanity
+              while maintaining strong ethical foundations. The system
+              emphasizes user control, privacy, and augmentation rather than
+              replacement of human connections. All AI personas operate under
+              user command with comprehensive "kill switch" capabilities and
+              transparent operation modes.
+            </p>
+          </ProjectCard>
+
+          <ProjectCard variant="highlight">
+            <h3
+              className="text-xl font-semibold mb-3"
+              style={{
+                color: themeProps.colors.primary,
+                fontFamily: themeProps.typography.headingFont,
+              }}
+            >
+              Research Impact
+            </h3>
+            <p>
+              This project contributes to the emerging field of AI persona
+              development, providing frameworks and algorithms that advance our
+              understanding of human-AI interaction patterns and effective
+              collaboration strategies between humans and artificial agents.
+            </p>
+          </ProjectCard>
         </div>
-
-        <h3>Vision & Ethical Considerations</h3>
-        <p>
-          Deep Human explores the intersection of technology and humanity while
-          maintaining strong ethical foundations. The system emphasizes user
-          control, privacy, and augmentation rather than replacement of human
-          connections. All AI personas operate under user command with
-          comprehensive "kill switch" capabilities and transparent operation
-          modes.
-        </p>
-
-        <h3>Research Impact</h3>
-        <p>
-          This project contributes to the emerging field of AI persona
-          development, providing frameworks and algorithms that advance our
-          understanding of human-AI interaction patterns and effective
-          collaboration strategies between humans and artificial agents.
-        </p>
       </ProjectSection>
 
       <ProjectCTA

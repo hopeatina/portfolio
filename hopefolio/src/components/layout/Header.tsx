@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import Link from "next/link";
 import { Theme } from "@/modules/mode-switch/ThemeContext";
+import Logo from "@/components/ui/Logo";
 import baseStyles from "@/styles/themes/base-theme.module.css";
 import cameroonianStyles from "@/styles/themes/cameroonian-theme.module.css";
 import riceStyles from "@/styles/themes/rice-theme.module.css";
@@ -128,28 +129,29 @@ export default function Header() {
         >
           <nav className="max-w-7xl mx-auto flex justify-between items-center">
             {/* Logo and Title */}
-            <div className="flex flex-col">
+            <div className="flex items-center gap-3">
               <Link
                 href="/"
-                className={`text-2xl ${styles.heading} ${styles.hoverScale} group`}
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  letterSpacing: "var(--letter-spacing-heading)",
-                  textShadow:
-                    theme === "rice"
-                      ? "0 2px 4px rgba(0, 32, 91, 0.1)"
-                      : "none",
-                }}
+                className={`flex items-center gap-3 ${styles.hoverScale} group`}
               >
-                <span className="relative">
-                  <span
-                    className="gradient-shift text-transparent relative z-10"
-                    style={{
-                      backgroundImage: "var(--gradient-primary)",
-                    }}
-                  >
-                    Hope Atina
-                  </span>
+                <Logo
+                  width={40}
+                  height={40}
+                  className="transition-transform group-hover:scale-110"
+                />
+                <span
+                  className={`text-2xl ${styles.heading}`}
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    letterSpacing: "var(--letter-spacing-heading)",
+                    color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
+                    textShadow:
+                      theme === "rice"
+                        ? "0 2px 4px rgba(0, 32, 91, 0.1)"
+                        : "none",
+                  }}
+                >
+                  Hope Atina
                 </span>
               </Link>
             </div>
