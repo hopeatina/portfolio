@@ -6,6 +6,7 @@ import ProjectCTA from "@/components/projects/ProjectCTA";
 import TechStack from "@/components/projects/TechStack";
 import FeatureGrid from "@/components/projects/FeatureGrid";
 import ProjectCard from "@/components/projects/ProjectCard";
+import MermaidDiagram from "@/components/projects/MermaidDiagram";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 export default function OrgX() {
@@ -152,6 +153,35 @@ export default function OrgX() {
     },
   ];
 
+  const criticalPathDiagram = `
+    flowchart TB
+      subgraph "User Interface"
+        A[React Flow Canvas] --> B[Interactive Nodes]
+        B --> C[Drag & Drop]
+      end
+      
+      subgraph "Critical Path Engine"
+        D[Task Dependencies] --> E[Graph Analysis]
+        E --> F[Longest Path Algorithm]
+        F --> G[Path Highlighting]
+      end
+      
+      subgraph "Collaboration Layer"
+        H[WebSocket Server] --> I[Live Cursors]
+        H --> J[Real-time Updates]
+        H --> K[Conflict Resolution]
+      end
+      
+      A --> D
+      G --> A
+      C --> H
+      J --> B
+      
+      style F fill:#DC2626,stroke:#B91C1C,color:#fff
+      style A fill:#3B82F6,stroke:#2563EB,color:#fff
+      style H fill:#10B981,stroke:#059669,color:#fff
+  `;
+
   return (
     <ProjectLayout
       title="OrgX"
@@ -254,6 +284,23 @@ export default function OrgX() {
             </p>
           </ProjectCard>
         </div>
+      </ProjectSection>
+
+      <ProjectSection title="Visual Workflow Optimization">
+        <p className="text-lg mb-6">
+          OrgX revolutionizes project management through advanced canvas
+          visualization, featuring sophisticated critical path algorithms, React
+          Flow integration, and real-time collaboration. The platform transforms
+          complex project dependencies into intuitive visual workflows with
+          intelligent optimization suggestions.
+        </p>
+
+        <MermaidDiagram
+          title="Critical Path Visualization System"
+          diagram={criticalPathDiagram}
+          description="Multi-layered architecture powering real-time critical path analysis, interactive canvas manipulation, and collaborative project management."
+          className="mb-8"
+        />
       </ProjectSection>
 
       <ProjectCTA demoUrl="https://orgx.ai" githubUrl="#" />

@@ -5,14 +5,11 @@ import ProjectSection from "@/components/projects/ProjectSection";
 import ProjectCTA from "@/components/projects/ProjectCTA";
 import TechStack from "@/components/projects/TechStack";
 import FeatureGrid from "@/components/projects/FeatureGrid";
-import SystemDiagram from "@/components/projects/SystemDiagram";
+import MermaidDiagram from "@/components/projects/MermaidDiagram";
 import StatsDisplay from "@/components/projects/StatsDisplay";
 import ProjectCard from "@/components/projects/ProjectCard";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 export default function DeepHuman() {
-  const { themeProps } = useTheme();
-
   const techStack = [
     { category: "Core", technologies: "Python, FastMCP Framework" },
     {
@@ -143,9 +140,39 @@ export default function DeepHuman() {
     },
   ];
 
-  const systemFlow = `Human Input → Persona Engine → Domain Intelligence → Compatibility Analysis → Multi-Agent Coordination → Response Generation
-     ↑                                                                                              ↓
-Configuration System ←―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――→ User Control Interface`;
+  const multiAgentDiagram = `
+    flowchart TB
+      subgraph "Human Interface"
+        A[User Input] --> B[Persona Engine]
+        B --> C[Domain Intelligence]
+      end
+      
+      subgraph "Multi-Agent System"
+        D[Agent 1: Interests] --> G[Coordination Layer]
+        E[Agent 2: Skills] --> G
+        F[Agent 3: Goals] --> G
+      end
+      
+      subgraph "Compatibility Engine"
+        H[Interest Matching] --> K[Compatibility Score]
+        I[Skill Complementarity] --> K
+        J[Goal Alignment] --> K
+      end
+      
+      C --> D
+      C --> E
+      C --> F
+      G --> H
+      G --> I
+      G --> J
+      
+      K --> L[Response Generation]
+      L --> M[User Control Interface]
+      
+      style B fill:#8B5CF6,stroke:#7C3AED,color:#fff
+      style G fill:#3B82F6,stroke:#2563EB,color:#fff
+      style K fill:#10B981,stroke:#059669,color:#fff
+  `;
 
   const implementationMetrics = [
     {
@@ -190,7 +217,7 @@ Configuration System ←――――――――――――――――――�
 
       <TechStack items={techStack} />
 
-      <ProjectSection title="Advanced Multi-Agent Architecture">
+      <ProjectSection title="Cutting-Edge AI Persona Development">
         <p className="text-lg mb-6">
           Deep Human represents cutting-edge research in AI persona development,
           featuring a sophisticated multi-agent system built on Model Context
@@ -199,21 +226,14 @@ Configuration System ←――――――――――――――――――�
           intelligent collaboration between AI agents.
         </p>
 
-        <SystemDiagram
+        <MermaidDiagram
           title="Multi-Agent Persona Framework"
-          diagram={systemFlow}
-          type="text"
+          diagram={multiAgentDiagram}
           description="Comprehensive AI persona system with multi-agent coordination, domain intelligence, and sophisticated compatibility analysis for human-AI collaboration."
         />
 
         <ProjectCard variant="secondary" className="mt-8">
-          <h3
-            className="text-xl font-semibold mb-4"
-            style={{
-              color: themeProps.colors.primary,
-              fontFamily: themeProps.typography.headingFont,
-            }}
-          >
+          <h3 className="text-xl font-semibold mb-4 text-primary">
             Research-Grade AI Implementation
           </h3>
           <p>
@@ -230,13 +250,7 @@ Configuration System ←――――――――――――――――――�
         <FeatureGrid features={architectureFeatures} columns={1} />
 
         <div className="mt-8">
-          <h3
-            className="text-xl font-semibold mb-6"
-            style={{
-              color: themeProps.colors.primary,
-              fontFamily: themeProps.typography.headingFont,
-            }}
-          >
+          <h3 className="text-xl font-semibold mb-6 text-primary">
             Advanced Algorithms & AI Features
           </h3>
           <FeatureGrid features={algorithmFeatures} columns={3} />
@@ -247,14 +261,7 @@ Configuration System ←――――――――――――――――――�
         <FeatureGrid features={innovationFeatures} columns={1} />
 
         <ProjectCard variant="highlight" className="mt-8">
-          <p
-            className="italic text-center text-lg"
-            style={{
-              color: themeProps.colors.text,
-              fontFamily: themeProps.typography.bodyFont,
-              lineHeight: themeProps.typography.lineHeight,
-            }}
-          >
+          <p className="italic text-center text-lg text-body">
             "Deep Human represents pioneering research in AI persona
             development, combining advanced algorithms, sophisticated
             architecture, and human-centered design. The project demonstrates my
@@ -265,30 +272,22 @@ Configuration System ←――――――――――――――――――�
       </ProjectSection>
 
       <ProjectSection title="Measurable Technical Achievements">
-        <StatsDisplay
-          stats={implementationMetrics}
-          columns={4}
-          className="mb-8"
-        />
+        <div className="mt-12">
+          <h3 className="text-xl font-semibold mb-6 text-primary">
+            Implementation Metrics
+          </h3>
+          <StatsDisplay stats={implementationMetrics} className="mb-8" />
+        </div>
 
         <ProjectCard variant="accent" className="mb-6">
-          <h3
-            className="text-xl font-semibold mb-4"
-            style={{
-              color: themeProps.colors.primary,
-              fontFamily: themeProps.typography.headingFont,
-            }}
-          >
+          <h3 className="text-xl font-semibold mb-4 text-primary">
             Research Innovation
           </h3>
           <ul className="space-y-3">
             {researchInnovations.map((innovation, index) => (
               <li key={index} className="flex items-start gap-3">
-                <span
-                  className="flex-shrink-0 w-2 h-2 rounded-full mt-2"
-                  style={{ backgroundColor: themeProps.colors.primary }}
-                />
-                <span style={{ color: themeProps.colors.text }}>
+                <span className="flex-shrink-0 w-2 h-2 rounded-full mt-2 bg-primary" />
+                <span className="text-body">
                   <strong>{innovation.split(":")[0]}:</strong>{" "}
                   {innovation.split(":")[1]}
                 </span>
@@ -299,13 +298,7 @@ Configuration System ←――――――――――――――――――�
 
         <div className="grid md:grid-cols-2 gap-6">
           <ProjectCard variant="secondary">
-            <h3
-              className="text-xl font-semibold mb-3"
-              style={{
-                color: themeProps.colors.primary,
-                fontFamily: themeProps.typography.headingFont,
-              }}
-            >
+            <h3 className="text-xl font-semibold mb-3 text-primary">
               Vision & Ethical Considerations
             </h3>
             <p>
@@ -319,13 +312,7 @@ Configuration System ←――――――――――――――――――�
           </ProjectCard>
 
           <ProjectCard variant="highlight">
-            <h3
-              className="text-xl font-semibold mb-3"
-              style={{
-                color: themeProps.colors.primary,
-                fontFamily: themeProps.typography.headingFont,
-              }}
-            >
+            <h3 className="text-xl font-semibold mb-3 text-primary">
               Research Impact
             </h3>
             <p>

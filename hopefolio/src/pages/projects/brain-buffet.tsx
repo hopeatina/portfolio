@@ -7,11 +7,9 @@ import TechStack from "@/components/projects/TechStack";
 import FeatureGrid from "@/components/projects/FeatureGrid";
 import StatsDisplay from "@/components/projects/StatsDisplay";
 import ProjectCard from "@/components/projects/ProjectCard";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import MermaidDiagram from "@/components/projects/MermaidDiagram";
 
 export default function BrainBuffet() {
-  const { themeProps } = useTheme();
-
   const techStack = [
     { category: "Frontend", technologies: "Next.js, React, TypeScript" },
     { category: "Backend", technologies: "Node.js, Express, GraphQL" },
@@ -123,6 +121,31 @@ export default function BrainBuffet() {
     { value: "Q4 2024", label: "AI Tutor Assistant" },
   ];
 
+  const learningFlowDiagram = `
+    flowchart LR
+      A[Student Input] --> B[AI Analysis Engine]
+      B --> C[Learning Style Detection]
+      C --> D[Content Generation]
+      D --> E[Interactive Lessons]
+      E --> F[Progress Tracking]
+      
+      F --> G[Performance Analytics]
+      G --> H[Adaptive Recommendations]
+      H --> B
+      
+      I[GPT-4/Claude] --> D
+      J[Course Templates] --> D
+      
+      K[Real-time Dashboard] --> L[Educator Insights]
+      F --> K
+      G --> K
+      
+      style A fill:#3B82F6,stroke:#2563EB,color:#fff
+      style D fill:#8B5CF6,stroke:#7C3AED,color:#fff
+      style H fill:#10B981,stroke:#059669,color:#fff
+      style K fill:#F59E0B,stroke:#D97706,color:#fff
+  `;
+
   return (
     <ProjectLayout
       title="Brain Buffet"
@@ -177,28 +200,12 @@ export default function BrainBuffet() {
       <ProjectSection title="Solution Architecture">
         <FeatureGrid features={coreFeatures} columns={2} />
 
-        <h4
-          className="text-lg font-semibold mb-4 mt-8"
-          style={{
-            color: themeProps.colors.text,
-            fontFamily: themeProps.typography.headingFont,
-          }}
-        >
-          Learning Flow Architecture
-        </h4>
-        <ProjectCard variant="default" className="mb-6">
-          <pre
-            className="text-sm whitespace-pre-wrap overflow-x-auto"
-            style={{
-              color: themeProps.colors.text,
-              fontFamily: "monospace",
-            }}
-          >
-            {`Student Input → AI Analysis → Content Generation → Interactive Lessons → Progress Tracking
-     ↑                                                                         ↓
-Adaptive Recommendations ←―――――――――――――――――――――――――――――――――――――――――――――― Performance Analytics`}
-          </pre>
-        </ProjectCard>
+        <MermaidDiagram
+          title="Adaptive Learning Flow"
+          diagram={learningFlowDiagram}
+          description="AI-driven learning pipeline with real-time adaptation based on student performance, learning style analysis, and comprehensive analytics dashboard."
+          className="mt-8"
+        />
       </ProjectSection>
 
       <ProjectSection title="Platform Features">
@@ -214,7 +221,7 @@ Adaptive Recommendations ←―――――――――――――――――�
       </ProjectSection>
 
       <ProjectSection title="Future Roadmap">
-        <StatsDisplay stats={roadmapStats} columns={3} className="mt-6" />
+        <StatsDisplay stats={roadmapStats} className="mt-6" />
       </ProjectSection>
 
       <ProjectCTA

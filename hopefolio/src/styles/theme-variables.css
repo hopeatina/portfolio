@@ -35,6 +35,32 @@
   --color-border-light: #F3F4F6;
   --color-border-dark: #D1D5DB;
   
+  /* RGB values for opacity usage */
+  --color-primary-rgb: 109, 40, 217;
+  --color-secondary-rgb: 236, 72, 153;
+  --color-accent-rgb: 251, 191, 36;
+  --color-surface-rgb: 243, 232, 255;
+  
+  /* Additional missing variables */
+  --primary: var(--color-primary);
+  --secondary: var(--color-secondary);
+  --accent: var(--color-accent);
+  --surface: var(--color-surface);
+  --background: var(--color-background);
+  --text: var(--color-text);
+  --text-on-dark: var(--color-text-on-primary);
+  --gradient-start: var(--color-primary);
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--color-text-on-primary);
+  --button-secondary-border: var(--color-primary);
+  --color-heading: var(--color-text);
+  --color-body: var(--color-text);
+  
+  /* Alias variables for backward compatibility */
+  --primary-rgb: var(--color-primary-rgb);
+  --secondary-rgb: var(--color-secondary-rgb);
+  --accent-rgb: var(--color-accent-rgb);
+  
   /* Typography */
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -203,6 +229,32 @@
   --color-border-light: #E5E5E5;
   --color-border-dark: #B4B4B4;
   
+  /* RGB values for opacity usage */
+  --color-primary-rgb: 0, 150, 57;
+  --color-secondary-rgb: 199, 31, 2;
+  --color-accent-rgb: 245, 233, 0;
+  --color-surface-rgb: 245, 255, 247;
+  
+  /* Additional missing variables */
+  --primary: var(--color-primary);
+  --secondary: var(--color-secondary);
+  --accent: var(--color-accent);
+  --surface: var(--color-surface);
+  --background: var(--color-background);
+  --text: var(--color-text);
+  --text-on-dark: var(--color-text-on-primary);
+  --gradient-start: var(--color-primary);
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--color-text-on-primary);
+  --button-secondary-border: var(--color-primary);
+  --color-heading: var(--color-text);
+  --color-body: var(--color-text);
+  
+  /* Alias variables for backward compatibility */
+  --primary-rgb: var(--color-primary-rgb);
+  --secondary-rgb: var(--color-secondary-rgb);
+  --accent-rgb: var(--color-accent-rgb);
+  
   /* Typography */
   --font-heading: 'Ubuntu Condensed', sans-serif;
   --font-body: 'Open Sans', sans-serif;
@@ -255,6 +307,32 @@
   --color-border-light: #F3F4F6;
   --color-border-dark: #D1D5DB;
   
+  /* RGB values for opacity usage */
+  --color-primary-rgb: 0, 32, 91;
+  --color-secondary-rgb: 124, 126, 127;
+  --color-accent-rgb: 173, 199, 220;
+  --color-surface-rgb: 248, 250, 251;
+  
+  /* Additional missing variables */
+  --primary: var(--color-primary);
+  --secondary: var(--color-secondary);
+  --accent: var(--color-accent);
+  --surface: var(--color-surface);
+  --background: var(--color-background);
+  --text: var(--color-text);
+  --text-on-dark: var(--color-text-on-primary);
+  --gradient-start: var(--color-primary);
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--color-text-on-primary);
+  --button-secondary-border: var(--color-primary);
+  --color-heading: var(--color-text);
+  --color-body: var(--color-text);
+  
+  /* Alias variables for backward compatibility */
+  --primary-rgb: var(--color-primary-rgb);
+  --secondary-rgb: var(--color-secondary-rgb);
+  --accent-rgb: var(--color-accent-rgb);
+  
   /* Typography */
   --font-heading: 'Merriweather', serif;
   --font-body: 'Inter', sans-serif;
@@ -306,6 +384,32 @@
   --color-border: #2A2A2A;
   --color-border-light: #3A3A3A;
   --color-border-dark: #1A1A1A;
+  
+  /* RGB values for opacity usage */
+  --color-primary-rgb: 0, 238, 92;
+  --color-secondary-rgb: 0, 179, 74;
+  --color-accent-rgb: 157, 0, 255;
+  --color-surface-rgb: 17, 17, 17;
+  
+  /* Additional missing variables */
+  --primary: var(--color-primary);
+  --secondary: var(--color-secondary);
+  --accent: var(--color-accent);
+  --surface: var(--color-surface);
+  --background: var(--color-background);
+  --text: var(--color-text);
+  --text-on-dark: var(--color-text);
+  --gradient-start: var(--color-primary);
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--color-text-on-primary);
+  --button-secondary-border: var(--color-primary);
+  --color-heading: var(--color-text);
+  --color-body: var(--color-text);
+  
+  /* Alias variables for backward compatibility */
+  --primary-rgb: var(--color-primary-rgb);
+  --secondary-rgb: var(--color-secondary-rgb);
+  --accent-rgb: var(--color-accent-rgb);
   
   /* Typography */
   --font-heading: 'Orbitron', monospace;
@@ -370,6 +474,32 @@
     --color-border: #2A2A2A;
     --color-border-light: #3A3A3A;
     --color-border-dark: #1A1A1A;
+    
+    /* RGB values for opacity usage */
+    --color-primary-rgb: 0, 238, 92;
+    --color-secondary-rgb: 0, 179, 74;
+    --color-accent-rgb: 157, 0, 255;
+    --color-surface-rgb: 17, 17, 17;
+    
+    /* Additional missing variables */
+    --primary: var(--color-primary);
+    --secondary: var(--color-secondary);
+    --accent: var(--color-accent);
+    --surface: var(--color-surface);
+    --background: var(--color-background);
+    --text: var(--color-text);
+    --text-on-dark: var(--color-text);
+    --gradient-start: var(--color-primary);
+    --button-primary-bg: var(--color-primary);
+    --button-primary-text: var(--color-text-on-primary);
+    --button-secondary-border: var(--color-primary);
+    --color-heading: var(--color-text);
+    --color-body: var(--color-text);
+    
+    /* Alias variables for backward compatibility */
+    --primary-rgb: var(--color-primary-rgb);
+    --secondary-rgb: var(--color-secondary-rgb);
+    --accent-rgb: var(--color-accent-rgb);
   }
 }
 

@@ -1,221 +1,156 @@
 import React from "react";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
-import styles from "@/styles/themes/base-theme.module.css";
+import { FaQuoteLeft } from "react-icons/fa";
 
 type Testimonial = {
-  quote: string;
+  id: string;
   name: string;
-  role: string;
-  company?: string;
+  title: string;
+  company: string;
+  content: string;
 };
 
 const testimonials: Testimonial[] = [
   {
-    quote:
-      "Hope's ability to combine technical expertise with human-centered design principles is truly remarkable. Her work on our AI education platform has been transformative.",
-    name: "Dr. Sarah Chen",
-    role: "Director of Innovation",
-    company: "EdTech Solutions",
+    id: "1",
+    name: "Sarah Chen",
+    title: "CTO",
+    company: "TechForward Inc.",
+    content:
+      "Hope's ability to bridge the gap between complex technical concepts and user-friendly solutions is remarkable. Her work on our AI systems has been transformative.",
   },
   {
-    quote:
-      "Working with Hope was an incredible experience. Her deep understanding of both technology and cultural nuances brought a unique perspective to our projects.",
-    name: "James Wilson",
-    role: "Lead Developer",
-    company: "Tech Innovators",
+    id: "2",
+    name: "Marcus Johnson",
+    title: "Product Director",
+    company: "InnovateLab",
+    content:
+      "Working with Hope was a game-changer for our product development. She brings both deep technical expertise and a creative approach to problem-solving.",
   },
   {
-    quote:
-      "Hope's commitment to creating inclusive and accessible technology solutions has made a real difference in our community engagement initiatives.",
-    name: "Michelle Rodriguez",
-    role: "Community Manager",
-    company: "Social Impact Hub",
+    id: "3",
+    name: "Dr. Emily Rodriguez",
+    title: "Research Lead",
+    company: "BioTech Solutions",
+    content:
+      "Hope's bioengineering background combined with her software skills created innovative solutions we didn't think were possible. Truly interdisciplinary thinking.",
   },
 ];
 
 const Testimonials = () => {
-  const { theme, getThemeStyles } = useTheme();
+  const { theme } = useTheme();
   const isDarkTheme = theme === "futuristic";
-  const isRiceTheme = theme === "rice";
-  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
 
   return (
     <section
-      className={`py-24 relative overflow-hidden ${styles.fadeUp}`}
+      className="py-24 relative overflow-hidden"
       style={{
-        background: isRiceTheme
-          ? "var(--background)"
-          : bgIsDark
-          ? "var(--background)"
-          : "var(--surface)",
+        background: isDarkTheme
+          ? "var(--color-background)"
+          : "var(--color-surface)",
       }}
     >
-      {/* Background Pattern */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "var(--cosmic-swirl)",
-          opacity: isRiceTheme ? 0.05 : bgIsDark ? 0.15 : 0.1,
-          mixBlendMode: "overlay",
-        }}
-      />
-
       {/* Content Container */}
-      <div className={`${styles.container} relative z-10`}>
+      <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2
-            className={`text-4xl md:text-5xl font-bold mb-6 ${
-              styles.headingH2
-            } ${bgIsDark && !isRiceTheme ? styles.gradientText : ""}`}
+            className="text-4xl md:text-5xl font-bold mb-6"
             style={{
-              color: isRiceTheme
-                ? "var(--text)"
-                : theme === "cameroonian"
-                ? "var(--primary)"
-                : bgIsDark
-                ? "transparent"
-                : "var(--text)",
+              color: isDarkTheme ? "var(--color-primary)" : "var(--color-text)",
               fontFamily: "var(--font-heading)",
-              letterSpacing: "var(--letter-spacing-heading)",
-              lineHeight: "var(--line-height-heading)",
-              textShadow: isRiceTheme
-                ? "0 2px 4px rgba(0, 32, 91, 0.1)"
-                : "none",
+              letterSpacing: "var(--letter-spacing-tight)",
             }}
           >
             What People Say
           </h2>
           <p
-            className={`text-lg md:text-xl max-w-2xl mx-auto ${styles.bodyLarge}`}
+            className="text-lg md:text-xl max-w-2xl mx-auto"
             style={{
-              color: isRiceTheme
-                ? "var(--text)"
-                : theme === "cameroonian"
-                ? "var(--text)"
-                : bgIsDark
-                ? "var(--text-on-dark)"
-                : "var(--text)",
+              color: "var(--color-text)",
               fontFamily: "var(--font-body)",
-              lineHeight: "var(--line-height-body)",
-              opacity: 0.9,
+              opacity: isDarkTheme ? 0.9 : 1,
             }}
           >
-            Testimonials from collaborators and partners
+            Feedback from colleagues and clients I've had the pleasure of
+            working with
           </p>
         </div>
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, idx) => (
-            <div key={idx} className="group relative">
+          {testimonials.map((testimonial) => (
+            <div
+              key={testimonial.id}
+              className="relative p-8 rounded-2xl transition-all duration-500 hover:scale-[1.02]"
+              style={{
+                background: isDarkTheme ? "rgba(255, 255, 255, 0.02)" : "white",
+                border: isDarkTheme
+                  ? "1px solid var(--color-primary)"
+                  : "1px solid var(--color-border)",
+                boxShadow: isDarkTheme
+                  ? "0 0 40px rgba(0, 238, 92, 0.1)"
+                  : "0 10px 30px rgba(0, 0, 0, 0.1)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = isDarkTheme
+                  ? "0 0 60px rgba(0, 238, 92, 0.2)"
+                  : "0 20px 40px rgba(0, 0, 0, 0.15)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = isDarkTheme
+                  ? "0 0 40px rgba(0, 238, 92, 0.1)"
+                  : "0 10px 30px rgba(0, 0, 0, 0.1)";
+              }}
+            >
+              {/* Quote Icon */}
               <div
-                className="relative p-8 rounded-2xl h-full transition-all duration-500 group-hover:transform group-hover:scale-[1.02]"
+                className="mb-6"
                 style={{
-                  background: isRiceTheme
-                    ? "rgba(255, 255, 255, 0.95)"
-                    : bgIsDark
-                    ? "rgba(10, 10, 10, 0.5)"
-                    : "var(--card-bg)",
-                  border: `1px solid ${
-                    isRiceTheme
-                      ? "rgba(var(--primary-rgb), 0.2)"
-                      : bgIsDark
-                      ? "rgba(var(--primary-rgb), 0.2)"
-                      : "var(--icon-border)"
-                  }`,
-                  boxShadow: isRiceTheme
-                    ? "0 4px 6px rgba(0, 32, 91, 0.1)"
-                    : "var(--box-shadow-card)",
+                  color: isDarkTheme
+                    ? "var(--color-primary)"
+                    : "var(--color-primary)",
+                  opacity: 0.3,
                 }}
               >
-                {/* Quote Icon */}
-                <div
-                  className="absolute -top-4 left-8"
+                <FaQuoteLeft size={32} />
+              </div>
+
+              {/* Content */}
+              <p
+                className="mb-6 text-lg"
+                style={{
+                  color: "var(--color-text)",
+                  fontFamily: "var(--font-body)",
+                  lineHeight: "1.8",
+                  opacity: isDarkTheme ? 0.9 : 1,
+                }}
+              >
+                "{testimonial.content}"
+              </p>
+
+              {/* Author */}
+              <div>
+                <h4
+                  className="font-bold text-lg"
                   style={{
-                    color: isRiceTheme
-                      ? "var(--primary)"
-                      : bgIsDark
-                      ? "var(--primary)"
-                      : "var(--accent)",
-                    opacity: 0.2,
-                    fontSize: "4rem",
+                    color: isDarkTheme
+                      ? "var(--color-primary)"
+                      : "var(--color-text)",
+                    fontFamily: "var(--font-heading)",
                   }}
                 >
-                  "
-                </div>
-
-                {/* Quote Text */}
+                  {testimonial.name}
+                </h4>
                 <p
-                  className={`mb-6 relative ${styles.body}`}
+                  className="text-sm"
                   style={{
-                    color: isRiceTheme
-                      ? "var(--text)"
-                      : bgIsDark
-                      ? "var(--text-on-dark)"
-                      : "var(--text)",
-                    opacity: 0.9,
-                    fontStyle: "italic",
+                    color: "var(--color-text)",
+                    opacity: 0.7,
                   }}
                 >
-                  {testimonial.quote}
+                  {testimonial.title} at {testimonial.company}
                 </p>
-
-                {/* Author Info */}
-                <div className="mt-auto">
-                  <h4
-                    className="font-semibold mb-1"
-                    style={{
-                      color: isRiceTheme
-                        ? "var(--primary)"
-                        : bgIsDark
-                        ? "var(--primary)"
-                        : "var(--accent)",
-                    }}
-                  >
-                    {testimonial.name}
-                  </h4>
-                  <p
-                    className="text-sm"
-                    style={{
-                      color: isRiceTheme
-                        ? "var(--text-muted)"
-                        : bgIsDark
-                        ? "var(--text-muted-on-dark)"
-                        : "var(--text-muted)",
-                    }}
-                  >
-                    {testimonial.role}
-                    {testimonial.company && (
-                      <>
-                        <span className="mx-2">•</span>
-                        {testimonial.company}
-                      </>
-                    )}
-                  </p>
-                </div>
-
-                {/* Corner Accents */}
-                {(bgIsDark || isRiceTheme) && (
-                  <>
-                    <div
-                      className="absolute top-0 left-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, var(--primary) 0%, transparent 100%)",
-                        opacity: 0.2,
-                      }}
-                    />
-                    <div
-                      className="absolute bottom-0 right-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        background:
-                          "linear-gradient(-45deg, var(--primary) 0%, transparent 100%)",
-                        opacity: 0.2,
-                      }}
-                    />
-                  </>
-                )}
               </div>
             </div>
           ))}

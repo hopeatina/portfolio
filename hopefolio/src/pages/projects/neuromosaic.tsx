@@ -7,11 +7,9 @@ import TechStack from "@/components/projects/TechStack";
 import FeatureGrid from "@/components/projects/FeatureGrid";
 import StatsDisplay from "@/components/projects/StatsDisplay";
 import ProjectCard from "@/components/projects/ProjectCard";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import MermaidDiagram from "@/components/projects/MermaidDiagram";
 
 export default function Neuromosaic() {
-  const { themeProps } = useTheme();
-
   const techStack = [
     { category: "Backend", technologies: "FastAPI, SQLAlchemy, Alembic" },
     { category: "Database", technologies: "PostgreSQL, SQLite" },
@@ -122,6 +120,33 @@ export default function Neuromosaic() {
     { value: "2000+", label: "Lines of Code" },
   ];
 
+  const architectureDiagram = `
+    flowchart TD
+      A[Architecture Vector] --> B[LLM Code Gen]
+      B --> C[PyTorch Model Code]
+      C --> D[Docker Container]
+      D --> E[Training & Evaluation]
+      E --> F[Results Database]
+      F --> G[3D Visualization]
+      
+      H[Meta-Learning] --> I[Search Strategy]
+      I --> A
+      F --> H
+      
+      J[WebSocket Server] --> K[Real-time Updates]
+      E --> J
+      K --> G
+      
+      L[FastAPI Backend] --> M[15+ API Endpoints]
+      M --> F
+      M --> D
+      
+      style A fill:#8E5BEF,stroke:#7A4DD8,color:#fff
+      style B fill:#8E5BEF,stroke:#7A4DD8,color:#fff
+      style G fill:#F59E0B,stroke:#D97706,color:#fff
+      style L fill:#10B981,stroke:#059669,color:#fff
+  `;
+
   return (
     <ProjectLayout
       title="Neuromosaic"
@@ -176,28 +201,12 @@ export default function Neuromosaic() {
       <ProjectSection title="Solution Architecture">
         <FeatureGrid features={coreFeatures} columns={2} />
 
-        <h4
-          className="text-lg font-semibold mb-4 mt-8"
-          style={{
-            color: themeProps.colors.text,
-            fontFamily: themeProps.typography.headingFont,
-          }}
-        >
-          System Architecture
-        </h4>
-        <ProjectCard variant="default" className="mb-6">
-          <pre
-            className="text-sm whitespace-pre-wrap overflow-x-auto"
-            style={{
-              color: themeProps.colors.text,
-              fontFamily: "monospace",
-            }}
-          >
-            {`Architecture Vector → LLM Code Gen → Docker Container → Training/Eval → Results DB → Visualization
-     ↑                                                                              ↓
-Meta-Learning & Search Strategy ←―――――――――――――――――――――――――――――――――――――――――――――――――――――――― Performance Metrics`}
-          </pre>
-        </ProjectCard>
+        <MermaidDiagram
+          title="Neural Architecture Search Pipeline"
+          diagram={architectureDiagram}
+          description="Complete workflow from architecture vector to deployed model, with meta-learning feedback loop and real-time monitoring through WebSocket connections."
+          className="mt-8"
+        />
       </ProjectSection>
 
       <ProjectSection title="Technical Implementation">
@@ -215,7 +224,7 @@ Meta-Learning & Search Strategy ←―――――――――――――――
           without extensive infrastructure, accelerating ML innovation across
           the field.
         </p>
-        <StatsDisplay stats={impactStats} columns={3} className="mt-6" />
+        <StatsDisplay stats={impactStats} className="mt-6" />
       </ProjectSection>
 
       <ProjectCTA

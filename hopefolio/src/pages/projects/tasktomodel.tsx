@@ -5,7 +5,7 @@ import ProjectSection from "@/components/projects/ProjectSection";
 import ProjectCTA from "@/components/projects/ProjectCTA";
 import TechStack from "@/components/projects/TechStack";
 import FeatureGrid from "@/components/projects/FeatureGrid";
-import SystemDiagram from "@/components/projects/SystemDiagram";
+import MermaidDiagram from "@/components/projects/MermaidDiagram";
 import StatsDisplay from "@/components/projects/StatsDisplay";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
@@ -104,9 +104,45 @@ export default function TaskToModel() {
     },
   ];
 
-  const systemFlow = `Task Description → NLP Analysis → Training Data Generation → OpenAI Fine-tuning → Model Validation → API Deployment
-     ↑                                                                                              ↓
-User Interface ←―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――→ Usage Analytics`;
+  const aiModelPipelineDiagram = `
+    flowchart TB
+      subgraph "Input Processing"
+        A[Task Description] --> B[NLP Analysis]
+        B --> C[Intent Extraction]
+      end
+      
+      subgraph "Data Generation"
+        D[Training Data Gen] --> E[Validation Sets]
+        E --> F[Quality Checks]
+      end
+      
+      subgraph "Model Training"
+        G[OpenAI Fine-tuning] --> H[Model Validation]
+        H --> I[Performance Testing]
+      end
+      
+      subgraph "Deployment"
+        J[API Generation] --> K[Endpoint Config]
+        K --> L[Production Deploy]
+      end
+      
+      C --> D
+      F --> G
+      I --> J
+      
+      M[NextAuth] --> N[User Management]
+      O[Stripe] --> P[Subscription Billing]
+      N --> A
+      P --> A
+      
+      L --> Q[Usage Analytics]
+      Q --> R[Airtable Tracking]
+      
+      style A fill:#3B82F6,stroke:#2563EB,color:#fff
+      style G fill:#8B5CF6,stroke:#7C3AED,color:#fff
+      style L fill:#10B981,stroke:#059669,color:#fff
+      style O fill:#F59E0B,stroke:#D97706,color:#fff
+  `;
 
   const developmentMetrics = [
     {
@@ -175,10 +211,9 @@ User Interface ←――――――――――――――――――――�
           experts to create specialized AI models without technical expertise.
         </p>
 
-        <SystemDiagram
+        <MermaidDiagram
           title="AI Model Generation Pipeline"
-          diagram={systemFlow}
-          type="text"
+          diagram={aiModelPipelineDiagram}
           description="Complete workflow from task description to deployed AI model, with automated fine-tuning and comprehensive validation throughout the process."
         />
 
@@ -228,7 +263,7 @@ User Interface ←――――――――――――――――――――�
       </ProjectSection>
 
       <ProjectSection title="Development Strategy & Execution">
-        <StatsDisplay stats={developmentMetrics} columns={4} className="mb-8" />
+        <StatsDisplay stats={developmentMetrics} className="mb-8" />
 
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <ProjectCard variant="accent">

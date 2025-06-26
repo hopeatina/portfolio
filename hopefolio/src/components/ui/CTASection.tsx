@@ -1,171 +1,118 @@
 import React from "react";
 import Link from "next/link";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
-import styles from "@/styles/themes/base-theme.module.css";
 
 const CTASection = () => {
-  const { theme, getThemeStyles } = useTheme();
+  const { theme } = useTheme();
   const isDarkTheme = theme === "futuristic";
-  const isRiceTheme = theme === "rice";
-  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
 
   return (
     <section
-      className={`py-24 relative overflow-hidden ${styles.fadeUp}`}
+      className="py-24 relative overflow-hidden"
       style={{
-        background: isRiceTheme
-          ? "var(--background)"
-          : bgIsDark
-          ? "var(--background)"
-          : "var(--surface)",
+        background: "var(--gradient-primary)",
+        position: "relative",
       }}
     >
-      {/* Background Pattern */}
+      {/* Background Gradient Overlay for depth */}
       <div
         className="absolute inset-0"
         style={{
-          background: bgIsDark
-            ? `
-              radial-gradient(circle at 20% 20%, rgba(var(--primary-rgb), 0.15) 0%, transparent 40%),
-              radial-gradient(circle at 80% 80%, rgba(var(--accent-rgb), 0.15) 0%, transparent 40%)
-            `
-            : "var(--gradient-surface)",
-          opacity: isRiceTheme ? 0.05 : bgIsDark ? 1 : 0.5,
+          background: isDarkTheme
+            ? "linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%)"
+            : "linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%)",
           mixBlendMode: "overlay",
         }}
       />
 
       {/* Content Container */}
-      <div className={`${styles.container} relative z-10`}>
-        <div
-          className="max-w-4xl mx-auto text-center p-12 rounded-2xl relative overflow-hidden"
+      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <h2
+          className="text-4xl md:text-5xl font-bold mb-6"
           style={{
-            background: isRiceTheme
-              ? "rgba(255, 255, 255, 0.95)"
-              : bgIsDark
-              ? "rgba(10, 10, 10, 0.5)"
-              : "var(--card-bg)",
-            border: `1px solid ${
-              isRiceTheme
-                ? "rgba(var(--primary-rgb), 0.2)"
-                : bgIsDark
-                ? "rgba(var(--primary-rgb), 0.2)"
-                : "var(--icon-border)"
-            }`,
-            boxShadow: isRiceTheme
-              ? "0 4px 6px rgba(0, 32, 91, 0.1)"
-              : "var(--box-shadow-card)",
+            color: "white",
+            fontFamily: "var(--font-heading)",
+            letterSpacing: "var(--letter-spacing-tight)",
+            textShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
           }}
         >
-          {/* Decorative Top Border */}
-          <div
-            className="absolute top-0 left-0 right-0 h-1"
-            style={{
-              background: "var(--gradient-primary)",
-              opacity: isRiceTheme ? 0.8 : bgIsDark ? 1 : 0.8,
-              borderTopLeftRadius: "inherit",
-              borderTopRightRadius: "inherit",
-            }}
-          />
+          Let's Build Something Amazing Together
+        </h2>
+        <p
+          className="text-lg md:text-xl mb-10 max-w-2xl mx-auto"
+          style={{
+            color: "rgba(255, 255, 255, 0.9)",
+            fontFamily: "var(--font-body)",
+            lineHeight: "1.6",
+          }}
+        >
+          Whether you have a project in mind or just want to connect, I'd love
+          to hear from you.
+        </p>
 
-          <h2
-            className={`text-4xl md:text-5xl font-bold mb-6 ${
-              styles.headingH2
-            } ${bgIsDark && !isRiceTheme ? styles.gradientText : ""}`}
-            style={{
-              color: isRiceTheme
-                ? "var(--primary)"
-                : bgIsDark
-                ? "transparent"
-                : "var(--text)",
-              fontFamily: "var(--font-heading)",
-              letterSpacing: "var(--letter-spacing-heading)",
-              lineHeight: "var(--line-height-heading)",
-              textShadow: isRiceTheme
-                ? "0 2px 4px rgba(0, 32, 91, 0.1)"
-                : "none",
-            }}
-          >
-            Ready to Build Something Incredible?
-          </h2>
-
-          <p
-            className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto ${styles.bodyLarge}`}
-            style={{
-              color: isRiceTheme
-                ? "var(--text)"
-                : bgIsDark
-                ? "var(--text-on-dark)"
-                : "var(--text)",
-              fontFamily: "var(--font-body)",
-              lineHeight: "var(--line-height-body)",
-              opacity: 0.9,
-            }}
-          >
-            I'm always open to discussing new projects, creative ideas, or
-            opportunities to make a difference.
-          </p>
-
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap gap-4 justify-center">
           <Link
             href="/contact"
-            className="inline-flex items-center group relative overflow-hidden rounded-full"
+            className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105"
             style={{
-              background: isRiceTheme
-                ? "var(--primary)"
-                : bgIsDark
-                ? "rgba(var(--primary-rgb), 0.1)"
-                : "var(--gradient-primary)",
-              color: isRiceTheme || !bgIsDark ? "white" : "var(--primary)",
-              padding: "1rem 3rem",
-              border:
-                bgIsDark && !isRiceTheme ? "1px solid var(--primary)" : "none",
-              transition: "var(--transition-base)",
+              background: "white",
+              color: "var(--color-primary)",
+              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.05) translateY(-2px)";
+              e.currentTarget.style.boxShadow =
+                "0 15px 40px rgba(0, 0, 0, 0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow =
+                "0 10px 30px rgba(0, 0, 0, 0.2)";
             }}
           >
-            <span className="relative z-10 font-medium text-lg">
-              Let's Talk
-            </span>
-            {bgIsDark && !isRiceTheme && (
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100"
-                style={{
-                  background: "var(--gradient-primary)",
-                  transition: "var(--transition-base)",
-                }}
-              />
-            )}
-            <span
-              className="ml-2 transform transition-transform group-hover:translate-x-1"
-              style={{
-                color: isRiceTheme || !bgIsDark ? "white" : "var(--primary)",
-              }}
-            >
-              →
-            </span>
+            Get In Touch
+            <span className="ml-2">→</span>
           </Link>
 
-          {/* Corner Accents */}
-          {(bgIsDark || isRiceTheme) && (
-            <>
-              <div
-                className="absolute top-0 left-0 w-24 h-24"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--primary) 0%, transparent 100%)",
-                  opacity: 0.1,
-                }}
-              />
-              <div
-                className="absolute bottom-0 right-0 w-24 h-24"
-                style={{
-                  background:
-                    "linear-gradient(-45deg, var(--primary) 0%, transparent 100%)",
-                  opacity: 0.1,
-                }}
-              />
-            </>
-          )}
+          <Link
+            href="/projects"
+            className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 backdrop-blur-sm"
+            style={{
+              background: "rgba(255, 255, 255, 0.1)",
+              color: "white",
+              border: "2px solid rgba(255, 255, 255, 0.3)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
+              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.5)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
+              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.3)";
+            }}
+          >
+            View My Work
+          </Link>
         </div>
+
+        {/* Email alternative */}
+        <p
+          className="mt-12 text-sm"
+          style={{
+            color: "rgba(255, 255, 255, 0.8)",
+            fontFamily: "var(--font-body)",
+          }}
+        >
+          Prefer email?{" "}
+          <a
+            href="mailto:hopeatina@gmail.com"
+            className="underline hover:no-underline transition-all"
+            style={{ color: "white" }}
+          >
+            hopeatina@gmail.com
+          </a>
+        </p>
       </div>
     </section>
   );

@@ -5,7 +5,7 @@ import ProjectSection from "@/components/projects/ProjectSection";
 import ProjectCTA from "@/components/projects/ProjectCTA";
 import TechStack from "@/components/projects/TechStack";
 import FeatureGrid from "@/components/projects/FeatureGrid";
-import SystemDiagram from "@/components/projects/SystemDiagram";
+import MermaidDiagram from "@/components/projects/MermaidDiagram";
 import StatsDisplay from "@/components/projects/StatsDisplay";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
@@ -173,6 +173,41 @@ Configuration Management ←―――――――――――――――――�
     "Production-Ready Output: Generated code requires zero manual editing for immediate deployment",
   ];
 
+  const codeGenerationDiagram = `
+    flowchart TB
+      subgraph "Input Analysis"
+        A[OpenAPI Spec] --> B[Schema Parser]
+        B --> C[Endpoint Analyzer]
+      end
+      
+      subgraph "LLM Pipeline"
+        D[Prompt Engineering] --> E[GPT-4/Claude]
+        E --> F[Code Generation]
+        F --> G[Validation Engine]
+      end
+      
+      subgraph "MCP Server Output"
+        H[Tool Definitions] --> K[Complete Server]
+        I[Handler Functions] --> K
+        J[Docker Config] --> K
+      end
+      
+      C --> D
+      G --> H
+      G --> I
+      G --> J
+      
+      K --> L[Deployment Platform]
+      L --> M[Railway/Supabase]
+      
+      N[Monitoring] --> O[Analytics Dashboard]
+      K --> N
+      
+      style A fill:#F59E0B,stroke:#D97706,color:#fff
+      style E fill:#8B5CF6,stroke:#7C3AED,color:#fff
+      style K fill:#10B981,stroke:#059669,color:#fff
+  `;
+
   return (
     <ProjectLayout
       title="MCP-Gen"
@@ -202,10 +237,9 @@ Configuration Management ←―――――――――――――――――�
           advanced LLM integration and comprehensive code generation pipelines.
         </p>
 
-        <SystemDiagram
+        <MermaidDiagram
           title="Code Generation Pipeline"
-          diagram={systemFlow}
-          type="text"
+          diagram={codeGenerationDiagram}
           description="Complete workflow from OpenAPI specification analysis to deployed MCP server, with intelligent LLM-powered code generation and comprehensive validation."
         />
 
@@ -267,8 +301,17 @@ Configuration Management ←―――――――――――――――――�
         </ProjectCard>
       </ProjectSection>
 
-      <ProjectSection title="Measurable Impact & Industry Recognition">
-        <StatsDisplay stats={impactMetrics} columns={4} className="mb-8" />
+      <ProjectSection title="Measurable Impact">
+        <h3
+          className="text-2xl font-semibold mb-6"
+          style={{
+            color: themeProps.colors.primary,
+            fontFamily: themeProps.typography.headingFont,
+          }}
+        >
+          Platform Achievements
+        </h3>
+        <StatsDisplay stats={impactMetrics} className="mb-8" />
 
         <ProjectCard variant="accent" className="mb-6">
           <h3

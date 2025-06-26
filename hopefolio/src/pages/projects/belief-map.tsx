@@ -5,7 +5,7 @@ import ProjectSection from "@/components/projects/ProjectSection";
 import ProjectCTA from "@/components/projects/ProjectCTA";
 import TechStack from "@/components/projects/TechStack";
 import FeatureGrid from "@/components/projects/FeatureGrid";
-import SystemDiagram from "@/components/projects/SystemDiagram";
+import MermaidDiagram from "@/components/projects/MermaidDiagram";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
@@ -123,9 +123,36 @@ export default function BeliefMap() {
     },
   ];
 
-  const systemFlow = `User Input → Belief Extraction → Pattern Analysis → Graph Generation → Visualization → Insights
-     ↑                                                                                    ↓
-Question Engine ←―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――→ Growth Recommendations`;
+  const beliefMapDiagram = `
+    flowchart LR
+      subgraph "Discovery Process"
+        A[User Input] --> B[Belief Extraction]
+        B --> C[Pattern Analysis]
+      end
+      
+      subgraph "Visualization Engine"
+        D[Graph Generation] --> E[Node Network]
+        E --> F[Interactive Canvas]
+        E --> G[Radar Charts]
+      end
+      
+      subgraph "Insight Generation"
+        H[AI Analysis] --> I[Pattern Detection]
+        I --> J[Growth Recommendations]
+        I --> K[Conflict Detection]
+      end
+      
+      C --> D
+      C --> H
+      F --> L[User Interaction]
+      J --> M[Personalized Insights]
+      K --> M
+      L --> A
+      
+      style A fill:#8B5CF6,stroke:#7C3AED,color:#fff
+      style E fill:#3B82F6,stroke:#2563EB,color:#fff
+      style M fill:#10B981,stroke:#059669,color:#fff
+  `;
 
   const achievements = [
     "Innovative UX Design: Created an intuitive flow that makes deep introspection accessible to everyone",
@@ -170,10 +197,9 @@ Question Engine ←――――――――――――――――――――�
           their beliefs interconnect.
         </p>
 
-        <SystemDiagram
+        <MermaidDiagram
           title="Belief Discovery Flow"
-          diagram={systemFlow}
-          type="text"
+          diagram={beliefMapDiagram}
           description="The system guides users through a structured discovery process, analyzing responses to build a comprehensive belief map with actionable insights."
         />
       </ProjectSection>

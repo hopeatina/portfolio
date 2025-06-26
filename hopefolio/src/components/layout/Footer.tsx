@@ -1,10 +1,11 @@
 "use client";
 
 import React, { createElement } from "react";
+import Link from "next/link";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import { FiGithub, FiTwitter, FiLinkedin, FiArrowUp } from "react-icons/fi";
 import { FaMedium } from "react-icons/fa";
-import styles from "@/styles/themes/base-theme.module.css";
+import Button from "@/components/ui/Button";
 
 interface SocialLink {
   platform: string;
@@ -35,119 +36,69 @@ const socialLinks: SocialLink[] = [
   },
 ];
 
+const footerLinks = [
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+];
+
 export default function Footer() {
-  const { theme, getThemeStyles } = useTheme();
-  const themeStyles = getThemeStyles();
-  const isDarkTheme = theme === "futuristic";
-  const isRiceTheme = theme === "rice";
-  const isCameroonianTheme = theme === "cameroonian";
-  const bgIsDark = isDarkTheme || isRiceTheme || isCameroonianTheme;
+  const { theme } = useTheme();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer
-      className={`${styles.footer} py-8`}
-      style={{
-        background: "var(--footer-bg)",
-        borderTop: "1px solid var(--footer-border)",
-      }}
-    >
+    <footer className="py-16 bg-surface border-t border-border">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Brand Section */}
           <div>
-            <h3
-              className={`text-xl mb-4 ${styles.headingH3}`}
-              style={{
-                color: "var(--color-heading)",
-                fontFamily: "var(--font-heading)",
-              }}
-            >
-              Hope Atina
-            </h3>
-            <p
-              className={`${styles.body}`}
-              style={{
-                color: "var(--color-body)",
-                opacity: 0.9,
-              }}
-            >
+            <h3 className="text-2xl font-bold mb-4 text-heading">Hope Atina</h3>
+            <p className="text-body text-body-secondary">
               Building innovative solutions at the intersection of technology
               and creativity.
             </p>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <h3
-              className={`text-xl mb-4 ${styles.headingH3}`}
-              style={{
-                color: "var(--color-heading)",
-                fontFamily: "var(--font-heading)",
-              }}
-            >
+            <h3 className="text-2xl font-bold mb-4 text-heading">
               Quick Links
             </h3>
-            <ul>
-              {["About", "Projects", "Blog", "Contact"].map((link) => (
-                <li key={link} className="mb-2">
-                  <a
-                    href={`#${link.toLowerCase()}`}
-                    className={`${styles.link} relative inline-block transition-all duration-300`}
-                    style={{
-                      color: "var(--color-link)",
-                    }}
+            <ul className="space-y-3">
+              {footerLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-link hover:text-link-hover transition-colors duration-200 inline-flex items-center group"
                   >
-                    <span className="relative z-10">{link}</span>
-                    <div
-                      className="absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"
-                      style={{
-                        background: "var(--color-link-hover)",
-                      }}
-                    />
-                  </a>
+                    {link.label}
+                    <span className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      →
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Connect Section */}
           <div>
-            <h3
-              className={`text-xl mb-4 ${styles.headingH3}`}
-              style={{
-                color: "var(--color-heading)",
-                fontFamily: "var(--font-heading)",
-              }}
-            >
-              Connect
-            </h3>
-            <div className="flex space-x-4">
+            <h3 className="text-2xl font-bold mb-4 text-heading">Connect</h3>
+            <div className="flex flex-wrap gap-3">
               {socialLinks.map((link) => (
                 <a
                   key={link.platform}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative w-10 h-10 flex items-center justify-center rounded-full overflow-hidden group transition-all duration-300 hover:scale-105"
-                  style={{
-                    background: "var(--gradient-primary)",
-                    boxShadow: "var(--box-shadow)",
-                  }}
+                  className="w-12 h-12 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary hover:text-white transition-all duration-300 group"
                   aria-label={`${link.platform} Profile`}
                 >
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
-                    style={{
-                      background: "var(--gradient-primary-hover)",
-                    }}
-                  />
-                  <span
-                    className="relative z-10 transition-transform duration-300 group-hover:scale-110"
-                    style={{
-                      color: "var(--text-on-dark)",
-                    }}
-                  >
+                  <span className="transition-transform duration-300 group-hover:scale-110">
                     {createElement(link.icon, { size: 20 })}
                   </span>
                 </a>
@@ -156,43 +107,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="text-center mt-8">
-          <button
-            onClick={scrollToTop}
-            className="relative w-10 h-10 flex items-center justify-center rounded-full overflow-hidden group transition-all duration-300 hover:scale-105"
-            style={{
-              background: "var(--gradient-primary)",
-              boxShadow: "var(--box-shadow)",
-            }}
-            aria-label="Back to top"
-          >
-            <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300"
-              style={{
-                background: "var(--gradient-primary-hover)",
-              }}
-            />
-            <span
-              className="relative z-10 transition-transform duration-300 group-hover:scale-110"
-              style={{
-                color: "var(--text-on-dark)",
-              }}
-            >
-              <FiArrowUp size={20} />
-            </span>
-          </button>
-        </div>
-
-        <div className="text-center mt-8">
-          <p
-            className={`${styles.body}`}
-            style={{
-              color: "var(--color-body)",
-              opacity: 0.9,
-            }}
-          >
+        {/* Bottom Section */}
+        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-body-secondary text-sm">
             © {new Date().getFullYear()} Hope Atina. All rights reserved.
           </p>
+
+          {/* Back to top button */}
+          <button
+            onClick={scrollToTop}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary hover:text-white transition-all duration-300 group"
+            aria-label="Back to top"
+          >
+            <FiArrowUp className="transition-transform duration-300 group-hover:-translate-y-0.5" />
+          </button>
         </div>
       </div>
     </footer>

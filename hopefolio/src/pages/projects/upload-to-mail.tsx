@@ -5,10 +5,10 @@ import ProjectSection from "@/components/projects/ProjectSection";
 import ProjectCTA from "@/components/projects/ProjectCTA";
 import TechStack from "@/components/projects/TechStack";
 import FeatureGrid from "@/components/projects/FeatureGrid";
-import SystemDiagram from "@/components/projects/SystemDiagram";
 import StatsDisplay from "@/components/projects/StatsDisplay";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import MermaidDiagram from "@/components/projects/MermaidDiagram";
 
 export default function UploadToMail() {
   const { themeProps } = useTheme();
@@ -130,9 +130,29 @@ export default function UploadToMail() {
     },
   ];
 
-  const systemFlow = `Document Upload → File Validation → Address Verification → Payment Processing → Mail Generation → Order Tracking
-     ↑                                                                                              ↓
-User Interface ←―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――→ Status Notifications`;
+  const processingFlowDiagram = `
+    flowchart LR
+      A[Document Upload] --> B[Validation & Preview]
+      B --> C[Address Verification]
+      C --> D[Stripe Payment]
+      D --> E[Job Queue]
+      E --> F[Print Service API]
+      F --> G[Mail Delivery]
+      
+      H[PostgreSQL] --> I[Job Tracking]
+      E --> H
+      I --> J[Status Updates]
+      J --> K[Email Notifications]
+      
+      L[Security Layer] --> B
+      L --> C
+      L --> D
+      
+      style A fill:#3B82F6,stroke:#2563EB,color:#fff
+      style D fill:#10B981,stroke:#059669,color:#fff
+      style F fill:#F59E0B,stroke:#D97706,color:#fff
+      style L fill:#DC2626,stroke:#B91C1C,color:#fff
+  `;
 
   const impactMetrics = [
     {
@@ -194,11 +214,10 @@ User Interface ←――――――――――――――――――――�
           multiple formats with comprehensive validation and security layers.
         </p>
 
-        <SystemDiagram
-          title="End-to-End Processing Flow"
-          diagram={systemFlow}
-          type="text"
-          description="Complete workflow from document upload to physical mail delivery, with real-time tracking and status notifications throughout the process."
+        <MermaidDiagram
+          title="End-to-End Processing Pipeline"
+          diagram={processingFlowDiagram}
+          description="Complete workflow from document upload to physical mail delivery, with enterprise security, payment processing, and real-time status tracking."
         />
       </ProjectSection>
 
@@ -309,7 +328,7 @@ User Interface ←――――――――――――――――――――�
       </ProjectSection>
 
       <ProjectSection title="Measurable Impact & Results">
-        <StatsDisplay stats={impactMetrics} columns={4} className="mb-8" />
+        <StatsDisplay stats={impactMetrics} className="mb-8" />
 
         <ProjectCard variant="accent">
           <h3

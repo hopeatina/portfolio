@@ -56,7 +56,7 @@ const FallbackContent = () => {
             textShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
           }}
         >
-          Hi, I'm Hope
+          Hope Atina
           <br />
           <span className="text-3xl md:text-5xl">
             Building, Creating, & Rethinking Possibility
@@ -68,19 +68,45 @@ const FallbackContent = () => {
             color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
           }}
         >
-          Software Developer, Bioengineer, and Musician
+          Software Developer, Bioengineer, and Musician. Building innovative
+          solutions at the intersection of technology, science, and creativity.
         </p>
-        <Link
-          href="/projects"
-          className="inline-block px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105"
-          style={{
-            background: "var(--gradient-primary)",
-            color: "white",
-            boxShadow: "0 4px 12px rgba(var(--primary-rgb), 0.3)",
-          }}
-        >
-          View My Work
-        </Link>
+        <div className="flex flex-wrap gap-4 justify-center">
+          <Link
+            href="/projects"
+            className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 group"
+            style={{
+              background: "var(--gradient-primary)",
+              color: "white",
+              boxShadow: "0 4px 12px rgba(var(--primary-rgb), 0.3)",
+            }}
+          >
+            View Projects
+            <svg
+              className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </Link>
+          <Link
+            href="/about"
+            className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 border-2"
+            style={{
+              borderColor: bgIsDark ? "rgba(255,255,255,0.3)" : "var(--border)",
+              color: bgIsDark ? "white" : "var(--text)",
+            }}
+          >
+            About Me
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -128,7 +154,7 @@ const Hero3D: React.FC = () => {
               textShadow: "0 4px 12px rgba(0, 0, 0, 0.5)",
             }}
           >
-            Hi, I'm Hope
+            Hope Atina
             <br />
             <span className="text-3xl md:text-5xl">
               Building, Creating, & Rethinking Possibility
@@ -144,16 +170,19 @@ const Hero3D: React.FC = () => {
               textShadow: "0 2px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
-            Software Developer, Bioengineer, and Musician
+            Software Developer, Bioengineer, and Musician. Building innovative
+            solutions at the intersection of technology, science, and
+            creativity.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-wrap gap-4 justify-center"
           >
             <Link
               href="/projects"
-              className="inline-block px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 group"
               style={{
                 background: "var(--gradient-primary)",
                 color: "white",
@@ -161,7 +190,30 @@ const Hero3D: React.FC = () => {
                 boxShadow: "0 4px 12px rgba(var(--primary-rgb), 0.3)",
               }}
             >
-              View My Work
+              View Projects
+              <svg
+                className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 border-2 border-white/30 backdrop-blur-sm"
+              style={{
+                color: "white",
+                fontFamily: bodyFont,
+              }}
+            >
+              About Me
             </Link>
           </motion.div>
         </div>

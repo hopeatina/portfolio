@@ -20,7 +20,7 @@ export default function TechStack({
   columns = 4,
   className = "",
 }: TechStackProps) {
-  const { themeProps } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <ProjectCard
@@ -31,36 +31,17 @@ export default function TechStack({
       ariaLabel="Technology stack information"
     >
       <div
-        className={`grid grid-cols-2 gap-4 text-sm`}
+        className={`grid gap-4 text-sm`}
         style={{
-          gridTemplateColumns: `repeat(${Math.min(
-            columns,
-            4
-          )}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(auto-fit, minmax(200px, 1fr))`,
         }}
       >
         {items.map((item, index) => (
           <div key={index} className="group" role="listitem">
-            <div
-              className="font-semibold mb-1 transition-colors duration-200 group-hover:opacity-80"
-              style={{
-                color: themeProps.colors.primary,
-                fontFamily: themeProps.typography.headingFont,
-                fontSize: "0.9rem",
-              }}
-            >
+            <div className="font-semibold mb-1 text-primary">
               {item.category}:
             </div>
-            <div
-              className="transition-colors duration-200 group-hover:opacity-90"
-              style={{
-                color: themeProps.colors.text,
-                fontFamily: themeProps.typography.bodyFont,
-                opacity: 0.9,
-              }}
-            >
-              {item.technologies}
-            </div>
+            <div className="text-body-secondary">{item.technologies}</div>
           </div>
         ))}
       </div>
