@@ -109,8 +109,8 @@ export default function About() {
                   I build the systems that make AI agents reliable in
                   production. OrgX is a multi-agent orchestration platform with
                   MCP server integrations, durable workflows, trust-based
-                  governance, and org memory — a 19-repo ecosystem with 1,457+
-                  commits over 12 months.
+                  governance, and org memory — a 7-repo ecosystem with 1,270+
+                  commits over 15 months.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Tag size="sm">Multi-Agent Orchestration</Tag>
@@ -205,10 +205,10 @@ export default function About() {
                     lineHeight: "var(--line-height-body)",
                   }}
                 >
-                  Built AI-powered automated reassessment systems, compliant
-                  progress notes with PDF generation, and Brellium audit
-                  integration. Drove therapist adoption from 40% to 89%.
-                  HIPAA-compliant throughout.
+                  999 commits across 7 major feature areas over 2.7 years.
+                  Automated reassessments, compliant progress notes with PDF
+                  generation, Brellium audit integration, and RBAC document
+                  management. HIPAA-compliant throughout.
                 </p>
               </Card>
 
@@ -241,9 +241,9 @@ export default function About() {
                     lineHeight: "var(--line-height-body)",
                   }}
                 >
-                  Led backend re-architecture resulting in 93% bug reduction.
-                  Built real-time data pipelines and scalable infrastructure for
-                  healthcare delivery.
+                  Led backend re-architecture for reliability and data pipeline
+                  improvements. Built scalable infrastructure for healthcare
+                  delivery.
                 </p>
               </Card>
 
@@ -276,9 +276,8 @@ export default function About() {
                     lineHeight: "var(--line-height-body)",
                   }}
                 >
-                  Built automated ETL pipelines with Spark/Scala at enterprise
-                  scale. Led Snowflake onboarding and data infrastructure
-                  modernization.
+                  Pre-approval Auto Loans team. Built internal D0-D3 self-service
+                  platform for building real-time Spark/Scala streams.
                 </p>
               </Card>
 
@@ -303,7 +302,7 @@ export default function About() {
                       : "var(--text-secondary)",
                   }}
                 >
-                  Research
+                  Research Extern
                 </p>
                 <p
                   style={{
@@ -311,9 +310,8 @@ export default function About() {
                     lineHeight: "var(--line-height-body)",
                   }}
                 >
-                  Bioengineering research at one of the world's leading cancer
-                  research centers. Foundation in rigorous scientific methodology
-                  and systems thinking.
+                  Research extern. Built OR capacity monitoring dashboards with
+                  React, D3.js, and AngularJS.
                 </p>
               </Card>
             </div>

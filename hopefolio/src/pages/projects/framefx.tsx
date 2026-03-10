@@ -17,7 +17,7 @@ export default function FrameFX() {
     { category: "Animation", technologies: "Remotion, React" },
     {
       category: "Architecture",
-      technologies: "8-package monorepo, Turborepo",
+      technologies: "8-package monorepo, pnpm workspaces",
     },
     {
       category: "Design System",
@@ -125,9 +125,9 @@ export default function FrameFX() {
       description: "Frame-rate adaptive",
     },
     {
-      value: "Monorepo",
-      label: "Structure",
-      description: "Turborepo managed",
+      value: "pnpm",
+      label: "Workspaces",
+      description: "Monorepo managed",
     },
   ];
 
@@ -170,7 +170,7 @@ export default function FrameFX() {
             Monorepo Architecture
           </h3>
           <p>
-            The 8-package structure managed by Turborepo ensures clean
+            The 8-package structure managed by pnpm workspaces ensures clean
             separation of concerns: tokens, conversion utilities, hooks,
             components, compositions, and build tooling each live in their
             own package with explicit dependency boundaries. This makes each

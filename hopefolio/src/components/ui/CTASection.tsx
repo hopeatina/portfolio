@@ -36,7 +36,7 @@ export default function CTASection() {
         >
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-center">
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/55">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/[0.55]">
                 Next step
               </p>
               <h2
@@ -67,7 +67,7 @@ export default function CTASection() {
                 </Link>
                 <Link
                   href="/projects"
-                  className="no-underline inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/8 px-7 py-4 text-sm font-medium text-white/90 transition-all duration-200 hover:border-white/30 hover:bg-white/12 md:text-base"
+                  className="no-underline inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/[0.08] px-7 py-4 text-sm font-medium text-white/90 transition-all duration-200 hover:border-white/30 hover:bg-white/[0.12] md:text-base"
                   style={{
                     backdropFilter: "blur(12px)",
                   }}
@@ -76,7 +76,7 @@ export default function CTASection() {
                 </Link>
               </div>
 
-              <p className="mt-8 text-sm text-white/68">
+              <p className="mt-8 text-sm text-white/[0.68]">
                 Prefer email?{" "}
                 <a
                   href="mailto:hopeatina@gmail.com"
@@ -88,22 +88,22 @@ export default function CTASection() {
             </div>
 
             <aside
-              className="rounded-[1.65rem] border border-white/12 bg-white/6 px-6 py-6 backdrop-blur-md"
+              className="rounded-[1.65rem] border border-white/[0.12] bg-white/[0.06] px-6 py-6 backdrop-blur-md"
             >
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/52">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/[0.52]">
                 Best fit
               </p>
               <div className="mb-5 flex flex-wrap gap-2">
                 {focusAreas.map((area) => (
                   <span
                     key={area}
-                    className="rounded-full border border-white/12 bg-white/7 px-3 py-1.5 text-sm font-medium text-white/88"
+                    className="rounded-full border border-white/[0.12] bg-white/[0.07] px-3 py-1.5 text-sm font-medium text-white/[0.88]"
                   >
                     {area}
                   </span>
                 ))}
               </div>
-              <p className="text-sm leading-relaxed text-white/72">
+              <p className="text-sm leading-relaxed text-white/[0.72]">
                 Senior IC roles, platform teams, and product-infrastructure work
                 where reliable automation and crafted interaction design both
                 matter.

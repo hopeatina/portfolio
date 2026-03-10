@@ -4,75 +4,174 @@ export type ReviewState =
   | "Live tool"
   | "Experimental";
 
-export type HeroProofStat = {
+export type HeroSignal = {
   label: string;
   value: string;
 };
 
-export type AttentionItem = {
+export type FocusCheckpoint = {
+  label: string;
+  value: string;
+};
+
+export type FocusSystem = {
   name: string;
-  title: string;
   state: ReviewState;
-  proof: string;
+  title: string;
   summary: string;
+  proof: string;
+  checkpoints: FocusCheckpoint[];
   actionLabel: string;
   href: string;
 };
 
-export const heroProofStats: HeroProofStat[] = [
+export type ReviewQueueItem = {
+  name: string;
+  state: ReviewState;
+  title: string;
+  summary: string;
+  proof: string;
+  actionLabel: string;
+  href: string;
+};
+
+export type FlagshipSystem = {
+  id: string;
+  name: string;
+  slug: string;
+  state: ReviewState;
+  image: string;
+  summary: string;
+  proof: string;
+  whyItMatters: string;
+  meta: string;
+};
+
+export const heroSignals: HeroSignal[] = [
   {
-    label: "Flagship systems",
-    value: "4 systems",
+    label: "Experience",
+    value: "8+ years shipping production systems",
   },
   {
-    label: "Production environments",
-    value: "3 shipped",
+    label: "Current focus",
+    value: "Agent orchestration, tooling, and review surfaces",
   },
   {
-    label: "Core platform",
-    value: "1 orchestration engine",
+    label: "Operator surfaces",
+    value: "CLI, web, extension, production AI workflows",
   },
 ];
 
-export const attentionItems: AttentionItem[] = [
-  {
-    name: "OrgX",
-    title: "OrgX orchestration model",
-    state: "Ready for review",
-    proof: "19 repos, trust governance, durable workflows",
-    summary:
-      "Multi-agent orchestration platform with MCP, memory, scoring, and approval flows.",
-    actionLabel: "Inspect architecture",
-    href: "/projects/orgx",
-  },
+export const focusSystem: FocusSystem = {
+  name: "OrgX",
+  state: "Ready for review",
+  title: "Trust-governed orchestration control plane",
+  summary:
+    "A multi-agent platform that routes work, holds memory, and keeps human judgment at the right boundaries instead of pretending every decision can be automated.",
+  proof:
+    "1,270+ commits across a 7-repo ecosystem covering orchestration, memory, scoring, approvals, and agent tooling.",
+  checkpoints: [
+    {
+      label: "Current review",
+      value: "Spawn guards, approval flows, and trust-calibrated routing",
+    },
+    {
+      label: "Human boundary",
+      value: "Decision review before escalation, merge, or deployment",
+    },
+    {
+      label: "Receipts",
+      value: "MCP integrations, org memory, quality scoring, and autonomous sessions",
+    },
+  ],
+  actionLabel: "Inspect OrgX",
+  href: "/projects/orgx",
+};
+
+export const reviewQueue: ReviewQueueItem[] = [
   {
     name: "Alma",
-    title: "Alma clinical AI systems",
     state: "Shipped in production",
-    proof: "Therapist adoption 40% → 89%",
+    title: "Clinical AI systems under real constraints",
     summary:
-      "HIPAA-compliant reassessment and documentation systems running in production.",
-    actionLabel: "Review system",
+      "HIPAA-compliant reassessment and documentation systems that improved therapist adoption while staying operationally trustworthy.",
+    proof: "999 commits across 7 major feature areas over 2.7 years. HIPAA-compliant production.",
+    actionLabel: "Review production system",
     href: "/projects/alma",
   },
   {
     name: "PerfPulse",
-    title: "PerfPulse performance tooling",
     state: "Live tool",
-    proof: "Rust CLI, web dashboard, Homebrew distribution",
+    title: "Local-first performance tooling",
     summary:
-      "A local-first performance monitor with AI recommendations and three operator surfaces.",
-    actionLabel: "Inspect tool",
+      "Rust tooling with CLI, web, and TUI surfaces built to inspect system health without hiding behind abstractions.",
+    proof: "Homebrew distribution with three operator surfaces and AI-assisted recommendations",
+    actionLabel: "Inspect tool surface",
     href: "/projects/perfpulse",
   },
   {
     name: "OpenClaw",
-    title: "OpenClaw browser control UX",
     state: "Experimental",
-    proof: "Browser-native agent control, CLI-first orchestration",
+    title: "Browser control for agent workflows",
     summary:
-      "A browser extension that turns agent task control into a usable orchestration surface.",
+      "Agent orchestration plugin with web dashboard, 30 MCP tools, task queue state machine, and real-time mission control via SSE.",
+    proof: "558 commits shaping agent orchestration plugin and workflow UX",
     actionLabel: "Inspect workflow",
     href: "/projects/openclaw",
+  },
+];
+
+export const flagshipSystems: FlagshipSystem[] = [
+  {
+    id: "orgx",
+    name: "OrgX",
+    slug: "orgx",
+    state: "Ready for review",
+    image: "/images/projects/orgx.jpg",
+    summary:
+      "Multi-agent orchestration with MCP integrations, trust governance, approval flows, and durable workflows.",
+    proof: "1,270+ commits across the platform. 7 repos spanning memory, scoring, orchestration, and tooling.",
+    whyItMatters:
+      "This is the clearest expression of how I think about agent systems: delegate aggressively, keep provenance visible, and reserve judgment for the moments that matter.",
+    meta: "Multi-agent orchestration · MCP protocol · governance",
+  },
+  {
+    id: "alma",
+    name: "Alma",
+    slug: "alma",
+    state: "Shipped in production",
+    image: "/images/projects/alma.svg",
+    summary:
+      "Production AI systems for compliant reassessment, documentation, and clinical review workflows.",
+    proof: "999 commits, 7 feature areas, HIPAA production over 2.7 years.",
+    whyItMatters:
+      "It proves I can ship AI under real operational, legal, and product constraints rather than only in demos.",
+    meta: "Production AI systems · HIPAA-compliant workflows",
+  },
+  {
+    id: "perfpulse",
+    name: "PerfPulse",
+    slug: "perfpulse",
+    state: "Live tool",
+    image: "/images/projects/perfpulse.svg",
+    summary:
+      "Rust-based performance tooling with CLI, web dashboard, and TUI surfaces for operator-grade inspection.",
+    proof: "Homebrew-installable with local-first system inspection and AI-guided recommendations.",
+    whyItMatters:
+      "It shows command of developer-tool UX, performance-minded implementation, and productized distribution.",
+    meta: "Rust tooling · CLI + web + TUI",
+  },
+  {
+    id: "openclaw",
+    name: "OpenClaw",
+    slug: "openclaw",
+    state: "Experimental",
+    image: "/images/projects/openclaw.svg",
+    summary:
+      "Agent orchestration plugin with web dashboard, 30 MCP tools, task queue state machine, and real-time mission control via SSE.",
+    proof: "558 commits shaping agent orchestration plugin and workflow UX.",
+    whyItMatters:
+      "It expands the orchestration story into interaction design: what it feels like to supervise and guide active systems.",
+    meta: "30 MCP tools · agent workflow UX",
   },
 ];

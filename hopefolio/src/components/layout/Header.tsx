@@ -28,7 +28,7 @@ const themeLabels = {
 };
 
 export default function Header() {
-  const { theme, setTheme, isDarkMode, getTextColor } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [isChangingReality, setIsChangingReality] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayColor, setOverlayColor] = useState("");
@@ -70,20 +70,6 @@ export default function Header() {
   }, [isChangingReality, overlayColor]);
 
   const handleThemeChange = (newTheme: Theme) => {
-    // Get the accent color of the new theme
-    const newStyles = (() => {
-      switch (newTheme) {
-        case "cameroonian":
-          return cameroonianStyles;
-        case "rice":
-          return riceStyles;
-        case "futuristic":
-          return futuristicStyles;
-        default:
-          return baseStyles;
-      }
-    })();
-
     // Start the transition
     setIsChangingReality(true);
     setShowOverlay(true);
@@ -222,40 +208,27 @@ export default function Header() {
 
               <div className="ml-4 relative group">
                 <button
-                  className={`px-4 py-2 ${styles.transitionBase} ${
+                  className={`rounded-full px-3.5 py-2 ${styles.transitionBase} ${
                     isChangingReality ? styles.buttonPulse : ""
-                  } group-hover:shadow-lg`}
+                  }`}
                   style={{
-                    background: (() => {
-                      if (theme === "rice") {
-                        return "var(--primary)";
-                      }
-                      return bgIsDark
-                        ? "rgba(var(--primary-rgb), 0.1)"
-                        : "var(--gradient-primary)";
-                    })(),
-                    color: (() => {
-                      if (theme === "rice") {
-                        return "var(--text-on-dark)";
-                      }
-                      return bgIsDark
-                        ? "var(--primary)"
-                        : "var(--text-on-dark)";
-                    })(),
+                    background: bgIsDark
+                      ? "rgba(var(--primary-rgb), 0.08)"
+                      : "rgba(var(--text-rgb), 0.04)",
+                    color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
                     borderRadius: "var(--border-radius)",
-                    border:
-                      bgIsDark && theme !== "rice"
-                        ? "1px solid var(--primary)"
-                        : "none",
-                    boxShadow: "var(--box-shadow)",
+                    border: `1px solid ${
+                      bgIsDark
+                        ? "rgba(var(--primary-rgb), 0.18)"
+                        : "rgba(var(--text-rgb), 0.12)"
+                    }`,
+                    boxShadow: "none",
                     transition: "all 0.3s ease",
                   }}
                 >
                   <span className="flex items-center gap-2">
-                    <span className="animate-spin-slow">
-                      {themeLabels[theme].icon}
-                    </span>
-                    <span className="hidden sm:inline">Change Reality</span>
+                    <span aria-hidden="true">{themeLabels[theme].icon}</span>
+                    <span className="hidden sm:inline">Theme</span>
                     <svg
                       className={`w-4 h-4 ${styles.transitionBase} group-hover:rotate-180`}
                       fill="none"
@@ -273,11 +246,9 @@ export default function Header() {
                   <style jsx>{`
                     button:hover {
                       transform: translateY(-1px);
-                      ${theme === "rice"
-                        ? "background: var(--hover);"
-                        : bgIsDark
-                        ? "background: rgba(var(--primary-rgb), 0.2);"
-                        : "filter: brightness(1.1);"}
+                      ${bgIsDark
+                        ? "background: rgba(var(--primary-rgb), 0.12);"
+                        : "background: rgba(var(--text-rgb), 0.07);"}
                     }
                   `}</style>
                 </button>

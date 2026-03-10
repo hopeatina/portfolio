@@ -38,10 +38,11 @@ Now Claude Code, Cursor, and my CLI all discover and use this tool through the s
 
 ## The OrgX MCP Server Architecture
 
-The OrgX MCP server exposes ~50 tools organized into capability groups:
+The OrgX MCP server exposes 131+ tools across 22 MCP servers, organized into capability groups:
 
 **Entity Management**
-- `save_issue`, `get_issue`, `list_issues` — CRUD for tasks
+- `orgx_create_entity`, `orgx_update_entity`, `list_entities` — CRUD for tasks, projects, initiatives
+- `save_issue`, `get_issue`, `list_issues` — Task management
 - `save_project`, `get_project`, `list_projects` — Project management
 - `save_milestone`, `get_milestone` — Milestone tracking
 
@@ -50,6 +51,7 @@ The OrgX MCP server exposes ~50 tools organized into capability groups:
 - `handoff_task` — Transfer work between agents
 - `start_autonomous_session` — Begin an autonomous work session
 - `check_spawn_guard` — Verify agent spawning permissions
+- `get_agent_status` — Check agent state and active sessions
 
 **Governance**
 - `get_pending_decisions` — List actions awaiting approval
@@ -58,7 +60,7 @@ The OrgX MCP server exposes ~50 tools organized into capability groups:
 - `get_my_trust_context` — Check current trust level
 
 **Quality**
-- `record_quality_score` — Score agent output
+- `orgx_quality_score`, `record_quality_score` — Score agent output
 - `get_scoring_signals` — Get scoring criteria
 - `verify_entity_completion` — Validate completion criteria
 - `record_outcome` — Record task outcome for attribution
@@ -68,6 +70,10 @@ The OrgX MCP server exposes ~50 tools organized into capability groups:
 - `submit_learning` — Record a new learning
 - `get_relevant_learnings` — Context-aware learning retrieval
 - `get_morning_brief` — Daily summary of org activity
+
+**External Integrations (22 MCP Servers)**
+
+Beyond the core OrgX tools, the platform integrates with 22 external MCP servers: GitHub, Slack, Google Drive, Notion, HubSpot, Figma, Stripe, Vercel, Supabase, Asana, PostHog, Sentry, Intercom, Datadog, Box, Kling AI, Runway, Firecrawl, Playwright, Fal.AI, and more. Each integration exposes additional tools through the same MCP protocol, allowing agents to interact with external services as naturally as they interact with OrgX itself.
 
 ## Tool-Calling Middleware Patterns
 
@@ -169,7 +175,7 @@ Beyond the MCP server, OrgX integrates directly with Claude Code through custom 
 - **`/orgx-review`** — Review and score a completed task
 - **`/orgx-brief`** — Get a morning brief of organizational activity
 
-Skills compose multiple MCP tool calls into coherent workflows. A single `/orgx-plan` skill call might invoke 8-10 MCP tools under the hood.
+Skills compose multiple MCP tool calls into coherent workflows. A single `/orgx-plan` skill call might invoke an estimated 8-10 MCP tools under the hood.
 
 ## Production Lessons
 

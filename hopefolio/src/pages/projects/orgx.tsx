@@ -15,304 +15,330 @@ export default function OrgX() {
 
   const techStack = [
     {
-      category: "Core",
-      technologies: "TypeScript, React, Next.js",
+      category: "Frontend",
+      technologies: "Next.js 15, React, TypeScript",
     },
     {
-      category: "Protocol",
-      technologies: "MCP Protocol, Claude API, OpenAI API",
-    },
-    {
-      category: "Backend",
-      technologies: "Supabase, PostgreSQL, Cloudflare Workers",
-    },
-    {
-      category: "Orchestration",
-      technologies: "Agent Spawning, Task Handoff, Durable Workflows",
-    },
-    {
-      category: "Quality",
-      technologies: "Composite Scoring, Quality Gates, Trust Governance",
-    },
-    {
-      category: "Infrastructure",
-      technologies: "Vercel, Redis, Edge Computing",
+      category: "Database",
+      technologies: "Supabase (PostgreSQL with RLS)",
     },
     {
       category: "Auth",
-      technologies: "OAuth Flows, RBAC, Session Management",
+      technologies: "Clerk (session management, RBAC)",
     },
     {
-      category: "Tools",
-      technologies: "Claude Code Skills, Cursor Plugin, CLI",
-    },
-  ];
-
-  const problemFeatures = [
-    {
-      title: "Coordination Complexity",
-      description:
-        "When multiple AI agents operate across an organization, they need shared context, consistent decision-making, and clear handoff protocols. Without orchestration, agents duplicate work, contradict each other, and produce inconsistent outputs.",
+      category: "Workflows",
+      technologies: "Inngest (47+ durable workflow functions)",
     },
     {
-      title: "Governance Gap",
-      description:
-        "Autonomous agents making decisions at scale require trust boundaries, approval workflows, and quality assurance. Organizations need visibility into what agents are doing and the ability to intervene when needed.",
+      category: "AI/LLM",
+      technologies: "Anthropic Claude SDK, OpenAI SDK, OpenRouter",
     },
     {
-      title: "Observability Deficit",
-      description:
-        "Tracking agent performance, scoring output quality, and maintaining organizational memory across sessions is essential for continuous improvement but missing from existing tooling.",
+      category: "MCP",
+      technologies: "22 servers, 131+ tools",
+    },
+    {
+      category: "Observability",
+      technologies: "PostHog, Sentry, OpenTelemetry",
+    },
+    {
+      category: "Evaluation",
+      technologies: "Promptfoo-based eval pipelines",
     },
   ];
 
-  const ecosystemFeatures = [
+  const germinationFeatures = [
     {
-      title: "MCP Server Integrations",
+      title: "The Coordination Problem",
       description:
-        "Core protocol layer implementing the Model Context Protocol for standardized agent-to-tool communication. Enables agents to discover, invoke, and compose tools across the organization with consistent interfaces.",
+        "I was running multiple Claude Code sessions across different repos and kept hitting the same wall: agents duplicating work, losing context between sessions, and making decisions I could not trace back. There was no shared memory, no way to set boundaries on what an agent could do unsupervised, and no feedback loop to improve quality over time.",
+    },
+    {
+      title: "Why Not Existing Tools",
+      description:
+        "LangChain and CrewAI solve the 'chain LLM calls together' problem. I needed something different: a system where agents operate autonomously over hours, not seconds. That means governance (who approved this decision?), durability (what happens when a session crashes mid-task?), and organizational memory (what did we learn last week that is relevant now?).",
+    },
+    {
+      title: "The Operating System Analogy",
+      description:
+        "An OS does not run your programs for you -- it provides process management, permissions, memory, and inter-process communication. OrgX does the same thing for AI agents: it manages spawning, enforces trust boundaries, maintains shared memory, and coordinates handoffs between agents working on related tasks.",
+    },
+  ];
+
+  const mcpFeatures = [
+    {
+      title: "22 MCP Servers, 131+ Tools",
+      description:
+        "Each MCP server wraps a SaaS API into a standardized tool interface that any agent can discover and invoke. The servers handle authentication, rate limiting, and schema validation so agents interact with tools through a consistent protocol rather than raw API calls.",
       items: [
-        "MCP server implementations for Linear, Gmail, Google Calendar, Cloudflare, and Vercel",
-        "Tool-calling middleware with schema validation and error handling",
-        "Dynamic tool discovery and capability negotiation between agents",
-        "Standardized resource and prompt management across all integrations",
+        "Development: GitHub, Vercel, Supabase, Playwright",
+        "Communication: Slack, Intercom",
+        "Project Management: Notion, Asana",
+        "Business: HubSpot, Stripe, Figma",
+        "Data/Docs: Google Drive, Box, Firecrawl",
+        "Observability: PostHog, Sentry, Datadog",
+        "Media: Kling AI, Runway, Fal.AI",
       ],
     },
     {
-      title: "CLI-First Orchestration Engine",
+      title: "Trust-Based Governance",
       description:
-        "Command-line interface for spawning, monitoring, and managing agent workflows. Designed for developer ergonomics with composable commands and real-time streaming output.",
+        "A 3-tier trust system (strict, balanced, open) controls what agents can do autonomously. Each tier gates which tools are available and what risk level of action an agent can take without human approval. Risk tiers range from 0 (read-only, no approval needed) to 4 (destructive actions, always require approval).",
       items: [
-        "Agent spawning with configurable models, tools, and trust levels",
-        "Task handoff protocols for multi-agent collaboration chains",
-        "Durable workflow execution with checkpoint and resume capabilities",
-        "Real-time streaming of agent activity with structured logging",
+        "Strict mode: agents can read and analyze but require approval for any mutation",
+        "Balanced mode: agents can execute low-risk mutations autonomously, escalate medium-risk",
+        "Open mode: agents operate with full autonomy within their capability set",
+        "Spawn guards prevent uncontrolled agent proliferation with budget and count limits",
       ],
     },
     {
-      title: "Quality & Scoring System",
+      title: "Quality Gates and Scoring",
       description:
-        "Composite scoring engine that evaluates agent outputs against multiple quality dimensions. Integrates with quality gates to enforce standards before work is accepted.",
+        "A composite scoring engine evaluates agent outputs across multiple dimensions before work is accepted. Scores feed into workstream prioritization: higher-quality agents get routed to higher-stakes work. Domain-specific quality thresholds ensure that, for example, code changes meet a different bar than documentation edits.",
       items: [
-        "Multi-signal scoring combining relevance, completeness, correctness, and style",
+        "Multi-signal scoring combining relevance, completeness, correctness, and domain fit",
         "Quality gates that block progression until outputs meet configurable thresholds",
-        "Outcome attribution tracking which agents and decisions led to results",
-        "Historical scoring data powering continuous improvement and trust calibration",
+        "Outcome attribution tracking which agents and decisions led to specific results",
+        "Historical scoring data powering trust calibration and model routing decisions",
       ],
     },
   ];
 
-  const technicalDecisions = [
+  const tradeoffDecisions = [
     {
-      title: "Why MCP Protocol",
+      title: "Why Inngest Over Temporal",
       description:
-        "MCP provides a standardized interface between LLMs and external tools, eliminating the need to write custom integrations for every model-tool combination. By adopting MCP as the protocol layer, OrgX agents can use any MCP-compatible tool without modification, and new tools become instantly available to all agents in the organization.",
+        "Temporal is the industry standard for durable workflows, but it requires running a separate cluster and introduces significant operational overhead. Inngest runs as a managed service with an event-driven model that maps naturally to how agent tasks flow: an event fires (task assigned, approval received, quality check passed), a function runs, and if it fails, it retries with backoff. The 47+ workflow functions in OrgX handle everything from agent spawning to morning brief generation to autonomous session management.",
       items: [
-        "Vendor-agnostic: works with Claude, GPT, and other LLM providers",
-        "Composable tool ecosystem with shared schemas and discovery",
-        "Community-driven standard with growing adoption across the industry",
+        "Zero infrastructure: no cluster to manage, no workers to scale",
+        "Event-driven model matches agent workflow patterns naturally",
+        "Built-in retry logic with configurable backoff and failure handling",
+        "Step functions for multi-stage workflows with durable state between steps",
       ],
     },
     {
-      title: "Why Supabase for Org Memory",
+      title: "Why Supabase Over a Custom Backend",
       description:
-        "Organizational memory requires both structured data (entities, relationships, decisions) and real-time subscriptions (live agent activity, collaborative editing). Supabase provides PostgreSQL for complex queries with Row Level Security, plus real-time channels for live updates -- all with minimal infrastructure overhead.",
+        "Organizational memory requires both structured data (entities, decisions, trust levels, scoring history) and real-time subscriptions (live agent activity, collaborative dashboards). Supabase provides PostgreSQL with Row Level Security for multi-tenant data isolation, real-time channels for live updates, and edge functions for lightweight compute -- all without managing infrastructure. The tradeoff is less flexibility than a custom backend, but the development velocity has been worth it for a solo-built system.",
       items: [
-        "Row Level Security enables per-org and per-user data isolation",
-        "Real-time subscriptions power live dashboards and agent monitoring",
-        "Edge Functions for lightweight serverless compute close to users",
+        "Row Level Security enables per-org data isolation without application-level checks",
+        "Real-time subscriptions power live agent monitoring dashboards",
+        "PostgreSQL's full-text search supports semantic search over org memory",
+        "Edge functions handle webhook processing and lightweight API endpoints",
       ],
     },
     {
-      title: "Trust-Based Governance Model",
+      title: "Why MCP as the Protocol Layer",
       description:
-        "Rather than binary allow/deny permissions, OrgX implements a graduated trust model where agents earn autonomy through demonstrated quality. New agents start with limited scope and require human approval for consequential actions. As they accumulate positive outcomes, their trust level increases and approval requirements relax.",
+        "MCP provides a standardized interface between LLMs and external tools. Instead of writing bespoke integrations for each model-tool combination, each tool exposes an MCP server, and any MCP-compatible agent can discover and invoke it. The tradeoff: MCP is still a young protocol with evolving semantics, but standardizing on it early means OrgX benefits from the growing ecosystem of MCP-compatible tools without custom integration work.",
       items: [
-        "Graduated autonomy: agents earn broader permissions over time",
-        "Decision approval workflows for high-stakes actions",
-        "Spawn guards preventing uncontrolled agent proliferation",
-        "Audit trail of every decision, outcome, and trust adjustment",
+        "New tools become available to all agents instantly via MCP discovery",
+        "Schema validation at the protocol layer catches malformed tool calls before execution",
+        "Tool-level authentication and rate limiting handled once per server, not per agent",
       ],
     },
   ];
 
-  const autonomousSessionFeatures = [
+  const capabilityFeatures = [
     {
-      title: "Autonomous Session System",
+      title: "Agent Spawning and Model Routing",
       description:
-        "Long-running agent sessions that operate independently with periodic check-ins and configurable guardrails.",
+        "Agents are spawned with configurable trust levels, tool access, and model assignments. Opus handles planning and complex reasoning tasks; Sonnet handles execution and routine operations. Spawn guards enforce budget limits and prevent runaway agent proliferation.",
     },
     {
-      title: "Claude Code Skills Ecosystem",
+      title: "Autonomous Session Management",
       description:
-        "Custom skills that extend Claude Code with organization-specific capabilities, workflows, and domain knowledge.",
-    },
-    {
-      title: "Cursor Plugin",
-      description:
-        "IDE integration bringing OrgX orchestration directly into the development workflow with inline agent management.",
-    },
-    {
-      title: "Initiative Streaming",
-      description:
-        "Break large initiatives into streams of work that agents can pick up, execute, and hand off with full context preservation.",
+        "Long-running agent sessions operate independently with periodic check-ins and configurable budget guardrails. Sessions survive interruptions through Inngest's durable workflow execution, picking up where they left off after failures.",
     },
     {
       title: "Morning Brief System",
       description:
-        "Automated daily summaries of agent activity, pending decisions, and organizational health metrics.",
+        "An Inngest-powered skill that generates automated daily summaries of agent activity, pending decisions, initiative progress, and organizational health metrics. Delivered as a structured report covering what happened, what needs attention, and what is blocked.",
     },
     {
-      title: "Outcome Attribution",
+      title: "Organizational Memory",
       description:
-        "Track which agents, decisions, and workflows led to specific outcomes for continuous learning and optimization.",
+        "Semantic search over decisions, agent status, and initiative history. The memory layer captures what agents learned, what decisions were made and why, and what outcomes resulted -- making institutional knowledge queryable rather than lost between sessions.",
+    },
+    {
+      title: "Economic Ledger",
+      description:
+        "Cost attribution and ROI tracking by agent and capability. Every LLM call, tool invocation, and workflow execution is logged with its cost, enabling analysis of which agents and workflows deliver value relative to their compute spend.",
+    },
+    {
+      title: "Evaluation Pipelines",
+      description:
+        "Promptfoo-based evaluation pipelines that test agent behavior against defined scenarios. Used to validate model routing decisions, quality gate thresholds, and tool-calling accuracy before deploying changes to production.",
     },
   ];
 
   const orchestrationDiagram = `
     flowchart TB
-      subgraph "Protocol Layer"
-        A[MCP Server] --> B[Agent Spawning]
-        B --> C[Task Handoff]
+      subgraph "Event Layer (Inngest)"
+        A[Task Event] --> B[Spawn Guard Check]
+        B --> C[Agent Spawned]
+        C --> D[Workflow Execution]
+        D --> E[Quality Gate]
       end
 
       subgraph "Governance Layer"
-        D[Decision Approval] --> E[Quality Gates]
-        E --> F[Trust Governance]
+        F[Trust Tier Check] --> G[Capability Gating]
+        G --> H[Risk Assessment 0-4]
+        H --> I{Approval Required?}
+        I -->|Yes| J[Human Review]
+        I -->|No| K[Auto-Proceed]
       end
 
       subgraph "Intelligence Layer"
-        G[Org Memory] --> H[Composite Scoring]
-        H --> I[Outcome Attribution]
+        L[Org Memory] --> M[Composite Scoring]
+        M --> N[Outcome Attribution]
+        N --> O[Economic Ledger]
       end
 
-      C --> D
-      F --> G
-      I --> A
+      E --> F
+      J --> D
+      K --> D
+      O --> L
 
       style A fill:#8B5CF6,stroke:#7C3AED,color:#fff
       style E fill:#DC2626,stroke:#B91C1C,color:#fff
-      style G fill:#10B981,stroke:#059669,color:#fff
+      style L fill:#10B981,stroke:#059669,color:#fff
   `;
 
   const projectStats = [
     {
-      value: "1,457+",
+      value: "874K",
+      label: "Lines of Code",
+      description: "Across 8,704 files",
+    },
+    {
+      value: "1,270+",
       label: "Commits",
-      description: "Across the ecosystem",
+      description: "Across 7-repo ecosystem",
     },
     {
-      value: "19",
-      label: "Repositories",
-      description: "Interconnected ecosystem",
+      value: "131+",
+      label: "MCP Tools",
+      description: "Across 22 servers",
     },
     {
-      value: "Live",
-      label: "Production",
-      description: "At useorgx.com",
-    },
-    {
-      value: "12 mo",
+      value: "15 mo",
       label: "Active Development",
-      description: "And counting",
+      description: "Dec 2024 - present",
     },
   ];
 
   const architectureHighlights = [
-    "19-Repo Ecosystem: Modular architecture spanning MCP servers, CLI tools, web apps, plugins, and shared libraries",
-    "Durable Workflows: Agent tasks survive disconnections and resume with full context from checkpoints",
-    "Composite Scoring Engine: Multi-signal quality evaluation combining automated metrics with human feedback",
-    "Trust Calibration: Dynamic trust levels that adapt based on agent track record and outcome attribution",
-    "Spawn Guards: Prevent runaway agent proliferation with configurable limits and approval requirements",
+    "7-Repo Ecosystem: Modular architecture spanning MCP servers, web app, Inngest workflows, shared libraries, and evaluation pipelines",
+    "47+ Inngest Functions: Durable workflows handling agent spawning, task orchestration, morning briefs, autonomous sessions, and quality gate enforcement",
+    "3-Tier Trust Model: Strict, balanced, and open governance modes with risk tiers 0-4 controlling what agents can do unsupervised",
+    "Model Routing: Opus for planning and complex reasoning, Sonnet for execution and routine operations, OpenRouter for fallback",
+    "Composite Scoring Engine: Multi-signal quality evaluation feeding into workstream prioritization and trust calibration",
   ];
 
   return (
     <ProjectLayout
       title="OrgX"
-      description="Multi-agent orchestration platform with MCP protocol integration, trust-based governance, and organizational memory for coordinating AI agents at scale"
+      description="Multi-agent orchestration platform with 22 MCP servers, trust-based governance, durable Inngest workflows, and organizational memory -- live at useorgx.com"
     >
       <ProjectHero
         title="OrgX"
-        description="A multi-agent orchestration platform that coordinates AI agents across an organization with MCP protocol integration, trust-based governance, quality gates, and persistent organizational memory. Built as a 19-repository ecosystem powering durable agent workflows at scale."
+        description="A multi-agent orchestration platform I built solo over 15 months. 22 MCP servers with 131+ tools, trust-based governance with risk tiers, durable workflows via Inngest, and organizational memory with semantic search. 874K lines of code across a 7-repo ecosystem, live in production at useorgx.com."
         tags={[
           "Multi-Agent Orchestration",
           "MCP Protocol",
-          "Agent Governance",
-          "Tool Calling",
+          "Trust Governance",
+          "Inngest Workflows",
+          "Supabase",
         ]}
         image="/images/projects/orgx.jpg"
       />
 
       <TechStack items={techStack} />
 
-      <ProjectSection title="The Problem">
+      <ProjectSection title="Why I Built This">
         <p className="text-lg mb-8">
-          Coordinating multiple AI agents across an organization requires
-          orchestration, governance, and observability. Without these
-          foundations, agents operate in silos, make conflicting decisions, and
-          produce outputs no one can trace or trust.
+          OrgX started from a practical problem: I was running multiple AI agent
+          sessions across repos and had no way to coordinate them. Agents
+          duplicated work, lost context between sessions, and made decisions I
+          could not audit. I needed an operating system for agents -- not another
+          LLM wrapper, but infrastructure for process management, permissions,
+          shared memory, and inter-agent communication.
         </p>
 
-        <FeatureGrid features={problemFeatures} columns={3} />
+        <FeatureGrid features={germinationFeatures} columns={3} />
       </ProjectSection>
 
       <ProjectSection title="Architecture Overview">
         <p className="text-lg mb-6">
-          OrgX implements a three-layer architecture: a protocol layer for
-          standardized agent-tool communication via MCP, a governance layer for
-          decision approval and quality enforcement, and an intelligence layer
-          for organizational memory and continuous learning.
+          OrgX is structured in three layers. The event layer (Inngest) handles
+          durable workflow execution -- spawning agents, running quality gates,
+          managing autonomous sessions. The governance layer enforces trust tiers
+          and risk-based approval flows. The intelligence layer maintains
+          organizational memory, composite scoring, outcome attribution, and
+          cost tracking.
         </p>
 
         <MermaidDiagram
-          title="Multi-Agent Orchestration Pipeline"
+          title="Agent Orchestration Pipeline"
           diagram={orchestrationDiagram}
-          description="End-to-end flow from MCP server integration through agent spawning, task handoff, decision approval, quality gates, trust governance, and organizational memory with outcome attribution feeding back into the system."
+          description="End-to-end flow: a task event triggers an Inngest workflow, which runs spawn guard checks, executes the agent workflow, and applies quality gates. The governance layer checks trust tiers and risk levels, routing to human review or auto-proceeding. The intelligence layer captures outcomes, scores quality, and feeds learnings back into org memory."
         />
 
         <ProjectCard variant="secondary" className="mt-8">
           <h3 className="text-xl font-semibold mb-4 text-primary">
-            Why This Architecture
+            Why This Layering Matters
           </h3>
           <p>
-            Each layer can evolve independently. The protocol layer adopts new
-            MCP tools without touching governance. The governance layer can
-            tighten or relax controls without changing how agents communicate.
-            The intelligence layer learns from every interaction, making the
-            entire system smarter over time.
+            Each layer evolves independently. I can add new MCP servers without
+            touching governance. I can tighten trust controls without changing
+            how workflows execute. And the intelligence layer learns from every
+            interaction regardless of what triggered it. This separation was not
+            the original design -- it emerged after the first three months when I
+            realized governance changes kept breaking workflow logic because they
+            were too tightly coupled.
           </p>
         </ProjectCard>
       </ProjectSection>
 
-      <ProjectSection title="What I Built">
+      <ProjectSection title="What the System Does">
         <p className="text-lg mb-8">
-          A 19-repository ecosystem including MCP server integrations,
-          CLI-first orchestration, durable agent workflows, tool-calling
-          middleware, composite scoring engines, quality gates, autonomous
-          session systems, a Claude Code skills ecosystem, and a Cursor plugin.
+          The core of OrgX is the MCP integration layer, the trust governance
+          system, and the quality scoring engine. These three subsystems work
+          together: MCP servers give agents access to tools, governance controls
+          which tools agents can use and when they need approval, and scoring
+          evaluates the quality of what agents produce.
         </p>
 
-        <FeatureGrid features={ecosystemFeatures} columns={1} />
+        <FeatureGrid features={mcpFeatures} columns={1} />
       </ProjectSection>
 
-      <ProjectSection title="Technical Decisions">
-        <FeatureGrid features={technicalDecisions} columns={1} />
+      <ProjectSection title="Technical Tradeoffs">
+        <p className="text-lg mb-8">
+          Every major infrastructure decision in OrgX involved a tradeoff. Here
+          are the three that shaped the system most, and why I made the choices I
+          did.
+        </p>
+
+        <FeatureGrid features={tradeoffDecisions} columns={1} />
       </ProjectSection>
 
       <ProjectSection title="Agent Capabilities">
         <p className="text-lg mb-6">
-          Beyond core orchestration, OrgX provides a rich set of capabilities
-          that make agents genuinely useful in day-to-day workflows.
+          Beyond the core orchestration infrastructure, OrgX provides a set of
+          capabilities that make agents useful for sustained, autonomous work --
+          not just one-shot tasks.
         </p>
 
-        <FeatureGrid features={autonomousSessionFeatures} columns={2} />
+        <FeatureGrid features={capabilityFeatures} columns={2} />
 
         <ProjectCard variant="highlight" className="mt-8">
           <p className="italic text-center text-lg text-body">
-            "OrgX is not a wrapper around an API. It is the operating system
-            for how AI agents work together inside an organization -- with the
-            governance, observability, and trust mechanisms that make autonomous
-            agents viable at scale."
+            OrgX is not a wrapper around an API. It is infrastructure for how AI
+            agents operate inside an organization -- with the governance,
+            durability, and observability that make autonomous agents viable
+            beyond demo-scale.
           </p>
         </ProjectCard>
       </ProjectSection>
@@ -343,12 +369,13 @@ export default function OrgX() {
               Ecosystem Scale
             </h3>
             <p>
-              19 repositories working together: MCP servers for Linear, Gmail,
-              Google Calendar, Cloudflare, and Vercel; a CLI orchestration
-              engine; web dashboard; Claude Code skills; Cursor plugin; shared
-              TypeScript libraries; Supabase backend; and Cloudflare Workers
-              for edge compute. Each repo has its own CI/CD pipeline, and they
-              compose into a coherent platform.
+              7 repositories working together: 22 MCP servers integrating
+              GitHub, Slack, Notion, HubSpot, Figma, Stripe, and 16 other
+              services; a Next.js 15 web dashboard; Inngest workflow functions;
+              Promptfoo evaluation pipelines; shared TypeScript libraries; and a
+              Supabase backend with Row Level Security. 874K lines of code
+              across 8,704 files, with 692 commits in the main repo and 1,270+
+              across the ecosystem.
             </p>
           </ProjectCard>
 
@@ -357,12 +384,13 @@ export default function OrgX() {
               Live in Production
             </h3>
             <p>
-              OrgX is live at useorgx.com, actively used for managing
-              multi-agent workflows. The platform handles agent spawning, task
-              handoff, decision approval, quality scoring, and organizational
-              memory in production -- not a demo, not a prototype, but a
-              working system with 12 months of active development and 1,457+
-              commits behind it.
+              OrgX is live at useorgx.com and has been in active development
+              since December 2024 -- 15 months of continuous iteration. The
+              platform handles agent spawning, trust-gated tool execution,
+              durable workflow orchestration via Inngest, quality scoring,
+              autonomous sessions with budget guardrails, and organizational
+              memory with semantic search. Not a demo. Not a prototype. A
+              working system I use daily.
             </p>
           </ProjectCard>
         </div>

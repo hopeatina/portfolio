@@ -96,7 +96,7 @@ export default function EvalVybes() {
     >
       <ProjectHero
         title="EvalVybes"
-        description="Compare AI models through natural conversation. EvalVybes lets you test prompts across multiple AI models using voice commands, with real-time comparison and smart rating systems."
+        description="A conversational AI evaluation platform in active development. EvalVybes aims to let you test prompts across multiple AI models using voice commands, with real-time comparison and smart rating systems. ~16.3K LOC built so far."
         tags={[
           "Voice AI",
           "Model Comparison",
@@ -111,11 +111,10 @@ export default function EvalVybes() {
 
       <ProjectSection title="Overview">
         <p className="text-lg mb-6">
-          EvalVybes is a conversational AI evaluation platform that makes
-          comparing different AI models as easy as having a conversation. With a
-          vibrant, artistic interface featuring paintbrush gradients and
-          glassmorphism, the platform emphasizes fun, accessible AI exploration
-          while maintaining professional functionality.
+          EvalVybes is a conversational AI evaluation platform in active
+          development (~16.3K LOC). The vision is to make comparing different AI
+          models as easy as having a conversation, with a vibrant artistic
+          interface featuring paintbrush gradients and glassmorphism.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 mt-8">
@@ -273,7 +272,6 @@ export default function EvalVybes() {
       </ProjectSection>
 
       <ProjectCTA
-        demoUrl="https://evalvybes.com"
         githubUrl="https://github.com/hopeatina/evalvybes"
       />
     </ProjectLayout>

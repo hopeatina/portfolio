@@ -32,32 +32,32 @@ export default function TaskToModel() {
 
   const stageFeatures = [
     {
-      title: "Stage 0: Market Validation Platform",
+      title: "Stage 0: Market Validation Platform (Built)",
       description:
-        "Comprehensive market validation with systematic user feedback and conversion optimization",
+        "Market validation with user feedback and conversion optimization",
       items: [
-        "Landing Page Optimization: Compelling value proposition with conversion tracking and A/B testing",
+        "Landing Page Optimization: Value proposition with conversion tracking",
         "Waitlist System: Airtable integration with automated email sequences and engagement metrics",
         "Pre-order Mechanism: Stripe integration for market validation with tiered pricing validation",
-        "Analytics Pipeline: Comprehensive tracking for conversion optimization and user behavior analysis",
+        "Analytics Pipeline: Tracking for conversion optimization and user behavior analysis",
       ],
     },
     {
-      title: "Stage 1: MVP Implementation",
+      title: "Stage 1: MVP Implementation (Built)",
       description:
-        "Production-ready MVP with enterprise authentication and AI model generation capabilities",
+        "MVP with authentication and AI model generation capabilities",
       items: [
-        "NextAuth Integration: Complete authentication system with Google OAuth, session management, and user profiles",
-        "Task Description Engine: Sophisticated form system with validation, auto-save, and progress tracking",
+        "NextAuth Integration: Authentication system with Google OAuth, session management, and user profiles",
+        "Task Description Engine: Form system with validation, auto-save, and progress tracking",
         "OpenAI Fine-tuning: Direct API integration with job monitoring, progress tracking, and error handling",
-        "Model Testing Interface: Interactive testing environment with A/B comparison against base models",
+        "Model Testing Interface: Testing environment with A/B comparison against base models",
         "Payment Processing: Stripe integration with subscription handling and usage-based billing",
       ],
     },
     {
-      title: "Stages 2-4: Advanced Features",
+      title: "Stages 2-4: Advanced Features (Planned)",
       description:
-        "Enterprise-scale platform with team collaboration and white-label capabilities",
+        "Future roadmap for enterprise-scale platform with team collaboration and API access",
       items: [
         "AI-Assisted Generation: Automated example creation using LLMs with quality validation",
         "Comprehensive Evaluation: Multi-metric model assessment with custom evaluation frameworks",
@@ -146,19 +146,19 @@ export default function TaskToModel() {
 
   const developmentMetrics = [
     {
-      value: "4-Stage",
-      label: "Development Plan",
-      description: "Systematic progression",
+      value: "134",
+      label: "Commits",
+      description: "Active development",
     },
     {
-      value: "100+",
-      label: "Documentation Pages",
-      description: "Comprehensive specs",
+      value: "~41K",
+      label: "Lines of Code",
+      description: "Full-stack implementation",
     },
     {
-      value: "Enterprise",
-      label: "Authentication",
-      description: "NextAuth & OAuth",
+      value: "Stages 0-1",
+      label: "Built",
+      description: "Stages 2-4 planned",
     },
     {
       value: "Full-Stack",
@@ -189,7 +189,7 @@ export default function TaskToModel() {
     >
       <ProjectHero
         title="TaskToModel"
-        description="A comprehensive AI platform that converts plain English task descriptions into fine-tuned AI models. Features sophisticated product development strategy, systematic market validation, enterprise authentication, and automated ML pipeline orchestration."
+        description="An AI platform that converts plain English task descriptions into fine-tuned AI models. Stages 0-1 built (market validation, MVP with NextAuth + Stripe + OpenAI fine-tuning). Stages 2-4 planned (API, team collaboration, enterprise). 134 commits, ~41K LOC."
         tags={[
           "AI Platform",
           "Product Strategy",
@@ -357,7 +357,6 @@ export default function TaskToModel() {
       </ProjectSection>
 
       <ProjectCTA
-        demoUrl="https://tasktomodel.com"
         githubUrl="https://github.com/hopeatina/tasktomodel"
       />
     </ProjectLayout>

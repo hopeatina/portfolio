@@ -21,17 +21,17 @@ const receipts: Receipt[] = [
   },
   {
     id: "2",
-    value: "1,457+",
-    label: "Commits on OrgX",
+    value: "1,270+",
+    label: "Commits across OrgX ecosystem",
     system: "OrgX",
-    proof: "A multi-agent orchestration platform built across a 19-repo ecosystem over the last 12 months.",
+    proof: "A multi-agent orchestration platform built across a 7-repo ecosystem over the last 15 months.",
   },
   {
     id: "3",
-    value: "93%",
-    label: "Bug reduction",
-    system: "Vessel Health",
-    proof: "Measured after backend re-architecture and reliability-focused systems work.",
+    value: "999",
+    label: "Commits at Alma",
+    system: "Alma (Cove Health)",
+    proof: "Core backend contributor for 2.7 years — automated reassessments, compliance, audit integration in HIPAA production.",
   },
 ];
 

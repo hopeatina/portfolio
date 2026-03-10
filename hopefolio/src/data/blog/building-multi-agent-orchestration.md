@@ -1,13 +1,13 @@
 ---
 title: "Building a Multi-Agent Orchestration Platform: Lessons from OrgX"
 date: "2025-02-15"
-excerpt: "Durable workflows, trust-based governance, quality gates, and agent spawning — what I learned building a 19-repo multi-agent orchestration platform."
+excerpt: "Durable workflows, trust-based governance, quality gates, and agent spawning — what I learned building a 7-repo multi-agent orchestration platform."
 category: "Agent Infrastructure"
 ---
 
 # Building a Multi-Agent Orchestration Platform: Lessons from OrgX
 
-Over the past 12 months and 1,457+ commits, I've been building OrgX — a multi-agent orchestration platform that coordinates AI agents across organizational workflows. This post covers the architectural decisions, hard-won lessons, and patterns that emerged from building agent infrastructure at scale.
+Over the past 15 months and 1,270+ commits, I've been building OrgX — a multi-agent orchestration platform that coordinates AI agents across organizational workflows. This post covers the architectural decisions, hard-won lessons, and patterns that emerged from building agent infrastructure at scale.
 
 ## The Problem: Agents Need Coordination
 
@@ -20,7 +20,7 @@ At OrgX, I needed agents that could:
 - **Score and evaluate** their own output quality
 - **Remember** organizational patterns and decisions across sessions
 
-None of the existing frameworks handled all of this well. LangChain handles chains, not organizations. CrewAI handles crews, not governance. I needed something that treated the *organization* as a first-class primitive.
+None of the existing frameworks handled all of this well. Existing frameworks focus on single-agent chains or crew-based task assignment, but don't address organization-wide governance, trust calibration, or quality scoring across autonomous agents. I needed something that treated the *organization* as a first-class primitive.
 
 ## Architecture: Why MCP Protocol
 
@@ -111,9 +111,9 @@ const learnings = await queryOrgMemory({
 
 This creates a compounding advantage — the more work agents do, the better the organization's collective memory becomes.
 
-## The 19-Repo Ecosystem
+## The 7-Repo Ecosystem
 
-OrgX isn't a single repo. It's a 19-repo ecosystem that includes:
+OrgX isn't a single repo. It's a 7-repo ecosystem that includes:
 
 - **Core platform** — Next.js app with Supabase backend
 - **MCP server** — Tool definitions and handler implementations

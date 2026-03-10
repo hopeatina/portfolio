@@ -18,42 +18,30 @@ export default function BeliefMap() {
       category: "Visualization",
       technologies: "Canvas API, SVG, Interactive Charts",
     },
-    { category: "Data", technologies: "Graph Database, Local Storage" },
-    { category: "AI/ML", technologies: "Pattern Recognition, Insight Engine" },
+    { category: "Data", technologies: "Local Storage" },
     {
       category: "Design",
-      technologies: "Responsive UI, Dark Mode, Gamification",
+      technologies: "Responsive UI, Dark Mode",
     },
     { category: "Architecture", technologies: "Local-First, Privacy-Focused" },
   ];
 
   const coreFeatures = [
     {
-      title: "Guided Path Discovery",
+      title: "Guided Path Discovery (Planned)",
       description:
-        "Navigate through carefully crafted questions that help uncover deeper beliefs. The system adapts based on your responses, creating a personalized exploration journey.",
+        "Structured questions designed to help uncover deeper beliefs, creating a personalized exploration journey.",
       items: [
-        "Progressive questioning system (8+ areas)",
+        "Progressive questioning system across multiple life areas",
         "Quickstart and Deep Dive modes",
-        "Adaptive question paths based on responses",
-        "Real-time progress tracking",
+        "Question paths that adapt based on exploration",
+        "Progress tracking through the discovery process",
       ],
     },
     {
-      title: "Insight Engine",
+      title: "Interactive Visualization (Planned)",
       description:
-        "Advanced pattern recognition analyzes your beliefs to reveal hidden connections and potential growth areas across multiple life domains.",
-      items: [
-        "Pattern detection across belief categories",
-        "Conflict and alignment analysis",
-        "Growth opportunity identification",
-        "Experience points and gamification",
-      ],
-    },
-    {
-      title: "Interactive Visualization",
-      description:
-        "Beautiful, interactive visualizations bring your belief system to life through multiple viewing modes and real-time interactions.",
+        "Interactive visualizations to bring belief systems to life through multiple viewing modes.",
       items: [
         "Dynamic radar charts for belief categories",
         "Interactive node-based belief mapping",
@@ -64,7 +52,7 @@ export default function BeliefMap() {
     {
       title: "Belief Categories",
       description:
-        "Comprehensive coverage of life areas ensures holistic self-understanding across all aspects of personal philosophy.",
+        "Coverage of life areas for holistic self-understanding across personal philosophy.",
       items: [
         "Self-Worth & Identity",
         "Relationships & Trust",
@@ -80,46 +68,45 @@ export default function BeliefMap() {
 
   const technicalFeatures = [
     {
-      title: "Frontend Excellence",
-      description:
-        "Modern React architecture with advanced visualization capabilities",
+      title: "Planned Frontend",
+      description: "React architecture with D3.js visualization capabilities",
       items: [
         "React with TypeScript for type safety",
-        "D3.js for sophisticated data visualizations",
-        "Canvas API for smooth graph interactions",
+        "D3.js for data visualizations",
+        "Canvas API for graph interactions",
         "Responsive design for all devices",
-        "Dark mode with elegant UI themes",
+        "Dark mode support",
       ],
     },
     {
-      title: "Data & Intelligence",
+      title: "Privacy-First Data Design",
       description:
-        "Advanced data modeling and AI-powered insights for belief analysis",
+        "Local-first architecture to keep belief data fully private",
       items: [
         "Graph-based data model for belief networks",
-        "Local-first architecture for privacy",
-        "AI-powered insight generation",
-        "Real-time pattern analysis",
-        "Persistent state management",
+        "Local storage only — no server-side data collection",
+        "Optional export for personal backup",
+        "No accounts required",
+        "Persistent local state management",
       ],
     },
   ];
 
   const uxInnovations = [
     {
-      title: "Gamification",
+      title: "Gamification (Planned)",
       description:
-        "Experience points, progress tracking, and achievement systems make self-discovery engaging and rewarding.",
+        "Experience points, progress tracking, and achievement systems to make self-discovery engaging.",
     },
     {
       title: "Privacy-First",
       description:
-        "All data stored locally with optional export. Your beliefs remain private and under your control.",
+        "All data stored locally with optional export. Beliefs remain private and under user control.",
     },
     {
-      title: "Adaptive UI",
+      title: "Adaptive UI (Planned)",
       description:
-        "Interface adapts to user progress, showing relevant features as the belief map grows.",
+        "Interface that adapts to user progress, showing relevant features as the belief map grows.",
     },
   ];
 
@@ -129,86 +116,86 @@ export default function BeliefMap() {
         A[User Input] --> B[Belief Extraction]
         B --> C[Pattern Analysis]
       end
-      
+
       subgraph "Visualization Engine"
         D[Graph Generation] --> E[Node Network]
         E --> F[Interactive Canvas]
         E --> G[Radar Charts]
       end
-      
+
       subgraph "Insight Generation"
-        H[AI Analysis] --> I[Pattern Detection]
-        I --> J[Growth Recommendations]
-        I --> K[Conflict Detection]
+        H[Pattern Detection] --> I[Growth Areas]
+        H --> J[Conflict Detection]
       end
-      
+
       C --> D
       C --> H
-      F --> L[User Interaction]
-      J --> M[Personalized Insights]
-      K --> M
-      L --> A
-      
+      F --> K[User Interaction]
+      I --> L[Personalized Insights]
+      J --> L
+      K --> A
+
       style A fill:#8B5CF6,stroke:#7C3AED,color:#fff
       style E fill:#3B82F6,stroke:#2563EB,color:#fff
-      style M fill:#10B981,stroke:#059669,color:#fff
+      style L fill:#10B981,stroke:#059669,color:#fff
   `;
 
-  const achievements = [
-    "Innovative UX Design: Created an intuitive flow that makes deep introspection accessible to everyone",
-    "Advanced Visualizations: Developed custom D3.js visualizations for complex belief networks",
-    "AI Integration: Implemented intelligent pattern recognition for meaningful insights",
-    "Privacy-Focused: Built with local-first architecture to ensure user data remains private",
+  const designGoals = [
+    "Intuitive UX: An approachable flow that makes deep introspection feel accessible rather than overwhelming",
+    "D3.js Visualizations: Custom graph visualizations for complex belief networks as a design target",
+    "Privacy-Focused: Local-first architecture ensuring user data never leaves their device",
+    "No Accounts Needed: Self-contained experience with optional data export",
   ];
 
   return (
     <ProjectLayout
       title="Belief Map"
-      description="An interactive self-discovery platform that visualizes and analyzes personal beliefs through guided exploration, pattern recognition, and dynamic mapping"
+      description="An early-stage experimental concept for an interactive self-discovery platform that visualizes personal beliefs through guided exploration and dynamic mapping"
     >
       <ProjectHero
         title="Belief Map"
-        description="Transform self-reflection into an interactive journey. BeliefMap helps you explore, visualize, and understand your deepest beliefs through AI-powered insights, guided questioning, and dynamic data visualizations."
+        description="An early-stage concept exploring how guided questioning and graph visualization could help people map and understand their own belief systems. The GitHub repository (MyBeliefMap) is in its initial stages — this page documents the design vision and planned architecture."
         tags={[
+          "Concept",
           "React",
           "D3.js",
-          "AI Integration",
           "Graph Visualization",
           "Self-Discovery",
-          "Interactive Design",
+          "Early Stage",
         ]}
         image="/images/projects/belief-map.jpg"
       />
 
       <TechStack items={techStack} />
 
-      <ProjectSection title="The Journey of Self-Discovery">
+      <ProjectSection title="The Idea">
         <p className="text-lg mb-4">
           BeliefMap began with a simple yet profound question from a friend:
-          "What's a belief you hold that most others don't?" This sparked a
-          journey into creating a tool that could help anyone explore their
+          &ldquo;What&rsquo;s a belief you hold that most others don&rsquo;t?&rdquo; This sparked a
+          journey into designing a tool that could help anyone explore their
           inner landscape of beliefs, values, and assumptions.
         </p>
         <p className="mb-6">
-          The result is an immersive platform that transforms introspection into
-          an interactive, visual experience. Through guided paths, dynamic
-          visualizations, and AI-powered insights, BeliefMap helps users
-          understand not just what they believe, but why they believe it and how
-          their beliefs interconnect.
+          The concept envisions an immersive platform that transforms
+          introspection into an interactive, visual experience. Through guided
+          paths and dynamic visualizations, BeliefMap aims to help users
+          understand not just what they believe, but why they believe it and
+          how their beliefs interconnect. The repository is in early stages
+          &mdash; this is a design exploration rather than a shipped product.
         </p>
 
         <MermaidDiagram
-          title="Belief Discovery Flow"
+          title="Planned Belief Discovery Flow"
           diagram={beliefMapDiagram}
-          description="The system guides users through a structured discovery process, analyzing responses to build a comprehensive belief map with actionable insights."
+          description="The envisioned system would guide users through a structured discovery process, analyzing responses to build a comprehensive belief map."
         />
       </ProjectSection>
 
-      <ProjectSection title="Core Features">
+      <ProjectSection title="Planned Features">
         <FeatureGrid features={coreFeatures} columns={2} />
       </ProjectSection>
 
-      <ProjectSection title="Technical Implementation">
+      <ProjectSection title="Technical Design">
         <FeatureGrid features={technicalFeatures} columns={2} />
 
         <div className="mt-8">
@@ -219,18 +206,18 @@ export default function BeliefMap() {
               fontFamily: themeProps.typography.headingFont,
             }}
           >
-            User Experience Innovation
+            UX Principles
           </h3>
           <FeatureGrid features={uxInnovations} columns={3} />
         </div>
       </ProjectSection>
 
-      <ProjectSection title="Impact & Vision">
+      <ProjectSection title="Vision">
         <p className="text-lg mb-6">
-          BeliefMap represents a new paradigm in personal development tools. By
-          making our internal dialogues visual and interactive, we can better
-          understand ourselves and challenge our assumptions in a structured,
-          approachable way.
+          BeliefMap explores a new direction in personal development tools: by
+          making internal dialogues visual and interactive, people can better
+          understand themselves and challenge their assumptions in a structured,
+          approachable way. The project is an ongoing design and research effort.
         </p>
 
         <ProjectCard variant="accent" className="mb-6">
@@ -241,18 +228,18 @@ export default function BeliefMap() {
               fontFamily: themeProps.typography.headingFont,
             }}
           >
-            Key Achievements
+            Design Goals
           </h3>
           <ul className="space-y-3">
-            {achievements.map((achievement, index) => (
+            {designGoals.map((goal, index) => (
               <li key={index} className="flex items-start gap-3">
                 <span
                   className="flex-shrink-0 w-2 h-2 rounded-full mt-2"
                   style={{ backgroundColor: themeProps.colors.primary }}
                 />
                 <span style={{ color: themeProps.colors.text }}>
-                  <strong>{achievement.split(":")[0]}:</strong>{" "}
-                  {achievement.split(":")[1]}
+                  <strong>{goal.split(":")[0]}:</strong>{" "}
+                  {goal.split(":")[1]}
                 </span>
               </li>
             ))}
@@ -268,17 +255,14 @@ export default function BeliefMap() {
               lineHeight: themeProps.typography.lineHeight,
             }}
           >
-            "BeliefMap has been as much about developing myself as it is about
-            developing software. It's designed to make introspection and healthy
-            self-debate visual, interactive, and genuinely transformative."
+            &ldquo;BeliefMap has been as much about developing myself as it is about
+            developing software. It&rsquo;s designed to make introspection and healthy
+            self-debate visual, interactive, and genuinely transformative.&rdquo;
           </p>
         </ProjectCard>
       </ProjectSection>
 
-      <ProjectCTA
-        demoUrl="https://beliefmap.replit.app"
-        githubUrl="https://github.com/hopeatina/mybeliefmap"
-      />
+      <ProjectCTA githubUrl="https://github.com/hopeatina/mybeliefmap" />
     </ProjectLayout>
   );
 }

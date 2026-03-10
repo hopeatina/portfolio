@@ -17,21 +17,21 @@ export default function DeepHuman() {
     { category: "Core", technologies: "Python, FastMCP Framework" },
     {
       category: "Architecture",
-      technologies: "Multi-Agent Systems, MCP Protocol",
+      technologies: "MCP Protocol, Persona-as-a-Service",
     },
     { category: "AI/LLM", technologies: "OpenAI GPT-4, Anthropic Claude" },
     {
       category: "Algorithms",
       technologies: "Compatibility Scoring, Domain Intelligence",
     },
-    { category: "Configuration", technologies: "YAML Schema, Template Engine" },
+    { category: "Configuration", technologies: "YAML Persona Definitions (3 personas)" },
     {
-      category: "Communication",
-      technologies: "Inter-Agent Protocol, Event-Driven",
+      category: "Tools",
+      technologies: "7 MCP Tools, 4 MCP Resources",
     },
     {
       category: "Intelligence",
-      technologies: "3-Level Hybrid, Dynamic Generation",
+      technologies: "LLM-Powered Generation, Domain Detection",
     },
     {
       category: "Control",
@@ -41,76 +41,74 @@ export default function DeepHuman() {
 
   const architectureFeatures = [
     {
-      title: "MCP Server Implementation (2000+ Lines)",
+      title: "MCP Server Implementation (~1,200 Lines of Python)",
       description:
-        "Advanced multi-agent server with sophisticated persona interaction capabilities",
+        "FastMCP-based server with persona interaction tools and resources",
       items: [
-        "FastMCP Framework: Advanced server implementation with 50+ custom tools for persona interaction",
-        "Dynamic Content Engine: Real-time generation of interests, skills, and goals using configurable prompts",
-        "Multi-Domain Intelligence: Hierarchical domain detection system with core/emerging/LLM classification",
-        "Compatibility Algorithms: Mathematical models analyzing shared interests, skill complementarity, and goal alignment",
+        "FastMCP Framework: Server implementation with 7 MCP tools (get_basic_info, get_interests, get_skills, get_goals, hire_ios_engineer, find_job, converse) and 4 resources",
+        "Dynamic Content Engine: Generation of interests, skills, and goals using configurable prompts",
+        "Domain Intelligence: Domain detection system with core/emerging/LLM classification",
+        "Compatibility Algorithms: LLM-powered scoring analyzing shared interests, skill complementarity, and goal alignment",
         "Conversation Engine: Context-aware dialogue system with personality-consistent response generation",
       ],
     },
     {
-      title: "Advanced Configuration System",
+      title: "YAML-Based Persona Configuration",
       description:
-        "Comprehensive configuration framework with sophisticated templating and domain management",
+        "Configuration framework with 3 persona definitions and domain management",
       items: [
-        "Persona Definition: Comprehensive YAML schemas defining personality, expertise, and interaction patterns",
-        "Prompt Template Engine: Sophisticated templating system for domain-specific content generation",
+        "Persona Definition: YAML schemas defining personality, expertise, and interaction patterns for 3 personas",
+        "Prompt Template Engine: Templating system for domain-specific content generation",
         "Matching Weight Algorithms: Configurable algorithms for computing human compatibility scores",
         "LLM Configuration: Multi-provider support (OpenAI, Anthropic) with optimized prompts per persona",
         "Domain Architecture: Structured knowledge domains with aliases, keywords, and specialized behaviors",
       ],
     },
     {
-      title: "Multi-Agent Coordination",
+      title: "MCP Protocol Integration",
       description:
-        "Sophisticated orchestration system enabling collaborative AI agent interactions",
+        "Persona-as-a-service architecture using the Model Context Protocol",
       items: [
-        "Inter-Agent Communication: Protocol for multiple AI personas to interact and collaborate",
-        "Collaborative Intelligence: System for combining multiple AI perspectives on complex problems",
-        "Resource Management: Sophisticated orchestration of multiple MCP servers with load balancing",
-        "User Control Interface: Advanced 'kill switch' and persona management capabilities",
-        "Event-Driven Architecture: Real-time coordination between agents using event pub/sub patterns",
+        "MCP Tool Exposure: Each persona's capabilities exposed as callable MCP tools",
+        "Resource Endpoints: 4 MCP resources for accessing persona data programmatically",
+        "User Control Interface: Kill switch and persona management capabilities",
+        "Hackathon Prototype: Built as an exploration of persona-as-a-service via MCP",
       ],
     },
   ];
 
   const innovationFeatures = [
     {
-      title: "Novel AI Persona Architecture",
+      title: "AI Persona Architecture",
       description:
-        "Hybrid intelligence approach to AI persona development combining predefined, keyword-based, and LLM-generated domain knowledge",
+        "LLM-powered approach to AI persona development with domain detection and configurable persona definitions",
       items: [
-        "3-Level Hybrid Intelligence: Core domains (predefined), emerging domains (keyword-based), and pure LLM generation",
+        "Domain Detection: Core domains defined in YAML, with LLM-powered generation for emerging topics",
         "Domain-Specific Expertise: Dynamic adaptation to technical, creative, and interpersonal contexts",
-        "Personality Consistency: Advanced prompt engineering ensuring authentic, consistent persona responses",
-        "Context Preservation: Sophisticated memory systems maintaining conversation context across sessions",
+        "Personality Consistency: Prompt engineering ensuring authentic, consistent persona responses",
+        "Configurable Personas: 3 persona definitions with distinct personalities and expertise areas",
       ],
     },
     {
-      title: "Human-AI Compatibility Research",
+      title: "LLM-Powered Compatibility Scoring",
       description:
-        "Advanced algorithms for optimizing human-AI collaboration and relationship dynamics",
+        "Compatibility assessment between personas using multi-dimensional LLM analysis",
       items: [
-        "Multi-Dimensional Scoring: Algorithms considering interests (weighted overlap), skills (complementarity), and goals (alignment)",
+        "Multi-Dimensional Scoring: LLM-powered analysis considering interests (weighted overlap), skills (complementarity), and goals (alignment)",
         "Temporal Compatibility: Timezone analysis for optimal collaboration scheduling",
         "Communication Style Matching: Analysis of personality styles for effective collaboration",
-        "Collaboration Opportunity Detection: AI-driven identification of productive partnership opportunities",
+        "Collaboration Opportunity Detection: Identification of productive partnership opportunities",
       ],
     },
     {
-      title: "Advanced Use Cases",
+      title: "Potential Use Cases",
       description:
-        "Sophisticated applications demonstrating real-world impact of AI persona technology",
+        "Envisioned applications of persona-as-a-service technology",
       items: [
         "Meeting Preparation: AI personas simulating specific individuals for practice and preparation",
-        "Team Formation: Intelligent matching algorithms for optimal team composition",
-        "Startup Collaboration: AI-generated business ideas based on skill and interest intersection analysis",
-        "Social Networking: Sophisticated algorithms for meaningful human connection facilitation",
-        "Knowledge Archiving: Persona-based preservation of individual expertise and communication patterns",
+        "Team Formation: Matching algorithms for optimal team composition",
+        "Networking: Persona-based introductions based on compatibility scoring",
+        "Knowledge Representation: Persona-based preservation of individual expertise and communication patterns",
       ],
     },
   ];
@@ -179,82 +177,81 @@ export default function DeepHuman() {
 
   const implementationMetrics = [
     {
-      value: "2000+",
+      value: "~1,200",
       label: "Lines of Python",
-      description: "Sophisticated implementation",
+      description: "FastMCP implementation",
     },
-    { value: "50+", label: "Custom Tools", description: "Persona interaction" },
-    { value: "900+", label: "Config Lines", description: "Schema definitions" },
+    { value: "7+4", label: "Tools & Resources", description: "MCP endpoints" },
+    { value: "3", label: "Personas", description: "YAML-defined" },
     {
-      value: "3-Level",
-      label: "Hybrid Intelligence",
-      description: "Advanced architecture",
+      value: "MCP",
+      label: "Hackathon Prototype",
+      description: "Persona-as-a-service",
     },
   ];
 
   const researchInnovations = [
-    "Novel Compatibility Algorithms: Mathematical models for human-AI matching with multi-dimensional analysis",
-    "Advanced Prompt Engineering: Sophisticated techniques ensuring personality consistency across interactions",
-    "Dynamic Content Generation: Real-time creation of contextual interests, skills, and goals with domain awareness",
-    "Multi-Modal Intelligence: Comprehensive expertise coverage across diverse technical and interpersonal areas",
-    "Ethical AI Framework: User control mechanisms with comprehensive oversight and 'kill switch' capabilities",
+    "LLM Compatibility Scoring: Multi-dimensional compatibility analysis via LLM for persona matching",
+    "Prompt Engineering: Techniques ensuring personality consistency across interactions",
+    "Dynamic Content Generation: Creation of contextual interests, skills, and goals with domain awareness",
+    "Ethical AI Framework: User control mechanisms with oversight and kill switch capabilities",
   ];
 
   return (
     <ProjectLayout
       title="Deep Human"
-      description="Advanced AI persona framework with multi-agent systems, human compatibility algorithms, and sophisticated personality modeling"
+      description="MCP hackathon prototype exploring persona-as-a-service with FastMCP, YAML persona definitions, and LLM-powered compatibility scoring"
     >
       <ProjectHero
         title="Deep Human"
-        description="A sophisticated multi-agent AI system that creates personalized MCP servers representing digital twins. Features advanced compatibility algorithms, dynamic personality modeling, and intelligent collaboration between AI agents and humans."
+        description="An MCP hackathon prototype exploring persona-as-a-service. Creates personalized MCP servers representing digital personas with 7 tools and 4 resources. Features YAML-defined personas, LLM-powered compatibility scoring, and domain-aware conversation generation."
         tags={[
-          "Multi-Agent AI",
           "MCP Protocol",
+          "FastMCP",
           "Python",
-          "Persona Framework",
-          "Digital Twin",
+          "Hackathon Prototype",
+          "Persona-as-a-Service",
         ]}
         image="/images/projects/deep-human/hero-landing.png"
       />
 
       <TechStack items={techStack} />
 
-      <ProjectSection title="Product Vision">
+      <ProjectSection title="Concept">
         <div className="grid md:grid-cols-2 gap-8 items-center mb-12">
           <div>
             <h3
               className="text-2xl font-semibold mb-4"
               style={{ color: themeProps.colors.primary }}
             >
-              Create Your Digital Twin in 90 Seconds
+              Persona-as-a-Service via MCP
             </h3>
             <p className="text-lg mb-4">
-              Deep Human revolutionizes personal AI by creating digital twins
-              that network and negotiate on your behalf while you stay human.
-              The platform combines sophisticated multi-agent systems with
-              intuitive user experiences.
+              Deep Human explores the idea of representing people as MCP servers
+              — exposing their interests, skills, and goals as callable tools.
+              Built as a hackathon prototype, it demonstrates how the MCP
+              protocol can be used beyond developer tooling.
             </p>
             <ul className="space-y-2">
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">•</span>
                 <span>
-                  <strong>Instant Setup</strong>: Create your digital twin in
-                  just 90 seconds
+                  <strong>YAML Personas</strong>: Define personality, expertise,
+                  and interaction patterns in configuration
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">•</span>
                 <span>
-                  <strong>Autonomous Networking</strong>: Your twin connects
-                  with others based on compatibility
+                  <strong>MCP Tools</strong>: Expose persona capabilities as
+                  7 callable tools and 4 resources
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">•</span>
                 <span>
-                  <strong>Stay in Control</strong>: Review and guide your twin's
-                  learning over time
+                  <strong>Compatibility Scoring</strong>: LLM-powered analysis
+                  of interest, skill, and goal alignment
                 </span>
               </li>
             </ul>
@@ -418,11 +415,10 @@ export default function DeepHuman() {
 
       <ProjectSection title="AI Persona Development">
         <p className="text-lg mb-6">
-          Deep Human implements active research in AI persona development,
-          featuring a multi-agent system built on Model Context
-          Protocol (MCP) servers. The framework implements advanced algorithms
-          for human compatibility assessment, dynamic personality modeling, and
-          intelligent collaboration between AI agents.
+          Deep Human is an MCP hackathon prototype exploring persona-as-a-service,
+          built on the FastMCP framework. It implements LLM-powered compatibility
+          scoring, YAML-defined persona configurations, and domain-aware content
+          generation through 7 MCP tools and 4 resources.
         </p>
 
         <MermaidDiagram
@@ -433,14 +429,13 @@ export default function DeepHuman() {
 
         <ProjectCard variant="secondary" className="mt-8">
           <h3 className="text-xl font-semibold mb-4 text-primary">
-            Research-Grade AI Implementation
+            Hackathon Prototype
           </h3>
           <p>
-            The system employs advanced prompt engineering, context-aware
-            generation, and sophisticated algorithms for personality modeling.
-            Each persona can dynamically generate authentic responses based on
+            Built during a hackathon to explore persona-as-a-service via MCP.
+            Each persona can dynamically generate responses based on
             configurable personality traits, expertise domains, and interaction
-            styles.
+            styles defined in YAML configuration files.
           </p>
         </ProjectCard>
       </ProjectSection>
@@ -456,18 +451,8 @@ export default function DeepHuman() {
         </div>
       </ProjectSection>
 
-      <ProjectSection title="Innovation & Research Contributions">
+      <ProjectSection title="Exploration & Innovation">
         <FeatureGrid features={innovationFeatures} columns={1} />
-
-        <ProjectCard variant="highlight" className="mt-8">
-          <p className="italic text-center text-lg text-body">
-            "Deep Human represents pioneering research in AI persona
-            development, combining advanced algorithms, sophisticated
-            architecture, and human-centered design. The system tackles complex
-            AI challenges while maintaining ethical considerations and user
-            control."
-          </p>
-        </ProjectCard>
       </ProjectSection>
 
       <ProjectSection title="Measurable Technical Achievements">
@@ -512,13 +497,14 @@ export default function DeepHuman() {
 
           <ProjectCard variant="highlight">
             <h3 className="text-xl font-semibold mb-3 text-primary">
-              Research Impact
+              What I Learned
             </h3>
             <p>
-              This project contributes to the emerging field of AI persona
-              development, providing frameworks and algorithms that advance our
-              understanding of human-AI interaction patterns and effective
-              collaboration strategies between humans and artificial agents.
+              This hackathon prototype demonstrated that MCP can serve as a
+              protocol for persona representation, not just developer tooling.
+              The experience of building persona-as-a-service highlighted both
+              the potential and the constraints of the MCP tool/resource model
+              for non-traditional use cases.
             </p>
           </ProjectCard>
         </div>

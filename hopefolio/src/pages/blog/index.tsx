@@ -14,7 +14,7 @@ const posts = [
     title: "Building a Multi-Agent Orchestration Platform: Lessons from OrgX",
     date: "2025-02-15",
     excerpt:
-      "Durable workflows, trust-based governance, quality gates, and agent spawning — what I learned building a 19-repo multi-agent orchestration platform.",
+      "Durable workflows, trust-based governance, quality gates, and agent spawning — what I learned building a 7-repo multi-agent orchestration platform.",
     category: "Agent Infrastructure",
     readTime: "12 min read",
     author: "Hope Atina",

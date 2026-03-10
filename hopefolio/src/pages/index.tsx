@@ -38,7 +38,7 @@ export default function Home() {
 
       <main className="min-h-screen bg-background">
         {/* Hero Section with 3D Scene */}
-        <section className="relative w-full h-screen">
+        <section className="relative w-full">
           <Hero3D />
         </section>
 

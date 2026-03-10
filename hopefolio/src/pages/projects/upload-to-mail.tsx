@@ -56,12 +56,12 @@ export default function UploadToMail() {
     {
       title: "Comprehensive Testing",
       description:
-        "Production-quality testing suite ensuring reliability and maintainability",
+        "Testing suite across 9 test files with 2,240 lines of test code",
       items: [
-        "95%+ code coverage across all critical paths",
+        "9 test files covering components, hooks, API routes, and user flows (2,240 lines)",
         "Unit, integration, and E2E test suites",
         "Performance testing for concurrent file uploads",
-        "Automated CI/CD pipeline with coverage reporting",
+        "Automated CI/CD pipeline setup",
       ],
     },
     {
@@ -156,14 +156,14 @@ export default function UploadToMail() {
 
   const impactMetrics = [
     {
-      value: "95%+",
-      label: "Test Coverage",
-      description: "Across all critical paths",
+      value: "9",
+      label: "Test Files",
+      description: "2,240 lines of tests",
     },
     {
-      value: "Sub-2s",
-      label: "Page Load Times",
-      description: "With optimized bundles",
+      value: "12",
+      label: "Commits",
+      description: "~19.3K LOC",
     },
     {
       value: "10MB+",
@@ -171,9 +171,9 @@ export default function UploadToMail() {
       description: "With real-time progress",
     },
     {
-      value: "Zero",
-      label: "Downtime Deployment",
-      description: "Production architecture",
+      value: "Stripe",
+      label: "Payments",
+      description: "Integrated billing",
     },
   ];
 
@@ -265,8 +265,8 @@ export default function UploadToMail() {
                   style={{ backgroundColor: themeProps.colors.primary }}
                 />
                 <span>
-                  <strong>Comprehensive Test Coverage:</strong> 95%+ coverage
-                  across components, hooks, API routes, and user flows
+                  <strong>Comprehensive Test Suite:</strong> 9 test files with
+                  2,240 lines covering components, hooks, API routes, and user flows
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -319,9 +319,9 @@ export default function UploadToMail() {
           >
             "Upload to Mail handles the full stack from client-side document
             previews and chunked uploads through payment processing, print
-            service APIs, and physical delivery tracking. The system is
-            built with 95%+ test coverage and a zero-downtime deployment
-            architecture throughout."
+            service APIs, and physical delivery tracking. The system includes
+            a comprehensive test suite across 9 files with 2,240 lines of
+            test code."
           </p>
         </ProjectCard>
       </ProjectSection>
@@ -357,7 +357,6 @@ export default function UploadToMail() {
       </ProjectSection>
 
       <ProjectCTA
-        demoUrl="https://uploadtomail.com"
         githubUrl="https://github.com/hopeatina/uploadtomail"
       />
     </ProjectLayout>

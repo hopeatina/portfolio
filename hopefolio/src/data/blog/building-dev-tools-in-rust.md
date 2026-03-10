@@ -15,7 +15,7 @@ This post covers the technical decisions behind PerfPulse, from choosing Rust to
 
 I considered three languages: Go, TypeScript (via Bun), and Rust. Here's why Rust won:
 
-**Binary size matters.** PerfPulse ships as a ~5MB static binary. No runtime, no dependencies, no "please install Node 18 first." Users run `brew install hopeatina/perf-pulse/perf-pulse` and they're done.
+**Binary size matters.** PerfPulse ships as a 3.3-4.3 MiB static binary. No runtime, no dependencies, no "please install Node 18 first." Users run `brew install hopeatina/perf-pulse/perf-pulse` and they're done.
 
 **Performance is the product.** PerfPulse is a performance monitoring tool. If the monitor itself consumes significant CPU or memory, it defeats the purpose. Rust's zero-cost abstractions mean PerfPulse uses negligible resources while continuously sampling system metrics.
 
@@ -96,9 +96,9 @@ async fn dashboard(State(state): State<AppState>) -> Html<String> {
 
 ### TUI Mode
 
-Run `perf-pulse --tui` for a full terminal UI built with `crossterm` and `ratatui`. This gives you a real-time dashboard in your terminal with live-updating charts, process lists, and AI recommendations.
+Run `perf-pulse --tui` for a full terminal UI built with `crossterm`. This gives you a real-time dashboard in your terminal with live-updating charts, process lists, and AI recommendations.
 
-The TUI was the most fun to build. `ratatui` makes it surprisingly straightforward to build complex terminal interfaces in Rust.
+The TUI was the most fun to build. `crossterm` provides the low-level terminal manipulation primitives, and building the UI components directly on top of it gave full control over rendering and layout.
 
 ## Claude API Integration
 
@@ -198,16 +198,12 @@ A system monitoring tool has elevated access concerns. PerfPulse handles this ca
 - **No root required** — PerfPulse uses only unprivileged system APIs
 - **No data exfiltration** — system data is only sent to Claude's API when the user explicitly requests AI analysis
 
-## Performance Budget
+## Performance Targets
 
-PerfPulse monitors its own resource usage and enforces a budget:
+PerfPulse monitors its own resource usage and targets a lean footprint:
 
-- **CPU**: < 1% at idle, < 3% during active monitoring
-- **Memory**: < 15MB resident
-- **Binary size**: < 10MB
-- **Startup time**: < 100ms
-
-If any metric exceeds the budget, it's a bug. The sampling interval automatically adjusts if PerfPulse detects it's consuming too many resources.
+- **Binary size**: 3.3-4.3 MiB (verified across Apple Silicon and Intel builds)
+- **Resource usage**: The sampling interval automatically adjusts if PerfPulse detects it's consuming too many resources, keeping overhead minimal during monitoring.
 
 ## What I Learned
 
@@ -215,7 +211,7 @@ If any metric exceeds the budget, it's a bug. The sampling interval automaticall
 
 **2. Ship the simplest interface first.** I built CLI mode in a weekend, shipped it, got feedback, then built the web dashboard and TUI. Each interface taught me what users actually wanted.
 
-**3. Homebrew distribution is table stakes.** Before the Homebrew tap, adoption was 10x lower. Developers have strong opinions about installation methods.
+**3. Homebrew distribution removes friction.** Developers have strong opinions about installation methods, and `brew install` is the path of least resistance on macOS.
 
 **4. AI integration should be optional.** PerfPulse works perfectly without the Claude API key. The AI recommendations are a bonus, not a dependency.
 

@@ -11,35 +11,28 @@ import MermaidDiagram from "@/components/projects/MermaidDiagram";
 
 export default function Neuromosaic() {
   const techStack = [
-    {
-      category: "Infrastructure",
-      technologies: "Docker, Kubernetes, Container Orchestration",
-    },
     { category: "Backend", technologies: "FastAPI, SQLAlchemy, Alembic" },
-    { category: "Database", technologies: "PostgreSQL, SQLite, 20+ Tables" },
+    { category: "Database", technologies: "PostgreSQL, SQLite, 22 Tables" },
     {
       category: "ML/AI",
-      technologies: "PyTorch, Transformers, LLM Code Generation",
+      technologies: "PyTorch, Transformers, LLM Code Generation (GPT-4, LLaMA, vLLM)",
     },
-    {
-      category: "Distributed",
-      technologies: "Multi-node Training, Resource Management",
-    },
-    { category: "Monitoring", technologies: "WebSocket, Real-time Dashboard" },
-    { category: "Cloud", technologies: "AWS, HuggingFace Hub" },
+    { category: "Monitoring", technologies: "WebSocket, Dash/Plotly Dashboard" },
+    { category: "Cloud", technologies: "HuggingFace Hub" },
+    { category: "API", technologies: "21 Endpoint Modules, RESTful" },
     { category: "Quality", technologies: "Pytest, Coverage, Pre-commit" },
   ];
 
   const infrastructureFeatures = [
     {
-      title: "Distributed Experiment Orchestration",
+      title: "Experiment Orchestration",
       description:
-        "Container-based infrastructure for running, tracking, and managing ML experiments at scale",
+        "FastAPI-based infrastructure for running, tracking, and managing ML experiments with a 22-table PostgreSQL backend",
       items: [
-        "Docker-based experiment isolation with automatic environment provisioning and cleanup",
-        "Multi-node distributed training across compute clusters with resource allocation",
-        "FastAPI backend with 15+ endpoint categories managing experiments, architectures, and results",
-        "PostgreSQL database with 20+ tables handling the full experiment lifecycle",
+        "FastAPI backend with 21 endpoint modules managing experiments, architectures, and results",
+        "PostgreSQL database with 22 tables handling the full experiment lifecycle",
+        "Environment pinning and versioning for reproducible experiment runs",
+        "LLM-driven architecture generation reducing manual coding of model variants",
       ],
     },
     {
@@ -59,21 +52,21 @@ export default function Neuromosaic() {
     {
       title: "Real-Time Experiment Monitoring",
       description:
-        "WebSocket-powered monitoring infrastructure for distributed ML experiments",
+        "WebSocket-powered monitoring infrastructure for ML experiments",
       items: [
         "Live training metrics streamed via WebSocket to interactive Dash/Plotly dashboard",
-        "3D architecture space visualization with experiments color-coded by performance",
+        "Dash/Plotly visualization with experiments color-coded by performance",
         "Cluster analysis automatically groups similar architectures and identifies patterns",
-        "Resource monitoring tracks compute utilization across the distributed cluster",
+        "Resource monitoring tracks compute utilization during experiment runs",
       ],
     },
     {
-      title: "Multi-Language SDK & API Layer",
+      title: "SDK & API Layer",
       description:
         "Comprehensive API infrastructure for programmatic access to the experiment platform",
       items: [
-        "RESTful API with 15+ endpoint categories and full OpenAPI documentation",
-        "Multi-language SDKs (Python, TypeScript, Go) for integration into existing ML workflows",
+        "RESTful API with 21 endpoint modules and full OpenAPI documentation",
+        "SDKs in Python and TypeScript for integration into existing ML workflows",
         "Type-safe data layer with Pydantic/SQLModel for experiment configuration and results",
         "Database migrations with Alembic for schema evolution without data loss",
       ],
@@ -82,24 +75,24 @@ export default function Neuromosaic() {
 
   const impactStats = [
     {
-      value: "50+",
-      label: "Architecture Components",
-      description: "Compositional search space",
+      value: "521",
+      label: "Commits",
+      description: "Active development",
     },
     {
-      value: "15+",
-      label: "API Endpoints",
+      value: "21",
+      label: "API Endpoint Modules",
       description: "Full experiment management",
     },
     {
-      value: "20+",
+      value: "22",
       label: "Database Tables",
       description: "Complete experiment lifecycle",
     },
     {
-      value: "3",
-      label: "SDK Languages",
-      description: "Python, TypeScript, Go",
+      value: "44.7K",
+      label: "Lines of Code",
+      description: "Python + TypeScript",
     },
   ];
 
@@ -107,8 +100,7 @@ export default function Neuromosaic() {
     flowchart TD
       A[Architecture Vector] --> B[LLM Code Gen]
       B --> C[PyTorch Model Code]
-      C --> D[Docker Container]
-      D --> E[Distributed Training]
+      C --> E[Training Run]
       E --> F[Results Database]
       F --> G[Monitoring Dashboard]
 
@@ -122,10 +114,10 @@ export default function Neuromosaic() {
 
       L[FastAPI Backend] --> M[REST API / SDKs]
       M --> F
-      M --> D
+      M --> E
 
       style A fill:#8E5BEF,stroke:#7A4DD8,color:#fff
-      style D fill:#3B82F6,stroke:#2563EB,color:#fff
+      style E fill:#3B82F6,stroke:#2563EB,color:#fff
       style G fill:#F59E0B,stroke:#D97706,color:#fff
       style L fill:#10B981,stroke:#059669,color:#fff
   `;
@@ -133,15 +125,14 @@ export default function Neuromosaic() {
   return (
     <ProjectLayout
       title="Neuromosaic"
-      description="Distributed ML infrastructure for automated neural architecture search with LLM code generation and container orchestration"
+      description="ML infrastructure for automated neural architecture search with LLM code generation, FastAPI, and a 22-table PostgreSQL backend"
     >
       <ProjectHero
         title="Neuromosaic"
-        description="Distributed ML infrastructure that automates neural architecture search. LLM-powered code generation, container-based experiment orchestration, multi-node training, and real-time monitoring across a 20+ table PostgreSQL backend."
+        description="ML infrastructure that automates neural architecture search. LLM-powered code generation (GPT-4, LLaMA, vLLM), real-time Dash/Plotly monitoring via WebSocket, and a 22-table PostgreSQL backend managed by FastAPI. 521 commits, 44.7K LOC."
         tags={[
           "Distributed ML",
           "Infrastructure",
-          "Docker",
           "FastAPI",
           "PyTorch",
           "LLM Code Gen",
@@ -176,16 +167,16 @@ export default function Neuromosaic() {
           </li>
           <li>
             <strong>Resource waste</strong>: No visibility into compute
-            utilization across distributed experiments
+            utilization across experiments
           </li>
         </ul>
       </ProjectSection>
 
       <ProjectSection title="Infrastructure Architecture">
         <MermaidDiagram
-          title="Distributed Experiment Pipeline"
+          title="Experiment Pipeline"
           diagram={architectureDiagram}
-          description="End-to-end infrastructure from architecture vector encoding to distributed training, with meta-learning feedback loop and real-time WebSocket monitoring."
+          description="End-to-end infrastructure from architecture vector encoding to training runs, with meta-learning feedback loop and real-time WebSocket monitoring."
           className="mb-8"
         />
 
@@ -202,14 +193,14 @@ export default function Neuromosaic() {
         <div className="space-y-6">
           <ProjectCard variant="secondary">
             <h3 className="text-xl font-semibold mb-3 text-primary">
-              Why Container-Based Experiment Isolation
+              Why Environment-Versioned Experiment Isolation
             </h3>
             <p>
-              Each experiment runs in its own Docker container with pinned
-              dependencies and automatic cleanup. This guarantees
-              reproducibility — any experiment can be re-run months later with
-              identical results. It also enables safe parallel execution across
-              the cluster without dependency conflicts.
+              Each experiment pins its dependencies and stores generated code
+              alongside results in PostgreSQL. This guarantees reproducibility
+              — any experiment can be re-run months later with identical
+              environment and configuration, without relying on containerization
+              infrastructure.
             </p>
           </ProjectCard>
 
@@ -228,10 +219,7 @@ export default function Neuromosaic() {
         </div>
       </ProjectSection>
 
-      <ProjectCTA
-        githubUrl="https://github.com/hopeatina/neuromosaic"
-        demoUrl="https://neuromosaic.dev"
-      />
+      <ProjectCTA githubUrl="https://github.com/hopeatina/neuromosaic" />
     </ProjectLayout>
   );
 }
