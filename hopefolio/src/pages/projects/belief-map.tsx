@@ -29,7 +29,7 @@ export default function BeliefMap() {
 
   const coreFeatures = [
     {
-      title: "🗺️ Guided Path Discovery",
+      title: "Guided Path Discovery",
       description:
         "Navigate through carefully crafted questions that help uncover deeper beliefs. The system adapts based on your responses, creating a personalized exploration journey.",
       items: [
@@ -40,7 +40,7 @@ export default function BeliefMap() {
       ],
     },
     {
-      title: "🔍 Insight Engine",
+      title: "Insight Engine",
       description:
         "Advanced pattern recognition analyzes your beliefs to reveal hidden connections and potential growth areas across multiple life domains.",
       items: [
@@ -51,7 +51,7 @@ export default function BeliefMap() {
       ],
     },
     {
-      title: "📊 Interactive Visualization",
+      title: "Interactive Visualization",
       description:
         "Beautiful, interactive visualizations bring your belief system to life through multiple viewing modes and real-time interactions.",
       items: [
@@ -62,7 +62,7 @@ export default function BeliefMap() {
       ],
     },
     {
-      title: "🎯 Belief Categories",
+      title: "Belief Categories",
       description:
         "Comprehensive coverage of life areas ensures holistic self-understanding across all aspects of personal philosophy.",
       items: [
@@ -80,7 +80,7 @@ export default function BeliefMap() {
 
   const technicalFeatures = [
     {
-      title: "⚛️ Frontend Excellence",
+      title: "Frontend Excellence",
       description:
         "Modern React architecture with advanced visualization capabilities",
       items: [
@@ -92,7 +92,7 @@ export default function BeliefMap() {
       ],
     },
     {
-      title: "🧠 Data & Intelligence",
+      title: "Data & Intelligence",
       description:
         "Advanced data modeling and AI-powered insights for belief analysis",
       items: [
@@ -107,17 +107,17 @@ export default function BeliefMap() {
 
   const uxInnovations = [
     {
-      title: "🎮 Gamification",
+      title: "Gamification",
       description:
         "Experience points, progress tracking, and achievement systems make self-discovery engaging and rewarding.",
     },
     {
-      title: "🔒 Privacy-First",
+      title: "Privacy-First",
       description:
         "All data stored locally with optional export. Your beliefs remain private and under your control.",
     },
     {
-      title: "🎨 Adaptive UI",
+      title: "Adaptive UI",
       description:
         "Interface adapts to user progress, showing relevant features as the belief map grows.",
     },
@@ -168,7 +168,7 @@ export default function BeliefMap() {
     >
       <ProjectHero
         title="Belief Map"
-        description="Transform self-reflection into an interactive journey. BeliefMap is a groundbreaking tool that helps you explore, visualize, and understand your deepest beliefs through AI-powered insights, guided questioning, and beautiful data visualizations."
+        description="Transform self-reflection into an interactive journey. BeliefMap helps you explore, visualize, and understand your deepest beliefs through AI-powered insights, guided questioning, and dynamic data visualizations."
         tags={[
           "React",
           "D3.js",

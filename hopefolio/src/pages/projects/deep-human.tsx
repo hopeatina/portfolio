@@ -41,7 +41,7 @@ export default function DeepHuman() {
 
   const architectureFeatures = [
     {
-      title: "🤖 MCP Server Implementation (2000+ Lines)",
+      title: "MCP Server Implementation (2000+ Lines)",
       description:
         "Advanced multi-agent server with sophisticated persona interaction capabilities",
       items: [
@@ -53,7 +53,7 @@ export default function DeepHuman() {
       ],
     },
     {
-      title: "⚙️ Advanced Configuration System",
+      title: "Advanced Configuration System",
       description:
         "Comprehensive configuration framework with sophisticated templating and domain management",
       items: [
@@ -65,7 +65,7 @@ export default function DeepHuman() {
       ],
     },
     {
-      title: "🔗 Multi-Agent Coordination",
+      title: "Multi-Agent Coordination",
       description:
         "Sophisticated orchestration system enabling collaborative AI agent interactions",
       items: [
@@ -80,9 +80,9 @@ export default function DeepHuman() {
 
   const innovationFeatures = [
     {
-      title: "🧠 Novel AI Persona Architecture",
+      title: "Novel AI Persona Architecture",
       description:
-        "Revolutionary approach to AI persona development with hybrid intelligence systems",
+        "Hybrid intelligence approach to AI persona development combining predefined, keyword-based, and LLM-generated domain knowledge",
       items: [
         "3-Level Hybrid Intelligence: Core domains (predefined), emerging domains (keyword-based), and pure LLM generation",
         "Domain-Specific Expertise: Dynamic adaptation to technical, creative, and interpersonal contexts",
@@ -91,7 +91,7 @@ export default function DeepHuman() {
       ],
     },
     {
-      title: "🤝 Human-AI Compatibility Research",
+      title: "Human-AI Compatibility Research",
       description:
         "Advanced algorithms for optimizing human-AI collaboration and relationship dynamics",
       items: [
@@ -102,7 +102,7 @@ export default function DeepHuman() {
       ],
     },
     {
-      title: "🚀 Advanced Use Cases",
+      title: "Advanced Use Cases",
       description:
         "Sophisticated applications demonstrating real-world impact of AI persona technology",
       items: [
@@ -117,27 +117,27 @@ export default function DeepHuman() {
 
   const algorithmFeatures = [
     {
-      title: "📊 Compatibility Scoring",
+      title: "Compatibility Scoring",
       description:
         "Multi-dimensional analysis considering interests, skills, goals, and timezones",
     },
     {
-      title: "⚖️ Skill Complementarity",
+      title: "Skill Complementarity",
       description:
         "Mathematical models identifying synergistic skill combinations",
     },
     {
-      title: "🎯 Goal Alignment Analysis",
+      title: "Goal Alignment Analysis",
       description:
         "Sophisticated algorithms for measuring shared objectives and motivations",
     },
     {
-      title: "💡 Startup Ideation Engine",
+      title: "Startup Ideation Engine",
       description:
         "AI system generating business concepts from skill and interest intersections",
     },
     {
-      title: "🌐 Social Network Modeling",
+      title: "Social Network Modeling",
       description:
         "Algorithms for relationship mapping and social connection optimization",
     },
@@ -416,10 +416,10 @@ export default function DeepHuman() {
         </div>
       </ProjectSection>
 
-      <ProjectSection title="Cutting-Edge AI Persona Development">
+      <ProjectSection title="AI Persona Development">
         <p className="text-lg mb-6">
-          Deep Human represents cutting-edge research in AI persona development,
-          featuring a sophisticated multi-agent system built on Model Context
+          Deep Human implements active research in AI persona development,
+          featuring a multi-agent system built on Model Context
           Protocol (MCP) servers. The framework implements advanced algorithms
           for human compatibility assessment, dynamic personality modeling, and
           intelligent collaboration between AI agents.
@@ -463,9 +463,9 @@ export default function DeepHuman() {
           <p className="italic text-center text-lg text-body">
             "Deep Human represents pioneering research in AI persona
             development, combining advanced algorithms, sophisticated
-            architecture, and human-centered design. The project demonstrates my
-            ability to tackle complex AI challenges while maintaining ethical
-            considerations and user control."
+            architecture, and human-centered design. The system tackles complex
+            AI challenges while maintaining ethical considerations and user
+            control."
           </p>
         </ProjectCard>
       </ProjectSection>
@@ -525,7 +525,6 @@ export default function DeepHuman() {
       </ProjectSection>
 
       <ProjectCTA
-        demoUrl="#"
         githubUrl="https://github.com/hopeatina/deep-human"
       />
     </ProjectLayout>

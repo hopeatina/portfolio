@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EA580C"/>
+      <stop offset="100%" style="stop-color:#F97316"/>
+    </linearGradient>
+    <pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="15" cy="15" r="2" fill="rgba(255,255,255,0.08)"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <!-- Network/community nodes pattern -->
+  <g opacity="0.12">
+    <circle cx="250" cy="200" r="8" fill="white"/>
+    <circle cx="350" cy="150" r="6" fill="white"/>
+    <circle cx="300" cy="350" r="10" fill="white"/>
+    <circle cx="180" cy="300" r="5" fill="white"/>
+    <circle cx="400" cy="280" r="7" fill="white"/>
+    <line x1="250" y1="200" x2="350" y2="150" stroke="white" stroke-width="1"/>
+    <line x1="250" y1="200" x2="300" y2="350" stroke="white" stroke-width="1"/>
+    <line x1="250" y1="200" x2="180" y2="300" stroke="white" stroke-width="1"/>
+    <line x1="350" y1="150" x2="400" y2="280" stroke="white" stroke-width="1"/>
+    <line x1="300" y1="350" x2="400" y2="280" stroke="white" stroke-width="1"/>
+    <circle cx="900" cy="250" r="8" fill="white"/>
+    <circle cx="1000" cy="200" r="6" fill="white"/>
+    <circle cx="950" cy="400" r="10" fill="white"/>
+    <circle cx="850" cy="350" r="5" fill="white"/>
+    <circle cx="1050" cy="330" r="7" fill="white"/>
+    <line x1="900" y1="250" x2="1000" y2="200" stroke="white" stroke-width="1"/>
+    <line x1="900" y1="250" x2="950" y2="400" stroke="white" stroke-width="1"/>
+    <line x1="900" y1="250" x2="850" y2="350" stroke="white" stroke-width="1"/>
+    <line x1="1000" y1="200" x2="1050" y2="330" stroke="white" stroke-width="1"/>
+    <line x1="950" y1="400" x2="1050" y2="330" stroke="white" stroke-width="1"/>
+  </g>
+  <!-- Project name -->
+  <text x="600" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="68" font-weight="700" fill="white" text-anchor="middle" letter-spacing="-1">The AI Cook-Up</text>
+  <text x="600" y="355" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="rgba(255,255,255,0.7)" text-anchor="middle">Community AI Hackathon Platform</text>
+  <!-- Accent line -->
+  <rect x="480" y="375" width="240" height="3" rx="1.5" fill="rgba(255,255,255,0.3)"/>
+</svg>

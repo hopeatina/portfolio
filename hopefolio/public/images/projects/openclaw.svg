@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#15803D"/>
+      <stop offset="100%" style="stop-color:#22C55E"/>
+    </linearGradient>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <!-- Browser window outline -->
+  <g transform="translate(180, 160)" opacity="0.12">
+    <rect x="0" y="0" width="200" height="140" rx="8" fill="none" stroke="white" stroke-width="2"/>
+    <line x1="0" y1="25" x2="200" y2="25" stroke="white" stroke-width="1"/>
+    <circle cx="15" cy="12" r="4" fill="white" opacity="0.5"/>
+    <circle cx="30" cy="12" r="4" fill="white" opacity="0.5"/>
+    <circle cx="45" cy="12" r="4" fill="white" opacity="0.5"/>
+    <rect x="15" y="40" width="170" height="8" rx="2" fill="white" opacity="0.3"/>
+    <rect x="15" y="58" width="120" height="8" rx="2" fill="white" opacity="0.2"/>
+    <rect x="15" y="76" width="150" height="8" rx="2" fill="white" opacity="0.3"/>
+    <rect x="15" y="94" width="90" height="8" rx="2" fill="white" opacity="0.2"/>
+  </g>
+  <!-- Terminal/CLI icon -->
+  <g transform="translate(850, 180)" opacity="0.12">
+    <rect x="0" y="0" width="180" height="120" rx="8" fill="none" stroke="white" stroke-width="2"/>
+    <text x="15" y="35" font-family="monospace" font-size="14" fill="white">$ agent run</text>
+    <text x="15" y="55" font-family="monospace" font-size="14" fill="white">  task: deploy</text>
+    <text x="15" y="75" font-family="monospace" font-size="14" fill="white">  status: ok</text>
+    <rect x="15" y="90" width="8" height="14" fill="white" opacity="0.6"/>
+  </g>
+  <!-- Connection arrow between browser and CLI -->
+  <g opacity="0.1">
+    <line x1="400" y1="230" x2="830" y2="240" stroke="white" stroke-width="2" stroke-dasharray="10,6"/>
+    <polygon points="830,234 820,228 820,246" fill="white"/>
+  </g>
+  <!-- Project name -->
+  <text x="600" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="68" font-weight="700" fill="white" text-anchor="middle" letter-spacing="-1">OpenClaw Plugin</text>
+  <text x="600" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="rgba(255,255,255,0.7)" text-anchor="middle">Browser Extension for Agent Orchestration</text>
+  <!-- Accent line -->
+  <rect x="460" y="380" width="280" height="3" rx="1.5" fill="rgba(255,255,255,0.3)"/>
+</svg>

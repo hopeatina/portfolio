@@ -146,6 +146,7 @@ export default function FrameFX() {
           "Design Tokens",
           "TypeScript",
         ]}
+        image="/images/projects/framefx.svg"
       />
 
       <TechStack items={techStack} />

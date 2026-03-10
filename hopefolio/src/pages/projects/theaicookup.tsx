@@ -36,7 +36,7 @@ export default function TheAICookup() {
 
   const coreFeatures = [
     {
-      title: "🎯 Event Management",
+      title: "Event Management",
       description:
         "Comprehensive platform for organizing AI development events",
       items: [
@@ -48,7 +48,7 @@ export default function TheAICookup() {
       ],
     },
     {
-      title: "🤝 Intelligent Team Matching",
+      title: "Intelligent Team Matching",
       description: "LLM-powered team formation based on skills and preferences",
       items: [
         "Multi-dimensional matching: skills, AI experience, and interests",
@@ -59,7 +59,7 @@ export default function TheAICookup() {
       ],
     },
     {
-      title: "💡 Idea Management & Voting",
+      title: "Idea Management & Voting",
       description: "Democratic project selection through community voting",
       items: [
         "Participant-submitted project ideas with descriptions",
@@ -129,7 +129,7 @@ export default function TheAICookup() {
 
   const algorithmFeatures = [
     {
-      title: "🧠 LLM-Powered Team Logic",
+      title: "LLM-Powered Team Logic",
       description: "Advanced AI algorithms for optimal team composition",
       items: [
         "Structured prompt engineering for team formation constraints",
@@ -140,7 +140,7 @@ export default function TheAICookup() {
       ],
     },
     {
-      title: "⚡ Real-time Processing",
+      title: "Real-time Processing",
       description: "Efficient system for immediate team assignments",
       items: [
         "Instant team formation after voting period ends",
@@ -151,7 +151,7 @@ export default function TheAICookup() {
       ],
     },
     {
-      title: "📊 Data-Driven Insights",
+      title: "Data-Driven Insights",
       description: "Analytics and optimization for better events",
       items: [
         "Participant skill distribution analysis",
@@ -178,7 +178,7 @@ export default function TheAICookup() {
           "Supabase",
           "AI Integration",
         ]}
-        image="/images/projects/theaicookup.jpg"
+        image="/images/projects/theaicookup.svg"
       />
 
       <TechStack items={techStack} />

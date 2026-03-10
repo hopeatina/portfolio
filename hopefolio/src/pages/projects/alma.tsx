@@ -141,6 +141,7 @@ export default function AlmaProductionAI() {
           "Celery",
           "Healthcare",
         ]}
+        image="/images/projects/alma.svg"
       />
 
       <TechStack items={techStack} />

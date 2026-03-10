@@ -30,9 +30,9 @@ export default function BodyFX() {
 
   const mainFeatures = [
     {
-      title: "🎯 AI-Powered Video Segmentation",
+      title: "AI-Powered Video Segmentation",
       description:
-        "Leverage Meta's state-of-the-art SAM2 model for automatic subject detection and tracking",
+        "Leverage Meta's SAM2 model for automatic subject detection and tracking without manual rotoscoping setup",
       items: [
         "Automatic subject detection without manual rotoscoping",
         "Frame-by-frame tracking with temporal consistency",
@@ -41,7 +41,7 @@ export default function BodyFX() {
       ],
     },
     {
-      title: "🎬 After Effects Integration",
+      title: "After Effects Integration",
       description:
         "Seamless workflow integration with Adobe After Effects for professional VFX work",
       items: [
@@ -52,7 +52,7 @@ export default function BodyFX() {
       ],
     },
     {
-      title: "🎮 OBS Studio Plugin",
+      title: "OBS Studio Plugin",
       description:
         "Real-time background removal for live streaming without green screens",
       items: [
@@ -63,7 +63,7 @@ export default function BodyFX() {
       ],
     },
     {
-      title: "⚡ Performance Optimization",
+      title: "Performance Optimization",
       description: "Built for production with scalability and speed in mind",
       items: [
         "GPU acceleration with CUDA support",
@@ -91,28 +91,28 @@ export default function BodyFX() {
 
   const technicalFeatures = [
     {
-      title: "🧠 Advanced Segmentation",
-      description: "State-of-the-art AI model for precise subject isolation",
+      title: "Advanced Segmentation",
+      description: "Transformer-based segmentation model for precise subject isolation",
     },
     {
-      title: "🔄 Temporal Consistency",
+      title: "Temporal Consistency",
       description:
         "Smart tracking maintains segmentation quality across frames",
     },
     {
-      title: "📐 Custom Prompts",
+      title: "Custom Prompts",
       description: "Point or bounding box prompts for targeted segmentation",
     },
     {
-      title: "🚀 Batch Processing",
+      title: "Batch Processing",
       description: "Automatic memory management for long videos",
     },
     {
-      title: "🎨 Preview Generation",
+      title: "Preview Generation",
       description: "Quick key frame previews before full processing",
     },
     {
-      title: "📦 Easy Installation",
+      title: "Easy Installation",
       description: "One-line pip install with automatic dependency management",
     },
   ];
@@ -140,14 +140,14 @@ export default function BodyFX() {
           "After Effects",
           "OBS Plugin",
         ]}
-        image="/images/projects/bodyfx.jpg"
+        image="/images/projects/bodyfx.svg"
       />
 
       <TechStack items={techStack} />
 
       <ProjectSection title="Project Overview">
         <p className="text-lg mb-6">
-          BodyFX bridges the gap between cutting-edge AI research and practical
+          BodyFX bridges the gap between recent AI research and practical
           video production needs. By leveraging Meta's Segment Anything Model 2
           (SAM2), it automates one of the most time-consuming tasks in visual
           effects: rotoscoping and subject isolation.
@@ -160,7 +160,7 @@ export default function BodyFX() {
           <p>
             Manual rotoscoping in video production is extremely time-intensive,
             often requiring hours of frame-by-frame work. BodyFX automates this
-            process using state-of-the-art AI, reducing what used to take hours
+            process using SAM2-based AI segmentation, reducing what used to take hours
             into minutes while maintaining professional quality.
           </p>
         </ProjectCard>
@@ -313,9 +313,9 @@ export default function BodyFX() {
 
       <ProjectSection title="Technical Innovation">
         <p className="text-lg mb-8">
-          BodyFX represents a practical application of cutting-edge computer
-          vision research, making advanced AI accessible to creative
-          professionals.
+          BodyFX applies recent computer vision research to practical production
+          workflows, making GPU-accelerated AI segmentation accessible to
+          creative professionals.
         </p>
 
         <FeatureGrid features={technicalFeatures} columns={3} />

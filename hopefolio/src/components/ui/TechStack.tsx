@@ -1,247 +1,300 @@
+"use client";
+
 import React, { useState } from "react";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
-import {
-  SiPython,
-  SiTypescript,
-  SiRust,
-  SiPostgresql,
-  SiReact,
-  SiNextdotjs,
-  SiDjango,
-  SiNodedotjs,
-  SiApachespark,
-  SiCelery,
-  SiVercel,
-  SiSupabase,
-  SiSentry,
-  SiOpenai,
-  SiDatadog,
-  SiRedis,
-  SiFlask,
-} from "react-icons/si";
-import { FaAws } from "react-icons/fa";
-import { DiScala } from "react-icons/di";
 
 type CapabilityPillar = {
   name: string;
-  proof: string;
-  technologies: {
-    name: string;
-    icon?: React.ComponentType<any>;
-  }[];
+  summary: string;
+  behaviors: string[];
+  shipped: string[];
+  tools: string[];
 };
 
 const capabilityPillars: CapabilityPillar[] = [
   {
     name: "Multi-Agent Orchestration",
-    proof: "OrgX: agent spawning, task handoff, decision approval, autonomous sessions, durable workflows, quality gates",
-    technologies: [
-      { name: "MCP Protocol" },
-      { name: "Claude API" },
-      { name: "OpenAI API", icon: SiOpenai },
-      { name: "Supabase", icon: SiSupabase },
-      { name: "TypeScript", icon: SiTypescript },
-      { name: "Cloudflare Workers" },
+    summary:
+      "I design systems that spawn, route, score, pause, and hand off work across multiple agents without losing accountability.",
+    behaviors: ["spawn", "handoff", "review", "quality gates", "trust calibration"],
+    shipped: ["OrgX", "OpenClaw plugin", "Claude Code skills ecosystem"],
+    tools: [
+      "MCP Protocol",
+      "TypeScript",
+      "Supabase",
+      "Claude API",
+      "OpenAI API",
+      "Cloudflare Workers",
     ],
   },
   {
     name: "MCP / Tool Calling / Auth",
-    proof: "MCP server integrations, tool-calling middleware, OAuth/auth flows, Claude Code skills, Cursor plugin",
-    technologies: [
-      { name: "TypeScript", icon: SiTypescript },
-      { name: "Python", icon: SiPython },
-      { name: "MCP Protocol" },
-      { name: "Claude Code" },
-      { name: "Node.js", icon: SiNodedotjs },
-    ],
+    summary:
+      "I build the plumbing that makes agent actions safe, legible, and composable across tools, identities, and workflows.",
+    behaviors: ["tool discovery", "auth flows", "schema validation", "guardrails", "retry / re-auth"],
+    shipped: ["OrgX MCP integrations", "Transmorph", "OpenClaw plugin"],
+    tools: ["TypeScript", "Python", "MCP Protocol", "Node.js", "Claude Code", "OAuth flows"],
   },
   {
     name: "Observability / Evals / Routing",
-    proof: "PerfPulse, Datadog dashboards at Alma, production monitoring, cost attribution, performance debugging",
-    technologies: [
-      { name: "Rust", icon: SiRust },
-      { name: "Datadog", icon: SiDatadog },
-      { name: "Sentry", icon: SiSentry },
-      { name: "Redis", icon: SiRedis },
-      { name: "OpenTelemetry" },
-    ],
+    summary:
+      "I care about the systems behind the systems: how they are measured, debugged, routed, and made trustworthy over time.",
+    behaviors: ["monitoring", "performance debugging", "quality scoring", "routing", "cost attribution"],
+    shipped: ["PerfPulse", "Alma dashboards", "Outcome scoring in OrgX"],
+    tools: ["Rust", "Datadog", "Sentry", "Redis", "OpenTelemetry"],
   },
   {
     name: "Product Engineering at Scale",
-    proof: "Alma (HIPAA clinical), Vessel Health (re-architecture), Capital One (data pipelines), BrainBuffet (LLM product)",
-    technologies: [
-      { name: "Django", icon: SiDjango },
-      { name: "Celery", icon: SiCelery },
-      { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "AWS", icon: FaAws },
-      { name: "Next.js", icon: SiNextdotjs },
-      { name: "Flask", icon: SiFlask },
-      { name: "Spark", icon: SiApachespark },
-      { name: "Scala", icon: DiScala },
-    ],
+    summary:
+      "I ship product systems under real constraints: healthcare compliance, data scale, reliability, customer impact, and cross-functional handoff.",
+    behaviors: ["batch workflows", "feature flags", "state machines", "rollout safety", "production reliability"],
+    shipped: ["Alma", "Vessel Health", "Capital One", "BrainBuffet"],
+    tools: ["Django", "Celery", "PostgreSQL", "AWS", "Next.js", "Spark / Scala"],
   },
 ];
 
-const TechStack = () => {
+export default function TechStack() {
   const { theme } = useTheme();
   const isDarkTheme = theme === "futuristic";
   const [activeTab, setActiveTab] = useState(0);
+  const pillar = capabilityPillars[activeTab];
 
   return (
     <section
-      className="py-24 relative overflow-hidden"
+      className="relative overflow-hidden py-24"
       style={{
-        background: isDarkTheme
-          ? "var(--color-background)"
-          : "var(--color-surface)",
-        minHeight: "600px",
+        background: isDarkTheme ? "var(--color-background)" : "var(--color-surface)",
       }}
     >
-      {/* Content Container */}
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mb-14 max-w-3xl">
+          <p
+            className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
+            style={{ color: "var(--color-primary)", opacity: 0.9 }}
+          >
+            Operating Pillars
+          </p>
           <h2
-            className="text-4xl md:text-5xl font-bold mb-6"
+            className="mb-5 text-4xl md:text-5xl font-bold"
             style={{
               color: isDarkTheme ? "var(--color-primary)" : "var(--color-text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-tight)",
             }}
           >
-            Capabilities
+            How the systems behave
           </h2>
           <p
-            className="text-lg md:text-xl max-w-2xl mx-auto"
+            className="text-lg md:text-xl"
             style={{
               color: "var(--color-text)",
-              fontFamily: "var(--font-body)",
-              opacity: isDarkTheme ? 0.9 : 1,
+              opacity: isDarkTheme ? 0.88 : 0.78,
             }}
           >
-            Four pillars of infrastructure I build and ship
+            This is the operating model behind the projects: the patterns,
+            control surfaces, and infrastructure habits that show up repeatedly
+            across orchestration, tooling, and production product work.
           </p>
         </div>
 
-        {/* Tabs */}
-        <div
-          className="flex flex-wrap justify-center mb-12 gap-3"
-          role="tablist"
-        >
-          {capabilityPillars.map((pillar, index) => (
+        <div className="mb-10 flex flex-wrap gap-3" role="tablist">
+          {capabilityPillars.map((item, index) => (
             <button
-              key={pillar.name}
+              key={item.name}
               onClick={() => setActiveTab(index)}
               role="tab"
               aria-selected={activeTab === index}
-              className="px-5 py-3 rounded-full transition-all duration-300 relative group text-sm md:text-base"
+              className="rounded-full px-5 py-3 text-sm font-medium transition-all duration-200 md:text-base"
               style={{
                 background:
                   activeTab === index
                     ? isDarkTheme
-                      ? "var(--color-primary)"
-                      : "var(--gradient-primary)"
+                      ? "rgba(56, 189, 248, 0.16)"
+                      : "rgba(15, 23, 42, 0.08)"
                     : "transparent",
                 color:
                   activeTab === index
                     ? isDarkTheme
-                      ? "var(--color-background)"
-                      : "white"
+                      ? "var(--color-primary)"
+                      : "var(--color-text)"
                     : "var(--color-text)",
-                border: `2px solid ${
+                border: `1px solid ${
                   activeTab === index
-                    ? "transparent"
+                    ? isDarkTheme
+                      ? "rgba(56, 189, 248, 0.25)"
+                      : "rgba(15, 23, 42, 0.12)"
                     : isDarkTheme
-                    ? "var(--color-primary)"
-                    : "var(--color-border)"
+                    ? "rgba(148, 163, 184, 0.18)"
+                    : "rgba(15, 23, 42, 0.08)"
                 }`,
+                opacity: activeTab === index ? 1 : 0.78,
               }}
             >
-              <span className="relative z-10 font-medium">{pillar.name}</span>
+              {item.name}
             </button>
           ))}
         </div>
 
-        {/* Active Pillar Content */}
         <div
-          className="relative p-8 rounded-2xl overflow-hidden"
+          className="rounded-[2rem] p-8 md:p-10"
           style={{
-            background: isDarkTheme ? "rgba(255, 255, 255, 0.02)" : "white",
+            background: isDarkTheme
+              ? "linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.82))"
+              : "rgba(255, 255, 255, 0.95)",
             border: isDarkTheme
-              ? "1px solid var(--color-primary)"
-              : "1px solid var(--color-border)",
+              ? "1px solid rgba(56, 189, 248, 0.16)"
+              : "1px solid rgba(15, 23, 42, 0.08)",
             boxShadow: isDarkTheme
-              ? "0 0 40px rgba(0, 238, 92, 0.1)"
-              : "0 10px 30px rgba(0, 0, 0, 0.1)",
+              ? "0 22px 60px rgba(2, 6, 23, 0.34)"
+              : "0 18px 40px rgba(15, 23, 42, 0.08)",
           }}
         >
-          {/* Proof Statement */}
-          <p
-            className="text-base mb-8 max-w-3xl"
-            style={{
-              color: "var(--color-text)",
-              fontFamily: "var(--font-body)",
-              opacity: isDarkTheme ? 0.85 : 0.8,
-              lineHeight: "1.7",
-            }}
-          >
-            {capabilityPillars[activeTab].proof}
-          </p>
-
-          {/* Technologies Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {capabilityPillars[activeTab].technologies.map((item) => (
-              <div
-                key={item.name}
-                className="group relative flex items-center justify-center p-6 rounded-xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_360px]">
+            <div>
+              <p
+                className="mb-2 text-xs font-semibold uppercase tracking-[0.18em]"
+                style={{ color: "var(--color-primary)", opacity: 0.9 }}
+              >
+                What I build
+              </p>
+              <h3
+                className="mb-4 text-3xl font-semibold"
                 style={{
-                  background: isDarkTheme
-                    ? "rgba(0, 238, 92, 0.05)"
-                    : "var(--color-surface)",
-                  border: isDarkTheme
-                    ? "1px solid rgba(0, 238, 92, 0.2)"
-                    : "1px solid var(--color-border)",
-                  height: "100px",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = isDarkTheme
-                    ? "0 0 30px rgba(0, 238, 92, 0.3)"
-                    : "0 10px 20px rgba(109, 40, 217, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = "none";
+                  color: "var(--color-text)",
+                  fontFamily: "var(--font-heading)",
                 }}
               >
-                <div className="flex flex-col items-center justify-center gap-3">
-                  {item.icon && (
-                    <div className="transition-transform duration-500 group-hover:scale-110">
-                      {React.createElement(item.icon, {
-                        className: "w-7 h-7",
-                        style: {
-                          color: isDarkTheme
-                            ? "var(--color-primary)"
-                            : "var(--color-primary)",
-                        },
-                      })}
-                    </div>
-                  )}
-                  <div
-                    className="font-medium text-center text-sm"
-                    style={{
-                      color: "var(--color-text)",
-                      opacity: isDarkTheme ? 0.9 : 1,
-                    }}
+                {pillar.name}
+              </h3>
+              <p
+                className="mb-8 max-w-2xl text-base leading-relaxed md:text-lg"
+                style={{
+                  color: "var(--color-text)",
+                  opacity: isDarkTheme ? 0.9 : 0.78,
+                }}
+              >
+                {pillar.summary}
+              </p>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                <div
+                  className="rounded-2xl px-5 py-5"
+                  style={{
+                    background: isDarkTheme
+                      ? "rgba(15, 23, 42, 0.7)"
+                      : "rgba(15, 23, 42, 0.04)",
+                    border: isDarkTheme
+                      ? "1px solid rgba(148, 163, 184, 0.16)"
+                      : "1px solid rgba(15, 23, 42, 0.06)",
+                  }}
+                >
+                  <p
+                    className="mb-3 text-xs font-semibold uppercase tracking-[0.16em]"
+                    style={{ color: "var(--color-primary)" }}
                   >
-                    {item.name}
+                    How it behaves
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {pillar.behaviors.map((behavior) => (
+                      <span
+                        key={behavior}
+                        className="rounded-full px-3 py-1 text-xs font-medium uppercase tracking-[0.12em]"
+                        style={{
+                          background: isDarkTheme
+                            ? "rgba(56, 189, 248, 0.12)"
+                            : "rgba(15, 23, 42, 0.06)",
+                          border: isDarkTheme
+                            ? "1px solid rgba(56, 189, 248, 0.18)"
+                            : "1px solid rgba(15, 23, 42, 0.08)",
+                          color: isDarkTheme ? "var(--color-primary)" : "var(--color-text)",
+                        }}
+                      >
+                        {behavior}
+                      </span>
+                    ))}
                   </div>
                 </div>
+
+                <div
+                  className="rounded-2xl px-5 py-5"
+                  style={{
+                    background: isDarkTheme
+                      ? "rgba(15, 23, 42, 0.7)"
+                      : "rgba(15, 23, 42, 0.04)",
+                    border: isDarkTheme
+                      ? "1px solid rgba(148, 163, 184, 0.16)"
+                      : "1px solid rgba(15, 23, 42, 0.06)",
+                  }}
+                >
+                  <p
+                    className="mb-3 text-xs font-semibold uppercase tracking-[0.16em]"
+                    style={{ color: "var(--color-primary)" }}
+                  >
+                    Where it shipped
+                  </p>
+                  <ul className="space-y-2 list-none p-0">
+                    {pillar.shipped.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-sm leading-relaxed"
+                        style={{
+                          color: "var(--color-text)",
+                          opacity: isDarkTheme ? 0.9 : 0.78,
+                        }}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 h-1.5 w-1.5 rounded-full"
+                          style={{ background: "var(--color-primary)" }}
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            ))}
+            </div>
+
+            <aside
+              className="rounded-[1.6rem] px-6 py-6"
+              style={{
+                background: isDarkTheme
+                  ? "rgba(15, 23, 42, 0.72)"
+                  : "rgba(15, 23, 42, 0.04)",
+                border: isDarkTheme
+                  ? "1px solid rgba(148, 163, 184, 0.16)"
+                  : "1px solid rgba(15, 23, 42, 0.06)",
+              }}
+            >
+              <p
+                className="mb-3 text-xs font-semibold uppercase tracking-[0.16em]"
+                style={{ color: "var(--color-primary)" }}
+              >
+                Core tools
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {pillar.tools.map((tool) => (
+                  <span
+                    key={tool}
+                    className="rounded-full px-3 py-1.5 text-sm font-medium"
+                    style={{
+                      background: isDarkTheme
+                        ? "rgba(255, 255, 255, 0.04)"
+                        : "rgba(255, 255, 255, 0.88)",
+                      border: isDarkTheme
+                        ? "1px solid rgba(148, 163, 184, 0.14)"
+                        : "1px solid rgba(15, 23, 42, 0.06)",
+                      color: "var(--color-text)",
+                    }}
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </aside>
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default TechStack;
+}

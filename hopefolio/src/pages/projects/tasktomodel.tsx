@@ -32,7 +32,7 @@ export default function TaskToModel() {
 
   const stageFeatures = [
     {
-      title: "🎯 Stage 0: Market Validation Platform",
+      title: "Stage 0: Market Validation Platform",
       description:
         "Comprehensive market validation with systematic user feedback and conversion optimization",
       items: [
@@ -43,7 +43,7 @@ export default function TaskToModel() {
       ],
     },
     {
-      title: "🚀 Stage 1: MVP Implementation",
+      title: "Stage 1: MVP Implementation",
       description:
         "Production-ready MVP with enterprise authentication and AI model generation capabilities",
       items: [
@@ -55,7 +55,7 @@ export default function TaskToModel() {
       ],
     },
     {
-      title: "🔮 Stages 2-4: Advanced Features",
+      title: "Stages 2-4: Advanced Features",
       description:
         "Enterprise-scale platform with team collaboration and white-label capabilities",
       items: [
@@ -70,7 +70,7 @@ export default function TaskToModel() {
 
   const innovationFeatures = [
     {
-      title: "📊 Market Validation Innovation",
+      title: "Market Validation Innovation",
       description:
         "Systematic approach to product-market fit validation with quantitative metrics",
       items: [
@@ -81,7 +81,7 @@ export default function TaskToModel() {
       ],
     },
     {
-      title: "🤖 Technical Innovation",
+      title: "Technical Innovation",
       description:
         "Advanced AI pipeline automation with natural language processing capabilities",
       items: [
@@ -92,7 +92,7 @@ export default function TaskToModel() {
       ],
     },
     {
-      title: "📈 Product Management Excellence",
+      title: "Product Management Excellence",
       description:
         "Strategic product development with comprehensive planning and execution frameworks",
       items: [
@@ -228,11 +228,11 @@ export default function TaskToModel() {
             Product Strategy Excellence
           </h3>
           <p>
-            The project showcases advanced product management skills with
-            detailed stage planning, risk assessment, edge case analysis, and
-            systematic approach to feature development. Each stage includes
-            specific success metrics, technical milestones, and user experience
-            optimization strategies.
+            Each development stage includes detailed planning, risk assessment,
+            edge case analysis, and a systematic approach to feature
+            development. Every stage has specific success metrics, technical
+            milestones, and user experience optimization strategies built in
+            from the start.
           </p>
         </ProjectCard>
       </ProjectSection>
@@ -253,11 +253,11 @@ export default function TaskToModel() {
               lineHeight: themeProps.typography.lineHeight,
             }}
           >
-            "TaskToModel demonstrates my ability to conceptualize, plan, and
-            execute complex AI products from market validation to enterprise
-            deployment. The systematic approach to product development showcases
-            both technical depth and strategic business thinking essential for
-            senior engineering roles."
+            "TaskToModel is built on the idea that AI model creation should be
+            as accessible as describing a task in plain English. The platform
+            covers the full product lifecycle, from market validation and
+            phased development to enterprise deployment, with systematic
+            planning at each stage."
           </p>
         </ProjectCard>
       </ProjectSection>

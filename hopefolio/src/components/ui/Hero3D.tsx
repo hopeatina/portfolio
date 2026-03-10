@@ -1,400 +1,347 @@
 "use client";
 
-import React, { Suspense, useCallback } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { FiArrowRight, FiChevronDown } from "react-icons/fi";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
-import { FiChevronDown } from "react-icons/fi";
-import { motion } from "framer-motion";
+import { attentionItems, heroProofStats } from "@/data/homepage";
+import StateBadge from "./StateBadge";
 
-// Loading component with shimmer effect
-const LoadingScene = () => (
+const StaticHeroBackdrop = () => (
   <div
-    className="w-full h-screen relative overflow-hidden"
+    className="absolute inset-0"
     style={{
-      background: "var(--background)",
+      background:
+        "radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 30%), radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.18), transparent 24%), linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 1))",
     }}
   >
     <div
-      className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-primary/10 to-transparent"
+      className="absolute inset-0"
       style={{
-        backgroundSize: "200% 100%",
-        animation: "shimmer 2s infinite",
+        backgroundImage:
+          "linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px)",
+        backgroundSize: "48px 48px",
+        maskImage:
+          "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.95) 85%)",
       }}
     />
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="text-center">
-        <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-primary/20 animate-pulse" />
-        <div className="h-8 w-64 mx-auto bg-primary/20 rounded animate-pulse mb-4" />
-        <div className="h-4 w-48 mx-auto bg-primary/20 rounded animate-pulse" />
-      </div>
-    </div>
   </div>
 );
 
-// Fallback content for when WebGL is not supported
-const FallbackContent = () => {
-  const { theme, themeProps } = useTheme();
-  const isDarkTheme = theme === "futuristic";
-  const isRiceTheme = theme === "rice";
-  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
+class SceneErrorBoundary extends React.Component<
+  { fallback: React.ReactNode; children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { fallback: React.ReactNode; children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-  return (
-    <div
-      className="w-full h-screen flex items-center justify-center bg-gradient-to-br"
-      style={{
-        background: bgIsDark
-          ? "linear-gradient(to bottom right, var(--background), var(--primary-dark))"
-          : "linear-gradient(to bottom right, var(--background), var(--primary-light))",
-      }}
-    >
-      <div className="text-center px-4">
-        <h1
-          className="text-5xl md:text-7xl font-bold mb-6"
-          style={{
-            color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
-            textShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
-          }}
-        >
-          Hope Atina
-          <br />
-          <span className="text-3xl md:text-5xl">
-            Building Infrastructure for Autonomous AI Agents
-          </span>
-        </h1>
-        <p
-          className="text-xl md:text-2xl mb-8 opacity-90"
-          style={{
-            color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
-          }}
-        >
-          Agent Infrastructure Engineer. Creator of OrgX (multi-agent coordination)
-          and PerfPulse (Rust CLI). 8+ years shipping production AI systems.
-        </p>
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Link
-            href="/projects"
-            className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 group"
-            style={{
-              background: "var(--gradient-primary)",
-              color: "white",
-              boxShadow: "0 4px 12px rgba(var(--primary-rgb), 0.3)",
-            }}
-          >
-            View Projects
-            <svg
-              className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
-          </Link>
-          <Link
-            href="/about"
-            className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 border-2"
-            style={{
-              borderColor: bgIsDark ? "rgba(255,255,255,0.3)" : "var(--border)",
-              color: bgIsDark ? "white" : "var(--text)",
-            }}
-          >
-            About Me
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  override render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+
+    return this.props.children;
+  }
+}
 
 const ConnectorScene = dynamic(() => import("./ConnectorScene"), {
   ssr: false,
-  loading: () => <LoadingScene />,
+  loading: () => <StaticHeroBackdrop />,
 });
 
-const Hero3D: React.FC = () => {
+export default function Hero3D() {
   const { themeProps } = useTheme();
+  const shouldReduceMotion = useReducedMotion();
+  const [shouldRenderScene, setShouldRenderScene] = useState(true);
   const headingFont =
     themeProps.typography.headingFont || "'Orbitron', sans-serif";
   const bodyFont =
     themeProps.typography.bodyFont || "'Titillium Web', sans-serif";
+  const focusItems = attentionItems.slice(0, 3);
 
-  // Scroll to next section functionality
-  const scrollToNextSection = useCallback(() => {
-    const nextSection = document.querySelector("main section:nth-child(2)");
-    if (nextSection) {
-      nextSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    } else {
-      // Fallback: scroll to the height of the viewport
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: "smooth",
-      });
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if (window.navigator.webdriver) {
+      setShouldRenderScene(false);
+      return;
+    }
+
+    const canvas = document.createElement("canvas");
+    const gl =
+      canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+
+    if (!gl) {
+      setShouldRenderScene(false);
     }
   }, []);
 
+  const reveal = (delay: number, y = 20) =>
+    shouldReduceMotion
+      ? {
+          initial: { opacity: 1, y: 0 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.01, delay: 0 },
+        }
+      : {
+          initial: { opacity: 0, y },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.55, delay, ease: "easeOut" as const },
+        };
+
+  const scrollToNextSection = useCallback(() => {
+    const nextSection = document.querySelector("main section:nth-child(2)");
+
+    if (nextSection) {
+      nextSection.scrollIntoView({
+        behavior: shouldReduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+      return;
+    }
+
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: shouldReduceMotion ? "auto" : "smooth",
+    });
+  }, [shouldReduceMotion]);
+
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      <Suspense fallback={<LoadingScene />}>
-        <div className="absolute inset-0">
-          <ConnectorScene />
-        </div>
-      </Suspense>
+    <div className="relative min-h-screen w-full overflow-hidden lg:h-screen">
+      <div className="absolute inset-0">
+        {shouldRenderScene ? (
+          <SceneErrorBoundary fallback={<StaticHeroBackdrop />}>
+            <Suspense fallback={<StaticHeroBackdrop />}>
+              <ConnectorScene />
+            </Suspense>
+          </SceneErrorBoundary>
+        ) : (
+          <StaticHeroBackdrop />
+        )}
+      </div>
+
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(15,23,42,0.15),rgba(2,6,23,0.78)_72%,rgba(2,6,23,0.94))]" />
 
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10"
+        transition={{ duration: shouldReduceMotion ? 0.01 : 0.65 }}
+        className="absolute inset-0 z-10 flex items-start px-4 pt-28 pb-24 md:px-6 lg:items-center lg:pt-24 lg:pb-28"
       >
-        {/* Main content container with improved spacing and hierarchy */}
-        <div className="relative max-w-6xl mx-auto text-center">
-          {/* Eyebrow text - establishes context */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-sm md:text-base font-medium tracking-wider uppercase mb-4 text-white/80"
-            style={{
-              fontFamily: bodyFont,
-              letterSpacing: "var(--letter-spacing-wider)",
-              textShadow: "0 2px 8px rgba(0, 0, 0, 0.4)",
-            }}
-          >
-            Agent Infrastructure • Multi-Agent Orchestration • Developer Tooling
-          </motion.p>
-
-          {/* Primary heading with better scale progression */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-6"
-            style={{
-              fontFamily: headingFont,
-            }}
-          >
-            <span
-              className="block text-6xl md:text-7xl lg:text-8xl font-bold text-white"
+        <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-end">
+          <div className="text-center lg:text-left">
+            <motion.p
+              {...reveal(0.12, 12)}
+              className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-white/72 md:text-base"
               style={{
-                fontSize:
-                  "clamp(var(--font-size-5xl), 10vw, var(--font-size-6xl))",
-                lineHeight: "var(--line-height-none)",
-                textShadow:
-                  "0 4px 20px rgba(0, 0, 0, 0.5), 0 8px 40px rgba(var(--primary-rgb), 0.3)",
-                letterSpacing: "var(--letter-spacing-tight)",
+                fontFamily: bodyFont,
+                textShadow: "0 2px 10px rgba(0, 0, 0, 0.3)",
               }}
             >
-              Hope Atina
-            </span>
-          </motion.h1>
+              Agent Infrastructure • Multi-Agent Orchestration • Developer Tooling
+            </motion.p>
 
-          {/* Tagline with visual separation */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-8"
-          >
-            <h2
-              className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white/95"
+            <motion.h1
+              {...reveal(0.2, 24)}
+              className="mb-4"
+              style={{ fontFamily: headingFont }}
+            >
+              <span
+                className="block text-6xl font-bold text-white md:text-7xl lg:text-8xl"
+                style={{
+                  fontSize:
+                    "clamp(var(--font-size-5xl), 10vw, var(--font-size-6xl))",
+                  lineHeight: "var(--line-height-none)",
+                  letterSpacing: "var(--letter-spacing-tight)",
+                  textShadow:
+                    "0 8px 30px rgba(0, 0, 0, 0.48), 0 10px 40px rgba(14, 165, 233, 0.18)",
+                }}
+              >
+                Hope Atina
+              </span>
+            </motion.h1>
+
+            <motion.h2
+              {...reveal(0.28, 24)}
+              className="mb-6 text-3xl font-semibold text-white/95 md:text-4xl lg:text-5xl"
               style={{
                 fontFamily: headingFont,
-                fontSize:
-                  "clamp(var(--font-size-2xl), 5vw, var(--font-size-4xl))",
                 lineHeight: "var(--line-height-tight)",
-                textShadow: "0 3px 12px rgba(0, 0, 0, 0.4)",
-                background:
-                  "linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                textShadow: "0 4px 18px rgba(0, 0, 0, 0.35)",
               }}
             >
-              Building Infrastructure for Autonomous AI Agents
-            </h2>
-          </motion.div>
+              Building infrastructure for autonomous AI agents
+            </motion.h2>
 
-          {/* Description with improved readability */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-lg md:text-xl lg:text-2xl mb-12 max-w-3xl mx-auto text-white/80"
-            style={{
-              fontFamily: bodyFont,
-              lineHeight: "var(--line-height-relaxed)",
-              textShadow: "0 2px 8px rgba(0, 0, 0, 0.4)",
-            }}
-          >
-            Creator of OrgX (multi-agent coordination) and PerfPulse (Rust CLI).
-            8+ years shipping production AI systems at Alma, Vessel Health, and Capital One.
-          </motion.p>
-
-          {/* CTAs with improved visual prominence */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            {/* Primary CTA */}
-            <Link
-              href="/projects"
-              className="group relative inline-flex items-center px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
+            <motion.p
+              {...reveal(0.36, 20)}
+              className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-white/80 md:text-xl lg:mx-0 lg:text-2xl"
               style={{
-                fontSize: "var(--font-size-lg)",
                 fontFamily: bodyFont,
-                background: "var(--gradient-primary)",
-                color: "white",
-                boxShadow:
-                  "0 4px 20px rgba(var(--primary-rgb), 0.4), 0 8px 32px rgba(0, 0, 0, 0.2)",
+                textShadow: "0 2px 10px rgba(0, 0, 0, 0.3)",
               }}
             >
-              <span className="relative z-10">View Projects</span>
-              <svg
-                className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-              {/* Hover effect overlay */}
-              <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </Link>
+              Creator of OrgX and PerfPulse. I build orchestration, tooling, and
+              production systems where delegation, review, provenance, and
+              judgment all have a clear place.
+            </motion.p>
 
-            {/* Secondary CTA */}
-            <Link
-              href="/about"
-              className="group relative inline-flex items-center px-8 py-4 rounded-full font-medium transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
-              style={{
-                fontSize: "var(--font-size-base)",
-                fontFamily: bodyFont,
-                border: "2px solid rgba(255, 255, 255, 0.3)",
-                color: "white",
-                background: "rgba(255, 255, 255, 0.05)",
-              }}
-            >
-              <span className="relative z-10">Learn More About Me</span>
-              {/* Hover effect */}
-              <div className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-            </Link>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Improved scroll indicator with functionality */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-      >
-        <div className="flex flex-col items-center">
-          {/* Text label */}
-          <motion.p
-            className="text-white/70 text-xs md:text-sm mb-3 font-medium select-none"
-            style={{
-              fontFamily: bodyFont,
-              letterSpacing: "var(--letter-spacing-wide)",
-              textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
-            }}
-            animate={{ opacity: [0.7, 1, 0.7] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            Scroll to explore
-          </motion.p>
-
-          {/* Clickable scroll button */}
-          <motion.button
-            onClick={scrollToNextSection}
-            className="group relative"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Scroll to next section"
-          >
-            {/* Outer pulse ring */}
             <motion.div
-              className="absolute inset-0 rounded-full border-2 border-white/20"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.8, 0, 0.8],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeOut",
-              }}
-              style={{
-                width: "60px",
-                height: "60px",
-                left: "50%",
-                top: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            />
-
-            {/* Main button */}
-            <motion.div
-              className="relative w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer transition-all duration-300"
-              style={{
-                background: "rgba(255, 255, 255, 0.1)",
-                border: "2px solid rgba(255, 255, 255, 0.25)",
-                boxShadow:
-                  "0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-              }}
-              animate={{ y: [0, 6, 0] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              whileHover={{
-                background: "rgba(255, 255, 255, 0.2)",
-                borderColor: "rgba(255, 255, 255, 0.4)",
-                boxShadow:
-                  "0 6px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-              }}
+              {...reveal(0.44, 18)}
+              className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3"
             >
-              <FiChevronDown
-                className="text-white transition-transform duration-300 group-hover:translate-y-1"
-                size={20}
-              />
+              {heroProofStats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-2xl border border-white/10 bg-white/8 px-4 py-4 text-left backdrop-blur-md"
+                  style={{
+                    boxShadow: "0 18px 40px rgba(2, 6, 23, 0.14)",
+                  }}
+                >
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-white/52">
+                    {stat.label}
+                  </p>
+                  <p className="text-base font-medium text-white md:text-lg">
+                    {stat.value}
+                  </p>
+                </div>
+              ))}
             </motion.div>
-          </motion.button>
+
+            <motion.div
+              {...reveal(0.52, 18)}
+              className="flex flex-wrap justify-center gap-4 lg:justify-start"
+            >
+              <Link
+                href="/projects"
+                className="no-underline inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-semibold text-slate-950 transition-all duration-200 hover:-translate-y-0.5 md:text-base"
+                style={{
+                  fontFamily: bodyFont,
+                  boxShadow: "0 18px 46px rgba(2, 6, 23, 0.24)",
+                }}
+              >
+                Review systems
+                <FiArrowRight />
+              </Link>
+              <Link
+                href="/blog"
+                className="no-underline inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/6 px-7 py-4 text-sm font-medium text-white/90 transition-all duration-200 hover:border-white/30 hover:bg-white/12 md:text-base"
+                style={{
+                  fontFamily: bodyFont,
+                  backdropFilter: "blur(12px)",
+                }}
+              >
+                Read technical writing
+              </Link>
+            </motion.div>
+          </div>
+
+          <motion.aside
+            {...reveal(0.4, 28)}
+            className="hidden rounded-[1.9rem] border border-white/12 bg-slate-950/42 p-5 text-left backdrop-blur-xl lg:block"
+            style={{
+              boxShadow: "0 30px 90px rgba(2, 6, 23, 0.4)",
+            }}
+          >
+            <p
+              className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/55"
+              style={{ fontFamily: bodyFont }}
+            >
+              What needs attention
+            </p>
+            <h3
+              className="mb-5 text-2xl font-semibold text-white"
+              style={{ fontFamily: headingFont }}
+            >
+              Review the systems that best show how I build.
+            </h3>
+
+            <div className="space-y-3">
+              {focusItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="group no-underline block rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition-all duration-200 hover:border-white/18 hover:bg-white/10"
+                >
+                  <div className="mb-3">
+                    <StateBadge state={item.state} />
+                  </div>
+                  <p
+                    className="mb-1 text-sm font-semibold uppercase tracking-[0.16em] text-white/50"
+                    style={{ fontFamily: bodyFont }}
+                  >
+                    {item.name}
+                  </p>
+                  <p className="mb-2 text-lg font-semibold text-white">
+                    {item.title}
+                  </p>
+                  <p
+                    className="mb-3 text-sm leading-relaxed text-white/72"
+                    style={{ fontFamily: bodyFont }}
+                  >
+                    {item.proof}
+                  </p>
+                  <div className="inline-flex items-center gap-2 text-sm font-medium text-white/84">
+                    <span>{item.actionLabel}</span>
+                    <FiArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </motion.aside>
         </div>
       </motion.div>
 
-      <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            background-position: -200% 0;
-          }
-          100% {
-            background-position: 200% 0;
-          }
-        }
-      `}</style>
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: shouldReduceMotion ? 0.01 : 0.5, delay: shouldReduceMotion ? 0 : 0.68 }}
+        className="absolute bottom-6 left-1/2 z-20 hidden -translate-x-1/2 md:block"
+      >
+        <button
+          onClick={scrollToNextSection}
+          aria-label="Scroll to the next section"
+          className="group inline-flex flex-col items-center gap-3 no-underline"
+        >
+          <span
+            className="text-xs font-medium uppercase tracking-[0.18em] text-white/56"
+            style={{ fontFamily: bodyFont }}
+          >
+            Scroll to review
+          </span>
+          <motion.span
+            animate={
+              shouldReduceMotion
+                ? undefined
+                : {
+                    y: [0, 3, 0],
+                  }
+            }
+            transition={
+              shouldReduceMotion
+                ? undefined
+                : {
+                    duration: 1.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }
+            }
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/16 bg-white/8 text-white/88 backdrop-blur-md transition-all duration-200 group-hover:border-white/28 group-hover:bg-white/12"
+          >
+            <FiChevronDown />
+          </motion.span>
+        </button>
+      </motion.div>
     </div>
   );
-};
-
-export default Hero3D;
+}

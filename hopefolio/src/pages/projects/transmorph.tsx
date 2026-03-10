@@ -38,7 +38,7 @@ export default function Transmorph() {
 
   const architectureFeatures = [
     {
-      title: "🔧 Core Generation Engine",
+      title: "Core Generation Engine",
       description:
         "Sophisticated pipeline transforming OpenAPI specs into production-ready MCP servers",
       items: [
@@ -50,7 +50,7 @@ export default function Transmorph() {
       ],
     },
     {
-      title: "💻 CLI Framework & Developer Experience",
+      title: "CLI Framework & Developer Experience",
       description:
         "Professional-grade command-line interface with comprehensive developer tooling",
       items: [
@@ -62,7 +62,7 @@ export default function Transmorph() {
       ],
     },
     {
-      title: "🚀 Hosted Deployment Platform",
+      title: "Hosted Deployment Platform",
       description:
         "Complete SaaS offering with automated deployment and resource management",
       items: [
@@ -77,7 +77,7 @@ export default function Transmorph() {
 
   const innovationFeatures = [
     {
-      title: "🤖 Advanced LLM Integration",
+      title: "Advanced LLM Integration",
       description:
         "Cutting-edge AI integration for intelligent code generation and analysis",
       items: [
@@ -88,7 +88,7 @@ export default function Transmorph() {
       ],
     },
     {
-      title: "🏗️ Code Quality & Standards",
+      title: "Code Quality & Standards",
       description:
         "Enterprise-grade code generation with security and maintainability focus",
       items: [
@@ -99,7 +99,7 @@ export default function Transmorph() {
       ],
     },
     {
-      title: "🌐 Deployment Innovation",
+      title: "Deployment Innovation",
       description:
         "Multi-platform deployment support with advanced environment management",
       items: [
@@ -113,26 +113,26 @@ export default function Transmorph() {
 
   const ecosystemComponents = [
     {
-      title: "📦 Core Library",
+      title: "Core Library",
       description: "Shared utilities and interfaces used across all packages",
     },
     {
-      title: "⌨️ CLI Package",
+      title: "CLI Package",
       description:
         "OCLIF-based command-line interface with comprehensive testing",
     },
     {
-      title: "🌐 Web Interface",
+      title: "Web Interface",
       description:
         "React-based frontend for drag-and-drop OpenAPI specification processing",
     },
     {
-      title: "📚 Documentation Site",
+      title: "Documentation Site",
       description:
         "Comprehensive documentation with tutorials and API references",
     },
     {
-      title: "🧪 Testing Suite",
+      title: "Testing Suite",
       description:
         "End-to-end testing framework validating generated code functionality",
     },
@@ -292,11 +292,11 @@ Configuration Management ←―――――――――――――――――�
               lineHeight: themeProps.typography.lineHeight,
             }}
           >
-            "MCP-Gen demonstrates my ability to architect and implement complex
-            developer tools that bridge traditional APIs with cutting-edge LLM
-            technology. The comprehensive testing, documentation, and hosted
-            platform showcase enterprise-level software engineering and product
-            development skills."
+            "MCP-Gen bridges traditional REST APIs with the emerging LLM tool
+            ecosystem. It handles OpenAPI parsing, prompt-driven code
+            generation, schema validation, and Docker packaging in a single
+            pipeline -- from spec to deployed MCP server with no manual
+            editing required."
           </p>
         </ProjectCard>
       </ProjectSection>

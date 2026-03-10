@@ -37,7 +37,7 @@ export default function EvalVybes() {
 
   const features = [
     {
-      title: "🎤 Conversational Interface",
+      title: "Conversational Interface",
       description:
         "Natural voice and text interaction for creating and managing AI evaluations",
       items: [
@@ -48,7 +48,7 @@ export default function EvalVybes() {
       ],
     },
     {
-      title: "🤖 Multi-Model Comparison",
+      title: "Multi-Model Comparison",
       description:
         "Compare outputs from different AI models side-by-side with detailed analysis",
       items: [
@@ -59,7 +59,7 @@ export default function EvalVybes() {
       ],
     },
     {
-      title: "⭐ Smart Rating System",
+      title: "Smart Rating System",
       description: "Comprehensive rating and feedback system for AI outputs",
       items: [
         "Customizable evaluation criteria with 1-5 star ratings",
@@ -104,7 +104,7 @@ export default function EvalVybes() {
           "WebRTC",
           "Multi-LLM",
         ]}
-        image="/images/projects/evalvybes.jpg"
+        image="/images/projects/evalvybes.svg"
       />
 
       <TechStack items={techStack} />
@@ -204,7 +204,7 @@ export default function EvalVybes() {
               WebRTC Voice System
             </h3>
             <p className="mb-4">
-              EvalVybes is implementing cutting-edge WebRTC architecture for
+              EvalVybes is implementing a WebRTC architecture for
               real-time voice interaction with OpenAI's Realtime API:
             </p>
             <ul className="space-y-2">

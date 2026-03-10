@@ -129,6 +129,7 @@ export default function OpenClaw() {
           "CLI Orchestration",
           "TypeScript",
         ]}
+        image="/images/projects/openclaw.svg"
       />
 
       <TechStack items={techStack} />
