@@ -6,7 +6,7 @@ import TechStack from "@/components/ui/TechStack";
 import Testimonials from "@/components/ui/Testimonials";
 import CTASection from "@/components/ui/CTASection";
 import CompanyLogos from "@/components/ui/CompanyLogos";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import WhatNeedsAttention from "@/components/ui/WhatNeedsAttention";
 
 // Dynamically import Hero3D to avoid SSR issues with Three.js
 const Hero3D = dynamic(() => import("@/components/ui/Hero3D"), {
@@ -23,8 +23,6 @@ const Hero3D = dynamic(() => import("@/components/ui/Hero3D"), {
 });
 
 export default function Home() {
-  const { theme } = useTheme();
-
   return (
     <>
       <Head>
@@ -43,6 +41,9 @@ export default function Home() {
         <section className="relative w-full h-screen">
           <Hero3D />
         </section>
+
+        {/* What Needs Attention */}
+        <WhatNeedsAttention />
 
         {/* Shipped in Production */}
         <CompanyLogos />

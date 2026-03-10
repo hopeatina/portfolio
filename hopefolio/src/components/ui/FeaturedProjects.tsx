@@ -1,167 +1,215 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import { FiArrowRight } from "react-icons/fi";
+import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import StateBadge from "./StateBadge";
+import type { ReviewState } from "@/data/homepage";
 
 type Project = {
   id: string;
   title: string;
-  description: string;
+  summary: string;
   image: string;
   slug: string;
   tags: string[];
-  metric?: string;
+  state: ReviewState;
+  proof: string[];
+  artifactLabel: string;
 };
 
 const projects: Project[] = [
   {
     id: "1",
     title: "OrgX",
-    description:
-      "Multi-agent coordination platform. MCP server integrations, durable agent workflows, tool-calling middleware, org memory, trust-based governance. 19-repo ecosystem, 1,457+ commits.",
+    summary:
+      "Multi-agent orchestration platform with MCP integrations, trust governance, quality gates, and durable workflows.",
     image: "/images/projects/orgx.jpg",
     slug: "orgx",
     tags: ["Multi-Agent Orchestration", "MCP Protocol", "Agent Governance"],
-    metric: "1,457+ commits",
+    state: "Ready for review",
+    proof: ["1,457+ commits", "19 repos", "Memory + scoring loops"],
+    artifactLabel: "Architecture review",
   },
   {
     id: "2",
     title: "OpenClaw Plugin",
-    description:
-      "Browser extension for agent control and orchestration. 644+ commits. CLI-first UX for agent interaction, real-time task management.",
-    image: "/images/projects/orgx.jpg",
+    summary:
+      "Browser-native agent control surface with CLI-first orchestration patterns and real-time task management.",
+    image: "/images/projects/openclaw.svg",
     slug: "openclaw",
     tags: ["Browser Extension", "Agent UX", "CLI Orchestration"],
-    metric: "644+ commits",
+    state: "Experimental",
+    proof: ["644+ commits", "Browser control UX", "Agent task flow"],
+    artifactLabel: "Workflow surface",
   },
   {
     id: "3",
     title: "PerfPulse",
-    description:
-      "AI-powered macOS Activity Monitor replacement. Rust CLI + web dashboard + TUI. Homebrew-installable. Performance scoring with Claude-powered recommendations.",
-    image: "/images/projects/neuromosaic.jpg",
+    summary:
+      "Rust performance tooling with CLI, web dashboard, and TUI surfaces plus optional AI recommendations.",
+    image: "/images/projects/perfpulse.svg",
     slug: "perfpulse",
     tags: ["Rust", "Homebrew Tap", "CLI Tool", "AI-Powered"],
-    metric: "Homebrew tap",
+    state: "Live tool",
+    proof: ["Homebrew install", "3 operator surfaces", "Local-first inspection"],
+    artifactLabel: "Interface preview",
   },
   {
     id: "4",
     title: "BrainBuffet",
-    description:
-      "AI course platform. Multi-step LLM pipelines, RAG retrieval, structured generation. 250+ courses created, 90% time reduction. Real customers.",
+    summary:
+      "Multi-step LLM product with retrieval, structured generation, and real customer usage in production.",
     image: "/images/projects/brain-buffet.jpg",
     slug: "brain-buffet",
     tags: ["LLM Pipelines", "RAG", "Shipped Product"],
-    metric: "250+ courses",
+    state: "Shipped in production",
+    proof: ["250+ courses", "90% time reduction", "Real customers"],
+    artifactLabel: "Product snapshot",
   },
 ];
 
-const FeaturedProjects = () => {
+export default function FeaturedProjects() {
   const { theme } = useTheme();
   const isDarkTheme = theme === "futuristic";
 
   return (
     <section
-      className="py-24 relative overflow-hidden"
+      className="relative overflow-hidden py-24"
       style={{
-        background: isDarkTheme
-          ? "var(--color-background)"
-          : "var(--color-surface)",
-        minHeight: "600px",
+        background: isDarkTheme ? "var(--color-background)" : "var(--color-surface)",
       }}
     >
-      {/* Content Container */}
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mb-14 max-w-3xl">
+          <p
+            className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
+            style={{
+              color: "var(--color-primary)",
+              opacity: 0.9,
+            }}
+          >
+            Systems Under Review
+          </p>
           <h2
-            className="text-4xl md:text-5xl font-bold mb-6"
+            className="mb-5 text-4xl md:text-5xl font-bold"
             style={{
               color: isDarkTheme ? "var(--color-primary)" : "var(--color-text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-tight)",
             }}
           >
-            Systems I've Built
+            Systems I&apos;ve built
           </h2>
           <p
-            className="text-lg md:text-xl max-w-2xl mx-auto"
+            className="text-lg md:text-xl"
             style={{
               color: "var(--color-text)",
-              fontFamily: "var(--font-body)",
-              opacity: isDarkTheme ? 0.9 : 1,
+              opacity: isDarkTheme ? 0.88 : 0.78,
             }}
           >
-            Agent infrastructure, orchestration platforms, and production AI
-            systems
+            These are the systems I would want a hiring manager to inspect first:
+            the platforms, tools, and production implementations where orchestration,
+            judgment, and proof all show up clearly.
           </p>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid gap-8 md:grid-cols-2">
           {projects.map((project) => (
             <Link
               key={project.id}
               href={`/projects/${project.slug}`}
-              className="group relative block"
+              className="group no-underline"
             >
-              <div
-                className="relative rounded-2xl overflow-hidden transition-all duration-500 transform group-hover:scale-[1.02]"
+              <article
+                className="flex h-full flex-col overflow-hidden rounded-[2rem] transition-all duration-200 hover:-translate-y-1"
                 style={{
                   background: isDarkTheme
-                    ? "rgba(255, 255, 255, 0.02)"
-                    : "white",
+                    ? "linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.84))"
+                    : "rgba(255, 255, 255, 0.95)",
                   border: isDarkTheme
-                    ? "1px solid var(--color-primary)"
-                    : "1px solid var(--color-border)",
+                    ? "1px solid rgba(56, 189, 248, 0.18)"
+                    : "1px solid rgba(15, 23, 42, 0.08)",
                   boxShadow: isDarkTheme
-                    ? "0 0 40px rgba(0, 238, 92, 0.1)"
-                    : "0 10px 30px rgba(0, 0, 0, 0.1)",
+                    ? "0 22px 60px rgba(2, 6, 23, 0.34)"
+                    : "0 18px 40px rgba(15, 23, 42, 0.08)",
                 }}
               >
-                {/* Project Image */}
-                <div className="relative aspect-video overflow-hidden">
+                <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
                     src={project.image}
-                    alt={`Preview of ${project.title}`}
+                    alt={`Artifact preview for ${project.title}`}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-
-                  {/* Metric Badge */}
-                  {project.metric && (
-                    <div
-                      className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold"
-                      style={{
-                        background: isDarkTheme
-                          ? "rgba(0, 238, 92, 0.9)"
-                          : "var(--color-primary)",
-                        color: isDarkTheme ? "black" : "white",
-                      }}
-                    >
-                      {project.metric}
-                    </div>
-                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+                  <div className="absolute left-4 top-4">
+                    <StateBadge state={project.state} />
+                  </div>
+                  <div
+                    className="absolute bottom-4 left-4 rounded-full border border-white/12 bg-slate-950/65 px-3 py-1 text-xs font-medium uppercase tracking-[0.16em] text-white/72 backdrop-blur-md"
+                  >
+                    {project.artifactLabel}
+                  </div>
                 </div>
 
-                {/* Project Content */}
-                <div className="p-6">
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-1 flex-col p-6">
+                  <h3
+                    className="mb-3 text-2xl font-semibold"
+                    style={{
+                      color: isDarkTheme ? "var(--color-primary)" : "var(--color-text)",
+                      fontFamily: "var(--font-heading)",
+                    }}
+                  >
+                    {project.title}
+                  </h3>
+
+                  <p
+                    className="mb-5 text-base leading-relaxed"
+                    style={{
+                      color: "var(--color-text)",
+                      opacity: isDarkTheme ? 0.9 : 0.78,
+                    }}
+                  >
+                    {project.summary}
+                  </p>
+
+                  <div className="mb-5 flex flex-wrap gap-2">
+                    {project.proof.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full px-3 py-1 text-xs font-medium"
+                        style={{
+                          background: isDarkTheme
+                            ? "rgba(15, 23, 42, 0.84)"
+                            : "rgba(15, 23, 42, 0.05)",
+                          border: isDarkTheme
+                            ? "1px solid rgba(148, 163, 184, 0.16)"
+                            : "1px solid rgba(15, 23, 42, 0.06)",
+                          color: isDarkTheme ? "rgba(226,232,240,0.92)" : "var(--color-text)",
+                        }}
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mb-6 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 text-sm rounded-full transition-all duration-300"
+                        className="rounded-full px-3 py-1 text-xs font-medium"
                         style={{
                           background: isDarkTheme
-                            ? "rgba(0, 238, 92, 0.1)"
-                            : "var(--color-primary)",
-                          color: isDarkTheme ? "var(--color-primary)" : "white",
+                            ? "rgba(56, 189, 248, 0.12)"
+                            : "rgba(15, 23, 42, 0.05)",
+                          color: isDarkTheme ? "var(--color-primary)" : "var(--color-text)",
                           border: isDarkTheme
-                            ? "1px solid var(--color-primary)"
-                            : "none",
+                            ? "1px solid rgba(56, 189, 248, 0.2)"
+                            : "1px solid rgba(15, 23, 42, 0.08)",
                         }}
                       >
                         {tag}
@@ -169,52 +217,21 @@ const FeaturedProjects = () => {
                     ))}
                   </div>
 
-                  {/* Title */}
-                  <h3
-                    className="text-2xl font-bold mb-2"
-                    style={{
-                      color: isDarkTheme
-                        ? "var(--color-primary)"
-                        : "var(--color-text)",
-                      fontFamily: "var(--font-heading)",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p
-                    className="mb-4"
-                    style={{
-                      color: "var(--color-text)",
-                      fontFamily: "var(--font-body)",
-                      opacity: isDarkTheme ? 0.9 : 1,
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    {project.description}
-                  </p>
-
-                  {/* View Case Study Link */}
                   <div
-                    className="inline-flex items-center group/link transition-all duration-300"
+                    className="mt-auto inline-flex items-center gap-2 text-sm font-medium"
                     style={{
-                      color: isDarkTheme
-                        ? "var(--color-primary)"
-                        : "var(--color-primary)",
+                      color: "var(--color-primary)",
                     }}
                   >
-                    <span className="font-medium">View Case Study</span>
-                    <FiArrowRight className="ml-2 transform transition-transform group-hover/link:translate-x-2" />
+                    <span>Inspect case study</span>
+                    <FiArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
                   </div>
                 </div>
-              </div>
+              </article>
             </Link>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default FeaturedProjects;
+}

@@ -31,7 +31,7 @@ const projects = [
     longDescription:
       "Browser extension for agent control and orchestration. 644+ commits. CLI-first UX for agent interaction, real-time task management.",
     link: "/projects/openclaw",
-    image: "/images/projects/orgx.jpg",
+    image: "/images/projects/openclaw.svg",
     tags: ["Browser Extension", "Agent UX", "CLI Orchestration"],
     color: "blue",
     featured: true,
@@ -46,7 +46,7 @@ const projects = [
     longDescription:
       "AI-powered macOS Activity Monitor replacement. Rust CLI + web dashboard + TUI. Homebrew-installable. Performance scoring with Claude-powered recommendations.",
     link: "/projects/perfpulse",
-    image: "/images/projects/neuromosaic.jpg",
+    image: "/images/projects/perfpulse.svg",
     tags: ["Rust", "Homebrew Tap", "CLI Tool", "AI-Powered"],
     color: "orange",
     featured: true,
@@ -61,7 +61,7 @@ const projects = [
     longDescription:
       "AI-powered automated reassessment system, compliant progress notes, Brellium audit integration. Django/Celery/PostgreSQL at HIPAA scale. Therapist adoption 40% → 89%.",
     link: "/projects/alma",
-    image: "/images/projects/brain-buffet.jpg",
+    image: "/images/projects/alma.svg",
     tags: ["Production AI", "HIPAA", "Django", "Healthcare"],
     color: "purple",
     featured: true,
@@ -120,7 +120,7 @@ const projects = [
     longDescription:
       "8-package Remotion monorepo. Token-driven motion design system with FPS-aware conversion, animation hooks, and declarative components.",
     link: "/projects/framefx",
-    image: "/images/projects/transmorph.jpg",
+    image: "/images/projects/framefx.svg",
     tags: ["Remotion", "Monorepo", "Design Tokens"],
     color: "cyan",
     tier: "selected",
@@ -134,7 +134,7 @@ const projects = [
     longDescription:
       "Premium trading signal platform. Multi-source data ingestion, approval workflows, real-time analytics. Convex + TimescaleDB + IBKR integration.",
     link: "/projects/meridian",
-    image: "/images/projects/transmorph.jpg",
+    image: "/images/projects/meridian.svg",
     tags: ["Real-Time Data", "Convex", "TimescaleDB"],
     color: "teal",
     tier: "selected",
@@ -148,7 +148,7 @@ const projects = [
     longDescription:
       "Compare AI models through natural conversation. Test prompts across GPT-4, Claude, and more.",
     link: "/projects/evalvybes",
-    image: "/images/projects/evalvybes.jpg",
+    image: "/images/projects/evalvybes.svg",
     tags: ["Voice AI", "Model Comparison", "Next.js"],
     color: "pink",
     tier: "other",
@@ -161,7 +161,7 @@ const projects = [
     longDescription:
       "Fostering Houston's AI community through organized events and LLM-powered team formation.",
     link: "/projects/theaicookup",
-    image: "/images/projects/theaicookup.jpg",
+    image: "/images/projects/theaicookup.svg",
     tags: ["Event Platform", "Community", "AI"],
     color: "teal",
     tier: "other",
@@ -222,7 +222,7 @@ const projects = [
     longDescription:
       "Automated rotoscoping with Meta's SAM2 and real-time background removal.",
     link: "/projects/bodyfx",
-    image: "/images/projects/bodyfx.jpg",
+    image: "/images/projects/bodyfx.svg",
     tags: ["Computer Vision", "Python"],
     color: "purple",
     tier: "other",

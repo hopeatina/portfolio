@@ -143,6 +143,7 @@ export default function PerfPulse() {
           "AI-Powered",
           "Cross-Platform",
         ]}
+        image="/images/projects/perfpulse.svg"
       />
 
       <TechStack items={techStack} />

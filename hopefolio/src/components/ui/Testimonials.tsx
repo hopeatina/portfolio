@@ -1,143 +1,139 @@
+"use client";
+
 import React from "react";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
-type Metric = {
+type Receipt = {
   id: string;
   value: string;
   label: string;
+  system: string;
   proof: string;
 };
 
-const metrics: Metric[] = [
+const receipts: Receipt[] = [
   {
     id: "1",
     value: "8+",
-    label: "Years in Production",
-    proof: "Shipping systems at Alma, Vessel Health, and Capital One",
+    label: "Years in production systems",
+    system: "Alma • Vessel Health • Capital One",
+    proof: "Shipping and operating systems in healthcare, enterprise data, and customer-facing product environments.",
   },
   {
     id: "2",
     value: "1,457+",
     label: "Commits on OrgX",
-    proof: "Multi-agent orchestration platform built over 12 months",
+    system: "OrgX",
+    proof: "A multi-agent orchestration platform built across a 19-repo ecosystem over the last 12 months.",
   },
   {
     id: "3",
     value: "93%",
-    label: "Bug Reduction",
-    proof: "Backend re-architecture at Vessel Health",
+    label: "Bug reduction",
+    system: "Vessel Health",
+    proof: "Measured after backend re-architecture and reliability-focused systems work.",
   },
 ];
 
-const Testimonials = () => {
+export default function Testimonials() {
   const { theme } = useTheme();
   const isDarkTheme = theme === "futuristic";
 
   return (
     <section
-      className="py-24 relative overflow-hidden"
+      className="relative overflow-hidden py-24"
       style={{
-        background: isDarkTheme
-          ? "var(--color-background)"
-          : "var(--color-surface)",
+        background: isDarkTheme ? "var(--color-background)" : "var(--color-surface)",
       }}
     >
-      {/* Content Container */}
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mb-14 max-w-3xl">
+          <p
+            className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
+            style={{ color: "var(--color-primary)", opacity: 0.9 }}
+          >
+            Receipts
+          </p>
           <h2
-            className="text-4xl md:text-5xl font-bold mb-6"
+            className="mb-5 text-4xl md:text-5xl font-bold"
             style={{
               color: isDarkTheme ? "var(--color-primary)" : "var(--color-text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-tight)",
             }}
           >
-            By the Numbers
+            By the numbers
           </h2>
           <p
-            className="text-lg md:text-xl max-w-2xl mx-auto"
+            className="text-lg md:text-xl"
             style={{
               color: "var(--color-text)",
-              fontFamily: "var(--font-body)",
-              opacity: isDarkTheme ? 0.9 : 1,
+              opacity: isDarkTheme ? 0.88 : 0.78,
             }}
           >
-            Verifiable metrics from real production systems
+            Metrics matter when they attach to a system, an environment, and a
+            result. These are the numbers I can defend because they map back to
+            real work.
           </p>
         </div>
 
-        {/* Metrics Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {metrics.map((metric) => (
-            <div
-              key={metric.id}
-              className="relative p-8 rounded-2xl transition-all duration-500 hover:scale-[1.02] text-center"
+        <div className="grid gap-8 md:grid-cols-3">
+          {receipts.map((receipt) => (
+            <article
+              key={receipt.id}
+              className="flex h-full flex-col rounded-[1.85rem] p-8"
               style={{
-                background: isDarkTheme ? "rgba(255, 255, 255, 0.02)" : "white",
+                background: isDarkTheme
+                  ? "linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.82))"
+                  : "rgba(255, 255, 255, 0.95)",
                 border: isDarkTheme
-                  ? "1px solid var(--color-primary)"
-                  : "1px solid var(--color-border)",
+                  ? "1px solid rgba(56, 189, 248, 0.16)"
+                  : "1px solid rgba(15, 23, 42, 0.08)",
                 boxShadow: isDarkTheme
-                  ? "0 0 40px rgba(0, 238, 92, 0.1)"
-                  : "0 10px 30px rgba(0, 0, 0, 0.1)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = isDarkTheme
-                  ? "0 0 60px rgba(0, 238, 92, 0.2)"
-                  : "0 20px 40px rgba(0, 0, 0, 0.15)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = isDarkTheme
-                  ? "0 0 40px rgba(0, 238, 92, 0.1)"
-                  : "0 10px 30px rgba(0, 0, 0, 0.1)";
+                  ? "0 20px 50px rgba(2, 6, 23, 0.3)"
+                  : "0 18px 40px rgba(15, 23, 42, 0.08)",
               }}
             >
-              {/* Big Number */}
+              <p
+                className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
+                style={{ color: "var(--color-primary)", opacity: 0.9 }}
+              >
+                {receipt.system}
+              </p>
+
               <div
-                className="text-5xl md:text-6xl font-bold mb-4"
+                className="mb-4 text-5xl md:text-6xl font-bold"
                 style={{
-                  color: isDarkTheme
-                    ? "var(--color-primary)"
-                    : "var(--color-primary)",
+                  color: "var(--color-primary)",
                   fontFamily: "var(--font-heading)",
                 }}
               >
-                {metric.value}
+                {receipt.value}
               </div>
 
-              {/* Label */}
               <h3
-                className="text-xl font-semibold mb-3"
+                className="mb-3 text-xl font-semibold"
                 style={{
-                  color: isDarkTheme
-                    ? "var(--color-primary)"
-                    : "var(--color-text)",
+                  color: "var(--color-text)",
                   fontFamily: "var(--font-heading)",
                 }}
               >
-                {metric.label}
+                {receipt.label}
               </h3>
 
-              {/* Proof */}
               <p
-                className="text-sm"
+                className="mt-auto text-sm leading-relaxed"
                 style={{
                   color: "var(--color-text)",
-                  fontFamily: "var(--font-body)",
-                  opacity: isDarkTheme ? 0.8 : 0.7,
-                  lineHeight: "1.6",
+                  opacity: isDarkTheme ? 0.84 : 0.74,
                 }}
               >
-                {metric.proof}
+                {receipt.proof}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Testimonials;
+}

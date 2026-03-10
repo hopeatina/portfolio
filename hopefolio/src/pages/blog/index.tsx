@@ -2,10 +2,7 @@
 
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
 import BlogPostCard from "@/components/blog/BlogPostCard";
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 const BLOG_DESCRIPTION = "Technical writing on agent orchestration, MCP protocol, and production AI infrastructure";
@@ -145,62 +142,27 @@ export default function Blog() {
               ))}
             </div>
 
-            {/* Newsletter Section */}
-            <div className="mt-24 max-w-2xl mx-auto">
-              <Card
-                variant={isDarkTheme ? "glass" : "elevated"}
-                className="text-center p-12"
+            {/* More writing CTA */}
+            <div className="mt-24 max-w-2xl mx-auto text-center">
+              <p
+                className="text-lg"
+                style={{
+                  color: isDarkTheme
+                    ? "var(--text-on-dark-secondary)"
+                    : "var(--text-secondary)",
+                  lineHeight: "var(--line-height-body)",
+                }}
               >
-                <h2
-                  className="text-3xl md:text-4xl font-bold mb-4"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--primary)",
-                  }}
+                More articles on{" "}
+                <a
+                  href="https://medium.com/@hopeatina"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--primary)" }}
                 >
-                  Stay Updated
-                </h2>
-                <p
-                  className="text-lg mb-8 max-w-xl mx-auto"
-                  style={{
-                    color: isDarkTheme
-                      ? "var(--text-on-dark-secondary)"
-                      : "var(--text-secondary)",
-                    lineHeight: "var(--line-height-body)",
-                  }}
-                >
-                  Get notified when I publish new articles about engineering,
-                  creativity, and the future of technology.
-                </p>
-
-                <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 px-4 py-3 rounded-lg transition-all duration-200"
-                    style={{
-                      background: isDarkTheme
-                        ? "rgba(255, 255, 255, 0.05)"
-                        : "var(--background)",
-                      border: "1px solid var(--border)",
-                      color: "var(--text)",
-                      fontFamily: "var(--font-body)",
-                    }}
-                  />
-                  <Button variant="primary" size="lg" type="submit">
-                    Subscribe
-                  </Button>
-                </form>
-              </Card>
-            </div>
-
-            {/* View All Posts */}
-            <div className="mt-16 text-center">
-              <Link href="/blog/archive">
-                <Button variant="secondary" size="lg">
-                  View All Posts
-                </Button>
-              </Link>
+                  Medium
+                </a>
+              </p>
             </div>
           </div>
         </section>

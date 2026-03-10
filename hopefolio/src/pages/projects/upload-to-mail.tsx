@@ -32,7 +32,7 @@ export default function UploadToMail() {
 
   const keyAchievements = [
     {
-      title: "🏗️ Production Infrastructure",
+      title: "Production Infrastructure",
       description:
         "Enterprise-grade architecture with comprehensive deployment and monitoring solutions",
       items: [
@@ -43,7 +43,7 @@ export default function UploadToMail() {
       ],
     },
     {
-      title: "📁 Advanced File Processing",
+      title: "Advanced File Processing",
       description:
         "Robust document handling system supporting multiple formats with security validation",
       items: [
@@ -54,7 +54,7 @@ export default function UploadToMail() {
       ],
     },
     {
-      title: "🧪 Comprehensive Testing",
+      title: "Comprehensive Testing",
       description:
         "Production-quality testing suite ensuring reliability and maintainability",
       items: [
@@ -65,7 +65,7 @@ export default function UploadToMail() {
       ],
     },
     {
-      title: "🔒 Enterprise Security",
+      title: "Enterprise Security",
       description:
         "Multi-layered security implementation protecting user data and transactions",
       items: [
@@ -79,7 +79,7 @@ export default function UploadToMail() {
 
   const architectureFeatures = [
     {
-      title: "⚙️ Backend Architecture",
+      title: "Backend Architecture",
       description:
         "Robust server-side implementation with optimized performance and reliability",
       items: [
@@ -91,7 +91,7 @@ export default function UploadToMail() {
       ],
     },
     {
-      title: "⚛️ Frontend Architecture",
+      title: "Frontend Architecture",
       description:
         "Modern React application with TypeScript and accessibility-first design",
       items: [
@@ -106,7 +106,7 @@ export default function UploadToMail() {
 
   const innovationFeatures = [
     {
-      title: "🚀 Technical Challenges Solved",
+      title: "Technical Challenges Solved",
       description:
         "Complex engineering solutions for real-world production requirements",
       items: [
@@ -118,7 +118,7 @@ export default function UploadToMail() {
       ],
     },
     {
-      title: "🎨 User Experience Innovation",
+      title: "User Experience Innovation",
       description:
         "Intuitive interfaces and guided workflows enhancing user satisfaction",
       items: [
@@ -317,12 +317,11 @@ export default function UploadToMail() {
               lineHeight: themeProps.typography.lineHeight,
             }}
           >
-            "This project showcases my ability to build production-ready
-            applications from conception to deployment, handling complex
-            technical challenges while maintaining code quality and user
-            experience excellence. The comprehensive testing and documentation
-            demonstrate my commitment to maintainable, enterprise-grade
-            software."
+            "Upload to Mail handles the full stack from client-side document
+            previews and chunked uploads through payment processing, print
+            service APIs, and physical delivery tracking. The system is
+            built with 95%+ test coverage and a zero-downtime deployment
+            architecture throughout."
           </p>
         </ProjectCard>
       </ProjectSection>

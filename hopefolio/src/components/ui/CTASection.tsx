@@ -1,122 +1,117 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
-const CTASection = () => {
+const focusAreas = [
+  "Multi-agent orchestration",
+  "MCP / tool calling",
+  "Observability",
+  "AI infrastructure",
+];
+
+export default function CTASection() {
   const { theme } = useTheme();
   const isDarkTheme = theme === "futuristic";
 
   return (
     <section
-      className="py-24 relative overflow-hidden"
+      className="relative overflow-hidden py-24"
       style={{
-        background: "var(--gradient-primary)",
-        position: "relative",
+        background: isDarkTheme ? "var(--color-background)" : "var(--color-surface)",
       }}
     >
-      {/* Background Gradient Overlay for depth */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: isDarkTheme
-            ? "linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%)"
-            : "linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%)",
-          mixBlendMode: "overlay",
-        }}
-      />
-
-      {/* Content Container */}
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-        <h2
-          className="text-4xl md:text-5xl font-bold mb-6"
+      <div className="mx-auto max-w-6xl px-6">
+        <div
+          className="rounded-[2.25rem] px-8 py-10 md:px-12 md:py-12"
           style={{
-            color: "white",
-            fontFamily: "var(--font-heading)",
-            letterSpacing: "var(--letter-spacing-tight)",
-            textShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
+            background: isDarkTheme
+              ? "linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(8, 47, 73, 0.78))"
+              : "linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.9))",
+            border: "1px solid rgba(148, 163, 184, 0.16)",
+            boxShadow: "0 28px 80px rgba(2, 6, 23, 0.28)",
           }}
         >
-          Building agent infrastructure? Let's talk.
-        </h2>
-        <p
-          className="text-lg md:text-xl mb-10 max-w-2xl mx-auto"
-          style={{
-            color: "rgba(255, 255, 255, 0.9)",
-            fontFamily: "var(--font-body)",
-            lineHeight: "1.6",
-          }}
-        >
-          I'm looking for roles in multi-agent orchestration, MCP/tool-calling
-          platforms, observability, and AI infrastructure. Currently open to
-          senior engineering positions.
-        </p>
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-center">
+            <div>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/55">
+                Next step
+              </p>
+              <h2
+                className="mb-5 text-4xl md:text-5xl font-bold text-white"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "var(--letter-spacing-tight)",
+                }}
+              >
+                Building agent infrastructure? Let&apos;s talk.
+              </h2>
+              <p className="mb-8 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
+                I&apos;m looking for senior engineering roles where orchestration,
+                product systems, and operational taste all matter. The best fit
+                is work that needs both systems rigor and interaction judgment.
+              </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Link
-            href="/contact"
-            className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105"
-            style={{
-              background: "white",
-              color: "var(--color-primary)",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.05) translateY(-2px)";
-              e.currentTarget.style.boxShadow =
-                "0 15px 40px rgba(0, 0, 0, 0.3)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.boxShadow =
-                "0 10px 30px rgba(0, 0, 0, 0.2)";
-            }}
-          >
-            Get In Touch
-            <span className="ml-2">→</span>
-          </Link>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="/contact"
+                  className="no-underline inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-semibold text-slate-950 transition-all duration-200 hover:-translate-y-0.5 md:text-base"
+                  style={{
+                    boxShadow: "0 18px 46px rgba(2, 6, 23, 0.22)",
+                  }}
+                >
+                  Start a conversation
+                  <FiArrowRight />
+                </Link>
+                <Link
+                  href="/projects"
+                  className="no-underline inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/8 px-7 py-4 text-sm font-medium text-white/90 transition-all duration-200 hover:border-white/30 hover:bg-white/12 md:text-base"
+                  style={{
+                    backdropFilter: "blur(12px)",
+                  }}
+                >
+                  Review the systems
+                </Link>
+              </div>
 
-          <Link
-            href="/projects"
-            className="inline-flex items-center px-8 py-3 rounded-full font-medium transition-all duration-300 backdrop-blur-sm"
-            style={{
-              background: "rgba(255, 255, 255, 0.1)",
-              color: "white",
-              border: "2px solid rgba(255, 255, 255, 0.3)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)";
-              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.5)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.3)";
-            }}
-          >
-            View My Work
-          </Link>
+              <p className="mt-8 text-sm text-white/68">
+                Prefer email?{" "}
+                <a
+                  href="mailto:hopeatina@gmail.com"
+                  className="no-underline font-medium text-white"
+                >
+                  hopeatina@gmail.com
+                </a>
+              </p>
+            </div>
+
+            <aside
+              className="rounded-[1.65rem] border border-white/12 bg-white/6 px-6 py-6 backdrop-blur-md"
+            >
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/52">
+                Best fit
+              </p>
+              <div className="mb-5 flex flex-wrap gap-2">
+                {focusAreas.map((area) => (
+                  <span
+                    key={area}
+                    className="rounded-full border border-white/12 bg-white/7 px-3 py-1.5 text-sm font-medium text-white/88"
+                  >
+                    {area}
+                  </span>
+                ))}
+              </div>
+              <p className="text-sm leading-relaxed text-white/72">
+                Senior IC roles, platform teams, and product-infrastructure work
+                where reliable automation and crafted interaction design both
+                matter.
+              </p>
+            </aside>
+          </div>
         </div>
-
-        {/* Email alternative */}
-        <p
-          className="mt-12 text-sm"
-          style={{
-            color: "rgba(255, 255, 255, 0.8)",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          Prefer email?{" "}
-          <a
-            href="mailto:hopeatina@gmail.com"
-            className="underline hover:no-underline transition-all"
-            style={{ color: "white" }}
-          >
-            hopeatina@gmail.com
-          </a>
-        </p>
       </div>
     </section>
   );
-};
-
-export default CTASection;
+}

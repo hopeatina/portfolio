@@ -150,6 +150,7 @@ export default function Meridian() {
           "TimescaleDB",
           "IBKR",
         ]}
+        image="/images/projects/meridian.svg"
       />
 
       <TechStack items={techStack} />

@@ -24,9 +24,20 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // Form submission logic will be implemented later
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Temporary simulation
-      setFormStatus("success");
+      const formData = new FormData(e.currentTarget);
+      const response = await fetch("https://formspree.io/f/xpwzgkpd", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      if (response.ok) {
+        setFormStatus("success");
+        e.currentTarget.reset();
+      } else {
+        setFormStatus("error");
+      }
     } catch (error) {
       setFormStatus("error");
     } finally {
@@ -139,7 +150,15 @@ export default function Contact() {
 
                 {formStatus === "error" && (
                   <div className="text-center p-4 rounded-lg bg-error/10 text-error border border-error/30">
-                    Oops! Something went wrong. Please try again.
+                    Something went wrong sending your message. You can also
+                    reach me directly at{" "}
+                    <a
+                      href="mailto:hopeatina@gmail.com"
+                      className="underline font-medium"
+                    >
+                      hopeatina@gmail.com
+                    </a>
+                    .
                   </div>
                 )}
               </form>
