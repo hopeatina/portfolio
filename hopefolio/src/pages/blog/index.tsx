@@ -8,42 +8,42 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
-const BLOG_DESCRIPTION = "Thoughts on technology, culture, and innovation";
+const BLOG_DESCRIPTION = "Technical writing on agent orchestration, MCP protocol, and production AI infrastructure";
 
 // This would typically come from your CMS or data source
 const posts = [
   {
-    slug: "hello-world",
-    title: "Hello World: Building with Purpose",
-    date: "2023-12-24",
+    slug: "building-multi-agent-orchestration",
+    title: "Building a Multi-Agent Orchestration Platform: Lessons from OrgX",
+    date: "2025-02-15",
     excerpt:
-      "Exploring the intersection of technology, creativity, and social impact through code.",
-    category: "Engineering",
-    readTime: "5 min read",
+      "Durable workflows, trust-based governance, quality gates, and agent spawning — what I learned building a 19-repo multi-agent orchestration platform.",
+    category: "Agent Infrastructure",
+    readTime: "12 min read",
     author: "Hope Atina",
-    tags: ["Engineering", "Technology", "Impact"],
+    tags: ["Multi-Agent", "Orchestration", "MCP Protocol"],
   },
   {
-    slug: "cultural-tech",
-    title: "Bridging Cultures Through Technology",
-    date: "2023-12-23",
+    slug: "mcp-in-production",
+    title: "Taking MCP to Production: How OrgX Uses the Model Context Protocol",
+    date: "2025-01-28",
     excerpt:
-      "How my Cameroonian heritage influences my approach to software development and innovation.",
-    category: "Culture",
-    readTime: "7 min read",
-    author: "Hope Atina",
-    tags: ["Culture", "Innovation", "Technology"],
-  },
-  {
-    slug: "ai-ethics",
-    title: "AI Ethics: A Developer's Perspective",
-    date: "2023-12-22",
-    excerpt:
-      "Reflecting on the responsibilities we have as builders of AI-powered solutions.",
-    category: "AI & Ethics",
+      "A deep-dive into MCP protocol, building MCP server integrations, tool-calling middleware patterns, and reducing agent friction in production.",
+    category: "MCP Protocol",
     readTime: "10 min read",
     author: "Hope Atina",
-    tags: ["AI", "Ethics", "Development"],
+    tags: ["MCP", "Tool Calling", "Production"],
+  },
+  {
+    slug: "building-dev-tools-in-rust",
+    title: "Building a Homebrew-Installable Dev Tool in Rust: The PerfPulse Story",
+    date: "2025-01-10",
+    excerpt:
+      "Why Rust for CLI tools, cross-platform M1/Intel builds, Homebrew tap distribution, and integrating Claude API for AI-powered recommendations.",
+    category: "Developer Tooling",
+    readTime: "10 min read",
+    author: "Hope Atina",
+    tags: ["Rust", "CLI", "Homebrew", "Developer Tools"],
   },
 ];
 
@@ -54,7 +54,7 @@ export default function Blog() {
   return (
     <>
       <Head>
-        <title>Blog | Hope Atina</title>
+        <title>Blog | Hope Atina - AI Agent Infrastructure</title>
         <meta name="description" content={BLOG_DESCRIPTION} />
       </Head>
 
@@ -80,7 +80,7 @@ export default function Blog() {
                 lineHeight: "var(--line-height-heading)",
               }}
             >
-              Thoughts on Engineering, Art & Future
+              Technical Writing
             </h1>
 
             {/* Decorative element */}

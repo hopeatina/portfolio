@@ -40,7 +40,7 @@ export default function Contact() {
         <title>Contact | Hope Atina</title>
         <meta
           name="description"
-          content="Get in touch to discuss collaborations, projects, or just to say hello"
+          content="Get in touch about AI agent infrastructure, multi-agent orchestration, MCP protocol, and developer tooling opportunities."
         />
       </Head>
 
@@ -229,8 +229,9 @@ export default function Contact() {
                     new technologies together, let's chat!
                   </p>
                   <p className="text-body-secondary">
-                    I'm particularly interested in projects involving AI/ML,
-                    bioengineering, creative technology, and social impact.
+                    I'm particularly interested in multi-agent orchestration,
+                    MCP/tool-calling platforms, agent observability, and AI
+                    infrastructure engineering.
                   </p>
                 </div>
               </div>

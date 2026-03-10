@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
@@ -11,27 +11,49 @@ type Project = {
   image: string;
   slug: string;
   tags: string[];
+  metric?: string;
 };
 
-// Sample projects data - you can move this to a separate data file later
 const projects: Project[] = [
   {
     id: "1",
-    title: "Deep Human",
+    title: "OrgX",
     description:
-      "Creating personalized AI personas that feel real enough to meaningfully interact with – exploring what makes us human through technology.",
-    image: "/images/projects/deep-human.jpg",
-    slug: "deep-human",
-    tags: ["AI Personas", "MCP Protocol", "Python", "Multi-Agent"],
+      "Multi-agent coordination platform. MCP server integrations, durable agent workflows, tool-calling middleware, org memory, trust-based governance. 19-repo ecosystem, 1,457+ commits.",
+    image: "/images/projects/orgx.jpg",
+    slug: "orgx",
+    tags: ["Multi-Agent Orchestration", "MCP Protocol", "Agent Governance"],
+    metric: "1,457+ commits",
   },
   {
     id: "2",
-    title: "OrgX",
+    title: "OpenClaw Plugin",
     description:
-      "AI-accelerated product development platform where human creativity meets AI speed – turning great ideas into great products faster.",
+      "Browser extension for agent control and orchestration. 644+ commits. CLI-first UX for agent interaction, real-time task management.",
     image: "/images/projects/orgx.jpg",
-    slug: "orgx",
-    tags: ["AI Collaboration", "Project Management", "Next.js"],
+    slug: "openclaw",
+    tags: ["Browser Extension", "Agent UX", "CLI Orchestration"],
+    metric: "644+ commits",
+  },
+  {
+    id: "3",
+    title: "PerfPulse",
+    description:
+      "AI-powered macOS Activity Monitor replacement. Rust CLI + web dashboard + TUI. Homebrew-installable. Performance scoring with Claude-powered recommendations.",
+    image: "/images/projects/neuromosaic.jpg",
+    slug: "perfpulse",
+    tags: ["Rust", "Homebrew Tap", "CLI Tool", "AI-Powered"],
+    metric: "Homebrew tap",
+  },
+  {
+    id: "4",
+    title: "BrainBuffet",
+    description:
+      "AI course platform. Multi-step LLM pipelines, RAG retrieval, structured generation. 250+ courses created, 90% time reduction. Real customers.",
+    image: "/images/projects/brain-buffet.jpg",
+    slug: "brain-buffet",
+    tags: ["LLM Pipelines", "RAG", "Shipped Product"],
+    metric: "250+ courses",
   },
 ];
 
@@ -61,7 +83,7 @@ const FeaturedProjects = () => {
               letterSpacing: "var(--letter-spacing-tight)",
             }}
           >
-            Featured Projects
+            Systems I've Built
           </h2>
           <p
             className="text-lg md:text-xl max-w-2xl mx-auto"
@@ -71,7 +93,8 @@ const FeaturedProjects = () => {
               opacity: isDarkTheme ? 0.9 : 1,
             }}
           >
-            Exploring the intersection of AI, education, and social impact
+            Agent infrastructure, orchestration platforms, and production AI
+            systems
           </p>
         </div>
 
@@ -103,19 +126,24 @@ const FeaturedProjects = () => {
                     src={project.image}
                     alt={`Preview of ${project.title}`}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
 
-                  {/* Image Overlay */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: isDarkTheme
-                        ? "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%)"
-                        : "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 100%)",
-                    }}
-                  />
+                  {/* Metric Badge */}
+                  {project.metric && (
+                    <div
+                      className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold"
+                      style={{
+                        background: isDarkTheme
+                          ? "rgba(0, 238, 92, 0.9)"
+                          : "var(--color-primary)",
+                        color: isDarkTheme ? "black" : "white",
+                      }}
+                    >
+                      {project.metric}
+                    </div>
+                  )}
                 </div>
 
                 {/* Project Content */}

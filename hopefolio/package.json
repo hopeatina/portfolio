@@ -16,8 +16,6 @@
     "@react-three/postprocessing": "^2.16.3",
     "@react-three/rapier": "^1.5.0",
     "@trigger.dev/companyicons": "^1.5.42",
-    "@types/node": "^20.11.5",
-    "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@types/three": "^0.160.0",
     "autoprefixer": "^10.4.17",
@@ -33,16 +31,18 @@
     "react-icons": "^5.4.0",
     "react-intersection-observer": "^9.16.0",
     "tailwindcss": "^3.4.1",
-    "three": "^0.160.1",
-    "typescript": "^5.3.3"
+    "three": "^0.160.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "25.4.0",
+    "@types/react": "19.2.14",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.1.0",
     "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript": "5.9.3"
   }
 }

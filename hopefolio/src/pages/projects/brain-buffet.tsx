@@ -12,172 +12,140 @@ import MermaidDiagram from "@/components/projects/MermaidDiagram";
 export default function BrainBuffet() {
   const techStack = [
     {
-      category: "Frontend",
-      technologies: "Next.js, React, TypeScript, Mobile-First Design",
+      category: "LLM Pipelines",
+      technologies: "OpenAI GPT-4, Multi-step Chains, Structured Output",
     },
+    {
+      category: "RAG",
+      technologies: "Document Retrieval, Embedding Search, Context Injection",
+    },
+    { category: "Frontend", technologies: "Next.js, React, TypeScript" },
     { category: "Backend", technologies: "Node.js, Express, REST APIs" },
-    { category: "Database", technologies: "PostgreSQL, Course Management" },
-    { category: "AI/ML", technologies: "OpenAI GPT-4, Content Generation" },
+    { category: "Database", technologies: "PostgreSQL, Vector Storage" },
     {
-      category: "Media",
-      technologies: "Video Processing, Mobile Optimization",
+      category: "Content Generation",
+      technologies: "Structured Generation, Template Engine, Validation",
     },
     {
-      category: "UI/UX",
-      technologies: "Responsive Design, Progressive Web App",
-    },
-    {
-      category: "Content",
-      technologies: "Interactive Quizzes, Chapter-based Learning",
+      category: "Distribution",
+      technologies: "Mobile-First PWA, Responsive Design",
     },
     {
       category: "Analytics",
-      technologies: "Progress Tracking, Completion Metrics",
+      technologies: "Progress Tracking, Completion Metrics, Revenue",
     },
   ];
 
-  const coreFeatures = [
+  const pipelineFeatures = [
     {
-      title: "📱 Mobile-First Learning",
+      title: "Multi-Step LLM Pipeline",
       description:
-        "Designed specifically for mobile consumption with optimized video content, responsive design, and seamless touch interactions. Perfect for learning on-the-go with offline capabilities.",
-    },
-    {
-      title: "🎯 Interactive Course Experience",
-      description:
-        "Chapter-based learning with integrated quizzes, progress tracking, and completion rewards. Features interactive elements like star completion icons and engagement metrics.",
-    },
-  ];
-
-  const platformFeatures = [
-    {
-      title: "💰 Financial Freedom Courses",
-      description:
-        "Comprehensive personal finance education with practical applications",
+        "Course generation isn't a single prompt — it's a multi-step pipeline that produces structured, validated educational content",
       items: [
-        "Chapter-based Financial Literacy: Structured lessons covering budgeting, investing, and wealth building",
-        "Mobile-Optimized Content: Video lessons designed for smartphone viewing with clear, engaging visuals",
-        "Interactive Examples: Real-world financial scenarios and calculators",
-        "Progress Tracking: Visual progress indicators and completion rewards",
+        "Step 1 — Topic Analysis: LLM analyzes the subject domain, identifies key concepts, and generates a course outline with learning objectives",
+        "Step 2 — Content Generation: Each chapter is generated with structured output schemas ensuring consistent format, difficulty progression, and pedagogical flow",
+        "Step 3 — Quiz Generation: Assessment questions are generated from course content using RAG retrieval to ensure accuracy and relevance",
+        "Step 4 — Validation & Review: Generated content passes through validation checks for completeness, accuracy, and engagement quality",
       ],
     },
     {
-      title: "📱 Digital Wellness Programs",
+      title: "RAG-Powered Content Accuracy",
       description:
-        "Courses focused on healthy technology habits and digital detox",
+        "Retrieval-Augmented Generation ensures course content is grounded in real source material, not hallucinated",
       items: [
-        "iPhone Addiction Recovery: Structured program for reducing phone dependency",
-        "Mindful Technology Use: Strategies for balanced digital consumption",
-        "Habit Formation: Evidence-based approaches to building healthier tech habits",
-        "Community Support: Progress sharing and peer accountability features",
-      ],
-    },
-    {
-      title: "🎮 Gamified Learning Experience",
-      description: "Engaging features that motivate continued learning",
-      items: [
-        "Quiz Integration: Built-in knowledge checks with instant feedback",
-        "Star Completion System: Visual rewards for completing chapters and courses",
-        "Progress Visualization: Clear indicators of learning journey advancement",
-        "Achievement Badges: Recognition system for reaching learning milestones",
+        "Document Ingestion: Source materials are chunked, embedded, and stored for semantic retrieval",
+        "Context Injection: Relevant passages are retrieved and injected into generation prompts to ground LLM output",
+        "Citation Tracking: Generated content maintains references back to source material for verifiability",
+        "Quality Scoring: Each generated section receives an accuracy score based on source alignment",
       ],
     },
   ];
 
-  const impactMetrics = [
+  const productFeatures = [
     {
-      title: "📱 Mobile-First Design",
+      title: "Shipped Product with Real Customers",
       description:
-        "Responsive platform optimized for smartphone learning with touch-friendly interfaces, optimized video playback, and offline capabilities for learning anywhere.",
-    },
-    {
-      title: "🎯 Focused Course Content",
-      description:
-        "Specialized courses in high-demand areas like financial literacy and digital wellness, with practical applications and real-world scenarios for immediate implementation.",
-    },
-    {
-      title: "🎮 Interactive Learning",
-      description:
-        "Gamified experience with integrated quizzes, progress tracking, star completion rewards, and chapter-based progression to maintain learner engagement.",
-    },
-    {
-      title: "🚀 Accessibility Focus",
-      description:
-        "Designed for busy professionals and students who need flexible, mobile-accessible education that fits into their daily routines and lifestyles.",
-    },
-  ];
-
-  const useCases = [
-    {
-      title: "💼 Personal Development Learners",
-      description:
-        "Individuals seeking to improve their financial literacy and digital wellness habits through mobile-accessible courses.",
+        "BrainBuffet is a live product generating revenue, not a demo or proof of concept",
       items: [
-        "Professionals building financial independence",
-        "Young adults learning money management",
-        "People struggling with technology addiction",
-        "Anyone seeking structured personal growth",
+        "250+ courses created through the LLM pipeline, covering financial literacy, digital wellness, and professional development",
+        "90% reduction in course creation time compared to manual authoring — from weeks to hours",
+        "Real paying customers using the platform for structured learning",
+        "Mobile-first PWA with offline capabilities for learning on the go",
       ],
     },
     {
-      title: "🎯 Mobile-First Education",
+      title: "Structured Generation System",
       description:
-        "Optimized for busy lifestyles with bite-sized lessons that fit into daily routines.",
+        "Every piece of content follows a strict schema that ensures pedagogical quality",
       items: [
-        "Commute-friendly learning sessions",
-        "Quick daily progress tracking",
-        "Offline-capable content for anywhere access",
-        "Progressive course completion over time",
+        "Chapter Structure: Title, objectives, content blocks, key takeaways, assessment — all generated to schema",
+        "Difficulty Progression: LLM pipeline ensures concepts build on each other with appropriate complexity curves",
+        "Interactive Elements: Quizzes, exercises, and knowledge checks generated inline with chapter content",
+        "Engagement Optimization: Content length, reading level, and interactivity calibrated per audience segment",
       ],
     },
   ];
 
-  const roadmapStats = [
-    { value: "Q2 2024", label: "VR/AR Integration" },
-    { value: "Q3 2024", label: "Multi-language Support" },
-    { value: "Q4 2024", label: "AI Tutor Assistant" },
+  const impactStats = [
+    {
+      value: "250+",
+      label: "Courses Created",
+      description: "Via multi-step LLM pipeline",
+    },
+    {
+      value: "90%",
+      label: "Time Reduction",
+      description: "Compared to manual authoring",
+    },
+    {
+      value: "Live",
+      label: "Shipped Product",
+      description: "Real customers, real revenue",
+    },
+    {
+      value: "Multi-step",
+      label: "LLM Pipeline",
+      description: "RAG + structured generation",
+    },
   ];
 
-  const learningFlowDiagram = `
+  const pipelineDiagram = `
     flowchart LR
-      A[Student Input] --> B[AI Analysis Engine]
-      B --> C[Learning Style Detection]
-      C --> D[Content Generation]
-      D --> E[Interactive Lessons]
-      E --> F[Progress Tracking]
-      
-      F --> G[Performance Analytics]
-      G --> H[Adaptive Recommendations]
-      H --> B
-      
-      I[GPT-4/Claude] --> D
-      J[Course Templates] --> D
-      
-      K[Real-time Dashboard] --> L[Educator Insights]
-      F --> K
-      G --> K
-      
-      style A fill:#3B82F6,stroke:#2563EB,color:#fff
-      style D fill:#8B5CF6,stroke:#7C3AED,color:#fff
-      style H fill:#10B981,stroke:#059669,color:#fff
+      A[Topic Input] --> B[Topic Analysis]
+      B --> C[Outline Generation]
+      C --> D[RAG Retrieval]
+      D --> E[Content Generation]
+      E --> F[Quiz Generation]
+      F --> G[Validation]
+      G --> H[Published Course]
+
+      I[Source Documents] --> J[Embedding]
+      J --> K[Vector Store]
+      K --> D
+
+      L[Structured Schema] --> E
+      L --> F
+
+      style B fill:#8B5CF6,stroke:#7C3AED,color:#fff
+      style D fill:#3B82F6,stroke:#2563EB,color:#fff
+      style G fill:#10B981,stroke:#059669,color:#fff
       style K fill:#F59E0B,stroke:#D97706,color:#fff
   `;
 
   return (
     <ProjectLayout
-      title="Brain Buffet"
-      description="AI-powered personalized learning platform that revolutionizes course creation and adaptive education"
+      title="BrainBuffet"
+      description="LLM pipeline platform for automated course generation with RAG retrieval and structured output — 250+ courses, real customers"
     >
       <ProjectHero
-        title="Brain Buffet"
-        description="A mobile-first educational platform offering interactive courses on personal development topics like financial freedom and digital wellness. Features AI-powered content generation, chapter-based learning, and integrated quizzes for enhanced engagement."
+        title="BrainBuffet"
+        description="An LLM pipeline platform that generates structured educational courses through multi-step generation, RAG retrieval, and validated structured output. 250+ courses created, 90% time reduction, real paying customers."
         tags={[
-          "EdTech",
-          "Mobile Learning",
+          "LLM Pipelines",
+          "RAG",
+          "Structured Generation",
+          "Shipped Product",
           "Next.js",
-          "Interactive Courses",
-          "AI Content",
-          "Personal Development",
         ]}
         image="/images/projects/brain-buffet.jpg"
       />
@@ -187,58 +155,92 @@ export default function BrainBuffet() {
       <ProjectSection title="The Problem">
         <p className="text-lg mb-4">
           <strong>
-            Personal development education is often inaccessible, overwhelming,
-            and designed for desktop consumption.
+            Creating quality educational content is slow and expensive.
           </strong>{" "}
-          People struggle to find practical, mobile-friendly courses that fit
-          into their busy lives, especially for topics like financial literacy
-          and digital wellness.
+          Manual course authoring takes weeks per course, doesn't scale, and
+          content quality varies wildly depending on the author. The question
+          wasn't whether AI could help — it was whether AI could produce
+          content that's actually good enough to charge for.
         </p>
         <ul className="space-y-2 list-disc list-inside">
           <li>
-            <strong>Mobile accessibility</strong>: Most educational content
-            isn't optimized for smartphone learning
+            <strong>Speed</strong>: Manual course creation takes 2-4 weeks per
+            course
           </li>
           <li>
-            <strong>Time constraints</strong>: Traditional courses require large
-            time commitments that busy people can't maintain
+            <strong>Consistency</strong>: Quality varies across authors and
+            topics
           </li>
           <li>
-            <strong>Practical application</strong>: Many courses lack actionable
-            steps for real-world implementation
+            <strong>Scale</strong>: Can't cover hundreds of topics with manual
+            authoring
           </li>
           <li>
-            <strong>Engagement barriers</strong>: Static content without
-            interactive elements leads to course abandonment
+            <strong>Accuracy</strong>: Generated content must be grounded in
+            real sources, not hallucinated
           </li>
         </ul>
       </ProjectSection>
 
-      <ProjectSection title="Solution Architecture">
-        <FeatureGrid features={coreFeatures} columns={2} />
-
+      <ProjectSection title="LLM Pipeline Architecture">
         <MermaidDiagram
-          title="Adaptive Learning Flow"
-          diagram={learningFlowDiagram}
-          description="AI-driven learning pipeline with real-time adaptation based on student performance, learning style analysis, and comprehensive analytics dashboard."
-          className="mt-8"
+          title="Multi-Step Course Generation Pipeline"
+          diagram={pipelineDiagram}
+          description="End-to-end pipeline from topic input to published course, with RAG retrieval for accuracy and structured schemas for consistency."
+          className="mb-8"
         />
+
+        <FeatureGrid features={pipelineFeatures} columns={1} />
       </ProjectSection>
 
-      <ProjectSection title="Platform Features">
-        <FeatureGrid features={platformFeatures} columns={1} />
+      <ProjectSection title="Shipped Product">
+        <FeatureGrid features={productFeatures} columns={1} />
+
+        <div className="mt-8">
+          <StatsDisplay stats={impactStats} />
+        </div>
       </ProjectSection>
 
-      <ProjectSection title="Business Impact & Results">
-        <FeatureGrid features={impactMetrics} columns={2} />
-      </ProjectSection>
+      <ProjectSection title="Technical Decisions">
+        <div className="space-y-6">
+          <ProjectCard variant="secondary">
+            <h3 className="text-xl font-semibold mb-3 text-primary">
+              Why Multi-Step Pipelines Over Single-Prompt Generation
+            </h3>
+            <p>
+              A single prompt can't produce a quality 10-chapter course.
+              Breaking generation into steps — outline, content, quizzes,
+              validation — gives each step focused context and allows
+              intermediate quality checks. If chapter 5 fails validation, you
+              regenerate chapter 5, not the entire course.
+            </p>
+          </ProjectCard>
 
-      <ProjectSection title="Use Cases & Success Stories">
-        <FeatureGrid features={useCases} columns={2} />
-      </ProjectSection>
+          <ProjectCard variant="accent">
+            <h3 className="text-xl font-semibold mb-3 text-primary">
+              Why RAG for Content Accuracy
+            </h3>
+            <p>
+              Customers pay for accurate content. RAG retrieval grounds every
+              generated section in real source material, reducing hallucination
+              and enabling citation tracking. The accuracy score system flags
+              sections that need human review before publication.
+            </p>
+          </ProjectCard>
 
-      <ProjectSection title="Future Roadmap">
-        <StatsDisplay stats={roadmapStats} className="mt-6" />
+          <ProjectCard variant="default">
+            <h3 className="text-xl font-semibold mb-3 text-primary">
+              Why Structured Generation
+            </h3>
+            <p>
+              Every course follows a strict schema: chapters have objectives,
+              content blocks, key takeaways, and assessments. This isn't just
+              formatting — it ensures pedagogical consistency across 250+
+              courses and makes the content renderable across mobile, web, and
+              future platforms.
+            </p>
+          </ProjectCard>
+        </div>
       </ProjectSection>
 
       <ProjectCTA

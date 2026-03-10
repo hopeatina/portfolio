@@ -47,7 +47,7 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
 
       <div
         className="relative"
-        dangerouslySetInnerHTML={{ __html: marked(content) }}
+        dangerouslySetInnerHTML={{ __html: marked(content) as string }}
       />
 
       <style jsx global>{`

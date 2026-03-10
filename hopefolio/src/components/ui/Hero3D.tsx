@@ -59,7 +59,7 @@ const FallbackContent = () => {
           Hope Atina
           <br />
           <span className="text-3xl md:text-5xl">
-            Building, Creating, & Rethinking Possibility
+            Building Infrastructure for Autonomous AI Agents
           </span>
         </h1>
         <p
@@ -68,8 +68,8 @@ const FallbackContent = () => {
             color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
           }}
         >
-          Software Developer, Bioengineer, and Musician. Building innovative
-          solutions at the intersection of technology, science, and creativity.
+          Agent Infrastructure Engineer. Creator of OrgX (multi-agent coordination)
+          and PerfPulse (Rust CLI). 8+ years shipping production AI systems.
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <Link
@@ -169,7 +169,7 @@ const Hero3D: React.FC = () => {
               textShadow: "0 2px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
-            Software Developer • Bioengineer • Musician
+            Agent Infrastructure • Multi-Agent Orchestration • Developer Tooling
           </motion.p>
 
           {/* Primary heading with better scale progression */}
@@ -219,7 +219,7 @@ const Hero3D: React.FC = () => {
                 backgroundClip: "text",
               }}
             >
-              Building, Creating, & Rethinking Possibility
+              Building Infrastructure for Autonomous AI Agents
             </h2>
           </motion.div>
 
@@ -235,8 +235,8 @@ const Hero3D: React.FC = () => {
               textShadow: "0 2px 8px rgba(0, 0, 0, 0.4)",
             }}
           >
-            Building innovative solutions at the intersection of technology,
-            science, and creativity.
+            Creator of OrgX (multi-agent coordination) and PerfPulse (Rust CLI).
+            8+ years shipping production AI systems at Alma, Vessel Health, and Capital One.
           </motion.p>
 
           {/* CTAs with improved visual prominence */}

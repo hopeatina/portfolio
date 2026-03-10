@@ -1,39 +1,31 @@
 import React from "react";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
-import { FaQuoteLeft } from "react-icons/fa";
 
-type Testimonial = {
+type Metric = {
   id: string;
-  name: string;
-  title: string;
-  company: string;
-  content: string;
+  value: string;
+  label: string;
+  proof: string;
 };
 
-const testimonials: Testimonial[] = [
+const metrics: Metric[] = [
   {
     id: "1",
-    name: "Sarah Chen",
-    title: "CTO",
-    company: "TechForward Inc.",
-    content:
-      "Hope's ability to bridge the gap between complex technical concepts and user-friendly solutions is remarkable. Her work on our AI systems has been transformative.",
+    value: "8+",
+    label: "Years in Production",
+    proof: "Shipping systems at Alma, Vessel Health, and Capital One",
   },
   {
     id: "2",
-    name: "Marcus Johnson",
-    title: "Product Director",
-    company: "InnovateLab",
-    content:
-      "Working with Hope was a game-changer for our product development. She brings both deep technical expertise and a creative approach to problem-solving.",
+    value: "1,457+",
+    label: "Commits on OrgX",
+    proof: "Multi-agent orchestration platform built over 12 months",
   },
   {
     id: "3",
-    name: "Dr. Emily Rodriguez",
-    title: "Research Lead",
-    company: "BioTech Solutions",
-    content:
-      "Hope's bioengineering background combined with her software skills created innovative solutions we didn't think were possible. Truly interdisciplinary thinking.",
+    value: "93%",
+    label: "Bug Reduction",
+    proof: "Backend re-architecture at Vessel Health",
   },
 ];
 
@@ -62,7 +54,7 @@ const Testimonials = () => {
               letterSpacing: "var(--letter-spacing-tight)",
             }}
           >
-            What People Say
+            By the Numbers
           </h2>
           <p
             className="text-lg md:text-xl max-w-2xl mx-auto"
@@ -72,17 +64,16 @@ const Testimonials = () => {
               opacity: isDarkTheme ? 0.9 : 1,
             }}
           >
-            Feedback from colleagues and clients I've had the pleasure of
-            working with
+            Verifiable metrics from real production systems
           </p>
         </div>
 
-        {/* Testimonials Grid */}
+        {/* Metrics Grid */}
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
+          {metrics.map((metric) => (
             <div
-              key={testimonial.id}
-              className="relative p-8 rounded-2xl transition-all duration-500 hover:scale-[1.02]"
+              key={metric.id}
+              className="relative p-8 rounded-2xl transition-all duration-500 hover:scale-[1.02] text-center"
               style={{
                 background: isDarkTheme ? "rgba(255, 255, 255, 0.02)" : "white",
                 border: isDarkTheme
@@ -103,55 +94,44 @@ const Testimonials = () => {
                   : "0 10px 30px rgba(0, 0, 0, 0.1)";
               }}
             >
-              {/* Quote Icon */}
+              {/* Big Number */}
               <div
-                className="mb-6"
+                className="text-5xl md:text-6xl font-bold mb-4"
                 style={{
                   color: isDarkTheme
                     ? "var(--color-primary)"
                     : "var(--color-primary)",
-                  opacity: 0.3,
+                  fontFamily: "var(--font-heading)",
                 }}
               >
-                <FaQuoteLeft size={32} />
+                {metric.value}
               </div>
 
-              {/* Content */}
+              {/* Label */}
+              <h3
+                className="text-xl font-semibold mb-3"
+                style={{
+                  color: isDarkTheme
+                    ? "var(--color-primary)"
+                    : "var(--color-text)",
+                  fontFamily: "var(--font-heading)",
+                }}
+              >
+                {metric.label}
+              </h3>
+
+              {/* Proof */}
               <p
-                className="mb-6 text-lg"
+                className="text-sm"
                 style={{
                   color: "var(--color-text)",
                   fontFamily: "var(--font-body)",
-                  lineHeight: "1.8",
-                  opacity: isDarkTheme ? 0.9 : 1,
+                  opacity: isDarkTheme ? 0.8 : 0.7,
+                  lineHeight: "1.6",
                 }}
               >
-                "{testimonial.content}"
+                {metric.proof}
               </p>
-
-              {/* Author */}
-              <div>
-                <h4
-                  className="font-bold text-lg"
-                  style={{
-                    color: isDarkTheme
-                      ? "var(--color-primary)"
-                      : "var(--color-text)",
-                    fontFamily: "var(--font-heading)",
-                  }}
-                >
-                  {testimonial.name}
-                </h4>
-                <p
-                  className="text-sm"
-                  style={{
-                    color: "var(--color-text)",
-                    opacity: 0.7,
-                  }}
-                >
-                  {testimonial.title} at {testimonial.company}
-                </p>
-              </div>
             </div>
           ))}
         </div>

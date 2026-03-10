@@ -7,6 +7,8 @@ type Company = {
   logo?: string;
   url: string;
   shortName?: string;
+  role: string;
+  impact: string;
 };
 
 const companies: Company[] = [
@@ -14,22 +16,31 @@ const companies: Company[] = [
     name: "Alma",
     logo: "/images/logos/alma.png",
     url: "https://helloalma.com",
+    role: "Software Engineer, Quality Enablement",
+    impact: "AI-powered automated reassessments, therapist adoption 40% → 89%",
   },
   {
-    name: "Vessel",
+    name: "Vessel Health",
     logo: "/images/logos/vessel.png",
     url: "https://wearevessel.co",
+    shortName: "Vessel",
+    role: "Lead Backend Engineer",
+    impact: "Backend re-architecture, 93% bug reduction",
   },
   {
     name: "Capital One",
     logo: "/images/logos/capital-one.png",
     url: "https://www.capitalone.com",
+    role: "Software & Data Engineer",
+    impact: "Automated ETL pipelines, Spark/Scala at scale",
   },
   {
     name: "MD Anderson Cancer Center",
     shortName: "MD Anderson",
     logo: "/images/logos/md-anderson.png",
     url: "https://www.mdanderson.org",
+    role: "Research",
+    impact: "Bioengineering research",
   },
 ];
 
@@ -59,81 +70,87 @@ const CompanyLogos = () => {
               fontFamily: "var(--font-heading)",
             }}
           >
-            Proud to Have Worked With
+            Shipped in Production
           </h2>
         </div>
 
-        {/* Logos Grid */}
-        <div
-          className="relative p-8 rounded-2xl overflow-hidden"
-          style={{
-            background: isDarkTheme
-              ? "rgba(255, 255, 255, 0.02)"
-              : "rgba(255, 255, 255, 0.7)",
-            backdropFilter: "blur(8px)",
-            border: isDarkTheme
-              ? "1px solid var(--color-primary)"
-              : "1px solid var(--color-border)",
-          }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
-            {companies.map((company) => (
-              <a
-                key={company.name}
-                href={company.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative flex items-center justify-center w-full h-16 transition-all duration-300 hover:scale-110"
-                aria-label={`Visit ${company.name} website`}
+        {/* Companies Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {companies.map((company) => (
+            <a
+              key={company.name}
+              href={company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]"
+              style={{
+                background: isDarkTheme
+                  ? "rgba(255, 255, 255, 0.02)"
+                  : "rgba(255, 255, 255, 0.7)",
+                backdropFilter: "blur(8px)",
+                border: isDarkTheme
+                  ? "1px solid rgba(0, 238, 92, 0.2)"
+                  : "1px solid var(--color-border)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = isDarkTheme
+                  ? "var(--color-primary)"
+                  : "var(--color-primary)";
+                e.currentTarget.style.boxShadow = isDarkTheme
+                  ? "0 0 30px rgba(0, 238, 92, 0.15)"
+                  : "0 10px 25px rgba(0, 0, 0, 0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = isDarkTheme
+                  ? "rgba(0, 238, 92, 0.2)"
+                  : "var(--color-border)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+              aria-label={`${company.name} - ${company.role}`}
+            >
+              {/* Logo */}
+              {company.logo && (
+                <div className="relative w-24 h-10 mb-4 mx-auto">
+                  <Image
+                    src={company.logo}
+                    alt={company.name}
+                    fill
+                    className="object-contain"
+                    style={{
+                      filter: isDarkTheme
+                        ? "brightness(0) invert(1) opacity(0.8)"
+                        : "grayscale(100%) opacity(0.7)",
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Role */}
+              <p
+                className="text-xs font-medium uppercase tracking-wider mb-2 text-center"
+                style={{
+                  color: isDarkTheme
+                    ? "var(--color-primary)"
+                    : "var(--color-primary)",
+                  opacity: 0.8,
+                }}
               >
-                {company.logo ? (
-                  <div className="relative w-32 h-full">
-                    <Image
-                      src={company.logo}
-                      alt={company.name}
-                      fill
-                      className="object-contain"
-                      style={{
-                        filter: isDarkTheme
-                          ? "brightness(0) invert(1) opacity(0.8)"
-                          : "grayscale(100%) opacity(0.7)",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.filter = isDarkTheme
-                          ? "brightness(0) invert(1) opacity(1)"
-                          : "grayscale(0%) opacity(1)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.filter = isDarkTheme
-                          ? "brightness(0) invert(1) opacity(0.8)"
-                          : "grayscale(100%) opacity(0.7)";
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center">
-                    <span
-                      className="font-semibold text-lg transition-all duration-300"
-                      style={{
-                        color: isDarkTheme
-                          ? "var(--color-primary)"
-                          : "var(--color-text)",
-                        opacity: 0.7,
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.opacity = "1";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.opacity = "0.7";
-                      }}
-                    >
-                      {company.shortName || company.name}
-                    </span>
-                  </div>
-                )}
-              </a>
-            ))}
-          </div>
+                {company.role}
+              </p>
+
+              {/* Impact */}
+              <p
+                className="text-sm text-center"
+                style={{
+                  color: "var(--color-text)",
+                  opacity: isDarkTheme ? 0.8 : 0.7,
+                  lineHeight: "1.5",
+                }}
+              >
+                {company.impact}
+              </p>
+            </a>
+          ))}
         </div>
       </div>
     </section>

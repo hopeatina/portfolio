@@ -58,8 +58,8 @@ export default function Footer() {
           <div>
             <h3 className="text-2xl font-bold mb-4 text-heading">Hope Atina</h3>
             <p className="text-body text-body-secondary">
-              Building innovative solutions at the intersection of technology
-              and creativity.
+              Building AI agent infrastructure — orchestration, MCP protocol,
+              developer tooling.
             </p>
           </div>
 

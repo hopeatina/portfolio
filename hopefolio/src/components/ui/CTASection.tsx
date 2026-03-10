@@ -36,7 +36,7 @@ const CTASection = () => {
             textShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
           }}
         >
-          Let's Build Something Amazing Together
+          Building agent infrastructure? Let's talk.
         </h2>
         <p
           className="text-lg md:text-xl mb-10 max-w-2xl mx-auto"
@@ -46,8 +46,9 @@ const CTASection = () => {
             lineHeight: "1.6",
           }}
         >
-          Whether you have a project in mind or just want to connect, I'd love
-          to hear from you.
+          I'm looking for roles in multi-agent orchestration, MCP/tool-calling
+          platforms, observability, and AI infrastructure. Currently open to
+          senior engineering positions.
         </p>
 
         {/* CTA Buttons */}

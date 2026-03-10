@@ -421,7 +421,7 @@ export default function BodyFX() {
         </div>
       </ProjectSection>
 
-      <ProjectCTA githubUrl="https://github.com/yourusername/bodyfx" />
+      <ProjectCTA githubUrl="https://github.com/hopeatina/bodyfx" />
     </ProjectLayout>
   );
 }

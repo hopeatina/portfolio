@@ -61,7 +61,7 @@ interface MetricCardProps {
 function MetricCard({ metric, animate, duration, delay }: MetricCardProps) {
   const [displayValue, setDisplayValue] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(undefined);
 
   useEffect(() => {
     if (!animate) return;

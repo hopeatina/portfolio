@@ -1,8 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import Button from "@/components/ui/Button";
-import AboutSection from "@/components/ui/AboutSection";
 import FeaturedProjects from "@/components/ui/FeaturedProjects";
 import TechStack from "@/components/ui/TechStack";
 import Testimonials from "@/components/ui/Testimonials";
@@ -30,12 +28,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>
-          Hope Atina - Software Developer, Bioengineer, and Musician
-        </title>
+        <title>Hope Atina - AI Agent Infrastructure Engineer</title>
         <meta
           name="description"
-          content="Hi, I'm Hope - Software Developer, Bioengineer, and Musician. Building innovative solutions at the intersection of technology, science, and creativity."
+          content="AI Agent Infrastructure Engineer. Multi-agent orchestration, MCP protocol, developer tooling. Creator of OrgX and PerfPulse. 8+ years shipping production systems."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="var(--primary)" />
@@ -48,19 +44,16 @@ export default function Home() {
           <Hero3D />
         </section>
 
-        {/* About Section */}
-        <AboutSection />
-
-        {/* Company Logos */}
+        {/* Shipped in Production */}
         <CompanyLogos />
 
-        {/* Featured Projects */}
+        {/* Flagship Case Studies */}
         <FeaturedProjects />
 
-        {/* Tech Stack */}
+        {/* Capabilities */}
         <TechStack />
 
-        {/* Testimonials */}
+        {/* By the Numbers */}
         <Testimonials />
 
         {/* CTA Section */}

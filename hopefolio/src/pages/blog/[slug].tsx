@@ -34,12 +34,12 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const socialLinks = [
     {
       platform: "LinkedIn",
-      url: "https://linkedin.com/in/yourusername",
+      url: "https://linkedin.com/in/hopeatina",
       icon: <UserCircleIcon className="w-5 h-5" />,
     },
     {
-      platform: "TikTok",
-      url: "https://tiktok.com/@yourusername",
+      platform: "GitHub",
+      url: "https://github.com/hopeatina",
       icon: <PhoneIcon className="w-5 h-5" />,
     },
     {

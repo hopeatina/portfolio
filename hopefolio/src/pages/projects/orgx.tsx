@@ -7,6 +7,7 @@ import TechStack from "@/components/projects/TechStack";
 import FeatureGrid from "@/components/projects/FeatureGrid";
 import ProjectCard from "@/components/projects/ProjectCard";
 import MermaidDiagram from "@/components/projects/MermaidDiagram";
+import StatsDisplay from "@/components/projects/StatsDisplay";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 export default function OrgX() {
@@ -14,296 +15,363 @@ export default function OrgX() {
 
   const techStack = [
     {
-      category: "Frontend",
-      technologies: "Next.js App Router, React 18, TypeScript",
+      category: "Core",
+      technologies: "TypeScript, React, Next.js",
     },
     {
-      category: "Visualization",
-      technologies: "React Flow, Framer Motion, D3.js",
+      category: "Protocol",
+      technologies: "MCP Protocol, Claude API, OpenAI API",
     },
     {
-      category: "State Management",
-      technologies: "Zustand, React Query, Immer",
-    },
-    { category: "Backend", technologies: "Supabase, PostgreSQL, Redis" },
-    { category: "Real-time", technologies: "WebSockets, Server-Sent Events" },
-    {
-      category: "Performance",
-      technologies: "Cloudflare Workers, Edge Computing",
-    },
-    { category: "Authentication", technologies: "Enterprise SSO, RBAC" },
-    {
-      category: "Analytics",
-      technologies: "Critical Path Algorithms, ML Models",
-    },
-  ];
-
-  const canvasFeatures = [
-    {
-      title: "🎯 Advanced Canvas Implementation",
-      description:
-        "Sophisticated visualization engine with enterprise-grade features",
-      items: [
-        "React Flow Integration: Sophisticated node-based workflow visualization with custom components and advanced interactions",
-        "Critical Path Algorithms: Real-time calculation and visualization of project critical paths with animated edge highlighting",
-        "Dynamic Node Positioning: Intelligent auto-layout algorithms with collision detection and optimization",
-        "Real-time Collaboration: Multi-user canvas editing with conflict resolution and live cursor tracking",
-        "Advanced Animations: Framer Motion integration for smooth transitions, node state changes, and path highlighting",
-        "Performance Optimization: Virtualized rendering for large-scale project visualization with 1000+ nodes",
-      ],
+      category: "Backend",
+      technologies: "Supabase, PostgreSQL, Cloudflare Workers",
     },
     {
-      title: "🧠 Intelligent Project Analytics",
-      description:
-        "Advanced algorithms for comprehensive project analysis and optimization",
-      items: [
-        "Critical Path Calculation: Sophisticated longest path analysis with dependency graph evaluation",
-        "Resource Optimization: AI-driven recommendations for optimal team allocation and workload distribution",
-        "Timeline Prediction: Machine learning models predicting project completion times and identifying risks",
-        "Risk Assessment: Automated identification of project risks with mitigation recommendations",
-        "Bottleneck Detection: Intelligent analysis of workflow bottlenecks with suggested optimizations",
-        "Pattern Recognition: Historical project analysis to identify recurring patterns and improvement opportunities",
-      ],
+      category: "Orchestration",
+      technologies: "Agent Spawning, Task Handoff, Durable Workflows",
+    },
+    {
+      category: "Quality",
+      technologies: "Composite Scoring, Quality Gates, Trust Governance",
+    },
+    {
+      category: "Infrastructure",
+      technologies: "Vercel, Redis, Edge Computing",
+    },
+    {
+      category: "Auth",
+      technologies: "OAuth Flows, RBAC, Session Management",
+    },
+    {
+      category: "Tools",
+      technologies: "Claude Code Skills, Cursor Plugin, CLI",
     },
   ];
 
-  const technicalArchitecture = [
+  const problemFeatures = [
     {
-      title: "🏗️ Canvas Visualization Engine",
+      title: "Coordination Complexity",
       description:
-        "Advanced React Flow implementation with custom components and algorithms",
-      items: [
-        "Custom Node Components: Specialized task nodes with status indicators, progress tracking, and contextual information",
-        "Animated Edge System: Dynamic edge rendering with critical path highlighting, progress indicators, and status animations",
-        "Real-time Updates: WebSocket integration for live collaboration with optimistic updates and conflict resolution",
-        "Multi-Level Zoom: Seamless navigation from high-level project overview to detailed task implementation",
-      ],
+        "When multiple AI agents operate across an organization, they need shared context, consistent decision-making, and clear handoff protocols. Without orchestration, agents duplicate work, contradict each other, and produce inconsistent outputs.",
     },
     {
-      title: "📊 Project Management Core",
+      title: "Governance Gap",
       description:
-        "Comprehensive task and resource management with advanced analytics",
-      items: [
-        "Advanced Task System: Comprehensive task management with dependencies, milestones, and resource allocation",
-        "Timeline Analysis: Critical path calculation with slack time analysis and schedule optimization",
-        "Resource Management: Team allocation, workload balancing, and capacity planning algorithms",
-        "Version Control: Git-like versioning for project states with branching and merging capabilities",
-      ],
+        "Autonomous agents making decisions at scale require trust boundaries, approval workflows, and quality assurance. Organizations need visibility into what agents are doing and the ability to intervene when needed.",
     },
     {
-      title: "🚀 Performance & Scalability",
+      title: "Observability Deficit",
       description:
-        "Enterprise-grade performance optimization and scalability features",
-      items: [
-        "Virtualized Rendering: Efficient rendering of large project graphs with viewport optimization",
-        "Edge Computing: Cloudflare Workers integration for global low-latency performance",
-        "Caching Strategy: Multi-layer caching with Redis for session data and computed results",
-        "Database Optimization: Optimized queries with indexing strategies for complex project relationships",
-      ],
+        "Tracking agent performance, scoring output quality, and maintaining organizational memory across sessions is essential for continuous improvement but missing from existing tooling.",
     },
   ];
 
-  const innovationFeatures = [
+  const ecosystemFeatures = [
     {
-      title: "🎨 Critical Path Visualization Innovation",
+      title: "MCP Server Integrations",
       description:
-        "Revolutionary approach to project timeline visualization with real-time animations and intelligent layout algorithms.",
+        "Core protocol layer implementing the Model Context Protocol for standardized agent-to-tool communication. Enables agents to discover, invoke, and compose tools across the organization with consistent interfaces.",
       items: [
-        "Animated Critical Paths: Real-time animated highlighting of critical project paths with dynamic stroke patterns",
-        "Intelligent Node Layout: Advanced auto-positioning algorithms minimizing edge crossings and optimizing readability",
-        "Interactive Timeline: Drag-and-drop task scheduling with automatic dependency validation and conflict resolution",
+        "MCP server implementations for Linear, Gmail, Google Calendar, Cloudflare, and Vercel",
+        "Tool-calling middleware with schema validation and error handling",
+        "Dynamic tool discovery and capability negotiation between agents",
+        "Standardized resource and prompt management across all integrations",
       ],
     },
     {
-      title: "🤝 Advanced Collaboration",
+      title: "CLI-First Orchestration Engine",
       description:
-        "Real-time multiplayer project management with sophisticated conflict resolution and activity tracking.",
+        "Command-line interface for spawning, monitoring, and managing agent workflows. Designed for developer ergonomics with composable commands and real-time streaming output.",
       items: [
-        "Real-time Multiplayer: Multi-user canvas editing with live cursors, selection sharing, and conflict resolution",
-        "Comment System: Contextual commenting on tasks and project elements with threaded discussions",
-        "Activity Streams: Real-time activity feeds with intelligent filtering and notification systems",
+        "Agent spawning with configurable models, tools, and trust levels",
+        "Task handoff protocols for multi-agent collaboration chains",
+        "Durable workflow execution with checkpoint and resume capabilities",
+        "Real-time streaming of agent activity with structured logging",
+      ],
+    },
+    {
+      title: "Quality & Scoring System",
+      description:
+        "Composite scoring engine that evaluates agent outputs against multiple quality dimensions. Integrates with quality gates to enforce standards before work is accepted.",
+      items: [
+        "Multi-signal scoring combining relevance, completeness, correctness, and style",
+        "Quality gates that block progression until outputs meet configurable thresholds",
+        "Outcome attribution tracking which agents and decisions led to results",
+        "Historical scoring data powering continuous improvement and trust calibration",
       ],
     },
   ];
 
-  const achievements = [
+  const technicalDecisions = [
     {
-      title: "💻 Technical Complexity",
+      title: "Why MCP Protocol",
       description:
-        "Sophisticated algorithms and performance engineering for enterprise-scale project management.",
+        "MCP provides a standardized interface between LLMs and external tools, eliminating the need to write custom integrations for every model-tool combination. By adopting MCP as the protocol layer, OrgX agents can use any MCP-compatible tool without modification, and new tools become instantly available to all agents in the organization.",
       items: [
-        "Advanced Algorithms: Critical path calculation and optimization",
-        "Real-time Systems: Multi-user collaboration with conflict resolution",
-        "Performance Engineering: Virtualized rendering for large datasets",
-        "Complex State Management: Sophisticated global state with persistence",
-        "Advanced Animations: Smooth, performant UI transitions and indicators",
+        "Vendor-agnostic: works with Claude, GPT, and other LLM providers",
+        "Composable tool ecosystem with shared schemas and discovery",
+        "Community-driven standard with growing adoption across the industry",
       ],
     },
     {
-      title: "🏢 Enterprise Value",
+      title: "Why Supabase for Org Memory",
       description:
-        "Measurable business impact through improved project management efficiency and team collaboration.",
+        "Organizational memory requires both structured data (entities, relationships, decisions) and real-time subscriptions (live agent activity, collaborative editing). Supabase provides PostgreSQL for complex queries with Row Level Security, plus real-time channels for live updates -- all with minimal infrastructure overhead.",
       items: [
-        "Visual Project Management: Intuitive canvas interface reducing cognitive load",
-        "Critical Path Analysis: Automated identification of project bottlenecks",
-        "Team Collaboration: Real-time editing improving team coordination",
-        "Performance Insights: Data-driven project optimization recommendations",
-        "Scalable Architecture: Support for enterprise-scale project portfolios",
+        "Row Level Security enables per-org and per-user data isolation",
+        "Real-time subscriptions power live dashboards and agent monitoring",
+        "Edge Functions for lightweight serverless compute close to users",
+      ],
+    },
+    {
+      title: "Trust-Based Governance Model",
+      description:
+        "Rather than binary allow/deny permissions, OrgX implements a graduated trust model where agents earn autonomy through demonstrated quality. New agents start with limited scope and require human approval for consequential actions. As they accumulate positive outcomes, their trust level increases and approval requirements relax.",
+      items: [
+        "Graduated autonomy: agents earn broader permissions over time",
+        "Decision approval workflows for high-stakes actions",
+        "Spawn guards preventing uncontrolled agent proliferation",
+        "Audit trail of every decision, outcome, and trust adjustment",
       ],
     },
   ];
 
-  const criticalPathDiagram = `
+  const autonomousSessionFeatures = [
+    {
+      title: "Autonomous Session System",
+      description:
+        "Long-running agent sessions that operate independently with periodic check-ins and configurable guardrails.",
+    },
+    {
+      title: "Claude Code Skills Ecosystem",
+      description:
+        "Custom skills that extend Claude Code with organization-specific capabilities, workflows, and domain knowledge.",
+    },
+    {
+      title: "Cursor Plugin",
+      description:
+        "IDE integration bringing OrgX orchestration directly into the development workflow with inline agent management.",
+    },
+    {
+      title: "Initiative Streaming",
+      description:
+        "Break large initiatives into streams of work that agents can pick up, execute, and hand off with full context preservation.",
+    },
+    {
+      title: "Morning Brief System",
+      description:
+        "Automated daily summaries of agent activity, pending decisions, and organizational health metrics.",
+    },
+    {
+      title: "Outcome Attribution",
+      description:
+        "Track which agents, decisions, and workflows led to specific outcomes for continuous learning and optimization.",
+    },
+  ];
+
+  const orchestrationDiagram = `
     flowchart TB
-      subgraph "User Interface"
-        A[React Flow Canvas] --> B[Interactive Nodes]
-        B --> C[Drag & Drop]
+      subgraph "Protocol Layer"
+        A[MCP Server] --> B[Agent Spawning]
+        B --> C[Task Handoff]
       end
-      
-      subgraph "Critical Path Engine"
-        D[Task Dependencies] --> E[Graph Analysis]
-        E --> F[Longest Path Algorithm]
-        F --> G[Path Highlighting]
+
+      subgraph "Governance Layer"
+        D[Decision Approval] --> E[Quality Gates]
+        E --> F[Trust Governance]
       end
-      
-      subgraph "Collaboration Layer"
-        H[WebSocket Server] --> I[Live Cursors]
-        H --> J[Real-time Updates]
-        H --> K[Conflict Resolution]
+
+      subgraph "Intelligence Layer"
+        G[Org Memory] --> H[Composite Scoring]
+        H --> I[Outcome Attribution]
       end
-      
-      A --> D
-      G --> A
-      C --> H
-      J --> B
-      
-      style F fill:#DC2626,stroke:#B91C1C,color:#fff
-      style A fill:#3B82F6,stroke:#2563EB,color:#fff
-      style H fill:#10B981,stroke:#059669,color:#fff
+
+      C --> D
+      F --> G
+      I --> A
+
+      style A fill:#8B5CF6,stroke:#7C3AED,color:#fff
+      style E fill:#DC2626,stroke:#B91C1C,color:#fff
+      style G fill:#10B981,stroke:#059669,color:#fff
   `;
+
+  const projectStats = [
+    {
+      value: "1,457+",
+      label: "Commits",
+      description: "Across the ecosystem",
+    },
+    {
+      value: "19",
+      label: "Repositories",
+      description: "Interconnected ecosystem",
+    },
+    {
+      value: "Live",
+      label: "Production",
+      description: "At useorgx.com",
+    },
+    {
+      value: "12 mo",
+      label: "Active Development",
+      description: "And counting",
+    },
+  ];
+
+  const architectureHighlights = [
+    "19-Repo Ecosystem: Modular architecture spanning MCP servers, CLI tools, web apps, plugins, and shared libraries",
+    "Durable Workflows: Agent tasks survive disconnections and resume with full context from checkpoints",
+    "Composite Scoring Engine: Multi-signal quality evaluation combining automated metrics with human feedback",
+    "Trust Calibration: Dynamic trust levels that adapt based on agent track record and outcome attribution",
+    "Spawn Guards: Prevent runaway agent proliferation with configurable limits and approval requirements",
+  ];
 
   return (
     <ProjectLayout
       title="OrgX"
-      description="Advanced project management platform with real-time canvas visualization, critical path algorithms, animated workflows, and enterprise-grade collaboration features"
+      description="Multi-agent orchestration platform with MCP protocol integration, trust-based governance, and organizational memory for coordinating AI agents at scale"
     >
       <ProjectHero
         title="OrgX"
-        description="A sophisticated project management platform featuring real-time canvas visualization with critical path analysis, animated workflow representation, advanced dependency tracking, and AI-powered insights for enterprise teams."
+        description="A multi-agent orchestration platform that coordinates AI agents across an organization with MCP protocol integration, trust-based governance, quality gates, and persistent organizational memory. Built as a 19-repository ecosystem powering durable agent workflows at scale."
         tags={[
-          "Project Management",
-          "Canvas Visualization",
-          "React Flow",
-          "Real-time",
-          "Enterprise",
+          "Multi-Agent Orchestration",
+          "MCP Protocol",
+          "Agent Governance",
+          "Tool Calling",
         ]}
         image="/images/projects/orgx.jpg"
       />
 
       <TechStack items={techStack} />
 
-      <ProjectSection title="Advanced Visualization & Analytics">
-        <p className="text-lg mb-6">
-          OrgX represents cutting-edge project management with sophisticated
-          canvas-based visualization, real-time critical path analysis, and
-          advanced workflow orchestration. The platform combines
-          enterprise-grade project tracking with innovative visual interfaces
-          for complex project coordination.
+      <ProjectSection title="The Problem">
+        <p className="text-lg mb-8">
+          Coordinating multiple AI agents across an organization requires
+          orchestration, governance, and observability. Without these
+          foundations, agents operate in silos, make conflicting decisions, and
+          produce outputs no one can trace or trust.
         </p>
 
-        <FeatureGrid features={canvasFeatures} columns={1} />
+        <FeatureGrid features={problemFeatures} columns={3} />
       </ProjectSection>
 
-      <ProjectSection title="Technical Architecture Deep-Dive">
-        <FeatureGrid features={technicalArchitecture} columns={1} />
-      </ProjectSection>
-
-      <ProjectSection title="Innovation & Advanced Features">
-        <FeatureGrid features={innovationFeatures} columns={2} />
-
-        <div className="mt-8">
-          <ProjectCard variant="highlight" className="mt-6">
-            <p
-              className="italic text-center"
-              style={{
-                color: themeProps.colors.text,
-                fontFamily: themeProps.typography.bodyFont,
-                fontSize: "1.1rem",
-                lineHeight: themeProps.typography.lineHeight,
-              }}
-            >
-              "OrgX showcases my ability to build sophisticated enterprise
-              applications with advanced visualization, complex algorithms, and
-              real-time collaboration features. The project demonstrates
-              expertise in performance optimization, user experience design, and
-              scalable architecture for demanding enterprise environments."
-            </p>
-          </ProjectCard>
-        </div>
-      </ProjectSection>
-
-      <ProjectSection title="Technical Achievements & Impact">
-        <FeatureGrid features={achievements} columns={2} />
-
-        <div className="mt-8 space-y-6">
-          <ProjectCard variant="secondary">
-            <h3
-              className="text-xl font-semibold mb-3"
-              style={{
-                color: themeProps.colors.primary,
-                fontFamily: themeProps.typography.headingFont,
-              }}
-            >
-              Innovation in Project Management
-            </h3>
-            <p>
-              OrgX introduces novel approaches to project visualization,
-              combining traditional Gantt chart functionality with modern
-              canvas-based interfaces. The critical path visualization with
-              animated highlighting provides immediate visual feedback on
-              project health and potential issues.
-            </p>
-          </ProjectCard>
-
-          <ProjectCard variant="accent">
-            <h3
-              className="text-xl font-semibold mb-3"
-              style={{
-                color: themeProps.colors.primary,
-                fontFamily: themeProps.typography.headingFont,
-              }}
-            >
-              Future Vision
-            </h3>
-            <p>
-              The platform is designed to evolve with enterprise needs,
-              incorporating machine learning for predictive project management,
-              advanced resource optimization, and intelligent workflow
-              recommendations based on historical project data and industry best
-              practices.
-            </p>
-          </ProjectCard>
-        </div>
-      </ProjectSection>
-
-      <ProjectSection title="Visual Workflow Optimization">
+      <ProjectSection title="Architecture Overview">
         <p className="text-lg mb-6">
-          OrgX revolutionizes project management through advanced canvas
-          visualization, featuring sophisticated critical path algorithms, React
-          Flow integration, and real-time collaboration. The platform transforms
-          complex project dependencies into intuitive visual workflows with
-          intelligent optimization suggestions.
+          OrgX implements a three-layer architecture: a protocol layer for
+          standardized agent-tool communication via MCP, a governance layer for
+          decision approval and quality enforcement, and an intelligence layer
+          for organizational memory and continuous learning.
         </p>
 
         <MermaidDiagram
-          title="Critical Path Visualization System"
-          diagram={criticalPathDiagram}
-          description="Multi-layered architecture powering real-time critical path analysis, interactive canvas manipulation, and collaborative project management."
-          className="mb-8"
+          title="Multi-Agent Orchestration Pipeline"
+          diagram={orchestrationDiagram}
+          description="End-to-end flow from MCP server integration through agent spawning, task handoff, decision approval, quality gates, trust governance, and organizational memory with outcome attribution feeding back into the system."
         />
+
+        <ProjectCard variant="secondary" className="mt-8">
+          <h3 className="text-xl font-semibold mb-4 text-primary">
+            Why This Architecture
+          </h3>
+          <p>
+            Each layer can evolve independently. The protocol layer adopts new
+            MCP tools without touching governance. The governance layer can
+            tighten or relax controls without changing how agents communicate.
+            The intelligence layer learns from every interaction, making the
+            entire system smarter over time.
+          </p>
+        </ProjectCard>
       </ProjectSection>
 
-      <ProjectCTA demoUrl="https://orgx.ai" githubUrl="#" />
+      <ProjectSection title="What I Built">
+        <p className="text-lg mb-8">
+          A 19-repository ecosystem including MCP server integrations,
+          CLI-first orchestration, durable agent workflows, tool-calling
+          middleware, composite scoring engines, quality gates, autonomous
+          session systems, a Claude Code skills ecosystem, and a Cursor plugin.
+        </p>
+
+        <FeatureGrid features={ecosystemFeatures} columns={1} />
+      </ProjectSection>
+
+      <ProjectSection title="Technical Decisions">
+        <FeatureGrid features={technicalDecisions} columns={1} />
+      </ProjectSection>
+
+      <ProjectSection title="Agent Capabilities">
+        <p className="text-lg mb-6">
+          Beyond core orchestration, OrgX provides a rich set of capabilities
+          that make agents genuinely useful in day-to-day workflows.
+        </p>
+
+        <FeatureGrid features={autonomousSessionFeatures} columns={2} />
+
+        <ProjectCard variant="highlight" className="mt-8">
+          <p className="italic text-center text-lg text-body">
+            "OrgX is not a wrapper around an API. It is the operating system
+            for how AI agents work together inside an organization -- with the
+            governance, observability, and trust mechanisms that make autonomous
+            agents viable at scale."
+          </p>
+        </ProjectCard>
+      </ProjectSection>
+
+      <ProjectSection title="Proof of Work">
+        <StatsDisplay stats={projectStats} className="mb-8" />
+
+        <ProjectCard variant="accent" className="mb-6">
+          <h3 className="text-xl font-semibold mb-4 text-primary">
+            Architecture Highlights
+          </h3>
+          <ul className="space-y-3">
+            {architectureHighlights.map((highlight, index) => (
+              <li key={index} className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-2 h-2 rounded-full mt-2 bg-primary" />
+                <span className="text-body">
+                  <strong>{highlight.split(":")[0]}:</strong>{" "}
+                  {highlight.split(":").slice(1).join(":")}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </ProjectCard>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <ProjectCard variant="secondary">
+            <h3 className="text-xl font-semibold mb-3 text-primary">
+              Ecosystem Scale
+            </h3>
+            <p>
+              19 repositories working together: MCP servers for Linear, Gmail,
+              Google Calendar, Cloudflare, and Vercel; a CLI orchestration
+              engine; web dashboard; Claude Code skills; Cursor plugin; shared
+              TypeScript libraries; Supabase backend; and Cloudflare Workers
+              for edge compute. Each repo has its own CI/CD pipeline, and they
+              compose into a coherent platform.
+            </p>
+          </ProjectCard>
+
+          <ProjectCard variant="highlight">
+            <h3 className="text-xl font-semibold mb-3 text-primary">
+              Live in Production
+            </h3>
+            <p>
+              OrgX is live at useorgx.com, actively used for managing
+              multi-agent workflows. The platform handles agent spawning, task
+              handoff, decision approval, quality scoring, and organizational
+              memory in production -- not a demo, not a prototype, but a
+              working system with 12 months of active development and 1,457+
+              commits behind it.
+            </p>
+          </ProjectCard>
+        </div>
+      </ProjectSection>
+
+      <ProjectCTA
+        demoUrl="https://useorgx.com"
+        githubUrl="https://github.com/hopeatina"
+      />
     </ProjectLayout>
   );
 }
