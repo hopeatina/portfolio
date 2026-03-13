@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Theme, useTheme } from "@/modules/mode-switch/ThemeContext";
+import {
+  Theme,
+  isThemeDark,
+  useTheme,
+} from "@/modules/mode-switch/ThemeContext";
 import Logo from "@/components/ui/Logo";
 import baseStyles from "@/styles/themes/base-theme.module.css";
 import cameroonianStyles from "@/styles/themes/cameroonian-theme.module.css";
@@ -36,11 +40,28 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const isDarkTheme = theme === "futuristic";
+  const isDarkTheme = isThemeDark(theme);
   const isHomeRoute = router.pathname === "/";
   const overHero = isHomeRoute && !isScrolled && !isMobileMenuOpen;
-  const chromeIsDark =
-    isDarkTheme || theme === "rice" || theme === "cameroonian" || overHero;
+  const chromeIsDark = isDarkTheme || overHero;
+  const headerTextColor = chromeIsDark ? "var(--text-on-dark)" : "var(--text)";
+  const headerPanelBackground = chromeIsDark
+    ? "rgba(7, 12, 24, 0.8)"
+    : "rgba(var(--background-rgb), 0.88)";
+  const headerSoftFill = chromeIsDark
+    ? "rgba(255, 255, 255, 0.06)"
+    : "rgba(var(--color-primary-rgb), 0.06)";
+  const headerSelectedFill = chromeIsDark
+    ? "rgba(255, 255, 255, 0.08)"
+    : "rgba(var(--color-primary-rgb), 0.1)";
+  const headerBorderColor = chromeIsDark
+    ? "rgba(148, 163, 184, 0.18)"
+    : "rgba(var(--color-primary-rgb), 0.14)";
+  const headerShadow = overHero
+    ? "0 18px 48px rgba(2, 6, 23, 0.24)"
+    : chromeIsDark
+      ? "0 18px 42px rgba(2, 8, 23, 0.24)"
+      : "0 18px 42px rgba(15, 23, 42, 0.08)";
 
   const getThemeStyles = () => {
     switch (theme) {
@@ -138,21 +159,15 @@ export default function Header() {
           isHeaderVisible ? "translate-y-0" : "-translate-y-[120%]"
         }`}
       >
-        <div className="mx-auto max-w-6xl px-3 pt-3 sm:px-4 md:px-6">
+        <div className="mx-auto max-w-6xl px-3 pt-2.5 sm:px-4 md:px-6">
           <div
             className={`pointer-events-auto overflow-hidden border ${styles.theme}`}
             style={{
-              background: chromeIsDark
-                ? "rgba(7, 12, 24, 0.78)"
-                : "rgba(255, 255, 255, 0.84)",
-              boxShadow: overHero
-                ? "0 18px 48px rgba(2, 6, 23, 0.22)"
-                : "0 18px 42px rgba(15, 23, 42, 0.08)",
+              background: headerPanelBackground,
+              boxShadow: headerShadow,
               backdropFilter: "blur(14px)",
               WebkitBackdropFilter: "blur(14px)",
-              borderColor: chromeIsDark
-                ? "rgba(148, 163, 184, 0.18)"
-                : "rgba(15, 23, 42, 0.08)",
+              borderColor: headerBorderColor,
               borderRadius: isMobileMenuOpen ? "1.7rem" : "9999px",
             }}
           >
@@ -172,9 +187,7 @@ export default function Header() {
                     style={{
                       fontFamily: "var(--font-heading)",
                       letterSpacing: "var(--letter-spacing-heading)",
-                      color: chromeIsDark
-                        ? "var(--text-on-dark)"
-                        : "var(--text)",
+                      color: headerTextColor,
                     }}
                   >
                     Hope Atina
@@ -187,10 +200,8 @@ export default function Header() {
                 className={`lg:hidden rounded-full p-2 ${styles.transitionBase}`}
                 aria-label="Toggle mobile menu"
                 style={{
-                  color: chromeIsDark ? "var(--text-on-dark)" : "var(--text)",
-                  background: chromeIsDark
-                    ? "rgba(255, 255, 255, 0.06)"
-                    : "rgba(15, 23, 42, 0.05)",
+                  color: headerTextColor,
+                  background: headerSoftFill,
                 }}
               >
                 <svg
@@ -224,9 +235,7 @@ export default function Header() {
                     href={link.path}
                     className={`${styles.transitionBase} ${styles.body} relative py-1 hover:opacity-80`}
                     style={{
-                      color: chromeIsDark
-                        ? "var(--text-on-dark)"
-                        : "var(--text)",
+                      color: headerTextColor,
                     }}
                   >
                     <span className="relative z-10">{link.name}</span>
@@ -248,18 +257,10 @@ export default function Header() {
                       isChangingReality ? styles.buttonPulse : ""
                     }`}
                     style={{
-                      background: chromeIsDark
-                        ? "rgba(255, 255, 255, 0.05)"
-                        : "rgba(15, 23, 42, 0.04)",
-                      color: chromeIsDark
-                        ? "var(--text-on-dark)"
-                        : "var(--text)",
+                      background: headerSoftFill,
+                      color: headerTextColor,
                       borderRadius: "9999px",
-                      border: `1px solid ${
-                        chromeIsDark
-                          ? "rgba(148, 163, 184, 0.16)"
-                          : "rgba(15, 23, 42, 0.12)"
-                      }`,
+                      border: `1px solid ${headerBorderColor}`,
                       boxShadow: "none",
                     }}
                   >
@@ -287,17 +288,13 @@ export default function Header() {
                     style={{
                       background: chromeIsDark
                         ? "rgba(7, 12, 24, 0.95)"
-                        : "rgba(255, 255, 255, 0.96)",
+                        : "rgba(var(--background-rgb), 0.96)",
                       boxShadow: "var(--box-shadow)",
                       borderRadius: "1.25rem",
                       zIndex: 50,
                       backdropFilter: "blur(10px)",
                       WebkitBackdropFilter: "blur(10px)",
-                      border: `1px solid ${
-                        chromeIsDark
-                          ? "rgba(148, 163, 184, 0.18)"
-                          : "rgba(15, 23, 42, 0.08)"
-                      }`,
+                      border: `1px solid ${headerBorderColor}`,
                     }}
                   >
                     <div className="py-1">
@@ -307,14 +304,10 @@ export default function Header() {
                           onClick={() => handleThemeChange(mode)}
                           className={`w-full px-4 py-3 text-left ${styles.transitionBase} ${styles.body} hover:scale-[0.98]`}
                           style={{
-                            color: chromeIsDark
-                              ? "var(--text-on-dark)"
-                              : "var(--text)",
+                            color: headerTextColor,
                             background:
                               theme === mode
-                                ? chromeIsDark
-                                  ? "rgba(255, 255, 255, 0.06)"
-                                  : "rgba(var(--accent-rgb), 0.1)"
+                                ? headerSelectedFill
                                 : "transparent",
                             opacity: theme === mode ? 0.95 : 1,
                           }}
@@ -344,9 +337,7 @@ export default function Header() {
             <div
               className={`lg:hidden ${isMobileMenuOpen ? "block" : "hidden"} border-t px-3 pb-4 pt-3`}
               style={{
-                borderColor: chromeIsDark
-                  ? "rgba(148, 163, 184, 0.14)"
-                  : "rgba(15, 23, 42, 0.08)",
+                borderColor: headerBorderColor,
               }}
             >
               <div className="space-y-1">
@@ -357,9 +348,7 @@ export default function Header() {
                     onClick={handleMobileNavClick}
                     className={`block rounded-2xl px-3 py-2 ${styles.transitionBase} ${styles.body}`}
                     style={{
-                      color: chromeIsDark
-                        ? "var(--text-on-dark)"
-                        : "var(--text)",
+                      color: headerTextColor,
                       background: "transparent",
                     }}
                   >
@@ -372,7 +361,7 @@ export default function Header() {
                 <p
                   className="px-3 text-sm font-medium"
                   style={{
-                    color: chromeIsDark ? "var(--text-on-dark)" : "var(--text)",
+                    color: headerTextColor,
                   }}
                 >
                   Theme
@@ -387,15 +376,9 @@ export default function Header() {
                       }}
                       className={`w-full rounded-2xl px-3 py-2 text-left ${styles.transitionBase} ${styles.body}`}
                       style={{
-                        color: chromeIsDark
-                          ? "var(--text-on-dark)"
-                          : "var(--text)",
+                        color: headerTextColor,
                         background:
-                          theme === mode
-                            ? chromeIsDark
-                              ? "rgba(255, 255, 255, 0.06)"
-                              : "rgba(var(--accent-rgb), 0.1)"
-                            : "transparent",
+                          theme === mode ? headerSelectedFill : "transparent",
                       }}
                     >
                       <div className="flex items-center gap-3">

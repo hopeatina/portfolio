@@ -3,7 +3,7 @@
 import React from "react";
 import Head from "next/head";
 import BlogPostCard from "@/components/blog/BlogPostCard";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import { isThemeDark, useTheme } from "@/modules/mode-switch/ThemeContext";
 
 const BLOG_DESCRIPTION = "Technical writing on agent orchestration, MCP protocol, and production AI infrastructure";
 
@@ -46,7 +46,7 @@ const posts = [
 
 export default function Blog() {
   const { theme } = useTheme();
-  const isDarkTheme = theme === "futuristic";
+  const isDarkTheme = isThemeDark(theme);
 
   return (
     <>
@@ -61,11 +61,11 @@ export default function Blog() {
       >
         {/* Header Section */}
         <section
-          className="relative py-24 md:py-32"
+          className="relative py-20 md:py-28"
           style={{
             background: isDarkTheme
-              ? "linear-gradient(to bottom, var(--background), var(--background-secondary))"
-              : "linear-gradient(to bottom, var(--surface), var(--background))",
+              ? "linear-gradient(180deg, rgba(var(--background-rgb), 1) 0%, rgba(var(--color-surface-rgb), 0.94) 100%)"
+              : "linear-gradient(180deg, rgba(var(--color-surface-rgb), 0.7) 0%, rgba(var(--background-rgb), 1) 100%)",
           }}
         >
           <div className="container mx-auto px-4 text-center">
@@ -115,7 +115,7 @@ export default function Blog() {
         {/* Posts Grid */}
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
-            <div className="grid gap-12 max-w-3xl mx-auto">
+            <div className="grid max-w-3xl gap-10 mx-auto md:gap-12">
               {posts.map((post, index) => (
                 <article
                   key={post.slug}

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import { isThemeDark, useTheme } from "@/modules/mode-switch/ThemeContext";
 import type { ReviewState } from "@/data/homepage";
 
 interface StateBadgeProps {
@@ -30,8 +30,7 @@ export default function StateBadge({
 }: StateBadgeProps) {
   const { theme } = useTheme();
   const colors = statePalette[state];
-  const isDarkTheme =
-    theme === "futuristic" || theme === "rice" || theme === "cameroonian";
+  const isDarkTheme = isThemeDark(theme);
 
   return (
     <span

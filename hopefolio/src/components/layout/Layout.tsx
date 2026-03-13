@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import { isThemeDark, useTheme } from "@/modules/mode-switch/ThemeContext";
 import Header from "./Header";
 import Footer from "./Footer";
 import SiteSeo from "./SiteSeo";
@@ -15,6 +15,9 @@ export default function Layout({ children, showFooter = true }: LayoutProps) {
   useEffect(() => {
     // Apply theme to document root
     document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.style.colorScheme = isThemeDark(theme)
+      ? "dark"
+      : "light";
 
     // Add theme transition overlay effect
     const overlay = document.querySelector(".theme-transition-overlay");

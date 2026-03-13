@@ -2,10 +2,9 @@
 
 import React, { createElement } from "react";
 import Link from "next/link";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
-import { FiGithub, FiTwitter, FiLinkedin, FiArrowUp } from "react-icons/fi";
+import { isThemeDark, useTheme } from "@/modules/mode-switch/ThemeContext";
+import { FiArrowUp, FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
 import { FaMedium } from "react-icons/fa";
-import Button from "@/components/ui/Button";
 
 interface SocialLink {
   platform: string;
@@ -45,38 +44,50 @@ const footerLinks = [
 
 export default function Footer() {
   const { theme } = useTheme();
+  const darkTheme = isThemeDark(theme);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="py-16 bg-surface border-t border-border">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Brand Section */}
-          <div>
-            <h3 className="text-2xl font-bold mb-4 text-heading">Hope Atina</h3>
-            <p className="text-body text-body-secondary">
-              Building AI agent infrastructure — orchestration, MCP protocol,
-              developer tooling.
+    <footer
+      className="border-t"
+      style={{
+        background: darkTheme
+          ? "linear-gradient(180deg, rgba(var(--color-surface-rgb), 0.92) 0%, rgba(var(--background-rgb), 1) 100%)"
+          : "linear-gradient(180deg, rgba(var(--color-surface-rgb), 0.62) 0%, rgba(var(--background-rgb), 1) 100%)",
+        borderColor: "var(--border)",
+      }}
+    >
+      <div className="mx-auto max-w-[1180px] px-4 py-12 md:px-6 md:py-14">
+        <div className="grid gap-10 md:grid-cols-[minmax(0,1.2fr)_0.7fr_0.85fr] md:gap-12">
+          <div className="max-w-md">
+            <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-body-secondary">
+              Agent infrastructure
+            </div>
+            <h2 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-heading md:text-[2rem]">
+              Hope Atina
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-body-secondary md:text-[15px]">
+              Building orchestration layers, MCP workflows, developer tooling,
+              and production AI systems with interfaces designed for review.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h3 className="text-2xl font-bold mb-4 text-heading">
-              Quick Links
-            </h3>
-            <ul className="space-y-3">
+            <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-body-secondary">
+              Navigate
+            </div>
+            <ul className="mt-4 space-y-3">
               {footerLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-link hover:text-link-hover transition-colors duration-200 inline-flex items-center group"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-heading transition-opacity duration-200 hover:opacity-72 no-underline"
                   >
-                    {link.label}
-                    <span className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <span>{link.label}</span>
+                    <span aria-hidden="true" className="text-body-secondary">
                       →
                     </span>
                   </Link>
@@ -85,41 +96,61 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Connect Section */}
           <div>
-            <h3 className="text-2xl font-bold mb-4 text-heading">Connect</h3>
-            <div className="flex flex-wrap gap-3">
+            <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-body-secondary">
+              Elsewhere
+            </div>
+            <div className="mt-4 flex flex-wrap gap-3">
               {socialLinks.map((link) => (
                 <a
                   key={link.platform}
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary hover:text-white transition-all duration-300 group"
-                  aria-label={`${link.platform} Profile`}
+                  aria-label={`${link.platform} profile`}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border transition-transform duration-200 hover:-translate-y-0.5"
+                  style={{
+                    background: darkTheme
+                      ? "rgba(255, 255, 255, 0.03)"
+                      : "rgba(var(--color-primary-rgb), 0.04)",
+                    borderColor: "var(--border)",
+                    color: "var(--text)",
+                    boxShadow: darkTheme ? "var(--box-shadow-card)" : "none",
+                  }}
                 >
-                  <span className="transition-transform duration-300 group-hover:scale-110">
-                    {createElement(link.icon, { size: 20 })}
-                  </span>
+                  {createElement(link.icon, { size: 18 })}
                 </a>
               ))}
             </div>
+            <p className="mt-4 max-w-xs text-sm leading-6 text-body-secondary">
+              The strongest read is still the work itself. Start with OrgX, then
+              the supporting tooling and production systems.
+            </p>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-body-secondary text-sm">
-            © {new Date().getFullYear()} Hope Atina. All rights reserved.
+        <div
+          className="mt-10 flex flex-col gap-4 border-t pt-5 text-sm text-body-secondary md:flex-row md:items-center md:justify-between"
+          style={{ borderColor: "var(--border)" }}
+        >
+          <p className="mb-0">
+            © {new Date().getFullYear()} Hope Atina. Built with an agent-first
+            review bar.
           </p>
 
-          {/* Back to top button */}
           <button
             onClick={scrollToTop}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary hover:text-white transition-all duration-300 group"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border transition-transform duration-200 hover:-translate-y-0.5"
+            style={{
+              borderColor: "var(--border)",
+              background: darkTheme
+                ? "rgba(255, 255, 255, 0.03)"
+                : "rgba(var(--color-primary-rgb), 0.04)",
+              color: "var(--text)",
+            }}
             aria-label="Back to top"
           >
-            <FiArrowUp className="transition-transform duration-300 group-hover:-translate-y-0.5" />
+            <FiArrowUp className="h-4 w-4" />
           </button>
         </div>
       </div>
