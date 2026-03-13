@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import {
   FiMail,
   FiUser,
@@ -18,8 +17,6 @@ export default function Contact() {
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
     "idle"
   );
-  const { theme } = useTheme();
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -58,21 +55,21 @@ export default function Contact() {
       <main className="min-h-screen bg-background py-24">
         <div className="container mx-auto px-4">
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="mb-10 text-center md:mb-12">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              <span className="gradient-text">Let's Connect</span>
+              <span className="gradient-text">Let&apos;s Connect</span>
             </h1>
             <p className="text-lg md:text-xl text-body-secondary max-w-2xl mx-auto">
-              Feel free to reach out, and I'll get back to you soon!
+              Feel free to reach out, and I&apos;ll get back to you soon!
             </p>
           </div>
 
           {/* Content Grid */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid max-w-5xl gap-6 mx-auto md:grid-cols-2 md:gap-8">
             {/* Contact Form */}
-            <Card variant="elevated" className="p-8">
+            <Card variant="elevated" className="p-6 md:p-8">
               <h2 className="text-2xl font-bold mb-6 text-heading">
-                I'd love to hear from you!
+                I&apos;d love to hear from you!
               </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -144,7 +141,7 @@ export default function Contact() {
 
                 {formStatus === "success" && (
                   <div className="text-center p-4 rounded-lg bg-success/10 text-success border border-success/30">
-                    Thanks for your message! I'll get back to you soon.
+                    Thanks for your message! I&apos;ll get back to you soon.
                   </div>
                 )}
 
@@ -165,7 +162,7 @@ export default function Contact() {
             </Card>
 
             {/* Contact Info */}
-            <Card variant="elevated" className="p-8">
+            <Card variant="elevated" className="p-6 md:p-8">
               <h2 className="text-2xl font-bold mb-6 text-heading">
                 Other Ways to Connect
               </h2>
@@ -193,13 +190,13 @@ export default function Contact() {
                   <h3 className="text-lg font-semibold mb-4 text-heading">
                     Social Media
                   </h3>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
                     <Button
                       href="https://github.com/hopeatina"
                       external
                       icon={<FiGithub />}
                       size="lg"
-                      className="flex-1 sm:flex-initial"
+                      className="w-full justify-center"
                     >
                       GitHub
                     </Button>
@@ -209,7 +206,7 @@ export default function Contact() {
                       external
                       icon={<FiLinkedin />}
                       size="lg"
-                      className="flex-1 sm:flex-initial"
+                      className="w-full justify-center"
                     >
                       LinkedIn
                     </Button>
@@ -219,7 +216,7 @@ export default function Contact() {
                       external
                       icon={<FiTwitter />}
                       size="lg"
-                      className="flex-1 sm:flex-initial"
+                      className="w-full justify-center"
                     >
                       X (Twitter)
                     </Button>
@@ -229,7 +226,7 @@ export default function Contact() {
                       external
                       icon={<FaMedium />}
                       size="lg"
-                      className="flex-1 sm:flex-initial"
+                      className="w-full justify-center"
                     >
                       Medium
                     </Button>
@@ -242,13 +239,13 @@ export default function Contact() {
                     Looking for collaboration?
                   </h3>
                   <p className="text-body-secondary mb-4">
-                    I'm always excited to work on innovative projects that push
+                    I&apos;m always excited to work on innovative projects that push
                     boundaries and create meaningful impact. Whether you have a
                     startup idea, need technical consulting, or want to explore
-                    new technologies together, let's chat!
+                    new technologies together, let&apos;s chat!
                   </p>
                   <p className="text-body-secondary">
-                    I'm particularly interested in multi-agent orchestration,
+                    I&apos;m particularly interested in multi-agent orchestration,
                     MCP/tool-calling platforms, agent observability, and AI
                     infrastructure engineering.
                   </p>

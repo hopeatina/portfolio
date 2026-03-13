@@ -14,6 +14,8 @@ import futuristicStyles from "@/styles/themes/futuristic-theme.module.css";
 
 export type Theme = "base" | "cameroonian" | "rice" | "futuristic";
 
+export const isThemeDark = (theme: Theme) => theme === "futuristic";
+
 interface ThemeColors {
   primary: string;
   accent: string;
@@ -307,7 +309,7 @@ export const themeProperties: Record<Theme, ThemeProperties> = {
 interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
-  getThemeStyles: () => any;
+  getThemeStyles: () => Record<string, string>;
   themeProps: ThemeProperties;
   isDarkMode: boolean;
   getTextColor: (isDarkBg?: boolean) => string;
@@ -329,9 +331,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   // Determine if current theme is dark mode
   const isDarkMode = useMemo(() => {
-    return (
-      theme === "futuristic" || theme === "rice" || theme === "cameroonian"
-    );
+    return isThemeDark(theme);
   }, [theme]);
 
   // Get appropriate text color based on background context
