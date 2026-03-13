@@ -112,7 +112,7 @@ export default function Hero3D() {
         )}
       </div>
 
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(7,14,29,0.08),rgba(2,6,23,0.72)_68%,rgba(2,6,23,0.96))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(14,165,233,0.08),rgba(2,6,23,0.78)_38%,rgba(2,6,23,0.97)_78%)]" />
 
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0 }}
@@ -120,8 +120,12 @@ export default function Hero3D() {
         transition={{ duration: shouldReduceMotion ? 0.01 : 0.65 }}
         className="relative z-10 px-4 pb-16 pt-20 md:px-6 md:pb-20 md:pt-24 lg:px-8 lg:pb-24 lg:pt-28"
       >
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1.1fr)_420px] lg:items-center">
-          <div className="max-w-4xl text-left">
+        <div className="mx-auto max-w-7xl">
+          <div
+            className="rounded-[2.35rem] border border-white/[0.08] bg-slate-950/[0.18] px-4 py-6 shadow-[0_26px_90px_rgba(2,6,23,0.28)] backdrop-blur-[3px] md:px-6 md:py-8 lg:px-8 lg:py-10"
+          >
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_420px] lg:items-center">
+              <div className="max-w-4xl text-left">
             <motion.p
               {...reveal(0.02, 10)}
               className="mb-4 max-w-2xl text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60 md:text-sm"
@@ -164,7 +168,31 @@ export default function Hero3D() {
             </motion.p>
 
             <motion.div
-              {...reveal(0.18, 14)}
+              {...reveal(0.2, 12)}
+              className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4"
+            >
+              <Link
+                href="/projects"
+                className="no-underline inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-slate-950 transition-all duration-200 hover:-translate-y-0.5 md:text-base"
+                style={{
+                  fontFamily: bodyFont,
+                  boxShadow: "0 18px 46px rgba(2, 6, 23, 0.24)",
+                }}
+              >
+                Review systems
+                <FiArrowRight />
+              </Link>
+              <Link
+                href="/blog"
+                className="no-underline inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.14] px-6 py-3.5 text-sm font-medium text-white/90 transition-all duration-200 hover:border-white/[0.24] hover:bg-white/[0.06] md:text-base"
+                style={{ fontFamily: bodyFont }}
+              >
+                Read technical writing
+              </Link>
+            </motion.div>
+
+            <motion.div
+              {...reveal(0.22, 14)}
               className="mt-6 overflow-hidden rounded-[1.4rem] border border-white/[0.12] bg-slate-950/[0.42] p-4 backdrop-blur-md lg:hidden"
               style={{
                 boxShadow: "0 18px 44px rgba(2, 6, 23, 0.24)",
@@ -203,36 +231,15 @@ export default function Hero3D() {
               </Link>
             </motion.div>
 
-            <motion.div
-              {...reveal(0.2, 12)}
-              className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4"
-            >
-              <Link
-                href="/projects"
-                className="no-underline inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-slate-950 transition-all duration-200 hover:-translate-y-0.5 md:text-base"
+              <motion.dl
+                {...reveal(0.24, 12)}
+                className="mt-7 grid gap-4 overflow-hidden rounded-[1.35rem] border border-white/10 bg-slate-950/[0.42] p-4 sm:mt-8 sm:grid-cols-3"
                 style={{
-                  fontFamily: bodyFont,
-                  boxShadow: "0 18px 46px rgba(2, 6, 23, 0.24)",
+                  boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.02)",
                 }}
               >
-                Review systems
-                <FiArrowRight />
-              </Link>
-              <Link
-                href="/blog"
-                className="no-underline inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.14] px-6 py-3.5 text-sm font-medium text-white/90 transition-all duration-200 hover:border-white/[0.24] hover:bg-white/[0.06] md:text-base"
-                style={{ fontFamily: bodyFont }}
-              >
-                Read technical writing
-              </Link>
-            </motion.div>
-
-            <motion.dl
-              {...reveal(0.24, 12)}
-              className="mt-7 grid gap-4 border-t border-white/10 pt-5 sm:mt-8 sm:grid-cols-3 sm:pt-6"
-            >
-              {heroSignals.map((signal) => (
-                <div key={signal.label} className="space-y-1">
+                {heroSignals.map((signal) => (
+                  <div key={signal.label} className="space-y-1">
                   <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/[0.42]">
                     {signal.label}
                   </dt>
@@ -244,88 +251,90 @@ export default function Hero3D() {
                   </dd>
                 </div>
               ))}
-            </motion.dl>
-          </div>
-
-          <motion.aside
-            {...reveal(0.16, 18)}
-            className="hidden overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/[0.52] backdrop-blur-xl lg:block"
-            style={{
-              boxShadow: "0 30px 90px rgba(2, 6, 23, 0.42)",
-            }}
-          >
-            <div className="border-b border-white/10 px-5 py-5 md:px-6">
-              <p
-                className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/[0.44]"
-                style={{ fontFamily: bodyFont }}
-              >
-                Current review object
-              </p>
-              <StateBadge state={focusSystem.state} />
-              <h2
-                className="mt-4 text-2xl font-semibold text-white md:text-[2rem]"
-                style={{ fontFamily: headingFont, lineHeight: 1 }}
-              >
-                {focusSystem.title}
-              </h2>
-              <p
-                className="mt-3 text-sm leading-relaxed text-white/70 md:text-[15px]"
-                style={{ fontFamily: bodyFont }}
-              >
-                {focusSystem.summary}
-              </p>
+              </motion.dl>
             </div>
 
-            <div className="px-5 py-5 md:px-6">
-              <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.03] px-4 py-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/[0.42]">
-                  Focus system
+            <motion.aside
+              {...reveal(0.16, 18)}
+              className="hidden overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/[0.62] backdrop-blur-xl lg:block"
+              style={{
+                boxShadow: "0 30px 90px rgba(2, 6, 23, 0.42)",
+              }}
+            >
+              <div className="border-b border-white/10 px-5 py-5 md:px-6">
+                <p
+                  className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/[0.44]"
+                  style={{ fontFamily: bodyFont }}
+                >
+                  Current review object
                 </p>
-                <div className="mt-2 flex items-start justify-between gap-4">
-                  <div>
-                    <p
-                      className="text-xl font-semibold text-white"
-                      style={{ fontFamily: headingFont }}
-                    >
-                      {focusSystem.name}
-                    </p>
-                    <p
-                      className="mt-2 max-w-xs text-sm leading-relaxed text-white/70"
-                      style={{ fontFamily: bodyFont }}
-                    >
-                      {focusSystem.proof}
-                    </p>
-                  </div>
-                  <Link
-                    href={focusSystem.href}
-                    className="no-underline inline-flex items-center gap-2 text-sm font-medium text-white/[0.88] transition-all duration-200 hover:text-white"
-                  >
-                    {focusSystem.actionLabel}
-                    <FiArrowRight />
-                  </Link>
-                </div>
+                <StateBadge state={focusSystem.state} />
+                <h2
+                  className="mt-4 text-2xl font-semibold text-white md:text-[2rem]"
+                  style={{ fontFamily: headingFont, lineHeight: 1 }}
+                >
+                  {focusSystem.title}
+                </h2>
+                <p
+                  className="mt-3 text-sm leading-relaxed text-white/70 md:text-[15px]"
+                  style={{ fontFamily: bodyFont }}
+                >
+                  {focusSystem.summary}
+                </p>
               </div>
 
-              <dl className="mt-5 divide-y divide-white/8">
-                {focusSystem.checkpoints.map((checkpoint) => (
-                  <div
-                    key={checkpoint.label}
-                    className="grid gap-2 py-4 md:grid-cols-[132px_minmax(0,1fr)] md:gap-4"
-                  >
-                    <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/40">
-                      {checkpoint.label}
-                    </dt>
-                    <dd
-                      className="text-sm leading-relaxed text-white/[0.74]"
-                      style={{ fontFamily: bodyFont }}
+              <div className="px-5 py-5 md:px-6">
+                <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.03] px-4 py-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/[0.42]">
+                    Focus system
+                  </p>
+                  <div className="mt-2 flex items-start justify-between gap-4">
+                    <div>
+                      <p
+                        className="text-xl font-semibold text-white"
+                        style={{ fontFamily: headingFont }}
+                      >
+                        {focusSystem.name}
+                      </p>
+                      <p
+                        className="mt-2 max-w-xs text-sm leading-relaxed text-white/70"
+                        style={{ fontFamily: bodyFont }}
+                      >
+                        {focusSystem.proof}
+                      </p>
+                    </div>
+                    <Link
+                      href={focusSystem.href}
+                      className="no-underline inline-flex items-center gap-2 text-sm font-medium text-white/[0.88] transition-all duration-200 hover:text-white"
                     >
-                      {checkpoint.value}
-                    </dd>
+                      {focusSystem.actionLabel}
+                      <FiArrowRight />
+                    </Link>
                   </div>
-                ))}
-              </dl>
+                </div>
+
+                <dl className="mt-5 divide-y divide-white/8">
+                  {focusSystem.checkpoints.map((checkpoint) => (
+                    <div
+                      key={checkpoint.label}
+                      className="grid gap-2 py-4 md:grid-cols-[132px_minmax(0,1fr)] md:gap-4"
+                    >
+                      <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/40">
+                        {checkpoint.label}
+                      </dt>
+                      <dd
+                        className="text-sm leading-relaxed text-white/[0.74]"
+                        style={{ fontFamily: bodyFont }}
+                      >
+                        {checkpoint.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </motion.aside>
             </div>
-          </motion.aside>
+          </div>
         </div>
       </motion.div>
     </div>

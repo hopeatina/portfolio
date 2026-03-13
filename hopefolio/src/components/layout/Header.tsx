@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Theme } from "@/modules/mode-switch/ThemeContext";
+import { useRouter } from "next/router";
+import { Theme, useTheme } from "@/modules/mode-switch/ThemeContext";
 import Logo from "@/components/ui/Logo";
 import baseStyles from "@/styles/themes/base-theme.module.css";
 import cameroonianStyles from "@/styles/themes/cameroonian-theme.module.css";
@@ -29,14 +29,19 @@ const themeLabels = {
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
   const [isChangingReality, setIsChangingReality] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayColor, setOverlayColor] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const isDarkTheme = theme === "futuristic";
-  const bgIsDark = isDarkTheme || theme === "rice" || theme === "cameroonian";
+  const isHomeRoute = router.pathname === "/";
+  const overHero = isHomeRoute && !isScrolled && !isMobileMenuOpen;
+  const chromeIsDark =
+    isDarkTheme || theme === "rice" || theme === "cameroonian" || overHero;
 
-  // Get the current theme's styles
   const getThemeStyles = () => {
     switch (theme) {
       case "cameroonian":
@@ -69,323 +74,338 @@ export default function Header() {
     }
   }, [isChangingReality, overlayColor]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 28);
+
+      if (!isHomeRoute || isMobileMenuOpen) {
+        setIsHeaderVisible(true);
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      if (currentScrollY < 56) {
+        setIsHeaderVisible(true);
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      if (Math.abs(currentScrollY - lastScrollY) < 8) {
+        return;
+      }
+
+      setIsHeaderVisible(currentScrollY < lastScrollY);
+      lastScrollY = currentScrollY;
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHomeRoute, isMobileMenuOpen]);
+
   const handleThemeChange = (newTheme: Theme) => {
-    // Start the transition
     setIsChangingReality(true);
     setShowOverlay(true);
     setOverlayColor(
       getComputedStyle(document.documentElement).getPropertyValue("--accent")
     );
 
-    // Change theme after a short delay
     setTimeout(() => {
       setTheme(newTheme);
     }, 150);
 
-    // Reset states after animation
     setTimeout(() => {
       setIsChangingReality(false);
       setShowOverlay(false);
     }, 500);
   };
 
-  // Close mobile menu when clicking a link
   const handleMobileNavClick = () => {
     setIsMobileMenuOpen(false);
   };
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 ${styles.theme}`}>
-        <div
-          className={`w-full py-4 px-6 ${styles.transitionBase}`}
-          style={{
-            background: bgIsDark
-              ? "rgba(10, 10, 10, 0.85)"
-              : "rgba(255, 255, 255, 0.85)",
-            boxShadow: "var(--box-shadow)",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
-            borderBottom: `1px solid ${
-              bgIsDark
-                ? "rgba(var(--primary-rgb), 0.2)"
-                : "rgba(var(--text-rgb), 0.1)"
-            }`,
-          }}
-        >
-          <nav className="max-w-7xl mx-auto flex justify-between items-center">
-            {/* Logo and Title */}
-            <div className="flex items-center gap-3">
-              <Link
-                href="/"
-                className={`flex items-center gap-3 ${styles.hoverScale} group`}
-              >
-                <Logo
-                  width={40}
-                  height={40}
-                  className="transition-transform group-hover:scale-110"
-                />
-                <span
-                  className={`text-2xl ${styles.heading}`}
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    letterSpacing: "var(--letter-spacing-heading)",
-                    color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
-                    textShadow:
-                      theme === "rice"
-                        ? "0 2px 4px rgba(0, 32, 91, 0.1)"
-                        : "none",
-                  }}
-                >
-                  Hope Atina
-                </span>
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-lg ${styles.transitionBase}`}
-              aria-label="Toggle mobile menu"
-              style={{
-                color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
-                background: bgIsDark
-                  ? "rgba(var(--primary-rgb), 0.1)"
-                  : "rgba(var(--text-rgb), 0.05)",
-              }}
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {isMobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-6">
-              {navLinks.map((link) => (
+      <header
+        className={`fixed inset-x-0 z-50 pointer-events-none transition-transform duration-300 ${
+          isHeaderVisible ? "translate-y-0" : "-translate-y-[120%]"
+        }`}
+      >
+        <div className="mx-auto max-w-6xl px-3 pt-3 sm:px-4 md:px-6">
+          <div
+            className={`pointer-events-auto overflow-hidden border ${styles.theme}`}
+            style={{
+              background: chromeIsDark
+                ? "rgba(7, 12, 24, 0.78)"
+                : "rgba(255, 255, 255, 0.84)",
+              boxShadow: overHero
+                ? "0 18px 48px rgba(2, 6, 23, 0.22)"
+                : "0 18px 42px rgba(15, 23, 42, 0.08)",
+              backdropFilter: "blur(14px)",
+              WebkitBackdropFilter: "blur(14px)",
+              borderColor: chromeIsDark
+                ? "rgba(148, 163, 184, 0.18)"
+                : "rgba(15, 23, 42, 0.08)",
+              borderRadius: isMobileMenuOpen ? "1.7rem" : "9999px",
+            }}
+          >
+            <nav className="flex items-center justify-between px-4 py-3 md:px-6">
+              <div className="flex items-center gap-3">
                 <Link
-                  key={link.name}
-                  href={link.path}
-                  className={`${styles.transitionBase} ${styles.body} hover:opacity-80`}
-                  style={{
-                    color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
-                    position: "relative",
-                    padding: "0.25rem 0",
-                  }}
+                  href="/"
+                  className={`group flex items-center gap-3 ${styles.hoverScale}`}
                 >
-                  <span className="relative z-10">{link.name}</span>
-                  <span
-                    className={`${styles.transitionBase} absolute inset-x-0 bottom-0 h-0.5 transform scale-x-0 origin-left`}
-                    style={{
-                      background: "var(--accent)",
-                    }}
+                  <Logo
+                    width={36}
+                    height={36}
+                    className="transition-transform group-hover:scale-105"
                   />
-                  <style jsx>{`
-                    a:hover span:last-child {
-                      transform: scaleX(1);
-                    }
-                  `}</style>
-                </Link>
-              ))}
-
-              <div className="ml-4 relative group">
-                <button
-                  className={`rounded-full px-3.5 py-2 ${styles.transitionBase} ${
-                    isChangingReality ? styles.buttonPulse : ""
-                  }`}
-                  style={{
-                    background: bgIsDark
-                      ? "rgba(var(--primary-rgb), 0.08)"
-                      : "rgba(var(--text-rgb), 0.04)",
-                    color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
-                    borderRadius: "var(--border-radius)",
-                    border: `1px solid ${
-                      bgIsDark
-                        ? "rgba(var(--primary-rgb), 0.18)"
-                        : "rgba(var(--text-rgb), 0.12)"
-                    }`,
-                    boxShadow: "none",
-                    transition: "all 0.3s ease",
-                  }}
-                >
-                  <span className="flex items-center gap-2">
-                    <span aria-hidden="true">{themeLabels[theme].icon}</span>
-                    <span className="hidden sm:inline">Theme</span>
-                    <svg
-                      className={`w-4 h-4 ${styles.transitionBase} group-hover:rotate-180`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
+                  <span
+                    className={`text-2xl ${styles.heading}`}
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      letterSpacing: "var(--letter-spacing-heading)",
+                      color: chromeIsDark
+                        ? "var(--text-on-dark)"
+                        : "var(--text)",
+                    }}
+                  >
+                    Hope Atina
                   </span>
-                  <style jsx>{`
-                    button:hover {
-                      transform: translateY(-1px);
-                      ${bgIsDark
-                        ? "background: rgba(var(--primary-rgb), 0.12);"
-                        : "background: rgba(var(--text-rgb), 0.07);"}
-                    }
-                  `}</style>
-                </button>
+                </Link>
+              </div>
 
-                <div
-                  className={`absolute right-0 mt-2 w-56 ${styles.transitionBase} opacity-0 invisible group-hover:opacity-100 group-hover:visible`}
-                  style={{
-                    background: bgIsDark
-                      ? "rgba(10, 10, 10, 0.95)"
-                      : "rgba(255, 255, 255, 0.95)",
-                    boxShadow: "var(--box-shadow)",
-                    borderRadius: "var(--border-radius)",
-                    zIndex: 50,
-                    backdropFilter: "blur(8px)",
-                    WebkitBackdropFilter: "blur(8px)",
-                    border: `1px solid ${
-                      bgIsDark
-                        ? "rgba(var(--primary-rgb), 0.2)"
-                        : "rgba(var(--text-rgb), 0.1)"
-                    }`,
-                  }}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className={`lg:hidden rounded-full p-2 ${styles.transitionBase}`}
+                aria-label="Toggle mobile menu"
+                style={{
+                  color: chromeIsDark ? "var(--text-on-dark)" : "var(--text)",
+                  background: chromeIsDark
+                    ? "rgba(255, 255, 255, 0.06)"
+                    : "rgba(15, 23, 42, 0.05)",
+                }}
+              >
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <div className="py-1">
-                    {(Object.keys(themeLabels) as Theme[]).map((mode) => (
-                      <button
-                        key={mode}
-                        onClick={() => handleThemeChange(mode)}
-                        className={`w-full text-left px-4 py-3 ${styles.transitionBase} ${styles.body} hover:scale-[0.98]`}
-                        style={{
-                          color: bgIsDark
-                            ? "var(--text-on-dark)"
-                            : "var(--text)",
-                          background:
-                            theme === mode
-                              ? bgIsDark
-                                ? "rgba(var(--primary-rgb), 0.2)"
-                                : "rgba(var(--accent-rgb), 0.1)"
-                              : "transparent",
-                          opacity: theme === mode ? 0.9 : 1,
-                        }}
+                  {isMobileMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+
+              <div className="hidden items-center gap-6 lg:flex">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.path}
+                    className={`${styles.transitionBase} ${styles.body} relative py-1 hover:opacity-80`}
+                    style={{
+                      color: chromeIsDark
+                        ? "var(--text-on-dark)"
+                        : "var(--text)",
+                    }}
+                  >
+                    <span className="relative z-10">{link.name}</span>
+                    <span
+                      className={`${styles.transitionBase} absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0`}
+                      style={{ background: "var(--accent)" }}
+                    />
+                    <style jsx>{`
+                      a:hover span:last-child {
+                        transform: scaleX(1);
+                      }
+                    `}</style>
+                  </Link>
+                ))}
+
+                <div className="relative ml-3 group">
+                  <button
+                    className={`rounded-full px-3.5 py-2 ${styles.transitionBase} ${
+                      isChangingReality ? styles.buttonPulse : ""
+                    }`}
+                    style={{
+                      background: chromeIsDark
+                        ? "rgba(255, 255, 255, 0.05)"
+                        : "rgba(15, 23, 42, 0.04)",
+                      color: chromeIsDark
+                        ? "var(--text-on-dark)"
+                        : "var(--text)",
+                      borderRadius: "9999px",
+                      border: `1px solid ${
+                        chromeIsDark
+                          ? "rgba(148, 163, 184, 0.16)"
+                          : "rgba(15, 23, 42, 0.12)"
+                      }`,
+                      boxShadow: "none",
+                    }}
+                  >
+                    <span className="flex items-center gap-2">
+                      <span aria-hidden="true">{themeLabels[theme].icon}</span>
+                      <span className="hidden sm:inline">Theme</span>
+                      <svg
+                        className={`h-4 w-4 ${styles.transitionBase} group-hover:rotate-180`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        <div className="flex items-center gap-3">
-                          <span className="text-xl">
-                            {themeLabels[mode].icon}
-                          </span>
-                          <div className="flex flex-col">
-                            <span className="font-medium">
-                              {mode.charAt(0).toUpperCase() + mode.slice(1)}{" "}
-                              Mode
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </span>
+                  </button>
+
+                  <div
+                    className={`absolute right-0 mt-2 w-56 ${styles.transitionBase} invisible opacity-0 group-hover:visible group-hover:opacity-100`}
+                    style={{
+                      background: chromeIsDark
+                        ? "rgba(7, 12, 24, 0.95)"
+                        : "rgba(255, 255, 255, 0.96)",
+                      boxShadow: "var(--box-shadow)",
+                      borderRadius: "1.25rem",
+                      zIndex: 50,
+                      backdropFilter: "blur(10px)",
+                      WebkitBackdropFilter: "blur(10px)",
+                      border: `1px solid ${
+                        chromeIsDark
+                          ? "rgba(148, 163, 184, 0.18)"
+                          : "rgba(15, 23, 42, 0.08)"
+                      }`,
+                    }}
+                  >
+                    <div className="py-1">
+                      {(Object.keys(themeLabels) as Theme[]).map((mode) => (
+                        <button
+                          key={mode}
+                          onClick={() => handleThemeChange(mode)}
+                          className={`w-full px-4 py-3 text-left ${styles.transitionBase} ${styles.body} hover:scale-[0.98]`}
+                          style={{
+                            color: chromeIsDark
+                              ? "var(--text-on-dark)"
+                              : "var(--text)",
+                            background:
+                              theme === mode
+                                ? chromeIsDark
+                                  ? "rgba(255, 255, 255, 0.06)"
+                                  : "rgba(var(--accent-rgb), 0.1)"
+                                : "transparent",
+                            opacity: theme === mode ? 0.95 : 1,
+                          }}
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="text-xl">
+                              {themeLabels[mode].icon}
                             </span>
-                            <span className="text-sm opacity-75">
-                              {themeLabels[mode].label}
-                            </span>
+                            <div className="flex flex-col">
+                              <span className="font-medium">
+                                {mode.charAt(0).toUpperCase() + mode.slice(1)}{" "}
+                                Mode
+                              </span>
+                              <span className="text-sm opacity-75">
+                                {themeLabels[mode].label}
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      </button>
-                    ))}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </nav>
+            </nav>
 
-          {/* Mobile Navigation Menu */}
-          <div
-            className={`lg:hidden ${
-              isMobileMenuOpen ? "block" : "hidden"
-            } pt-4 pb-3`}
-            style={{
-              background: bgIsDark
-                ? "rgba(10, 10, 10, 0.95)"
-                : "rgba(255, 255, 255, 0.95)",
-              borderTop: `1px solid ${
-                bgIsDark
-                  ? "rgba(var(--primary-rgb), 0.2)"
-                  : "rgba(var(--text-rgb), 0.1)"
-              }`,
-            }}
-          >
-            <div className="space-y-1 px-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.path}
-                  onClick={handleMobileNavClick}
-                  className={`block px-3 py-2 rounded-md ${styles.transitionBase} ${styles.body} hover:bg-opacity-10`}
-                  style={{
-                    color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
-                    background: "transparent",
-                  }}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="pt-4">
-                <div className="px-3">
-                  <p
-                    className="text-sm font-medium"
+            <div
+              className={`lg:hidden ${isMobileMenuOpen ? "block" : "hidden"} border-t px-3 pb-4 pt-3`}
+              style={{
+                borderColor: chromeIsDark
+                  ? "rgba(148, 163, 184, 0.14)"
+                  : "rgba(15, 23, 42, 0.08)",
+              }}
+            >
+              <div className="space-y-1">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.path}
+                    onClick={handleMobileNavClick}
+                    className={`block rounded-2xl px-3 py-2 ${styles.transitionBase} ${styles.body}`}
                     style={{
-                      color: bgIsDark ? "var(--text-on-dark)" : "var(--text)",
+                      color: chromeIsDark
+                        ? "var(--text-on-dark)"
+                        : "var(--text)",
+                      background: "transparent",
                     }}
                   >
-                    Theme
-                  </p>
-                  <div className="mt-2 space-y-1">
-                    {(Object.keys(themeLabels) as Theme[]).map((mode) => (
-                      <button
-                        key={mode}
-                        onClick={() => {
-                          handleThemeChange(mode);
-                          handleMobileNavClick();
-                        }}
-                        className={`w-full text-left px-3 py-2 rounded-md ${styles.transitionBase} ${styles.body}`}
-                        style={{
-                          color: bgIsDark
-                            ? "var(--text-on-dark)"
-                            : "var(--text)",
-                          background:
-                            theme === mode
-                              ? bgIsDark
-                                ? "rgba(var(--primary-rgb), 0.2)"
-                                : "rgba(var(--accent-rgb), 0.1)"
-                              : "transparent",
-                          opacity: theme === mode ? 0.9 : 1,
-                        }}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-xl">
-                            {themeLabels[mode].icon}
-                          </span>
-                          <span>
-                            {mode.charAt(0).toUpperCase() + mode.slice(1)}
-                          </span>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="pt-4">
+                <p
+                  className="px-3 text-sm font-medium"
+                  style={{
+                    color: chromeIsDark ? "var(--text-on-dark)" : "var(--text)",
+                  }}
+                >
+                  Theme
+                </p>
+                <div className="mt-2 space-y-1">
+                  {(Object.keys(themeLabels) as Theme[]).map((mode) => (
+                    <button
+                      key={mode}
+                      onClick={() => {
+                        handleThemeChange(mode);
+                        handleMobileNavClick();
+                      }}
+                      className={`w-full rounded-2xl px-3 py-2 text-left ${styles.transitionBase} ${styles.body}`}
+                      style={{
+                        color: chromeIsDark
+                          ? "var(--text-on-dark)"
+                          : "var(--text)",
+                        background:
+                          theme === mode
+                            ? chromeIsDark
+                              ? "rgba(255, 255, 255, 0.06)"
+                              : "rgba(var(--accent-rgb), 0.1)"
+                            : "transparent",
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-xl">{themeLabels[mode].icon}</span>
+                        <span>
+                          {mode.charAt(0).toUpperCase() + mode.slice(1)}
+                        </span>
+                      </div>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -393,10 +413,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Theme Transition Overlay */}
-      <div
-        className={`theme-transition-overlay ${showOverlay ? "active" : ""}`}
-      />
+      <div className={`theme-transition-overlay ${showOverlay ? "active" : ""}`} />
     </>
   );
 }

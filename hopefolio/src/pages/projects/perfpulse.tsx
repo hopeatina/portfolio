@@ -195,6 +195,25 @@ export default function PerfPulse() {
     },
   ];
 
+  const heroFacts = [
+    { label: "Proof", value: "v1.5.4", detail: "Shipped and iterated" },
+    { label: "Language", value: "8,803 LOC", detail: "Rust across 21 source files" },
+    { label: "Distribution", value: "Homebrew", detail: "One-line install" },
+    { label: "Surface", value: "3 modes", detail: "CLI, web dashboard, TUI" },
+  ];
+
+  const artifactPanel = {
+    title: "Utility-grade product surface",
+    items: [
+      "The CLI is primary: 20+ subcommands that make system state inspectable without leaving the terminal.",
+      "The web dashboard stays inside the Rust binary, avoiding a separate frontend stack and deployment tail.",
+      "Meeting mode turns a product insight into a concrete systems intervention by pausing heavyweight processes.",
+      "Claude explanations augment a practical knowledge base instead of pretending the AI layer is the whole product.",
+    ],
+    footer:
+      "PerfPulse demonstrates a different axis of the portfolio: small, distribution-ready tooling with a clean systems story and a product instinct.",
+  };
+
   return (
     <ProjectLayout
       title="PerfPulse"
@@ -203,6 +222,8 @@ export default function PerfPulse() {
       <ProjectHero
         title="PerfPulse"
         description="A weekend experiment that grew into a real tool. PerfPulse is a Rust CLI that replaces Activity Monitor with 20+ subcommands, a web dashboard served by Axum, and a terminal TUI -- plus Claude-powered process explanations and a meeting mode that actually reclaims CPU before video calls."
+        eyebrow="Flagship tool review"
+        facts={heroFacts}
         tags={[
           "Rust",
           "CLI Tool",
@@ -210,7 +231,7 @@ export default function PerfPulse() {
           "Axum",
           "Claude API",
         ]}
-        image="/images/projects/perfpulse.svg"
+        artifactPanel={artifactPanel}
       />
 
       <TechStack items={techStack} />
@@ -257,7 +278,7 @@ export default function PerfPulse() {
               The dev build is 4.3 MiB. Both start instantly.
             </p>
             <p>
-              Go would have been faster to write initially, but Rust's
+              Go would have been faster to write initially, but Rust&apos;s
               release profile options (opt-level=3, lto=true, codegen-units=1,
               strip=true) produce tighter binaries, and sysinfo is a
               battle-tested crate for cross-platform system metrics. The
@@ -290,7 +311,7 @@ export default function PerfPulse() {
               Why Axum for the web dashboard?
             </h3>
             <p className="text-sm">
-              I considered warp and actix-web, but Axum's tower-based
+              I considered warp and actix-web, but Axum&apos;s tower-based
               middleware and first-class tokio integration made it the
               cleanest fit. The dashboard is a single inline HTML page --
               no React, no npm, no build step. Just Rust serving HTML with
@@ -367,7 +388,7 @@ export default function PerfPulse() {
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div>
             <p className="text-lg mb-4">
-              Getting a Rust binary into someone else's hands is the part
+              Getting a Rust binary into someone else&apos;s hands is the part
               most side projects skip. I wanted a one-liner install, which
               meant Homebrew.
             </p>
@@ -477,7 +498,7 @@ export default function PerfPulse() {
               <li className="flex items-start gap-2">
                 <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-2 bg-primary" />
                 <span>
-                  <strong>SIGSTOP/SIGCONT is underused.</strong> Most "optimizer" tools kill processes. Pausing them preserves state and is completely reversible.
+                  <strong>SIGSTOP/SIGCONT is underused.</strong> Most &quot;optimizer&quot; tools kill processes. Pausing them preserves state and is completely reversible.
                 </span>
               </li>
               <li className="flex items-start gap-2">
@@ -494,6 +515,9 @@ export default function PerfPulse() {
       <ProjectCTA
         demoUrl="https://perf-pulse-web.vercel.app"
         githubUrl="https://github.com/hopeatina/perf-pulse"
+        title="Inspect the tool in use"
+        description="PerfPulse is strongest when judged like a real utility product: install path, runtime footprint, interface clarity, and the system-level decisions behind the UX."
+        note="The value here is not just the Rust implementation. It is the combination of product taste, small-binary discipline, and distribution readiness."
       />
     </ProjectLayout>
   );

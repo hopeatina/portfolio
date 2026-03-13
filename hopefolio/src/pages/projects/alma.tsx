@@ -8,11 +8,8 @@ import FeatureGrid from "@/components/projects/FeatureGrid";
 import ProjectCard from "@/components/projects/ProjectCard";
 import MermaidDiagram from "@/components/projects/MermaidDiagram";
 import StatsDisplay from "@/components/projects/StatsDisplay";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 export default function AlmaCove() {
-  const { themeProps } = useTheme();
-
   const techStack = [
     { category: "Language", technologies: "Python (96.4% of file touches)" },
     { category: "Framework", technologies: "Django, Django REST Framework" },
@@ -194,6 +191,25 @@ export default function AlmaCove() {
     },
   ];
 
+  const heroFacts = [
+    { label: "Proof", value: "999 commits", detail: "Verified across 2.7 years" },
+    { label: "Scope", value: "7 features", detail: "Major production areas shipped" },
+    { label: "Language", value: "96.4% Python", detail: "1,893 of 1,966 file touches" },
+    { label: "Context", value: "HIPAA", detail: "Compliance shaped every implementation choice" },
+  ];
+
+  const artifactPanel = {
+    title: "Clinical systems review",
+    items: [
+      "Automated reassessment backfills, cadence logic, family-based assessment rules, and batch enrollment flows.",
+      "Serializer- and PDF-heavy progress note compliance work with audit-compatible document generation.",
+      "Brellium audit client with retries, re-authentication, and API surfaces documented through DRF.",
+      "Appointment document workflows, RBAC, and feature-flagged rollout patterns across sensitive surfaces.",
+    ],
+    footer:
+      "This page is intentionally framed around operational ownership, compliance churn, and production reliability rather than generic product copy.",
+  };
+
   return (
     <ProjectLayout
       title="Alma (Cove) - Production Backend Engineering"
@@ -202,6 +218,8 @@ export default function AlmaCove() {
       <ProjectHero
         title="Alma (Cove): 2.7 Years of Production Backend"
         description="Core backend contributor on Alma's internal platform, Cove. 999 commits over July 2023 through March 2026, shipping 7 major feature areas in HIPAA-compliant Django/DRF. This page is backed by a verified contribution report -- every number here comes from git history."
+        eyebrow="Production systems review"
+        facts={heroFacts}
         tags={[
           "Python",
           "Django / DRF",
@@ -210,7 +228,7 @@ export default function AlmaCove() {
           "S3",
           "HIPAA",
         ]}
-        image="/images/projects/alma.svg"
+        artifactPanel={artifactPanel}
       />
 
       <TechStack items={techStack} />
@@ -356,7 +374,12 @@ export default function AlmaCove() {
         </div>
       </ProjectSection>
 
-      <ProjectCTA demoUrl="https://helloalma.com" />
+      <ProjectCTA
+        demoUrl="https://helloalma.com"
+        title="Read this work as production evidence"
+        description="The signal here is long-term ownership under clinical and compliance constraints: migration safety, serializer rigor, async workflows, and feature-flagged rollout discipline."
+        note="Alma is the clearest proof that I can own high-stakes backend systems over time, not just prototype AI features."
+      />
     </ProjectLayout>
   );
 }

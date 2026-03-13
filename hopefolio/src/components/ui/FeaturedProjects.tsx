@@ -11,305 +11,183 @@ import { flagshipSystems } from "@/data/homepage";
 export default function FeaturedProjects() {
   const { theme } = useTheme();
   const isDarkTheme = theme === "futuristic";
-  const [primary, alma, perfPulse, openClaw] = flagshipSystems;
+  const [primary, ...secondary] = flagshipSystems;
 
   return (
     <section
-      className="relative overflow-hidden py-24"
+      className="relative overflow-hidden border-y py-24"
       style={{
         background: isDarkTheme
-          ? "var(--color-background)"
-          : "var(--color-surface)",
+          ? "linear-gradient(180deg, rgba(2, 6, 23, 1), rgba(6, 12, 22, 1))"
+          : "linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(12, 18, 33, 0.98))",
+        borderColor: "rgba(148, 163, 184, 0.12)",
       }}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-14 max-w-3xl">
-          <p
-            className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
-            style={{ color: "var(--color-primary)", opacity: 0.9 }}
-          >
+        <div className="mb-12 max-w-3xl">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300/80">
             Flagship systems
           </p>
           <h2
-            className="mb-5 text-4xl font-bold md:text-5xl"
+            className="text-4xl font-bold text-white md:text-5xl"
             style={{
-              color: isDarkTheme ? "var(--color-primary)" : "var(--color-text)",
               fontFamily: "var(--font-heading)",
               letterSpacing: "var(--letter-spacing-tight)",
             }}
           >
             Start with the strongest object
           </h2>
-          <p
-            className="text-lg md:text-xl"
-            style={{
-              color: "var(--color-text)",
-              opacity: isDarkTheme ? 0.84 : 0.76,
-            }}
-          >
-            OrgX is the clearest expression of the work. The other systems matter
-            because they prove the same judgment in production AI, developer
-            tooling, and agent workflow UX.
+          <p className="mt-5 text-lg leading-relaxed text-white/80 md:text-xl">
+            OrgX should feel like the unmistakable center of gravity. The other
+            systems matter because they prove the same operating judgment under
+            production, tooling, and workflow constraints.
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-          <Link href={`/projects/${primary.slug}`} className="group no-underline">
-            <article
-              className="flex h-full flex-col overflow-hidden rounded-[2rem] border"
-              style={{
-                background: isDarkTheme
-                  ? "linear-gradient(180deg, rgba(9, 17, 31, 0.96), rgba(15, 23, 42, 0.9))"
-                  : "rgba(255, 255, 255, 0.96)",
-                borderColor: isDarkTheme
-                  ? "rgba(56, 189, 248, 0.18)"
-                  : "rgba(15, 23, 42, 0.08)",
-                boxShadow: isDarkTheme
-                  ? "0 26px 70px rgba(2, 6, 23, 0.34)"
-                  : "0 20px 48px rgba(15, 23, 42, 0.08)",
-              }}
-            >
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <Image
-                  src={primary.image}
-                  alt={`Primary artifact for ${primary.name}`}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
-              </div>
-
-              <div className="flex flex-1 flex-col px-6 py-6 md:px-8 md:py-7">
+        <Link href={`/projects/${primary.slug}`} className="group block no-underline">
+          <article
+            className="overflow-hidden rounded-[2.5rem] border"
+            style={{
+              background: "rgba(255, 255, 255, 0.03)",
+              borderColor: "rgba(148, 163, 184, 0.12)",
+              boxShadow: "0 30px 100px rgba(2, 6, 23, 0.42)",
+            }}
+          >
+            <div className="grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+              <div className="flex flex-col px-7 py-7 md:px-10 md:py-10">
                 <StateBadge state={primary.state} />
-                <p
-                  className="mt-4 text-[11px] font-semibold uppercase tracking-[0.18em]"
-                  style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                >
+                <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300/78">
                   {primary.meta}
                 </p>
                 <h3
-                  className="mt-3 text-3xl font-semibold md:text-[2.2rem]"
+                  className="mt-3 text-[2.4rem] font-semibold text-white md:text-[3rem]"
                   style={{
-                    color: isDarkTheme
-                      ? "var(--color-primary)"
-                      : "var(--color-text)",
                     fontFamily: "var(--font-heading)",
-                    lineHeight: 0.98,
+                    lineHeight: 0.94,
                   }}
                 >
                   {primary.name}
                 </h3>
-                <p
-                  className="mt-4 max-w-2xl text-base leading-relaxed md:text-lg"
-                  style={{
-                    color: "var(--color-text)",
-                    opacity: isDarkTheme ? 0.88 : 0.78,
-                  }}
-                >
+                <p className="mt-5 max-w-xl text-base leading-relaxed text-white/78 md:text-lg">
                   {primary.summary}
                 </p>
 
-                <div className="mt-6 grid gap-5 border-t border-white/10 pt-5 md:grid-cols-2">
+                <blockquote className="mt-8 border-l border-emerald-300/28 pl-4 text-lg leading-relaxed text-white/88 md:text-xl">
+                  {primary.whyItMatters}
+                </blockquote>
+
+                <div className="mt-auto grid gap-6 border-t border-white/10 pt-7 md:grid-cols-2">
                   <div>
-                    <p
-                      className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                      style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                    >
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300/78">
                       Proof
                     </p>
-                    <p
-                      className="mt-2 text-sm leading-relaxed md:text-[15px]"
-                      style={{
-                        color: "var(--color-text)",
-                        opacity: isDarkTheme ? 0.84 : 0.76,
-                      }}
-                    >
+                    <p className="mt-2 text-sm leading-relaxed text-white/72 md:text-[15px]">
                       {primary.proof}
                     </p>
                   </div>
-
                   <div>
-                    <p
-                      className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                      style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                    >
-                      Why it matters
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300/78">
+                      Surface
                     </p>
-                    <p
-                      className="mt-2 text-sm leading-relaxed md:text-[15px]"
-                      style={{
-                        color: "var(--color-text)",
-                        opacity: isDarkTheme ? 0.84 : 0.76,
-                      }}
-                    >
-                      {primary.whyItMatters}
+                    <p className="mt-2 text-sm leading-relaxed text-white/72 md:text-[15px]">
+                      Workspace-first onboarding, proof-first landing, and command
+                      center review built as one cohesive system.
                     </p>
                   </div>
                 </div>
 
-                <div
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-medium"
-                  style={{ color: "var(--color-primary)" }}
-                >
+                <div className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-emerald-300 md:text-base">
                   <span>Inspect case study</span>
                   <FiArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
                 </div>
               </div>
-            </article>
-          </Link>
 
-          <div className="flex flex-col gap-6">
-            {[alma, perfPulse].map((project) => (
-              <Link
-                key={project.id}
-                href={`/projects/${project.slug}`}
-                className="group no-underline"
-              >
-                <article
-                  className="grid gap-4 overflow-hidden rounded-[1.8rem] border p-4 md:grid-cols-[150px_minmax(0,1fr)] md:p-5"
-                  style={{
-                    background: isDarkTheme
-                      ? "rgba(9, 17, 31, 0.86)"
-                      : "rgba(255, 255, 255, 0.94)",
-                    borderColor: isDarkTheme
-                      ? "rgba(148, 163, 184, 0.14)"
-                      : "rgba(15, 23, 42, 0.08)",
-                    boxShadow: isDarkTheme
-                      ? "0 18px 46px rgba(2, 6, 23, 0.26)"
-                      : "0 18px 40px rgba(15, 23, 42, 0.06)",
-                  }}
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[1.2rem]">
-                    <Image
-                      src={project.image}
-                      alt={`Artifact preview for ${project.name}`}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      sizes="(max-width: 768px) 100vw, 240px"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
-                  </div>
-
-                  <div className="flex flex-col">
-                    <StateBadge state={project.state} />
-                    <p
-                      className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em]"
-                      style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                    >
-                      {project.meta}
-                    </p>
-                    <h3
-                      className="mt-2 text-2xl font-semibold"
-                      style={{
-                        color: "var(--color-text)",
-                        fontFamily: "var(--font-heading)",
-                      }}
-                    >
-                      {project.name}
-                    </h3>
-                    <p
-                      className="mt-3 text-sm leading-relaxed md:text-[15px]"
-                      style={{
-                        color: "var(--color-text)",
-                        opacity: isDarkTheme ? 0.84 : 0.76,
-                      }}
-                    >
-                      {project.summary}
-                    </p>
-                    <p
-                      className="mt-4 text-sm leading-relaxed"
-                      style={{
-                        color: "var(--color-text)",
-                        opacity: isDarkTheme ? 0.72 : 0.7,
-                      }}
-                    >
-                      {project.proof}
-                    </p>
-                    <div
-                      className="mt-5 inline-flex items-center gap-2 text-sm font-medium"
-                      style={{ color: "var(--color-primary)" }}
-                    >
-                      <span>Inspect case study</span>
-                      <FiArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
-                    </div>
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <Link href={`/projects/${openClaw.slug}`} className="group no-underline block">
-          <article
-            className="mt-6 grid gap-4 overflow-hidden rounded-[1.75rem] border px-5 py-5 md:grid-cols-[120px_minmax(0,1fr)_220px] md:items-center md:px-6"
-            style={{
-              background: isDarkTheme
-                ? "rgba(255, 255, 255, 0.03)"
-                : "rgba(255, 255, 255, 0.9)",
-              borderColor: isDarkTheme
-                ? "rgba(148, 163, 184, 0.12)"
-                : "rgba(15, 23, 42, 0.08)",
-            }}
-          >
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[1rem]">
-              <Image
-                src={openClaw.image}
-                alt={`Artifact preview for ${openClaw.name}`}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                sizes="160px"
-              />
-            </div>
-
-            <div>
-              <StateBadge state={openClaw.state} />
-              <h3
-                className="mt-3 text-2xl font-semibold"
-                style={{
-                  color: "var(--color-text)",
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                {openClaw.name}
-              </h3>
-              <p
-                className="mt-2 text-sm leading-relaxed md:text-[15px]"
-                style={{
-                  color: "var(--color-text)",
-                  opacity: isDarkTheme ? 0.84 : 0.76,
-                }}
-              >
-                {openClaw.summary}
-              </p>
-            </div>
-
-            <div>
-              <p
-                className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                style={{ color: "var(--color-primary)", opacity: 0.82 }}
-              >
-                {openClaw.meta}
-              </p>
-              <p
-                className="mt-2 text-sm leading-relaxed"
-                style={{
-                  color: "var(--color-text)",
-                  opacity: isDarkTheme ? 0.74 : 0.7,
-                }}
-              >
-                {openClaw.proof}
-              </p>
               <div
-                className="mt-4 inline-flex items-center gap-2 text-sm font-medium"
-                style={{ color: "var(--color-primary)" }}
+                className="relative min-h-[22rem] border-t border-white/10 lg:min-h-full lg:border-l lg:border-t-0"
+                style={{
+                  background:
+                    "radial-gradient(circle at top, rgba(16, 185, 129, 0.18), transparent 28%), linear-gradient(180deg, rgba(2, 6, 23, 0.24), rgba(2, 6, 23, 0.62))",
+                }}
               >
-                <span>Inspect workflow</span>
-                <FiArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
+                <Image
+                  src={primary.image}
+                  alt={`Primary artifact for ${primary.name}`}
+                  fill
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.015]"
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent" />
+                <div className="absolute inset-x-4 bottom-4 rounded-[1.35rem] border border-white/10 bg-slate-950/72 px-4 py-4 backdrop-blur-md md:inset-x-6 md:bottom-6 md:px-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300/78">
+                    Featured artifact
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/78 md:text-[15px]">
+                    The landing experience itself acts as a proof surface: a
+                    command center preview, live output framing, and receipts
+                    before setup.
+                  </p>
+                </div>
               </div>
             </div>
           </article>
         </Link>
+
+        <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.9fr)]">
+          {secondary.map((project) => (
+            <Link
+              key={project.id}
+              href={`/projects/${project.slug}`}
+              className="group no-underline"
+            >
+              <article
+                className="flex h-full flex-col overflow-hidden rounded-[1.7rem] border"
+                style={{
+                  background:
+                    project.id === "openclaw"
+                      ? "rgba(255, 255, 255, 0.04)"
+                      : "rgba(255, 255, 255, 0.06)",
+                  borderColor: "rgba(148, 163, 184, 0.12)",
+                }}
+              >
+                <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10">
+                  <Image
+                    src={project.image}
+                    alt={`Artifact preview for ${project.name}`}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    sizes="(max-width: 1024px) 100vw, 32vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
+                </div>
+
+                <div className="flex flex-1 flex-col px-5 py-5 md:px-6">
+                  <StateBadge state={project.state} />
+                  <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300/78">
+                    {project.meta}
+                  </p>
+                  <h3
+                    className="mt-3 text-2xl font-semibold text-white"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {project.name}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/72 md:text-[15px]">
+                    {project.summary}
+                  </p>
+                  <p className="mt-5 text-sm leading-relaxed text-white/64">
+                    {project.proof}
+                  </p>
+                  <div className="mt-auto pt-6 text-sm font-medium text-emerald-300">
+                    <span className="inline-flex items-center gap-2">
+                      Inspect case study
+                      <FiArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

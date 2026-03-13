@@ -146,6 +146,25 @@ export default function OpenClaw() {
     },
   ];
 
+  const heroFacts = [
+    { label: "Proof", value: "558 commits", detail: "Sustained plugin development" },
+    { label: "Codebase", value: "134K+ LOC", detail: "Backend + dashboard" },
+    { label: "Tooling", value: "30 MCP tools", detail: "Registered and callable" },
+    { label: "Resilience", value: "Offline-first", detail: "SQLite outbox with replay" },
+  ];
+
+  const artifactPanel = {
+    title: "Mission control surface",
+    items: [
+      "A local MCP bridge that auto-configures Claude, Codex, and Cursor against one endpoint.",
+      "Task queue and lane states designed for deterministic resume after drops, crashes, and reconnects.",
+      "SSE-first dashboard with polling fallback, so the orchestration surface never goes blind.",
+      "Background services for sync, watchdog, supervision, and auto-continue instead of manual babysitting.",
+    ],
+    footer:
+      "The point of this plugin is not ornament. It is local control, survivable state, and a browser-native way to reason about agent work.",
+  };
+
   return (
     <ProjectLayout
       title="OpenClaw Plugin"
@@ -154,6 +173,8 @@ export default function OpenClaw() {
       <ProjectHero
         title="OpenClaw Plugin"
         description="An OpenClaw agent plugin that serves a full web dashboard over HTTP, giving developers a single pane of glass for multi-agent orchestration. 30 MCP tools, SSE-streamed UI, SQLite offline-first outbox, and a custom zero-dependency HTTP router -- all in 134K lines of TypeScript across 558 commits."
+        eyebrow="Flagship plugin review"
+        facts={heroFacts}
         tags={[
           "Agent Plugin",
           "MCP Protocol",
@@ -161,7 +182,7 @@ export default function OpenClaw() {
           "TypeScript",
           "SQLite",
         ]}
-        image="/images/projects/openclaw.svg"
+        artifactPanel={artifactPanel}
       />
 
       <TechStack items={techStack} />
@@ -189,7 +210,7 @@ export default function OpenClaw() {
                 /orgx/mcp
               </code>{" "}
               without writing custom integration code. The plugin auto-configures
-              each agent's MCP config file on first run.
+              each agent&apos;s MCP config file on first run.
             </p>
           </div>
           <ProjectCard variant="secondary">
@@ -386,7 +407,12 @@ export default function OpenClaw() {
         </div>
       </ProjectSection>
 
-      <ProjectCTA githubUrl="https://github.com/hopeatina" />
+      <ProjectCTA
+        githubUrl="https://github.com/hopeatina"
+        title="Inspect the plugin architecture"
+        description="This case study matters because it shows the interaction layer around agent systems: queueing, local control, resilience, dashboard review, and protocol-level bridging."
+        note="The plugin is the connective tissue between abstract orchestration ideas and the actual surfaces a developer uses to supervise work."
+      />
     </ProjectLayout>
   );
 }

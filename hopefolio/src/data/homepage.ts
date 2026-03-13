@@ -65,11 +65,11 @@ export const heroSignals: HeroSignal[] = [
 export const focusSystem: FocusSystem = {
   name: "OrgX",
   state: "Ready for review",
-  title: "Trust-governed orchestration control plane",
+  title: "OrgX orchestration command center",
   summary:
     "A multi-agent platform that routes work, holds memory, and keeps human judgment at the right boundaries instead of pretending every decision can be automated.",
   proof:
-    "1,270+ commits across a 7-repo ecosystem covering orchestration, memory, scoring, approvals, and agent tooling.",
+    "1,270+ commits across a 7-repo ecosystem spanning workspace-first onboarding, live command center review, public proof surfaces, and agent tooling.",
   checkpoints: [
     {
       label: "Current review",
@@ -95,7 +95,8 @@ export const reviewQueue: ReviewQueueItem[] = [
     title: "Clinical AI systems under real constraints",
     summary:
       "HIPAA-compliant reassessment and documentation systems that improved therapist adoption while staying operationally trustworthy.",
-    proof: "999 commits across 7 major feature areas over 2.7 years. HIPAA-compliant production.",
+    proof:
+      "999 commits across 7 major feature areas over 2.7 years. HIPAA-compliant production with audit and document workflows.",
     actionLabel: "Review production system",
     href: "/projects/alma",
   },
@@ -127,13 +128,13 @@ export const flagshipSystems: FlagshipSystem[] = [
     name: "OrgX",
     slug: "orgx",
     state: "Ready for review",
-    image: "/images/projects/orgx.jpg",
+    image: "/images/projects/orgx-home.png",
     summary:
       "Multi-agent orchestration with MCP integrations, trust governance, approval flows, and durable workflows.",
     proof: "1,270+ commits across the platform. 7 repos spanning memory, scoring, orchestration, and tooling.",
     whyItMatters:
       "This is the clearest expression of how I think about agent systems: delegate aggressively, keep provenance visible, and reserve judgment for the moments that matter.",
-    meta: "Multi-agent orchestration · MCP protocol · governance",
+    meta: "Multi-agent orchestration · command center · proof surfaces",
   },
   {
     id: "alma",

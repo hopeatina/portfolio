@@ -13,54 +13,63 @@ export default function WhatNeedsAttention() {
 
   return (
     <section
-      className="relative overflow-hidden py-20 md:py-24"
+      className="relative overflow-hidden border-t py-24"
       style={{
         background: isDarkTheme
-          ? "var(--color-background)"
+          ? "rgba(2, 6, 23, 0.98)"
           : "var(--color-surface)",
-        borderTop: "1px solid var(--color-border)",
+        borderColor: "var(--color-border)",
       }}
     >
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-14">
-        <div>
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p
+              className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
+              style={{ color: "var(--color-primary)", opacity: 0.9 }}
+            >
+              Next proof surfaces
+            </p>
+            <h2
+              className="text-4xl font-bold md:text-5xl"
+              style={{
+                color: isDarkTheme
+                  ? "var(--color-primary)"
+                  : "var(--color-text)",
+                fontFamily: "var(--font-heading)",
+                letterSpacing: "var(--letter-spacing-tight)",
+              }}
+            >
+              Inspect the rest of the system story
+            </h2>
+          </div>
+
           <p
-            className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
-            style={{ color: "var(--color-primary)", opacity: 0.9 }}
-          >
-            Supporting review queue
-          </p>
-          <h2
-            className="mb-4 text-4xl font-bold md:text-5xl"
-            style={{
-              color: isDarkTheme ? "var(--color-primary)" : "var(--color-text)",
-              fontFamily: "var(--font-heading)",
-              letterSpacing: "var(--letter-spacing-tight)",
-            }}
-          >
-            Systems adjacent to the core story
-          </h2>
-          <p
-            className="text-lg md:text-xl"
+            className="max-w-2xl text-base leading-relaxed md:text-lg"
             style={{
               color: "var(--color-text)",
-              opacity: isDarkTheme ? 0.84 : 0.76,
+              opacity: isDarkTheme ? 0.76 : 0.72,
             }}
           >
-            These are the next surfaces to inspect once the orchestration thesis
-            is clear: real production AI, developer tooling, and agent workflow UX.
+            Production AI, local tooling, and browser-native supervision surfaces
+            that reinforce the same operating thesis without repeating the same
+            card pattern.
           </p>
         </div>
 
         <div
-          className="rounded-[2rem] border px-5 py-2 md:px-8"
+          className="overflow-hidden rounded-[2.1rem] border"
           style={{
-            background: isDarkTheme
-              ? "rgba(10, 18, 32, 0.42)"
-              : "rgba(255, 255, 255, 0.72)",
             borderColor: isDarkTheme
-              ? "rgba(148, 163, 184, 0.14)"
+              ? "rgba(56, 189, 248, 0.14)"
               : "rgba(15, 23, 42, 0.08)",
-            backdropFilter: "blur(10px)",
+            background: isDarkTheme
+              ? "linear-gradient(180deg, rgba(8, 15, 29, 0.94), rgba(5, 10, 20, 0.94))"
+              : "rgba(255, 255, 255, 0.76)",
+            boxShadow: isDarkTheme
+              ? "0 20px 70px rgba(2, 6, 23, 0.38)"
+              : "0 18px 42px rgba(15, 23, 42, 0.06)",
+            backdropFilter: "blur(12px)",
           }}
         >
           {reviewQueue.map((item, index) => (
@@ -70,7 +79,7 @@ export default function WhatNeedsAttention() {
               className="group no-underline block"
             >
               <article
-                className={`grid gap-4 py-6 transition-colors duration-200 md:grid-cols-[minmax(0,1fr)_220px_auto] md:items-start md:gap-6 ${
+                className={`grid gap-5 px-5 py-6 transition-colors duration-200 md:grid-cols-[88px_minmax(0,1.45fr)_minmax(0,0.95fr)_auto] md:px-7 md:py-7 ${
                   index !== reviewQueue.length - 1 ? "border-b" : ""
                 }`}
                 style={{
@@ -80,22 +89,41 @@ export default function WhatNeedsAttention() {
                         ? "rgba(148, 163, 184, 0.12)"
                         : "rgba(15, 23, 42, 0.08)"
                       : "transparent",
+                  background:
+                    index === 0
+                      ? isDarkTheme
+                        ? "rgba(255, 255, 255, 0.02)"
+                        : "rgba(255, 255, 255, 0.24)"
+                      : "transparent",
                 }}
               >
-                <div>
-                  <StateBadge state={item.state} />
+                <div className="flex items-center justify-between gap-3 md:block">
                   <p
-                    className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em]"
+                    className="text-[2rem] font-semibold md:text-[2.4rem]"
                     style={{
                       color: "var(--color-primary)",
-                      opacity: 0.85,
+                      fontFamily: "var(--font-heading)",
+                      lineHeight: 0.92,
                     }}
+                  >
+                    0{index + 1}
+                  </p>
+                  <StateBadge state={item.state} className="md:mt-4" />
+                </div>
+
+                <div>
+                  <p
+                    className="text-[11px] font-semibold uppercase tracking-[0.18em]"
+                    style={{ color: "var(--color-primary)", opacity: 0.82 }}
                   >
                     {item.name}
                   </p>
                   <h3
-                    className="mt-2 text-2xl font-semibold leading-tight"
-                    style={{ color: "var(--color-text)" }}
+                    className="mt-2 text-2xl font-semibold leading-tight md:text-[2rem]"
+                    style={{
+                      color: "var(--color-text)",
+                      fontFamily: "var(--font-heading)",
+                    }}
                   >
                     {item.title}
                   </h3>
@@ -103,7 +131,7 @@ export default function WhatNeedsAttention() {
                     className="mt-3 max-w-2xl text-sm leading-relaxed md:text-base"
                     style={{
                       color: "var(--color-text)",
-                      opacity: isDarkTheme ? 0.84 : 0.76,
+                      opacity: isDarkTheme ? 0.84 : 0.74,
                     }}
                   >
                     {item.summary}
@@ -113,18 +141,15 @@ export default function WhatNeedsAttention() {
                 <div>
                   <p
                     className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                    style={{
-                      color: "var(--color-primary)",
-                      opacity: 0.82,
-                    }}
+                    style={{ color: "var(--color-primary)", opacity: 0.82 }}
                   >
-                    Proof
+                    Receipt
                   </p>
                   <p
                     className="mt-2 text-sm leading-relaxed md:text-[15px]"
                     style={{
                       color: "var(--color-text)",
-                      opacity: isDarkTheme ? 0.84 : 0.74,
+                      opacity: isDarkTheme ? 0.82 : 0.72,
                     }}
                   >
                     {item.proof}
@@ -132,7 +157,7 @@ export default function WhatNeedsAttention() {
                 </div>
 
                 <div
-                  className="inline-flex items-center gap-2 text-sm font-medium"
+                  className="inline-flex items-center gap-2 self-start pt-1 text-sm font-medium"
                   style={{ color: "var(--color-primary)" }}
                 >
                   <span>{item.actionLabel}</span>

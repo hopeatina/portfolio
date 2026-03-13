@@ -48,10 +48,10 @@ export default function AboutLayout({ children }: AboutLayoutProps) {
   return (
     <>
       <Head>
-        <title>About | Emerging Hope</title>
+        <title>About | Hope Atina</title>
         <meta
           name="description"
-          content="Learn about my journey as a Cameroonian-Houstonian-Rice engineer and creative"
+          content="Learn about Hope Atina's background in agent infrastructure, production AI systems, and interdisciplinary product engineering."
         />
       </Head>
 

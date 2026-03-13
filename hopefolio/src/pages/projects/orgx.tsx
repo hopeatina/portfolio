@@ -8,11 +8,8 @@ import FeatureGrid from "@/components/projects/FeatureGrid";
 import ProjectCard from "@/components/projects/ProjectCard";
 import MermaidDiagram from "@/components/projects/MermaidDiagram";
 import StatsDisplay from "@/components/projects/StatsDisplay";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 export default function OrgX() {
-  const { themeProps } = useTheme();
-
   const techStack = [
     {
       category: "Frontend",
@@ -237,6 +234,13 @@ export default function OrgX() {
     "Composite Scoring Engine: Multi-signal quality evaluation feeding into workstream prioritization and trust calibration",
   ];
 
+  const heroFacts = [
+    { label: "Proof", value: "1,270+ commits", detail: "Across the OrgX ecosystem" },
+    { label: "System", value: "7 repos", detail: "Web app, MCP servers, workflows, shared libs" },
+    { label: "Tooling", value: "131+ tools", detail: "Across 22 MCP servers" },
+    { label: "State", value: "Live", detail: "Running at useorgx.com" },
+  ];
+
   return (
     <ProjectLayout
       title="OrgX"
@@ -245,6 +249,8 @@ export default function OrgX() {
       <ProjectHero
         title="OrgX"
         description="A multi-agent orchestration platform I built solo over 15 months. 22 MCP servers with 131+ tools, trust-based governance with risk tiers, durable workflows via Inngest, and organizational memory with semantic search. 874K lines of code across a 7-repo ecosystem, live in production at useorgx.com."
+        eyebrow="Flagship system review"
+        facts={heroFacts}
         tags={[
           "Multi-Agent Orchestration",
           "MCP Protocol",
@@ -252,7 +258,9 @@ export default function OrgX() {
           "Inngest Workflows",
           "Supabase",
         ]}
-        image="/images/projects/orgx.jpg"
+        image="/images/projects/orgx-home.png"
+        artifactLabel="Command center artifact"
+        artifactCaption="The OrgX command center is used here as live proof: a real orchestration surface where agent work, governance, and review states converge."
       />
 
       <TechStack items={techStack} />
@@ -399,6 +407,9 @@ export default function OrgX() {
       <ProjectCTA
         demoUrl="https://useorgx.com"
         githubUrl="https://github.com/hopeatina"
+        title="Inspect OrgX in production"
+        description="The strongest evidence for OrgX is the live command center and the surrounding ecosystem code. Review both to understand how the orchestration model actually behaves."
+        note="The public site is the visible surface. The larger proof is the repo ecosystem, the workflow layer, and the MCP integrations behind it."
       />
     </ProjectLayout>
   );
