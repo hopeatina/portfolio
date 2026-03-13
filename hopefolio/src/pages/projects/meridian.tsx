@@ -93,7 +93,7 @@ export default function Meridian() {
       description:
         "Live dashboard powered by Convex and WebSocket for instant visibility into signal performance",
       items: [
-        "Convex reactive queries for zero-latency dashboard updates",
+        "Convex reactive queries for real-time dashboard updates",
         "WebSocket push for real-time P&L and position tracking",
         "TimescaleDB continuous aggregates for historical analytics",
         "Customizable chart views with TailwindCSS-styled components",
@@ -212,10 +212,10 @@ export default function Meridian() {
             </h3>
             <p>
               TimescaleDB's hypertables and continuous aggregates enable
-              efficient querying across millions of time-series data points.
-              Combined with Convex's reactive subscriptions, the dashboard
-              delivers both historical depth and real-time responsiveness
-              for informed trading decisions.
+              efficient querying across time-series data. Combined with
+              Convex's reactive subscriptions, the dashboard delivers both
+              historical depth and real-time responsiveness for informed
+              trading decisions.
             </p>
           </ProjectCard>
         </div>

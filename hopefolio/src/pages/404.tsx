@@ -11,6 +11,7 @@ export default function Custom404() {
     <>
       <Head>
         <title>404 - Page Not Found | Hope Atina</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
       <div
         className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center"

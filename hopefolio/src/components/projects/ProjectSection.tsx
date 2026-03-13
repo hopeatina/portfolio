@@ -15,15 +15,12 @@ export default function ProjectSection({
   const { theme } = useTheme();
 
   return (
-    <section className={`my-12 project-section ${className}`}>
-      {/* Section Title */}
-      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-heading">
+    <section className={`project-section py-2 ${className}`}>
+      <h2 className="mb-6 text-3xl font-semibold tracking-[-0.04em] text-heading md:text-4xl">
         {title}
       </h2>
-
-      {/* Content */}
       <div
-        className={`prose prose-lg max-w-none text-body ${
+        className={`prose prose-lg max-w-none text-body [&>p:first-child]:mt-0 ${
           theme === "futuristic" ? "project-content" : ""
         }`}
       >

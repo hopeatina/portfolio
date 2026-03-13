@@ -167,10 +167,10 @@ Configuration Management ←―――――――――――――――――�
 
   const innovationAchievements = [
     "LLM-Powered Code Generation: Scalable AI-driven code generation with multi-provider support",
-    "OpenAPI to MCP Bridge: Novel protocol translation enabling traditional APIs to work with AI agents",
+    "OpenAPI to MCP Bridge: Protocol translation enabling traditional APIs to work with AI agents",
     "Complete Developer Ecosystem: End-to-end solution from CLI tool to hosted deployment platform",
-    "Advanced Prompt Engineering: Sophisticated prompt optimization for reliable code generation output",
-    "Production-Ready Output: Generated code requires zero manual editing for immediate deployment",
+    "Advanced Prompt Engineering: Prompt optimization for reliable code generation output",
+    "Minimal Editing for Simple APIs: Generated code for straightforward APIs requires little manual adjustment",
   ];
 
   const codeGenerationDiagram = `
@@ -295,8 +295,8 @@ Configuration Management ←―――――――――――――――――�
             "MCP-Gen bridges traditional REST APIs with the emerging LLM tool
             ecosystem. It handles OpenAPI parsing, prompt-driven code
             generation, schema validation, and Docker packaging in a single
-            pipeline -- from spec to deployed MCP server with no manual
-            editing required."
+            pipeline -- from spec to deployed MCP server with minimal manual
+            editing for simple APIs."
           </p>
         </ProjectCard>
       </ProjectSection>
@@ -367,22 +367,20 @@ Configuration Management ←―――――――――――――――――�
                 fontFamily: themeProps.typography.headingFont,
               }}
             >
-              Market Positioning
+              Why MCP-Gen?
             </h3>
             <p>
-              As one of the first comprehensive tools in the MCP ecosystem,
-              MCP-Gen positions itself at the forefront of AI agent development,
-              providing essential infrastructure for the next generation of
-              LLM-powered applications.
+              As MCP adoption grows, developers need a way to expose existing
+              REST APIs as MCP tools without rewriting their services. MCP-Gen
+              automates this translation, generating complete server
+              implementations from OpenAPI specs with 5 packages, a web UI,
+              and 87 commits of active development.
             </p>
           </ProjectCard>
         </div>
       </ProjectSection>
 
-      <ProjectCTA
-        demoUrl="https://mcpify.ai"
-        githubUrl="https://github.com/hopeatina/mcp-gen"
-      />
+      <ProjectCTA githubUrl="https://github.com/hopeatina/mcp-gen" />
     </ProjectLayout>
   );
 }

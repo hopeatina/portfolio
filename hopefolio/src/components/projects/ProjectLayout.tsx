@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 interface ProjectLayoutProps {
   children: ReactNode;
@@ -14,8 +13,6 @@ export default function ProjectLayout({
   title,
   description,
 }: ProjectLayoutProps) {
-  const { theme } = useTheme();
-
   return (
     <>
       <Head>
@@ -24,21 +21,20 @@ export default function ProjectLayout({
       </Head>
 
       <main className="min-h-screen bg-background text-body">
-        {/* Main Content Container */}
-        <div className="container mx-auto px-4 py-24">
-          {/* Back Navigation */}
+        <div className="mx-auto max-w-[1180px] px-4 pb-24 pt-24 md:px-6 md:pt-28">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 mb-8 text-link hover:text-link-hover transition-colors group"
+            className="mb-10 inline-flex items-center gap-3 rounded-full border px-4 py-2 text-sm font-medium text-link shadow-[0_18px_50px_-36px_rgba(15,23,42,0.28)] transition-colors hover:text-link-hover"
+            style={{
+              background: "var(--card-bg)",
+              borderColor: "var(--border-color)",
+            }}
           >
-            <span className="transition-transform group-hover:-translate-x-1">
-              ←
-            </span>
+            <span aria-hidden="true">←</span>
             <span>Back to Projects</span>
           </Link>
 
-          {/* Project Content */}
-          {children}
+          <div className="space-y-14 md:space-y-16">{children}</div>
         </div>
       </main>
     </>

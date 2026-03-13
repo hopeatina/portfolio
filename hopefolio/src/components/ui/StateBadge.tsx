@@ -9,28 +9,17 @@ interface StateBadgeProps {
   className?: string;
 }
 
-const statePalette: Record<
-  ReviewState,
-  { background: string; border: string; color: string }
-> = {
+const statePalette: Record<ReviewState, { color: string }> = {
   "Ready for review": {
-    background: "rgba(245, 158, 11, 0.14)",
-    border: "rgba(245, 158, 11, 0.4)",
     color: "#FBBF24",
   },
   "Shipped in production": {
-    background: "rgba(16, 185, 129, 0.14)",
-    border: "rgba(16, 185, 129, 0.38)",
     color: "#34D399",
   },
   "Live tool": {
-    background: "rgba(59, 130, 246, 0.14)",
-    border: "rgba(59, 130, 246, 0.38)",
     color: "#60A5FA",
   },
   Experimental: {
-    background: "rgba(148, 163, 184, 0.14)",
-    border: "rgba(148, 163, 184, 0.35)",
     color: "#CBD5E1",
   },
 };
@@ -46,13 +35,10 @@ export default function StateBadge({
 
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium tracking-[0.14em] uppercase ${className}`}
+      className={`inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] ${className}`}
       style={{
-        background: isDarkTheme ? colors.background : "rgba(255, 255, 255, 0.78)",
-        border: `1px solid ${colors.border}`,
         color: isDarkTheme ? colors.color : "var(--color-text)",
-        boxShadow: isDarkTheme ? "none" : "0 8px 20px rgba(15, 23, 42, 0.06)",
-        backdropFilter: "blur(10px)",
+        opacity: isDarkTheme ? 1 : 0.72,
       }}
     >
       <span

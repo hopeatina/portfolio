@@ -25,7 +25,7 @@ export default function BodyFX() {
       category: "Performance",
       technologies: "CUDA GPU Acceleration, Batch Processing",
     },
-    { category: "Distribution", technologies: "PyPI Package, CLI Tools" },
+    { category: "Distribution", technologies: "CLI Tools, pip installable" },
   ];
 
   const mainFeatures = [
@@ -52,14 +52,14 @@ export default function BodyFX() {
       ],
     },
     {
-      title: "OBS Studio Plugin",
+      title: "OBS Studio Plugin (Planned)",
       description:
-        "Real-time background removal for live streaming without green screens",
+        "Early-stage exploration of real-time background removal for live streaming — currently a stub with basic error handling",
       items: [
-        "Native OBS plugin for seamless integration",
-        "Real-time segmentation with minimal latency",
-        "No green screen required - works with any background",
-        "Custom blur and replacement background options",
+        "Initial C++ error handler scaffolding for OBS plugin architecture",
+        "Planned: SAM2-based real-time segmentation for streaming",
+        "Planned: Background blur and replacement options",
+        "Note: OBS integration is not yet functional — After Effects integration is the primary focus",
       ],
     },
     {
@@ -113,15 +113,15 @@ export default function BodyFX() {
     },
     {
       title: "Easy Installation",
-      description: "One-line pip install with automatic dependency management",
+      description: "pip installable with automatic dependency management",
     },
   ];
 
   const keyMetrics = [
     { value: "3", label: "Model Variants", description: "Small to Large" },
-    { value: "60fps", label: "Real-Time", description: "OBS streaming" },
-    { value: "10x", label: "Faster", description: "Than manual roto" },
-    { value: "2", label: "Integrations", description: "AE + OBS" },
+    { value: "7", label: "ExtendScript Files", description: "AE integration" },
+    { value: "SAM2", label: "AI Backbone", description: "Meta's segmentation model" },
+    { value: "AE", label: "Integration", description: "After Effects shape layers" },
   ];
 
   return (
@@ -131,14 +131,14 @@ export default function BodyFX() {
     >
       <ProjectHero
         title="BodyFX"
-        description="Transform video production and live streaming with AI-powered segmentation. BodyFX uses Meta's SAM2 to automatically detect and track subjects - from automated rotoscoping in After Effects to real-time background removal in OBS Studio, all without green screens."
+        description="AI-powered video segmentation using Meta's SAM2 for automated rotoscoping in After Effects. BodyFX automatically detects and tracks subjects frame-by-frame, exporting segmentation data as animatable shape layers via 7 ExtendScript (.jsx) files."
         tags={[
           "Computer Vision",
           "Video Effects",
           "Python",
           "SAM2",
           "After Effects",
-          "OBS Plugin",
+          "ExtendScript",
         ]}
         image="/images/projects/bodyfx.svg"
       />
@@ -160,8 +160,8 @@ export default function BodyFX() {
           <p>
             Manual rotoscoping in video production is extremely time-intensive,
             often requiring hours of frame-by-frame work. BodyFX automates this
-            process using SAM2-based AI segmentation, reducing what used to take hours
-            into minutes while maintaining professional quality.
+            process using SAM2-based AI segmentation, significantly reducing the
+            time required while maintaining professional quality.
           </p>
         </ProjectCard>
 
@@ -170,10 +170,9 @@ export default function BodyFX() {
             <h4 className="text-lg font-semibold mb-3">Use Cases</h4>
             <ul className="space-y-2">
               <li>• Visual effects and compositing</li>
-              <li>• Live streaming without green screens</li>
-              <li>• Background replacement for video calls</li>
               <li>• Motion graphics integration</li>
               <li>• Subject isolation for color grading</li>
+              <li>• Background replacement in post-production</li>
               <li>• Virtual production workflows</li>
             </ul>
           </ProjectCard>
@@ -181,11 +180,11 @@ export default function BodyFX() {
           <ProjectCard variant="accent">
             <h4 className="text-lg font-semibold mb-3">Key Benefits</h4>
             <ul className="space-y-2">
-              <li>• 10x faster than manual rotoscoping</li>
-              <li>• Frame-accurate tracking</li>
+              <li>• Significantly faster than manual rotoscoping</li>
+              <li>• Frame-accurate tracking via SAM2</li>
               <li>• No training data required</li>
               <li>• Works with any video content</li>
-              <li>• Professional After Effects integration</li>
+              <li>• Professional After Effects integration (7 .jsx files)</li>
             </ul>
           </ProjectCard>
         </div>
@@ -243,70 +242,26 @@ export default function BodyFX() {
         </div>
       </ProjectSection>
 
-      <ProjectSection title="OBS Studio Plugin - Real-Time Streaming">
+      <ProjectSection title="OBS Studio Plugin (Early Stage)">
         <p className="text-lg mb-8">
-          The BodyFX OBS plugin brings professional-quality background removal
-          to live streaming, eliminating the need for expensive green screens or
-          complex lighting setups.
+          An OBS plugin for real-time background removal is planned but currently
+          in early exploration. Only a basic C++ error handler file exists as
+          scaffolding. The primary focus of BodyFX is the After Effects
+          segmentation pipeline described above.
         </p>
-
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <ProjectCard variant="default">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
-              Plugin Features
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                • <strong>Real-Time Processing:</strong> Sub-100ms latency
-                segmentation
-              </li>
-              <li>
-                • <strong>Background Options:</strong> Blur, replace, or remove
-                entirely
-              </li>
-              <li>
-                • <strong>Edge Refinement:</strong> Smooth edges with
-                anti-aliasing
-              </li>
-              <li>
-                • <strong>Performance Modes:</strong> Balance quality vs. speed
-              </li>
-              <li>
-                • <strong>Multi-Source:</strong> Process multiple video sources
-              </li>
-            </ul>
-          </ProjectCard>
-
-          <ProjectCard variant="accent">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
-              Perfect For
-            </h3>
-            <ul className="space-y-2">
-              <li>• Twitch/YouTube streamers</li>
-              <li>• Remote work presentations</li>
-              <li>• Online education</li>
-              <li>• Virtual events</li>
-              <li>• Content creators</li>
-            </ul>
-          </ProjectCard>
-        </div>
 
         <ProjectCard variant="secondary">
           <h3 className="text-xl font-semibold mb-4 text-primary">
-            Installation & Setup
+            Planned OBS Features
           </h3>
-          <div className="bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm">
-            <p className="text-green-400"># Install the OBS plugin</p>
-            <p>$ bodyfx-obs-install</p>
-            <br />
-            <p className="text-green-400"># Or manual installation</p>
-            <p>1. Copy bodyfx-obs.dll to OBS plugins folder</p>
-            <p>2. Restart OBS Studio</p>
-            <p>3. Add "BodyFX Background Removal" filter to any source</p>
-          </div>
-          <p className="mt-4 text-sm">
-            The plugin automatically detects available GPU resources and adjusts
-            processing accordingly, ensuring smooth streaming performance.
+          <ul className="space-y-2">
+            <li>• SAM2-based real-time segmentation for live streaming</li>
+            <li>• Background blur, replacement, and removal options</li>
+            <li>• GPU-accelerated processing for streaming performance</li>
+          </ul>
+          <p className="mt-4 text-sm italic">
+            Note: The OBS plugin is not yet functional. This section describes
+            planned future work.
           </p>
         </ProjectCard>
       </ProjectSection>

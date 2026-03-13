@@ -16,8 +16,8 @@ export default function BrainBuffet() {
       technologies: "OpenAI GPT-4, Multi-step Chains, Structured Output",
     },
     {
-      category: "RAG",
-      technologies: "Document Retrieval, Embedding Search, Context Injection",
+      category: "Embeddings",
+      technologies: "Embedding-based Course Recommendations, Vector Storage",
     },
     { category: "Frontend", technologies: "Next.js, React, TypeScript" },
     { category: "Backend", technologies: "Node.js, Express, REST APIs" },
@@ -27,12 +27,12 @@ export default function BrainBuffet() {
       technologies: "Structured Generation, Template Engine, Validation",
     },
     {
-      category: "Distribution",
-      technologies: "Mobile-First PWA, Responsive Design",
+      category: "Payments",
+      technologies: "Stripe Integration, Subscription Management",
     },
     {
       category: "Analytics",
-      technologies: "Progress Tracking, Completion Metrics, Revenue",
+      technologies: "Progress Tracking, Completion Metrics",
     },
   ];
 
@@ -44,33 +44,33 @@ export default function BrainBuffet() {
       items: [
         "Step 1 — Topic Analysis: LLM analyzes the subject domain, identifies key concepts, and generates a course outline with learning objectives",
         "Step 2 — Content Generation: Each chapter is generated with structured output schemas ensuring consistent format, difficulty progression, and pedagogical flow",
-        "Step 3 — Quiz Generation: Assessment questions are generated from course content using RAG retrieval to ensure accuracy and relevance",
+        "Step 3 — Quiz Generation: Assessment questions are generated from course content to ensure relevance and pedagogical alignment",
         "Step 4 — Validation & Review: Generated content passes through validation checks for completeness, accuracy, and engagement quality",
       ],
     },
     {
-      title: "RAG-Powered Content Accuracy",
+      title: "Embedding-Based Course Recommendations",
       description:
-        "Retrieval-Augmented Generation ensures course content is grounded in real source material, not hallucinated",
+        "Embeddings power course discovery and recommendation, helping users find relevant content across the catalog",
       items: [
-        "Document Ingestion: Source materials are chunked, embedded, and stored for semantic retrieval",
-        "Context Injection: Relevant passages are retrieved and injected into generation prompts to ground LLM output",
-        "Citation Tracking: Generated content maintains references back to source material for verifiability",
-        "Quality Scoring: Each generated section receives an accuracy score based on source alignment",
+        "Course Embedding: Each course is embedded for semantic similarity search and recommendation",
+        "Topic Clustering: Related courses are grouped by embedding similarity for coherent learning paths",
+        "Personalized Suggestions: User interests are matched against course embeddings for relevant recommendations",
+        "Quality Scoring: Each generated section receives a quality score based on pedagogical criteria",
       ],
     },
   ];
 
   const productFeatures = [
     {
-      title: "Shipped Product with Real Customers",
+      title: "250+ Courses Generated",
       description:
-        "BrainBuffet is a live product generating revenue, not a demo or proof of concept",
+        "BrainBuffet has generated a substantial course catalog through its LLM pipeline across multiple subject areas",
       items: [
         "250+ courses created through the LLM pipeline, covering financial literacy, digital wellness, and professional development",
-        "90% reduction in course creation time compared to manual authoring — from weeks to hours",
-        "Real paying customers using the platform for structured learning",
-        "Mobile-first PWA with offline capabilities for learning on the go",
+        "Stripe integration for payment processing and subscription management",
+        "774 commits over 3 years of active development since March 2023",
+        "Responsive web design for cross-device learning experiences",
       ],
     },
     {
@@ -89,23 +89,23 @@ export default function BrainBuffet() {
   const impactStats = [
     {
       value: "250+",
-      label: "Courses Created",
+      label: "Courses Generated",
       description: "Via multi-step LLM pipeline",
     },
     {
-      value: "90%",
-      label: "Time Reduction",
-      description: "Compared to manual authoring",
+      value: "774",
+      label: "Commits",
+      description: "Since March 2023",
     },
     {
-      value: "Live",
-      label: "Shipped Product",
-      description: "Real customers, real revenue",
+      value: "Stripe",
+      label: "Payments",
+      description: "Integrated billing",
     },
     {
       value: "Multi-step",
       label: "LLM Pipeline",
-      description: "RAG + structured generation",
+      description: "Structured generation",
     },
   ];
 
@@ -113,21 +113,19 @@ export default function BrainBuffet() {
     flowchart LR
       A[Topic Input] --> B[Topic Analysis]
       B --> C[Outline Generation]
-      C --> D[RAG Retrieval]
-      D --> E[Content Generation]
+      C --> E[Content Generation]
       E --> F[Quiz Generation]
       F --> G[Validation]
       G --> H[Published Course]
 
-      I[Source Documents] --> J[Embedding]
-      J --> K[Vector Store]
-      K --> D
+      I[Course Catalog] --> J[Embedding]
+      J --> K[Recommendations]
 
       L[Structured Schema] --> E
       L --> F
 
       style B fill:#8B5CF6,stroke:#7C3AED,color:#fff
-      style D fill:#3B82F6,stroke:#2563EB,color:#fff
+      style E fill:#3B82F6,stroke:#2563EB,color:#fff
       style G fill:#10B981,stroke:#059669,color:#fff
       style K fill:#F59E0B,stroke:#D97706,color:#fff
   `;
@@ -135,16 +133,16 @@ export default function BrainBuffet() {
   return (
     <ProjectLayout
       title="BrainBuffet"
-      description="LLM pipeline platform for automated course generation with RAG retrieval and structured output — 250+ courses, real customers"
+      description="LLM pipeline platform for automated course generation with structured output and embedding-based recommendations — 250+ courses generated, 774 commits"
     >
       <ProjectHero
         title="BrainBuffet"
-        description="An LLM pipeline platform that generates structured educational courses through multi-step generation, RAG retrieval, and validated structured output. 250+ courses created, 90% time reduction, real paying customers."
+        description="An LLM pipeline platform that generates structured educational courses through multi-step generation, validated structured output, and embedding-based recommendations. 250+ courses generated across financial literacy, digital wellness, and professional development. 774 commits since March 2023."
         tags={[
           "LLM Pipelines",
-          "RAG",
           "Structured Generation",
-          "Shipped Product",
+          "Embeddings",
+          "Stripe",
           "Next.js",
         ]}
         image="/images/projects/brain-buffet.jpg"
@@ -176,8 +174,8 @@ export default function BrainBuffet() {
             authoring
           </li>
           <li>
-            <strong>Accuracy</strong>: Generated content must be grounded in
-            real sources, not hallucinated
+            <strong>Discovery</strong>: Users need help finding relevant courses
+            across a growing catalog
           </li>
         </ul>
       </ProjectSection>
@@ -186,14 +184,14 @@ export default function BrainBuffet() {
         <MermaidDiagram
           title="Multi-Step Course Generation Pipeline"
           diagram={pipelineDiagram}
-          description="End-to-end pipeline from topic input to published course, with RAG retrieval for accuracy and structured schemas for consistency."
+          description="End-to-end pipeline from topic input to published course, with structured schemas for consistency and embeddings for course recommendations."
           className="mb-8"
         />
 
         <FeatureGrid features={pipelineFeatures} columns={1} />
       </ProjectSection>
 
-      <ProjectSection title="Shipped Product">
+      <ProjectSection title="Product & Scale">
         <FeatureGrid features={productFeatures} columns={1} />
 
         <div className="mt-8">
@@ -218,13 +216,14 @@ export default function BrainBuffet() {
 
           <ProjectCard variant="accent">
             <h3 className="text-xl font-semibold mb-3 text-primary">
-              Why RAG for Content Accuracy
+              Why Embeddings for Course Recommendations
             </h3>
             <p>
-              Customers pay for accurate content. RAG retrieval grounds every
-              generated section in real source material, reducing hallucination
-              and enabling citation tracking. The accuracy score system flags
-              sections that need human review before publication.
+              With 250+ courses in the catalog, discovery becomes a real
+              problem. Embedding-based recommendations match user interests to
+              courses semantically, surfacing relevant content that keyword
+              search would miss. This drives engagement and helps users build
+              coherent learning paths.
             </p>
           </ProjectCard>
 
@@ -244,8 +243,7 @@ export default function BrainBuffet() {
       </ProjectSection>
 
       <ProjectCTA
-        githubUrl="https://github.com/hopeatina/brain-buffet"
-        demoUrl="https://brainbuffet.co"
+        githubUrl="https://github.com/hopeatina/brainbuffet"
       />
     </ProjectLayout>
   );

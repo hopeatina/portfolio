@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import Card from "@/components/ui/Card";
 
 interface ProjectCardProps {
   title?: string;
@@ -18,15 +17,35 @@ export default function ProjectCard({
   role,
   ariaLabel,
 }: ProjectCardProps) {
-  // Map ProjectCard variants to Card variants
-  const cardVariant = variant === "default" ? "elevated" : "outline";
+  const variantClassMap = {
+    default:
+      "border border-border bg-[var(--card-bg)] shadow-[0_24px_80px_-55px_rgba(15,23,42,0.32)]",
+    accent:
+      "border border-[color:var(--border-color)] bg-[linear-gradient(180deg,var(--surface),var(--card-bg))] shadow-[0_26px_80px_-56px_rgba(15,23,42,0.28)]",
+    secondary:
+      "border border-white/10 bg-[#07131d] text-white shadow-[0_30px_90px_-60px_rgba(2,8,23,0.92)]",
+    highlight:
+      "border border-border bg-[linear-gradient(135deg,var(--card-bg),var(--surface))] shadow-[0_20px_70px_-50px_rgba(15,23,42,0.26)]",
+  } as const;
 
   return (
-    <Card variant={cardVariant} className={`${className}`}>
+    <div
+      role={role}
+      aria-label={ariaLabel}
+      className={`rounded-[28px] p-6 md:p-7 ${variantClassMap[variant]} ${className}`}
+    >
       {title && (
-        <h4 className="font-semibold mb-4 text-lg text-heading">{title}</h4>
+        <h4
+          className={`mb-4 text-lg font-semibold tracking-[-0.03em] ${
+            variant === "secondary" ? "text-white" : "text-heading"
+          }`}
+        >
+          {title}
+        </h4>
       )}
-      <div className="text-body">{children}</div>
-    </Card>
+      <div className={variant === "secondary" ? "text-white/76" : "text-body"}>
+        {children}
+      </div>
+    </div>
   );
 }

@@ -14,15 +14,13 @@ export default function BlogLayout({
   children,
   title,
   description,
-  isPost = false,
 }: BlogLayoutProps) {
-  const { theme, getThemeStyles } = useTheme();
-  const themeStyles = getThemeStyles();
+  const { theme } = useTheme();
 
   return (
     <>
       <Head>
-        <title>{title} | Blog | Emerging Hope</title>
+        <title>{title} | Blog | Hope Atina</title>
         {description && <meta name="description" content={description} />}
       </Head>
 

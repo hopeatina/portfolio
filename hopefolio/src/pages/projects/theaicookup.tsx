@@ -38,10 +38,10 @@ export default function TheAICookup() {
     {
       title: "Event Management",
       description:
-        "Comprehensive platform for organizing AI development events",
+        "Platform concept for organizing AI development events",
       items: [
-        "Schedule and promote monthly AI Cook-Up events in Houston",
-        "Real-time event status tracking (pending, active, completed)",
+        "Schedule and manage AI Cook-Up events",
+        "Event status tracking (pending, active, completed)",
         "Customizable voting periods for idea selection",
         "Event-specific team size and configuration settings",
         "Participant registration with QR code support",
@@ -108,22 +108,22 @@ export default function TheAICookup() {
     {
       value: "6-8",
       label: "Teams/Event",
-      description: "Optimally sized groups",
+      description: "Target group count",
     },
     {
       value: "~5",
       label: "Members/Team",
-      description: "Balanced team size",
+      description: "Target team size",
     },
     {
-      value: "90s",
-      label: "Registration Time",
-      description: "Quick onboarding",
+      value: "15",
+      label: "Commits",
+      description: "Prototype development",
     },
     {
-      value: "Real-time",
-      label: "Team Updates",
-      description: "Instant assignments",
+      value: "~4K",
+      label: "Lines of Code",
+      description: "Concept implementation",
     },
   ];
 
@@ -166,11 +166,11 @@ export default function TheAICookup() {
   return (
     <ProjectLayout
       title="The AI Cook-Up"
-      description="Community platform for AI hackathon events in Houston with intelligent team matching"
+      description="Concept site for AI hackathon events in Houston with LLM-powered team matching — 15 commits, ~4K LOC"
     >
       <ProjectHero
         title="The AI Cook-Up"
-        description="A comprehensive web application designed to facilitate community AI development events in Houston. The platform combines event management with LLM-powered team matching to create engaging collaborative experiences for AI enthusiasts."
+        description="A concept site designed for community AI development events in Houston. The platform explores event management with LLM-powered team matching. 15 commits, ~4K LOC — built as a prototype for a community event idea."
         tags={[
           "Event Platform",
           "Team Matching",
@@ -183,14 +183,13 @@ export default function TheAICookup() {
 
       <TechStack items={techStack} />
 
-      <ProjectSection title="Building Houston's AI Community">
+      <ProjectSection title="The Concept">
         <div className="space-y-6">
           <p className="text-lg">
-            The AI Cook-Up addresses the challenge of organizing effective AI
+            The AI Cook-Up is a concept site exploring how to organize AI
             hackathon events where participants with diverse skills and
             experience levels need to form balanced, productive teams.
-            Traditional team formation methods often result in imbalanced groups
-            or leave participants without teams.
+            Built as a prototype for a community event idea.
           </p>
 
           <ProjectCard variant="secondary">
@@ -240,7 +239,7 @@ export default function TheAICookup() {
             <ul className="space-y-2">
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
-                <span>Simple 90-second registration process</span>
+                <span>Quick registration process via QR code</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">•</span>
@@ -371,57 +370,45 @@ export default function TheAICookup() {
         </ProjectCard>
       </ProjectSection>
 
-      <ProjectSection title="Impact & Future Vision">
+      <ProjectSection title="Vision">
         <div className="space-y-6">
           <ProjectCard variant="secondary">
             <h3
               className="text-xl font-semibold mb-4"
               style={{ color: themeProps.colors.primary }}
             >
-              Community Impact
+              Concept Goals
             </h3>
             <p className="mb-4">
-              The AI Cook-Up is fostering Houston's AI community by providing a
-              structured, inclusive platform for collaboration and learning.
-              Each event brings together diverse participants who might never
-              have connected otherwise.
+              The AI Cook-Up is a concept site exploring how to foster
+              Houston's AI community through organized events with LLM-powered
+              team formation. Built as a prototype to validate the idea.
             </p>
             <ul className="space-y-2">
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">•</span>
                 <span>
-                  Monthly events building consistent community engagement
+                  Cross-disciplinary collaboration through skill-balanced teams
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">•</span>
                 <span>
-                  Cross-disciplinary collaboration fostering innovation
+                  LLM-powered team matching based on skills and preferences
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-primary mt-1">•</span>
                 <span>
-                  Skill development through peer learning and mentorship
+                  Democratic project selection through community voting
                 </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-primary mt-1">•</span>
-                <span>Launching pad for AI startups and projects</span>
               </li>
             </ul>
           </ProjectCard>
-
-          <p className="text-lg italic text-center">
-            "The AI Cook-Up transforms how AI enthusiasts connect and
-            collaborate, making team formation intelligent, inclusive, and
-            effortless."
-          </p>
         </div>
       </ProjectSection>
 
       <ProjectCTA
-        demoUrl="https://theaicookup.com"
         githubUrl="https://github.com/hopeatina/theaicookup"
       />
     </ProjectLayout>
