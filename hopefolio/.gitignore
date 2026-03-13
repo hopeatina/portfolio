@@ -13,6 +13,7 @@
 # testing
 /coverage
 /test-results/
+docs/verification/theme-audit/
 
 # next.js
 /.next/
