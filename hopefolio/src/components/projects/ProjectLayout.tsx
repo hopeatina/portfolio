@@ -13,10 +13,12 @@ export default function ProjectLayout({
   title,
   description,
 }: ProjectLayoutProps) {
+  const pageTitle = `${title} | Projects | Hope Atina`;
+
   return (
     <>
       <Head>
-        <title>{title} | Projects | Hope Atina</title>
+        <title>{pageTitle}</title>
         {description && <meta name="description" content={description} />}
       </Head>
 

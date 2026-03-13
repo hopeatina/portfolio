@@ -9,6 +9,7 @@ export default function Spiral3D() {
 
   useEffect(() => {
     if (!containerRef.current) return;
+    const container = containerRef.current;
 
     // Setup
     sceneRef.current = new THREE.Scene();
@@ -25,7 +26,7 @@ export default function Spiral3D() {
     const renderer = rendererRef.current;
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    containerRef.current.appendChild(renderer.domElement);
+    container.appendChild(renderer.domElement);
 
     // Create spiral
     const points = [];
@@ -75,7 +76,7 @@ export default function Spiral3D() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      containerRef.current?.removeChild(renderer.domElement);
+      container.removeChild(renderer.domElement);
     };
   }, []);
 

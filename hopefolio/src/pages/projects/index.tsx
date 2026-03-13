@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 
 type Project = {
   id: string;
@@ -254,11 +255,13 @@ function FlagshipSupportCard({ project }: { project: Project }) {
 
       <div className="space-y-5 px-6 py-6">
         {project.image && (
-          <div className="flex h-24 items-center justify-center rounded-2xl border border-border bg-background p-5">
-            <img
+          <div className="relative flex h-24 items-center justify-center overflow-hidden rounded-2xl border border-border bg-background p-5">
+            <Image
               src={project.image}
               alt={project.title}
-              className="max-h-full max-w-full object-contain"
+              fill
+              sizes="(min-width: 1024px) 240px, 100vw"
+              className="object-contain p-5"
             />
           </div>
         )}
@@ -283,9 +286,9 @@ function SelectedWorkRow({ project }: { project: Project }) {
   return (
     <Link
       href={project.link}
-      className="grid gap-4 border-t border-border px-6 py-5 transition-colors hover:bg-[var(--surface)] first:border-t-0 md:grid-cols-[160px_minmax(0,1fr)_260px]"
+      className="grid gap-3 border-t border-border px-5 py-5 transition-colors hover:bg-[var(--surface)] first:border-t-0 md:grid-cols-[160px_minmax(0,1fr)_260px] md:gap-4 md:px-6"
     >
-      <div className="text-sm leading-6 text-body-secondary">
+      <div className="text-xs uppercase tracking-[0.16em] text-body-secondary md:text-sm md:normal-case md:tracking-normal">
         {project.metric || project.proof || "Selected work"}
       </div>
       <div>
@@ -294,9 +297,11 @@ function SelectedWorkRow({ project }: { project: Project }) {
         </h3>
         <p className="mt-2 text-sm leading-6 text-body">{project.description}</p>
       </div>
-      <div className="flex items-start justify-between gap-4 text-sm leading-6 text-body-secondary">
-        <div>{project.proof || project.tags.join(" · ")}</div>
-        <span className="font-medium text-link">→</span>
+      <div className="flex items-start justify-between gap-4 text-sm leading-6 text-body-secondary md:items-start">
+        <div className="max-w-[28rem] text-sm leading-6 text-body-secondary">
+          {project.proof || project.tags.join(" · ")}
+        </div>
+        <span className="font-medium text-link md:self-start">→</span>
       </div>
     </Link>
   );
@@ -338,7 +343,7 @@ export default function Projects() {
                 <div className="text-xs uppercase tracking-[0.18em] text-body-secondary">
                   Project index
                 </div>
-                <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.06em] text-heading md:text-7xl">
+                <h1 className="mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.06em] text-heading sm:text-5xl md:text-7xl">
                   Systems I can defend under inspection
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-8 text-body-secondary md:text-xl">
@@ -346,8 +351,12 @@ export default function Projects() {
                   flagship systems carry the most weight, the supporting work is
                   intentionally quieter, and the proof is visible before you click.
                 </p>
-                <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                  <div className="rounded-[24px] border border-border bg-[var(--card-bg)] px-5 py-5">
+                <div className="mt-6 rounded-2xl border border-border bg-[var(--card-bg)] px-4 py-4 text-sm leading-6 text-body-secondary lg:hidden">
+                  Start with OrgX, then read the plugin and tooling layer, then
+                  use the production systems to validate depth.
+                </div>
+                <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+                  <div className="col-span-2 rounded-[24px] border border-border bg-[var(--card-bg)] px-4 py-4 sm:col-span-1 sm:px-5 sm:py-5">
                     <div className="text-xs uppercase tracking-[0.18em] text-body-secondary">
                       Flagships
                     </div>
@@ -359,7 +368,7 @@ export default function Projects() {
                       narrative.
                     </div>
                   </div>
-                  <div className="rounded-[24px] border border-border bg-[var(--card-bg)] px-5 py-5">
+                  <div className="rounded-[24px] border border-border bg-[var(--card-bg)] px-4 py-4 sm:px-5 sm:py-5">
                     <div className="text-xs uppercase tracking-[0.18em] text-body-secondary">
                       Production
                     </div>
@@ -371,7 +380,7 @@ export default function Projects() {
                       products.
                     </div>
                   </div>
-                  <div className="rounded-[24px] border border-border bg-[var(--card-bg)] px-5 py-5">
+                  <div className="rounded-[24px] border border-border bg-[var(--card-bg)] px-4 py-4 sm:px-5 sm:py-5">
                     <div className="text-xs uppercase tracking-[0.18em] text-body-secondary">
                       Tenure
                     </div>
@@ -385,7 +394,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="rounded-[32px] border border-white/10 bg-[#06121c] p-6 text-white shadow-[0_30px_100px_-65px_rgba(2,8,23,0.9)] md:p-8">
+              <div className="hidden rounded-[32px] border border-white/10 bg-[#06121c] p-6 text-white shadow-[0_30px_100px_-65px_rgba(2,8,23,0.9)] md:p-8 lg:block">
                 <div className="text-xs uppercase tracking-[0.18em] text-white/42">
                   Reading guide
                 </div>
@@ -425,11 +434,11 @@ export default function Projects() {
               href={orgxProject.link}
               className="grid gap-0 overflow-hidden rounded-[34px] border border-white/10 bg-[#06121c] text-white shadow-[0_38px_110px_-72px_rgba(2,8,23,0.9)] lg:grid-cols-[minmax(0,1.05fr)_480px]"
             >
-              <div className="p-8 md:p-10 lg:p-12">
+              <div className="p-6 md:p-10 lg:p-12">
                 <div className="text-xs uppercase tracking-[0.18em] text-white/42">
                   Primary flagship
                 </div>
-                <h3 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-white md:text-5xl">
+                <h3 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl md:text-5xl">
                   {orgxProject.title}
                 </h3>
                 <p className="mt-6 max-w-2xl text-base leading-7 text-white/76 md:text-lg">
@@ -469,15 +478,17 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="border-t border-white/10 bg-[#081826] p-6 md:p-8 lg:border-l lg:border-t-0">
+              <div className="border-t border-white/10 bg-[#081826] p-5 md:p-8 lg:border-l lg:border-t-0">
                 <div className="text-xs uppercase tracking-[0.18em] text-white/42">
                   Live artifact
                 </div>
-                <div className="mt-4 overflow-hidden rounded-[28px] border border-white/10 bg-[#09131c]">
-                  <img
-                    src={orgxProject.image}
+                <div className="relative mt-4 overflow-hidden rounded-[28px] border border-white/10 bg-[#09131c] aspect-[16/11]">
+                  <Image
+                    src={orgxProject.image!}
                     alt="OrgX command center"
-                    className="h-full w-full object-cover"
+                    fill
+                    sizes="(min-width: 1024px) 480px, 100vw"
+                    className="object-cover"
                   />
                 </div>
                 <p className="mt-4 text-sm leading-6 text-white/55">
@@ -488,7 +499,7 @@ export default function Projects() {
               </div>
             </Link>
 
-            <div className="mt-6 grid gap-6 lg:grid-cols-3">
+            <div className="mt-6 grid gap-4 sm:gap-6 lg:grid-cols-3">
               {supportingFlagships.map((project) => (
                 <FlagshipSupportCard key={project.id} project={project} />
               ))}

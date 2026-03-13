@@ -53,6 +53,7 @@ export default function SiteSeo() {
 
   return (
     <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="author" content={SITE_NAME} />
       <meta name="robots" content={robotsContent} />
       <meta name="googlebot" content={robotsContent} />

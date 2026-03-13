@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import styles from "@/styles/themes/futuristic-theme.module.css";
 
@@ -74,11 +75,13 @@ export default function MediaEmbed({
                   : themeProps.boxShadow,
             }}
           >
-            <div className="aspect-w-16 aspect-h-9">
-              <img
+            <div className="relative aspect-[16/9]">
+              <Image
                 src={piece.src}
                 alt={piece.caption}
-                className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-110"
               />
             </div>
             <div
