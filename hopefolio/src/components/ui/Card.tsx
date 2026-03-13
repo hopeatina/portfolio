@@ -1,10 +1,6 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
-import baseStyles from "@/styles/themes/base-theme.module.css";
-import cameroonianStyles from "@/styles/themes/cameroonian-theme.module.css";
-import riceStyles from "@/styles/themes/rice-theme.module.css";
-import futuristicStyles from "@/styles/themes/futuristic-theme.module.css";
 
 interface CardProps {
   title?: string;
@@ -34,7 +30,6 @@ export default function Card({
   href,
   external = false,
   variant = "default",
-  hoverable = true,
   children,
   className = "",
   onClick,
@@ -58,11 +53,13 @@ export default function Card({
   const content = (
     <>
       {image && (
-        <div className="relative mb-4 -mx-6 -mt-6">
-          <img
+        <div className="relative mb-4 -mx-6 -mt-6 h-48 overflow-hidden rounded-t-lg">
+          <Image
             src={image.src}
             alt={image.alt}
-            className="w-full h-48 object-cover rounded-t-lg"
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover"
           />
         </div>
       )}

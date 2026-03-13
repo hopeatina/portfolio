@@ -16,11 +16,12 @@ export default function BlogLayout({
 }: BlogLayoutProps) {
   const { theme } = useTheme();
   const darkTheme = isThemeDark(theme);
+  const pageTitle = `${title} | Blog | Hope Atina`;
 
   return (
     <>
       <Head>
-        <title>{title} | Blog | Hope Atina</title>
+        <title>{pageTitle}</title>
         {description && <meta name="description" content={description} />}
       </Head>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+import Image from "next/image";
 import Card from "@/components/ui/Card";
 import Tag from "@/components/ui/Tag";
 import { formatDate } from "@/utils/date";
@@ -34,10 +34,12 @@ export default function BlogPostCard({
     <Card href={`/blog/${slug}`} variant="default" hoverable className="h-full">
       {image && (
         <div className="relative aspect-video mb-4 -mx-6 -mt-6 overflow-hidden">
-          <img
+          <Image
             src={image.src}
             alt={image.alt}
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover transition-transform duration-300 hover:scale-105"
           />
         </div>
       )}

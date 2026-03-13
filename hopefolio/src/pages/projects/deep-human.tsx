@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import ProjectLayout from "@/components/projects/ProjectLayout";
 import ProjectHero from "@/components/projects/ProjectHero";
 import ProjectSection from "@/components/projects/ProjectSection";
@@ -256,11 +257,13 @@ export default function DeepHuman() {
               </li>
             </ul>
           </div>
-          <div className="rounded-lg overflow-hidden shadow-xl">
-            <img
+          <div className="relative overflow-hidden rounded-lg shadow-xl aspect-[16/10]">
+            <Image
               src="/images/projects/deep-human/hero-landing.png"
               alt="Deep Human Landing Page"
-              className="w-full h-auto"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
             />
           </div>
         </div>
@@ -269,7 +272,7 @@ export default function DeepHuman() {
       <ProjectSection title="How Deep Human Works">
         <p className="text-lg mb-8">
           Deep Human creates a personalized MCP server that represents you in
-          the digital world. Here's the elegant 4-step process that brings your
+          the digital world. Here&apos;s the elegant 4-step process that brings your
           digital twin to life:
         </p>
 
@@ -288,13 +291,15 @@ export default function DeepHuman() {
               <p className="mb-4">
                 Complete your profile with your interests, skills, goals, and
                 conversation style. This information forms the foundation of
-                your digital twin's personality and capabilities.
+                your digital twin&apos;s personality and capabilities.
               </p>
-              <div className="rounded-lg overflow-hidden mt-4">
-                <img
+              <div className="relative overflow-hidden rounded-lg mt-4 aspect-[16/10]">
+                <Image
                   src="/images/projects/deep-human/how-it-works-1.png"
                   alt="Create Profile Step"
-                  className="w-full h-auto"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
                 />
               </div>
             </ProjectCard>
@@ -311,7 +316,7 @@ export default function DeepHuman() {
               <p className="mb-4">
                 With a single click, deploy your MCP server that hosts your
                 digital twin. Your server runs continuously, representing you
-                even when you're offline.
+                even when you&apos;re offline.
               </p>
               <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mt-4">
                 <code className="text-sm">
@@ -322,11 +327,13 @@ export default function DeepHuman() {
           </div>
 
           {/* Step 3 & 4 */}
-          <div className="rounded-lg overflow-hidden shadow-xl">
-            <img
+          <div className="relative overflow-hidden rounded-lg shadow-xl aspect-[16/10]">
+            <Image
               src="/images/projects/deep-human/how-it-works-2.png"
               alt="Connect and Review Steps"
-              className="w-full h-auto"
+              fill
+              sizes="100vw"
+              className="object-cover"
             />
           </div>
 
@@ -372,11 +379,13 @@ export default function DeepHuman() {
             what matters.
           </p>
 
-          <div className="rounded-lg overflow-hidden shadow-xl mb-8">
-            <img
+          <div className="relative overflow-hidden rounded-lg shadow-xl mb-8 aspect-[16/10]">
+            <Image
               src="/images/projects/deep-human/demo-interface.png"
               alt="Deep Human Demo Interface"
-              className="w-full h-auto"
+              fill
+              sizes="100vw"
+              className="object-cover"
             />
           </div>
 
@@ -490,7 +499,7 @@ export default function DeepHuman() {
               while maintaining strong ethical foundations. The system
               emphasizes user control, privacy, and augmentation rather than
               replacement of human connections. All AI personas operate under
-              user command with comprehensive "kill switch" capabilities and
+              user command with comprehensive &quot;kill switch&quot; capabilities and
               transparent operation modes.
             </p>
           </ProjectCard>

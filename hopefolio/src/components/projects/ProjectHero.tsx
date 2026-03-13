@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Tag from "@/components/ui/Tag";
 
 interface ProjectFact {
@@ -132,11 +133,13 @@ export default function ProjectHero({
                     {artifactLabel}
                   </div>
                 )}
-                <div className="overflow-hidden rounded-[28px] border border-white/10 bg-[#09131c]">
-                  <img
+                <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#09131c] aspect-[4/3]">
+                  <Image
                     src={image}
                     alt={title}
-                    className="h-full w-full object-cover"
+                    fill
+                    sizes="(min-width: 1024px) 370px, 100vw"
+                    className="object-cover"
                   />
                 </div>
                 {artifactCaption && (

@@ -8,24 +8,20 @@ import {
   MeshTransmissionMaterial,
   Environment,
   Lightformer,
-  OrbitControls,
 } from "@react-three/drei";
 import {
   CuboidCollider,
   BallCollider,
   Physics,
   RigidBody,
+  RapierRigidBody,
 } from "@react-three/rapier";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
-import { easing } from "maath";
 import {
   Mesh,
-  BufferGeometry,
   Vector3,
   MeshStandardMaterial,
-  Color,
   Group,
-  Box3,
   Material,
 } from "three";
 import { useTheme } from "@/modules/mode-switch/ThemeContext";
@@ -42,81 +38,6 @@ const MODEL_PATHS = {
   rice: "/models/rice_logo.glb",
   futuristic: "/models/c-transformed.glb",
 } as const;
-
-// -------------- Helpers to get & set color ranges --------------
-
-// Audits the min/max hue of a given color attribute
-function auditColorRange(
-  colorAttr: THREE.BufferAttribute | THREE.InterleavedBufferAttribute,
-  result: { minHue: number; maxHue: number }
-) {
-  const tmpColor = new THREE.Color();
-  const tmpHSL = { h: 0, s: 0, l: 0 };
-
-  for (let i = 0; i < colorAttr.count; i++) {
-    const r = colorAttr.getX(i);
-    const g = colorAttr.getY(i);
-    const b = colorAttr.getZ(i);
-
-    tmpColor.setRGB(r, g, b);
-    tmpColor.getHSL(tmpHSL);
-
-    if (tmpHSL.h < result.minHue) result.minHue = tmpHSL.h;
-    if (tmpHSL.h > result.maxHue) result.maxHue = tmpHSL.h;
-  }
-}
-
-// Actually does the remapping
-function remapColorAttr(
-  colorAttr: THREE.BufferAttribute | THREE.InterleavedBufferAttribute,
-  oldRange: { minHue: number; maxHue: number },
-  newRange: { start: number; end: number }
-) {
-  const tmpColor = new THREE.Color();
-  const tmpHSL = { h: 0, s: 0, l: 0 };
-
-  const { minHue, maxHue } = oldRange;
-  const { start, end } = newRange;
-  const oldRangeHueDelta = maxHue - minHue || 1; // avoid 0
-
-  for (let i = 0; i < colorAttr.count; i++) {
-    const r = colorAttr.getX(i);
-    const g = colorAttr.getY(i);
-    const b = colorAttr.getZ(i);
-
-    tmpColor.setRGB(r, g, b);
-    tmpColor.getHSL(tmpHSL);
-
-    // Original hue
-    const oldHue = tmpHSL.h;
-
-    // Map hue from [minHue, maxHue] to [start, end]
-    const alpha = (oldHue - minHue) / oldRangeHueDelta;
-    tmpHSL.h = start + alpha * (end - start);
-
-    tmpColor.setHSL(tmpHSL.h, tmpHSL.s, tmpHSL.l);
-
-    // For debugging: log a few points
-    if (i < 3) {
-      console.log(
-        `  Vertex #${i}: oldHue=${oldHue.toFixed(3)}, newHue=${tmpHSL.h.toFixed(
-          3
-        )}`
-      );
-    }
-
-    colorAttr.setXYZ(i, tmpColor.r, tmpColor.g, tmpColor.b);
-  }
-  colorAttr.needsUpdate = true;
-}
-
-// -------------------------------------------------------------
-
-function getThemeGradient(gradientValue: string) {
-  const matches = gradientValue.match(/rgba?\([^)]+\)/g);
-  if (!matches) return ["#141622"];
-  return matches.map((color) => color.replace(/rgba?\(([^)]+)\)/, "rgb($1)"));
-}
 
 const shuffle = (themeColors: {
   primary: string;
@@ -162,7 +83,6 @@ interface ConnectorProps {
   position?: [number, number, number];
   children?: React.ReactNode;
   vec?: THREE.Vector3;
-  scale?: number;
   r?: (range: number) => number;
   accent?: boolean;
   color?: string;
@@ -173,23 +93,23 @@ function Connector({
   position,
   children,
   vec = new THREE.Vector3(),
-  scale,
   r = THREE.MathUtils.randFloatSpread,
   accent,
   ...props
 }: ConnectorProps) {
-  const api = useRef(null);
+  const api = useRef<RapierRigidBody | null>(null);
   const pos = useMemo(
     () => position || new Vector3(r(10), r(10), r(10)),
     [position, r]
   );
 
-  useFrame((_, delta) => {
+  useFrame(() => {
     if (!api.current) return;
-    delta = Math.min(0.1, delta);
-    const current = api.current as any;
+    const current = api.current;
+    const translation = current.translation();
     current.applyImpulse(
-      vec.copy(current.translation()).negate().multiplyScalar(0.2)
+      vec.set(-translation.x * 0.2, -translation.y * 0.2, -translation.z * 0.2),
+      true
     );
   });
 
@@ -213,18 +133,18 @@ function Connector({
   );
 }
 
-function Pointer({ vec = new THREE.Vector3() }) {
-  const ref = useRef(null);
+function Pointer() {
+  const ref = useRef<RapierRigidBody | null>(null);
 
   useFrame(({ mouse, viewport }) => {
     if (!ref.current) return;
-    const current = ref.current as any;
+    const current = ref.current;
     current.setNextKinematicTranslation(
-      vec.set(
-        (mouse.x * viewport.width) / 2,
-        (mouse.y * viewport.height) / 2,
-        0
-      )
+      {
+        x: (mouse.x * viewport.width) / 2,
+        y: (mouse.y * viewport.height) / 2,
+        z: 0,
+      }
     );
   });
 
@@ -262,7 +182,7 @@ function Model({ children, color = "white", roughness = 0 }: ModelProps) {
   }, [theme]);
 
   // Load model with error handling and optimization
-  const { nodes, materials } = useGLTF(modelPath, true, undefined, (error) => {
+  const { nodes } = useGLTF(modelPath, true, undefined, (error) => {
     console.error(`Error loading model ${modelPath}:`, error);
     setModelError(true);
   });
@@ -280,9 +200,10 @@ function Model({ children, color = "white", roughness = 0 }: ModelProps) {
   );
 
   useEffect(() => {
-    if (groupRef.current) {
+    const group = groupRef.current;
+    if (group) {
       // Optimize geometry
-      groupRef.current.traverse((child: THREE.Object3D) => {
+      group.traverse((child: THREE.Object3D) => {
         if (child instanceof Mesh) {
           child.geometry.computeBoundingBox();
           child.geometry.computeBoundingSphere();
@@ -295,8 +216,8 @@ function Model({ children, color = "white", roughness = 0 }: ModelProps) {
 
     // Cleanup
     return () => {
-      if (groupRef.current) {
-        groupRef.current.traverse((child: THREE.Object3D) => {
+      if (group) {
+        group.traverse((child: THREE.Object3D) => {
           if (child instanceof Mesh) {
             child.geometry.dispose();
             if (child.material instanceof Material) {
@@ -347,7 +268,7 @@ function RotatingScene({
   connectors,
   gradientColors,
 }: {
-  connectors: any[];
+  connectors: ConnectorProps[];
   gradientColors: string[];
 }) {
   const rotationRef = useRef<THREE.Group>(null);
@@ -409,21 +330,25 @@ const ConnectorScene = () => {
   const [, click] = useReducer((s) => s + 1, 0);
   const style = useTheme();
 
-  const themeColors = style
-    ? {
-        primary: style.themeProps.colors.primary,
-        accent: style.themeProps.colors.accent,
-        secondary: style.themeProps.colors.secondary,
-        highlight: style.themeProps.colors.highlight,
-        gradientPrimary: style.themeProps.colors.gradients.primary,
-      }
-    : {
-        primary: "",
-        accent: "",
-        secondary: "",
-        highlight: "",
-        gradientPrimary: defaultGradient,
-      };
+  const themeColors = useMemo(
+    () =>
+      style
+        ? {
+            primary: style.themeProps.colors.primary,
+            accent: style.themeProps.colors.accent,
+            secondary: style.themeProps.colors.secondary,
+            highlight: style.themeProps.colors.highlight,
+            gradientPrimary: style.themeProps.colors.gradients.primary,
+          }
+        : {
+            primary: "",
+            accent: "",
+            secondary: "",
+            highlight: "",
+            gradientPrimary: defaultGradient,
+          },
+    [style]
+  );
 
   const connectors = useMemo(() => shuffle(themeColors), [themeColors]);
   const gradientColors = useMemo(() => {

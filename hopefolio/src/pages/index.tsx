@@ -31,7 +31,6 @@ export default function Home() {
           name="description"
           content="AI Agent Infrastructure Engineer. Multi-agent orchestration, MCP protocol, developer tooling. Creator of OrgX and PerfPulse. 8+ years shipping production systems."
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="var(--primary)" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
