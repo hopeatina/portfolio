@@ -5,13 +5,14 @@ import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import { reviewQueue } from "@/data/homepage";
 import StateBadge from "./StateBadge";
+import { ThemeAnimatedSection, ThemeHoverElement } from "../animations/ThemePhysics";
 
 export default function WhatNeedsAttention() {
   return (
     <section className="relative w-full py-32 px-6 lg:px-12">
       <div className="mx-auto max-w-7xl">
         {/* Terminal Glass Floating Object */}
-        <div className="relative overflow-hidden rounded-3xl bg-[#0a0a0a]/90 backdrop-blur-2xl border border-white/10 shadow-[0_0_80px_-20px_rgba(0,0,0,0.8)]">
+        <ThemeAnimatedSection className="relative overflow-hidden rounded-3xl bg-[#0a0a0a]/90 backdrop-blur-2xl border border-white/10 shadow-[0_0_80px_-20px_rgba(0,0,0,0.8)]">
           <div className="p-10 lg:p-16 border-b border-white/10 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
             <div className="max-w-2xl">
               <p className="mb-4 text-xs font-mono uppercase tracking-[0.25em] text-white/50">
@@ -30,7 +31,7 @@ export default function WhatNeedsAttention() {
                 href={item.href}
                 className="group block relative border-b border-white/5 last:border-b-0 transition-colors hover:bg-white/[0.03]"
               >
-                <article className="grid grid-cols-1 md:grid-cols-[100px_1fr_1fr_auto] gap-8 p-10 lg:p-16 items-start">
+                <ThemeHoverElement className="grid grid-cols-1 md:grid-cols-[100px_1fr_1fr_auto] gap-8 p-10 lg:p-16 items-start">
                   
                   <div className="flex items-center justify-between md:block">
                     <p className="text-4xl md:text-5xl font-heading font-light text-white/20 group-hover:text-white/40 transition-colors">
@@ -67,11 +68,11 @@ export default function WhatNeedsAttention() {
                     <FiArrowRight className="transition-transform group-hover:translate-x-2" />
                   </div>
 
-                </article>
+                </ThemeHoverElement>
               </Link>
             ))}
           </div>
-        </div>
+        </ThemeAnimatedSection>
       </div>
     </section>
   );

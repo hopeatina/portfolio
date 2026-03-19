@@ -6,11 +6,12 @@ import Image from "next/image";
 import { FiArrowRight } from "react-icons/fi";
 import { flagshipSystems } from "@/data/homepage";
 import StateBadge from "./StateBadge";
+import { ThemeAnimatedSection, ThemeHoverElement } from "../animations/ThemePhysics";
 
 export default function FeaturedProjects() {
   return (
     <section className="relative w-full bg-background pb-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12 mb-32 pt-32 text-center">
+      <ThemeAnimatedSection className="mx-auto max-w-7xl px-6 lg:px-12 mb-32 pt-32 text-center">
         <p className="mb-6 text-xs font-mono uppercase tracking-[0.25em] text-text-muted">
           Flagship systems
         </p>
@@ -20,16 +21,16 @@ export default function FeaturedProjects() {
         <p className="mt-8 text-xl font-body font-light text-text-muted leading-relaxed max-w-2xl mx-auto">
           OrgX should feel like the unmistakable center of gravity. The other systems matter because they prove the same operating judgment under production, tooling, and workflow constraints.
         </p>
-      </div>
+      </ThemeAnimatedSection>
 
       <div className="flex flex-col gap-40">
         {flagshipSystems.map((project, index) => (
-          <div key={project.id} className="relative w-full group">
+          <ThemeAnimatedSection key={project.id} delay={0.1} className="relative w-full group">
             <Link href={`/projects/${project.slug}`} className="block no-underline">
               <div className="relative mx-auto max-w-7xl px-6 lg:px-12 flex flex-col md:flex-row items-center gap-16 lg:gap-24 z-10">
                 
                 {/* Content Side */}
-                <div className={`w-full md:w-5/12 flex flex-col items-start ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
+                <ThemeHoverElement className={`w-full md:w-5/12 flex flex-col items-start ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
                   <StateBadge state={project.state} />
                   <p className="mt-6 text-xs font-mono uppercase tracking-[0.2em] text-primary">
                     {project.meta}
@@ -52,10 +53,10 @@ export default function FeaturedProjects() {
                     <span className="font-mono text-sm tracking-wide">Inspect case study</span>
                     <FiArrowRight className="transition-transform group-hover:translate-x-2" />
                   </div>
-                </div>
+                </ThemeHoverElement>
 
                 {/* Massive Image Mockup Intersecting Scroll */}
-                <div className={`w-full md:w-7/12 relative aspect-[4/3] rounded-3xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] border border-white/5 transition-transform duration-700 ease-out group-hover:scale-[1.02] group-hover:-translate-y-4 ${index % 2 !== 0 ? 'md:order-1' : ''}`}>
+                <ThemeHoverElement className={`w-full md:w-7/12 relative aspect-[4/3] rounded-3xl overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] border border-white/5 transition-transform duration-700 ease-out group-hover:scale-[1.02] group-hover:-translate-y-4 ${index % 2 !== 0 ? 'md:order-1' : ''}`}>
                   <Image
                     src={project.image}
                     alt={`Preview of ${project.name}`}
@@ -64,11 +65,11 @@ export default function FeaturedProjects() {
                     sizes="(max-width: 768px) 100vw, 60vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
+                </ThemeHoverElement>
 
               </div>
             </Link>
-          </div>
+          </ThemeAnimatedSection>
         ))}
       </div>
     </section>
