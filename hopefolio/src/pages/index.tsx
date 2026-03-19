@@ -1,26 +1,12 @@
 import React from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
+import Hero3D from "@/components/ui/Hero3D";
 import FeaturedProjects from "@/components/ui/FeaturedProjects";
 import TechStack from "@/components/ui/TechStack";
 import Testimonials from "@/components/ui/Testimonials";
 import CTASection from "@/components/ui/CTASection";
 import CompanyLogos from "@/components/ui/CompanyLogos";
 import WhatNeedsAttention from "@/components/ui/WhatNeedsAttention";
-
-// Dynamically import Hero3D to avoid SSR issues with Three.js
-const Hero3D = dynamic(() => import("@/components/ui/Hero3D"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-screen flex items-center justify-center bg-background">
-      <div className="animate-pulse">
-        <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-primary/20" />
-        <div className="h-8 w-64 mx-auto bg-primary/20 rounded mb-4" />
-        <div className="h-4 w-48 mx-auto bg-primary/20 rounded" />
-      </div>
-    </div>
-  ),
-});
 
 export default function Home() {
   return (
@@ -31,32 +17,17 @@ export default function Home() {
           name="description"
           content="AI Agent Infrastructure Engineer. Multi-agent orchestration, MCP protocol, developer tooling. Creator of OrgX and PerfPulse. 8+ years shipping production systems."
         />
-        <meta name="theme-color" content="var(--primary)" />
+        <meta name="theme-color" content="var(--color-primary)" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="min-h-screen bg-background">
-        {/* Hero Section with 3D Scene */}
-        <section className="relative w-full">
-          <Hero3D />
-        </section>
-
-        {/* What Needs Attention */}
+      <main className="min-h-screen bg-background text-text overflow-hidden selection:bg-primary selection:text-background">
+        <Hero3D />
         <WhatNeedsAttention />
-
-        {/* Shipped in Production */}
         <CompanyLogos />
-
-        {/* Flagship Case Studies */}
         <FeaturedProjects />
-
-        {/* Capabilities */}
         <TechStack />
-
-        {/* By the Numbers */}
         <Testimonials />
-
-        {/* CTA Section */}
         <CTASection />
       </main>
     </>

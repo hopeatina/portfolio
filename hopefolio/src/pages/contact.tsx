@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import {
   FiMail,
@@ -52,101 +51,102 @@ export default function Contact() {
         />
       </Head>
 
-      <main className="min-h-screen bg-background py-24">
-        <div className="container mx-auto px-4">
+      <main className="min-h-screen bg-background pt-32 pb-24 px-6 md:px-12 lg:px-24">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="mb-10 text-center md:mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              <span className="gradient-text">Let&apos;s Connect</span>
+          <div className="mb-24">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-semibold tracking-[-0.04em] text-heading" style={{ fontFamily: "var(--font-heading)" }}>
+              Let&apos;s Connect
             </h1>
-            <p className="text-lg md:text-xl text-body-secondary max-w-2xl mx-auto">
-              Feel free to reach out, and I&apos;ll get back to you soon!
+            <p className="mt-8 text-xl md:text-2xl text-body-secondary max-w-2xl leading-relaxed font-light">
+              Feel free to reach out to discuss infrastructure, orchestration, or your next big project.
             </p>
           </div>
 
           {/* Content Grid */}
-          <div className="grid max-w-5xl gap-6 mx-auto md:grid-cols-2 md:gap-8">
+          <div className="grid gap-16 lg:grid-cols-[1fr_400px] lg:gap-24">
             {/* Contact Form */}
-            <Card variant="elevated" className="p-6 md:p-8">
-              <h2 className="text-2xl font-bold mb-6 text-heading">
-                I&apos;d love to hear from you!
+            <div>
+              <h2 className="text-3xl md:text-4xl font-semibold mb-10 text-heading tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+                Start a conversation
               </h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium mb-2 flex items-center gap-2 text-label"
-                  >
-                    <FiUser className="w-4 h-4" />
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    placeholder="Enter your name"
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-input text-body focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                    disabled={isSubmitting}
-                  />
+              <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl">
+                <div className="space-y-6">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm uppercase tracking-[0.1em] font-medium mb-3 text-body-secondary"
+                    >
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      placeholder="Your name"
+                      className="w-full px-0 py-4 bg-transparent border-b border-border text-heading text-lg focus:outline-none focus:border-primary transition-all placeholder:text-body-secondary/40"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm uppercase tracking-[0.1em] font-medium mb-3 text-body-secondary"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      placeholder="Your email address"
+                      className="w-full px-0 py-4 bg-transparent border-b border-border text-heading text-lg focus:outline-none focus:border-primary transition-all placeholder:text-body-secondary/40"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="block text-sm uppercase tracking-[0.1em] font-medium mb-3 text-body-secondary"
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      required
+                      placeholder="What would you like to discuss?"
+                      className="w-full px-0 py-4 bg-transparent border-b border-border text-heading text-lg focus:outline-none focus:border-primary transition-all resize-none placeholder:text-body-secondary/40"
+                      disabled={isSubmitting}
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium mb-2 flex items-center gap-2 text-label"
-                  >
-                    <FiMail className="w-4 h-4" />
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-input text-body focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                <div className="pt-4">
+                  <Button
+                    type="submit"
                     disabled={isSubmitting}
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium mb-2 flex items-center gap-2 text-label"
+                    loading={isSubmitting}
+                    size="lg"
+                    className="rounded-full px-8"
                   >
-                    <FiMessageSquare className="w-4 h-4" />
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    required
-                    placeholder="What would you like to discuss?"
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-input text-body focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-vertical"
-                    disabled={isSubmitting}
-                  />
+                    Send Message
+                  </Button>
                 </div>
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  loading={isSubmitting}
-                  className="w-full"
-                  size="lg"
-                >
-                  Send Message
-                </Button>
 
                 {formStatus === "success" && (
-                  <div className="text-center p-4 rounded-lg bg-success/10 text-success border border-success/30">
+                  <div className="mt-8 p-6 bg-success/10 text-success border border-success/20 rounded-2xl">
                     Thanks for your message! I&apos;ll get back to you soon.
                   </div>
                 )}
 
                 {formStatus === "error" && (
-                  <div className="text-center p-4 rounded-lg bg-error/10 text-error border border-error/30">
+                  <div className="mt-8 p-6 bg-error/10 text-error border border-error/20 rounded-2xl">
                     Something went wrong sending your message. You can also
                     reach me directly at{" "}
                     <a
@@ -159,27 +159,26 @@ export default function Contact() {
                   </div>
                 )}
               </form>
-            </Card>
+            </div>
 
             {/* Contact Info */}
-            <Card variant="elevated" className="p-6 md:p-8">
-              <h2 className="text-2xl font-bold mb-6 text-heading">
-                Other Ways to Connect
+            <div className="lg:pl-16 lg:border-l lg:border-border">
+              <h2 className="text-2xl font-semibold mb-10 text-heading tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+                Other Ways
               </h2>
 
-              <div className="space-y-8">
+              <div className="space-y-12">
                 {/* Email */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-3 flex items-center gap-2 text-heading">
-                    <FiMail className="w-5 h-5" />
-                    Email
+                  <h3 className="text-xs uppercase tracking-[0.2em] mb-4 text-body-secondary font-medium">
+                    Direct Email
                   </h3>
                   <a
                     href="mailto:hopeatina@gmail.com"
-                    className="text-link hover:text-link-hover transition-colors inline-flex items-center group"
+                    className="text-xl text-heading hover:text-primary transition-colors inline-flex items-center group"
                   >
                     hopeatina@gmail.com
-                    <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="ml-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
                       →
                     </span>
                   </a>
@@ -187,71 +186,38 @@ export default function Contact() {
 
                 {/* Social Media */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-4 text-heading">
-                    Social Media
+                  <h3 className="text-xs uppercase tracking-[0.2em] mb-4 text-body-secondary font-medium">
+                    Elsewhere
                   </h3>
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
-                    <Button
-                      href="https://github.com/hopeatina"
-                      external
-                      icon={<FiGithub />}
-                      size="lg"
-                      className="w-full justify-center"
-                    >
-                      GitHub
-                    </Button>
-
-                    <Button
-                      href="https://linkedin.com/in/hopeatina"
-                      external
-                      icon={<FiLinkedin />}
-                      size="lg"
-                      className="w-full justify-center"
-                    >
-                      LinkedIn
-                    </Button>
-
-                    <Button
-                      href="https://x.com/emerginghope_"
-                      external
-                      icon={<FiTwitter />}
-                      size="lg"
-                      className="w-full justify-center"
-                    >
-                      X (Twitter)
-                    </Button>
-
-                    <Button
-                      href="https://medium.com/@hopeatina"
-                      external
-                      icon={<FaMedium />}
-                      size="lg"
-                      className="w-full justify-center"
-                    >
-                      Medium
-                    </Button>
+                  <div className="flex flex-col gap-4">
+                    <a href="https://github.com/hopeatina" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-lg text-body-secondary hover:text-heading transition-colors">
+                      <FiGithub className="w-5 h-5" /> GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/hopeatina" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-lg text-body-secondary hover:text-heading transition-colors">
+                      <FiLinkedin className="w-5 h-5" /> LinkedIn
+                    </a>
+                    <a href="https://x.com/emerginghope_" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-lg text-body-secondary hover:text-heading transition-colors">
+                      <FiTwitter className="w-5 h-5" /> X (Twitter)
+                    </a>
+                    <a href="https://medium.com/@hopeatina" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-lg text-body-secondary hover:text-heading transition-colors">
+                      <FaMedium className="w-5 h-5" /> Medium
+                    </a>
                   </div>
                 </div>
 
                 {/* Additional Info */}
-                <div>
-                  <h3 className="text-lg font-semibold mb-3 text-heading">
-                    Looking for collaboration?
+                <div className="pt-8 border-t border-border">
+                  <h3 className="text-xs uppercase tracking-[0.2em] mb-4 text-body-secondary font-medium">
+                    Current Focus
                   </h3>
-                  <p className="text-body-secondary mb-4">
-                    I&apos;m always excited to work on innovative projects that push
-                    boundaries and create meaningful impact. Whether you have a
-                    startup idea, need technical consulting, or want to explore
-                    new technologies together, let&apos;s chat!
-                  </p>
-                  <p className="text-body-secondary">
-                    I&apos;m particularly interested in multi-agent orchestration,
+                  <p className="text-body-secondary leading-relaxed">
+                    Particularly interested in multi-agent orchestration,
                     MCP/tool-calling platforms, agent observability, and AI
                     infrastructure engineering.
                   </p>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </main>

@@ -13,6 +13,53 @@
   color-scheme: dark;
 }
 
+/* Base Theme Delights */
+[data-theme="base"] ::selection {
+  background: rgba(139, 92, 246, 0.3); /* Soft purple */
+  color: var(--color-primary-dark);
+}
+
+/* Cameroonian Theme Delights */
+[data-theme="cameroonian"] ::selection {
+  background: rgba(245, 158, 11, 0.4); /* Earthy gold */
+  text-shadow: 0 0 10px rgba(245,158,11,0.5);
+}
+
+/* Rice Theme Delights */
+[data-theme="rice"] ::selection {
+  background: #FFD700; /* Sharp highlighter yellow */
+  color: #000;
+}
+
+[data-theme="rice"] a:hover::after {
+  content: "*";
+  color: var(--color-primary);
+  font-size: 0.8em;
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+/* Futuristic Theme Delights */
+[data-theme="futuristic"] ::selection {
+  background: rgba(0, 255, 255, 0.9); /* Stark cyan */
+  color: #000;
+  text-shadow: 2px 0 0 rgba(255,0,255,0.8);
+}
+
+[data-theme="futuristic"] a:hover {
+  text-shadow: -2px 0 red, 2px 0 cyan;
+  animation: glitch-anim 0.2s linear infinite;
+}
+
+@keyframes glitch-anim {
+  0% { transform: translate(0) }
+  20% { transform: translate(-1px, 1px) }
+  40% { transform: translate(-1px, -1px) }
+  60% { transform: translate(1px, 1px) }
+  80% { transform: translate(1px, -1px) }
+  100% { transform: translate(0) }
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-text);
@@ -22,6 +69,21 @@ body {
   transition: var(--transition-colors);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url('/noise.svg');
+  opacity: 0.2;
+  mix-blend-mode: overlay;
 }
 
 @layer base {
