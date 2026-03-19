@@ -45,9 +45,11 @@ export const baseThemeTokens: DesignTokens = {
     border: '#E5E7EB',         // Gray-200
     borderLight: '#F3F4F6',    // Gray-100
     borderDark: '#D1D5DB',     // Gray-300
+    glass: 'rgba(255, 255, 255, 0.7)',
+    glassBorder: 'rgba(255, 255, 255, 0.2)',
   },
   typography: {
-    fontHeading: "'Poppins', sans-serif",
+    fontHeading: "'Playfair Display', serif",
     fontBody: "'Inter', sans-serif",
     fontMono: "'Fira Code', monospace",
     fontSize: {
@@ -151,10 +153,12 @@ export const cameroonianThemeTokens: DesignTokens = {
     border: '#D4D4D4',
     borderLight: '#E5E5E5',
     borderDark: '#B4B4B4',
+    glass: 'rgba(255, 255, 255, 0.7)',
+    glassBorder: 'rgba(255, 255, 255, 0.4)',
   },
   typography: {
     ...baseThemeTokens.typography,
-    fontHeading: "'Ubuntu Condensed', sans-serif",
+    fontHeading: "'Playfair Display', serif",
     fontBody: "'Open Sans', sans-serif",
     letterSpacing: {
       tighter: '-0.03em',
@@ -220,10 +224,12 @@ export const riceThemeTokens: DesignTokens = {
     border: '#E5E7EB',
     borderLight: '#F3F4F6',
     borderDark: '#D1D5DB',
+    glass: 'rgba(255, 255, 255, 0.7)',
+    glassBorder: 'rgba(255, 255, 255, 0.4)',
   },
   typography: {
     ...baseThemeTokens.typography,
-    fontHeading: "'Merriweather', serif",
+    fontHeading: "'Playfair Display', serif",
     fontBody: "'Inter', sans-serif",
     letterSpacing: {
       tighter: '-0.02em',
@@ -289,10 +295,12 @@ export const futuristicThemeTokens: DesignTokens = {
     border: '#2A2A2A',
     borderLight: '#3A3A3A',
     borderDark: '#1A1A1A',
+    glass: 'rgba(0, 0, 0, 0.4)',
+    glassBorder: 'rgba(255, 255, 255, 0.1)',
   },
   typography: {
     ...baseThemeTokens.typography,
-    fontHeading: "'Orbitron', monospace",
+    fontHeading: "'Playfair Display', serif",
     fontBody: "'Titillium Web', sans-serif",
     letterSpacing: {
       tighter: '0',

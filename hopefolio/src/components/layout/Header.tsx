@@ -159,7 +159,7 @@ export default function Header() {
           isHeaderVisible ? "translate-y-0" : "-translate-y-[120%]"
         }`}
       >
-        <div className="mx-auto max-w-6xl px-3 pt-2.5 sm:px-4 md:px-6">
+        <div className="mx-auto max-w-5xl px-4 pt-8 sm:px-6 md:px-8">
           <div
             className={`pointer-events-auto overflow-hidden border ${styles.theme}`}
             style={{

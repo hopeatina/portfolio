@@ -66,7 +66,7 @@ export default function Footer() {
             <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-body-secondary">
               Agent infrastructure
             </div>
-            <h2 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-heading md:text-[2rem]">
+            <h2 className="mt-3 text-3xl md:text-5xl font-semibold tracking-[-0.04em] text-heading" style={{ fontFamily: "var(--font-heading)" }}>
               Hope Atina
             </h2>
             <p className="mt-4 text-sm leading-7 text-body-secondary md:text-[15px]">

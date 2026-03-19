@@ -3,6 +3,7 @@ import { isThemeDark, useTheme } from "@/modules/mode-switch/ThemeContext";
 import Header from "./Header";
 import Footer from "./Footer";
 import SiteSeo from "./SiteSeo";
+import ThemeEffects from "../ui/ThemeEffects";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -40,6 +41,7 @@ export default function Layout({ children, showFooter = true }: LayoutProps) {
 
   return (
     <>
+      <ThemeEffects />
       {/* Theme transition overlay */}
       <div className="theme-transition-overlay" aria-hidden="true" />
       <SiteSeo />

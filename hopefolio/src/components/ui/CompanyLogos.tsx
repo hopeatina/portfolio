@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
 
 type Company = {
   name: string;
@@ -58,343 +57,59 @@ const companies: Company[] = [
 ];
 
 export default function CompanyLogos() {
-  const { theme } = useTheme();
-  const isDarkTheme = theme === "futuristic";
-  const [leadCompany, ...supportingCompanies] = companies;
-  const [topSupport, ...bottomSupport] = supportingCompanies;
-
   return (
-    <section
-      className="relative overflow-hidden border-y py-24"
-      style={{
-        background: isDarkTheme
-          ? "rgba(7, 12, 24, 0.98)"
-          : "rgba(255, 255, 255, 0.5)",
-        borderColor: "var(--color-border)",
-      }}
-    >
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl">
-            <p
-              className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
-              style={{
-                color: "var(--color-primary)",
-                opacity: 0.9,
-              }}
-            >
-              Production proof
-            </p>
-            <h2
-              className="text-4xl font-bold md:text-5xl"
-              style={{
-                color: isDarkTheme
-                  ? "var(--color-primary)"
-                  : "var(--color-text)",
-                fontFamily: "var(--font-heading)",
-                letterSpacing: "var(--letter-spacing-tight)",
-              }}
-            >
-              Shipped in production
-            </h2>
-          </div>
-
-          <p
-            className="max-w-2xl text-base leading-relaxed md:text-lg"
-            style={{
-              color: "var(--color-text)",
-              opacity: isDarkTheme ? 0.78 : 0.72,
-            }}
-          >
-            One environment should carry the most weight. The rest should make it
-            clear the judgment holds under healthcare compliance, consumer
-            reliability, enterprise data scale, and scientific tooling.
+    <section className="relative w-full py-40 px-6 lg:px-12 bg-transparent z-10">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-32 max-w-3xl mx-auto text-center">
+          <p className="mb-6 text-xs font-mono uppercase tracking-[0.25em] text-text-muted">
+            Production environment proof
+          </p>
+          <h2 className="text-5xl md:text-6xl font-heading font-medium tracking-tight text-text">
+            Shipped in production
+          </h2>
+          <p className="mt-8 text-xl font-body font-light text-text-muted leading-relaxed max-w-2xl mx-auto">
+            Judgment that holds under healthcare compliance, consumer reliability, enterprise data scale, and scientific tooling.
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
-          <a
-            href={leadCompany.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group no-underline"
-          >
-            <article
-              className="flex h-full flex-col overflow-hidden rounded-[2.35rem] border px-7 py-7 md:px-9 md:py-9"
-              style={{
-                background: isDarkTheme
-                  ? "linear-gradient(160deg, rgba(9, 17, 31, 0.98), rgba(8, 47, 73, 0.78))"
-                  : "linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.95))",
-                borderColor: isDarkTheme
-                  ? "rgba(56, 189, 248, 0.16)"
-                  : "rgba(15, 23, 42, 0.08)",
-                boxShadow: isDarkTheme
-                  ? "0 24px 80px rgba(2, 6, 23, 0.32)"
-                  : "0 20px 60px rgba(15, 23, 42, 0.08)",
-              }}
-            >
-              <div className="flex items-start justify-between gap-5">
-                <div className="max-w-xl">
-                  <p
-                    className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                    style={{ color: "var(--color-primary)", opacity: 0.88 }}
-                  >
-                    Lead production story
-                  </p>
-                  <h3
-                    className="mt-3 text-[2.4rem] font-semibold"
-                    style={{
-                      color: "var(--color-text)",
-                      fontFamily: "var(--font-heading)",
-                      lineHeight: 0.94,
-                    }}
-                  >
-                    {leadCompany.name}
-                  </h3>
-                  <p
-                    className="mt-2 text-sm"
-                    style={{
-                      color: "var(--color-text)",
-                      opacity: isDarkTheme ? 0.7 : 0.64,
-                    }}
-                  >
-                    {leadCompany.role}
-                  </p>
-                </div>
-
-                {leadCompany.logo && (
-                  <div className="relative h-12 w-24 flex-shrink-0 opacity-80 transition-opacity duration-200 group-hover:opacity-100">
+        <div className="flex flex-col gap-32">
+          {companies.map((company, index) => (
+            <div key={company.name} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-16 md:gap-32`}>
+              
+              <div className="w-full md:w-1/3 flex justify-center">
+                {company.logo && (
+                  <div className="relative h-24 w-48 opacity-80 hover:opacity-100 transition-opacity duration-500 mix-blend-difference filter grayscale invert">
                     <Image
-                      src={leadCompany.logo}
-                      alt={`${leadCompany.name} logo`}
+                      src={company.logo}
+                      alt={`${company.name} logo`}
                       fill
                       className="object-contain"
-                      style={{
-                        filter: isDarkTheme
-                          ? "brightness(0) invert(1) opacity(0.92)"
-                          : "grayscale(100%)",
-                      }}
                     />
                   </div>
                 )}
               </div>
 
-              <p
-                className="mt-10 max-w-2xl text-2xl leading-tight md:text-[2rem]"
-                style={{
-                  color: "var(--color-text)",
-                  opacity: isDarkTheme ? 0.96 : 0.88,
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                {leadCompany.impact}
-              </p>
-
-              <dl className="mt-10 grid gap-6 border-t border-white/10 pt-6 md:grid-cols-2">
-                <div>
-                  <dt
-                    className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                    style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                  >
-                    Environment
-                  </dt>
-                  <dd
-                    className="mt-2 text-sm leading-relaxed md:text-[15px]"
-                    style={{
-                      color: "var(--color-text)",
-                      opacity: isDarkTheme ? 0.8 : 0.72,
-                    }}
-                  >
-                    {leadCompany.environment}
-                  </dd>
-                </div>
-                <div>
-                  <dt
-                    className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                    style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                  >
-                    What shipped
-                  </dt>
-                  <dd
-                    className="mt-2 text-sm leading-relaxed md:text-[15px]"
-                    style={{
-                      color: "var(--color-text)",
-                      opacity: isDarkTheme ? 0.8 : 0.72,
-                    }}
-                  >
-                    {leadCompany.shipped}
-                  </dd>
-                </div>
-              </dl>
-            </article>
-          </a>
-
-          <div className="grid gap-4">
-            <a
-              href={topSupport.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group no-underline"
-            >
-              <article
-                className="rounded-[1.8rem] border px-6 py-6"
-                style={{
-                  background: isDarkTheme
-                    ? "rgba(9, 17, 31, 0.84)"
-                    : "rgba(255, 255, 255, 0.92)",
-                  borderColor: isDarkTheme
-                    ? "rgba(148, 163, 184, 0.16)"
-                    : "rgba(15, 23, 42, 0.08)",
-                }}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p
-                      className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                      style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                    >
-                      {topSupport.environment}
-                    </p>
-                    <h3
-                      className="mt-3 text-2xl font-semibold"
-                      style={{
-                        color: "var(--color-text)",
-                        fontFamily: "var(--font-heading)",
-                      }}
-                    >
-                      {topSupport.name}
-                    </h3>
-                    <p
-                      className="mt-1 text-sm"
-                      style={{
-                        color: "var(--color-text)",
-                        opacity: isDarkTheme ? 0.72 : 0.64,
-                      }}
-                    >
-                      {topSupport.role}
-                    </p>
-                  </div>
-
-                  {topSupport.logo && (
-                    <div className="relative h-10 w-20 flex-shrink-0 opacity-70 transition-opacity duration-200 group-hover:opacity-100">
-                      <Image
-                        src={topSupport.logo}
-                        alt={`${topSupport.name} logo`}
-                        fill
-                        className="object-contain"
-                        style={{
-                          filter: isDarkTheme
-                            ? "brightness(0) invert(1) opacity(0.86)"
-                            : "grayscale(100%)",
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <p
-                  className="mt-5 text-base leading-relaxed"
-                  style={{
-                    color: "var(--color-text)",
-                    opacity: isDarkTheme ? 0.84 : 0.74,
-                  }}
-                >
-                  {topSupport.impact}
+              <div className="w-full md:w-2/3 flex flex-col gap-6">
+                <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary">
+                  {company.environment}
                 </p>
-                <p
-                  className="mt-5 text-sm leading-relaxed"
-                  style={{
-                    color: "var(--color-text)",
-                    opacity: isDarkTheme ? 0.68 : 0.64,
-                  }}
-                >
-                  {topSupport.shipped}
+                <h3 className="text-4xl md:text-5xl font-heading text-text">
+                  {company.name}
+                </h3>
+                <p className="text-xl font-body font-light text-text-muted italic">
+                  {company.role}
                 </p>
-              </article>
-            </a>
+                <p className="text-2xl font-body font-light text-text leading-relaxed mt-4">
+                  {company.impact}
+                </p>
+                <div className="mt-8 pl-6 border-l border-white/20">
+                  <p className="text-sm font-mono uppercase tracking-widest text-text-muted mb-2">What shipped</p>
+                  <p className="text-lg font-body font-light text-text-muted">{company.shipped}</p>
+                </div>
+              </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
-              {bottomSupport.map((company) => (
-                <a
-                  key={company.name}
-                  href={company.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group no-underline"
-                >
-                  <article
-                    className="h-full rounded-[1.6rem] border px-5 py-5"
-                    style={{
-                      background: isDarkTheme
-                        ? "rgba(255, 255, 255, 0.03)"
-                        : "rgba(255, 255, 255, 0.9)",
-                      borderColor: isDarkTheme
-                        ? "rgba(148, 163, 184, 0.12)"
-                        : "rgba(15, 23, 42, 0.08)",
-                    }}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p
-                          className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                          style={{
-                            color: "var(--color-primary)",
-                            opacity: 0.82,
-                          }}
-                        >
-                          {company.environment}
-                        </p>
-                        <h3
-                          className="mt-3 text-xl font-semibold"
-                          style={{
-                            color: "var(--color-text)",
-                            fontFamily: "var(--font-heading)",
-                          }}
-                        >
-                          {company.name}
-                        </h3>
-                      </div>
-
-                      {company.logo && (
-                        <div className="relative h-9 w-16 flex-shrink-0 opacity-70 transition-opacity duration-200 group-hover:opacity-100">
-                          <Image
-                            src={company.logo}
-                            alt={`${company.name} logo`}
-                            fill
-                            className="object-contain"
-                            style={{
-                              filter: isDarkTheme
-                                ? "brightness(0) invert(1) opacity(0.84)"
-                                : "grayscale(100%)",
-                            }}
-                          />
-                        </div>
-                      )}
-                    </div>
-
-                    <p
-                      className="mt-4 text-sm leading-relaxed"
-                      style={{
-                        color: "var(--color-text)",
-                        opacity: isDarkTheme ? 0.8 : 0.72,
-                      }}
-                    >
-                      {company.impact}
-                    </p>
-                    <p
-                      className="mt-4 text-sm leading-relaxed"
-                      style={{
-                        color: "var(--color-text)",
-                        opacity: isDarkTheme ? 0.64 : 0.6,
-                      }}
-                    >
-                      {company.shipped}
-                    </p>
-                  </article>
-                </a>
-              ))}
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

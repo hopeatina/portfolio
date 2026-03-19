@@ -57,6 +57,10 @@ export interface SemanticColors {
   border: string;
   borderLight: string;
   borderDark: string;
+
+  // Glassmorphism
+  glass: string;
+  glassBorder: string;
 }
 
 export interface Typography {

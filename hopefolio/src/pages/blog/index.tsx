@@ -2,7 +2,7 @@
 
 import React from "react";
 import Head from "next/head";
-import BlogPostCard from "@/components/blog/BlogPostCard";
+import Link from "next/link";
 import { isThemeDark, useTheme } from "@/modules/mode-switch/ThemeContext";
 
 const BLOG_DESCRIPTION = "Technical writing on agent orchestration, MCP protocol, and production AI infrastructure";
@@ -55,131 +55,61 @@ export default function Blog() {
         <meta name="description" content={BLOG_DESCRIPTION} />
       </Head>
 
-      <main
-        className="min-h-screen"
-        style={{ paddingTop: "var(--spacing-24)" }}
-      >
-        {/* Header Section */}
-        <section
-          className="relative py-20 md:py-28"
-          style={{
-            background: isDarkTheme
-              ? "linear-gradient(180deg, rgba(var(--background-rgb), 1) 0%, rgba(var(--color-surface-rgb), 0.94) 100%)"
-              : "linear-gradient(180deg, rgba(var(--color-surface-rgb), 0.7) 0%, rgba(var(--background-rgb), 1) 100%)",
-          }}
-        >
-          <div className="container mx-auto px-4 text-center">
-            <h1
-              className="text-5xl md:text-7xl font-bold mb-6"
-              style={{
-                fontFamily: "var(--font-heading)",
-                color: "var(--primary)",
-                lineHeight: "var(--line-height-heading)",
-              }}
-            >
-              Technical Writing
+      <main className="min-h-screen pt-32 pb-24 px-6 md:px-12 lg:px-24 bg-background">
+        <div className="max-w-5xl mx-auto">
+          {/* Header Section */}
+          <header className="mb-32">
+            <div className="text-xs uppercase tracking-[0.2em] mb-6 text-body-secondary">
+              Index
+            </div>
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-semibold tracking-[-0.04em] text-heading" style={{ fontFamily: "var(--font-heading)" }}>
+              Writing
             </h1>
-
-            {/* Decorative element */}
-            <div
-              className="w-24 h-1 mx-auto mb-8 rounded-full"
-              style={{
-                background: "var(--gradient-primary)",
-                opacity: 0.8,
-              }}
-            />
-
-            <p
-              className="text-xl md:text-2xl max-w-2xl mx-auto"
-              style={{
-                fontFamily: "var(--font-body)",
-                color: isDarkTheme
-                  ? "var(--text-on-dark-secondary)"
-                  : "var(--text-secondary)",
-                lineHeight: "var(--line-height-body)",
-              }}
-            >
+            <p className="mt-8 text-xl md:text-2xl max-w-2xl text-body-secondary leading-relaxed font-light">
               {BLOG_DESCRIPTION}
             </p>
+          </header>
+
+          {/* Posts List */}
+          <div className="flex flex-col border-t border-border">
+            {posts.map((post, index) => (
+              <article key={post.slug} className="group border-b border-border transition-colors hover:bg-[var(--surface)]">
+                <Link href={`/blog/${post.slug}`} className="block py-10 md:py-16 px-4 md:px-8">
+                  <div className="grid md:grid-cols-[200px_minmax(0,1fr)_120px] gap-6 md:gap-12 items-start">
+                    <div className="text-sm tracking-[0.1em] text-body-secondary font-mono mt-2">
+                      {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </div>
+                    
+                    <div>
+                      <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-heading mb-4" style={{ fontFamily: "var(--font-heading)" }}>
+                        {post.title}
+                      </h2>
+                      <p className="text-lg text-body-secondary leading-relaxed max-w-2xl">
+                        {post.excerpt}
+                      </p>
+                    </div>
+
+                    <div className="hidden md:flex justify-end mt-2 opacity-0 -translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                      <span className="text-2xl text-heading">→</span>
+                    </div>
+                  </div>
+                </Link>
+              </article>
+            ))}
           </div>
 
-          {/* Background pattern */}
-          <div
-            className="absolute inset-0 -z-10 opacity-5"
-            style={{
-              backgroundImage: `radial-gradient(circle at 50% 0%, var(--primary) 0%, transparent 70%)`,
-            }}
-          />
-        </section>
-
-        {/* Posts Grid */}
-        <section className="py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <div className="grid max-w-3xl gap-10 mx-auto md:gap-12">
-              {posts.map((post, index) => (
-                <article
-                  key={post.slug}
-                  className="relative"
-                  style={{
-                    animation: `fadeInUp 0.6s ease-out forwards`,
-                    animationDelay: `${index * 0.1}s`,
-                    opacity: 0,
-                  }}
-                >
-                  <BlogPostCard {...post} />
-
-                  {/* Divider between posts */}
-                  {index !== posts.length - 1 && (
-                    <div
-                      className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-1/2 h-px"
-                      style={{
-                        background: "var(--border)",
-                        opacity: 0.3,
-                      }}
-                    />
-                  )}
-                </article>
-              ))}
-            </div>
-
-            {/* More writing CTA */}
-            <div className="mt-24 max-w-2xl mx-auto text-center">
-              <p
-                className="text-lg"
-                style={{
-                  color: isDarkTheme
-                    ? "var(--text-on-dark-secondary)"
-                    : "var(--text-secondary)",
-                  lineHeight: "var(--line-height-body)",
-                }}
-              >
-                More articles on{" "}
-                <a
-                  href="https://medium.com/@hopeatina"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "var(--primary)" }}
-                >
-                  Medium
-                </a>
-              </p>
-            </div>
+          <div className="mt-32 text-center">
+            <a
+              href="https://medium.com/@hopeatina"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-sm uppercase tracking-[0.2em] font-medium text-body-secondary hover:text-heading transition-colors"
+            >
+              More articles on Medium <span className="ml-2">↗</span>
+            </a>
           </div>
-        </section>
+        </div>
       </main>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTheme } from "@/modules/mode-switch/ThemeContext";
 import type { IconType } from "react-icons";
 import { FiActivity, FiCpu, FiShield } from "react-icons/fi";
 import { FaAws } from "react-icons/fa";
@@ -127,284 +126,84 @@ const capabilityPillars: CapabilityPillar[] = [
 ];
 
 export default function TechStack() {
-  const { theme } = useTheme();
-  const isDarkTheme = theme === "futuristic";
-  const [activeTab, setActiveTab] = useState(0);
-  const pillar = capabilityPillars[activeTab];
-  const accentColor = isDarkTheme
-    ? "var(--color-primary)"
-    : "var(--color-text)";
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section
-      className="relative overflow-hidden py-24"
-      style={{
-        background: isDarkTheme
-          ? "rgba(2, 6, 23, 0.98)"
-          : "var(--color-surface)",
-      }}
-    >
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-12 max-w-3xl">
-          <p
-            className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
-            style={{ color: "var(--color-primary)", opacity: 0.9 }}
-          >
+    <section className="relative w-full py-40 px-6 lg:px-12 bg-transparent">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-32">
+          <p className="mb-6 text-xs font-mono uppercase tracking-[0.25em] text-text-muted">
             Operating model
           </p>
-          <h2
-            className="text-4xl font-bold md:text-5xl"
-            style={{
-              color: isDarkTheme
-                ? "var(--color-primary)"
-                : "var(--color-text)",
-              fontFamily: "var(--font-heading)",
-              letterSpacing: "var(--letter-spacing-tight)",
-            }}
-          >
-            How the systems behave
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-heading font-medium tracking-tight text-text">
+            How the systems <span className="italic text-primary font-light">behave</span>
           </h2>
-          <p
-            className="mt-5 text-lg leading-relaxed md:text-xl"
-            style={{
-              color: "var(--color-text)",
-              opacity: isDarkTheme ? 0.82 : 0.74,
-            }}
-          >
-            Explicit control, safe tool calling, visible trust signals, and
-            production-minded execution should read as behavior, not just as a
-            list of technologies.
-          </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[248px_minmax(0,1fr)]">
-          <div className="space-y-3">
-            {capabilityPillars.map((item, index) => (
-              <button
-                key={item.name}
-                onClick={() => setActiveTab(index)}
-                className="w-full rounded-[1.55rem] border px-5 py-4 text-left transition-all duration-200"
-                style={{
-                  background:
-                    activeTab === index
-                      ? isDarkTheme
-                        ? "rgba(255, 255, 255, 0.04)"
-                        : "rgba(255, 255, 255, 0.92)"
-                      : "transparent",
-                  borderColor:
-                    activeTab === index
-                      ? isDarkTheme
-                        ? "rgba(56, 189, 248, 0.18)"
-                        : "rgba(15, 23, 42, 0.12)"
-                      : isDarkTheme
-                      ? "rgba(148, 163, 184, 0.12)"
-                      : "rgba(15, 23, 42, 0.08)",
-                  boxShadow:
-                    activeTab === index && !isDarkTheme
-                      ? "0 16px 40px rgba(15, 23, 42, 0.06)"
-                      : "none",
-                }}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <p
-                    className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                    style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                  >
-                    {item.label}
+        <div className="flex flex-col border-t border-white/10">
+          {capabilityPillars.map((item, index) => (
+            <div
+              key={item.name}
+              className="group relative border-b border-white/10 py-16 transition-colors duration-500 hover:bg-white/[0.02]"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16 relative z-10 px-8">
+                
+                {/* Typographic Left */}
+                <div className="flex flex-col justify-center">
+                  <p className="text-xs font-mono text-white/40 mb-6 tracking-widest uppercase">
+                    0{index + 1} {"//"} {item.label}
                   </p>
-                  <p
-                    className="text-sm font-medium"
-                    style={{
-                      color: "var(--color-text)",
-                      opacity: activeTab === index ? 0.6 : 0.48,
-                    }}
-                  >
-                    0{index + 1}
+                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-heading text-text group-hover:text-primary transition-colors duration-500">
+                    {item.name}
+                  </h3>
+                </div>
+
+                {/* Details revealed on hover (always visible on mobile, fading on desktop) */}
+                <div className={`flex flex-col gap-10 transition-all duration-500 ${hoveredIndex === index ? 'opacity-100 translate-y-0' : 'lg:opacity-0 lg:translate-y-4 opacity-100 translate-y-0'}`}>
+                  <p className="text-2xl font-body font-light text-text-muted leading-relaxed">
+                    {item.summary}
                   </p>
-                </div>
-                <p
-                  className="mt-3 text-lg font-semibold"
-                  style={{ color: "var(--color-text)" }}
-                >
-                  {item.name}
-                </p>
-                <div className="mt-4 flex items-center gap-2 text-base">
-                  {item.tools.slice(0, 3).map((tool) => {
-                    const Icon = tool.icon;
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div>
+                      <p className="text-xs font-mono uppercase tracking-[0.2em] text-white/50 mb-6">Behaviors</p>
+                      <ul className="space-y-4">
+                        {item.behaviors.map((behavior, i) => (
+                          <li key={i} className="text-base text-text-muted font-light leading-relaxed flex items-start gap-4">
+                            <span className="text-primary mt-1 text-xs">✦</span>
+                            {behavior}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                    return (
-                      <span
-                        key={tool.name}
-                        className="inline-flex h-8 w-8 items-center justify-center rounded-full border"
-                        style={{
-                          borderColor: isDarkTheme
-                            ? "rgba(148, 163, 184, 0.18)"
-                            : "rgba(15, 23, 42, 0.1)",
-                          background: isDarkTheme
-                            ? "rgba(255, 255, 255, 0.05)"
-                            : "rgba(255, 255, 255, 0.72)",
-                          color: accentColor,
-                        }}
-                        aria-hidden="true"
-                      >
-                        <Icon />
-                      </span>
-                    );
-                  })}
-                </div>
-              </button>
-            ))}
-          </div>
-
-          <div
-            className="overflow-hidden rounded-[2.1rem] border"
-            style={{
-              background: isDarkTheme
-                ? "linear-gradient(180deg, rgba(9, 17, 31, 0.94), rgba(5, 10, 20, 0.94))"
-                : "rgba(255, 255, 255, 0.95)",
-              borderColor: isDarkTheme
-                ? "rgba(56, 189, 248, 0.16)"
-                : "rgba(15, 23, 42, 0.08)",
-              boxShadow: isDarkTheme
-                ? "0 22px 64px rgba(2, 6, 23, 0.32)"
-                : "0 18px 42px rgba(15, 23, 42, 0.08)",
-            }}
-          >
-            <div className="grid gap-8 px-6 py-6 md:px-8 md:py-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-              <div>
-                <h3
-                  className="text-3xl font-semibold"
-                  style={{
-                    color: "var(--color-text)",
-                    fontFamily: "var(--font-heading)",
-                  }}
-                >
-                  {pillar.name}
-                </h3>
-                <p
-                  className="mt-4 max-w-2xl text-base leading-relaxed md:text-lg"
-                  style={{
-                    color: "var(--color-text)",
-                    opacity: isDarkTheme ? 0.84 : 0.76,
-                  }}
-                >
-                  {pillar.summary}
-                </p>
-
-                <div className="mt-8 grid gap-8 md:grid-cols-2">
-                  <div>
-                    <p
-                      className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                      style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                    >
-                      Behaviors
-                    </p>
-                    <ul className="mt-4 space-y-3 list-none p-0">
-                      {pillar.behaviors.map((behavior) => (
-                        <li
-                          key={behavior}
-                          className="flex items-start gap-3 text-sm leading-relaxed md:text-[15px]"
-                          style={{
-                            color: "var(--color-text)",
-                            opacity: isDarkTheme ? 0.82 : 0.74,
-                          }}
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="mt-2 h-1.5 w-1.5 rounded-full"
-                            style={{ background: "var(--color-primary)" }}
-                          />
-                          <span>{behavior}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <p
-                      className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                      style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                    >
-                      Where it shipped
-                    </p>
-                    <ul className="mt-4 space-y-3 list-none p-0">
-                      {pillar.shipped.map((item) => (
-                        <li
-                          key={item}
-                          className="flex items-start gap-3 text-sm leading-relaxed md:text-[15px]"
-                          style={{
-                            color: "var(--color-text)",
-                            opacity: isDarkTheme ? 0.82 : 0.74,
-                          }}
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="mt-2 h-1.5 w-1.5 rounded-full"
-                            style={{ background: "var(--color-primary)" }}
-                          />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <p
-                  className="text-[11px] font-semibold uppercase tracking-[0.18em]"
-                  style={{ color: "var(--color-primary)", opacity: 0.82 }}
-                >
-                  Frameworks & tools
-                </p>
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  {pillar.tools.map((tool) => {
-                    const Icon = tool.icon;
-
-                    return (
-                      <div
-                        key={tool.name}
-                        className="flex items-center gap-3 rounded-[1rem] border px-3 py-3"
-                        style={{
-                          borderColor: isDarkTheme
-                            ? "rgba(148, 163, 184, 0.12)"
-                            : "rgba(15, 23, 42, 0.08)",
-                          background: isDarkTheme
-                            ? "rgba(255, 255, 255, 0.03)"
-                            : "rgba(248, 250, 252, 0.72)",
-                        }}
-                      >
-                        <span
-                          className="inline-flex h-9 w-9 items-center justify-center rounded-full border text-lg"
-                          style={{
-                            borderColor: isDarkTheme
-                              ? "rgba(148, 163, 184, 0.18)"
-                              : "rgba(15, 23, 42, 0.08)",
-                            color: accentColor,
-                            background: isDarkTheme
-                              ? "rgba(255, 255, 255, 0.05)"
-                              : "rgba(255, 255, 255, 0.88)",
-                          }}
-                          aria-hidden="true"
-                        >
-                          <Icon />
-                        </span>
-                        <span
-                          className="text-sm font-medium leading-tight md:text-[15px]"
-                          style={{
-                            color: "var(--color-text)",
-                            opacity: isDarkTheme ? 0.9 : 0.82,
-                          }}
-                        >
-                          {tool.name}
-                        </span>
+                    <div>
+                      <p className="text-xs font-mono uppercase tracking-[0.2em] text-white/50 mb-6">Tooling</p>
+                      <div className="flex flex-wrap gap-4">
+                        {item.tools.map((tool) => {
+                          const Icon = tool.icon;
+                          return (
+                            <div key={tool.name} className="flex items-center gap-2 text-sm text-text-muted bg-white/5 px-4 py-2 rounded-full border border-white/10 hover:border-primary hover:text-primary transition-colors cursor-default">
+                              <Icon className="text-lg" />
+                              <span>{tool.name}</span>
+                            </div>
+                          )
+                        })}
                       </div>
-                    );
-                  })}
+                    </div>
+                  </div>
                 </div>
+
               </div>
+
+              {/* Glowing Interaction Effect */}
+              <div 
+                className={`absolute inset-0 z-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 transition-opacity duration-700 pointer-events-none ${hoveredIndex === index ? 'opacity-100' : ''}`}
+              />
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
