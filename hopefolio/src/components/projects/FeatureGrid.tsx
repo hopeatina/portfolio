@@ -92,7 +92,7 @@ export default function FeatureGrid({
                 <p
                   className={`leading-relaxed ${
                     variant === "secondary"
-                      ? "text-white/68"
+                      ? "text-text-muted"
                       : "text-body-secondary"
                   }`}
                 >
@@ -111,7 +111,7 @@ export default function FeatureGrid({
                       <span
                         className={`text-sm leading-6 ${
                           variant === "secondary"
-                            ? "text-white/76"
+                            ? "text-text-muted"
                             : "text-body"
                         }`}
                       >

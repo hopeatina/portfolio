@@ -26,7 +26,7 @@ export default function TechStack({
       role="region"
       ariaLabel="Technology stack information"
     >
-      <div className="mb-6 max-w-3xl text-sm leading-6 text-white/62">
+      <div className="mb-6 max-w-3xl text-sm leading-6 text-text-muted">
         The implementation surface for this system. These are the layers that
         mattered in practice, not a generic skills wall.
       </div>
@@ -37,10 +37,10 @@ export default function TechStack({
             className="rounded-2xl border border-white/10 bg-white/[0.03] p-4"
             role="listitem"
           >
-            <div className="text-xs uppercase tracking-[0.16em] text-white/42">
+            <div className="text-xs uppercase tracking-[0.16em] text-text-muted">
               {item.category}
             </div>
-            <div className="mt-2 text-sm leading-6 text-white/78">
+            <div className="mt-2 text-sm leading-6 text-text-muted">
               {item.technologies}
             </div>
           </div>

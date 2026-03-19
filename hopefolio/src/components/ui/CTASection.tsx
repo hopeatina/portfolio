@@ -46,11 +46,11 @@ export default function CTASection() {
         >
           <div className="grid gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
             <div className="px-8 py-10 md:px-12 md:py-12">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/[0.54]">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted[0.54]">
                 Next step
               </p>
               <h2
-                className="mt-4 text-4xl font-bold text-white md:text-5xl"
+                className="mt-4 text-4xl font-bold text-text md:text-5xl"
                 style={{
                   fontFamily: "var(--font-heading)",
                   letterSpacing: "var(--letter-spacing-tight)",
@@ -58,7 +58,7 @@ export default function CTASection() {
               >
                 Building agent infrastructure? Let&apos;s talk.
               </h2>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted md:text-xl">
                 I&apos;m looking for senior engineering roles where orchestration,
                 product systems, and operational taste all matter. The best fit
                 is work that needs both systems rigor and interaction judgment.
@@ -77,17 +77,17 @@ export default function CTASection() {
                 </Link>
                 <Link
                   href="/projects"
-                  className="no-underline inline-flex items-center gap-2 rounded-full border border-white/[0.18] px-7 py-4 text-sm font-medium text-white/90 transition-all duration-200 hover:border-white/30 hover:bg-white/[0.08] md:text-base"
+                  className="no-underline inline-flex items-center gap-2 rounded-full border border-white/[0.18] px-7 py-4 text-sm font-medium text-text-muted transition-all duration-200 hover:border-white/30 hover:bg-white/[0.08] md:text-base"
                 >
                   Review the systems
                 </Link>
               </div>
 
-              <p className="mt-8 text-sm text-white/[0.68]">
+              <p className="mt-8 text-sm text-text-muted[0.68]">
                 Prefer email?{" "}
                 <a
                   href="mailto:hopeatina@gmail.com"
-                  className="no-underline font-medium text-white"
+                  className="no-underline font-medium text-text"
                 >
                   hopeatina@gmail.com
                 </a>
@@ -103,10 +103,10 @@ export default function CTASection() {
                   className={`${index !== closingRows.length - 1 ? "border-b" : ""} py-5`}
                   style={{ borderColor: "rgba(255, 255, 255, 0.08)" }}
                 >
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/[0.5]">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-text-muted[0.5]">
                     {row.label}
                   </p>
-                  <p className="mt-3 text-sm leading-relaxed text-white/[0.8] md:text-[15px]">
+                  <p className="mt-3 text-sm leading-relaxed text-text-muted[0.8] md:text-[15px]">
                     {row.value}
                   </p>
                 </div>

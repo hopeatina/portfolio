@@ -147,7 +147,7 @@ export const DesignSystemShowcase = () => {
         <div className="flex flex-wrap gap-2">
           <span className="tag">Default Tag</span>
           <span className="tag text-primary">Primary Tag</span>
-          <span className="tag bg-primary text-white">Filled Tag</span>
+          <span className="tag bg-primary text-text">Filled Tag</span>
           <span className="tag border-secondary text-secondary">
             Secondary Tag
           </span>

@@ -204,11 +204,11 @@ export default function OrgX() {
         <meta name="description" content="A multi-agent orchestration platform built solo over 15 months." />
       </Head>
 
-      <div className="bg-black text-white min-h-screen selection:bg-white/30 selection:text-white font-sans antialiased overflow-x-hidden relative">
+      <div className="bg-background text-text min-h-screen selection:bg-white/30 selection:text-text font-sans antialiased overflow-x-hidden relative">
         
         {/* Navigation / Header */}
-        <nav className="fixed top-0 w-full z-50 p-6 mix-blend-difference flex justify-between items-center text-white/70">
-          <Link href="/projects" className="text-sm tracking-[0.2em] uppercase hover:text-white transition-colors duration-500 flex items-center gap-3">
+        <nav className="fixed top-0 w-full z-50 p-6 mix-blend-difference flex justify-between items-center text-text-muted">
+          <Link href="/projects" className="text-sm tracking-[0.2em] uppercase hover:text-text transition-colors duration-500 flex items-center gap-3">
             <span className="opacity-50">&larr;</span> Projects
           </Link>
           <span className="text-xs tracking-[0.3em] uppercase opacity-50">Case Study 01</span>
@@ -243,7 +243,7 @@ export default function OrgX() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-xl md:text-3xl lg:text-4xl text-white/70 max-w-4xl font-light leading-snug tracking-tight"
+              className="text-xl md:text-3xl lg:text-4xl text-text-muted max-w-4xl font-light leading-snug tracking-tight"
             >
               A multi-agent orchestration platform. 22 MCP servers, 131+ tools, trust-based governance, and organizational memory.
             </motion.p>
@@ -257,20 +257,20 @@ export default function OrgX() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-[var(--font-heading)] font-medium leading-[1.1] tracking-tight text-white/90"
+            className="text-4xl md:text-6xl lg:text-7xl font-[var(--font-heading)] font-medium leading-[1.1] tracking-tight text-text-muted"
           >
             "I was running multiple sessions and kept hitting the same wall: agents duplicating work, losing context, and making decisions I could not trace back."
           </motion.h2>
-          <div className="mt-16 text-white/40 text-sm uppercase tracking-[0.3em] flex flex-col items-center gap-4">
+          <div className="mt-16 text-text-muted text-sm uppercase tracking-[0.3em] flex flex-col items-center gap-4">
             <div className="w-[1px] h-12 bg-white/20"></div>
             The Coordination Problem
           </div>
         </section>
 
         {/* Edge-to-Edge High-Fidelity UI Capture */}
-        <section className="w-full relative py-20 bg-[#050505]">
+        <section className="w-full relative py-20 bg-background">
           <div className="max-w-[100rem] mx-auto px-4 md:px-8">
-            <div className="text-xs text-white/40 uppercase tracking-[0.2em] mb-8 flex justify-between items-center border-b border-white/10 pb-4">
+            <div className="text-xs text-text-muted uppercase tracking-[0.2em] mb-8 flex justify-between items-center border-b border-white/10 pb-4">
               <span>Artifact: Command Center</span>
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -298,13 +298,13 @@ export default function OrgX() {
         <section className="py-32 md:py-48 px-6 max-w-7xl mx-auto border-b border-white/5">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 items-start">
             <div className="md:col-span-5 md:sticky md:top-32">
-              <h3 className="text-4xl md:text-6xl font-[var(--font-heading)] tracking-tighter leading-[1.1] text-white/90">
+              <h3 className="text-4xl md:text-6xl font-[var(--font-heading)] tracking-tighter leading-[1.1] text-text-muted">
                 The Operating System Analogy.
               </h3>
             </div>
-            <div className="md:col-span-7 space-y-12 text-xl md:text-2xl text-white/60 font-light leading-relaxed">
+            <div className="md:col-span-7 space-y-12 text-xl md:text-2xl text-text-muted font-light leading-relaxed">
               <p>
-                An OS does not run your programs for you — it provides process management, permissions, memory, and inter-process communication. <strong className="text-white font-medium">OrgX does the same thing for AI agents.</strong>
+                An OS does not run your programs for you — it provides process management, permissions, memory, and inter-process communication. <strong className="text-text font-medium">OrgX does the same thing for AI agents.</strong>
               </p>
               <p>
                 It manages spawning, enforces trust boundaries, maintains shared memory, and coordinates handoffs between agents working on related tasks.
@@ -319,24 +319,24 @@ export default function OrgX() {
         {/* Feature Deep Dive */}
         <section className="py-32 md:py-48 px-6 max-w-7xl mx-auto border-b border-white/5">
           <div className="mb-24 md:mb-40 max-w-4xl">
-            <h3 className="text-5xl md:text-7xl font-[var(--font-heading)] tracking-tighter text-white/90 mb-8">What the system does.</h3>
-            <p className="text-2xl text-white/50 font-light leading-relaxed">The core of OrgX is the MCP integration layer, the trust governance system, and the quality scoring engine.</p>
+            <h3 className="text-5xl md:text-7xl font-[var(--font-heading)] tracking-tighter text-text-muted mb-8">What the system does.</h3>
+            <p className="text-2xl text-text-muted font-light leading-relaxed">The core of OrgX is the MCP integration layer, the trust governance system, and the quality scoring engine.</p>
           </div>
 
           <div className="space-y-40">
             {mcpFeatures.map((feature, idx) => (
               <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
                 <div className="md:col-span-5">
-                  <div className="text-sm text-white/30 tracking-[0.2em] uppercase mb-6 font-mono">0{idx + 1} {"//"} Core System</div>
+                  <div className="text-sm text-text-muted tracking-[0.2em] uppercase mb-6 font-mono">0{idx + 1} {"//"} Core System</div>
                   <h4 className="text-3xl md:text-5xl font-[var(--font-heading)] tracking-tight leading-[1.1]">{feature.title}</h4>
                 </div>
                 <div className="md:col-span-7">
-                  <p className="text-xl md:text-2xl text-white/60 font-light leading-relaxed mb-12">{feature.description}</p>
+                  <p className="text-xl md:text-2xl text-text-muted font-light leading-relaxed mb-12">{feature.description}</p>
                   {feature.items && (
                     <ul className="space-y-6">
                       {feature.items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-6 text-white/80 text-lg md:text-xl font-light">
-                          <span className="text-white/20 mt-1 font-serif text-2xl leading-none">&mdash;</span>
+                        <li key={i} className="flex items-start gap-6 text-text-muted text-lg md:text-xl font-light">
+                          <span className="text-text-muted mt-1 font-serif text-2xl leading-none">&mdash;</span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -349,15 +349,15 @@ export default function OrgX() {
         </section>
 
         {/* Infrastructure & Tradeoffs - Grid Break Layout */}
-        <section className="py-32 md:py-48 bg-[#030303]">
+        <section className="py-32 md:py-48 bg-background">
           <div className="px-6 max-w-7xl mx-auto">
-            <h3 className="text-5xl md:text-7xl font-[var(--font-heading)] tracking-tighter text-white/90 mb-24 md:mb-32">Technical Tradeoffs.</h3>
+            <h3 className="text-5xl md:text-7xl font-[var(--font-heading)] tracking-tighter text-text-muted mb-24 md:mb-32">Technical Tradeoffs.</h3>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 md:gap-24">
               {tradeoffDecisions.map((decision, idx) => (
                 <div key={idx} className="flex flex-col">
-                  <h4 className="text-2xl md:text-3xl font-[var(--font-heading)] tracking-tight mb-8 text-white">{decision.title}</h4>
-                  <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed">{decision.description}</p>
+                  <h4 className="text-2xl md:text-3xl font-[var(--font-heading)] tracking-tight mb-8 text-text">{decision.title}</h4>
+                  <p className="text-lg md:text-xl text-text-muted font-light leading-relaxed">{decision.description}</p>
                 </div>
               ))}
             </div>
@@ -368,7 +368,7 @@ export default function OrgX() {
         <section className="py-32 md:py-48 px-6 max-w-7xl mx-auto border-y border-white/5">
           <div className="text-center mb-24">
             <h3 className="text-4xl md:text-6xl font-[var(--font-heading)] tracking-tight mb-8">Architecture Overview</h3>
-            <p className="text-xl text-white/50 font-light max-w-3xl mx-auto">
+            <p className="text-xl text-text-muted font-light max-w-3xl mx-auto">
               Three independent layers: Event (Inngest), Governance, and Intelligence. They evolve separately, preventing tight coupling between orchestration and permissions.
             </p>
           </div>
@@ -387,11 +387,11 @@ export default function OrgX() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-24">
             {capabilityFeatures.map((feature, idx) => (
               <div key={idx} className="group cursor-default">
-                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/30 font-mono text-sm mb-8 group-hover:border-white/40 group-hover:text-white transition-colors duration-500">
+                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-text-muted font-mono text-sm mb-8 group-hover:border-white/40 group-hover:text-text transition-colors duration-500">
                   {String(idx + 1).padStart(2, '0')}
                 </div>
-                <h4 className="text-2xl md:text-3xl font-[var(--font-heading)] text-white mb-6 tracking-tight">{feature.title}</h4>
-                <p className="text-white/50 text-lg font-light leading-relaxed">{feature.description}</p>
+                <h4 className="text-2xl md:text-3xl font-[var(--font-heading)] text-text mb-6 tracking-tight">{feature.title}</h4>
+                <p className="text-text-muted text-lg font-light leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -401,14 +401,14 @@ export default function OrgX() {
         <section className="py-24 px-6 max-w-7xl mx-auto border-t border-white/5">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-16">
             <div className="md:col-span-1">
-              <h3 className="text-sm tracking-[0.2em] uppercase text-white/40 mb-12">The Stack</h3>
+              <h3 className="text-sm tracking-[0.2em] uppercase text-text-muted mb-12">The Stack</h3>
             </div>
             <div className="md:col-span-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-12 gap-x-16">
                 {techStack.map(stack => (
                   <div key={stack.category} className="flex flex-col gap-2 border-b border-white/5 pb-8">
-                    <span className="text-white/40 text-xs uppercase tracking-widest">{stack.category}</span>
-                    <span className="text-xl text-white/90 font-light">{stack.technologies}</span>
+                    <span className="text-text-muted text-xs uppercase tracking-widest">{stack.category}</span>
+                    <span className="text-xl text-text-muted font-light">{stack.technologies}</span>
                   </div>
                 ))}
               </div>
@@ -428,14 +428,14 @@ export default function OrgX() {
             className="relative z-10"
           >
             <h2 className="text-5xl md:text-8xl font-[var(--font-heading)] font-medium tracking-tighter mb-12 leading-[1.1]">
-              15 Months. 7 Repos.<br/><span className="text-white/30">1 Production System.</span>
+              15 Months. 7 Repos.<br/><span className="text-text-muted">1 Production System.</span>
             </h2>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24 max-w-4xl mx-auto">
               {projectStats.map((stat, i) => (
                 <div key={i} className="flex flex-col items-center gap-3">
-                   <span className="text-4xl md:text-5xl font-[var(--font-heading)] tracking-tighter text-white">{stat.value}</span>
-                   <span className="text-white/40 text-xs uppercase tracking-[0.2em]">{stat.label}</span>
+                   <span className="text-4xl md:text-5xl font-[var(--font-heading)] tracking-tighter text-text">{stat.value}</span>
+                   <span className="text-text-muted text-xs uppercase tracking-[0.2em]">{stat.label}</span>
                 </div>
               ))}
             </div>
@@ -453,12 +453,12 @@ export default function OrgX() {
                 href="https://github.com/hopeatina" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="px-10 py-5 bg-transparent border border-white/20 text-white rounded-full font-medium tracking-wide hover:bg-white/5 transition-colors duration-500 w-full sm:w-auto"
+                className="px-10 py-5 bg-transparent border border-white/20 text-text rounded-full font-medium tracking-wide hover:bg-white/5 transition-colors duration-500 w-full sm:w-auto"
               >
                 Review Ecosystem
               </a>
             </div>
-            <p className="mt-12 text-white/30 text-sm font-light">
+            <p className="mt-12 text-text-muted text-sm font-light">
               Not a demo. Not a prototype. A working system I use daily.
             </p>
           </motion.div>
