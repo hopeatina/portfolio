@@ -152,7 +152,7 @@ export default function TechStack() {
                 
                 {/* Typographic Left */}
                 <div className="flex flex-col justify-center">
-                  <p className="text-xs font-mono text-white/40 mb-6 tracking-widest uppercase">
+                  <p className="text-xs font-mono text-text-muted mb-6 tracking-widest uppercase">
                     0{index + 1} {"//"} {item.label}
                   </p>
                   <h3 className="text-4xl md:text-5xl lg:text-6xl font-heading text-text group-hover:text-primary transition-colors duration-500">
@@ -168,7 +168,7 @@ export default function TechStack() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div>
-                      <p className="text-xs font-mono uppercase tracking-[0.2em] text-white/50 mb-6">Behaviors</p>
+                      <p className="text-xs font-mono uppercase tracking-[0.2em] text-text-muted mb-6">Behaviors</p>
                       <ul className="space-y-4">
                         {item.behaviors.map((behavior, i) => (
                           <li key={i} className="text-base text-text-muted font-light leading-relaxed flex items-start gap-4">
@@ -180,7 +180,7 @@ export default function TechStack() {
                     </div>
 
                     <div>
-                      <p className="text-xs font-mono uppercase tracking-[0.2em] text-white/50 mb-6">Tooling</p>
+                      <p className="text-xs font-mono uppercase tracking-[0.2em] text-text-muted mb-6">Tooling</p>
                       <div className="flex flex-wrap gap-4">
                         {item.tools.map((tool) => {
                           const Icon = tool.icon;

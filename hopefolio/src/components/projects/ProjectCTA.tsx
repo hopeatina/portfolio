@@ -23,17 +23,17 @@ export default function ProjectCTA({
     <section className={`mt-16 ${className}`}>
       <Card
         variant="glass"
-        className="overflow-hidden rounded-[32px] border border-white/10 bg-[#06121c] p-0 text-white shadow-[0_32px_100px_-65px_rgba(2,8,23,0.9)]"
+        className="overflow-hidden rounded-[32px] border border-white/10 bg-[#06121c] p-0 text-text shadow-[0_32px_100px_-65px_rgba(2,8,23,0.9)]"
       >
         <div className="grid gap-0 md:grid-cols-[minmax(0,1fr)_320px]">
           <div className="p-8 md:p-10">
-            <div className="text-xs uppercase tracking-[0.18em] text-white/42">
+            <div className="text-xs uppercase tracking-[0.18em] text-text-muted">
               Next inspection step
             </div>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white md:text-4xl">
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-text md:text-4xl">
               {title}
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-white/72 md:text-lg">
+            <p className="mt-4 max-w-2xl text-base leading-7 text-text-muted md:text-lg">
               {description}
             </p>
 
@@ -53,38 +53,38 @@ export default function ProjectCTA({
           </div>
 
           <div className="border-t border-white/10 bg-white/[0.03] p-8 md:border-l md:border-t-0 md:p-10">
-            <div className="space-y-4 text-sm leading-6 text-white/68">
+            <div className="space-y-4 text-sm leading-6 text-text-muted">
               {demoUrl && (
                 <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4">
-                  <div className="text-xs uppercase tracking-[0.16em] text-white/42">
+                  <div className="text-xs uppercase tracking-[0.16em] text-text-muted">
                     Live surface
                   </div>
-                  <div className="mt-2 break-all text-white/78">{demoUrl}</div>
+                  <div className="mt-2 break-all text-text-muted">{demoUrl}</div>
                 </div>
               )}
 
               {githubUrl && (
                 <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4">
-                  <div className="text-xs uppercase tracking-[0.16em] text-white/42">
+                  <div className="text-xs uppercase tracking-[0.16em] text-text-muted">
                     Source
                   </div>
-                  <div className="mt-2 break-all text-white/78">
+                  <div className="mt-2 break-all text-text-muted">
                     {githubUrl}
                   </div>
                 </div>
               )}
 
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4">
-                <div className="text-xs uppercase tracking-[0.16em] text-white/42">
+                <div className="text-xs uppercase tracking-[0.16em] text-text-muted">
                   Why this matters
                 </div>
-                <div className="mt-2 text-white/78">
+                <div className="mt-2 text-text-muted">
                   Strong systems work should be inspectable from multiple
                   angles: interface, architecture, and implementation.
                 </div>
               </div>
 
-              {note && <div className="pt-2 text-white/56">{note}</div>}
+              {note && <div className="pt-2 text-text-muted">{note}</div>}
             </div>
           </div>
         </div>

@@ -65,10 +65,10 @@ export default function Testimonials() {
 
               {/* Supporting details */}
               <div className={`w-full md:w-1/2 flex flex-col gap-6 ${index % 2 === 0 ? '' : 'md:order-1 items-end text-right'}`}>
-                <p className="text-sm font-mono uppercase tracking-[0.2em] text-white/40">
+                <p className="text-sm font-mono uppercase tracking-[0.2em] text-text-muted">
                   {receipt.system}
                 </p>
-                <h3 className="text-4xl md:text-5xl font-heading text-text group-hover:text-white transition-colors">
+                <h3 className="text-4xl md:text-5xl font-heading text-text group-hover:text-text transition-colors">
                   {receipt.label}
                 </h3>
                 <p className={`text-xl font-body font-light text-text-muted leading-relaxed max-w-md ${index % 2 !== 0 ? 'ml-auto' : ''}`}>

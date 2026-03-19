@@ -88,7 +88,7 @@ export default function MediaEmbed({
               className={`absolute inset-0 flex flex-col justify-end p-4 transition-opacity duration-300 ${
                 theme === "futuristic"
                   ? "bg-gradient-to-t from-black/80 to-transparent"
-                  : "bg-black/60"
+                  : "bg-background/60"
               }`}
             >
               <h3

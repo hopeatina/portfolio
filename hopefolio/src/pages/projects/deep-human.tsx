@@ -281,7 +281,7 @@ export default function DeepHuman() {
           <div className="grid md:grid-cols-2 gap-8">
             <ProjectCard variant="default">
               <div className="mb-4">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-text font-bold text-lg">
                   1
                 </span>
               </div>
@@ -306,7 +306,7 @@ export default function DeepHuman() {
 
             <ProjectCard variant="default">
               <div className="mb-4">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-text font-bold text-lg">
                   2
                 </span>
               </div>
@@ -340,7 +340,7 @@ export default function DeepHuman() {
           <div className="grid md:grid-cols-2 gap-8">
             <ProjectCard variant="accent">
               <div className="mb-4">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-text font-bold text-lg">
                   3
                 </span>
               </div>
@@ -356,7 +356,7 @@ export default function DeepHuman() {
 
             <ProjectCard variant="accent">
               <div className="mb-4">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-lg">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-text font-bold text-lg">
                   4
                 </span>
               </div>
