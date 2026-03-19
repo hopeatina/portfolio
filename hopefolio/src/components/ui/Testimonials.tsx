@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { ThemeAnimatedSection } from "../animations/ThemePhysics";
+import { ThemeText } from "../animations/ThemeText";
 
 type Receipt = {
   id: string;
@@ -41,23 +43,23 @@ export default function Testimonials() {
   return (
     <section className="relative w-full py-40 px-6 lg:px-12 bg-transparent border-t border-white/5">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-32 text-center">
+        <ThemeAnimatedSection className="mb-32 text-center">
           <p className="mb-6 text-xs font-mono uppercase tracking-[0.25em] text-text-muted">
-            The receipts
+            <ThemeText>The receipts</ThemeText>
           </p>
           <h2 className="text-5xl md:text-6xl font-heading font-medium tracking-tight text-text">
             Operating <span className="italic text-primary font-light">history</span>
           </h2>
-        </div>
+        </ThemeAnimatedSection>
 
         <div className="flex flex-col gap-32">
           {receipts.map((receipt, index) => (
-            <div key={receipt.id} className="relative flex flex-col md:flex-row items-center justify-between gap-12 group">
+            <ThemeAnimatedSection key={receipt.id} className="relative flex flex-col md:flex-row items-center justify-between gap-12 group">
               
               {/* Massive Typographic Number acting as art */}
               <div className={`w-full md:w-1/2 flex ${index % 2 === 0 ? 'justify-start' : 'md:order-2 justify-end'}`}>
                 <div className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-heading font-normal text-text opacity-20 group-hover:opacity-100 group-hover:text-primary transition-all duration-700 leading-none tracking-tighter">
-                  {receipt.value}
+                  <ThemeText>{receipt.value}</ThemeText>
                 </div>
               </div>
 
@@ -74,7 +76,7 @@ export default function Testimonials() {
                 </p>
               </div>
 
-            </div>
+            </ThemeAnimatedSection>
           ))}
         </div>
       </div>

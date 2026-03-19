@@ -25,6 +25,15 @@
   text-shadow: 0 0 10px rgba(245,158,11,0.5);
 }
 
+[data-theme="cameroonian"] img {
+  transition: filter 0.4s ease;
+}
+
+[data-theme="cameroonian"] a:hover img,
+[data-theme="cameroonian"] .group:hover img {
+  filter: sepia(100%) hue-rotate(10deg) saturate(200%) contrast(1.2);
+}
+
 /* Rice Theme Delights */
 [data-theme="rice"] ::selection {
   background: #FFD700; /* Sharp highlighter yellow */
