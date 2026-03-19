@@ -7,10 +7,6 @@ import {
   useTheme,
 } from "@/modules/mode-switch/ThemeContext";
 import Logo from "@/components/ui/Logo";
-import baseStyles from "@/styles/themes/base-theme.module.css";
-import cameroonianStyles from "@/styles/themes/cameroonian-theme.module.css";
-import riceStyles from "@/styles/themes/rice-theme.module.css";
-import futuristicStyles from "@/styles/themes/futuristic-theme.module.css";
 
 const themeLabels = {
   base: {
@@ -36,47 +32,10 @@ export default function Header() {
   const router = useRouter();
   const [isChangingReality, setIsChangingReality] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
-  const [overlayColor, setOverlayColor] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const isDarkTheme = isThemeDark(theme);
   const isHomeRoute = router.pathname === "/";
-  const overHero = isHomeRoute && !isScrolled && !isMobileMenuOpen;
-  const chromeIsDark = isDarkTheme || overHero;
-  const headerTextColor = chromeIsDark ? "var(--text-on-dark)" : "var(--text)";
-  const headerPanelBackground = chromeIsDark
-    ? "rgba(7, 12, 24, 0.8)"
-    : "rgba(var(--background-rgb), 0.88)";
-  const headerSoftFill = chromeIsDark
-    ? "rgba(255, 255, 255, 0.06)"
-    : "rgba(var(--color-primary-rgb), 0.06)";
-  const headerSelectedFill = chromeIsDark
-    ? "rgba(255, 255, 255, 0.08)"
-    : "rgba(var(--color-primary-rgb), 0.1)";
-  const headerBorderColor = chromeIsDark
-    ? "rgba(148, 163, 184, 0.18)"
-    : "rgba(var(--color-primary-rgb), 0.14)";
-  const headerShadow = overHero
-    ? "0 18px 48px rgba(2, 6, 23, 0.24)"
-    : chromeIsDark
-      ? "0 18px 42px rgba(2, 8, 23, 0.24)"
-      : "0 18px 42px rgba(15, 23, 42, 0.08)";
-
-  const getThemeStyles = () => {
-    switch (theme) {
-      case "cameroonian":
-        return cameroonianStyles;
-      case "rice":
-        return riceStyles;
-      case "futuristic":
-        return futuristicStyles;
-      default:
-        return baseStyles;
-    }
-  };
-
-  const styles = getThemeStyles();
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -85,15 +44,6 @@ export default function Header() {
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
-
-  useEffect(() => {
-    if (isChangingReality) {
-      document.body.style.setProperty(
-        "--transition-overlay-color",
-        overlayColor
-      );
-    }
-  }, [isChangingReality, overlayColor]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -134,9 +84,6 @@ export default function Header() {
   const handleThemeChange = (newTheme: Theme) => {
     setIsChangingReality(true);
     setShowOverlay(true);
-    setOverlayColor(
-      getComputedStyle(document.documentElement).getPropertyValue("--accent")
-    );
 
     setTimeout(() => {
       setTheme(newTheme);
@@ -161,13 +108,8 @@ export default function Header() {
       >
         <div className="mx-auto max-w-5xl px-4 pt-8 sm:px-6 md:px-8">
           <div
-            className={`pointer-events-auto overflow-hidden border ${styles.theme}`}
+            className="pointer-events-auto overflow-hidden border border-border/20 shadow-2xl transition-all duration-300 bg-surface/80 backdrop-blur-xl"
             style={{
-              background: headerPanelBackground,
-              boxShadow: headerShadow,
-              backdropFilter: "blur(14px)",
-              WebkitBackdropFilter: "blur(14px)",
-              borderColor: headerBorderColor,
               borderRadius: isMobileMenuOpen ? "1.7rem" : "9999px",
             }}
           >
@@ -175,20 +117,16 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Link
                   href="/"
-                  className={`group flex items-center gap-3 ${styles.hoverScale}`}
+                  className="group flex items-center gap-3"
                 >
                   <Logo
                     width={36}
                     height={36}
-                    className="transition-transform group-hover:scale-105"
+                    className="transition-transform group-hover:scale-105 text-primary"
                   />
                   <span
-                    className={`text-2xl ${styles.heading}`}
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      letterSpacing: "var(--letter-spacing-heading)",
-                      color: headerTextColor,
-                    }}
+                    className="text-2xl font-semibold tracking-tight text-text"
+                    style={{ fontFamily: "var(--font-heading)" }}
                   >
                     Hope Atina
                   </span>
@@ -197,12 +135,8 @@ export default function Header() {
 
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`lg:hidden rounded-full p-2 ${styles.transitionBase}`}
+                className="lg:hidden rounded-full p-2 text-text hover:bg-border/20 transition-colors"
                 aria-label="Toggle mobile menu"
-                style={{
-                  color: headerTextColor,
-                  background: headerSoftFill,
-                }}
               >
                 <svg
                   className="h-6 w-6"
@@ -233,98 +167,57 @@ export default function Header() {
                   <Link
                     key={link.name}
                     href={link.path}
-                    className={`${styles.transitionBase} ${styles.body} relative py-1 hover:opacity-80`}
-                    style={{
-                      color: headerTextColor,
-                    }}
+                    className="relative py-1 text-text/80 hover:text-text transition-colors font-medium text-sm"
                   >
                     <span className="relative z-10">{link.name}</span>
-                    <span
-                      className={`${styles.transitionBase} absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0`}
-                      style={{ background: "var(--accent)" }}
-                    />
-                    <style jsx>{`
-                      a:hover span:last-child {
-                        transform: scaleX(1);
-                      }
-                    `}</style>
                   </Link>
                 ))}
 
                 <div className="relative ml-3 group">
                   <button
-                    className={`rounded-full px-3.5 py-2 ${styles.transitionBase} ${
-                      isChangingReality ? styles.buttonPulse : ""
+                    className={`flex items-center gap-2 rounded-full px-4 py-2 border border-border/20 bg-background/50 text-text text-sm font-medium hover:bg-surface transition-all ${
+                      isChangingReality ? "scale-95 opacity-80" : ""
                     }`}
-                    style={{
-                      background: headerSoftFill,
-                      color: headerTextColor,
-                      borderRadius: "9999px",
-                      border: `1px solid ${headerBorderColor}`,
-                      boxShadow: "none",
-                    }}
                   >
-                    <span className="flex items-center gap-2">
-                      <span aria-hidden="true">{themeLabels[theme].icon}</span>
-                      <span className="hidden sm:inline">Theme</span>
-                      <svg
-                        className={`h-4 w-4 ${styles.transitionBase} group-hover:rotate-180`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </span>
+                    <span aria-hidden="true">{themeLabels[theme].icon}</span>
+                    <span>Theme</span>
+                    <svg
+                      className="h-4 w-4 transition-transform group-hover:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
                   </button>
 
-                  <div
-                    className={`absolute right-0 mt-2 w-56 ${styles.transitionBase} invisible opacity-0 group-hover:visible group-hover:opacity-100`}
-                    style={{
-                      background: chromeIsDark
-                        ? "rgba(7, 12, 24, 0.95)"
-                        : "rgba(var(--background-rgb), 0.96)",
-                      boxShadow: "var(--box-shadow)",
-                      borderRadius: "1.25rem",
-                      zIndex: 50,
-                      backdropFilter: "blur(10px)",
-                      WebkitBackdropFilter: "blur(10px)",
-                      border: `1px solid ${headerBorderColor}`,
-                    }}
-                  >
-                    <div className="py-1">
+                  <div className="absolute right-0 mt-2 w-56 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
+                    <div className="py-2 bg-surface border border-border/30 rounded-2xl shadow-2xl backdrop-blur-xl">
                       {(Object.keys(themeLabels) as Theme[]).map((mode) => (
                         <button
                           key={mode}
                           onClick={() => handleThemeChange(mode)}
-                          className={`w-full px-4 py-3 text-left ${styles.transitionBase} ${styles.body} hover:scale-[0.98]`}
-                          style={{
-                            color: headerTextColor,
-                            background:
-                              theme === mode
-                                ? headerSelectedFill
-                                : "transparent",
-                            opacity: theme === mode ? 0.95 : 1,
-                          }}
+                          className={`w-full px-4 py-3 flex items-center gap-3 text-left transition-colors ${
+                            theme === mode
+                              ? "bg-primary/10 text-primary"
+                              : "text-text hover:bg-border/20"
+                          }`}
                         >
-                          <div className="flex items-center gap-3">
-                            <span className="text-xl">
-                              {themeLabels[mode].icon}
+                          <span className="text-xl">
+                            {themeLabels[mode].icon}
+                          </span>
+                          <div className="flex flex-col">
+                            <span className="font-semibold text-sm">
+                              {mode.charAt(0).toUpperCase() + mode.slice(1)}
                             </span>
-                            <div className="flex flex-col">
-                              <span className="font-medium">
-                                {mode.charAt(0).toUpperCase() + mode.slice(1)}{" "}
-                                Mode
-                              </span>
-                              <span className="text-sm opacity-75">
-                                {themeLabels[mode].label}
-                              </span>
-                            </div>
+                            <span className="text-xs opacity-70">
+                              {themeLabels[mode].label}
+                            </span>
                           </div>
                         </button>
                       ))}
@@ -334,11 +227,9 @@ export default function Header() {
               </div>
             </nav>
 
+            {/* Mobile Nav */}
             <div
-              className={`lg:hidden ${isMobileMenuOpen ? "block" : "hidden"} border-t px-3 pb-4 pt-3`}
-              style={{
-                borderColor: headerBorderColor,
-              }}
+              className={`lg:hidden ${isMobileMenuOpen ? "block" : "hidden"} border-t border-border/20 px-3 pb-4 pt-3 bg-surface/95`}
             >
               <div className="space-y-1">
                 {navLinks.map((link) => (
@@ -346,27 +237,18 @@ export default function Header() {
                     key={link.name}
                     href={link.path}
                     onClick={handleMobileNavClick}
-                    className={`block rounded-2xl px-3 py-2 ${styles.transitionBase} ${styles.body}`}
-                    style={{
-                      color: headerTextColor,
-                      background: "transparent",
-                    }}
+                    className="block rounded-xl px-4 py-3 text-text font-medium hover:bg-border/20 transition-colors"
                   >
                     {link.name}
                   </Link>
                 ))}
               </div>
 
-              <div className="pt-4">
-                <p
-                  className="px-3 text-sm font-medium"
-                  style={{
-                    color: headerTextColor,
-                  }}
-                >
+              <div className="pt-4 mt-2 border-t border-border/10">
+                <p className="px-4 text-xs font-bold uppercase tracking-widest text-text-muted mb-2">
                   Theme
                 </p>
-                <div className="mt-2 space-y-1">
+                <div className="space-y-1">
                   {(Object.keys(themeLabels) as Theme[]).map((mode) => (
                     <button
                       key={mode}
@@ -374,19 +256,16 @@ export default function Header() {
                         handleThemeChange(mode);
                         handleMobileNavClick();
                       }}
-                      className={`w-full rounded-2xl px-3 py-2 text-left ${styles.transitionBase} ${styles.body}`}
-                      style={{
-                        color: headerTextColor,
-                        background:
-                          theme === mode ? headerSelectedFill : "transparent",
-                      }}
+                      className={`w-full rounded-xl px-4 py-3 flex items-center gap-3 text-left transition-colors ${
+                        theme === mode
+                          ? "bg-primary/10 text-primary"
+                          : "text-text hover:bg-border/20"
+                      }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <span className="text-xl">{themeLabels[mode].icon}</span>
-                        <span>
-                          {mode.charAt(0).toUpperCase() + mode.slice(1)}
-                        </span>
-                      </div>
+                      <span className="text-xl">{themeLabels[mode].icon}</span>
+                      <span className="font-medium">
+                        {mode.charAt(0).toUpperCase() + mode.slice(1)}
+                      </span>
                     </button>
                   ))}
                 </div>
