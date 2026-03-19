@@ -34,7 +34,7 @@ export default function TechStack({
         {items.map((item, index) => (
           <div
             key={index}
-            className="rounded-2xl border border-white/10 bg-white/[0.03] p-4"
+            className="rounded-2xl border border-border/30 bg-primary/10 p-4"
             role="listitem"
           >
             <div className="text-xs uppercase tracking-[0.16em] text-text-muted">

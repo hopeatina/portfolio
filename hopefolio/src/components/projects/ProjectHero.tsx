@@ -39,14 +39,14 @@ export default function ProjectHero({
 }: ProjectHeroProps) {
   return (
     <section className="mb-18">
-      <div className="overflow-hidden rounded-[32px] border border-white/10 bg-[#06121c] text-text shadow-[0_35px_120px_-65px_rgba(2,8,23,0.9)]">
+      <div className="overflow-hidden rounded-[32px] border border-border/30 bg-surface text-text shadow-[0_35px_120px_-65px_rgba(2,8,23,0.9)]">
         <div className="grid gap-0 lg:grid-cols-[minmax(0,1.12fr)_370px]">
           <div className="p-8 md:p-10 lg:p-12">
             <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-text-muted">
               <span className="font-medium uppercase tracking-[0.22em]">
                 {eyebrow}
               </span>
-              <span className="hidden h-1 w-1 rounded-full bg-white/25 sm:block" />
+              <span className="hidden h-1 w-1 rounded-full bg-border sm:block" />
               <span className="text-text-muted">review surface</span>
             </div>
 
@@ -63,7 +63,7 @@ export default function ProjectHero({
                 {facts.map((fact) => (
                   <div
                     key={`${fact.label}-${fact.value}`}
-                    className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4"
+                    className="rounded-2xl border border-border/30 bg-primary/10 px-4 py-4"
                   >
                     <div className="text-xs uppercase tracking-[0.16em] text-text-muted">
                       {fact.label}
@@ -87,7 +87,7 @@ export default function ProjectHero({
                   <Tag
                     key={tag}
                     size="sm"
-                    className="border-white/10 bg-white/[0.06] text-text-muted"
+                    className="border-border/30 bg-primary/10 text-text-muted"
                   >
                     {tag}
                   </Tag>
@@ -96,9 +96,9 @@ export default function ProjectHero({
             )}
           </div>
 
-          <div className="border-t border-white/10 bg-background p-6 md:p-8 lg:border-l lg:border-t-0">
+          <div className="border-t border-border/30 bg-background p-6 md:p-8 lg:border-l lg:border-t-0">
             {artifactPanel ? (
-              <div className="flex h-full flex-col rounded-[28px] border border-white/10 bg-[#09131c] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+              <div className="flex h-full flex-col rounded-[28px] border border-border/30 bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
                 <div className="text-xs uppercase tracking-[0.18em] text-text-muted">
                   inspection panel
                 </div>
@@ -109,7 +109,7 @@ export default function ProjectHero({
                   {artifactPanel.items.map((item, index) => (
                     <div
                       key={`${item}-${index}`}
-                      className="flex items-start gap-4 rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-4"
+                      className="flex items-start gap-4 rounded-2xl border border-border/30 bg-primary/10 px-4 py-4"
                     >
                       <div className="mt-0.5 text-xs font-medium tracking-[0.14em] text-text-muted">
                         {String(index + 1).padStart(2, "0")}
@@ -133,7 +133,7 @@ export default function ProjectHero({
                     {artifactLabel}
                   </div>
                 )}
-                <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#09131c] aspect-[4/3]">
+                <div className="relative overflow-hidden rounded-[28px] border border-border/30 bg-surface aspect-[4/3]">
                   <Image
                     src={image}
                     alt={title}
@@ -149,7 +149,7 @@ export default function ProjectHero({
                 )}
               </div>
             ) : (
-              <div className="flex h-full items-end rounded-[28px] border border-dashed border-white/10 bg-[#09131c] p-6">
+              <div className="flex h-full items-end rounded-[28px] border border-dashed border-border/30 bg-surface p-6">
                 <p className="text-sm leading-6 text-text-muted">
                   This case study is presented as a systems review:
                   architectural decisions, operational constraints, and proof of

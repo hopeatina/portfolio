@@ -23,7 +23,7 @@ export default function ProjectCTA({
     <section className={`mt-16 ${className}`}>
       <Card
         variant="glass"
-        className="overflow-hidden rounded-[32px] border border-white/10 bg-[#06121c] p-0 text-text shadow-[0_32px_100px_-65px_rgba(2,8,23,0.9)]"
+        className="overflow-hidden rounded-[32px] border border-border/30 bg-surface p-0 text-text shadow-[0_32px_100px_-65px_rgba(2,8,23,0.9)]"
       >
         <div className="grid gap-0 md:grid-cols-[minmax(0,1fr)_320px]">
           <div className="p-8 md:p-10">
@@ -52,10 +52,10 @@ export default function ProjectCTA({
             </div>
           </div>
 
-          <div className="border-t border-white/10 bg-white/[0.03] p-8 md:border-l md:border-t-0 md:p-10">
+          <div className="border-t border-border/30 bg-primary/10 p-8 md:border-l md:border-t-0 md:p-10">
             <div className="space-y-4 text-sm leading-6 text-text-muted">
               {demoUrl && (
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4">
+                <div className="rounded-2xl border border-border/30 bg-primary/10 px-4 py-4">
                   <div className="text-xs uppercase tracking-[0.16em] text-text-muted">
                     Live surface
                   </div>
@@ -64,7 +64,7 @@ export default function ProjectCTA({
               )}
 
               {githubUrl && (
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4">
+                <div className="rounded-2xl border border-border/30 bg-primary/10 px-4 py-4">
                   <div className="text-xs uppercase tracking-[0.16em] text-text-muted">
                     Source
                   </div>
@@ -74,7 +74,7 @@ export default function ProjectCTA({
                 </div>
               )}
 
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4">
+              <div className="rounded-2xl border border-border/30 bg-primary/10 px-4 py-4">
                 <div className="text-xs uppercase tracking-[0.16em] text-text-muted">
                   Why this matters
                 </div>
