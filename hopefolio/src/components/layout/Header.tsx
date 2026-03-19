@@ -196,8 +196,8 @@ export default function Header() {
                     </svg>
                   </button>
 
-                  <div className="absolute right-0 mt-2 w-56 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
-                    <div className="py-2 bg-surface border border-border/30 rounded-2xl shadow-2xl backdrop-blur-xl">
+                  <div className="absolute right-0 top-full pt-4 w-56 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-[100] translate-y-2 group-hover:translate-y-0">
+                    <div className="py-2 bg-surface/95 border border-border/30 rounded-2xl shadow-2xl backdrop-blur-xl relative overflow-hidden">
                       {(Object.keys(themeLabels) as Theme[]).map((mode) => (
                         <button
                           key={mode}

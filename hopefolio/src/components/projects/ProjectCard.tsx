@@ -23,7 +23,7 @@ export default function ProjectCard({
     accent:
       "border border-[color:var(--border-color)] bg-[linear-gradient(180deg,var(--surface),var(--card-bg))] shadow-[0_26px_80px_-56px_rgba(15,23,42,0.28)]",
     secondary:
-      "border border-white/10 bg-[#07131d] text-text shadow-[0_30px_90px_-60px_rgba(2,8,23,0.92)]",
+      "border border-border/30 bg-surface text-text shadow-[0_30px_90px_-60px_rgba(2,8,23,0.92)]",
     highlight:
       "border border-border bg-[linear-gradient(135deg,var(--card-bg),var(--surface))] shadow-[0_20px_70px_-50px_rgba(15,23,42,0.26)]",
   } as const;

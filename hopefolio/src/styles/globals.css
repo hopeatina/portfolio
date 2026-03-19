@@ -413,15 +413,15 @@ body::before {
     align-items: center;
     justify-content: center;
     padding: var(--spacing-3) var(--spacing-6);
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-base);
     line-height: 1;
     text-decoration: none;
-    border-radius: var(--radius-md);
-    transition: var(--transition-all);
+    border-radius: 9999px; /* DevSignal floating pill style */
+    transition: var(--transition-colors), transform var(--duration-fast) var(--easing-ease-out);
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     position: relative;
     overflow: hidden;
   }
@@ -438,33 +438,31 @@ body::before {
   
   /* Primary button */
   .btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-text-on-primary);
+    background-color: var(--color-text);
+    color: var(--color-background);
   }
   
   .btn-primary:hover:not(:disabled) {
-    background-color: var(--color-primary-dark);
-    transform: translateY(-1px);
-    box-shadow: var(--elevation-sm);
+    background-color: var(--color-text-muted);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.2);
   }
   
   .btn-primary:active:not(:disabled) {
     transform: translateY(0);
-    box-shadow: var(--elevation-xs);
   }
   
   /* Secondary button */
   .btn-secondary {
     background-color: transparent;
-    color: var(--color-primary);
-    border-color: var(--color-primary);
+    color: var(--color-text);
+    border-color: var(--color-border);
   }
   
   .btn-secondary:hover:not(:disabled) {
-    background-color: var(--color-primary);
-    color: var(--color-text-on-primary);
-    transform: translateY(-1px);
-    box-shadow: var(--elevation-sm);
+    background-color: var(--color-surface);
+    border-color: var(--color-text);
+    transform: translateY(-2px);
   }
   
   /* Ghost button */
@@ -475,7 +473,7 @@ body::before {
   
   .btn-ghost:hover:not(:disabled) {
     background-color: var(--color-surface);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
   }
   
   /* Button sizes */
@@ -491,175 +489,44 @@ body::before {
   
   /* Tags */
   .tag {
-    @apply inline-flex items-center rounded-full transition-all duration-200 font-medium;
-    cursor: pointer;
+    @apply inline-flex items-center rounded-full transition-all duration-300 font-medium tracking-wide text-xs uppercase font-mono px-3 py-1.5;
+    cursor: default;
   }
   
-  /* Base theme tag styles */
   .tag-default {
-    background-color: var(--primary);
-    color: var(--background);
-    border: 1px solid var(--primary);
-    opacity: 0.9;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
   }
   
   .tag-default:hover {
-    opacity: 1;
+    background-color: var(--color-text);
+    color: var(--color-background);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(142, 91, 239, 0.3);
   }
   
   .tag-outline {
-    background-color: rgba(142, 91, 239, 0.1);
-    color: var(--primary);
-    border: 1px solid var(--primary);
+    background-color: transparent;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
   }
   
   .tag-outline:hover {
-    background-color: var(--primary);
-    color: var(--background);
+    color: var(--color-text);
+    border-color: var(--color-text);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(142, 91, 239, 0.3);
   }
   
   .tag-muted {
-    background-color: var(--surface);
-    color: var(--text-secondary);
-    border: 1px solid var(--border);
+    background-color: var(--color-background);
+    color: var(--color-text-muted);
+    border: 1px dashed var(--color-border);
   }
   
   .tag-muted:hover {
-    background-color: var(--primary);
-    color: var(--background);
-    border-color: var(--primary);
+    color: var(--color-text);
+    border-color: var(--color-text);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(142, 91, 239, 0.3);
-  }
-  
-  /* Cameroonian theme tag styles */
-  [data-theme="cameroonian"] .tag-default {
-    background-color: var(--primary);
-    color: var(--text-on-dark);
-    border-color: var(--primary);
-    opacity: 0.9;
-  }
-  
-  [data-theme="cameroonian"] .tag-default:hover {
-    opacity: 1;
-    box-shadow: 0 6px 20px rgba(192, 120, 72, 0.4);
-  }
-  
-  [data-theme="cameroonian"] .tag-outline {
-    background-color: rgba(192, 120, 72, 0.15);
-    color: var(--primary);
-    border-color: var(--primary);
-  }
-  
-  [data-theme="cameroonian"] .tag-outline:hover {
-    background-color: var(--primary);
-    color: var(--background);
-    box-shadow: 0 6px 20px rgba(192, 120, 72, 0.4);
-  }
-  
-  [data-theme="cameroonian"] .tag-muted {
-    background-color: #FAF0E6;
-    color: #8B6F4D;
-    border-color: #D4A574;
-  }
-  
-  [data-theme="cameroonian"] .tag-muted:hover {
-    background-color: var(--secondary);
-    color: var(--background);
-    border-color: var(--secondary);
-    box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
-  }
-  
-  /* Rice theme tag styles */
-  [data-theme="rice"] .tag-default {
-    background-color: var(--primary);
-    color: white;
-    border-color: var(--primary);
-    opacity: 0.95;
-  }
-  
-  [data-theme="rice"] .tag-default:hover {
-    opacity: 1;
-    background-color: #002B52;
-    box-shadow: 0 6px 20px rgba(0, 60, 113, 0.3);
-  }
-  
-  [data-theme="rice"] .tag-outline {
-    background-color: rgba(0, 60, 113, 0.08);
-    color: var(--primary);
-    border-color: var(--primary);
-  }
-  
-  [data-theme="rice"] .tag-outline:hover {
-    background-color: var(--primary);
-    color: white;
-    box-shadow: 0 6px 20px rgba(0, 60, 113, 0.3);
-  }
-  
-  [data-theme="rice"] .tag-muted {
-    background-color: #EEF2F7;
-    color: #5A6B7D;
-    border-color: #D6E0EB;
-  }
-  
-  [data-theme="rice"] .tag-muted:hover {
-    background-color: #5A6B7D;
-    color: white;
-    border-color: #5A6B7D;
-    box-shadow: 0 6px 20px rgba(90, 107, 125, 0.3);
-  }
-  
-  /* Futuristic theme tag styles */
-  [data-theme="futuristic"] .tag-default {
-    background-color: var(--primary);
-    color: var(--text-on-dark);
-    border-color: var(--primary);
-    opacity: 0.9;
-    box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
-  }
-  
-  [data-theme="futuristic"] .tag-default:hover {
-    opacity: 1;
-    background-color: #38BDF8;
-    box-shadow: 0 0 20px rgba(14, 165, 233, 0.6), 0 4px 15px rgba(14, 165, 233, 0.4);
-  }
-  
-  [data-theme="futuristic"] .tag-outline {
-    background-color: rgba(14, 165, 233, 0.2);
-    color: var(--primary);
-    border-color: var(--primary);
-    box-shadow: inset 0 0 10px rgba(14, 165, 233, 0.1);
-  }
-  
-  [data-theme="futuristic"] .tag-outline:hover {
-    background-color: var(--primary);
-    color: var(--text-on-dark);
-    box-shadow: 0 0 20px rgba(14, 165, 233, 0.6), 0 4px 15px rgba(14, 165, 233, 0.4);
-  }
-  
-  [data-theme="futuristic"] .tag-muted {
-    background-color: #1E293B;
-    color: #94A3B8;
-    border-color: #334155;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
-  }
-  
-  [data-theme="futuristic"] .tag-muted:hover {
-    background-color: #475569;
-    color: #E2E8F0;
-    border-color: #64748B;
-    box-shadow: 0 0 15px rgba(148, 163, 184, 0.3);
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 640px) {
-    .tag {
-      @apply text-xs;
-    }
   }
   
   /* Form elements */
