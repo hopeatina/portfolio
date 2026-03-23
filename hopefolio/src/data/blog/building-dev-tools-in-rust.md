@@ -3,9 +3,15 @@ title: "Building a Homebrew-Installable Dev Tool in Rust: The PerfPulse Story"
 date: "2025-01-10"
 excerpt: "Why Rust for CLI tools, cross-platform M1/Intel builds, Homebrew tap distribution, and integrating Claude API for AI-powered recommendations."
 category: "Developer Tooling"
+readTime: "10 min read"
+tags:
+  - Rust
+  - CLI
+  - Homebrew
+relatedPosts:
+  - building-multi-agent-orchestration
+  - mcp-in-production
 ---
-
-# Building a Homebrew-Installable Dev Tool in Rust: The PerfPulse Story
 
 PerfPulse started as a weekend experiment: what if macOS Activity Monitor was actually useful? Not just a wall of numbers, but a tool that tells you *why* your system is slow and *what to do about it*. Six months later, it's a Rust CLI with three interface modes, Claude API integration, and a Homebrew tap.
 

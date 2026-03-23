@@ -11,9 +11,17 @@ interface PostData {
   excerpt: string;
   content: string;
   category: string;
+  readTime: string;
+  tags: string[];
+  relatedPosts: string[];
 }
 
 type PostDataPartial = Omit<PostData, 'content'>;
+
+function calculateReadTime(content: string) {
+  const words = content.trim().split(/\s+/).length;
+  return `${Math.max(3, Math.ceil(words / 220))} min read`;
+}
 
 export function getAllPosts(): PostDataPartial[] {
   try {
@@ -44,6 +52,9 @@ export function getAllPosts(): PostDataPartial[] {
             date: data.date,
             excerpt: data.excerpt || "",
             category: data.category || "Uncategorized",
+            readTime: data.readTime || calculateReadTime(fileContents),
+            tags: Array.isArray(data.tags) ? data.tags : [],
+            relatedPosts: Array.isArray(data.relatedPosts) ? data.relatedPosts : [],
           };
         } catch (error) {
           console.error(`Error processing file ${fileName}:`, error);
@@ -90,6 +101,9 @@ export function getPostBySlug(slug: string): PostData {
       content: processedContent,
       excerpt: data.excerpt || "",
       category: data.category || "Uncategorized",
+      readTime: data.readTime || calculateReadTime(processedContent),
+      tags: Array.isArray(data.tags) ? data.tags : [],
+      relatedPosts: Array.isArray(data.relatedPosts) ? data.relatedPosts : [],
     };
   } catch (error) {
     console.error(`Error getting post by slug ${slug}:`, error);
