@@ -32,7 +32,7 @@ export default function ProjectCard({
     <div
       role={role}
       aria-label={ariaLabel}
-      className={`rounded-[28px] p-6 md:p-7 ${variantClassMap[variant]} ${className}`}
+      className={`min-w-0 rounded-[28px] p-6 md:p-7 ${variantClassMap[variant]} ${className}`}
     >
       {title && (
         <h4
@@ -43,7 +43,7 @@ export default function ProjectCard({
           {title}
         </h4>
       )}
-      <div className={variant === "secondary" ? "text-text-muted" : "text-body"}>
+      <div className={variant === "secondary" ? "min-w-0 text-text-muted" : "min-w-0 text-body"}>
         {children}
       </div>
     </div>

@@ -1,15 +1,23 @@
 ---
-title: "Taking MCP to Production: How OrgX Uses the Model Context Protocol"
-date: "2025-01-28"
-excerpt: "A deep-dive into MCP protocol, building MCP server integrations, tool-calling middleware patterns, and reducing agent friction in production."
+title: "What I Learned Running 22 MCP Servers in Production"
+date: "2026-03-05"
+excerpt: "What broke, what patterns held up, and what I would do differently after exposing 131+ tools across 22 MCP servers."
 category: "MCP Protocol"
+readTime: "10 min read"
+tags:
+  - MCP
+  - Production
+  - Tool calling
+  - Infrastructure
+relatedPosts:
+  - building-multi-agent-orchestration
+  - trust-models-for-agent-autonomy
+  - building-dev-tools-in-rust
 ---
 
-# Taking MCP to Production: How OrgX Uses the Model Context Protocol
+The Model Context Protocol (MCP) sounds clean in theory: define tools once, expose them through a common protocol, and let compatible clients discover what they need. In practice, once you move beyond a few toy tools, the real work starts. Naming gets harder. Auth gets harder. Error recovery gets harder. Agent behavior gets weirder.
 
-The Model Context Protocol (MCP) is one of those ideas that sounds simple but changes everything. Instead of building custom integrations for every AI client, you build one MCP server and any compatible client can use your tools. In OrgX, MCP isn't a nice-to-have — it's the core integration layer that makes multi-agent orchestration possible.
-
-This post covers how OrgX uses MCP in production, the patterns that emerged, and the friction points I had to solve.
+In OrgX, MCP became the integration spine for 22 servers and 131+ tools across orchestration, governance, quality, memory, and external services. That scale was enough to make the real lessons obvious. This post covers the patterns that held up, the failures that surfaced under real use, and the changes I would make faster if I rebuilt it tomorrow.
 
 ## Why MCP for Agent Orchestration
 
