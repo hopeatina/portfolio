@@ -152,12 +152,13 @@ export default function MermaidDiagram({
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 100%;
-          min-width: 800px;
+          width: max-content;
+          min-width: 100%;
         }
         .mermaid-container :global(svg) {
-          width: 100%;
-          min-width: 800px;
+          width: max-content;
+          max-width: none;
+          min-width: 100%;
           height: auto !important;
           min-height: 400px;
           font-size: 16px !important;
@@ -196,10 +197,11 @@ export default function MermaidDiagram({
         /* Responsive adjustments */
         @media (max-width: 768px) {
           .mermaid-container :global(.mermaid) {
-            min-width: 600px;
+            min-width: 520px;
           }
           .mermaid-container :global(svg) {
-            min-width: 600px;
+            min-width: 520px;
+            min-height: 320px;
           }
         }
       `}</style>

@@ -3,7 +3,6 @@ import React, {
   useContext,
   useState,
   ReactNode,
-  useEffect,
   useMemo,
   useCallback,
 } from "react";
@@ -355,14 +354,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     );
   }, [theme]);
 
-  useEffect(() => {
-    // Get theme from localStorage if available
-    const savedTheme = localStorage.getItem("theme") as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
-
   const getThemeStyles = () => {
     switch (theme) {
       case "cameroonian":
@@ -380,7 +371,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     theme,
     setTheme: (newTheme: Theme) => {
       setTheme(newTheme);
-      localStorage.setItem("theme", newTheme);
     },
     getThemeStyles,
     themeProps: themeProperties[theme],
