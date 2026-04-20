@@ -613,6 +613,37 @@ select {
     0 10px 30px -10px rgba(0, 0, 0, 0.45);
 }
 
+/* Taller hero for the homepage — more visual weight on landing */
+.case-study-hero-tall .case-study-hero-visual {
+  min-height: clamp(22rem, 46vw, 32rem);
+}
+
+/* Blog post layout — article + optional sticky TOC */
+.blog-post-grid {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: minmax(0, 48rem) minmax(12rem, 16rem);
+  align-items: start;
+  margin: 0 auto;
+  max-width: 76rem;
+  width: 100%;
+  padding: 0 1.25rem;
+}
+
+.blog-post-article {
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .blog-post-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .blog-toc {
+    display: none;
+  }
+}
+
 /* macOS-style browser chrome for hero screenshots */
 .case-study-hero-visual::before {
   content: "";

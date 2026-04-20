@@ -50,17 +50,21 @@ export default function Home() {
 
       <main id="main-content" className="page-frame">
         <div className="page-stack">
-          <section className="case-study-hero" style={{ paddingTop: "1rem" }}>
+          <section className="case-study-hero case-study-hero-tall" style={{ paddingTop: "1rem" }}>
             <div className="case-study-intro">
               <div className="case-study-meta">
                 <span className="eyebrow">
                   Hope Atina · Senior AI Infrastructure Engineer · Founder, OrgX
                 </span>
               </div>
-              <h1>
+              <h1>Continuity infrastructure for AI agents.</h1>
+              <p
+                className="case-study-subtitle"
+                style={{ color: "var(--shell-text-soft)" }}
+              >
                 If you&apos;re building agent infrastructure, I&apos;m already
                 shipping it.
-              </h1>
+              </p>
               <p className="case-study-description">
                 Persistent organizational memory, trust scoring, decision
                 provenance, and the MCP tooling that ties them together across
@@ -117,18 +121,17 @@ export default function Home() {
                   <div
                     style={{
                       position: "relative",
-                      width: "96px",
-                      height: "34px",
-                      marginBottom: "0.9rem",
-                      opacity: 0.85,
-                      filter: "brightness(0) invert(1)",
+                      width: "144px",
+                      height: "48px",
+                      marginBottom: "1rem",
+                      opacity: 0.92,
                     }}
                   >
                     <Image
                       src={company.logo}
                       alt={`${company.name} logo`}
                       fill
-                      sizes="96px"
+                      sizes="144px"
                       style={{ objectFit: "contain", objectPosition: "left" }}
                     />
                   </div>

@@ -11,6 +11,7 @@ import {
   TerminalPanel,
   VisualFrame,
 } from "@/components/site/CaseStudyPrimitives";
+import NextProjectNav from "@/components/site/NextProjectNav";
 
 const architectureDiagram = `
 flowchart TB
@@ -168,6 +169,8 @@ export default function OpenClawPage() {
             secondaryHref="/projects/orgx"
             secondaryLabel="Read about OrgX"
           />
+
+          <NextProjectNav currentSlug="openclaw" />
         </div>
       </main>
     </>

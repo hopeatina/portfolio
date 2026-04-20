@@ -117,46 +117,26 @@ export default function About() {
             </div>
           </section>
 
-          <section className="about-grid">
-            <div className="page-content">
-              <div className="page-header-stack" style={{ gap: "0.8rem" }}>
-                <span className="eyebrow">Beyond code</span>
-                <h2>Story and taste</h2>
-              </div>
-              <p>
-                My story begins in Cameroon, where my family&apos;s
-                entrepreneurial energy and love of education shaped how I think
-                about range, ambition, and responsibility.
-              </p>
-              <p>
-                The move to Houston widened the aperture. Rice gave me the
-                engineering vocabulary. Music gave me taste, pacing, and a feel
-                for when a system is technically correct but still not resolved.
-              </p>
-              <p>
-                That mix is why the work sits where it does now: I care about
-                the hard infrastructure problems, but I care just as much about
-                the human surface wrapped around them.
-              </p>
+          <section className="page-content">
+            <div className="page-header-stack" style={{ gap: "0.8rem" }}>
+              <span className="eyebrow">Beyond code</span>
+              <h2>Story and taste</h2>
             </div>
-
-            <div className="work-grid">
-              {["/images/art/piece1.jpg", "/images/art/piece2.jpg", "/images/art/piece3.jpg"].map(
-                (src) => (
-                  <figure key={src} className="visual-frame">
-                    <div className="visual-frame-media">
-                      <Image
-                        src={src}
-                        alt="Creative work from Hope Atina"
-                        fill
-                        sizes="(min-width: 1024px) 30vw, 100vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  </figure>
-                )
-              )}
-            </div>
+            <p style={{ maxWidth: "42rem" }}>
+              My story begins in Cameroon, where my family&apos;s
+              entrepreneurial energy and love of education shaped how I think
+              about range, ambition, and responsibility.
+            </p>
+            <p style={{ maxWidth: "42rem" }}>
+              The move to Houston widened the aperture. Rice gave me the
+              engineering vocabulary. Music gave me taste, pacing, and a feel
+              for when a system is technically correct but still not resolved.
+            </p>
+            <p style={{ maxWidth: "42rem" }}>
+              That mix is why the work sits where it does now: I care about
+              the hard infrastructure problems, but I care just as much about
+              the human surface wrapped around them.
+            </p>
           </section>
 
           <section className="contact-card">

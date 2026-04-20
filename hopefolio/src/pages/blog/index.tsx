@@ -1,8 +1,39 @@
 import Head from "next/head";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { GetStaticProps } from "next";
 import { getAllPosts } from "@/modules/blog/posts";
+
+const CATEGORY_GROUPS = [
+  {
+    id: "all",
+    label: "All",
+    matches: (_category: string) => true,
+  },
+  {
+    id: "mcp-infra",
+    label: "MCP & Infrastructure",
+    matches: (category: string) =>
+      /MCP|Infrastructure|Agent Infrastructure/i.test(category),
+  },
+  {
+    id: "evals-trust",
+    label: "Evals & Trust",
+    matches: (category: string) => /Evals|Governance|Trust/i.test(category),
+  },
+  {
+    id: "essays",
+    label: "Essays",
+    matches: (category: string) => /Essay/i.test(category),
+  },
+  {
+    id: "tooling",
+    label: "Developer tooling",
+    matches: (category: string) => /Developer|Tooling|Tools/i.test(category),
+  },
+] as const;
+
+type GroupId = (typeof CATEGORY_GROUPS)[number]["id"];
 
 interface BlogIndexProps {
   posts: Array<{
@@ -84,6 +115,11 @@ const orgxEssays: OrgXEssay[] = [
 
 export default function BlogIndex({ posts }: BlogIndexProps) {
   const [featured, ...rest] = posts;
+  const [activeGroup, setActiveGroup] = useState<GroupId>("all");
+  const filteredRest = useMemo(() => {
+    const group = CATEGORY_GROUPS.find((g) => g.id === activeGroup) ?? CATEGORY_GROUPS[0];
+    return rest.filter((p) => group.matches(p.category));
+  }, [rest, activeGroup]);
 
   return (
     <>
@@ -130,8 +166,54 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
           ) : null}
 
           <section className="page-content">
+            <div
+              role="tablist"
+              aria-label="Blog category filter"
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0.5rem",
+                marginBottom: "1.5rem",
+              }}
+            >
+              {CATEGORY_GROUPS.map((g) => {
+                const isActive = g.id === activeGroup;
+                const count =
+                  g.id === "all"
+                    ? rest.length
+                    : rest.filter((p) => g.matches(p.category)).length;
+                if (g.id !== "all" && count === 0) return null;
+                return (
+                  <button
+                    key={g.id}
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setActiveGroup(g.id)}
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "0.72rem",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      padding: "0.45rem 0.9rem",
+                      borderRadius: "999px",
+                      border: isActive
+                        ? "1px solid rgba(0, 229, 160, 0.55)"
+                        : "1px solid rgba(255, 255, 255, 0.1)",
+                      background: isActive
+                        ? "rgba(0, 229, 160, 0.1)"
+                        : "transparent",
+                      color: isActive ? "var(--shell-text)" : "var(--shell-muted)",
+                      cursor: "pointer",
+                      transition: "all 150ms ease",
+                    }}
+                  >
+                    {g.label} <span style={{ opacity: 0.6 }}>({count})</span>
+                  </button>
+                );
+              })}
+            </div>
             <div className="blog-list">
-              {rest.map((post) => (
+              {filteredRest.map((post) => (
                 <article key={post.slug} className="blog-list-item">
                   <span className="eyebrow">{post.category}</span>
                   <h2 style={{ margin: 0, fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>

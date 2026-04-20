@@ -10,6 +10,7 @@ import {
   DiagramFrame,
   TerminalPanel,
 } from "@/components/site/CaseStudyPrimitives";
+import NextProjectNav from "@/components/site/NextProjectNav";
 
 const architectureDiagram = `
 flowchart TB
@@ -186,6 +187,8 @@ export default function PerfPulsePage() {
             secondaryHref="https://perf-pulse-web.vercel.app"
             secondaryLabel="Try the web dashboard"
           />
+
+          <NextProjectNav currentSlug="perfpulse" />
         </div>
       </main>
     </>

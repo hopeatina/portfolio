@@ -10,6 +10,7 @@ import {
   DiagramFrame,
   TerminalPanel,
 } from "@/components/site/CaseStudyPrimitives";
+import NextProjectNav from "@/components/site/NextProjectNav";
 
 const architectureDiagram = `
 flowchart TB
@@ -177,6 +178,8 @@ export default function AlmaPage() {
             secondaryHref="https://www.helloalma.com"
             secondaryLabel="View Alma"
           />
+
+          <NextProjectNav currentSlug="alma" />
         </div>
       </main>
     </>

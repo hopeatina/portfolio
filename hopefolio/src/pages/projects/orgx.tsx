@@ -11,6 +11,7 @@ import {
   TerminalPanel,
   VisualFrame,
 } from "@/components/site/CaseStudyPrimitives";
+import NextProjectNav from "@/components/site/NextProjectNav";
 
 const orchestrationDiagram = `
 flowchart TB
@@ -71,6 +72,54 @@ export default function OrgXPage() {
             image="/images/case-studies/orgx-live.png"
             imageAlt="OrgX live command center — real product surface, not a marketing illustration"
           />
+
+          <section
+            aria-label="Install quickstart"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: "1rem",
+              padding: "0.85rem 1.25rem",
+              borderRadius: "12px",
+              border: "1px solid rgba(0, 229, 160, 0.22)",
+              background:
+                "linear-gradient(180deg, rgba(0, 229, 160, 0.05), rgba(0, 229, 160, 0.02))",
+              fontSize: "0.92rem",
+            }}
+          >
+            <span
+              className="eyebrow"
+              style={{ fontSize: "0.72rem", letterSpacing: "0.14em" }}
+            >
+              Install
+            </span>
+            <code
+              style={{
+                fontFamily: "var(--font-mono)",
+                color: "var(--shell-text)",
+                background: "rgba(0,0,0,0.35)",
+                padding: "0.3rem 0.7rem",
+                borderRadius: "6px",
+                fontSize: "0.85rem",
+                flex: "1 1 auto",
+                minWidth: "0",
+                overflowX: "auto",
+                whiteSpace: "nowrap",
+              }}
+            >
+              npx @smithery/cli install @useorgx/orgx-mcp --client claude
+            </code>
+            <a
+              href="https://smithery.ai/server/@useorgx/orgx-mcp"
+              target="_blank"
+              rel="noreferrer"
+              className="site-link-inline"
+              style={{ whiteSpace: "nowrap" }}
+            >
+              View on Smithery ↗
+            </a>
+          </section>
 
           <BuildSurface
             items={[
@@ -229,7 +278,7 @@ export default function OrgXPage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
                 gap: "1.25rem",
               }}
             >
@@ -575,6 +624,8 @@ export default function OrgXPage() {
             secondaryHref="https://useorgx.com"
             secondaryLabel="View live platform"
           />
+
+          <NextProjectNav currentSlug="orgx" />
         </div>
       </main>
     </>

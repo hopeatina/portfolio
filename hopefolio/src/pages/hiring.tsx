@@ -101,45 +101,6 @@ export default function Hiring() {
             </div>
           </section>
 
-          <section className="page-content">
-            <div className="page-header-stack" style={{ gap: "0.8rem" }}>
-              <span className="eyebrow">Why this is a strong bet</span>
-              <h2>Three things most candidates can&apos;t say.</h2>
-            </div>
-            <div className="work-grid-supporting">
-              <article className="contact-card">
-                <h3 style={{ margin: 0, fontFamily: "var(--font-heading)", fontSize: "1.2rem" }}>
-                  I&apos;ve built it, not just used it
-                </h3>
-                <p style={{ margin: "0.5rem 0 0", color: "var(--shell-text-soft)" }}>
-                  Production MCP server with OAuth 2.1 + PKCE + DCR. Most
-                  candidates list &quot;MCP&quot; as a keyword. I ship a server
-                  that other MCP servers should look at.
-                </p>
-              </article>
-              <article className="contact-card">
-                <h3 style={{ margin: 0, fontFamily: "var(--font-heading)", fontSize: "1.2rem" }}>
-                  I run real benchmarks
-                </h3>
-                <p style={{ margin: "0.5rem 0 0", color: "var(--shell-text-soft)" }}>
-                  136+ tasks across 7 domains, independent judges, published
-                  artifacts. Most teams building agents don&apos;t have a harness
-                  this rigorous internally yet.
-                </p>
-              </article>
-              <article className="contact-card">
-                <h3 style={{ margin: 0, fontFamily: "var(--font-heading)", fontSize: "1.2rem" }}>
-                  I carry regulated-system judgment
-                </h3>
-                <p style={{ margin: "0.5rem 0 0", color: "var(--shell-text-soft)" }}>
-                  HIPAA at Alma. Regulated financial data at Capital One. I
-                  know how to ship AI in environments where &quot;move fast and
-                  break things&quot; is a fireable offense.
-                </p>
-              </article>
-            </div>
-          </section>
-
           <section className="contact-card">
             <span className="eyebrow">Next step</span>
             <h2 style={{ marginTop: "0.5rem" }}>30 minutes is enough to know if this is a fit.</h2>
