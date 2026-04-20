@@ -196,6 +196,11 @@ export default function OrgXPage() {
               caption="Primary operator view: the command center that makes active work, review state, and orchestration legible."
             />
             <VisualFrame
+              src="/images/case-studies/orgx-agents.png"
+              alt="OrgX live — the full agents grid and next-up queue with named specialists, activity timeline, and queued decisions"
+              caption="Production density: 6 named specialist agents (Mark, OrgX, Eli, Holt, Claude Code, Kimi), activity timeline with 20+ blocked and 1 decisions, and a next-up queue with plugin packaging, ads campaigns, and account management. The product surface earns the &ldquo;live&rdquo; label."
+            />
+            <VisualFrame
               src="/images/case-studies/orgx-mcp-agent-status.png"
               alt="OrgX MCP agent status screen"
               caption="MCP proof surface showing agent status and system activity rather than abstract platform claims."

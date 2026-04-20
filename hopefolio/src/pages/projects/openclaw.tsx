@@ -120,9 +120,9 @@ export default function OpenClawPage() {
 
           <CaseStudySection kicker="03 // dashboard proof" title="The interface shows why the architecture matters">
             <VisualFrame
-              src="/images/case-studies/openclaw-dashboard.png"
-              alt="OpenClaw full nine-panel dashboard"
-              caption="The full dashboard: mission control, next-up queue, activity timeline, decisions, and live system state in one place."
+              src="/images/case-studies/openclaw-sessions.png"
+              alt="OpenClaw Sessions — live agent session registry showing token counts per session"
+              caption="Sessions view: real agent sessions with live token counts (agent:orgx:main at 11,915 / 1,000,000, agent:main:fresh-test at 153,994 / 200,000), per-session thinking/fast/verbose/reasoning overrides, and direct/kind routing. This is what operational control looks like."
             />
             <VisualFrame
               src="/images/case-studies/openclaw-mission-control.png"
