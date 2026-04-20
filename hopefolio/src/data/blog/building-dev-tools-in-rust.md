@@ -87,7 +87,7 @@ $ perf-pulse
 
 ### Web Dashboard (Axum)
 
-Run `perf-pulse --web` and PerfPulse starts an Axum web server on `localhost:3847`. The dashboard shows real-time charts, historical trends, and AI recommendations.
+Run `perf-pulse serve` and PerfPulse starts an Axum web server on `localhost:7575`. The dashboard shows real-time charts, historical trends, and AI recommendations.
 
 Axum was the right choice for the web server. It's async, fast, and integrates naturally with Rust's type system. The dashboard is server-rendered HTML with minimal JavaScript — no React, no build step, just templates and a few lines of vanilla JS for chart updates via Server-Sent Events.
 

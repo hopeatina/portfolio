@@ -68,7 +68,7 @@ export default function OpenClawPage() {
               { label: "Persistence", value: "SQLite outbox" },
               { label: "Streaming", value: "SSE + polling fallback" },
             ]}
-            image="/images/case-studies/openclaw-dashboard.png"
+            image="/images/case-studies/openclaw-overview.png"
             imageAlt="OpenClaw full dashboard screenshot"
           />
 
