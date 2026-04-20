@@ -69,8 +69,8 @@ export default function PerfPulsePage() {
               { label: "Distribution", value: "Homebrew" },
               { label: "Binary", value: "3.3 MiB" },
             ]}
-            image="/images/projects/perfpulse.svg"
-            imageAlt="PerfPulse — Rust-based system monitor"
+            image="/images/case-studies/perfpulse-dashboard.png"
+            imageAlt="PerfPulse — the live web dashboard running on localhost, showing CPU/memory/process monitoring, score ring, meeting mode, and historical charts"
           />
 
           <BuildSurface
@@ -128,7 +128,7 @@ export default function PerfPulsePage() {
                   lines={[
                     "perf-pulse                # CLI — the primary surface",
                     "perf-pulse tui            # terminal dashboard",
-                    "perf-pulse serve          # http://127.0.0.1:3847",
+                    "perf-pulse serve          # http://127.0.0.1:7575",
                     "",
                     "modes",
                     "  meeting                 # pause heavy bg processes",
@@ -164,7 +164,7 @@ export default function PerfPulsePage() {
                 "$ brew install perf-pulse",
                 "$ perf-pulse serve",
                 "",
-                "launches local dashboard at http://127.0.0.1:3847",
+                "launches local dashboard at http://127.0.0.1:7575",
               ]}
             />
           </CaseStudySection>
