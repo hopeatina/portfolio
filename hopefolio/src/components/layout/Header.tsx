@@ -25,14 +25,15 @@ export default function Header() {
   return (
     <header className={`site-header ${isScrolled ? "site-header-scrolled" : ""}`}>
       <nav className="site-header-inner" aria-label="Primary">
-        <Link href="/" className="site-logo">
-          Hope Atina
+        <Link href="/" className="site-logo" aria-label="Hope Atina — home">
+          <span className="site-logo-mark" aria-hidden="true" />
+          <span>Hope Atina</span>
         </Link>
 
         <button
           type="button"
           onClick={() => setIsMobileMenuOpen((current) => !current)}
-          className="site-menu-toggle"
+          className={`site-menu-toggle ${isMobileMenuOpen ? "site-menu-toggle-open" : ""}`}
           aria-expanded={isMobileMenuOpen}
           aria-controls="site-mobile-nav"
           aria-label="Toggle navigation"
@@ -49,12 +50,15 @@ export default function Header() {
                 : item.href === "/blog"
                   ? router.pathname.startsWith("/blog")
                   : router.pathname === item.href;
+            const isHireCta = item.href === "/hiring";
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`site-nav-link ${isActive ? "site-nav-link-active" : ""}`}
+                className={`site-nav-link ${isActive ? "site-nav-link-active" : ""} ${
+                  isHireCta ? "site-nav-link-cta" : ""
+                }`}
               >
                 {item.label}
               </Link>
@@ -69,7 +73,9 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="site-nav-mobile-link"
+              className={`site-nav-mobile-link ${
+                item.href === "/hiring" ? "site-nav-mobile-link-cta" : ""
+              }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {item.label}

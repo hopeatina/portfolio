@@ -260,7 +260,7 @@ export default function OrgXPage() {
             kicker="05 // widgets"
             title="Six production MCP Apps widgets — UI that renders inside any MCP host"
           >
-            <p style={{ margin: "0 0 1.5rem", maxWidth: "44rem", color: "var(--shell-text-soft)" }}>
+            <p style={{ margin: "0 0 0.75rem", maxWidth: "44rem", color: "var(--shell-text-soft)" }}>
               Every OrgX widget ships typed data contracts, demo / loading /
               empty states, and SSR-safe rendering so an MCP host can embed
               them in a chat surface or dashboard without custom code. These
