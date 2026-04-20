@@ -46,8 +46,8 @@ export const featuredProjects: PortfolioProject[] = [
     description:
       "Multi-agent orchestration with trust governance, approval gates, durable workflows, and the interfaces operators need when autonomy stops being a toy.",
     proof: ["1,270+ commits", "22 MCP servers", "131+ tools"],
-    heroImage: "/images/projects/orgx-home.png",
-    heroAlt: "OrgX command center screenshot",
+    heroImage: "/images/projects/orgx-illustration.png",
+    heroAlt: "OrgX multi-agent orchestration illustration",
     href: "/projects/orgx",
     primaryCta: "Read case study",
     secondaryHref: "https://useorgx.com",

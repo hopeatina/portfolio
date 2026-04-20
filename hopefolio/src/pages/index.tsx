@@ -14,7 +14,7 @@ export default function Home() {
         <title>Hope Atina | Senior AI Infrastructure Engineer</title>
         <meta
           name="description"
-          content="Senior AI Infrastructure Engineer building orchestration, observability, governance, and review surfaces for agents in production."
+          content="Senior AI Infrastructure Engineer. Building OrgX — continuity infra for AI agents: MCP, persistent memory, trust scoring, decision provenance."
         />
         <meta name="theme-color" content="#09090b" />
       </Head>
@@ -22,7 +22,7 @@ export default function Home() {
       <main id="main-content" className="page-frame">
         <div className="page-stack">
           <section className="page-header-stack" style={{ paddingTop: "2rem" }}>
-            <span className="eyebrow">Agent infrastructure · production systems · developer tooling</span>
+            <span className="eyebrow">Agent infrastructure · MCP · memory · trust · provenance</span>
             <TypewriterName text="Hope Atina" />
             <div className="hero-reveal-group hero-reveal-group-delay">
               <p
@@ -33,20 +33,22 @@ export default function Home() {
                   letterSpacing: "0.18em",
                 }}
               >
-                Senior AI Infrastructure Engineer
+                Senior AI Infrastructure Engineer · Founder, OrgX
               </p>
             </div>
             <div className="hero-reveal-group hero-reveal-group-delay">
-              <p className="lead-copy" style={{ maxWidth: "38rem", margin: 0 }}>
+              <p className="lead-copy" style={{ maxWidth: "40rem", margin: 0 }}>
                 I build the systems that make AI agents reliable in production:
-                orchestration, observability, governance, and review surfaces.
+                persistent organizational memory, trust scoring, decision
+                provenance, and the MCP tooling that ties them together across
+                Claude Code, Cursor, and ChatGPT.
               </p>
             </div>
             <div className="hero-reveal-group hero-reveal-group-delay-2">
               <div className="proof-bar">
-                <span>8+ years shipping production systems</span>
-                <span>1,270+ commits across OrgX</span>
-                <span>999 commits in HIPAA production at Alma</span>
+                <span>7+ years shipping production systems</span>
+                <span>OrgX: 22 MCP servers · 131+ tools · 136 benchmark tasks</span>
+                <span>Alma: 999 commits in HIPAA production</span>
               </div>
             </div>
             <div className="hero-reveal-group hero-reveal-group-delay-2">
@@ -84,14 +86,17 @@ export default function Home() {
             <div className="page-header-stack" style={{ gap: "1rem" }}>
               <span className="eyebrow">Hiring</span>
               <h2>Currently looking for my next role.</h2>
-              <p style={{ margin: 0, maxWidth: "35rem" }}>
-                I&apos;m targeting senior IC roles in multi-agent orchestration,
-                MCP platforms, observability, and AI infrastructure. Best fit:
-                platform and product-infrastructure teams where reliable
-                automation and crafted interaction design both matter.
+              <p style={{ margin: 0, maxWidth: "38rem" }}>
+                I&apos;m targeting senior/staff IC roles on teams building
+                agent platforms, MCP infrastructure, AI developer productivity,
+                or evals + observability. Best fit: teams where OrgX looks
+                like a preview of what you&apos;re already building.
               </p>
               <div className="hero-actions">
-                <SiteButton href="/contact">Get in touch →</SiteButton>
+                <SiteButton href="/hiring">For hiring managers →</SiteButton>
+                <SiteButton href="/contact" variant="text">
+                  Get in touch ↗
+                </SiteButton>
                 <SiteButton href="mailto:hopeatina@gmail.com" variant="text" external>
                   hopeatina@gmail.com
                 </SiteButton>

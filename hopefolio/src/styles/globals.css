@@ -942,6 +942,11 @@ select {
 
   .work-card-featured {
     grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .work-card-featured .work-card-visual {
+    min-height: 14rem;
   }
 }
 

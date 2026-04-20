@@ -16,6 +16,72 @@ interface BlogIndexProps {
   }>;
 }
 
+interface OrgXEssay {
+  title: string;
+  summary: string;
+  url: string;
+  focus: string;
+}
+
+const orgxEssays: OrgXEssay[] = [
+  {
+    title: "Memory is the structural lift — Phase 2 substrate benchmark",
+    summary:
+      "136 tasks across multiple models and orchestration cells. Single-shot benchmarks structurally hide what agents cannot fake: cascading context.",
+    url: "https://useorgx.com/blog",
+    focus: "Benchmarks · substrate",
+  },
+  {
+    title: "You are the API between your AI tools. OrgX MCP fixes that.",
+    summary:
+      "Manual context-carrying between ChatGPT, Claude, and Cursor is the leak. MCP is the continuity layer for unified organizational context.",
+    url: "https://useorgx.com/blog",
+    focus: "MCP · memory",
+  },
+  {
+    title: "How we prove OrgX works",
+    summary:
+      "Weekly benchmarking: 12 tasks, 7 domains, 3 execution modes against a single-agent baseline and a human baseline — with full provenance.",
+    url: "https://useorgx.com/blog",
+    focus: "Evals · methodology",
+  },
+  {
+    title: "Our autonomous benchmark has independent judges now",
+    summary:
+      "Published artifacts, independent judgments, token-level costs, and failure cases requiring human review.",
+    url: "https://useorgx.com/blog",
+    focus: "Trust · credibility",
+  },
+  {
+    title: "The most underrated product surface in AI is the setup script",
+    summary:
+      "Initial configuration determines whether AI tools share organizational context or operate in isolation. OrgX Wizard as infrastructure.",
+    url: "https://useorgx.com/blog",
+    focus: "Infrastructure · onboarding",
+  },
+  {
+    title: "The OrgX way",
+    summary:
+      "Distributed AI tool usage is a coordination failure. The founder is the integration layer that should be code, not willpower.",
+    url: "https://useorgx.com/blog",
+    focus: "Systems thinking",
+  },
+  {
+    title: "Why AI-generated brand content is mostly slop",
+    summary:
+      "It&apos;s not prompting — it&apos;s systemic design. A model asked to carry taste, memory, and QA by itself will fail predictably.",
+    url: "https://useorgx.com/blog",
+    focus: "Systems thinking · trust",
+  },
+  {
+    title: "We generated 75 ad concepts. The useful part was killing 60.",
+    summary:
+      "Filtering and curation are higher-leverage than volume in AI generation. Rigor in selection matters more than throughput.",
+    url: "https://useorgx.com/blog",
+    focus: "Evals · craft",
+  },
+];
+
 export default function BlogIndex({ posts }: BlogIndexProps) {
   const [featured, ...rest] = posts;
 
@@ -82,6 +148,39 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
                 </article>
               ))}
             </div>
+          </section>
+
+          <section className="page-content">
+            <div className="page-header-stack" style={{ gap: "0.8rem" }}>
+              <span className="eyebrow">OrgX essays · useorgx.com/blog</span>
+              <h2>Writing from the platform itself</h2>
+              <p style={{ maxWidth: "42rem", margin: 0 }}>
+                The OrgX blog is where the substrate work gets argued out:
+                memory, benchmarks, MCP, trust, and where autonomy stops
+                being a demo and starts being real infrastructure.
+              </p>
+            </div>
+            <div className="blog-list">
+              {orgxEssays.map((essay) => (
+                <article key={essay.title} className="blog-list-item">
+                  <span className="eyebrow">{essay.focus}</span>
+                  <h2 style={{ margin: 0, fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>
+                    <a href={essay.url} target="_blank" rel="noreferrer">
+                      {essay.title}
+                    </a>
+                  </h2>
+                  <p style={{ margin: 0, maxWidth: "42rem" }}>{essay.summary}</p>
+                  <div className="blog-meta">
+                    Published on useorgx.com ↗
+                  </div>
+                </article>
+              ))}
+            </div>
+            <p style={{ marginTop: "1.5rem" }}>
+              <a href="https://useorgx.com/blog" target="_blank" rel="noreferrer" className="site-link-inline">
+                Read the full OrgX blog ↗
+              </a>
+            </p>
           </section>
         </div>
       </main>
