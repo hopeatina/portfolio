@@ -18,20 +18,25 @@ export default function Contact() {
           <section className="contact-card">
             <div className="page-header-stack" style={{ maxWidth: "44rem" }}>
               <span className="eyebrow">Contact</span>
-              <h1>The fastest path is email.</h1>
+              <h1>The fastest path is a 30-minute call.</h1>
               <p style={{ margin: 0 }}>
                 Senior/staff IC roles on agent platforms, MCP infrastructure,
-                AI developer productivity, or evals and observability. I reply
-                to every serious message within 24 hours.
+                AI developer productivity, or evals and observability. Book
+                directly on the calendar, or email me — serious messages get
+                a reply within 24 hours.
               </p>
               <div className="hero-actions" style={{ marginTop: "1.4rem" }}>
+                <SiteButton href="https://calendly.com/hopeatina/orgx-discovery" external>
+                  Book 30 minutes →
+                </SiteButton>
                 <SiteButton
                   href="mailto:hopeatina@gmail.com?subject=%5Byour%20company%5D%20%E2%80%94%20role%20conversation"
+                  variant="secondary"
                   external
                 >
-                  Email me →
+                  Email me
                 </SiteButton>
-                <SiteButton href="/hiring" variant="secondary">
+                <SiteButton href="/hiring" variant="text">
                   Hiring manager brief
                 </SiteButton>
                 <SiteButton href="/resume/hope-atina-resume.md" variant="text" external>

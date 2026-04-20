@@ -149,13 +149,17 @@ export default function Hiring() {
               a running demo in the call.
             </p>
             <div className="hero-actions" style={{ marginTop: "1.2rem" }}>
+              <SiteButton href="https://calendly.com/hopeatina/orgx-discovery" external>
+                Book 30 minutes →
+              </SiteButton>
               <SiteButton
                 href="mailto:hopeatina@gmail.com?subject=Role%20conversation%20%E2%80%94%20%5Bcompany%5D"
+                variant="secondary"
                 external
               >
-                Email me →
+                Email me
               </SiteButton>
-              <SiteButton href="/resume/hope-atina-resume.md" variant="secondary" external>
+              <SiteButton href="/resume/hope-atina-resume.md" variant="text" external>
                 Download resume
               </SiteButton>
             </div>

@@ -34,6 +34,15 @@ export default function About() {
               <Link href="/hiring" className="site-link-inline">
                 For hiring managers →
               </Link>
+              {" · "}
+              <a
+                href="https://calendly.com/hopeatina/orgx-discovery"
+                target="_blank"
+                rel="noreferrer"
+                className="site-link-inline"
+              >
+                Book 30 min ↗
+              </a>
             </p>
           </aside>
 
