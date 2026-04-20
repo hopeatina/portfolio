@@ -53,24 +53,21 @@ export default function Home() {
             <div className="case-study-intro">
               <div className="case-study-meta">
                 <span className="eyebrow">
-                  Agent infrastructure · MCP · memory · trust · provenance
+                  Hope Atina · Senior AI Infrastructure Engineer · Founder, OrgX
                 </span>
               </div>
-              <h1>Hope Atina</h1>
-              <p
-                className="case-study-subtitle"
-                style={{ color: "var(--shell-muted)" }}
-              >
-                Senior AI Infrastructure Engineer · Founder, OrgX
-              </p>
+              <h1>
+                If you&apos;re building agent infrastructure, I&apos;m already
+                shipping it.
+              </h1>
               <p className="case-study-description">
-                I build the systems that make AI agents reliable in production:
-                persistent organizational memory, trust scoring, decision
+                Persistent organizational memory, trust scoring, decision
                 provenance, and the MCP tooling that ties them together across
-                Claude Code, Cursor, and ChatGPT.
+                Claude Code, Cursor, and ChatGPT. 7+ years in production before
+                this — healthtech compliance, regulated fintech data, and
+                AI-native products.
               </p>
               <div className="proof-bar" style={{ marginTop: "0.25rem" }}>
-                <span>7+ years in production</span>
                 <span>61 MCP tools · 12-repo platform</span>
                 <span>136+ benchmark tasks</span>
                 <span>999 HIPAA commits · 20% fewer errors at Alma</span>
@@ -100,28 +97,6 @@ export default function Home() {
                 className="object-cover"
               />
               <div className="work-card-overlay" />
-            </div>
-          </section>
-
-          <section className="contact-card">
-            <span className="eyebrow">Philosophy</span>
-            <div
-              style={{
-                display: "grid",
-                gap: "0.6rem",
-                marginTop: "0.9rem",
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(1.6rem, 3.5vw, 2.1rem)",
-                letterSpacing: "-0.03em",
-                lineHeight: 1.1,
-              }}
-            >
-              <span>Make delegation aggressive.</span>
-              <span>Make provenance visible.</span>
-              <span>Make trust earned, not assumed.</span>
-              <span>Make failures inspectable.</span>
-              <span>Make the review surface the product.</span>
-              <span>Make it ship.</span>
             </div>
           </section>
 

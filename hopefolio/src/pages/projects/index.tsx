@@ -20,22 +20,27 @@ export default function Projects() {
       <main id="main-content" className="page-frame">
         <div className="page-stack">
           <header className="page-header-stack">
-            <span className="eyebrow">Index</span>
-            <h1>Work that can survive inspection.</h1>
-            <p style={{ maxWidth: "40rem", margin: 0 }}>
-              Four flagship case studies carry the portfolio. Everything else
-              moves out of the way unless it earns its place with deeper proof.
+            <span className="eyebrow">Index · 4 case studies, 1 thesis</span>
+            <h1>Make autonomy trustworthy. Then make the review surface the product.</h1>
+            <p style={{ maxWidth: "42rem", margin: 0 }}>
+              OrgX is the flagship. The supporting three are that same thesis
+              applied under different constraints: production AI in HIPAA,
+              developer tooling on the local machine, and plugin architecture
+              inside a coding agent.
             </p>
           </header>
 
           <section className="page-content">
+            <div className="page-header-stack" style={{ gap: "0.5rem" }}>
+              <span className="eyebrow">Flagship · agent platform</span>
+            </div>
             <ProjectCard project={orgx} featured />
           </section>
 
           <section className="page-content">
             <div className="page-header-stack" style={{ gap: "0.75rem" }}>
-              <span className="eyebrow">Production + tooling</span>
-              <h2>Supporting proof</h2>
+              <span className="eyebrow">Supporting · production · tooling · plugin</span>
+              <h2>Three proofs under different constraints</h2>
             </div>
             <div className="work-grid-supporting">
               {supporting.map((project) => (

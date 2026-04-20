@@ -269,7 +269,7 @@ select {
 
 .page-stack {
   display: grid;
-  gap: 8.75rem;
+  gap: 5rem;
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -978,7 +978,7 @@ select {
   }
 
   .page-stack {
-    gap: 6rem;
+    gap: 3.5rem;
   }
 
   .case-study-section,

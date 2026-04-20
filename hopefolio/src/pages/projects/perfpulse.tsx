@@ -44,64 +44,6 @@ flowchart TB
   I --> G
 `;
 
-function DashboardSurface() {
-  return (
-    <div className="contact-card" style={{ padding: "1.5rem" }}>
-      <span className="eyebrow">Web dashboard</span>
-      <h3 style={{ margin: "0.4rem 0 1rem", fontFamily: "var(--font-heading)", fontSize: "1.7rem" }}>
-        One Rust binary, three operator surfaces
-      </h3>
-      <div style={{ display: "grid", gap: "0.9rem" }}>
-        <div
-          style={{
-            border: "1px solid var(--shell-border)",
-            borderRadius: "18px",
-            padding: "1rem",
-            background: "rgba(255,255,255,0.03)",
-          }}
-        >
-          <div className="proof-bar">
-            <span>127.0.0.1:3847</span>
-            <span>meeting mode</span>
-            <span>historical charts</span>
-          </div>
-          <div style={{ display: "grid", gap: "0.5rem", marginTop: "1rem" }}>
-            {[78, 62, 41, 83].map((value) => (
-              <div key={value} style={{ display: "grid", gap: "0.35rem" }}>
-                <div className="eyebrow" style={{ letterSpacing: "0.06em" }}>
-                  {value === 78
-                    ? "CPU"
-                    : value === 62
-                      ? "Memory"
-                      : value === 41
-                        ? "Battery"
-                        : "Score"}
-                </div>
-                <div
-                  style={{
-                    height: "10px",
-                    background: "rgba(255,255,255,0.07)",
-                    borderRadius: "999px",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: `${value}%`,
-                      height: "100%",
-                      background: "linear-gradient(90deg, var(--shell-accent), rgba(0,229,160,0.35))",
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function PerfPulsePage() {
   return (
     <>
@@ -177,7 +119,25 @@ export default function PerfPulsePage() {
           </CaseStudySection>
 
           <CaseStudySection kicker="03 // product surface" title="Distribution made the project real">
-            <CaseStudySplit media={<DashboardSurface />}>
+            <CaseStudySplit
+              media={
+                <TerminalPanel
+                  label="surfaces"
+                  lines={[
+                    "perf-pulse                # CLI — the primary surface",
+                    "perf-pulse tui            # terminal dashboard",
+                    "perf-pulse serve          # http://127.0.0.1:3847",
+                    "",
+                    "modes",
+                    "  meeting                 # pause heavy bg processes",
+                    "  default                 # live top + history",
+                    "  claude                  # layered explanations",
+                    "",
+                    "everything ships inside one 3.3 MiB Rust binary.",
+                  ]}
+                />
+              }
+            >
               <p>
                 The CLI is the primary surface. The Axum dashboard exists
                 because some signals deserve charts. The TUI exists because

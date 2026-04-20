@@ -131,6 +131,8 @@ export default function OrgXPage() {
                   "Durable Object SQLite: session and workspace state survive deploys.",
                   "Ed25519-signed registry: domain verification, automated release pipeline.",
                   "Context pointers, not embeds: entities reference URLs and other entities without payload bloat.",
+                  "Inngest over Temporal: workflow durability without a separate orchestration cluster.",
+                  "Supabase over custom backend: real-time subscriptions, auth, velocity — one system.",
                 ]}
               />
             </CaseStudySplit>
@@ -201,36 +203,7 @@ export default function OrgXPage() {
           </CaseStudySection>
 
           <CaseStudySection
-            kicker="05 // decisions"
-            title="The important architecture choices"
-          >
-            <CaseStudySplit
-              media={
-                <CalloutList
-                  items={[
-                    "Inngest over Temporal to keep workflow durability without running separate orchestration infrastructure.",
-                    "Supabase over a custom backend to get real-time subscriptions, auth boundaries, and velocity in one system.",
-                    "MCP as the protocol layer so tools are discoverable and portable across clients instead of rewritten per runtime.",
-                  ]}
-                />
-              }
-            >
-              <p>
-                These choices are pragmatic, not theoretical. They favor a solo
-                builder&apos;s ability to ship and observe the system without
-                drowning in platform maintenance before the product proves
-                itself.
-              </p>
-              <p>
-                The throughline is the same one I want in my next role: build
-                the substrate that makes autonomy trustworthy, then build the
-                operator surface that proves it.
-              </p>
-            </CaseStudySplit>
-          </CaseStudySection>
-
-          <CaseStudySection
-            kicker="06 // benchmark"
+            kicker="05 // benchmark"
             title="Single-shot benchmarks hide what agents can't fake"
             raised
           >
@@ -279,91 +252,100 @@ export default function OrgXPage() {
           </CaseStudySection>
 
           <CaseStudySection
-            kicker="07 // ecosystem"
+            kicker="06 // ecosystem"
             title="12 repos, one coherent platform"
           >
-            <div className="work-grid-supporting">
-              <article className="contact-card">
-                <div className="eyebrow">MCP server</div>
-                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
-                  orgx-mcp
-                </h3>
-                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
-                  Cloudflare Workers + Durable Objects. 61 tools. OAuth 2.1
-                  + PKCE. Ed25519-signed domain verification.
-                </p>
-                <p style={{ marginTop: "0.8rem" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: "0.25rem 2rem",
+                fontSize: "0.95rem",
+              }}
+            >
+              <div>
+                <p style={{ margin: "0.3rem 0" }}>
                   <a href="https://github.com/useorgx/orgx-mcp" target="_blank" rel="noreferrer" className="site-link-inline">
-                    github.com/useorgx/orgx-mcp ↗
-                  </a>
+                    orgx-mcp ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>
+                    — 61 MCP tools · Cloudflare Workers + Durable Objects · OAuth 2.1 + DCR
+                  </span>
                 </p>
-              </article>
-              <article className="contact-card">
-                <div className="eyebrow">Gateway SDK</div>
-                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
-                  orgx-gateway-sdk
-                </h3>
-                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
-                  OrgX Gateway Protocol v1. Each plugin peer opens its own
-                  WebSocket to the OrgX server.
-                </p>
-                <p style={{ marginTop: "0.8rem" }}>
+                <p style={{ margin: "0.3rem 0" }}>
                   <a href="https://github.com/useorgx/orgx-gateway-sdk" target="_blank" rel="noreferrer" className="site-link-inline">
-                    github.com/useorgx/orgx-gateway-sdk ↗
-                  </a>
+                    orgx-gateway-sdk ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— Gateway Protocol v1 client SDK</span>
                 </p>
-              </article>
-              <article className="contact-card">
-                <div className="eyebrow">Plugins</div>
-                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
-                  Claude Code · Codex · OpenCode · OpenClaw
-                </h3>
-                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
-                  Runtime hooks, skill synchronization, agent dispatch,
-                  browser-native mission control. Four coding-agent
-                  runtimes, one OrgX context surface.
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/openclaw-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
+                    openclaw-plugin ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— 30-tool MCP + browser mission control</span>
                 </p>
-                <p style={{ marginTop: "0.8rem" }}>
-                  <a href="https://github.com/useorgx" target="_blank" rel="noreferrer" className="site-link-inline">
-                    github.com/useorgx ↗
-                  </a>
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/orgx-claude-code-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
+                    orgx-claude-code-plugin ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— Claude Code runtime integration</span>
                 </p>
-              </article>
-              <article className="contact-card">
-                <div className="eyebrow">UI + data</div>
-                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
-                  orgx-ui-kit · orgx-data
-                </h3>
-                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
-                  React components, tokens, and typed data contracts for
-                  Sovereign Execution surfaces.
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/cursor-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
+                    cursor-plugin ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— MCP, rules, skills, hooks, commands</span>
                 </p>
-              </article>
-              <article className="contact-card">
-                <div className="eyebrow">Desktop shell</div>
-                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
-                  orgx-local-shell
-                </h3>
-                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
-                  Tauri 2 desktop application rendering Command, Mission
-                  Control, Activity, and Daily Brief surfaces.
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/orgx-codex-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
+                    orgx-codex-plugin ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— Codex + initiative-aware skills</span>
                 </p>
-              </article>
-              <article className="contact-card">
-                <div className="eyebrow">Methodology + skills</div>
-                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
-                  autonomous-initiative-benchmark · skills
-                </h3>
-                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
-                  Public methodology, task catalog, and reusable agent
-                  skill definitions for the orchestration platform.
+              </div>
+              <div>
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/orgx-opencode-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
+                    orgx-opencode-plugin ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— OpenCode peer driver</span>
                 </p>
-              </article>
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/orgx-ui-kit" target="_blank" rel="noreferrer" className="site-link-inline">
+                    orgx-ui-kit ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— React components + tokens</span>
+                </p>
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/orgx-data" target="_blank" rel="noreferrer" className="site-link-inline">
+                    orgx-data ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— typed contracts + React hooks</span>
+                </p>
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/orgx-local-shell" target="_blank" rel="noreferrer" className="site-link-inline">
+                    orgx-local-shell ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— Tauri 2 desktop app</span>
+                </p>
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/skills" target="_blank" rel="noreferrer" className="site-link-inline">
+                    skills ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— reusable agent skill library</span>
+                </p>
+                <p style={{ margin: "0.3rem 0" }}>
+                  <a href="https://github.com/useorgx/autonomous-initiative-benchmark" target="_blank" rel="noreferrer" className="site-link-inline">
+                    autonomous-initiative-benchmark ↗
+                  </a>{" "}
+                  <span style={{ color: "var(--shell-muted)" }}>— public methodology + catalog</span>
+                </p>
+              </div>
             </div>
           </CaseStudySection>
 
           <CaseStudySection
-            kicker="08 // try it"
+            kicker="07 // try it"
             title="Install OrgX MCP in a compatible client"
             raised
           >
