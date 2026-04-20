@@ -128,7 +128,7 @@ export const flagshipSystems: FlagshipSystem[] = [
     name: "OrgX",
     slug: "orgx",
     state: "Ready for review",
-    image: "/images/projects/orgx-home.png",
+    image: "/images/projects/orgx-illustration.png",
     summary:
       "Multi-agent orchestration with MCP integrations, trust governance, approval flows, and durable workflows.",
     proof: "1,270+ commits across the platform. 7 repos spanning memory, scoring, orchestration, and tooling.",

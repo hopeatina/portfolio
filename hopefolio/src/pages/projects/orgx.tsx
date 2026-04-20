@@ -58,16 +58,17 @@ export default function OrgXPage() {
             kicker="Case study 01"
             status="Ready for review"
             title="OrgX"
-            subtitle="The flagship platform: multi-agent orchestration, trust governance, and proof-first operator surfaces."
+            subtitle="Continuity infrastructure for AI agents: persistent organizational memory, trust scoring, decision provenance, and MCP tooling across Claude Code, Cursor, and ChatGPT."
             description="OrgX is the clearest expression of how I think about agent infrastructure. Delegate aggressively, keep provenance visible, and make the review surface strong enough that human judgment can stay precise instead of becoming a bottleneck."
             facts={[
               { label: "Commits", value: "1,270+" },
               { label: "MCP servers", value: "22" },
-              { label: "Tools", value: "131+" },
-              { label: "Workflow layer", value: "47+ durable functions" },
+              { label: "Tools exposed", value: "131+" },
+              { label: "Benchmark tasks run", value: "136+" },
+              { label: "Public essays", value: "8" },
             ]}
-            image="/images/case-studies/orgx-live.png"
-            imageAlt="OrgX live platform interface"
+            image="/images/projects/orgx-illustration.png"
+            imageAlt="OrgX multi-agent orchestration illustration"
           />
 
           <BuildSurface
@@ -174,20 +175,265 @@ export default function OrgXPage() {
             </CaseStudySplit>
           </CaseStudySection>
 
+          <CaseStudySection
+            kicker="05 // technical depth"
+            title="The boring infrastructure choices that matter"
+          >
+            <CaseStudySplit
+              media={
+                <TerminalPanel
+                  label="orgx-mcp internals"
+                  lines={[
+                    "auth",
+                    "  OAuth 2.1 + PKCE",
+                    "  dynamic client registration via POST /register",
+                    "  no API keys in env — creds in Durable Object SQLite",
+                    "",
+                    "state",
+                    "  Durable Objects for session isolation",
+                    "  cross-deploy persistence across Worker restarts",
+                    "  context[] JSON pointers on every entity",
+                    "",
+                    "registry",
+                    "  Ed25519-signed domain verification",
+                    "  automated release pipeline to Smithery",
+                    "",
+                    "transport",
+                    "  HTTP streaming + SSE fallback",
+                    "  MCP Apps widget rendering for compatible hosts",
+                  ]}
+                />
+              }
+            >
+              <p>
+                The public narrative around MCP today is &quot;connect a tool
+                to a model.&quot; That&apos;s table stakes. The harder
+                question is: how do you run an MCP server that production
+                teams will actually trust with real organizational state?
+              </p>
+              <p>
+                OrgX MCP is built on Cloudflare Workers + Durable Objects
+                because session isolation, SQLite persistence, and
+                cross-deploy state survival matter more than easy scaling.
+                Auth uses OAuth 2.1 with dynamic client registration — no
+                API keys, no shared secrets — because every serious MCP
+                client is going to need this in six months anyway.
+              </p>
+              <CalloutList
+                items={[
+                  "OAuth 2.1 + PKCE + DCR: credentials never touch environment variables.",
+                  "Durable Object SQLite: session and workspace state survive deploys.",
+                  "Ed25519-signed registry: domain verification, automated release pipeline.",
+                  "Context pointers, not embeds: entities reference URLs and other entities without payload bloat.",
+                ]}
+              />
+            </CaseStudySplit>
+          </CaseStudySection>
+
+          <CaseStudySection
+            kicker="06 // benchmark"
+            title="Single-shot benchmarks hide what agents can't fake"
+            raised
+          >
+            <CaseStudySplit
+              media={
+                <TerminalPanel
+                  label="autonomous-initiative-benchmark"
+                  lines={[
+                    "tasks               136+",
+                    "domains             7 (product, eng, ops, design, ...)",
+                    "execution modes     3 (agent, api, cli)",
+                    "judges              independent LLM panels",
+                    "artifacts           task, judgment, cost, token logs",
+                    "failure cases       published with human review notes",
+                    "",
+                    "methodology         useorgx.com/blog",
+                    "next run            more inclusive — more models,",
+                    "                    more domains, broader substrate",
+                  ]}
+                />
+              }
+            >
+              <p>
+                Most agent benchmarks are single-shot: one prompt, one model,
+                one task. That structurally hides the thing that actually
+                breaks in production — cascading context across sessions,
+                tools, and time.
+              </p>
+              <p>
+                The OrgX benchmark evaluates cross-session continuity,
+                memory handoff, and decision provenance across real
+                initiatives. Results, judgments, token costs, and failure
+                cases are published openly.
+              </p>
+              <div className="hero-actions" style={{ marginTop: "1rem" }}>
+                <a
+                  href="https://useorgx.com/blog"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="site-link-inline"
+                >
+                  Read the methodology + published runs ↗
+                </a>
+              </div>
+            </CaseStudySplit>
+          </CaseStudySection>
+
+          <CaseStudySection
+            kicker="07 // ecosystem"
+            title="12 repos, one coherent platform"
+          >
+            <div className="work-grid-supporting">
+              <article className="contact-card">
+                <div className="eyebrow">MCP server</div>
+                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
+                  orgx-mcp
+                </h3>
+                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
+                  Cloudflare Workers + Durable Objects. 61 tools. OAuth 2.1
+                  + PKCE. Ed25519-signed domain verification.
+                </p>
+                <p style={{ marginTop: "0.8rem" }}>
+                  <a href="https://github.com/useorgx/orgx-mcp" target="_blank" rel="noreferrer" className="site-link-inline">
+                    github.com/useorgx/orgx-mcp ↗
+                  </a>
+                </p>
+              </article>
+              <article className="contact-card">
+                <div className="eyebrow">Gateway SDK</div>
+                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
+                  orgx-gateway-sdk
+                </h3>
+                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
+                  OrgX Gateway Protocol v1. Each plugin peer opens its own
+                  WebSocket to the OrgX server.
+                </p>
+                <p style={{ marginTop: "0.8rem" }}>
+                  <a href="https://github.com/useorgx/orgx-gateway-sdk" target="_blank" rel="noreferrer" className="site-link-inline">
+                    github.com/useorgx/orgx-gateway-sdk ↗
+                  </a>
+                </p>
+              </article>
+              <article className="contact-card">
+                <div className="eyebrow">Plugins</div>
+                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
+                  Claude Code · Codex · OpenCode · OpenClaw
+                </h3>
+                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
+                  Runtime hooks, skill synchronization, agent dispatch,
+                  browser-native mission control. Four coding-agent
+                  runtimes, one OrgX context surface.
+                </p>
+                <p style={{ marginTop: "0.8rem" }}>
+                  <a href="https://github.com/useorgx" target="_blank" rel="noreferrer" className="site-link-inline">
+                    github.com/useorgx ↗
+                  </a>
+                </p>
+              </article>
+              <article className="contact-card">
+                <div className="eyebrow">UI + data</div>
+                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
+                  orgx-ui-kit · orgx-data
+                </h3>
+                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
+                  React components, tokens, and typed data contracts for
+                  Sovereign Execution surfaces.
+                </p>
+              </article>
+              <article className="contact-card">
+                <div className="eyebrow">Desktop shell</div>
+                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
+                  orgx-local-shell
+                </h3>
+                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
+                  Tauri 2 desktop application rendering Command, Mission
+                  Control, Activity, and Daily Brief surfaces.
+                </p>
+              </article>
+              <article className="contact-card">
+                <div className="eyebrow">Methodology + skills</div>
+                <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.35rem" }}>
+                  autonomous-initiative-benchmark · skills
+                </h3>
+                <p style={{ margin: "0.6rem 0 0", color: "var(--shell-text-soft)" }}>
+                  Public methodology, task catalog, and reusable agent
+                  skill definitions for the orchestration platform.
+                </p>
+              </article>
+            </div>
+          </CaseStudySection>
+
+          <CaseStudySection
+            kicker="08 // try it"
+            title="Install OrgX MCP in a compatible client"
+            raised
+          >
+            <CaseStudySplit
+              media={
+                <TerminalPanel
+                  label="install"
+                  lines={[
+                    "# Smithery (recommended)",
+                    "npx @smithery/cli install @useorgx/orgx-mcp --client claude",
+                    "",
+                    "# Direct MCP config",
+                    "{",
+                    '  "mcpServers": {',
+                    '    "orgx": {',
+                    '      "url": "https://mcp.useorgx.com"',
+                    "    }",
+                    "  }",
+                    "}",
+                  ]}
+                />
+              }
+            >
+              <p>
+                The MCP server exposes 61 tools for org memory, planning,
+                decisions, scoring, and workspace management. It works in
+                Claude Desktop, Claude Code, Cursor, and any compatible
+                MCP client.
+              </p>
+              <p>
+                Dynamic client registration handles auth. Durable Objects
+                handle state survival across deploys. You get working
+                context in the first session.
+              </p>
+              <div className="hero-actions" style={{ marginTop: "1rem" }}>
+                <a
+                  href="https://mcp.useorgx.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="site-link-inline"
+                >
+                  mcp.useorgx.com ↗
+                </a>
+                <a
+                  href="https://smithery.ai/server/@useorgx/orgx-mcp"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="site-link-inline"
+                >
+                  View on Smithery ↗
+                </a>
+              </div>
+            </CaseStudySplit>
+          </CaseStudySection>
+
           <CaseStudyEndcap
             title="OrgX is the system I’d build again from scratch tomorrow."
             body={
               <>
                 <p>
-                  If you&apos;re hiring for agent infrastructure, this is the
-                  work I want to do next: orchestration, governance,
-                  observability, and the interface layer that makes serious
-                  automation usable.
+                  If you&apos;re hiring for agent infrastructure, agent
+                  platforms, AI developer productivity, or MCP tooling — this
+                  is a preview of the work I&apos;ll ship on your team from
+                  day one.
                 </p>
               </>
             }
-            primaryHref="/contact"
-            primaryLabel="Get in touch"
+            primaryHref="/hiring"
+            primaryLabel="For hiring managers"
             secondaryHref="https://useorgx.com"
             secondaryLabel="View live platform"
           />
