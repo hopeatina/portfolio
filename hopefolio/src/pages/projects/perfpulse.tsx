@@ -61,7 +61,7 @@ function DashboardSurface() {
           }}
         >
           <div className="proof-bar">
-            <span>127.0.0.1:7575</span>
+            <span>127.0.0.1:3847</span>
             <span>meeting mode</span>
             <span>historical charts</span>
           </div>
@@ -202,7 +202,7 @@ export default function PerfPulsePage() {
                 "$ brew install perf-pulse",
                 "$ perf-pulse serve",
                 "",
-                "launches local dashboard at http://127.0.0.1:7575",
+                "launches local dashboard at http://127.0.0.1:3847",
               ]}
             />
           </CaseStudySection>

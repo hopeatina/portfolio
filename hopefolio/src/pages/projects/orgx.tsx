@@ -81,103 +81,8 @@ export default function OrgXPage() {
             ]}
           />
 
-          <CaseStudySection kicker="01 // system frame" title="What the platform actually does">
-            <CaseStudySplit
-              media={
-                <TerminalPanel
-                  label="trust tiers"
-                  lines={[
-                    "strict   -> read, analyze, propose; no mutation without approval",
-                    "balanced -> low-risk mutation allowed; medium risk escalates",
-                    "open     -> full autonomy inside tool and budget guardrails",
-                    "",
-                    "spawn guards",
-                    "  max_agents_per_task: enforced",
-                    "  budget_per_run: enforced",
-                    "  human escalation: required for destructive actions",
-                  ]}
-                />
-              }
-            >
-              <p>
-                OrgX treats the organization, not the single prompt, as the
-                primitive. Tasks turn into workflows. Agents become operating
-                actors with tool access, trust boundaries, cost footprints, and
-                quality history.
-              </p>
-              <p>
-                The value is not just that the system can delegate. The value is
-                that delegation stays legible: you can see what was routed,
-                which tools were used, what quality bar was applied, and where a
-                human stepped in.
-              </p>
-              <CalloutList
-                items={[
-                  "Spawn and route specialist agents without losing context.",
-                  "Gate autonomy through trust tiers instead of hard-coded fear or blind freedom.",
-                  "Carry decisions, learnings, and costs forward through org memory and outcome attribution.",
-                ]}
-              />
-            </CaseStudySplit>
-          </CaseStudySection>
-
           <CaseStudySection
-            kicker="02 // architecture"
-            title="Three layers keep the platform honest"
-            raised
-          >
-            <DiagramFrame
-              title="OrgX architecture"
-              description="Events drive durable execution, governance decides what can happen next, and the intelligence layer records quality, cost, and memory."
-              diagram={orchestrationDiagram}
-            />
-          </CaseStudySection>
-
-          <CaseStudySection kicker="03 // visual proof" title="The product surface is part of the system">
-            <VisualFrame
-              src="/images/case-studies/orgx-live.png"
-              alt="OrgX command center dashboard"
-              caption="Primary operator view: the command center that makes active work, review state, and orchestration legible."
-            />
-            <VisualFrame
-              src="/images/case-studies/orgx-mcp-agent-status.png"
-              alt="OrgX MCP agent status screen"
-              caption="MCP proof surface showing agent status and system activity rather than abstract platform claims."
-            />
-          </CaseStudySection>
-
-          <CaseStudySection
-            kicker="04 // decisions"
-            title="The important architecture choices"
-            raised
-          >
-            <CaseStudySplit
-              media={
-                <CalloutList
-                  items={[
-                    "Inngest over Temporal to keep workflow durability without running separate orchestration infrastructure.",
-                    "Supabase over a custom backend to get real-time subscriptions, auth boundaries, and velocity in one system.",
-                    "MCP as the protocol layer so tools are discoverable and portable across clients instead of rewritten per runtime.",
-                  ]}
-                />
-              }
-            >
-              <p>
-                These choices are pragmatic, not theoretical. They favor a solo
-                builder&apos;s ability to ship and observe the system without
-                drowning in platform maintenance before the product proves
-                itself.
-              </p>
-              <p>
-                The throughline is the same one I want in my next role: build
-                the substrate that makes autonomy trustworthy, then build the
-                operator surface that proves it.
-              </p>
-            </CaseStudySplit>
-          </CaseStudySection>
-
-          <CaseStudySection
-            kicker="05 // technical depth"
+            kicker="01 // technical depth"
             title="The boring infrastructure choices that matter"
           >
             <CaseStudySplit
@@ -228,6 +133,99 @@ export default function OrgXPage() {
                   "Context pointers, not embeds: entities reference URLs and other entities without payload bloat.",
                 ]}
               />
+            </CaseStudySplit>
+          </CaseStudySection>
+
+          <CaseStudySection kicker="02 // system frame" title="What the platform actually does" raised>
+            <CaseStudySplit
+              media={
+                <TerminalPanel
+                  label="trust tiers"
+                  lines={[
+                    "strict   -> read, analyze, propose; no mutation without approval",
+                    "balanced -> low-risk mutation allowed; medium risk escalates",
+                    "open     -> full autonomy inside tool and budget guardrails",
+                    "",
+                    "spawn guards",
+                    "  max_agents_per_task: enforced",
+                    "  budget_per_run: enforced",
+                    "  human escalation: required for destructive actions",
+                  ]}
+                />
+              }
+            >
+              <p>
+                OrgX treats the organization, not the single prompt, as the
+                primitive. Tasks turn into workflows. Agents become operating
+                actors with tool access, trust boundaries, cost footprints, and
+                quality history.
+              </p>
+              <p>
+                The value is not just that the system can delegate. The value is
+                that delegation stays legible: you can see what was routed,
+                which tools were used, what quality bar was applied, and where a
+                human stepped in.
+              </p>
+              <CalloutList
+                items={[
+                  "Spawn and route specialist agents without losing context.",
+                  "Gate autonomy through trust tiers instead of hard-coded fear or blind freedom.",
+                  "Carry decisions, learnings, and costs forward through org memory and outcome attribution.",
+                ]}
+              />
+            </CaseStudySplit>
+          </CaseStudySection>
+
+          <CaseStudySection
+            kicker="03 // architecture"
+            title="Three layers keep the platform honest"
+          >
+            <DiagramFrame
+              title="OrgX architecture"
+              description="Events drive durable execution, governance decides what can happen next, and the intelligence layer records quality, cost, and memory."
+              diagram={orchestrationDiagram}
+            />
+          </CaseStudySection>
+
+          <CaseStudySection kicker="04 // visual proof" title="The product surface is part of the system" raised>
+            <VisualFrame
+              src="/images/case-studies/orgx-live.png"
+              alt="OrgX command center dashboard"
+              caption="Primary operator view: the command center that makes active work, review state, and orchestration legible."
+            />
+            <VisualFrame
+              src="/images/case-studies/orgx-mcp-agent-status.png"
+              alt="OrgX MCP agent status screen"
+              caption="MCP proof surface showing agent status and system activity rather than abstract platform claims."
+            />
+          </CaseStudySection>
+
+          <CaseStudySection
+            kicker="05 // decisions"
+            title="The important architecture choices"
+          >
+            <CaseStudySplit
+              media={
+                <CalloutList
+                  items={[
+                    "Inngest over Temporal to keep workflow durability without running separate orchestration infrastructure.",
+                    "Supabase over a custom backend to get real-time subscriptions, auth boundaries, and velocity in one system.",
+                    "MCP as the protocol layer so tools are discoverable and portable across clients instead of rewritten per runtime.",
+                  ]}
+                />
+              }
+            >
+              <p>
+                These choices are pragmatic, not theoretical. They favor a solo
+                builder&apos;s ability to ship and observe the system without
+                drowning in platform maintenance before the product proves
+                itself.
+              </p>
+              <p>
+                The throughline is the same one I want in my next role: build
+                the substrate that makes autonomy trustworthy, then build the
+                operator surface that proves it.
+              </p>
             </CaseStudySplit>
           </CaseStudySection>
 

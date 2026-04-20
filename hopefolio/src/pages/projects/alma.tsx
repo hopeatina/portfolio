@@ -53,7 +53,7 @@ function ContributionSurface() {
         2.7 years of sustained ownership
       </h3>
       <p style={{ margin: "0.8rem 0 1rem", color: "var(--shell-text-soft)" }}>
-        999 commits, 7 feature areas, 96.4% Python. The story is not one heroic
+        999 commits across 7 feature areas. The story is not one heroic
         sprint; it is repeated operational ownership under compliance pressure.
       </p>
       <div
@@ -108,7 +108,8 @@ export default function AlmaPage() {
               { label: "Commits", value: "999" },
               { label: "Tenure", value: "2.7 years" },
               { label: "Feature areas", value: "7 shipped" },
-              { label: "Language mix", value: "96.4% Python" },
+              { label: "Error reduction", value: "20%" },
+              { label: "Adoption", value: "72%" },
             ]}
           />
 
