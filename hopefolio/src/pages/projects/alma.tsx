@@ -8,6 +8,7 @@ import {
   CaseStudySection,
   CaseStudySplit,
   DiagramFrame,
+  TerminalPanel,
 } from "@/components/site/CaseStudyPrimitives";
 
 const architectureDiagram = `
@@ -39,52 +40,6 @@ flowchart TB
   A --> M
 `;
 
-function ContributionSurface() {
-  const blocks = [
-    1, 2, 2, 3, 4, 3, 2, 2, 1, 2, 3, 4,
-    4, 4, 3, 3, 2, 3, 4, 4, 3, 2, 2, 1,
-    2, 3, 4, 4, 3, 3, 4, 4, 3, 2, 1, 1,
-  ];
-
-  return (
-    <div className="contact-card" style={{ padding: "1.5rem" }}>
-      <span className="eyebrow">Contribution history</span>
-      <h3 style={{ margin: "0.45rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.7rem" }}>
-        2.7 years of sustained ownership
-      </h3>
-      <p style={{ margin: "0.8rem 0 1rem", color: "var(--shell-text-soft)" }}>
-        999 commits across 7 feature areas. The story is not one heroic
-        sprint; it is repeated operational ownership under compliance pressure.
-      </p>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
-          gap: "0.35rem",
-        }}
-      >
-        {blocks.map((value, index) => (
-          <span
-            key={`${value}-${index}`}
-            style={{
-              aspectRatio: "1 / 1",
-              borderRadius: "10px",
-              background:
-                value === 4
-                  ? "rgba(0,229,160,0.95)"
-                  : value === 3
-                    ? "rgba(0,229,160,0.58)"
-                    : value === 2
-                      ? "rgba(255,255,255,0.18)"
-                      : "rgba(255,255,255,0.08)",
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function AlmaPage() {
   return (
     <>
@@ -103,7 +58,7 @@ export default function AlmaPage() {
             status="Shipped in production"
             title="Alma"
             subtitle="999 commits in HIPAA production across reassessments, compliance, audit integrations, and document workflows."
-            description="This is the production proof case study. It shows the kind of long-running, failure-sensitive backend ownership that never becomes flashy but becomes indispensable when the system cannot break."
+            description="Long-running, failure-sensitive backend ownership in a regulated environment: reassessment logic, audit integrations, Datadog observability, Celery workflows, and RBAC document management — all shipped without breaking production."
             facts={[
               { label: "Commits", value: "999" },
               { label: "Tenure", value: "2.7 years" },
@@ -123,7 +78,24 @@ export default function AlmaPage() {
           />
 
           <CaseStudySection kicker="01 // production frame" title="What the work actually demanded">
-            <CaseStudySplit media={<ContributionSurface />}>
+            <CaseStudySplit
+              media={
+                <TerminalPanel
+                  label="feature areas shipped"
+                  lines={[
+                    "automated_reassessments    → 72% adoption",
+                    "compliant_progress_notes   → HIPAA-safe workflows",
+                    "brellium_audit_integration → third-party audit hooks",
+                    "rbac_document_management   → permission-scoped docs",
+                    "celery_reminders           → async therapist comms",
+                    "datadog_observability      → 20% fewer prod errors",
+                    "serializer_evolution       → evolving compliance reqs",
+                    "",
+                    "over 999 commits · 2.7 years · operational ownership",
+                  ]}
+                />
+              }
+            >
               <p>
                 Alma is where the portfolio proves I can operate under
                 healthcare constraints, not just prototype around them. The work
@@ -187,19 +159,21 @@ export default function AlmaPage() {
           </CaseStudySection>
 
           <CaseStudyEndcap
-            title="999 commits in HIPAA production is the kind of work that doesn’t make demo reels."
+            title="The work that holds when the system cannot break."
             body={
               <>
                 <p>
-                  It is the work that matters when systems cannot break. That
-                  is exactly why it belongs in the portfolio.
+                  Long-running, failure-sensitive backend ownership in a
+                  regulated environment. The same instinct carries directly
+                  into agent infrastructure: build systems that stay
+                  inspectable when they matter most.
                 </p>
               </>
             }
-            primaryHref="https://www.helloalma.com"
-            primaryLabel="View Alma"
-            secondaryHref="/projects/orgx"
-            secondaryLabel="Read about OrgX"
+            primaryHref="/projects/orgx"
+            primaryLabel="Read OrgX case study →"
+            secondaryHref="https://www.helloalma.com"
+            secondaryLabel="View Alma"
           />
         </div>
       </main>

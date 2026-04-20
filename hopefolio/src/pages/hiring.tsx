@@ -103,8 +103,8 @@ export default function Hiring() {
 
           <section className="page-content">
             <div className="page-header-stack" style={{ gap: "0.8rem" }}>
-              <span className="eyebrow">Signal · what makes this a strong bet</span>
-              <h2>Six reasons this résumé is worth a conversation</h2>
+              <span className="eyebrow">Why this is a strong bet</span>
+              <h2>Three things most candidates can&apos;t say.</h2>
             </div>
             <div className="work-grid-supporting">
               <article className="contact-card">
@@ -112,18 +112,9 @@ export default function Hiring() {
                   I&apos;ve built it, not just used it
                 </h3>
                 <p style={{ margin: "0.5rem 0 0", color: "var(--shell-text-soft)" }}>
-                  Production MCP server with OAuth 2.1 + DCR. Most candidates
-                  list &quot;MCP&quot; as a keyword. I ship a server that
-                  other MCP servers should look at.
-                </p>
-              </article>
-              <article className="contact-card">
-                <h3 style={{ margin: 0, fontFamily: "var(--font-heading)", fontSize: "1.2rem" }}>
-                  I ship and write
-                </h3>
-                <p style={{ margin: "0.5rem 0 0", color: "var(--shell-text-soft)" }}>
-                  8 technical essays published on OrgX. One shows up in every
-                  conversation I have with agent-platform engineers at labs.
+                  Production MCP server with OAuth 2.1 + PKCE + DCR. Most
+                  candidates list &quot;MCP&quot; as a keyword. I ship a server
+                  that other MCP servers should look at.
                 </p>
               </article>
               <article className="contact-card">
@@ -131,9 +122,9 @@ export default function Hiring() {
                   I run real benchmarks
                 </h3>
                 <p style={{ margin: "0.5rem 0 0", color: "var(--shell-text-soft)" }}>
-                  136+ tasks with independent judges and published artifacts.
-                  Most teams building agents don&apos;t have a harness this
-                  rigorous internally.
+                  136+ tasks across 7 domains, independent judges, published
+                  artifacts. Most teams building agents don&apos;t have a harness
+                  this rigorous internally yet.
                 </p>
               </article>
               <article className="contact-card">
@@ -141,28 +132,9 @@ export default function Hiring() {
                   I carry regulated-system judgment
                 </h3>
                 <p style={{ margin: "0.5rem 0 0", color: "var(--shell-text-soft)" }}>
-                  HIPAA at Alma. Regulated financial data at Capital One.
-                  I know how to ship AI in environments where &quot;move fast
-                  and break things&quot; is a fireable offense.
-                </p>
-              </article>
-              <article className="contact-card">
-                <h3 style={{ margin: 0, fontFamily: "var(--font-heading)", fontSize: "1.2rem" }}>
-                  I work across the stack
-                </h3>
-                <p style={{ margin: "0.5rem 0 0", color: "var(--shell-text-soft)" }}>
-                  Backend (Python, TypeScript, Scala, Java). Infra (Cloudflare
-                  Workers, AWS, Hetzner, Trigger.dev). Product UX. SDKs.
-                  Developer tools.
-                </p>
-              </article>
-              <article className="contact-card">
-                <h3 style={{ margin: 0, fontFamily: "var(--font-heading)", fontSize: "1.2rem" }}>
-                  I write tools other engineers install
-                </h3>
-                <p style={{ margin: "0.5rem 0 0", color: "var(--shell-text-soft)" }}>
-                  corgx-wizard + skills libraries open-sourced. OrgX MCP
-                  listed on Smithery. PerfPulse distributed via Homebrew.
+                  HIPAA at Alma. Regulated financial data at Capital One. I
+                  know how to ship AI in environments where &quot;move fast and
+                  break things&quot; is a fireable offense.
                 </p>
               </article>
             </div>
@@ -172,16 +144,16 @@ export default function Hiring() {
             <span className="eyebrow">Next step</span>
             <h2 style={{ marginTop: "0.5rem" }}>30 minutes is enough to know if this is a fit.</h2>
             <p style={{ margin: "0.8rem 0 0", maxWidth: "38rem" }}>
-              Book directly or email me with the role + a time window. I&apos;ll
-              come with a live OrgX walkthrough tailored to what your team is
-              building and I can ship a running demo in the call.
+              Email me with the role and a time window. I&apos;ll come with a
+              live OrgX walkthrough tailored to what your team is building and
+              a running demo in the call.
             </p>
             <div className="hero-actions" style={{ marginTop: "1.2rem" }}>
-              <SiteButton href="https://cal.com/hopeatina/30min" external>
+              <SiteButton href="https://calendly.com/hopeatina/orgx-discovery" external>
                 Book 30 minutes →
               </SiteButton>
               <SiteButton
-                href="mailto:hopeatina@gmail.com?subject=Role%20conversation"
+                href="mailto:hopeatina@gmail.com?subject=Role%20conversation%20%E2%80%94%20%5Bcompany%5D"
                 variant="secondary"
                 external
               >
@@ -190,14 +162,37 @@ export default function Hiring() {
               <SiteButton href="/resume/hope-atina-resume.md" variant="text" external>
                 Download resume
               </SiteButton>
-              <SiteButton href="https://github.com/useorgx" variant="text" external>
-                github.com/useorgx ↗
-              </SiteButton>
-              <SiteButton href="https://useorgx.com" variant="text" external>
-                useorgx.com ↗
-              </SiteButton>
             </div>
-            <p style={{ marginTop: "1rem", fontSize: "0.8rem", color: "var(--shell-muted)" }}>
+            <p style={{ marginTop: "1rem", fontSize: "0.85rem" }}>
+              Or explore:{" "}
+              <a
+                href="https://github.com/useorgx"
+                target="_blank"
+                rel="noreferrer"
+                className="site-link-inline"
+              >
+                github.com/useorgx ↗
+              </a>
+              {" · "}
+              <a
+                href="https://useorgx.com"
+                target="_blank"
+                rel="noreferrer"
+                className="site-link-inline"
+              >
+                useorgx.com ↗
+              </a>
+              {" · "}
+              <a
+                href="https://useorgx.com/blog"
+                target="_blank"
+                rel="noreferrer"
+                className="site-link-inline"
+              >
+                writing ↗
+              </a>
+            </p>
+            <p style={{ marginTop: "0.5rem", fontSize: "0.8rem", color: "var(--shell-muted)" }}>
               Typical reply under 24 hours · Houston CT · remote-friendly
             </p>
           </section>

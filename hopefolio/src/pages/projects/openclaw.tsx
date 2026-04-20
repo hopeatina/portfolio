@@ -58,7 +58,7 @@ export default function OpenClawPage() {
         <div className="page-stack">
           <CaseStudyHero
             kicker="Case study 04"
-            status="Experimental"
+            status="Live tool"
             title="OpenClaw"
             subtitle="Plugin architecture for agent workflow control, not another standalone orchestration toy."
             description="OpenClaw matters because it makes existing tools better instead of asking users to adopt yet another dashboard from scratch. The plugin inherits the host environment, adds a local MCP bridge, and exposes a browser-native mission control for active agent work."

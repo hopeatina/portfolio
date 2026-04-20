@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { experienceEntries } from "@/data/portfolio";
 
@@ -16,6 +17,35 @@ export default function About() {
 
       <main id="main-content" className="page-frame">
         <div className="page-stack">
+          <aside
+            className="contact-card"
+            style={{
+              padding: "0.9rem 1.1rem",
+              borderLeft: "3px solid var(--shell-border-strong)",
+              background: "rgba(255,255,255,0.02)",
+            }}
+          >
+            <p style={{ margin: 0, fontSize: "0.95rem", color: "var(--shell-text-soft)" }}>
+              <strong style={{ color: "var(--shell-text)" }}>Currently:</strong>{" "}
+              shipping OrgX — continuity infrastructure for AI agents.{" "}
+              <strong style={{ color: "var(--shell-text)" }}>Looking for:</strong>{" "}
+              senior/staff IC seats on agent platforms, MCP infra, or evals +
+              observability.{" "}
+              <Link href="/hiring" className="site-link-inline">
+                For hiring managers →
+              </Link>
+              {" · "}
+              <a
+                href="https://calendly.com/hopeatina/orgx-discovery"
+                target="_blank"
+                rel="noreferrer"
+                className="site-link-inline"
+              >
+                Book 30 min ↗
+              </a>
+            </p>
+          </aside>
+
           <section className="about-grid">
             <div className="page-header-stack">
               <span className="eyebrow">About</span>

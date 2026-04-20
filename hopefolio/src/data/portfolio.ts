@@ -88,7 +88,7 @@ export const featuredProjects: PortfolioProject[] = [
   {
     slug: "openclaw",
     title: "OpenClaw",
-    status: "Experimental",
+    status: "Live tool",
     shortLabel: "Plugin architecture",
     summary:
       "Browser-native mission control for agent workflows with MCP bridging, SSE, and resumable state.",

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import SiteButton from "@/components/site/SiteButton";
 
 export default function Contact() {
   return (
@@ -8,36 +9,48 @@ export default function Contact() {
         <title>Contact | Hope Atina</title>
         <meta
           name="description"
-          content="Hiring for agent infrastructure, orchestration, observability, or MCP platforms? Reach Hope Atina directly."
+          content="Reach Hope Atina for senior/staff IC roles on agent platforms, MCP infrastructure, AI developer productivity, or evals and observability."
         />
       </Head>
 
       <main id="main-content" className="page-frame">
         <div className="page-stack">
           <section className="contact-card">
-            <div className="page-header-stack" style={{ maxWidth: "42rem" }}>
+            <div className="page-header-stack" style={{ maxWidth: "44rem" }}>
               <span className="eyebrow">Contact</span>
-              <h1>Hiring for agent infrastructure?</h1>
+              <h1>The fastest path is a 30-minute call.</h1>
               <p style={{ margin: 0 }}>
-                I&apos;m looking for senior IC positions in multi-agent
-                orchestration, MCP platforms, observability, and AI
-                infrastructure engineering. If that&apos;s what you&apos;re
-                building, let&apos;s talk.
+                Senior/staff IC roles on agent platforms, MCP infrastructure,
+                AI developer productivity, or evals and observability. Book
+                directly on the calendar, or email me — serious messages get
+                a reply within 24 hours.
               </p>
-              <p
-                style={{
-                  margin: "1rem 0 0",
-                  fontSize: "clamp(1.3rem, 3vw, 1.8rem)",
-                  fontWeight: 600,
-                }}
-              >
-                <a href="mailto:hopeatina@gmail.com" className="site-link-inline">
-                  hopeatina@gmail.com
-                </a>
-              </p>
-              <p style={{ margin: 0, color: "var(--shell-muted)" }}>
+              <div className="hero-actions" style={{ marginTop: "1.4rem" }}>
+                <SiteButton href="https://calendly.com/hopeatina/orgx-discovery" external>
+                  Book 30 minutes →
+                </SiteButton>
+                <SiteButton
+                  href="mailto:hopeatina@gmail.com?subject=%5Byour%20company%5D%20%E2%80%94%20role%20conversation"
+                  variant="secondary"
+                  external
+                >
+                  Email me
+                </SiteButton>
+                <SiteButton href="/hiring" variant="text">
+                  Hiring manager brief
+                </SiteButton>
+                <SiteButton href="/resume/hope-atina-resume.md" variant="text" external>
+                  Download resume
+                </SiteButton>
+              </div>
+              <p style={{ margin: "1.4rem 0 0", color: "var(--shell-muted)", fontSize: "0.95rem" }}>
+                Also here:{" "}
                 <a href="https://github.com/hopeatina" target="_blank" rel="noreferrer">
                   GitHub
+                </a>{" "}
+                ·{" "}
+                <a href="https://github.com/useorgx" target="_blank" rel="noreferrer">
+                  @useorgx
                 </a>{" "}
                 ·{" "}
                 <a href="https://linkedin.com/in/hopeatina" target="_blank" rel="noreferrer">
@@ -46,7 +59,14 @@ export default function Contact() {
                 ·{" "}
                 <a href="https://x.com/emerginghope_" target="_blank" rel="noreferrer">
                   X
+                </a>{" "}
+                ·{" "}
+                <a href="https://medium.com/@hopeatina" target="_blank" rel="noreferrer">
+                  Medium
                 </a>
+              </p>
+              <p style={{ margin: "0.3rem 0 0", fontSize: "0.8rem", color: "var(--shell-muted)" }}>
+                Houston CT · remote-friendly · open to hybrid SF / NYC / Seattle
               </p>
             </div>
           </section>

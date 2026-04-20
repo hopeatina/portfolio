@@ -99,10 +99,11 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
         <div className="page-stack">
           <header className="page-header-stack">
             <span className="eyebrow">Writing</span>
-            <h1>Technical writing on agent orchestration, MCP protocol, and production AI systems.</h1>
+            <h1>What breaks when you put agents in production.</h1>
             <p style={{ maxWidth: "42rem", margin: 0 }}>
-              Featured writing stays on-site now. The index leads with the
-              strongest essay, then keeps the rest compressed and easy to scan.
+              Essays on memory, MCP, trust scoring, decision provenance, and
+              why single-shot benchmarks hide what matters. On-site first,
+              then the OrgX essays in order of strength.
             </p>
           </header>
 
