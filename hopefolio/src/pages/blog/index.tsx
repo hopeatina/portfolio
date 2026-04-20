@@ -28,56 +28,56 @@ const orgxEssays: OrgXEssay[] = [
     title: "Memory is the structural lift — Phase 2 substrate benchmark",
     summary:
       "136 tasks across multiple models and orchestration cells. Single-shot benchmarks structurally hide what agents cannot fake: cascading context.",
-    url: "https://useorgx.com/blog",
+    url: "https://useorgx.com/blog/phase-2-substrate-matrix-memory-lift",
     focus: "Benchmarks · substrate",
   },
   {
     title: "You are the API between your AI tools. OrgX MCP fixes that.",
     summary:
       "Manual context-carrying between ChatGPT, Claude, and Cursor is the leak. MCP is the continuity layer for unified organizational context.",
-    url: "https://useorgx.com/blog",
+    url: "https://useorgx.com/blog/orgx-mcp-launch",
     focus: "MCP · memory",
   },
   {
     title: "How we prove OrgX works",
     summary:
       "Weekly benchmarking: 12 tasks, 7 domains, 3 execution modes against a single-agent baseline and a human baseline — with full provenance.",
-    url: "https://useorgx.com/blog",
+    url: "https://useorgx.com/blog/orgx-autonomous-initiative-benchmark-methodology",
     focus: "Evals · methodology",
   },
   {
     title: "Our autonomous benchmark has independent judges now",
     summary:
       "Published artifacts, independent judgments, token-level costs, and failure cases requiring human review.",
-    url: "https://useorgx.com/blog",
+    url: "https://useorgx.com/blog/autonomous-benchmark-first-judged-run",
     focus: "Trust · credibility",
   },
   {
     title: "The most underrated product surface in AI is the setup script",
     summary:
       "Initial configuration determines whether AI tools share organizational context or operate in isolation. OrgX Wizard as infrastructure.",
-    url: "https://useorgx.com/blog",
+    url: "https://useorgx.com/blog/ai-setup-script-as-product-surface",
     focus: "Infrastructure · onboarding",
   },
   {
     title: "The OrgX way",
     summary:
       "Distributed AI tool usage is a coordination failure. The founder is the integration layer that should be code, not willpower.",
-    url: "https://useorgx.com/blog",
+    url: "https://useorgx.com/blog/orgx-way-manifesto",
     focus: "Systems thinking",
   },
   {
     title: "Why AI-generated brand content is mostly slop",
     summary:
-      "It&apos;s not prompting — it&apos;s systemic design. A model asked to carry taste, memory, and QA by itself will fail predictably.",
-    url: "https://useorgx.com/blog",
+      "It is not prompting — it is systemic design. A model asked to carry taste, memory, and QA by itself will fail predictably.",
+    url: "https://useorgx.com/blog/ai-content-that-knows-your-brand",
     focus: "Systems thinking · trust",
   },
   {
     title: "We generated 75 ad concepts. The useful part was killing 60.",
     summary:
       "Filtering and curation are higher-leverage than volume in AI generation. Rigor in selection matters more than throughput.",
-    url: "https://useorgx.com/blog",
+    url: "https://useorgx.com/blog/seventy-five-ad-concepts-one-afternoon",
     focus: "Evals · craft",
   },
 ];

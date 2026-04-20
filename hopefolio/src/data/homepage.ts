@@ -50,7 +50,7 @@ export type FlagshipSystem = {
 export const heroSignals: HeroSignal[] = [
   {
     label: "Experience",
-    value: "8+ years shipping production systems",
+    value: "7+ years shipping production systems",
   },
   {
     label: "Current focus",
@@ -69,7 +69,7 @@ export const focusSystem: FocusSystem = {
   summary:
     "A multi-agent platform that routes work, holds memory, and keeps human judgment at the right boundaries instead of pretending every decision can be automated.",
   proof:
-    "1,270+ commits across a 7-repo ecosystem spanning workspace-first onboarding, live command center review, public proof surfaces, and agent tooling.",
+    "1,270+ commits across a 12-repo ecosystem spanning workspace-first onboarding, live command center review, public proof surfaces, and agent tooling.",
   checkpoints: [
     {
       label: "Current review",
@@ -131,7 +131,7 @@ export const flagshipSystems: FlagshipSystem[] = [
     image: "/images/projects/orgx-illustration.png",
     summary:
       "Multi-agent orchestration with MCP integrations, trust governance, approval flows, and durable workflows.",
-    proof: "1,270+ commits across the platform. 7 repos spanning memory, scoring, orchestration, and tooling.",
+    proof: "1,270+ commits across the platform. 12 repos spanning memory, scoring, orchestration, plugins, SDKs, and tooling.",
     whyItMatters:
       "This is the clearest expression of how I think about agent systems: delegate aggressively, keep provenance visible, and reserve judgment for the moments that matter.",
     meta: "Multi-agent orchestration · command center · proof surfaces",

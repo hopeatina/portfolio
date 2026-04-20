@@ -1,7 +1,7 @@
 ---
-title: "What I Learned Running 22 MCP Servers in Production"
+title: "What I Learned Running MCP in Production"
 date: "2026-03-05"
-excerpt: "What broke, what patterns held up, and what I would do differently after exposing 131+ tools across 22 MCP servers."
+excerpt: "What broke, what patterns held up, and what I would do differently after shipping the OrgX MCP server — 61 tools across 16 categories — plus integrations with ~20 external MCP services."
 category: "MCP Protocol"
 readTime: "10 min read"
 tags:
@@ -17,7 +17,7 @@ relatedPosts:
 
 The Model Context Protocol (MCP) sounds clean in theory: define tools once, expose them through a common protocol, and let compatible clients discover what they need. In practice, once you move beyond a few toy tools, the real work starts. Naming gets harder. Auth gets harder. Error recovery gets harder. Agent behavior gets weirder.
 
-In OrgX, MCP became the integration spine for 22 servers and 131+ tools across orchestration, governance, quality, memory, and external services. That scale was enough to make the real lessons obvious. This post covers the patterns that held up, the failures that surfaced under real use, and the changes I would make faster if I rebuilt it tomorrow.
+In OrgX, MCP became the integration spine: 61 tools across 16 categories on the OrgX MCP server itself, plus wiring into roughly 20 external MCP services across orchestration, governance, quality, memory, and product surfaces. That scale was enough to make the real lessons obvious. This post covers the patterns that held up, the failures that surfaced under real use, and the changes I would make faster if I rebuilt it tomorrow.
 
 ## Why MCP for Agent Orchestration
 
@@ -46,7 +46,7 @@ Now Claude Code, Cursor, and my CLI all discover and use this tool through the s
 
 ## The OrgX MCP Server Architecture
 
-The OrgX MCP server exposes 131+ tools across 22 MCP servers, organized into capability groups:
+The OrgX MCP server exposes 61 tools across 16 categories, organized into capability groups:
 
 **Entity Management**
 - `orgx_create_entity`, `orgx_update_entity`, `list_entities` — CRUD for tasks, projects, initiatives
@@ -79,9 +79,9 @@ The OrgX MCP server exposes 131+ tools across 22 MCP servers, organized into cap
 - `get_relevant_learnings` — Context-aware learning retrieval
 - `get_morning_brief` — Daily summary of org activity
 
-**External Integrations (22 MCP Servers)**
+**External MCP Integrations**
 
-Beyond the core OrgX tools, the platform integrates with 22 external MCP servers: GitHub, Slack, Google Drive, Notion, HubSpot, Figma, Stripe, Vercel, Supabase, Asana, PostHog, Sentry, Intercom, Datadog, Box, Kling AI, Runway, Firecrawl, Playwright, Fal.AI, and more. Each integration exposes additional tools through the same MCP protocol, allowing agents to interact with external services as naturally as they interact with OrgX itself.
+Beyond the core OrgX tools, the platform integrates with a broad set of external MCP services: GitHub, Slack, Google Drive, Notion, HubSpot, Figma, Stripe, Vercel, Supabase, Asana, PostHog, Sentry, Intercom, Datadog, Box, Kling AI, Runway, Firecrawl, Playwright, Fal.AI, and more. Each integration exposes additional tools through the same MCP protocol, allowing agents to interact with external services as naturally as they interact with OrgX itself.
 
 ## Tool-Calling Middleware Patterns
 

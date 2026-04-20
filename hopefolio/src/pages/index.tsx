@@ -47,8 +47,9 @@ export default function Home() {
             <div className="hero-reveal-group hero-reveal-group-delay-2">
               <div className="proof-bar">
                 <span>7+ years shipping production systems</span>
-                <span>OrgX: 22 MCP servers · 131+ tools · 136 benchmark tasks</span>
-                <span>Alma: 999 commits in HIPAA production</span>
+                <span>OrgX: 61 MCP tools · 12-repo platform · 136+ benchmark tasks</span>
+                <span>Alma: 999 commits in HIPAA production · 20% fewer errors</span>
+                <span>Vessel: 93% bug reduction via API re-architecture</span>
               </div>
             </div>
             <div className="hero-reveal-group hero-reveal-group-delay-2">

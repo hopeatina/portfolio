@@ -32,6 +32,7 @@ export const navItems = [
   { label: "Work", href: "/projects" },
   { label: "Writing", href: "/blog" },
   { label: "About", href: "/about" },
+  { label: "Hire", href: "/hiring" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -45,7 +46,7 @@ export const featuredProjects: PortfolioProject[] = [
       "Operational control plane for multi-agent work: routing, governance, memory, and review surfaces.",
     description:
       "Multi-agent orchestration with trust governance, approval gates, durable workflows, and the interfaces operators need when autonomy stops being a toy.",
-    proof: ["1,270+ commits", "22 MCP servers", "131+ tools"],
+    proof: ["1,270+ commits", "61 MCP tools", "136+ benchmark tasks"],
     heroImage: "/images/projects/orgx-illustration.png",
     heroAlt: "OrgX multi-agent orchestration illustration",
     href: "/projects/orgx",
@@ -96,7 +97,7 @@ export const featuredProjects: PortfolioProject[] = [
     proof: ["558 commits", "30 MCP tools", "SSE + SQLite"],
     href: "/projects/openclaw",
     primaryCta: "Read case study",
-    secondaryHref: "https://github.com/hopeatina/orgx-openclaw-plugin",
+    secondaryHref: "https://github.com/useorgx/openclaw-plugin",
     secondaryLabel: "View source",
     tier: "supporting",
   },
@@ -253,23 +254,23 @@ export const experienceEntries: ExperienceEntry[] = [
   {
     company: "Alma",
     role: "Software Engineer, Quality Enablement",
-    period: "2023–2026",
+    period: "2023–Present",
     outcome:
-      "999 commits across 7 major feature areas. Led automated reassessment work that reached 89% therapist adoption while staying HIPAA-safe.",
+      "999 commits across 7 major feature areas. Automated reassessment workflows reached 72% feature adoption. Datadog dashboards and alerting cut production errors by 20%.",
   },
   {
     company: "Vessel Health",
     role: "Lead Backend Engineer",
-    period: "2021–2023",
+    period: "2020–2023",
     outcome:
-      "Led backend re-architecture for reliability, data-pipeline hardening, and healthier production operations.",
+      "Owned end-to-end tech specs for an API re-architecture that reduced bug output by 93%. Led auth, hardware calibration, and AWS-backed internal platform workflows.",
   },
   {
     company: "Capital One",
     role: "Software & Data Engineer",
-    period: "2019–2021",
+    period: "2017–2019",
     outcome:
-      "Built internal self-service infrastructure for real-time Spark and Scala streams used by multiple teams.",
+      "Automated ETL pipeline generation and data quality validation for Snowflake onboarding. Tuned Spark/Scala apps ingesting millions of near-real-time records in regulated finance.",
   },
   {
     company: "MD Anderson",
