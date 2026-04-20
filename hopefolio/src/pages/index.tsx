@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import ProjectCard from "@/components/site/ProjectCard";
 import SiteButton from "@/components/site/SiteButton";
+import RevealOnScroll from "@/components/site/RevealOnScroll";
 import { featuredProjects } from "@/data/portfolio";
 
 const productionCompanies = [
@@ -100,7 +101,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="page-content">
+          <RevealOnScroll as="section" className="page-content">
             <div className="page-header-stack" style={{ gap: "0.8rem" }}>
               <span className="eyebrow">Shipped in production</span>
               <h2 className="lead-title">Judgment that holds under real constraints.</h2>
@@ -152,9 +153,9 @@ export default function Home() {
                 </article>
               ))}
             </div>
-          </section>
+          </RevealOnScroll>
 
-          <section className="page-content">
+          <RevealOnScroll as="section" className="page-content">
             <div className="page-header-stack" style={{ gap: "0.8rem" }}>
               <span className="eyebrow">Selected work</span>
               <h2 className="lead-title">
@@ -180,9 +181,9 @@ export default function Home() {
                 Open the full work index →
               </Link>
             </p>
-          </section>
+          </RevealOnScroll>
 
-          <section className="contact-card">
+          <RevealOnScroll as="section" className="contact-card">
             <div className="page-header-stack" style={{ gap: "1rem" }}>
               <span className="eyebrow">Hiring</span>
               <h2>Currently looking for my next role.</h2>
@@ -202,7 +203,7 @@ export default function Home() {
                 </SiteButton>
               </div>
             </div>
-          </section>
+          </RevealOnScroll>
         </div>
       </main>
     </>
