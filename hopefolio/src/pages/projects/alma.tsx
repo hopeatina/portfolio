@@ -66,6 +66,8 @@ export default function AlmaPage() {
               { label: "Error reduction", value: "20%" },
               { label: "Adoption", value: "72%" },
             ]}
+            image="/images/projects/alma.svg"
+            imageAlt="Alma — HIPAA-compliant backend systems"
           />
 
           <BuildSurface

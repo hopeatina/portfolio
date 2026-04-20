@@ -89,8 +89,8 @@ export default function Home() {
 
             <div className="case-study-hero-visual">
               <Image
-                src="/images/case-studies/orgx-live.png"
-                alt="OrgX command center — the live operator view showing active agent work, review state, and orchestration"
+                src="/images/projects/orgx-illustration.png"
+                alt="OrgX — multi-agent orchestration across Claude Code, Cursor, and ChatGPT"
                 fill
                 priority
                 sizes="(min-width: 1024px) 44vw, 100vw"
