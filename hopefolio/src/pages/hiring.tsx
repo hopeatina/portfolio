@@ -171,16 +171,23 @@ export default function Hiring() {
           <section className="contact-card">
             <span className="eyebrow">Next step</span>
             <h2 style={{ marginTop: "0.5rem" }}>30 minutes is enough to know if this is a fit.</h2>
-            <p style={{ margin: "0.8rem 0 0", maxWidth: "36rem" }}>
-              Email me with the role and a time window. I&apos;ll come with a
-              live OrgX walkthrough specific to what your team is building
-              and I can ship running demos in the call.
+            <p style={{ margin: "0.8rem 0 0", maxWidth: "38rem" }}>
+              Book directly or email me with the role + a time window. I&apos;ll
+              come with a live OrgX walkthrough tailored to what your team is
+              building and I can ship a running demo in the call.
             </p>
             <div className="hero-actions" style={{ marginTop: "1.2rem" }}>
-              <SiteButton href="mailto:hopeatina@gmail.com?subject=Role%20conversation" external>
-                Email me →
+              <SiteButton href="https://cal.com/hopeatina/30min" external>
+                Book 30 minutes →
               </SiteButton>
-              <SiteButton href="/resume/hope-atina-resume.md" variant="secondary" external>
+              <SiteButton
+                href="mailto:hopeatina@gmail.com?subject=Role%20conversation"
+                variant="secondary"
+                external
+              >
+                Email me
+              </SiteButton>
+              <SiteButton href="/resume/hope-atina-resume.md" variant="text" external>
                 Download resume
               </SiteButton>
               <SiteButton href="https://github.com/useorgx" variant="text" external>
@@ -190,6 +197,9 @@ export default function Hiring() {
                 useorgx.com ↗
               </SiteButton>
             </div>
+            <p style={{ marginTop: "1rem", fontSize: "0.8rem", color: "var(--shell-muted)" }}>
+              Typical reply under 24 hours · Houston CT · remote-friendly
+            </p>
           </section>
         </div>
       </main>

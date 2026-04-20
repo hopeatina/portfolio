@@ -1,9 +1,37 @@
 import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import ProjectCard from "@/components/site/ProjectCard";
 import SiteButton from "@/components/site/SiteButton";
-import TypewriterName from "@/components/site/TypewriterName";
 import { featuredProjects } from "@/data/portfolio";
+
+const productionCompanies = [
+  {
+    name: "Alma",
+    logo: "/images/logos/alma.png",
+    environment: "Mental health · HIPAA production",
+    role: "Software Engineer, Quality Enablement · 2023–Present",
+    impact:
+      "999 commits across 7 feature areas. Celery reassessment workflows at 72% adoption. Datadog observability cut production errors 20%.",
+  },
+  {
+    name: "Vessel Health",
+    logo: "/images/logos/vessel.png",
+    environment: "Consumer health · connected hardware",
+    role: "Lead Backend Engineer · 2020–2023",
+    impact:
+      "End-to-end technical ownership for auth, hardware calibration, and AWS-backed platform workflows. API re-arch reduced bug output 93%.",
+  },
+  {
+    name: "Capital One",
+    logo: "/images/logos/capital-one.png",
+    environment: "Regulated finance · data platform",
+    role: "Software & Data Engineer · 2017–2019",
+    impact:
+      "Automated Snowflake onboarding pipelines. Tuned Spark/Scala apps ingesting millions of near-real-time records in a regulated environment.",
+  },
+];
 
 export default function Home() {
   const [orgx, ...supporting] = featuredProjects;
@@ -21,55 +49,146 @@ export default function Home() {
 
       <main id="main-content" className="page-frame">
         <div className="page-stack">
-          <section className="page-header-stack" style={{ paddingTop: "2rem" }}>
-            <span className="eyebrow">Agent infrastructure · MCP · memory · trust · provenance</span>
-            <TypewriterName text="Hope Atina" />
-            <div className="hero-reveal-group hero-reveal-group-delay">
+          <section className="case-study-hero" style={{ paddingTop: "1rem" }}>
+            <div className="case-study-intro">
+              <div className="case-study-meta">
+                <span className="eyebrow">
+                  Agent infrastructure · MCP · memory · trust · provenance
+                </span>
+              </div>
+              <h1>Hope Atina</h1>
               <p
-                className="eyebrow"
-                style={{
-                  color: "var(--shell-muted)",
-                  fontSize: "0.95rem",
-                  letterSpacing: "0.18em",
-                }}
+                className="case-study-subtitle"
+                style={{ color: "var(--shell-muted)" }}
               >
                 Senior AI Infrastructure Engineer · Founder, OrgX
               </p>
-            </div>
-            <div className="hero-reveal-group hero-reveal-group-delay">
-              <p className="lead-copy" style={{ maxWidth: "40rem", margin: 0 }}>
+              <p className="case-study-description">
                 I build the systems that make AI agents reliable in production:
                 persistent organizational memory, trust scoring, decision
                 provenance, and the MCP tooling that ties them together across
                 Claude Code, Cursor, and ChatGPT.
               </p>
-            </div>
-            <div className="hero-reveal-group hero-reveal-group-delay-2">
-              <div className="proof-bar">
-                <span>7+ years shipping production systems</span>
-                <span>OrgX: 61 MCP tools · 12-repo platform · 136+ benchmark tasks</span>
-                <span>Alma: 999 commits in HIPAA production · 20% fewer errors</span>
-                <span>Vessel: 93% bug reduction via API re-architecture</span>
+              <div className="proof-bar" style={{ marginTop: "0.25rem" }}>
+                <span>7+ years in production</span>
+                <span>61 MCP tools · 12-repo platform</span>
+                <span>136+ benchmark tasks</span>
+                <span>999 HIPAA commits · 20% fewer errors at Alma</span>
+                <span>93% bug reduction at Vessel</span>
               </div>
-            </div>
-            <div className="hero-reveal-group hero-reveal-group-delay-2">
-              <div className="hero-actions">
-                <SiteButton href="/projects">View my work →</SiteButton>
+              <div
+                className="hero-actions"
+                style={{ marginTop: "1.25rem" }}
+              >
+                <SiteButton href="/hiring">For hiring managers →</SiteButton>
+                <SiteButton href="/projects/orgx" variant="secondary">
+                  Read OrgX case study
+                </SiteButton>
                 <SiteButton href="/blog" variant="text">
-                  Read my writing ↗
+                  Writing ↗
                 </SiteButton>
               </div>
+            </div>
+
+            <div className="case-study-hero-visual">
+              <Image
+                src="/images/case-studies/orgx-live.png"
+                alt="OrgX command center — the live operator view showing active agent work, review state, and orchestration"
+                fill
+                priority
+                sizes="(min-width: 1024px) 44vw, 100vw"
+                className="object-cover"
+              />
+              <div className="work-card-overlay" />
+            </div>
+          </section>
+
+          <section className="contact-card">
+            <span className="eyebrow">Philosophy</span>
+            <div
+              style={{
+                display: "grid",
+                gap: "0.6rem",
+                marginTop: "0.9rem",
+                fontFamily: "var(--font-heading)",
+                fontSize: "clamp(1.6rem, 3.5vw, 2.1rem)",
+                letterSpacing: "-0.03em",
+                lineHeight: 1.1,
+              }}
+            >
+              <span>Make delegation aggressive.</span>
+              <span>Make provenance visible.</span>
+              <span>Make trust earned, not assumed.</span>
+              <span>Make failures inspectable.</span>
+              <span>Make the review surface the product.</span>
+              <span>Make it ship.</span>
+            </div>
+          </section>
+
+          <section className="page-content">
+            <div className="page-header-stack" style={{ gap: "0.8rem" }}>
+              <span className="eyebrow">Shipped in production</span>
+              <h2 className="lead-title">Judgment that holds under real constraints.</h2>
+              <p style={{ maxWidth: "42rem", margin: 0 }}>
+                Healthcare compliance, consumer reliability, and regulated
+                enterprise data. Three environments, one posture: ship what
+                survives inspection.
+              </p>
+            </div>
+            <div className="work-grid-supporting">
+              {productionCompanies.map((company) => (
+                <article key={company.name} className="contact-card">
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "96px",
+                      height: "34px",
+                      marginBottom: "0.9rem",
+                      opacity: 0.85,
+                      filter: "brightness(0) invert(1)",
+                    }}
+                  >
+                    <Image
+                      src={company.logo}
+                      alt={`${company.name} logo`}
+                      fill
+                      sizes="96px"
+                      style={{ objectFit: "contain", objectPosition: "left" }}
+                    />
+                  </div>
+                  <div className="eyebrow" style={{ fontSize: "0.7rem" }}>
+                    {company.environment}
+                  </div>
+                  <h3
+                    style={{
+                      margin: "0.4rem 0 0",
+                      fontFamily: "var(--font-heading)",
+                      fontSize: "1.6rem",
+                    }}
+                  >
+                    {company.name}
+                  </h3>
+                  <p style={{ margin: 0, color: "var(--shell-muted)", fontSize: "0.9rem" }}>
+                    {company.role}
+                  </p>
+                  <p style={{ margin: "0.9rem 0 0", fontSize: "0.95rem" }}>
+                    {company.impact}
+                  </p>
+                </article>
+              ))}
             </div>
           </section>
 
           <section className="page-content">
             <div className="page-header-stack" style={{ gap: "0.8rem" }}>
               <span className="eyebrow">Selected work</span>
-              <h2 className="lead-title">Four systems, one clear story.</h2>
+              <h2 className="lead-title">
+                Flagship: OrgX. Then three proofs under different constraints.
+              </h2>
               <p style={{ maxWidth: "42rem", margin: 0 }}>
-                The portfolio now starts where the proof is strongest: one
-                flagship platform, then the production and tooling work that
-                proves the same judgment under different constraints.
+                OrgX is where the thesis lives. The supporting three show the
+                same judgment applied to production AI, developer tooling, and
+                plugin architecture.
               </p>
             </div>
 
@@ -81,6 +200,11 @@ export default function Home() {
                 ))}
               </div>
             </div>
+            <p style={{ marginTop: "1.25rem" }}>
+              <Link href="/projects" className="site-link-inline">
+                Open the full work index →
+              </Link>
+            </p>
           </section>
 
           <section className="contact-card">
