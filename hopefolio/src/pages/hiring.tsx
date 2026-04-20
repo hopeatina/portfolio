@@ -27,6 +27,18 @@ export default function Hiring() {
               memory, trust scoring, decision provenance, and MCP tooling
               across Claude Code, Cursor, and ChatGPT.
             </p>
+            <div className="proof-bar" style={{ marginTop: "1rem" }}>
+              <span>61 MCP tools · 16 categories</span>
+              <span>136+ benchmark tasks</span>
+              <span>999 HIPAA commits · 20% fewer prod errors at Alma</span>
+              <span>93% bug reduction via API re-arch at Vessel</span>
+            </div>
+            <div className="proof-bar" style={{ marginTop: "0.4rem", fontSize: "0.85rem" }}>
+              <span>Role target: Senior or Staff IC</span>
+              <span>Based: Houston, TX · remote-friendly</span>
+              <span>Open to: hybrid SF, NYC, Seattle</span>
+              <span>Availability: 4-week start</span>
+            </div>
           </section>
 
           <section className="page-content">
@@ -47,9 +59,10 @@ export default function Hiring() {
                   OrgX
                 </h3>
                 <p style={{ margin: "0.7rem 0 0", color: "var(--shell-text-soft)" }}>
-                  12 repos. 22 MCP servers. 131+ tools. OAuth 2.1 + PKCE + DCR.
-                  Durable Objects for cross-deploy state. Ed25519-signed
-                  registry. Live at mcp.useorgx.com and listed on Smithery.
+                  12-repo platform. 61 MCP tools across 16 categories. OAuth 2.1
+                  + PKCE + DCR. Durable Objects for cross-deploy state.
+                  Ed25519-signed registry. Live at mcp.useorgx.com and listed
+                  on Smithery.
                 </p>
                 <p style={{ marginTop: "0.8rem" }}>
                   <Link href="/projects/orgx" className="site-link-inline">Read the case study →</Link>
@@ -167,8 +180,8 @@ export default function Hiring() {
               <SiteButton href="mailto:hopeatina@gmail.com?subject=Role%20conversation" external>
                 Email me →
               </SiteButton>
-              <SiteButton href="/resume/hope-atina-resume.pdf" variant="secondary" external>
-                Download resume (PDF)
+              <SiteButton href="/resume/hope-atina-resume.md" variant="secondary" external>
+                Download resume
               </SiteButton>
               <SiteButton href="https://github.com/useorgx" variant="text" external>
                 github.com/useorgx ↗

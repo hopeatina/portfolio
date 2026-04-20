@@ -1,44 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { experienceEntries } from "@/data/portfolio";
 
-type AboutWorld = "base" | "cameroon" | "rice" | "future";
-
-const worldCopy: Record<
-  AboutWorld,
-  { label: string; title: string; body: string; className: string }
-> = {
-  base: {
-    label: "Base",
-    title: "Clean systems shell",
-    body: "The default world is restrained: clear hierarchy, dark surfaces, and proof-first interaction.",
-    className: "theme-preview-base",
-  },
-  cameroon: {
-    label: "Cameroon",
-    title: "Grounded ambition",
-    body: "Cameroon shows up as warmth, rhythm, and identity without turning the interface into a costume.",
-    className: "theme-preview-cameroon",
-  },
-  rice: {
-    label: "Rice",
-    title: "Academic precision",
-    body: "Rice leans toward blue-steel restraint and a slightly more formal posture.",
-    className: "theme-preview-rice",
-  },
-  future: {
-    label: "Future",
-    title: "Calm optimism",
-    body: "Future keeps the shell dark and minimal, then pushes the accent slightly more forward.",
-    className: "theme-preview-future",
-  },
-};
-
 export default function About() {
-  const [world, setWorld] = useState<AboutWorld>("base");
-  const theme = useMemo(() => worldCopy[world], [world]);
-
   return (
     <>
       <Head>
@@ -60,7 +25,7 @@ export default function About() {
                 aggressive delegation stays legible.
               </p>
               <p style={{ margin: 0, maxWidth: "36rem" }}>
-                8+ years shipping production systems across healthcare,
+                7+ years shipping production systems across healthcare,
                 enterprise data, and AI infrastructure. B.S. Bioengineering,
                 Rice University.
               </p>
@@ -164,42 +129,15 @@ export default function About() {
             </div>
           </section>
 
-          <section className="about-worlds">
-            <span className="eyebrow">Theme worlds</span>
-            <p style={{ margin: 0, color: "var(--shell-text-soft)" }}>
-              These themes stay off the global nav now. They live here as a
-              small story device instead of an always-on control.
-            </p>
-            <div className="theme-chip-row">
-              {(["base", "cameroon", "rice", "future"] as AboutWorld[]).map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  className={`theme-chip ${world === item ? "theme-chip-active" : ""}`}
-                  onClick={() => setWorld(item)}
-                >
-                  {worldCopy[item].label}
-                </button>
-              ))}
-            </div>
-            <div className={`theme-preview ${theme.className}`}>
-              <span className="theme-preview-kicker">{theme.label}</span>
-              <h3 style={{ margin: 0, fontFamily: "var(--font-heading)", fontSize: "1.7rem" }}>
-                {theme.title}
-              </h3>
-              <p style={{ color: "var(--shell-text-soft)" }}>{theme.body}</p>
-            </div>
-          </section>
-
           <section className="contact-card">
-            <span className="eyebrow">Now</span>
-            <h2 style={{ marginTop: "0.5rem" }}>March 2026</h2>
-            <div className="page-content">
-              <p><strong>Currently building:</strong> agent infrastructure, review surfaces, and proof-heavy portfolio systems.</p>
-              <p><strong>Currently reading:</strong> papers and product writing about autonomy, observability, and human oversight.</p>
-              <p><strong>Currently thinking about:</strong> where agent tooling stops being a demo and starts becoming operational software.</p>
-              <p><strong>Currently listening to:</strong> music that still reminds me structure and feeling are not separate jobs.</p>
-            </div>
+            <span className="eyebrow">Now · April 2026</span>
+            <h2 style={{ marginTop: "0.5rem" }}>Building the continuity layer for AI agents.</h2>
+            <p style={{ margin: "0.9rem 0 0", maxWidth: "42rem" }}>
+              Shipping OrgX MCP in public. Running a weekly agent benchmark
+              with independent judges. Writing about memory, provenance, and
+              trust in production agent systems. Looking for a senior/staff
+              IC seat on a team already building in this lane.
+            </p>
           </section>
         </div>
       </main>

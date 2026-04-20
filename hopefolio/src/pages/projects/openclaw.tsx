@@ -163,7 +163,7 @@ export default function OpenClawPage() {
                 </p>
               </>
             }
-            primaryHref="https://github.com/hopeatina/orgx-openclaw-plugin"
+            primaryHref="https://github.com/useorgx/openclaw-plugin"
             primaryLabel="View source"
             secondaryHref="/projects/orgx"
             secondaryLabel="Read about OrgX"

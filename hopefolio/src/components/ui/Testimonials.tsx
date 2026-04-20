@@ -15,15 +15,15 @@ type Receipt = {
 const receipts: Receipt[] = [
   {
     id: "orgx",
-    value: "1.2k+",
+    value: "1,270+",
     label: "Commits across OrgX",
-    system: "OrgX · 7 repos",
+    system: "OrgX · 12 repos",
     proof:
-      "A multi-agent orchestration platform built across memory, scoring, orchestration, and tooling.",
+      "A multi-agent orchestration platform built across memory, scoring, orchestration, plugins, SDKs, and tooling.",
   },
   {
     id: "years",
-    value: "8+",
+    value: "7+",
     label: "Years in production",
     system: "Alma · Vessel Health · Capital One",
     proof:

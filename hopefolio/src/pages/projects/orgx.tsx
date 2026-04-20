@@ -62,9 +62,10 @@ export default function OrgXPage() {
             description="OrgX is the clearest expression of how I think about agent infrastructure. Delegate aggressively, keep provenance visible, and make the review surface strong enough that human judgment can stay precise instead of becoming a bottleneck."
             facts={[
               { label: "Commits", value: "1,270+" },
-              { label: "MCP servers", value: "22" },
-              { label: "Tools exposed", value: "131+" },
-              { label: "Benchmark tasks run", value: "136+" },
+              { label: "MCP tools", value: "61" },
+              { label: "Tool categories", value: "16" },
+              { label: "Platform repos", value: "12" },
+              { label: "Benchmark tasks", value: "136+" },
               { label: "Public essays", value: "8" },
             ]}
             image="/images/projects/orgx-illustration.png"
