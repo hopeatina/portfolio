@@ -69,6 +69,8 @@ export default function PerfPulsePage() {
               { label: "Distribution", value: "Homebrew" },
               { label: "Binary", value: "3.3 MiB" },
             ]}
+            image="/images/projects/perfpulse.svg"
+            imageAlt="PerfPulse — Rust-based system monitor"
           />
 
           <BuildSurface

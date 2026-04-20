@@ -68,8 +68,8 @@ export default function OrgXPage() {
               { label: "Benchmark tasks", value: "136+" },
               { label: "Public essays", value: "8" },
             ]}
-            image="/images/projects/orgx-illustration.png"
-            imageAlt="OrgX multi-agent orchestration illustration"
+            image="/images/case-studies/orgx-live.png"
+            imageAlt="OrgX live command center — real product surface, not a marketing illustration"
           />
 
           <BuildSurface
