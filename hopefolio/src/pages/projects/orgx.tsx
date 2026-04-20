@@ -208,7 +208,159 @@ export default function OrgXPage() {
           </CaseStudySection>
 
           <CaseStudySection
-            kicker="05 // benchmark"
+            kicker="05 // widgets"
+            title="Six production MCP Apps widgets — UI that renders inside any MCP host"
+          >
+            <p style={{ margin: "0 0 1.5rem", maxWidth: "44rem", color: "var(--shell-text-soft)" }}>
+              Every OrgX widget ships typed data contracts, demo / loading /
+              empty states, and SSR-safe rendering so an MCP host can embed
+              them in a chat surface or dashboard without custom code. These
+              are real demos, served live at{" "}
+              <a
+                href="https://mcp.useorgx.com/widgets/index.html"
+                target="_blank"
+                rel="noreferrer"
+                className="site-link-inline"
+              >
+                mcp.useorgx.com/widgets ↗
+              </a>
+              .
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                gap: "1.25rem",
+              }}
+            >
+              {[
+                {
+                  src: "/images/case-studies/widgets/initiative-pulse.png",
+                  title: "Initiative Pulse",
+                  caption:
+                    "Health, ROI, and blockers in a single conversational card. 78 health score, +431% ROI, 1 blocker surfaced with resolution path.",
+                  href: "https://mcp.useorgx.com/widgets/initiative-pulse.html?demo=true",
+                },
+                {
+                  src: "/images/case-studies/widgets/agent-status.png",
+                  title: "Agent Status",
+                  caption:
+                    "Live status of every specialist agent. Current focus, tasks in flight, blocked/review signals, and the &ldquo;needs you&rdquo; prompts that drive human review.",
+                  href: "https://mcp.useorgx.com/widgets/agent-status.html?demo=true",
+                },
+                {
+                  src: "/images/case-studies/widgets/morning-brief.png",
+                  title: "Morning Brief",
+                  caption:
+                    "Daily executive summary. Top priorities by domain, decisions made, receipts, and what needs attention — generated and citable.",
+                  href: "https://mcp.useorgx.com/widgets/morning-brief.html?demo=true",
+                },
+                {
+                  src: "/images/case-studies/widgets/decisions.png",
+                  title: "Pending Decisions",
+                  caption:
+                    "Interactive approval surface with approve / revise actions, cost estimates, and countdown-to-auto-approve. The UI that closes the human-in-the-loop.",
+                  href: "https://mcp.useorgx.com/widgets/decisions.html?demo=true",
+                },
+                {
+                  src: "/images/case-studies/widgets/scaffolded-initiative.png",
+                  title: "Scaffolded Initiative",
+                  caption:
+                    "Work-breakdown structure rendered from a typed scaffold event. Workstreams, milestones, and tasks with live status badges and owners.",
+                  href: "https://mcp.useorgx.com/widgets/scaffolded-initiative.html?demo=true",
+                },
+                {
+                  src: "/images/case-studies/widgets/search-results.png",
+                  title: "Search Results",
+                  caption:
+                    "Unified retrieval across artifacts, decisions, and initiatives with relevance scores. The shape of memory, visible.",
+                  href: "https://mcp.useorgx.com/widgets/search-results.html?demo=true",
+                },
+              ].map((w) => (
+                <a
+                  key={w.title}
+                  href={w.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: "grid",
+                    gap: "0.7rem",
+                    padding: "0.9rem",
+                    borderRadius: "14px",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "rgba(255,255,255,0.02)",
+                    textDecoration: "none",
+                    color: "inherit",
+                    transition: "border-color 200ms ease, background 200ms ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(0, 229, 160, 0.45)";
+                    e.currentTarget.style.background = "rgba(0, 229, 160, 0.04)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "relative",
+                      aspectRatio: "560 / 760",
+                      overflow: "hidden",
+                      borderRadius: "10px",
+                      background: "rgba(0,0,0,0.3)",
+                    }}
+                  >
+                    <img
+                      src={w.src}
+                      alt={`${w.title} widget demo`}
+                      loading="lazy"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "top",
+                        display: "block",
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        fontSize: "1.05rem",
+                        fontWeight: 600,
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      {w.title}{" "}
+                      <span
+                        style={{
+                          fontSize: "0.75rem",
+                          color: "var(--shell-muted)",
+                          fontWeight: 400,
+                        }}
+                      >
+                        ↗
+                      </span>
+                    </div>
+                    <p
+                      style={{
+                        margin: "0.35rem 0 0",
+                        color: "var(--shell-text-soft)",
+                        fontSize: "0.88rem",
+                        lineHeight: 1.5,
+                      }}
+                      dangerouslySetInnerHTML={{ __html: w.caption }}
+                    />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </CaseStudySection>
+
+          <CaseStudySection
+            kicker="06 // benchmark"
             title="Single-shot benchmarks hide what agents can't fake"
             raised
           >
@@ -257,7 +409,7 @@ export default function OrgXPage() {
           </CaseStudySection>
 
           <CaseStudySection
-            kicker="06 // ecosystem"
+            kicker="07 // ecosystem"
             title="12 repos, one coherent platform"
           >
             <div
@@ -350,7 +502,7 @@ export default function OrgXPage() {
           </CaseStudySection>
 
           <CaseStudySection
-            kicker="07 // try it"
+            kicker="08 // try it"
             title="Install OrgX MCP in a compatible client"
             raised
           >
