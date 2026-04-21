@@ -5,6 +5,7 @@ import React from "react";
 import ProjectCard from "@/components/site/ProjectCard";
 import SiteButton from "@/components/site/SiteButton";
 import RevealOnScroll from "@/components/site/RevealOnScroll";
+import MaterializeHero from "@/components/site/MaterializeHero";
 import { featuredProjects } from "@/data/portfolio";
 
 const productionCompanies = [
@@ -50,60 +51,94 @@ export default function Home() {
 
       <main id="main-content" className="page-frame">
         <div className="page-stack">
-          <section className="case-study-hero case-study-hero-tall" style={{ paddingTop: "1rem" }}>
-            <div className="case-study-intro">
-              <div className="case-study-meta">
-                <span className="eyebrow">
-                  Hope Atina · Senior AI Infrastructure Engineer · Founder, OrgX
-                </span>
+          <MaterializeHero className="case-study-hero case-study-hero-tall" storageKey="home">
+            <div className="case-study-hero-grid">
+              <div className="case-study-intro">
+                <div
+                  className="case-study-meta"
+                  data-materialize
+                  style={{ ["--materialize-delay" as any]: "260ms" }}
+                >
+                  <span className="eyebrow">
+                    Hope Atina · Senior AI Infrastructure Engineer · Founder, OrgX
+                  </span>
+                </div>
+                <h1
+                  data-materialize
+                  style={{ ["--materialize-delay" as any]: "380ms" }}
+                >
+                  Continuity infrastructure for AI agents.
+                </h1>
+                <p
+                  className="case-study-subtitle"
+                  data-materialize
+                  style={{
+                    color: "var(--shell-text-soft)",
+                    ["--materialize-delay" as any]: "480ms",
+                  }}
+                >
+                  If you&apos;re building agent infrastructure, I&apos;m already
+                  shipping it.
+                </p>
+                <p
+                  className="case-study-description"
+                  data-materialize
+                  style={{ ["--materialize-delay" as any]: "560ms" }}
+                >
+                  Persistent organizational memory, trust scoring, decision
+                  provenance, and the MCP tooling that ties them together across
+                  Claude Code, Cursor, and ChatGPT. 7+ years in production before
+                  this — healthtech compliance, regulated fintech data, and
+                  AI-native products.
+                </p>
+                <div
+                  className="proof-bar"
+                  data-materialize
+                  style={{
+                    marginTop: "0.25rem",
+                    ["--materialize-delay" as any]: "680ms",
+                  }}
+                >
+                  <span>61 MCP tools · 12-repo platform</span>
+                  <span>136+ benchmark tasks</span>
+                  <span>999 HIPAA commits · 20% fewer errors at Alma</span>
+                  <span>93% bug reduction at Vessel</span>
+                </div>
+                <div
+                  className="hero-actions"
+                  data-materialize
+                  style={{
+                    marginTop: "1.25rem",
+                    ["--materialize-delay" as any]: "820ms",
+                  }}
+                >
+                  <SiteButton href="/hiring">For hiring managers →</SiteButton>
+                  <SiteButton href="/projects/orgx" variant="secondary">
+                    Read OrgX case study
+                  </SiteButton>
+                  <SiteButton href="/blog" variant="text">
+                    Writing ↗
+                  </SiteButton>
+                </div>
               </div>
-              <h1>Continuity infrastructure for AI agents.</h1>
-              <p
-                className="case-study-subtitle"
-                style={{ color: "var(--shell-text-soft)" }}
-              >
-                If you&apos;re building agent infrastructure, I&apos;m already
-                shipping it.
-              </p>
-              <p className="case-study-description">
-                Persistent organizational memory, trust scoring, decision
-                provenance, and the MCP tooling that ties them together across
-                Claude Code, Cursor, and ChatGPT. 7+ years in production before
-                this — healthtech compliance, regulated fintech data, and
-                AI-native products.
-              </p>
-              <div className="proof-bar" style={{ marginTop: "0.25rem" }}>
-                <span>61 MCP tools · 12-repo platform</span>
-                <span>136+ benchmark tasks</span>
-                <span>999 HIPAA commits · 20% fewer errors at Alma</span>
-                <span>93% bug reduction at Vessel</span>
-              </div>
-              <div
-                className="hero-actions"
-                style={{ marginTop: "1.25rem" }}
-              >
-                <SiteButton href="/hiring">For hiring managers →</SiteButton>
-                <SiteButton href="/projects/orgx" variant="secondary">
-                  Read OrgX case study
-                </SiteButton>
-                <SiteButton href="/blog" variant="text">
-                  Writing ↗
-                </SiteButton>
-              </div>
-            </div>
 
-            <div className="case-study-hero-visual">
-              <Image
-                src="/images/projects/orgx-illustration.png"
-                alt="OrgX — multi-agent orchestration across Claude Code, Cursor, and ChatGPT"
-                fill
-                priority
-                sizes="(min-width: 1024px) 44vw, 100vw"
-                className="object-cover"
-              />
-              <div className="work-card-overlay" />
+              <div
+                className="case-study-hero-visual"
+                data-materialize
+                style={{ ["--materialize-delay" as any]: "340ms" }}
+              >
+                <Image
+                  src="/images/projects/orgx-illustration.png"
+                  alt="OrgX — multi-agent orchestration across Claude Code, Cursor, and ChatGPT"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 44vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="work-card-overlay" />
+              </div>
             </div>
-          </section>
+          </MaterializeHero>
 
           <RevealOnScroll as="section" className="page-content">
             <div className="page-header-stack" style={{ gap: "0.8rem" }}>
