@@ -12,6 +12,7 @@ import {
   VisualFrame,
 } from "@/components/site/CaseStudyPrimitives";
 import NextProjectNav from "@/components/site/NextProjectNav";
+import RevealOnScroll from "@/components/site/RevealOnScroll";
 
 const orchestrationDiagram = `
 flowchart TB
@@ -71,6 +72,9 @@ export default function OrgXPage() {
             ]}
             image="/images/case-studies/orgx-live.png"
             imageAlt="OrgX live command center — real product surface, not a marketing illustration"
+            materialize="page"
+            materializeDirection="left-right"
+            materializeKey="orgx"
           />
 
           <section
@@ -275,7 +279,9 @@ export default function OrgXPage() {
               </a>
               .
             </p>
-            <div
+            <RevealOnScroll
+              as="div"
+              className="materialize-stagger"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
@@ -331,6 +337,7 @@ export default function OrgXPage() {
                   href={w.href}
                   target="_blank"
                   rel="noreferrer"
+                  data-materialize
                   style={{
                     display: "grid",
                     gap: "0.7rem",
@@ -405,7 +412,7 @@ export default function OrgXPage() {
                   </div>
                 </a>
               ))}
-            </div>
+            </RevealOnScroll>
           </CaseStudySection>
 
           <CaseStudySection
@@ -461,16 +468,15 @@ export default function OrgXPage() {
             kicker="07 // ecosystem"
             title="12 repos, one coherent platform"
           >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                gap: "0.25rem 2rem",
-                fontSize: "0.95rem",
-              }}
+            <RevealOnScroll
+              as="div"
+              className="materialize-stagger-grid"
             >
-              <div>
-                <p style={{ margin: "0.3rem 0" }}>
+              <div
+                className="materialize-stagger"
+                style={{ margin: 0 }}
+              >
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/orgx-mcp" target="_blank" rel="noreferrer" className="site-link-inline">
                     orgx-mcp ↗
                   </a>{" "}
@@ -478,76 +484,79 @@ export default function OrgXPage() {
                     — 61 MCP tools · Cloudflare Workers + Durable Objects · OAuth 2.1 + DCR
                   </span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/orgx-gateway-sdk" target="_blank" rel="noreferrer" className="site-link-inline">
                     orgx-gateway-sdk ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— Gateway Protocol v1 client SDK</span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/openclaw-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
                     openclaw-plugin ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— 30-tool MCP + browser mission control</span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/orgx-claude-code-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
                     orgx-claude-code-plugin ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— Claude Code runtime integration</span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/cursor-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
                     cursor-plugin ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— MCP, rules, skills, hooks, commands</span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/orgx-codex-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
                     orgx-codex-plugin ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— Codex + initiative-aware skills</span>
                 </p>
               </div>
-              <div>
-                <p style={{ margin: "0.3rem 0" }}>
+              <div
+                className="materialize-stagger"
+                style={{ margin: 0 }}
+              >
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/orgx-opencode-plugin" target="_blank" rel="noreferrer" className="site-link-inline">
                     orgx-opencode-plugin ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— OpenCode peer driver</span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/orgx-ui-kit" target="_blank" rel="noreferrer" className="site-link-inline">
                     orgx-ui-kit ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— React components + tokens</span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/orgx-data" target="_blank" rel="noreferrer" className="site-link-inline">
                     orgx-data ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— typed contracts + React hooks</span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/orgx-local-shell" target="_blank" rel="noreferrer" className="site-link-inline">
                     orgx-local-shell ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— Tauri 2 desktop app</span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/skills" target="_blank" rel="noreferrer" className="site-link-inline">
                     skills ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— reusable agent skill library</span>
                 </p>
-                <p style={{ margin: "0.3rem 0" }}>
+                <p style={{ margin: "0.3rem 0" }} data-materialize>
                   <a href="https://github.com/useorgx/autonomous-initiative-benchmark" target="_blank" rel="noreferrer" className="site-link-inline">
                     autonomous-initiative-benchmark ↗
                   </a>{" "}
                   <span style={{ color: "var(--shell-muted)" }}>— public methodology + catalog</span>
                 </p>
               </div>
-            </div>
+            </RevealOnScroll>
           </CaseStudySection>
 
           <CaseStudySection

@@ -71,6 +71,8 @@ export default function OpenClawPage() {
             ]}
             image="/images/case-studies/openclaw-overview.png"
             imageAlt="OpenClaw full dashboard screenshot"
+            materialize="light"
+            materializeKey="openclaw"
           />
 
           <BuildSurface

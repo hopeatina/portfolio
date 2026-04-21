@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import SiteButton from "@/components/site/SiteButton";
+import MaterializeHero from "@/components/site/MaterializeHero";
 
 export default function Hiring() {
   return (
@@ -16,10 +17,29 @@ export default function Hiring() {
 
       <main id="main-content" className="page-frame">
         <div className="page-stack">
-          <section className="page-header-stack" style={{ paddingTop: "2rem" }}>
-            <span className="eyebrow">For hiring managers · 60-second brief</span>
-            <h1>If you&apos;re building agent infrastructure, I&apos;m already shipping it.</h1>
-            <p className="lead-copy" style={{ maxWidth: "44rem", margin: 0 }}>
+          <MaterializeHero variant="page" storageKey="hiring" className="page-header-stack">
+            <span
+              className="eyebrow"
+              data-materialize
+              style={{ ["--materialize-delay" as any]: "180ms" }}
+            >
+              For hiring managers · 60-second brief
+            </span>
+            <h1
+              data-materialize
+              style={{ ["--materialize-delay" as any]: "260ms" }}
+            >
+              If you&apos;re building agent infrastructure, I&apos;m already shipping it.
+            </h1>
+            <p
+              className="lead-copy"
+              data-materialize
+              style={{
+                maxWidth: "44rem",
+                margin: 0,
+                ["--materialize-delay" as any]: "340ms",
+              }}
+            >
               I&apos;m a senior software engineer with 7+ years in production
               systems across healthtech compliance, fintech data platforms,
               and AI-native products. Currently building OrgX — continuity
@@ -27,19 +47,34 @@ export default function Hiring() {
               memory, trust scoring, decision provenance, and MCP tooling
               across Claude Code, Cursor, and ChatGPT.
             </p>
-            <div className="proof-bar" style={{ marginTop: "1rem" }}>
+            <div
+              className="proof-bar"
+              data-materialize
+              style={{
+                marginTop: "1rem",
+                ["--materialize-delay" as any]: "460ms",
+              }}
+            >
               <span>61 MCP tools · 16 categories</span>
               <span>136+ benchmark tasks</span>
               <span>999 HIPAA commits · 20% fewer prod errors at Alma</span>
               <span>93% bug reduction via API re-arch at Vessel</span>
             </div>
-            <div className="proof-bar" style={{ marginTop: "0.4rem", fontSize: "0.85rem" }}>
+            <div
+              className="proof-bar"
+              data-materialize
+              style={{
+                marginTop: "0.4rem",
+                fontSize: "0.85rem",
+                ["--materialize-delay" as any]: "560ms",
+              }}
+            >
               <span>Role target: Senior or Staff IC</span>
               <span>Based: Houston, TX · remote-friendly</span>
               <span>Open to: hybrid SF, NYC, Seattle</span>
               <span>Availability: 4-week start</span>
             </div>
-          </section>
+          </MaterializeHero>
 
           <section className="page-content">
             <div className="page-header-stack" style={{ gap: "0.8rem" }}>

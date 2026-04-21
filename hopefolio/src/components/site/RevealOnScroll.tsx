@@ -6,6 +6,8 @@ interface RevealOnScrollProps {
   delay?: number;
   as?: keyof JSX.IntrinsicElements;
   className?: string;
+  style?: React.CSSProperties;
+  ["aria-label"]?: string;
 }
 
 export default function RevealOnScroll({
@@ -13,6 +15,8 @@ export default function RevealOnScroll({
   delay = 0,
   as = "div",
   className = "",
+  style,
+  "aria-label": ariaLabel,
 }: RevealOnScrollProps) {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
@@ -62,7 +66,8 @@ export default function RevealOnScroll({
     <Tag
       ref={ref}
       className={`reveal-on-scroll ${visible ? "reveal-visible" : ""} ${className}`.trim()}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${delay}ms`, ...style }}
+      aria-label={ariaLabel}
     >
       {children}
     </Tag>

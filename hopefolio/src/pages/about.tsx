@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import MaterializeHero from "@/components/site/MaterializeHero";
 import { experienceEntries } from "@/data/portfolio";
 
 export default function About() {
@@ -46,22 +47,53 @@ export default function About() {
             </p>
           </aside>
 
-          <section className="about-grid">
+          <MaterializeHero
+            variant="light"
+            storageKey="about"
+            className="about-grid"
+          >
             <div className="page-header-stack">
-              <span className="eyebrow">About</span>
-              <h1>Hope Atina</h1>
-              <p style={{ margin: 0, fontSize: "1.25rem", color: "var(--shell-muted)" }}>
+              <span
+                className="eyebrow"
+                data-materialize
+                style={{ ["--materialize-delay" as any]: "140ms" }}
+              >
+                About
+              </span>
+              <h1 data-materialize style={{ ["--materialize-delay" as any]: "220ms" }}>
+                Hope Atina
+              </h1>
+              <p
+                data-materialize
+                style={{
+                  margin: 0,
+                  fontSize: "1.25rem",
+                  color: "var(--shell-muted)",
+                  ["--materialize-delay" as any]: "300ms",
+                }}
+              >
                 Cameroon-born, Houston-based engineer building systems where
                 aggressive delegation stays legible.
               </p>
-              <p style={{ margin: 0, maxWidth: "36rem" }}>
+              <p
+                data-materialize
+                style={{
+                  margin: 0,
+                  maxWidth: "36rem",
+                  ["--materialize-delay" as any]: "360ms",
+                }}
+              >
                 7+ years shipping production systems across healthcare,
                 enterprise data, and AI infrastructure. B.S. Bioengineering,
                 Rice University.
               </p>
             </div>
 
-            <figure className="visual-frame">
+            <figure
+              className="visual-frame"
+              data-materialize
+              style={{ ["--materialize-delay" as any]: "200ms" }}
+            >
               <div className="visual-frame-media">
                 <Image
                   src="/images/hope-profile.jpg"
@@ -74,7 +106,7 @@ export default function About() {
               </div>
               <figcaption>Profile portrait, re-framed into the darker shell.</figcaption>
             </figure>
-          </section>
+          </MaterializeHero>
 
           <section className="contact-card">
             <span className="eyebrow">Philosophy</span>

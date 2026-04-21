@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import RevealOnScroll from "./RevealOnScroll";
 
 interface NextProjectNavProps {
   currentSlug: string;
@@ -19,7 +20,8 @@ export default function NextProjectNav({ currentSlug }: NextProjectNavProps) {
   const next = CHAIN[(idx + 1) % CHAIN.length];
 
   return (
-    <nav
+    <RevealOnScroll
+      as="nav"
       aria-label="Case study navigation"
       style={{
         display: "grid",
@@ -30,8 +32,10 @@ export default function NextProjectNav({ currentSlug }: NextProjectNavProps) {
         borderTop: "1px solid rgba(255, 255, 255, 0.06)",
         borderRadius: "14px",
         background: "rgba(255, 255, 255, 0.015)",
+        position: "relative",
+        overflow: "hidden",
       }}
-      className="next-project-nav"
+      className="next-project-nav materialize-stagger"
     >
       <Link
         href={`/projects/${prev.slug}`}
@@ -115,6 +119,6 @@ export default function NextProjectNav({ currentSlug }: NextProjectNavProps) {
           {next.label}
         </span>
       </Link>
-    </nav>
+    </RevealOnScroll>
   );
 }

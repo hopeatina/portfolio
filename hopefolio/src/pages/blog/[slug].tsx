@@ -5,6 +5,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { marked } from "marked";
 import BlogProgressBar from "@/components/site/BlogProgressBar";
 import BlogToc, { TocEntry } from "@/components/site/BlogToc";
+import MaterializeHero from "@/components/site/MaterializeHero";
 import { getAllPosts, getPostBySlug } from "@/modules/blog/posts";
 
 function slugify(text: string) {
@@ -66,20 +67,46 @@ export default function PostPage({ post, related, toc }: PostPageProps) {
         <div className="page-stack">
           <div className="blog-post-grid">
             <article className="blog-post-article">
-              <header className="blog-featured">
-                <span className="eyebrow">{post.category}</span>
-                <h1>{post.title}</h1>
-                <p style={{ margin: "0.8rem 0 0", color: "var(--shell-text-soft)" }}>
+              <MaterializeHero
+                variant="page"
+                storageKey={`blog:${post.slug}`}
+                className="blog-featured"
+              >
+                <span
+                  className="eyebrow"
+                  data-materialize
+                  style={{ ["--materialize-delay" as any]: "180ms" }}
+                >
+                  {post.category}
+                </span>
+                <h1 data-materialize style={{ ["--materialize-delay" as any]: "260ms" }}>
+                  {post.title}
+                </h1>
+                <p
+                  data-materialize
+                  style={{
+                    margin: "0.8rem 0 0",
+                    color: "var(--shell-text-soft)",
+                    ["--materialize-delay" as any]: "340ms",
+                  }}
+                >
                   {post.excerpt}
                 </p>
-                <div className="proof-bar" style={{ marginTop: "1rem" }}>
+                <div
+                  className="proof-bar"
+                  data-materialize
+                  style={{
+                    marginTop: "1rem",
+                    ["--materialize-delay" as any]: "440ms",
+                  }}
+                >
                   <span>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
                   <span>{post.readTime}</span>
                   {post.tags.map((tag) => (
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
-              </header>
+              </MaterializeHero>
 
               <div className="prose-shell" dangerouslySetInnerHTML={{ __html: html }} />
 

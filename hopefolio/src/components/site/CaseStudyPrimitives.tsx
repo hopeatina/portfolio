@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import MermaidDiagram from "@/components/projects/MermaidDiagram";
+import MaterializeHero from "./MaterializeHero";
+import RevealOnScroll from "./RevealOnScroll";
 import StatusBadge from "./StatusBadge";
 import type { ProjectStatus } from "@/data/portfolio";
 
@@ -19,6 +21,9 @@ export function CaseStudyHero({
   facts,
   image,
   imageAlt,
+  materialize,
+  materializeKey,
+  materializeDirection = "top-down",
 }: {
   kicker: string;
   status: ProjectStatus;
@@ -28,20 +33,45 @@ export function CaseStudyHero({
   facts: CaseStudyFact[];
   image?: string;
   imageAlt?: string;
+  materialize?: "page" | "light";
+  materializeKey?: string;
+  materializeDirection?: "top-down" | "left-right";
 }) {
-  return (
-    <section className="case-study-hero">
+  const inner = (
+    <>
       <div className="case-study-intro">
-        <div className="case-study-meta">
+        <div
+          className="case-study-meta"
+          data-materialize
+          style={{ ["--materialize-delay" as any]: "180ms" }}
+        >
           <span className="eyebrow">{kicker}</span>
           <StatusBadge status={status} />
         </div>
-        <h1>{title}</h1>
-        <p className="case-study-subtitle">{subtitle}</p>
-        <p className="case-study-description">{description}</p>
-        <div className="case-study-facts">
+        <h1 data-materialize style={{ ["--materialize-delay" as any]: "260ms" }}>
+          {title}
+        </h1>
+        <p
+          className="case-study-subtitle"
+          data-materialize
+          style={{ ["--materialize-delay" as any]: "340ms" }}
+        >
+          {subtitle}
+        </p>
+        <p
+          className="case-study-description"
+          data-materialize
+          style={{ ["--materialize-delay" as any]: "400ms" }}
+        >
+          {description}
+        </p>
+        <div className="case-study-facts materialize-stagger">
           {facts.map((fact) => (
-            <div key={`${fact.label}-${fact.value}`} className="case-study-fact">
+            <div
+              key={`${fact.label}-${fact.value}`}
+              className="case-study-fact"
+              data-materialize
+            >
               <span>{fact.label}</span>
               <strong>{fact.value}</strong>
             </div>
@@ -50,7 +80,11 @@ export function CaseStudyHero({
       </div>
 
       {image ? (
-        <div className="case-study-hero-visual">
+        <div
+          className="case-study-hero-visual"
+          data-materialize
+          style={{ ["--materialize-delay" as any]: "220ms" }}
+        >
           <Image
             src={image}
             alt={imageAlt || title}
@@ -62,8 +96,23 @@ export function CaseStudyHero({
           <div className="work-card-overlay" />
         </div>
       ) : null}
-    </section>
+    </>
   );
+
+  if (materialize) {
+    return (
+      <MaterializeHero
+        variant={materialize}
+        direction={materializeDirection}
+        storageKey={materializeKey}
+        className="case-study-hero"
+      >
+        <div className="case-study-hero-grid">{inner}</div>
+      </MaterializeHero>
+    );
+  }
+
+  return <section className="case-study-hero">{inner}</section>;
 }
 
 export function CaseStudySection({
@@ -138,9 +187,12 @@ export function DiagramFrame({
   diagram: string;
 }) {
   return (
-    <div className="visual-frame visual-frame-diagram">
+    <RevealOnScroll
+      as="div"
+      className="visual-frame visual-frame-diagram diagram-reveal"
+    >
       <MermaidDiagram title={title} description={description} diagram={diagram} />
-    </div>
+    </RevealOnScroll>
   );
 }
 

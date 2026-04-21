@@ -72,6 +72,8 @@ export default function PerfPulsePage() {
             ]}
             image="/images/case-studies/perfpulse-dashboard.png"
             imageAlt="PerfPulse — the live web dashboard running on localhost, showing CPU/memory/process monitoring, score ring, meeting mode, and historical charts"
+            materialize="light"
+            materializeKey="perfpulse"
           />
 
           <BuildSurface

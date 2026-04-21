@@ -816,6 +816,65 @@ main.page-frame {
   -webkit-box-orient: vertical;
 }
 
+/* Mermaid architecture diagram — draws itself in when scrolled into view.
+   Nodes fade + scale from 0.96 → 1; edges run a stroke-dashoffset animation
+   that simulates drawing. Stagger delays create a visible build sequence. */
+.diagram-reveal .mermaid-container svg g.node,
+.diagram-reveal .mermaid-container svg g.cluster {
+  opacity: 0;
+  transform-origin: center;
+  transform: scale(0.96);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.diagram-reveal .mermaid-container svg g.edgePath path {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  transition: stroke-dashoffset 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.diagram-reveal.reveal-visible .mermaid-container svg g.node,
+.diagram-reveal.reveal-visible .mermaid-container svg g.cluster {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.diagram-reveal.reveal-visible .mermaid-container svg g.edgePath path {
+  stroke-dashoffset: 0;
+}
+
+/* Per-node stagger via nth-child */
+.diagram-reveal.reveal-visible .mermaid-container svg g.node:nth-of-type(1) { transition-delay: 80ms; }
+.diagram-reveal.reveal-visible .mermaid-container svg g.node:nth-of-type(2) { transition-delay: 140ms; }
+.diagram-reveal.reveal-visible .mermaid-container svg g.node:nth-of-type(3) { transition-delay: 200ms; }
+.diagram-reveal.reveal-visible .mermaid-container svg g.node:nth-of-type(4) { transition-delay: 260ms; }
+.diagram-reveal.reveal-visible .mermaid-container svg g.node:nth-of-type(5) { transition-delay: 320ms; }
+.diagram-reveal.reveal-visible .mermaid-container svg g.node:nth-of-type(6) { transition-delay: 380ms; }
+.diagram-reveal.reveal-visible .mermaid-container svg g.node:nth-of-type(n + 7) { transition-delay: 440ms; }
+
+.diagram-reveal.reveal-visible .mermaid-container svg g.edgePath:nth-of-type(n) path { transition-delay: 400ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram-reveal .mermaid-container svg g.node,
+  .diagram-reveal .mermaid-container svg g.cluster,
+  .diagram-reveal .mermaid-container svg g.edgePath path {
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
+
+/* Ecosystem stagger grid — 2 columns on desktop, 1 on mobile */
+.materialize-stagger-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.25rem 2rem;
+  font-size: 0.95rem;
+}
+
 /* Read-next card hover */
 .read-next-card:hover {
   border-color: rgba(0, 229, 160, 0.45) !important;
@@ -917,9 +976,18 @@ main.page-frame {
   animation: materializeScan 900ms cubic-bezier(0.65, 0, 0.35, 1) 120ms both;
 }
 
-.materialize-playing [data-materialize] {
+.materialize-playing [data-materialize],
+.reveal-visible [data-materialize],
+.scroll-revealed [data-materialize] {
   animation: materializeElement 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--materialize-delay, 350ms);
+}
+
+/* RevealOnScroll or ScrollRevealLine show data-materialize children as
+   visible once revealed — matches the done-state values. */
+.reveal-visible [data-materialize],
+.scroll-revealed [data-materialize] {
+  /* animation handles the arrival; no conflicting initial state */
 }
 
 /* Done — content is fully visible, no transforms */
@@ -947,6 +1015,72 @@ main.page-frame {
   90% { opacity: 1; }
   100% { transform: translateY(38rem); opacity: 0; }
 }
+
+/* Left→right scanline variant — vertical 1.5px line that sweeps
+   horizontally across the hero (for case studies emphasizing
+   product-image width). */
+.materialize-dir-left-right .materialize-scanline {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: auto;
+  width: 1.5px;
+  height: auto;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 229, 160, 0.3) 15%,
+    rgba(0, 229, 160, 1) 50%,
+    rgba(0, 229, 160, 0.3) 85%,
+    transparent 100%
+  );
+}
+
+.materialize-dir-left-right.materialize-playing .materialize-scanline {
+  animation: materializeScanLR 900ms cubic-bezier(0.65, 0, 0.35, 1) 120ms both;
+}
+
+@keyframes materializeScanLR {
+  0% { transform: translateX(-10px); opacity: 0; }
+  8% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(calc(100vw - 2rem)); opacity: 0; }
+}
+
+/* Page variant — no grid flash, faster + shorter sequence. */
+.materialize-page .materialize-scanline {
+  opacity: 0;
+}
+
+.materialize-page.materialize-playing .materialize-scanline {
+  animation-duration: 700ms;
+}
+
+.materialize-page.materialize-playing [data-materialize] {
+  animation-duration: 550ms;
+}
+
+/* Light variant — no scanline, just element stagger. */
+.materialize-light [data-materialize] {
+  /* falls through to base rules */
+}
+
+/* Stagger utility — any container can auto-stagger its children
+   using attribute ordering. Each data-materialize element uses its
+   inline --materialize-delay, but this utility provides sensible
+   defaults if none is set. */
+.materialize-stagger > [data-materialize]:nth-child(1) { --materialize-delay: 40ms; }
+.materialize-stagger > [data-materialize]:nth-child(2) { --materialize-delay: 90ms; }
+.materialize-stagger > [data-materialize]:nth-child(3) { --materialize-delay: 140ms; }
+.materialize-stagger > [data-materialize]:nth-child(4) { --materialize-delay: 190ms; }
+.materialize-stagger > [data-materialize]:nth-child(5) { --materialize-delay: 240ms; }
+.materialize-stagger > [data-materialize]:nth-child(6) { --materialize-delay: 290ms; }
+.materialize-stagger > [data-materialize]:nth-child(7) { --materialize-delay: 340ms; }
+.materialize-stagger > [data-materialize]:nth-child(8) { --materialize-delay: 390ms; }
+.materialize-stagger > [data-materialize]:nth-child(9) { --materialize-delay: 440ms; }
+.materialize-stagger > [data-materialize]:nth-child(10) { --materialize-delay: 490ms; }
+.materialize-stagger > [data-materialize]:nth-child(11) { --materialize-delay: 540ms; }
+.materialize-stagger > [data-materialize]:nth-child(12) { --materialize-delay: 590ms; }
 
 @keyframes materializeElement {
   0% {
@@ -1022,7 +1156,8 @@ main.page-frame {
   position: relative;
 }
 
-/* Accent line anchoring each section's kicker */
+/* Accent line anchoring each section's kicker.
+   Animates scale-Y + blur-to-sharp when scrolled into view. */
 .case-study-section-head::before {
   content: "";
   position: absolute;
@@ -1033,6 +1168,44 @@ main.page-frame {
   border-radius: 3px;
   background: var(--shell-accent);
   box-shadow: 0 0 12px rgba(0, 229, 160, 0.45);
+  transform-origin: top center;
+  animation: kickerBarDraw 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 50%;
+}
+
+@keyframes kickerBarDraw {
+  from {
+    transform: scaleY(0);
+    filter: blur(4px);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+/* Fallback for browsers without scroll-timeline: ScrollRevealLine
+   wrapper drives via class toggle. */
+@supports not (animation-timeline: view()) {
+  .case-study-section-head::before {
+    animation: none;
+    transform: scaleY(0);
+    filter: blur(4px);
+    opacity: 0;
+    transition:
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .scroll-revealed .case-study-section-head::before,
+  .reveal-visible .case-study-section-head::before {
+    transform: scaleY(1);
+    filter: blur(0);
+    opacity: 1;
+  }
 }
 
 @media (max-width: 640px) {

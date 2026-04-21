@@ -1,10 +1,15 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
+type MaterializeVariant = "landing" | "page" | "light";
+type MaterializeDirection = "top-down" | "left-right";
+
 interface MaterializeHeroProps {
   children: React.ReactNode;
   storageKey?: string;
   className?: string;
+  variant?: MaterializeVariant;
+  direction?: MaterializeDirection;
 }
 
 // Module-scoped flag. Persists across client-side nav in the same
@@ -31,6 +36,8 @@ export default function MaterializeHero({
   children,
   storageKey = "home",
   className = "",
+  variant = "landing",
+  direction = "top-down",
 }: MaterializeHeroProps) {
   const ref = useRef<HTMLElement>(null);
   const [phase, setPhase] = useState<"idle" | "playing" | "done">("idle");
@@ -68,10 +75,14 @@ export default function MaterializeHero({
   return (
     <section
       ref={ref}
-      className={`materialize-hero materialize-${phase} ${className}`.trim()}
+      className={`materialize-hero materialize-${phase} materialize-${variant} materialize-dir-${direction} ${className}`.trim()}
     >
-      <div className="materialize-grid" aria-hidden="true" />
-      <div className="materialize-scanline" aria-hidden="true" />
+      {variant === "landing" ? (
+        <div className="materialize-grid" aria-hidden="true" />
+      ) : null}
+      {variant !== "light" ? (
+        <div className="materialize-scanline" aria-hidden="true" />
+      ) : null}
       <div className="materialize-content">{children}</div>
     </section>
   );

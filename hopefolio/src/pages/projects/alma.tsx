@@ -69,6 +69,8 @@ export default function AlmaPage() {
             ]}
             image="/images/projects/alma.svg"
             imageAlt="Alma — HIPAA-compliant backend systems"
+            materialize="light"
+            materializeKey="alma"
           />
 
           <BuildSurface
