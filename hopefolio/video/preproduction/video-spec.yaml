@@ -1,0 +1,58 @@
+project: hope-atina-portfolio-film
+title: Continuity Signal
+format:
+  aspect_ratio: "9:16"
+  width: 1080
+  height: 1920
+  fps: 30
+  duration_seconds: 28
+  delivery: "H.264 MP4 with stereo AAC"
+creative_direction:
+  visual_language: "Editorial control room meets human portraiture"
+  palette: ["#080A09", "#F1F0EA", "#B7F34A", "#DFA548", "#A2A79F"]
+  typography: "Bricolage Grotesque structure, Instrument Serif emphasis, JetBrains Mono telemetry"
+  camera_metaphor: "A single continuous inspection path: hard crops, measured pushes, scroll translation, and one ochre handoff"
+  prohibited: ["generic device mockups", "random gradients", "particle fields", "per-character text fades", "unverified metrics"]
+shots:
+  - id: 1
+    time: "00:00-00:04.5"
+    framing: "Extreme portrait crop on right third; negative space for hook"
+    movement: "Slow 3% push with two beat-locked type reveals"
+    action: "Question the missing continuity layer"
+    text: ["AI CAN ACT.", "CAN IT KEEP THE PLOT?"]
+    sound: "Sparse kick; first transition impact at 4.0s"
+  - id: 2
+    time: "00:04-00:09"
+    framing: "Portfolio hero floats as a live editorial plane with Hope visible inside it"
+    movement: "Plane rises and settles; signal line scans once"
+    action: "Introduce Hope and the continuity thesis"
+    text: ["I BUILD THE CONTINUITY LAYER.", "Context · Memory · Review"]
+    sound: "Hats and arpeggio enter"
+  - id: 3
+    time: "00:08.5-00:13.5"
+    framing: "Continuity chapter fills the center; three-stage ledger anchors bottom"
+    movement: "Measured horizontal crop and sequential stage activation"
+    action: "Show the system remembering, acting, and returning decisions"
+    text: ["CONTEXT SURVIVES", "AGENTS ACT", "HUMANS DECIDE"]
+    sound: "Full rhythm; impact at 8.5s and 13.0s"
+  - id: 4
+    time: "00:13-00:18"
+    framing: "Proof portfolio window above a four-cell evidence ledger"
+    movement: "Window slides upward; figures enter on separate beats"
+    action: "Convert the thesis into shipped-system evidence"
+    text: ["61 MCP TOOLS", "12 REPOS", "999 AGENT COMMITS", "93% FEWER BUGS"]
+    sound: "Peak forward momentum"
+  - id: 5
+    time: "00:17.5-00:22.5"
+    framing: "Judgment architecture map centered with portrait core"
+    movement: "Slow zoom and orbit line rotation; motion decelerates"
+    action: "Name the differentiator"
+    text: ["MY DIFFERENTIATOR ISN'T AUTONOMY.", "IT'S JUDGMENT ARCHITECTURE."]
+    sound: "Rhythmic drop; impact at 22.0s"
+  - id: 6
+    time: "00:22-00:28"
+    framing: "Ochre closing portrait full-bleed with concise identity lockup"
+    movement: "Portrait and copy meet at center; final line resolves on last hit"
+    action: "End on Hope, role, point of view, and direct contact"
+    text: ["BOTH SIDES OF THE HANDOFF.", "HOPE ATINA · AI SYSTEMS ENGINEER", "hopeatina@gmail.com"]
+    sound: "Full theme returns; resolved final hit"

@@ -1,0 +1,27 @@
+1
+00:00:00,000 --> 00:00:01,650
+AI can act.
+
+2
+00:00:01,650 --> 00:00:04,200
+Can it keep the plot?
+
+3
+00:00:04,200 --> 00:00:08,700
+I build the continuity layer.
+
+4
+00:00:08,700 --> 00:00:13,100
+Context survives. Agents act. Humans decide.
+
+5
+00:00:13,100 --> 00:00:17,650
+61 tools. 12 repos. 999 agent commits. 93% fewer bugs.
+
+6
+00:00:17,650 --> 00:00:22,200
+My differentiator isn't autonomy. It's judgment architecture.
+
+7
+00:00:22,200 --> 00:00:28,000
+Hope Atina. I engineer both sides of the handoff.

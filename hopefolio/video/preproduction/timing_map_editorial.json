@@ -1,0 +1,17 @@
+{
+  "project_id": "hope-atina-portfolio-film",
+  "source_analysis": "beat_grid.json and timing_map.json",
+  "editorial_basis": "120 BPM source structure with impacts at 4.0, 8.5, 13.0, 17.5, and 22.0 seconds",
+  "total_duration": 28,
+  "tempo_target": 120,
+  "tempo_detected": 117.5,
+  "time_signature": "4/4",
+  "scenes": [
+    { "id": "hook", "start_time": 0, "end_time": 4, "intensity": "tension" },
+    { "id": "thesis", "start_time": 4, "end_time": 8.5, "intensity": "building" },
+    { "id": "continuity", "start_time": 8.5, "end_time": 13, "intensity": "high" },
+    { "id": "proof", "start_time": 13, "end_time": 17.5, "intensity": "peak" },
+    { "id": "judgment", "start_time": 17.5, "end_time": 22, "intensity": "breakdown" },
+    { "id": "handoff", "start_time": 22, "end_time": 28, "intensity": "resolution" }
+  ]
+}

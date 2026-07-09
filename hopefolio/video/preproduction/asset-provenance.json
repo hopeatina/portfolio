@@ -1,0 +1,30 @@
+{
+  "original_assets": [
+    {
+      "file": "public/images/hope-profile.jpg",
+      "source": "Existing Hope Atina portfolio asset",
+      "usage": "Opening and closing portrait"
+    },
+    {
+      "files": [
+        "public/video/portfolio-film/hero.png",
+        "public/video/portfolio-film/continuity.png",
+        "public/video/portfolio-film/career.png",
+        "public/video/portfolio-film/systems.png",
+        "public/video/portfolio-film/judgment.png",
+        "public/video/portfolio-film/closing.png"
+      ],
+      "source": "Playwright captures of the locally rebuilt portfolio at http://127.0.0.1:3000",
+      "captured_at": "2026-07-09",
+      "usage": "Portfolio walkthrough footage"
+    },
+    {
+      "file": "public/video/portfolio-film/continuity-score.wav",
+      "source": "Original deterministic in-repo synthesis",
+      "usage": "Master score",
+      "license": "Original work; no external sample or music license required"
+    }
+  ],
+  "external_assets": [],
+  "ai_generated_visual_assets": []
+}

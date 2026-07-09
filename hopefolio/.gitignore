@@ -23,6 +23,11 @@ docs/verification/theme-audit/
 
 # production
 /build
+/video/.venv/
+/video/output/.remotion/
+/video/output/hope-atina-portfolio-social.mp4
+/video/qa/final-frames/
+/video/qa/frame-*.png
 
 # misc
 .DS_Store
