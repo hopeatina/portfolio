@@ -1,0 +1,21 @@
+{
+  "project": "Continuity Signal",
+  "approved": true,
+  "approved_at": "2026-07-09",
+  "format": { "width": 1080, "height": 1920, "fps": 30, "duration_frames": 840 },
+  "scenes": [
+    { "id": "hook", "start_frame": 0, "end_frame": 134, "asset": "hope-profile.jpg", "purpose": "Tension and identity" },
+    { "id": "thesis", "start_frame": 120, "end_frame": 269, "asset": "hero.png", "purpose": "Show Hope and the rebuilt portfolio thesis" },
+    { "id": "continuity", "start_frame": 255, "end_frame": 404, "asset": "continuity.png", "purpose": "Explain the operating model" },
+    { "id": "proof", "start_frame": 390, "end_frame": 539, "asset": "systems.png", "purpose": "Show the evidence ledger" },
+    { "id": "judgment", "start_frame": 525, "end_frame": 674, "asset": "judgment.png", "purpose": "Name the unique differentiator" },
+    { "id": "handoff", "start_frame": 660, "end_frame": 839, "asset": "closing.png", "purpose": "Resolve on Hope and contact" }
+  ],
+  "transitions": [
+    { "at_frame": 120, "duration_frames": 15, "type": "from-bottom slide" },
+    { "at_frame": 255, "duration_frames": 15, "type": "left wipe" },
+    { "at_frame": 390, "duration_frames": 15, "type": "from-bottom slide" },
+    { "at_frame": 525, "duration_frames": 15, "type": "fade" },
+    { "at_frame": 660, "duration_frames": 15, "type": "right wipe to ochre" }
+  ]
+}

@@ -1,0 +1,19 @@
+scenes:
+  - id: hook
+    message: "AI can act. Can it keep the plot?"
+    visual_concept: "Hope portrait fragment and editorial hook"
+  - id: thesis
+    message: "I build the continuity layer."
+    visual_concept: "Rebuilt portfolio hero as a live editorial plane"
+  - id: continuity
+    message: "Context survives. Agents act. Humans decide."
+    visual_concept: "Continuity chapter and three-stage operating ledger"
+  - id: proof
+    message: "Shipped-system evidence, not claims."
+    visual_concept: "Selected systems capture plus four verified figures"
+  - id: judgment
+    message: "My differentiator is judgment architecture."
+    visual_concept: "Human boundary map with Hope at the core"
+  - id: handoff
+    message: "I engineer both sides of the handoff."
+    visual_concept: "Ochre portrait resolution and direct contact"

@@ -1,0 +1,18 @@
+{
+  "format": "stereo 48kHz 16-bit PCM source, AAC delivery",
+  "music": {
+    "file": "public/video/portfolio-film/continuity-score.wav",
+    "title": "Continuity Signal",
+    "original": true,
+    "target_bpm": 120,
+    "target_lufs": -14,
+    "target_true_peak_dbtp": -1.0
+  },
+  "voiceover": null,
+  "sfx": "Synthesized transition impacts are embedded in the original score at 4.0, 8.5, 13.0, 17.5, and 22.0 seconds.",
+  "mix_notes": [
+    "The score is the timing spine, not background decoration.",
+    "No external licensed audio is used.",
+    "Final encode must retain stereo audio at 48kHz."
+  ]
+}

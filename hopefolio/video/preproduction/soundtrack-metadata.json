@@ -1,0 +1,17 @@
+{
+  "title": "Continuity Signal",
+  "original": true,
+  "composer": "Generated in-repo for Hope Atina's portfolio film",
+  "sampleRate": 48000,
+  "channels": 2,
+  "durationSeconds": 28,
+  "targetBpm": 120,
+  "structuralBeatsSeconds": [
+    4,
+    8.5,
+    13,
+    17.5,
+    22
+  ],
+  "file": "public/video/portfolio-film/continuity-score.wav"
+}

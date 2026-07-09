@@ -1,0 +1,263 @@
+{
+  "project_id": "video_project",
+  "total_duration": 28.0,
+  "tempo": 117.5,
+  "scene_count": 6,
+  "time_signature": "4/4",
+  "summary": {
+    "total_beats": 47,
+    "total_measures": 11,
+    "drops": 0,
+    "builds": 0,
+    "breakdowns": 0
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "index": 0,
+      "start_time": 0.0,
+      "end_time": 4.296,
+      "duration": 4.296,
+      "veo_duration": 4,
+      "start_beat": 1,
+      "end_beat": 1,
+      "beat_count": 0,
+      "measures": 0,
+      "cut_on_beat": true,
+      "cut_type": "strong_beat",
+      "intensity": "moderate",
+      "intensity_value": 0.464,
+      "events": {
+        "has_drop": false,
+        "has_build": false,
+        "in_breakdown": false
+      },
+      "suggested_shot_type": "wide",
+      "suggested_camera": {
+        "movement": "dolly_in",
+        "speed": "slow",
+        "rationale": "Moderate intensity - building focus"
+      },
+      "audio_cues": {
+        "sfx_on_entry": null,
+        "sfx_on_drop": null,
+        "beat_emphasis": false
+      },
+      "message": "AI can act. Can it keep the plot?",
+      "visual_concept": "Hope portrait fragment and editorial hook"
+    },
+    {
+      "id": "thesis",
+      "index": 1,
+      "start_time": 4.296,
+      "end_time": 9.288,
+      "duration": 4.992,
+      "veo_duration": 4,
+      "start_beat": 1,
+      "end_beat": 11,
+      "beat_count": 10,
+      "measures": 2,
+      "cut_on_beat": true,
+      "cut_type": "strong_beat",
+      "intensity": "medium",
+      "intensity_value": 0.554,
+      "events": {
+        "has_drop": false,
+        "has_build": false,
+        "in_breakdown": false
+      },
+      "suggested_shot_type": "medium",
+      "suggested_camera": {
+        "movement": "dolly_in",
+        "speed": "gradual",
+        "rationale": "Medium-high intensity - engaging"
+      },
+      "audio_cues": {
+        "sfx_on_entry": "soft_whoosh",
+        "sfx_on_drop": null,
+        "beat_emphasis": false
+      },
+      "message": "I build the continuity layer.",
+      "visual_concept": "Rebuilt portfolio hero as a live editorial plane"
+    },
+    {
+      "id": "continuity",
+      "index": 2,
+      "start_time": 9.288,
+      "end_time": 14.28,
+      "duration": 4.992,
+      "veo_duration": 4,
+      "start_beat": 11,
+      "end_beat": 21,
+      "beat_count": 10,
+      "measures": 2,
+      "cut_on_beat": true,
+      "cut_type": "strong_beat",
+      "intensity": "medium",
+      "intensity_value": 0.604,
+      "events": {
+        "has_drop": false,
+        "has_build": false,
+        "in_breakdown": false
+      },
+      "suggested_shot_type": "medium_close_up",
+      "suggested_camera": {
+        "movement": "dolly_in",
+        "speed": "gradual",
+        "rationale": "Medium-high intensity - engaging"
+      },
+      "audio_cues": {
+        "sfx_on_entry": "soft_whoosh",
+        "sfx_on_drop": null,
+        "beat_emphasis": false
+      },
+      "message": "Context survives. Agents act. Humans decide.",
+      "visual_concept": "Continuity chapter and three-stage operating ledger"
+    },
+    {
+      "id": "proof",
+      "index": 3,
+      "start_time": 14.28,
+      "end_time": 19.273,
+      "duration": 4.993,
+      "veo_duration": 4,
+      "start_beat": 21,
+      "end_beat": 31,
+      "beat_count": 10,
+      "measures": 2,
+      "cut_on_beat": true,
+      "cut_type": "strong_beat",
+      "intensity": "medium",
+      "intensity_value": 0.578,
+      "events": {
+        "has_drop": false,
+        "has_build": false,
+        "in_breakdown": false
+      },
+      "suggested_shot_type": "close_up",
+      "suggested_camera": {
+        "movement": "dolly_in",
+        "speed": "gradual",
+        "rationale": "Medium-high intensity - engaging"
+      },
+      "audio_cues": {
+        "sfx_on_entry": "soft_whoosh",
+        "sfx_on_drop": null,
+        "beat_emphasis": false
+      },
+      "message": "Shipped-system evidence, not claims.",
+      "visual_concept": "Selected systems capture plus four verified figures"
+    },
+    {
+      "id": "judgment",
+      "index": 4,
+      "start_time": 19.273,
+      "end_time": 24.288,
+      "duration": 5.015,
+      "veo_duration": 6,
+      "start_beat": 31,
+      "end_beat": 41,
+      "beat_count": 10,
+      "measures": 2,
+      "cut_on_beat": true,
+      "cut_type": "strong_beat",
+      "intensity": "medium",
+      "intensity_value": 0.678,
+      "events": {
+        "has_drop": false,
+        "has_build": false,
+        "in_breakdown": false
+      },
+      "suggested_shot_type": "medium",
+      "suggested_camera": {
+        "movement": "dolly_in",
+        "speed": "gradual",
+        "rationale": "Medium-high intensity - engaging"
+      },
+      "audio_cues": {
+        "sfx_on_entry": "soft_whoosh",
+        "sfx_on_drop": null,
+        "beat_emphasis": false
+      },
+      "message": "My differentiator is judgment architecture.",
+      "visual_concept": "Human boundary map with Hope at the core"
+    },
+    {
+      "id": "handoff",
+      "index": 5,
+      "start_time": 24.288,
+      "end_time": 27.283,
+      "duration": 2.995,
+      "veo_duration": 4,
+      "start_beat": 41,
+      "end_beat": 47,
+      "beat_count": 6,
+      "measures": 1,
+      "cut_on_beat": true,
+      "cut_type": "strong_beat",
+      "intensity": "medium",
+      "intensity_value": 0.613,
+      "events": {
+        "has_drop": false,
+        "has_build": false,
+        "in_breakdown": false
+      },
+      "suggested_shot_type": "medium_close_up",
+      "suggested_camera": {
+        "movement": "dolly_in",
+        "speed": "gradual",
+        "rationale": "Medium-high intensity - engaging"
+      },
+      "audio_cues": {
+        "sfx_on_entry": "soft_whoosh",
+        "sfx_on_drop": null,
+        "beat_emphasis": false
+      },
+      "message": "I engineer both sides of the handoff.",
+      "visual_concept": "Ochre portrait resolution and direct contact"
+    }
+  ],
+  "scene_index": {
+    "hook": 0,
+    "thesis": 1,
+    "continuity": 2,
+    "proof": 3,
+    "judgment": 4,
+    "handoff": 5
+  },
+  "lookup": {
+    "scene_at_time": {
+      "0": "hook",
+      "1": "hook",
+      "2": "hook",
+      "3": "hook",
+      "4": "thesis",
+      "5": "thesis",
+      "6": "thesis",
+      "7": "thesis",
+      "8": "thesis",
+      "9": "continuity",
+      "10": "continuity",
+      "11": "continuity",
+      "12": "continuity",
+      "13": "continuity",
+      "14": "proof",
+      "15": "proof",
+      "16": "proof",
+      "17": "proof",
+      "18": "proof",
+      "19": "judgment",
+      "20": "judgment",
+      "21": "judgment",
+      "22": "judgment",
+      "23": "judgment",
+      "24": "handoff",
+      "25": "handoff",
+      "26": "handoff",
+      "27": "handoff"
+    },
+    "high_intensity_scenes": [],
+    "drop_scenes": [],
+    "build_scenes": []
+  }
+}
