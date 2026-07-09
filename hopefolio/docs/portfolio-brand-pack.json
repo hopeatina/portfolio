@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "name": "Hope Atina Portfolio",
+    "version": "3.0.0",
+    "calibration_date": "2026-07-09",
+    "source_url": "local://hopefolio"
+  },
+  "tokens": {
+    "colors": {
+      "ink": "#080a09",
+      "paper": "#f2efe7",
+      "signal": "#b7f34a",
+      "ochre": "#d69a45",
+      "mutedDark": "#9ca39d",
+      "mutedLight": "#5a615b"
+    },
+    "typography": {
+      "families": {
+        "display": "Bricolage Grotesque",
+        "editorial": "Instrument Serif",
+        "body": "Manrope",
+        "utility": "JetBrains Mono"
+      },
+      "scale": {
+        "display": "clamp(4rem, 9vw, 8.5rem)",
+        "h1": "clamp(3.2rem, 7vw, 7rem)",
+        "h2": "clamp(2.6rem, 5vw, 5.4rem)",
+        "body": "clamp(1rem, 1.4vw, 1.25rem)",
+        "micro": "0.75rem"
+      }
+    },
+    "spacing": {
+      "base_unit": 8,
+      "scale": [8, 16, 24, 32, 48, 64, 96, 128, 192]
+    },
+    "motion": {
+      "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "durations": { "fast": "180ms", "normal": "420ms", "slow": "760ms" }
+    }
+  },
+  "visualAesthetic": {
+    "aesthetic_parameters": {
+      "background_style": "high-contrast editorial dark with one warm light chapter",
+      "accent_ratio": "minimal under 8 percent",
+      "energy_level": "calm technical confidence",
+      "whitespace_target": "40 percent plus"
+    },
+    "screenshotExemplars": {
+      "required": true,
+      "count": 5,
+      "screenshots": [
+        {
+          "id": "homepage-hero",
+          "path": "docs/verification/homepage/pass4-after-desktop-full.png",
+          "source_url": "local://hopefolio/",
+          "description": "Current homepage baseline and original dark-shell reference"
+        },
+        {
+          "id": "product-page",
+          "path": "docs/verification/projects/after-orgx-desktop.png",
+          "source_url": "local://hopefolio/projects/orgx",
+          "description": "Flagship case study and real product proof treatment"
+        },
+        {
+          "id": "social-post",
+          "path": "docs/verification/homepage/after-mobile-viewport-final.png",
+          "source_url": "local://hopefolio/mobile",
+          "description": "Vertical crop and mobile social-format reference"
+        },
+        {
+          "id": "marketing-page",
+          "path": "docs/verification/projects/after-projects-index-desktop.png",
+          "source_url": "local://hopefolio/projects",
+          "description": "Work index and portfolio marketing hierarchy reference"
+        },
+        {
+          "id": "blog-content",
+          "path": "docs/verification/projects/after-alma-desktop.png",
+          "source_url": "local://hopefolio/projects/alma",
+          "description": "Long-form editorial case-study rhythm reference"
+        }
+      ]
+    }
+  },
+  "signature_moves": [
+    {
+      "id": "continuity-signal",
+      "description": "A single signal-green line tracks progress and handoffs",
+      "frequency": "always"
+    },
+    {
+      "id": "human-boundary",
+      "description": "Hope remains the stable visual anchor while system states change",
+      "frequency": "often"
+    },
+    {
+      "id": "receipt-surface",
+      "description": "Claims attach directly to product screenshots, metrics, or decision state",
+      "frequency": "always"
+    }
+  ],
+  "budgets": {
+    "colors_max_per_view": 4,
+    "accent_elements_max_per_view": 2,
+    "bordered_containers_max_per_view": 2,
+    "simultaneous_motion_events_max": 2,
+    "transition_types_max": 2
+  },
+  "anti_patterns": [
+    "purple blue technology gradients",
+    "repeated glass cards",
+    "equal weight project grids",
+    "floating decorative orbs",
+    "bounce easing",
+    "scroll hijacking",
+    "generated portraits",
+    "claims without receipts",
+    "badge soup",
+    "tiny low contrast metadata",
+    "anonymous product only hero",
+    "constant ambient movement"
+  ],
+  "generationConstraints": {
+    "required": ["NO TEXT", "real product evidence", "premium editorial restraint"],
+    "blocked": ["generated logo", "generated portrait", "generic stock photo", "purple gradient", "glass card field"],
+    "allowedModels": {
+      "images": ["fal-ai/nano-banana-pro"],
+      "video": ["veo3"]
+    }
+  },
+  "qa_weights": {
+    "hierarchy_clarity": 20,
+    "whitespace_confidence": 15,
+    "typography_craft": 15,
+    "brand_recognition": 20,
+    "product_alignment": 15,
+    "restraint_discipline": 10,
+    "style_consistency": 5
+  },
+  "qa_threshold": 90,
+  "brand_essence": {
+    "personality": ["precise", "warm", "technically serious", "opinionated"],
+    "voice": {
+      "do": ["direct", "specific", "proof-led", "human"],
+      "dont": ["generic AI language", "empty superlatives", "defensive jargon"]
+    },
+    "decision_heuristic": "Does this make human judgment more visible and technical proof easier to inspect?"
+  }
+}
