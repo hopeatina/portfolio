@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ContinuityPlayhead,
+  LivingMotif,
   SectionSignal,
   SystemGlyph,
   TextLink,
@@ -45,7 +46,8 @@ export default function Hiring() {
       <main id="main-content" className="v4-page v4-hiring-page">
         <ContinuityPlayhead label="work with me" />
 
-        <header className="v4-hiring-hero">
+        <header className="v4-hiring-hero v4-motif-backed">
+          <LivingMotif variant="handoff" className="v4-hiring-hero-motif" label="A signal crossing engineering, product, and founder boundaries" />
           <span>For founders / recruiters / ambitious teams</span>
           <h1>If the hard problem lives between AI capability, product judgment, and production consequence—that is my lane.</h1>
           <div>
@@ -65,7 +67,8 @@ export default function Hiring() {
           </div>
         </header>
 
-        <section className="v4-hiring-contribution">
+        <section className="v4-hiring-contribution v4-motif-backed">
+          <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="01">What changes when I join the problem</SectionSignal>
           <div className="v4-hiring-contribution-heading">
             <h2>Depth without tunnel vision. Range without hand-waving.</h2>
@@ -86,7 +89,8 @@ export default function Hiring() {
           </div>
         </section>
 
-        <section className="v4-hiring-proof">
+        <section className="v4-hiring-proof v4-motif-backed">
+          <LivingMotif variant="aperture" className="v4-section-motif" />
           <SectionSignal index="02">Three ways to inspect the claim</SectionSignal>
           <div className="v4-hiring-proof-grid">
             <Link href="/projects/orgx" className="v4-hiring-proof-featured">
@@ -123,7 +127,8 @@ export default function Hiring() {
           </div>
         </section>
 
-        <section className="v4-hiring-fit">
+        <section className="v4-hiring-fit v4-motif-backed">
+          <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="03">Where the fit is strongest</SectionSignal>
           <div className="v4-hiring-fit-grid">
             <h2>Give me the consequential system, not the isolated ticket.</h2>
@@ -142,7 +147,8 @@ export default function Hiring() {
           </div>
         </section>
 
-        <section className="v4-hiring-close">
+        <section className="v4-hiring-close v4-motif-backed">
+          <LivingMotif variant="resolve" className="v4-hiring-close-motif" />
           <span>A good first conversation is concrete.</span>
           <h2>Show me the system, the pressure, and what has resisted becoming clear.</h2>
           <div>

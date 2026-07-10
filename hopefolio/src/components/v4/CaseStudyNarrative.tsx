@@ -1,5 +1,13 @@
 import Head from "next/head";
-import { CausalFlow, ContinuityPlayhead, EvidenceSpecimen, GlyphName, SectionSignal, TextLink } from "./V4Primitives";
+import {
+  CausalFlow,
+  ContinuityPlayhead,
+  EvidenceSpecimen,
+  GlyphName,
+  LivingMotif,
+  SectionSignal,
+  TextLink,
+} from "./V4Primitives";
 
 export interface NarrativeBlock {
   eyebrow: string;
@@ -13,6 +21,23 @@ export interface NarrativeProof {
   alt: string;
   label: string;
   caption: string;
+}
+
+export interface SystemChapter {
+  eyebrow: string;
+  title: string;
+  introduction: string;
+  layers: Array<{
+    label: string;
+    title: string;
+    detail: string;
+    technology?: string;
+    tone?: "heat" | "cold" | "signal";
+  }>;
+  rationale: Array<{ pressure: string; choice: string; reason: string }>;
+  surfaces: Array<{ name: string; mode: string; detail: string }>;
+  technologies: Array<{ label: string; values: string[] }>;
+  surfaceProofs?: NarrativeProof[];
 }
 
 interface CaseStudyNarrativeProps {
@@ -29,11 +54,94 @@ interface CaseStudyNarrativeProps {
   insight: NarrativeBlock;
   decision: NarrativeBlock;
   flow: Array<{ glyph: GlyphName; label: string; detail: string; tone?: "heat" | "cold" }>;
+  system?: SystemChapter;
   proofs: NarrativeProof[];
   learning: NarrativeBlock;
   primaryLink: { href: string; label: string; external?: boolean };
   secondaryLink?: { href: string; label: string; external?: boolean };
   next: { href: string; label: string; title: string };
+}
+
+function SystemDepth({ chapter }: { chapter: SystemChapter }) {
+  return (
+    <div className="v4-system-depth">
+      <div className="v4-system-depth-intro">
+        <span>{chapter.eyebrow}</span>
+        <h2>{chapter.title}</h2>
+        <p>{chapter.introduction}</p>
+      </div>
+
+      <div className="v4-architecture-map" role="list" aria-label="System architecture layers">
+        {chapter.layers.map((layer, index) => (
+          <article className={layer.tone ? `is-${layer.tone}` : ""} role="listitem" key={`${layer.label}-${layer.title}`}>
+            <div>
+              <span>{String(index + 1).padStart(2, "0")} / {layer.label}</span>
+              <strong>{layer.title}</strong>
+            </div>
+            <p>{layer.detail}</p>
+            {layer.technology ? <small>{layer.technology}</small> : null}
+          </article>
+        ))}
+      </div>
+
+      <div className="v4-rationale-block">
+        <span>Architecture rationale / pressure → choice → consequence</span>
+        <div className="v4-rationale-table" role="table" aria-label="Architecture rationale">
+          <div className="v4-rationale-heading" role="row">
+            <span role="columnheader">Pressure</span>
+            <span role="columnheader">Decision</span>
+            <span role="columnheader">Why it mattered</span>
+          </div>
+          {chapter.rationale.map((item) => (
+            <div role="row" key={item.pressure}>
+              <strong role="cell">{item.pressure}</strong>
+              <span role="cell">{item.choice}</span>
+              <p role="cell">{item.reason}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="v4-surface-atlas">
+        <div className="v4-surface-atlas-heading">
+          <span>Surface atlas</span>
+          <p>The architecture is only complete when every operator and client boundary has a legible surface.</p>
+        </div>
+        <div className="v4-surface-atlas-grid">
+          {chapter.surfaces.map((surface, index) => (
+            <article key={surface.name}>
+              <span>{String(index + 1).padStart(2, "0")} / {surface.mode}</span>
+              <h3>{surface.name}</h3>
+              <p>{surface.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div className="v4-technology-lattice" aria-label="Technology choices">
+        {chapter.technologies.map((group) => (
+          <div key={group.label}>
+            <span>{group.label}</span>
+            <p>{group.values.join(" · ")}</p>
+          </div>
+        ))}
+      </div>
+
+      {chapter.surfaceProofs?.length ? (
+        <div className="v4-surface-proof-field">
+          <div className="v4-surface-proof-heading">
+            <span>Embedded surfaces / real product evidence</span>
+            <p>These are working MCP and operator surfaces, not concept renders.</p>
+          </div>
+          <div className="v4-surface-proof-grid">
+            {chapter.surfaceProofs.map((proof) => (
+              <EvidenceSpecimen {...proof} key={proof.src} className="v4-widget-specimen" />
+            ))}
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 function NarrativeCopy({ block }: { block: NarrativeBlock }) {
@@ -65,6 +173,7 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
         <ContinuityPlayhead label={props.title} />
 
         <header className="v4-case-hero">
+          <LivingMotif variant="handoff" className="v4-case-hero-motif" label="A continuity signal crossing a system boundary" />
           <div className="v4-case-hero-copy">
             <div className="v4-case-meta">
               <span>{props.index}</span>
@@ -93,24 +202,36 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
           <EvidenceSpecimen {...props.heroProof} priority className="v4-case-hero-proof" />
         </header>
 
-        <section className="v4-narrative-section v4-narrative-section-problem">
+        <section className="v4-narrative-section v4-narrative-section-problem v4-motif-backed">
+          <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="01">The consequential problem</SectionSignal>
           <NarrativeCopy block={props.problem} />
         </section>
 
-        <section className="v4-narrative-section v4-narrative-section-insight">
+        <section className="v4-narrative-section v4-narrative-section-insight v4-motif-backed">
+          <LivingMotif variant="aperture" className="v4-section-motif" />
           <SectionSignal index="02">What I saw</SectionSignal>
           <NarrativeCopy block={props.insight} />
         </section>
 
-        <section className="v4-narrative-section v4-narrative-section-decision">
+        <section className="v4-narrative-section v4-narrative-section-decision v4-motif-backed">
+          <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="03">The decision that changed the system</SectionSignal>
           <NarrativeCopy block={props.decision} />
           <CausalFlow steps={props.flow} />
         </section>
 
-        <section className="v4-proof-field">
-          <SectionSignal index="04">Authentic proof</SectionSignal>
+        {props.system ? (
+          <section className="v4-system-chapter v4-motif-backed">
+            <LivingMotif variant="handoff" className="v4-system-chapter-motif" />
+            <SectionSignal index="04">System anatomy / rationale / surfaces</SectionSignal>
+            <SystemDepth chapter={props.system} />
+          </section>
+        ) : null}
+
+        <section className="v4-proof-field v4-motif-backed">
+          <LivingMotif variant="aperture" className="v4-section-motif" />
+          <SectionSignal index={props.system ? "05" : "04"}>Authentic proof</SectionSignal>
           <div className="v4-proof-grid">
             {props.proofs.map((proof, index) => (
               <EvidenceSpecimen
@@ -122,12 +243,14 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
           </div>
         </section>
 
-        <section className="v4-learning-section">
-          <SectionSignal index="05">What changed in my operating model</SectionSignal>
+        <section className="v4-learning-section v4-motif-backed">
+          <LivingMotif variant="memory" className="v4-section-motif" />
+          <SectionSignal index={props.system ? "06" : "05"}>What changed in my operating model</SectionSignal>
           <NarrativeCopy block={props.learning} />
         </section>
 
-        <footer className="v4-case-next">
+        <footer className="v4-case-next v4-motif-backed">
+          <LivingMotif variant="resolve" className="v4-case-next-motif" />
           <span>{props.next.label}</span>
           <TextLink href={props.next.href}>{props.next.title}</TextLink>
         </footer>

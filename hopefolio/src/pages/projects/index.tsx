@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { ContinuityPlayhead, SectionSignal, TextLink } from "@/components/v4/V4Primitives";
+import { ContinuityPlayhead, LivingMotif, SectionSignal, TextLink } from "@/components/v4/V4Primitives";
 
 const projects = [
   {
@@ -63,7 +63,8 @@ export default function Projects() {
 
       <main id="main-content" className="v4-page v4-work-page">
         <ContinuityPlayhead label="selected work" />
-        <header className="v4-work-hero">
+        <header className="v4-work-hero v4-motif-backed">
+          <LivingMotif variant="branch" className="v4-work-hero-motif" label="One practice branching across four systems" />
           <span>Selected systems / 2017—now</span>
           <h1>Range, measured by the constraints that changed the work.</h1>
           <p>
@@ -73,7 +74,8 @@ export default function Projects() {
           </p>
         </header>
 
-        <section className="v4-work-spectrum" aria-labelledby="spectrum-title">
+        <section className="v4-work-spectrum v4-motif-backed" aria-labelledby="spectrum-title">
+          <LivingMotif variant="handoff" className="v4-section-motif" />
           <SectionSignal index="01">Constraint spectrum</SectionSignal>
           <h2 id="spectrum-title" className="sr-only">Selected project spectrum</h2>
           {projects.map((project) => (
@@ -100,7 +102,8 @@ export default function Projects() {
           ))}
         </section>
 
-        <section className="v4-work-method">
+        <section className="v4-work-method v4-motif-backed">
+          <LivingMotif variant="aperture" className="v4-section-motif" />
           <SectionSignal index="02">Reading the work</SectionSignal>
           <div>
             <h2>Every case study answers five questions.</h2>
@@ -114,7 +117,8 @@ export default function Projects() {
           </div>
         </section>
 
-        <section className="v4-work-archive">
+        <section className="v4-work-archive v4-motif-backed">
+          <LivingMotif variant="resolve" className="v4-section-motif" />
           <span>Earlier experiments still matter; they just do not all deserve the same stage.</span>
           <h2>The archive holds the breadth. This page holds the signal.</h2>
           <TextLink href="/projects/archive">Open the project archive</TextLink>

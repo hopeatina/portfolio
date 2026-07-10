@@ -3,6 +3,13 @@ import React from "react";
 export default function Footer() {
   return (
     <footer className="site-footer">
+      <div className="site-footer-motif" aria-hidden="true">
+        <svg viewBox="0 0 800 300" preserveAspectRatio="none">
+          <path d="M-30 70C122 70 160 246 314 246S514 70 670 70H842" />
+          <path d="M-30 246C122 246 160 70 314 70S514 246 670 246H842" />
+          <path d="M670 70V246" />
+        </svg>
+      </div>
       <div className="site-footer-inner">
         <div className="site-footer-thesis">
           <span>Hope Atina</span>

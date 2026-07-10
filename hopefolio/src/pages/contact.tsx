@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ContinuityPlayhead, TextLink } from "@/components/v4/V4Primitives";
+import { ContinuityPlayhead, LivingMotif, TextLink } from "@/components/v4/V4Primitives";
 
 export default function Contact() {
   return (
@@ -14,7 +14,8 @@ export default function Contact() {
 
       <main id="main-content" className="v4-page v4-contact-page">
         <ContinuityPlayhead label="contact" />
-        <section className="v4-contact-hero">
+        <section className="v4-contact-hero v4-motif-backed">
+          <LivingMotif variant="resolve" className="v4-contact-hero-motif" label="Separate systems resolving into a shared starting point" />
           <span>Contact / Houston CT</span>
           <h1>Bring me the system that needs to become coherent.</h1>
           <p>
@@ -27,7 +28,8 @@ export default function Contact() {
             <TextLink href="/hiring">Read the team brief</TextLink>
           </div>
         </section>
-        <section className="v4-contact-links" aria-label="Elsewhere">
+        <section className="v4-contact-links v4-motif-backed" aria-label="Elsewhere">
+          <LivingMotif variant="handoff" className="v4-section-motif" />
           <a href="https://github.com/hopeatina" target="_blank" rel="noreferrer"><span>Code</span><strong>GitHub ↗</strong></a>
           <a href="https://github.com/useorgx" target="_blank" rel="noreferrer"><span>Company</span><strong>OrgX ↗</strong></a>
           <a href="https://linkedin.com/in/hopeatina" target="_blank" rel="noreferrer"><span>Work history</span><strong>LinkedIn ↗</strong></a>

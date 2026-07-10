@@ -75,6 +75,33 @@ export default function PerfPulsePage() {
         { glyph: "judgment", label: "Recommend action", detail: "The operator sees the tradeoff before a process is paused.", tone: "heat" },
         { glyph: "receipt", label: "Restore state", detail: "Meeting mode returns the machine to its prior operating state." },
       ]}
+      system={{
+        eyebrow: "One core, earned surfaces",
+        title: "Collection, explanation, action, and recovery share a small local-first architecture.",
+        introduction: "Each interface exists for a different temporal need: the CLI for the next move, the TUI for sustained inspection, and the web surface for history and comparison. None owns a separate truth.",
+        layers: [
+          { label: "collector", title: "Read the machine locally", detail: "A small Rust core gathers system and process state without sending the operating picture away.", technology: "Rust · system APIs", tone: "cold" },
+          { label: "decision", title: "Translate state into an operator choice", detail: "Process context and optional explanations clarify what is safe to pause and what the tradeoff will be.", technology: "local rules · optional Claude context", tone: "heat" },
+          { label: "surfaces", title: "Match the interface to the time horizon", detail: "CLI, TUI, and Axum web views share one core instead of becoming three products.", technology: "CLI · TUI · Axum", tone: "signal" },
+          { label: "distribution", title: "Make use the default outcome", detail: "A single binary and Homebrew formula collapse the distance between discovering the tool and running it.", technology: "single binary · Homebrew" },
+        ],
+        rationale: [
+          { pressure: "The diagnostic tool cannot become the workload", choice: "Use a compact Rust core", reason: "Runtime footprint remains part of the product promise." },
+          { pressure: "Urgent diagnosis and historical inspection are different jobs", choice: "Default to CLI; add TUI and web only where they earn the cost", reason: "Each surface preserves the fastest useful path instead of competing for primacy." },
+          { pressure: "Pausing work creates recovery debt", choice: "Record and restore prior state in Meeting Mode", reason: "Action stays reversible, which makes the recommendation trustworthy." },
+        ],
+        surfaces: [
+          { name: "CLI", mode: "immediate", detail: "Fast diagnosis and direct action at the point where developers already work." },
+          { name: "TUI", mode: "sustained", detail: "A persistent terminal view for live system inspection without leaving the shell." },
+          { name: "Local dashboard", mode: "visual", detail: "History, process comparison, and meeting readiness receive the space charts actually need." },
+          { name: "Homebrew", mode: "distribution", detail: "Installation becomes the first coherent product interaction, not a README obstacle." },
+        ],
+        technologies: [
+          { label: "Core", values: ["Rust", "local system APIs", "single binary"] },
+          { label: "Surfaces", values: ["CLI", "TUI", "Axum web server"] },
+          { label: "Delivery", values: ["Homebrew", "local-first runtime", "optional Claude context"] },
+        ],
+      }}
       proofs={[
         {
           src: "/images/case-studies/perfpulse-dashboard.png",
