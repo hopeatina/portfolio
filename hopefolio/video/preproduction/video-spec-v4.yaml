@@ -1,0 +1,51 @@
+project: portfolio-film-v4-spoken-faultline
+format:
+  width: 1080
+  height: 1920
+  fps: 30
+  duration_frames: 816
+style:
+  visual_language: living inspection field
+  palette: ["#080806", "#F2EFE4", "#C7FF36", "#FF5738", "#48C7FF"]
+  motion: hard cuts on downbeats, steady vertical translation, one inspection aperture, brief chromatic faultlines
+  typography: Recursive with rare Newsreader italic
+  avoid: [fake browser chrome, generated UI, generic particles, neon glow, purple gradients, repeated portrait, meaningless camera motion]
+shots:
+  - id: spoken_faultline
+    duration_seconds: 3.646
+    composition: extreme close abstract woven field; quote occupies upper-middle safe zone
+    movement: continuity line draws steadily left-to-right; typography reveals by string slice
+    audio: Hope Config voice primary; music ducked
+    emotion: intrigue and authorship
+  - id: invisible_layer
+    duration_seconds: 5.503
+    composition: new site hero as a full editorial plane, no device frame
+    movement: slow controlled push and vertical crop reveal
+    audio: original music returns to full level
+    emotion: recognition and awe
+  - id: continuity_model
+    duration_seconds: 5.387
+    composition: new continuity section; client rail and cause chain remain legible
+    movement: steady downward inspection scan; one cold and one heat faultline
+    emotion: comprehension
+  - id: receipt_proof
+    duration_seconds: 2.716
+    composition: authentic OrgX receipt fills the field
+    movement: circular inspection aperture resolves on quality and provenance
+    emotion: trust
+  - id: constraint_range
+    duration_seconds: 5.364
+    composition: new constraint spectrum; one project row receives signal treatment
+    movement: crop travels down the spectrum; labels land on beats
+    emotion: breadth and confidence
+  - id: authored_close
+    duration_seconds: 4.584
+    composition: Hope portrait once, hard-edged against the reflection field
+    movement: portrait and identity plane resolve without bounce
+    emotion: desire to collaborate and resolution
+technical:
+  render_engine: Remotion
+  image_sources: Remotion Img plus staticFile only
+  animation_source: useCurrentFrame only
+  sequence_premount_frames: 30
+  export: H.264, yuv420p, AAC stereo, 48 kHz, fast-start

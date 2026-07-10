@@ -1,69 +1,124 @@
 import Head from "next/head";
-import React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import ProjectCard from "@/components/site/ProjectCard";
-import { featuredProjects } from "@/data/portfolio";
+import { ContinuityPlayhead, SectionSignal, TextLink } from "@/components/v4/V4Primitives";
+
+const projects = [
+  {
+    index: "01",
+    title: "OrgX",
+    role: "Founder · engineering · product",
+    thesis: "Make AI-delivered work accountable after the prompt disappears.",
+    tension: "distributed autonomy",
+    evidence: "receipts / trust / continuity",
+    image: "/images/case-studies/orgx-v4/artifact-receipt.png",
+    href: "/projects/orgx",
+    tone: "signal",
+  },
+  {
+    index: "02",
+    title: "Alma",
+    role: "Production backend engineering",
+    thesis: "Ship continuously where reliability, privacy, and auditability are inseparable.",
+    tension: "regulated consequence",
+    evidence: "HIPAA / rollout / adoption",
+    image: "/images/projects/alma.svg",
+    href: "/projects/alma",
+    tone: "heat",
+  },
+  {
+    index: "03",
+    title: "PerfPulse",
+    role: "Product engineering · Rust",
+    thesis: "Respect the machine you are inspecting—and the person operating it.",
+    tension: "local constraint",
+    evidence: "CLI / TUI / web / Homebrew",
+    image: "/images/case-studies/perfpulse-dashboard.png",
+    href: "/projects/perfpulse",
+    tone: "paper",
+  },
+  {
+    index: "04",
+    title: "OrgX for OpenClaw",
+    role: "Plugin architecture · agent operations",
+    thesis: "Add organizational memory and accountable execution where agents already work.",
+    tension: "hosted continuity",
+    evidence: "state / streaming / proof",
+    image: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",
+    href: "/projects/openclaw",
+    tone: "cold",
+  },
+];
 
 export default function Projects() {
-  const [orgx, ...supporting] = featuredProjects;
-
   return (
     <>
       <Head>
-        <title>Work | Hope Atina</title>
+        <title>Selected work — Hope Atina</title>
         <meta
           name="description"
-          content="Curated case studies in multi-agent orchestration, production backend systems, developer tooling, and plugin architecture."
+          content="Selected systems work by Hope Atina across AI continuity, regulated production, developer tooling, and plugin architecture."
         />
       </Head>
 
-      <main id="main-content" className="page-frame">
-        <div className="page-stack">
-          <header className="page-header-stack">
-            <span className="eyebrow">Index · 4 case studies, 1 thesis</span>
-            <h1>Make autonomy trustworthy. Then make the review surface the product.</h1>
-            <p style={{ maxWidth: "42rem", margin: 0 }}>
-              OrgX is the flagship. The supporting three are that same thesis
-              applied under different constraints: production AI in HIPAA,
-              developer tooling on the local machine, and plugin architecture
-              inside a coding agent.
-            </p>
-          </header>
+      <main id="main-content" className="v4-page v4-work-page">
+        <ContinuityPlayhead label="selected work" />
+        <header className="v4-work-hero">
+          <span>Selected systems / 2017—now</span>
+          <h1>Range, measured by the constraints that changed the work.</h1>
+          <p>
+            This is not a grid of equal projects. It is a spectrum—from founder-led AI
+            infrastructure to regulated production and local tools—showing how I think when the
+            system, audience, and consequence change.
+          </p>
+        </header>
 
-          <section className="page-content">
-            <div className="page-header-stack" style={{ gap: "0.5rem" }}>
-              <span className="eyebrow">Flagship · agent platform</span>
-            </div>
-            <ProjectCard project={orgx} featured />
-          </section>
+        <section className="v4-work-spectrum" aria-labelledby="spectrum-title">
+          <SectionSignal index="01">Constraint spectrum</SectionSignal>
+          <h2 id="spectrum-title" className="sr-only">Selected project spectrum</h2>
+          {projects.map((project) => (
+            <Link
+              href={project.href}
+              className={`v4-work-entry is-${project.tone}`}
+              key={project.title}
+            >
+              <div className="v4-work-entry-index">
+                <span>{project.index}</span>
+                <small>{project.tension}</small>
+              </div>
+              <div className="v4-work-entry-title">
+                <span>{project.role}</span>
+                <h2>{project.title}</h2>
+              </div>
+              <p>{project.thesis}</p>
+              <div className="v4-work-entry-evidence">{project.evidence}</div>
+              <div className="v4-work-entry-image" aria-hidden="true">
+                <Image src={project.image} alt="" fill sizes="32vw" />
+              </div>
+              <b aria-hidden="true">inspect ↗</b>
+            </Link>
+          ))}
+        </section>
 
-          <section className="page-content">
-            <div className="page-header-stack" style={{ gap: "0.75rem" }}>
-              <span className="eyebrow">Supporting · production · tooling · plugin</span>
-              <h2>Three proofs under different constraints</h2>
-            </div>
-            <div className="work-grid-supporting">
-              {supporting.map((project) => (
-                <ProjectCard key={project.slug} project={project} />
-              ))}
-            </div>
-          </section>
+        <section className="v4-work-method">
+          <SectionSignal index="02">Reading the work</SectionSignal>
+          <div>
+            <h2>Every case study answers five questions.</h2>
+            <ol>
+              <li><span>01</span> What was the consequential problem?</li>
+              <li><span>02</span> What did I see that changed the frame?</li>
+              <li><span>03</span> Which decision changed the system?</li>
+              <li><span>04</span> What is the authentic proof?</li>
+              <li><span>05</span> How did it change my operating model?</li>
+            </ol>
+          </div>
+        </section>
 
-          <section className="contact-card">
-            <span className="eyebrow">Archive</span>
-            <h2 style={{ marginTop: "0.5rem" }}>Everything else is still available, just off the main stage.</h2>
-            <p style={{ margin: "0.8rem 0 0", maxWidth: "36rem" }}>
-              Older experiments and weaker-fit projects stay reachable in a
-              hidden archive so the main index can stay tightly aligned with the
-              agent infrastructure story.
-            </p>
-            <p style={{ marginTop: "1rem" }}>
-              <Link href="/projects/archive" className="site-link-inline">
-                Open archive ↗
-              </Link>
-            </p>
-          </section>
-        </div>
+        <section className="v4-work-archive">
+          <span>Earlier experiments still matter; they just do not all deserve the same stage.</span>
+          <h2>The archive holds the breadth. This page holds the signal.</h2>
+          <TextLink href="/projects/archive">Open the project archive</TextLink>
+        </section>
       </main>
     </>
   );

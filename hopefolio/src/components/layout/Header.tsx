@@ -22,12 +22,33 @@ export default function Header() {
     setIsMobileMenuOpen(false);
   }, [router.asPath]);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileMenuOpen(false);
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header className={`site-header ${isScrolled ? "site-header-scrolled" : ""}`}>
       <nav className="site-header-inner" aria-label="Primary">
         <Link href="/" className="site-logo" aria-label="Hope Atina — home">
-          <span className="site-logo-mark" aria-hidden="true" />
-          <span>Hope Atina</span>
+          <span className="site-logo-monogram" aria-hidden="true">
+            HA
+          </span>
+          <span className="site-logo-copy">
+            <strong>Hope Atina</strong>
+            <small>systems / product / AI</small>
+          </span>
         </Link>
 
         <button
@@ -36,7 +57,7 @@ export default function Header() {
           className={`site-menu-toggle ${isMobileMenuOpen ? "site-menu-toggle-open" : ""}`}
           aria-expanded={isMobileMenuOpen}
           aria-controls="site-mobile-nav"
-          aria-label="Toggle navigation"
+          aria-label={isMobileMenuOpen ? "Close navigation" : "Open navigation"}
         >
           <span />
           <span />
@@ -60,11 +81,16 @@ export default function Header() {
                   isHireCta ? "site-nav-link-cta" : ""
                 }`}
               >
-                {item.label}
+                <span>{item.label}</span>
               </Link>
             );
           })}
         </div>
+
+        <span className="site-header-availability" aria-label="Available for consequential work">
+          <i aria-hidden="true" />
+          available for consequential work
+        </span>
       </nav>
 
       {isMobileMenuOpen ? (

@@ -1,180 +1,124 @@
-import Head from "next/head";
-import React from "react";
-import {
-  BuildSurface,
-  CalloutList,
-  CaseStudyEndcap,
-  CaseStudyHero,
-  CaseStudySection,
-  CaseStudySplit,
-  DiagramFrame,
-  TerminalPanel,
-  VisualFrame,
-} from "@/components/site/CaseStudyPrimitives";
-import NextProjectNav from "@/components/site/NextProjectNav";
+import CaseStudyNarrative from "@/components/v4/CaseStudyNarrative";
 
-const architectureDiagram = `
-flowchart TB
-  subgraph Hosts["Agent hosts"]
-    A1[Claude CLI] --> MCP["/orgx/mcp"]
-    A2[Codex] --> MCP
-    A3[Cursor] --> MCP
-  end
-
-  subgraph Plugin["Plugin core"]
-    MCP --> TR[HTTP router]
-    TR --> TQ[Task queue state machine]
-    TR --> SSE[SSE + polling fallback]
-    TQ --> SQ[SQLite outbox]
-  end
-
-  subgraph Background["Background services"]
-    B1[Sync service] --> SQ
-    B2[Watchdog] --> TR
-    B3[Worker supervisor] --> TQ
-    B4[Auto-continue] --> TQ
-  end
-
-  subgraph UI["Dashboard @ :18789/orgx/live"]
-    SSE --> D1[Mission Control]
-    SSE --> D2[Next Up]
-    SSE --> D3[Activity]
-    SSE --> D4[Decision Queue]
-    SSE --> D5[Session Inspector]
-  end
-`;
-
-export default function OpenClawPage() {
+export default function OrgXForOpenClawPage() {
   return (
-    <>
-      <Head>
-        <title>OpenClaw | Hope Atina</title>
-        <meta
-          name="description"
-          content="OpenClaw case study: plugin architecture, MCP bridge, task queue state machine, SSE dashboard, and offline-first agent workflow control."
-        />
-      </Head>
-
-      <main id="main-content" className="page-frame">
-        <div className="page-stack">
-          <CaseStudyHero
-            kicker="Case study 04"
-            status="Live tool"
-            title="OpenClaw"
-            subtitle="Plugin architecture for agent workflow control, not another standalone orchestration toy."
-            description="OpenClaw matters because it makes existing tools better instead of asking users to adopt yet another dashboard from scratch. The plugin inherits the host environment, adds a local MCP bridge, and exposes a browser-native mission control for active agent work."
-            facts={[
-              { label: "Commits", value: "558" },
-              { label: "MCP tools", value: "30" },
-              { label: "Persistence", value: "SQLite outbox" },
-              { label: "Streaming", value: "SSE + polling fallback" },
-            ]}
-            image="/images/case-studies/openclaw-overview.png"
-            imageAlt="OpenClaw full dashboard screenshot"
-            materialize="light"
-            materializeKey="openclaw"
-          />
-
-          <BuildSurface
-            items={[
-              { label: "Runtime", value: "TypeScript" },
-              { label: "Transport", value: "SSE + polling fallback" },
-              { label: "Persistence", value: "SQLite outbox" },
-              { label: "Agent layer", value: "MCP bridge + CLI integration" },
-            ]}
-          />
-
-          <CaseStudySection kicker="01 // why plugin" title="Why this had to live inside another tool">
-            <CaseStudySplit
-              media={
-                <TerminalPanel
-                  label="/orgx/mcp"
-                  lines={[
-                    "claude  -> ~/.claude/mcp.json auto-configured",
-                    "codex   -> ~/.codex/config.toml auto-configured",
-                    "cursor  -> ~/.cursor/mcp.json auto-configured",
-                    "",
-                    "single local bridge, single auth story, shared lifecycle",
-                  ]}
-                />
-              }
-            >
-              <p>
-                A standalone orchestration app would have needed its own auth,
-                process management, lifecycle handling, and deployment story.
-                The plugin avoids that tax by inheriting the host app&apos;s
-                environment and focusing only on the orchestration value.
-              </p>
-              <p>
-                The result is a smaller adoption ask: make the tool people
-                already use better, then add the control surface they were
-                missing.
-              </p>
-            </CaseStudySplit>
-          </CaseStudySection>
-
-          <CaseStudySection kicker="02 // architecture" title="A survivable workflow stack" raised>
-            <DiagramFrame
-              title="OpenClaw plugin flow"
-              description="Agent hosts connect through one MCP bridge, the plugin manages queue state and streaming, and the dashboard stays current through SSE with a polling fallback."
-              diagram={architectureDiagram}
-            />
-          </CaseStudySection>
-
-          <CaseStudySection kicker="03 // dashboard proof" title="The interface shows why the architecture matters">
-            <VisualFrame
-              src="/images/case-studies/openclaw-sessions.png"
-              alt="OpenClaw Sessions — live agent session registry showing token counts per session"
-              caption="Sessions view: real agent sessions with live token counts (agent:orgx:main at 11,915 / 1,000,000, agent:main:fresh-test at 153,994 / 200,000), per-session thinking/fast/verbose/reasoning overrides, and direct/kind routing. This is what operational control looks like."
-            />
-            <VisualFrame
-              src="/images/case-studies/openclaw-mission-control.png"
-              alt="OpenClaw mission control panel"
-              caption="Mission control detail view, where hierarchy and next actions stay visible instead of collapsing into log noise."
-            />
-          </CaseStudySection>
-
-          <CaseStudySection kicker="04 // resilience" title="State machines and fallbacks keep the UI from lying" raised>
-            <CaseStudySplit
-              media={
-                <CalloutList
-                  items={[
-                    "Task states are enforced by the state machine, not by scattered conventions.",
-                    "SQLite outbox preserves mutations offline and replays them when the gateway reconnects.",
-                    "SSE is primary, polling is backup, so the dashboard never goes blind when streaming drops.",
-                  ]}
-                />
-              }
-            >
-              <p>
-                This is the part that matters most in practice. The value of the
-                dashboard disappears immediately if it shows stale or partial
-                truth. The queue model, outbox, and transport fallback exist so
-                the interface can stay trustworthy under failure, not just under
-                demos.
-              </p>
-            </CaseStudySplit>
-          </CaseStudySection>
-
-          <CaseStudyEndcap
-            title="The value of a plugin is that you don’t have to convince anyone to adopt a new tool."
-            body={
-              <>
-                <p>
-                  You just make the tool they already use better. That is the
-                  architectural instinct I wanted this project to make obvious.
-                </p>
-              </>
-            }
-            primaryHref="https://github.com/useorgx/openclaw-plugin"
-            primaryLabel="View source"
-            secondaryHref="/projects/orgx"
-            secondaryLabel="Read about OrgX"
-          />
-
-          <NextProjectNav currentSlug="openclaw" />
-        </div>
-      </main>
-    </>
+    <CaseStudyNarrative
+      pageTitle="OrgX for OpenClaw case study — Hope Atina"
+      description="How OrgX for OpenClaw adds persistent organizational memory, coordinated execution, and proof to OpenClaw agents."
+      index="Case 04 / plugin architecture"
+      status="Published plugin · v0.7"
+      title="OrgX for OpenClaw"
+      subtitle="Persistent organizational memory and coordinated execution inside OpenClaw."
+      introduction="This is not OpenClaw itself and not another standalone dashboard. It is the OrgX bridge that lets OpenClaw agents enter shared organizational context, coordinate work, and return evidence without leaving the host environment."
+      facts={[
+        { label: "Product", value: "OrgX plugin" },
+        { label: "Host", value: "OpenClaw" },
+        { label: "Continuity", value: "persistent state" },
+        { label: "Control", value: "live + resumable" },
+      ]}
+      heroProof={{
+        src: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",
+        alt: "OrgX Live dashboard connected to OpenClaw with agents, activity, and next-up work",
+        label: "OrgX Live inside the OpenClaw operating loop",
+        caption: "Named agents, current work, blocked decisions, activity, and next-up actions remain visible in one live control surface.",
+      }}
+      problem={{
+        eyebrow: "The host already had agents; it lacked organizational continuity",
+        title: "A capable local agent can still wake up without the company in its head.",
+        body: (
+          <>
+            <p>
+              OpenClaw could run agents and tools, but long-running organizational work needed more
+              than a session. Tasks had to survive restarts, handoffs, and changing operators without
+              becoming a pile of local state and logs.
+            </p>
+            <p>
+              Asking people to leave the host for a separate orchestration product would have added
+              adoption friction at exactly the wrong boundary.
+            </p>
+          </>
+        ),
+        notes: [
+          "Session state was not the same thing as organizational memory.",
+          "Realtime activity could not be allowed to outrun durable state.",
+          "A separate destination would fracture the operator's workflow.",
+        ],
+      }}
+      insight={{
+        eyebrow: "The plugin boundary was the product opportunity",
+        title: "Bring the organization into the host instead of moving the operator out of it.",
+        body: (
+          <>
+            <p>
+              The right architecture inherits OpenClaw's environment and lifecycle, then adds OrgX
+              where the host is intentionally thin: shared context, resumable coordination, trust
+              state, decisions, and receipts.
+            </p>
+            <p>
+              That makes the integration feel native while keeping the organizational model portable
+              across the rest of the OrgX client ecosystem.
+            </p>
+          </>
+        ),
+      }}
+      decision={{
+        eyebrow: "One local bridge; durable work on the other side",
+        title: "Treat live transport as a view of state—not the source of truth.",
+        body: (
+          <>
+            <p>
+              The plugin coordinates through an MCP bridge, persistent queue state, and a live
+              surface. Streaming keeps the interface current; durable records keep it honest when
+              the stream disconnects, the host restarts, or work resumes later.
+            </p>
+          </>
+        ),
+      }}
+      flow={[
+        { glyph: "context", label: "Org context", detail: "The initiative, constraints, and prior decisions enter OpenClaw together." },
+        { glyph: "branch", label: "Host execution", detail: "OpenClaw agents act through the plugin's coordinated tool surface.", tone: "cold" },
+        { glyph: "judgment", label: "Durable boundary", detail: "Queue state and decisions survive the live connection.", tone: "heat" },
+        { glyph: "receipt", label: "OrgX receipt", detail: "Outcomes return to the shared work graph with provenance." },
+      ]}
+      proofs={[
+        {
+          src: "/images/case-studies/orgx-openclaw-v4/mission-control.png",
+          alt: "Mission control view for OrgX for OpenClaw showing active work and next actions",
+          label: "Mission control",
+          caption: "The next action remains explicit even when multiple workstreams are active or degraded.",
+        },
+        {
+          src: "/images/case-studies/orgx-openclaw-v4/activity-timeline.png",
+          alt: "OrgX for OpenClaw activity timeline with completed and failed agent work",
+          label: "Activity with consequence",
+          caption: "Completion, failure, and intervention remain attached to named work instead of collapsing into a terminal feed.",
+        },
+      ]}
+      learning={{
+        eyebrow: "Integration quality is product quality",
+        title: "The best orchestration surface is sometimes the one the operator does not have to adopt.",
+        body: (
+          <>
+            <p>
+              OrgX for OpenClaw sharpened a rule I now use across the platform: preserve the host's
+              strengths, add only the missing control layer, and keep durable truth independent from
+              live transport.
+            </p>
+          </>
+        ),
+        notes: [
+          "Do not confuse the OpenClaw host with the OrgX plugin.",
+          "Let streams update the view; let durable state govern recovery.",
+          "Make continuity portable without making every client identical.",
+        ],
+      }}
+      primaryLink={{
+        href: "https://github.com/useorgx/openclaw-plugin",
+        label: "View the plugin",
+        external: true,
+      }}
+      secondaryLink={{ href: "/projects/orgx", label: "See the OrgX platform" }}
+      next={{ href: "/projects/orgx", label: "Return / flagship system", title: "OrgX" }}
+    />
   );
 }

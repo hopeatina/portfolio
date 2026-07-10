@@ -1,0 +1,25 @@
+{
+  "project": "portfolio-film-v4-spoken-faultline",
+  "fps": 30,
+  "duration_seconds": 27.2,
+  "duration_frames": 816,
+  "tempo_bpm": 89.1,
+  "music_source": "tiktok_pipes",
+  "scenes": [
+    { "id": "spoken_faultline", "start_time": 0.0, "end_time": 3.646, "start_frame": 0, "end_frame": 108, "cut": "downbeat" },
+    { "id": "invisible_layer", "start_time": 3.646, "end_time": 9.149, "start_frame": 109, "end_frame": 273, "cut": "downbeat" },
+    { "id": "continuity_model", "start_time": 9.149, "end_time": 14.536, "start_frame": 274, "end_frame": 435, "cut": "downbeat" },
+    { "id": "receipt_proof", "start_time": 14.536, "end_time": 17.252, "start_frame": 436, "end_frame": 516, "cut": "drop-adjacent" },
+    { "id": "constraint_range", "start_time": 17.252, "end_time": 22.616, "start_frame": 517, "end_frame": 678, "cut": "downbeat" },
+    { "id": "authored_close", "start_time": 22.616, "end_time": 27.2, "start_frame": 679, "end_frame": 815, "cut": "final drop" }
+  ],
+  "audio": {
+    "music_file": "public/video/portfolio-film/tiktok-pipes.wav",
+    "voice_file": "public/video/portfolio-film/hope-config-voice.wav",
+    "voice_start_frame": 4,
+    "voice_end_frame": 111,
+    "duck_music_db": -8,
+    "normalization_target_lufs": -14,
+    "true_peak_db": -1
+  }
+}

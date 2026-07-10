@@ -2,22 +2,26 @@
 
 ## LinkedIn / Threads
 
-AI can act. But can it keep the plot?
+“I’m less about talk and more about action.”
 
-I rebuilt my portfolio around the question that has shaped my work for the last 7+ years: how do we give software more agency without losing context, accountability, or human judgment?
+I said that at Figma Config in 2021. It still feels like the clearest way to introduce my work.
 
-The new experience tells that story through the systems I’ve shipped—61 MCP tools, 12 repositories on one agent platform, 999 agent-authored commits, and a 93% reduction in production bugs at Vessel.
+I rebuilt my portfolio around the invisible layer I keep finding inside ambitious systems: the context, judgment, and continuity that let intelligence survive across people, agents, interfaces, and time.
 
-My differentiator isn’t autonomy for autonomy’s sake. It’s judgment architecture: context that survives, delegation you can see, and risk that knows when to return to a person.
+The work crosses AI infrastructure, clinical systems, developer tools, and product interfaces. The throughline is the same: I’m an engineer, founder, and product thinker who wants the whole system to cohere—not just the demo.
 
-I’m looking for a senior or staff IC role where agent infrastructure, developer tooling, or evaluation systems are already becoming core product.
+The film is made from the real portfolio, real OrgX product evidence, my own voice, and my SoundCloud track `tiktok_pipes`.
 
-#AISystems #AgentInfrastructure #SoftwareEngineering #DeveloperTools #Portfolio
+If you’re building something where depth, taste, and execution all matter, I’d love to talk.
+
+hopeatina.com
+
+#AI #ProductEngineering #Founder #DesignEngineering #Portfolio
 
 ## Short caption
 
-AI can act. Can it keep the plot? A new portfolio for the systems—and the human judgment—behind reliable agents.
+Depth, made visible. A new portfolio and film about the context, judgment, and continuity behind ambitious systems—built with my own work, voice, and music.
 
 ## Alt text
 
-A 28-second vertical portfolio film featuring Hope Atina and a redesigned black, signal-green, paper-white, and ochre website. It moves from the question “AI can act. Can it keep the plot?” through product screenshots and verified engineering metrics, ending on Hope’s portrait and the line “I engineer both sides of the handoff.”
+A 27-second portfolio film by Hope Atina. A woven black inspection field opens under Hope’s Config voice, then reveals a signal-green and mineral portfolio, a continuity model, an authentic OrgX artifact receipt, and four projects organized by the constraints they solve. The film closes on Hope’s portrait and the words “Depth, made visible.”

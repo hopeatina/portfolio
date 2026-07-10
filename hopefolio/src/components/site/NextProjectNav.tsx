@@ -10,7 +10,7 @@ const CHAIN = [
   { slug: "orgx", title: "OrgX", label: "Flagship — agent platform" },
   { slug: "alma", title: "Alma", label: "Production AI in HIPAA" },
   { slug: "perfpulse", title: "PerfPulse", label: "Rust developer tool" },
-  { slug: "openclaw", title: "OpenClaw", label: "Plugin architecture" },
+  { slug: "openclaw", title: "OrgX for OpenClaw", label: "Continuity plugin" },
 ];
 
 export default function NextProjectNav({ currentSlug }: NextProjectNavProps) {
