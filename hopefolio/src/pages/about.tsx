@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import { experienceEntries } from "@/data/portfolio";
 import {
   CausalFlow,
   ContinuityPlayhead,
+  LivingMotif,
   SectionSignal,
   TextLink,
 } from "@/components/v4/V4Primitives";
@@ -31,6 +31,7 @@ export default function About() {
             sizes="100vw"
             aria-hidden="true"
           />
+          <LivingMotif variant="weave" className="v4-about-hero-motif" label="Roots, disciplines, and experiences weaving into one practice" />
           <div>
             <span>About / inspection as a creative practice</span>
             <h1>I build systems to understand what matters—and use the work to become more precise.</h1>
@@ -42,32 +43,34 @@ export default function About() {
           </div>
         </header>
 
-        <section className="v4-about-origin">
-          <SectionSignal index="01">How I came to the work</SectionSignal>
+        <section className="v4-about-origin v4-motif-backed">
+          <LivingMotif variant="weave" className="v4-section-motif" />
+          <SectionSignal index="01">The root system</SectionSignal>
           <div className="v4-about-origin-grid">
-            <h2>Engineering gave me rigor. Collaboration gave it range. Inspection gave it depth.</h2>
+            <h2>Two cultures taught me to look for the system beneath the surface.</h2>
             <div>
               <p>
-                Bioengineering at Rice trained me to see interacting systems instead of isolated
-                features. Capital One taught me that reliability begins before the data moves.
-                Vessel Health expanded ownership across hardware, APIs, and operations. Alma made
-                consequence, privacy, and reversible rollout impossible to separate.
+                My Cameroonian and Estonian roots are not a moodboard. They are an early lesson in
+                translation: the same thing can carry different meaning depending on context,
+                history, and the people interpreting it. I learned to inspect the structure before
+                assuming the surface told the whole story.
               </p>
               <p>
-                Building OrgX pulled those lessons into one founder problem: how do many intelligent
-                actors move quickly without losing the shared context, judgment, and proof that make
-                the work accountable?
+                Bioengineering at Rice gave that instinct technical rigor. Complex outcomes emerge
+                from relationships between parts; the useful intervention is rarely the loudest one.
+                That became the foundation of how I approach software, products, and teams.
               </p>
               <p>
-                Music stays in the background, where it belongs: in pacing, tension, release, and a
-                sensitivity to when something is technically correct but not yet resolved.
+                Music stays in the background of the practice: timing, tension, counterpoint, and the
+                feeling that a technically correct composition can still be unresolved.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="v4-about-method">
-          <SectionSignal index="02">My operating pattern</SectionSignal>
+        <section className="v4-about-method v4-motif-backed">
+          <LivingMotif variant="aperture" className="v4-section-motif" />
+          <SectionSignal index="02">The practice</SectionSignal>
           <div className="v4-about-method-heading">
             <h2>Inspect deeply. Locate the boundary. Compose the intervention. Leave a stronger system.</h2>
             <p>
@@ -85,35 +88,44 @@ export default function About() {
           />
         </section>
 
-        <section className="v4-about-experience">
-          <SectionSignal index="03">Production environments</SectionSignal>
-          <div className="v4-experience-list">
-            <article className="v4-experience-featured">
-              <span>Now</span>
-              <div>
-                <small>Founder / OrgX</small>
-                <h2>Building the continuity and proof layer for AI-delivered work.</h2>
-              </div>
-              <p>
-                Product, architecture, distribution, quality systems, and the connective tissue across
-                Claude Code, Codex, Cursor, OpenCode, and OpenClaw.
-              </p>
-              <TextLink href="/projects/orgx">Inspect OrgX</TextLink>
+        <section className="v4-about-experience v4-motif-backed">
+          <LivingMotif variant="branch" className="v4-section-motif" />
+          <SectionSignal index="03">The questions got harder</SectionSignal>
+          <div className="v4-about-arc-heading">
+            <h2>Each environment added a boundary I could no longer ignore.</h2>
+            <p>This is one evolving practice—not a list of unrelated roles.</p>
+          </div>
+          <div className="v4-about-chapter-list">
+            <article>
+              <span>01 / Capital One · scale</span>
+              <h3>Can data be trusted before it starts moving?</h3>
+              <p>Regulated finance made data quality, lineage, and reliable ingestion part of the system—not cleanup after the pipeline.</p>
+              <small>Spark · Scala · Snowflake · near-real-time ETL</small>
             </article>
-            {experienceEntries.map((entry) => (
-              <article key={entry.company}>
-                <span>{entry.period}</span>
-                <div>
-                  <small>{entry.role}</small>
-                  <h3>{entry.company}</h3>
-                </div>
-                <p>{entry.outcome}</p>
-              </article>
-            ))}
+            <article>
+              <span>02 / Vessel Health · ownership</span>
+              <h3>What changes when the API touches hardware and operations?</h3>
+              <p>Leading backend work across authentication, calibration, AWS infrastructure, and internal workflows expanded the unit of ownership beyond code.</p>
+              <small>API architecture · hardware calibration · AWS · operations</small>
+            </article>
+            <article>
+              <span>03 / Alma · consequence</span>
+              <h3>How do you move continuously when failure reaches clinical work?</h3>
+              <p>HIPAA production taught me to make privacy enter early, failure visible, rollout reversible, and operator trust part of engineering quality.</p>
+              <small>Django · Celery · PostgreSQL · Datadog</small>
+            </article>
+            <article className="v4-about-chapter-featured">
+              <span>04 / OrgX · synthesis</span>
+              <h3>How can many intelligent actors move without losing the organization?</h3>
+              <p>OrgX integrates the questions: shared context, client-native execution, consequence-aware judgment, and proof that improves the next decision.</p>
+              <small>Founder · product · architecture · distribution</small>
+              <TextLink href="/projects/orgx">Inspect the system</TextLink>
+            </article>
           </div>
         </section>
 
-        <section className="v4-about-collaboration">
+        <section className="v4-about-collaboration v4-motif-backed">
+          <LivingMotif variant="handoff" className="v4-section-motif" />
           <SectionSignal index="04">Collaboration is a creative technology</SectionSignal>
           <div>
             <h2>I started Figma and Chill because talking about making was not enough.</h2>
@@ -147,7 +159,8 @@ export default function About() {
           </a>
         </section>
 
-        <section className="v4-about-now">
+        <section className="v4-about-now v4-motif-backed">
+          <LivingMotif variant="resolve" className="v4-about-now-motif" />
           <span>Now / July 2026</span>
           <h2>Building in public where AI infrastructure becomes a human operating system.</h2>
           <p>

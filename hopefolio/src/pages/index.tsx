@@ -7,6 +7,7 @@ import {
   CausalFlow,
   ContinuityPlayhead,
   EvidenceSpecimen,
+  LivingMotif,
   SectionSignal,
   SystemGlyph,
   TextLink,
@@ -109,6 +110,7 @@ export default function Home() {
             sizes="100vw"
             aria-hidden="true"
           />
+          <LivingMotif variant="weave" className="v4-hero-live-motif" label="Multiple systems resolving into one continuous signal" />
           <div className="v4-home-hero-copy">
             <motion.span
               className="v4-hero-kicker"
@@ -173,7 +175,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="v4-signature-section" aria-labelledby="signatures-title">
+        <section className="v4-signature-section v4-motif-backed" aria-labelledby="signatures-title">
+          <LivingMotif variant="aperture" className="v4-section-motif" />
           <SectionSignal index="01">Capability signatures</SectionSignal>
           <div className="v4-signature-intro">
             <h2 id="signatures-title">Range is only useful when it resolves into judgment.</h2>
@@ -194,7 +197,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="v4-continuity-section" aria-labelledby="continuity-title">
+        <section className="v4-continuity-section v4-motif-backed" aria-labelledby="continuity-title">
+          <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="02">The system I keep building toward</SectionSignal>
           <div className="v4-continuity-heading">
             <h2 id="continuity-title">Continuity is the product.</h2>
@@ -222,7 +226,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="v4-orgx-home" aria-labelledby="orgx-title">
+        <section className="v4-orgx-home v4-motif-backed" aria-labelledby="orgx-title">
+          <LivingMotif variant="handoff" className="v4-section-motif" />
           <SectionSignal index="03">Flagship / OrgX</SectionSignal>
           <div className="v4-orgx-home-heading">
             <div>
@@ -261,7 +266,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="v4-range-section" aria-labelledby="range-title">
+        <section className="v4-range-section v4-motif-backed" aria-labelledby="range-title">
+          <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="04">Range under constraint</SectionSignal>
           <div className="v4-range-heading">
             <h2 id="range-title">Four systems. Four different kinds of pressure.</h2>
@@ -289,7 +295,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="v4-collaboration-section" aria-labelledby="collaboration-title">
+        <section className="v4-collaboration-section v4-motif-backed" aria-labelledby="collaboration-title">
+          <LivingMotif variant="resolve" className="v4-section-motif" />
           <SectionSignal index="05">Product taste is collaborative</SectionSignal>
           <div className="v4-collaboration-grid">
             <a
@@ -329,7 +336,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="v4-home-close">
+        <section className="v4-home-close v4-motif-backed">
+          <LivingMotif variant="memory" className="v4-home-close-motif" />
           <span>Depth becomes visible through inspection.</span>
           <h2>Bring me the system that needs to become coherent.</h2>
           <div>

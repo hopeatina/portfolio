@@ -76,6 +76,33 @@ export default function AlmaPage() {
         { glyph: "judgment", label: "Audit boundary", detail: "Flags, permissions, and external audit state gate rollout.", tone: "heat" },
         { glyph: "receipt", label: "Operator trust", detail: "The result is traceable, observable, and safe to reverse." },
       ]}
+      system={{
+        eyebrow: "Production anatomy",
+        title: "Sensitive workflows became durable stages with explicit failure and recovery paths.",
+        introduction: "The architecture optimized for operational clarity: keep provider-facing requests narrow, move long-running work into observable jobs, preserve the clinical state transition, and make rollout reversible.",
+        layers: [
+          { label: "request edge", title: "Narrow clinical APIs", detail: "Permission, eligibility, consent, and cadence rules enter through reviewable request boundaries.", technology: "Django · Django REST Framework", tone: "heat" },
+          { label: "workflow", title: "Durable background execution", detail: "Backfills, reminders, documents, and vendor interactions leave the synchronous request path.", technology: "Celery · Redis", tone: "cold" },
+          { label: "state", title: "Durable clinical records", detail: "Workflow state remains queryable and attributable across long-running operations.", technology: "PostgreSQL · S3" },
+          { label: "operator", title: "Observable rollout", detail: "Flags, metrics, and failure context make releases reviewable and reversible before clinical operations absorb the risk.", technology: "Datadog · feature flags", tone: "signal" },
+        ],
+        rationale: [
+          { pressure: "Provider requests cannot wait on long-running work", choice: "Move documents, reminders, vendors, and backfills into Celery", reason: "The clinical surface remains responsive while failure and retry state stays explicit." },
+          { pressure: "Regulated changes need a narrow blast radius", choice: "Ship decomposed changes behind reversible flags", reason: "Review, rollout, and rollback remain legible to engineering and operations." },
+          { pressure: "A silent failure becomes an operator problem", choice: "Instrument the failure path, not only throughput", reason: "The team can intervene before a clinician has to diagnose the backend." },
+        ],
+        surfaces: [
+          { name: "Reassessments", mode: "clinical", detail: "Cadence, eligibility, and prior state coordinate a workflow that unfolds over time." },
+          { name: "Progress notes", mode: "documentation", detail: "Provider-authored clinical records preserve permissions and audit context." },
+          { name: "Document workflows", mode: "operations", detail: "Generation, storage, delivery, and retry state remain durable and traceable." },
+          { name: "Consent + audit", mode: "compliance", detail: "Sensitive boundaries enter early and remain visible through external integrations." },
+        ],
+        technologies: [
+          { label: "Application", values: ["Python", "Django", "Django REST Framework"] },
+          { label: "Workflow + data", values: ["Celery", "Redis", "PostgreSQL", "S3"] },
+          { label: "Operations", values: ["Datadog", "feature flags", "vendor APIs", "background jobs"] },
+        ],
+      }}
       proofs={[
         {
           src: "/images/projects/alma-system-v4.svg",
