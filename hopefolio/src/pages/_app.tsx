@@ -1,40 +1,32 @@
 import type { AppProps } from "next/app";
-import {
-  Bricolage_Grotesque,
-  Instrument_Serif,
-  JetBrains_Mono,
-  Manrope,
-} from "next/font/google";
+import { Newsreader, Recursive } from "next/font/google";
 import { ThemeProvider } from "@/modules/mode-switch/ThemeContext";
 import Layout from "@/components/layout/Layout";
 import "@/styles/globals.css";
+import "@/styles/v4.css";
 
-const display = Bricolage_Grotesque({
+const recursive = Recursive({
   subsets: ["latin"],
-  variable: "--font-display",
+  weight: "variable",
+  axes: ["CASL", "CRSV", "MONO", "slnt"],
+  display: "swap",
+  variable: "--font-recursive",
 });
 
-const body = Manrope({
+const newsreader = Newsreader({
   subsets: ["latin"],
-  variable: "--font-body-system",
-});
-
-const editorial = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
+  weight: "variable",
   style: ["normal", "italic"],
-  variable: "--font-editorial",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono-system",
+  axes: ["opsz"],
+  adjustFontFallback: false,
+  display: "swap",
+  variable: "--font-newsreader",
 });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
-      <div className={`${display.variable} ${body.variable} ${editorial.variable} ${mono.variable}`}>
+      <div className={`${recursive.variable} ${newsreader.variable}`}>
         <Layout>
           <Component {...pageProps} />
         </Layout>

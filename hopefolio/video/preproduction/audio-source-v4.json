@@ -1,0 +1,23 @@
+{
+  "music": {
+    "title": "tiktok_pipes",
+    "artist": "Hope Atina",
+    "source": "https://soundcloud.com/hope-atina/tiktok_pipes",
+    "profile": "https://soundcloud.com/hope-atina",
+    "published": "2024-11-20",
+    "duration_seconds": 43.15,
+    "tempo_bpm": 89.1,
+    "license_on_source": "all-rights-reserved",
+    "usage_basis": "Hope explicitly requested use of the most relevant track from his own SoundCloud for his portfolio film.",
+    "selection_reason": "Recent, authored for short-form, sparse opening, strong 16.44s and 25.54s drops, and enough rhythmic space for voice."
+  },
+  "voice": {
+    "speaker": "Hope Atina",
+    "source": "https://www.youtube.com/watch?v=JSpfsuK75j0",
+    "event": "Figma Config 2021",
+    "source_window": "00:02:57-00:03:10",
+    "used_excerpt": "I'm less about talk and more about action.",
+    "used_duration_seconds": 3.55,
+    "usage_basis": "Hope supplied the talk as portfolio evidence and explicitly requested his voice in the social film."
+  }
+}

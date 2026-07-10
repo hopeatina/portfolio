@@ -18,7 +18,7 @@ export default function Layout({ children, showFooter = true }: LayoutProps) {
 
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-      metaThemeColor.setAttribute("content", "#09090b");
+      metaThemeColor.setAttribute("content", "#080806");
     }
   }, [theme]);
 

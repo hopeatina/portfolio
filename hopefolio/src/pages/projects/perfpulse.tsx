@@ -1,198 +1,117 @@
-import Head from "next/head";
-import React from "react";
-import {
-  BuildSurface,
-  CalloutList,
-  CaseStudyEndcap,
-  CaseStudyHero,
-  CaseStudySection,
-  CaseStudySplit,
-  DiagramFrame,
-  TerminalPanel,
-} from "@/components/site/CaseStudyPrimitives";
-import NextProjectNav from "@/components/site/NextProjectNav";
-
-const architectureDiagram = `
-flowchart TB
-  subgraph Collection["Data collection"]
-    A[sysinfo] --> B[Rust core]
-    B --> C[Process metrics]
-    B --> D[System stats]
-    B --> E[History store]
-  end
-
-  subgraph Interfaces["Operator surfaces"]
-    F[CLI via clap]
-    G[Web dashboard via Axum]
-    H[TUI via crossterm]
-  end
-
-  subgraph Intelligence["Optional AI layer"]
-    I[Process knowledge base]
-    J[Claude explanations]
-    K[LRU cache]
-  end
-
-  C --> F
-  C --> G
-  C --> H
-  D --> F
-  D --> G
-  D --> H
-  C --> J
-  J --> K
-  I --> F
-  I --> G
-`;
+import CaseStudyNarrative from "@/components/v4/CaseStudyNarrative";
 
 export default function PerfPulsePage() {
   return (
-    <>
-      <Head>
-        <title>PerfPulse | Hope Atina</title>
-        <meta
-          name="description"
-          content="PerfPulse case study: Rust system monitor with CLI, TUI, Axum dashboard, Homebrew distribution, and Claude-assisted process explanations."
-        />
-      </Head>
-
-      <main id="main-content" className="page-frame">
-        <div className="page-stack">
-          <CaseStudyHero
-            kicker="Case study 03"
-            status="Live tool"
-            title="PerfPulse"
-            subtitle="A utility-grade developer tool with real install paths, real runtime constraints, and three usable interfaces."
-            description="PerfPulse started as a fix for a slow video call and turned into a product lesson: distribution is part of the feature. The project proves I can build tooling that feels fast, ships cleanly, and respects the system it is inspecting."
-            facts={[
-              { label: "Language", value: "Rust" },
-              { label: "Operator surfaces", value: "CLI + web + TUI" },
-              { label: "Distribution", value: "Homebrew" },
-              { label: "Binary", value: "3.3 MiB" },
-            ]}
-            image="/images/case-studies/perfpulse-dashboard.png"
-            imageAlt="PerfPulse — the live web dashboard running on localhost, showing CPU/memory/process monitoring, score ring, meeting mode, and historical charts"
-            materialize="light"
-            materializeKey="perfpulse"
-          />
-
-          <BuildSurface
-            items={[
-              { label: "Language", value: "Rust 2021" },
-              { label: "Web", value: "Axum + inline HTML" },
-              { label: "Terminal", value: "crossterm" },
-              { label: "Distribution", value: "GitHub Actions + Homebrew" },
-            ]}
-          />
-
-          <CaseStudySection kicker="01 // origin" title="Why this tool exists">
-            <CaseStudySplit
-              media={
-                <TerminalPanel
-                  label="perf-pulse top"
-                  lines={[
-                    "PID    CPU%   MEM%   PROCESS",
-                    "4289   43.1   12.8   Docker Desktop",
-                    "1884   26.4    8.1   Slack",
-                    "9192   18.7    6.3   vite dev server",
-                    "",
-                    "recommendation -> enable meeting mode to pause heavy background processes",
-                  ]}
-                />
-              }
-            >
-              <p>
-                Activity Monitor could tell me what was hurting my machine, but
-                it could not act on the insight. PerfPulse closes that gap: it
-                shows the state, explains the state, and gives you a next step
-                that respects developer reality.
-              </p>
-              <p>
-                The design constraint was simple: if the monitoring tool is
-                itself heavy, it has already failed. That is why Rust, small
-                binaries, and minimal runtime overhead mattered from the start.
-              </p>
-            </CaseStudySplit>
-          </CaseStudySection>
-
-          <CaseStudySection kicker="02 // architecture" title="One core, three interfaces" raised>
-            <DiagramFrame
-              title="PerfPulse architecture"
-              description="The same Rust core powers a CLI, a local web dashboard, and a tiny TUI, with optional Claude explanations layered on top."
-              diagram={architectureDiagram}
-            />
-          </CaseStudySection>
-
-          <CaseStudySection kicker="03 // product surface" title="Distribution made the project real">
-            <CaseStudySplit
-              media={
-                <TerminalPanel
-                  label="surfaces"
-                  lines={[
-                    "perf-pulse                # CLI — the primary surface",
-                    "perf-pulse tui            # terminal dashboard",
-                    "perf-pulse serve          # http://127.0.0.1:7575",
-                    "",
-                    "modes",
-                    "  meeting                 # pause heavy bg processes",
-                    "  default                 # live top + history",
-                    "  claude                  # layered explanations",
-                    "",
-                    "everything ships inside one 3.3 MiB Rust binary.",
-                  ]}
-                />
-              }
-            >
-              <p>
-                The CLI is the primary surface. The Axum dashboard exists
-                because some signals deserve charts. The TUI exists because
-                sometimes the right answer is to stay in the terminal. Together
-                they make the tool feel complete instead of clever.
-              </p>
-              <CalloutList
-                items={[
-                  "Meeting mode pauses heavyweight background processes before a call, then resumes them later.",
-                  "Claude explanations add context when process names are opaque instead of pretending AI is the whole product.",
-                  "The dashboard stays inside the Rust binary, which keeps install and deployment complexity low.",
-                ]}
-              />
-            </CaseStudySplit>
-          </CaseStudySection>
-
-          <CaseStudySection kicker="04 // install path" title="Homebrew is not a bonus feature" raised>
-            <TerminalPanel
-              label="distribution"
-              lines={[
-                "$ brew tap hopeatina/perf-pulse",
-                "$ brew install perf-pulse",
-                "$ perf-pulse serve",
-                "",
-                "launches local dashboard at http://127.0.0.1:7575",
-              ]}
-            />
-          </CaseStudySection>
-
-          <CaseStudyEndcap
-            title="Distribution is the feature."
-            body={
-              <>
-                <p>
-                  A tool nobody can install is a tool nobody uses. PerfPulse is
-                  strongest when judged like a real utility product: install
-                  path, runtime footprint, and operator clarity.
-                </p>
-              </>
-            }
-            shellLine="$ brew install hopeatina/perf-pulse/perf-pulse"
-            primaryHref="https://github.com/hopeatina/perf-pulse"
-            primaryLabel="View source"
-            secondaryHref="https://perf-pulse-web.vercel.app"
-            secondaryLabel="Try the web dashboard"
-          />
-
-          <NextProjectNav currentSlug="perfpulse" />
-        </div>
-      </main>
-    </>
+    <CaseStudyNarrative
+      pageTitle="PerfPulse case study — Hope Atina"
+      description="A Rust system monitor designed as a small, local-first product across CLI, TUI, web, and Homebrew distribution."
+      index="Case 03 / developer tooling"
+      status="Open source · live utility"
+      title="PerfPulse"
+      subtitle="A system inspector that respects the machine it is inspecting."
+      introduction="PerfPulse began with a slow video call and became a product lesson: diagnosis, action, runtime footprint, and installation are one experience. A utility only becomes real when it is easy to trust and easy to run."
+      facts={[
+        { label: "Core", value: "Rust" },
+        { label: "Surfaces", value: "CLI / TUI / web" },
+        { label: "Footprint", value: "3.3 MiB" },
+        { label: "Distribution", value: "Homebrew" },
+      ]}
+      heroProof={{
+        src: "/images/case-studies/perfpulse-dashboard.png",
+        alt: "PerfPulse local dashboard showing system health, processes, and meeting mode",
+        label: "One core, three operator surfaces",
+        caption: "The local dashboard gives charts room to breathe while the CLI remains the fastest path to diagnosis and action.",
+      }}
+      problem={{
+        eyebrow: "Inspection stopped at information",
+        title: "Activity Monitor could show the problem, but it could not help me recover the moment.",
+        body: (
+          <>
+            <p>
+              A slow call is not the time to interpret opaque process names, compare multiple charts,
+              or wonder which background service is safe to pause. The system tools exposed state but
+              left the operator to convert it into action under pressure.
+            </p>
+            <p>
+              Any replacement also had to avoid becoming the next heavyweight process on the list.
+            </p>
+          </>
+        ),
+        notes: [
+          "The primary interaction had to stay in the terminal.",
+          "Optional AI context could clarify—but not become the product.",
+          "Installation and runtime overhead were part of the feature contract.",
+        ],
+      }}
+      insight={{
+        eyebrow: "The user needed a next move, not another dashboard",
+        title: "Explain the state at the level where action is possible.",
+        body: (
+          <>
+            <p>
+              PerfPulse pairs process and system metrics with direct operating modes. Meeting mode can
+              pause heavyweight background work before a call, then restore it later. Claude-assisted
+              explanations are layered only where process names or tradeoffs are opaque.
+            </p>
+          </>
+        ),
+      }}
+      decision={{
+        eyebrow: "Distribution completed the architecture",
+        title: "Keep one small Rust core and let each interface earn its existence.",
+        body: (
+          <>
+            <p>
+              The CLI is the default. The TUI supports sustained terminal inspection. The local Axum
+              dashboard exists for history and charts. All three ship in one binary through Homebrew,
+              which keeps the path from curiosity to use intentionally short.
+            </p>
+          </>
+        ),
+      }}
+      flow={[
+        { glyph: "context", label: "Collect locally", detail: "System and process state stay on the machine." },
+        { glyph: "branch", label: "Choose a surface", detail: "CLI, TUI, or web appears only when the task needs it.", tone: "cold" },
+        { glyph: "judgment", label: "Recommend action", detail: "The operator sees the tradeoff before a process is paused.", tone: "heat" },
+        { glyph: "receipt", label: "Restore state", detail: "Meeting mode returns the machine to its prior operating state." },
+      ]}
+      proofs={[
+        {
+          src: "/images/case-studies/perfpulse-dashboard.png",
+          alt: "PerfPulse web interface with score, charts, and active processes",
+          label: "The chart surface has a reason to exist",
+          caption: "History, process comparison, and meeting readiness benefit from a visual surface; quick diagnosis does not require one.",
+        },
+      ]}
+      learning={{
+        eyebrow: "A tool is more than its core algorithm",
+        title: "The final mile is where engineering becomes product.",
+        body: (
+          <>
+            <p>
+              PerfPulse changed how I assess developer tooling. A technically strong core is
+              unfinished until the install path, operator hierarchy, recovery behavior, and runtime
+              footprint resolve into one trustworthy experience.
+            </p>
+          </>
+        ),
+        notes: [
+          "Default to the fastest useful surface.",
+          "Use AI to clarify the boundary, not to decorate the feature list.",
+          "Treat installation as the first product interaction.",
+        ],
+      }}
+      primaryLink={{
+        href: "https://github.com/hopeatina/perf-pulse",
+        label: "View the source",
+        external: true,
+      }}
+      secondaryLink={{
+        href: "https://perf-pulse-web.vercel.app",
+        label: "Try the web surface",
+        external: true,
+      }}
+      next={{ href: "/projects/openclaw", label: "Next / plugin architecture", title: "OrgX for OpenClaw" }}
+    />
   );
 }

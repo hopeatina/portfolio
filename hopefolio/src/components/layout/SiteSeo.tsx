@@ -39,7 +39,7 @@ export default function SiteSeo() {
     "@type": "Person",
     name: SITE_NAME,
     url: absoluteUrl("/"),
-    jobTitle: "AI Agent Infrastructure Engineer",
+    jobTitle: "Engineer, Founder, and Product Thinker",
     description: SITE_DESCRIPTION,
     image: absoluteUrl(SITE_IMAGE),
     sameAs: [
@@ -69,7 +69,7 @@ export default function SiteSeo() {
       <meta property="og:type" content="website" />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={absoluteUrl(SITE_IMAGE)} />
-      <meta property="og:image:alt" content={`${SITE_NAME} profile photo`} />
+      <meta property="og:image:alt" content={`${SITE_NAME} portfolio inspection field`} />
       <meta property="og:locale" content="en_US" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={SITE_HANDLE} />

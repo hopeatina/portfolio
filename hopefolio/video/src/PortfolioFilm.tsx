@@ -1,16 +1,12 @@
-import { loadFont as loadBricolage } from "@remotion/google-fonts/BricolageGrotesque";
-import { loadFont as loadInstrument } from "@remotion/google-fonts/InstrumentSerif";
-import { loadFont as loadMono } from "@remotion/google-fonts/JetBrainsMono";
+import { loadFont as loadNewsreader } from "@remotion/google-fonts/Newsreader";
+import { loadFont as loadRecursive } from "@remotion/google-fonts/Recursive";
 import { Audio } from "@remotion/media";
-import { TransitionSeries, linearTiming } from "@remotion/transitions";
-import { fade } from "@remotion/transitions/fade";
-import { slide } from "@remotion/transitions/slide";
-import { wipe } from "@remotion/transitions/wipe";
 import React from "react";
 import {
   AbsoluteFill,
   Easing,
   Img,
+  Sequence,
   interpolate,
   spring,
   staticFile,
@@ -18,26 +14,23 @@ import {
   useVideoConfig,
 } from "remotion";
 
-const { fontFamily: sans } = loadBricolage("normal", {
-  weights: ["400", "500", "600", "700", "800"],
+const { fontFamily: sans } = loadRecursive("normal", {
+  weights: ["300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
-const { fontFamily: serif } = loadInstrument("italic", {
-  weights: ["400"],
-  subsets: ["latin"],
-});
-const { fontFamily: mono } = loadMono("normal", {
-  weights: ["400", "500", "600"],
+const { fontFamily: serif } = loadNewsreader("italic", {
+  weights: ["300", "400", "500", "600"],
   subsets: ["latin"],
 });
 
 const palette = {
-  ink: "#080A09",
-  paper: "#F1F0EA",
-  signal: "#B7F34A",
-  ochre: "#DFA548",
-  muted: "#A2A79F",
-  line: "rgba(241, 240, 234, 0.18)",
+  carbon: "#080806",
+  mineral: "#F2EFE4",
+  signal: "#C7FF36",
+  heat: "#FF5738",
+  cold: "#48C7FF",
+  dim: "#9D9D92",
+  line: "rgba(242,239,228,0.2)",
 };
 
 const clamp = {
@@ -45,576 +38,543 @@ const clamp = {
   extrapolateRight: "clamp" as const,
 };
 
-const enter = (frame: number, fps: number, delay = 0) =>
+const SCENES = {
+  faultline: { from: 0, duration: 109 },
+  hero: { from: 109, duration: 165 },
+  continuity: { from: 274, duration: 162 },
+  receipt: { from: 436, duration: 81 },
+  range: { from: 517, duration: 162 },
+  close: { from: 679, duration: 137 },
+};
+
+const appear = (frame: number, fps: number, delay = 0, duration = 22) =>
   spring({
     frame: frame - delay,
     fps,
-    durationInFrames: Math.round(fps * 0.72),
-    config: { damping: 200 },
+    durationInFrames: duration,
+    config: { damping: 200, mass: 0.9, stiffness: 180 },
   });
 
-const Kicker: React.FC<{ children: React.ReactNode; color?: string }> = ({
-  children,
-  color = palette.signal,
+const Grid = ({ light = false }: { light?: boolean }) => (
+  <AbsoluteFill
+    style={{
+      opacity: light ? 0.08 : 0.14,
+      backgroundImage: `linear-gradient(${light ? "rgba(8,8,6,.35)" : "rgba(242,239,228,.35)"} 1px, transparent 1px), linear-gradient(90deg, ${light ? "rgba(8,8,6,.35)" : "rgba(242,239,228,.35)"} 1px, transparent 1px)`,
+      backgroundSize: "72px 72px",
+    }}
+  />
+);
+
+const FilmIndex = ({
+  label,
+  index,
+  total = "06",
+  light = false,
+}: {
+  label: string;
+  index: string;
+  total?: string;
+  light?: boolean;
 }) => (
+  <div
+    style={{
+      position: "absolute",
+      top: 62,
+      left: 64,
+      right: 64,
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      color: light ? palette.carbon : palette.mineral,
+      fontFamily: sans,
+      fontSize: 18,
+      fontWeight: 650,
+      letterSpacing: "0.13em",
+      textTransform: "uppercase",
+      zIndex: 20,
+    }}
+  >
+    <span style={{ display: "flex", alignItems: "center", gap: 14 }}>
+      <span style={{ width: 12, height: 12, background: palette.signal }} />
+      {label}
+    </span>
+    <span style={{ opacity: 0.55 }}>
+      {index} / {total}
+    </span>
+  </div>
+);
+
+const Kicker = ({ children, color = palette.signal }: { children: React.ReactNode; color?: string }) => (
   <div
     style={{
       display: "flex",
       alignItems: "center",
-      gap: 18,
+      gap: 14,
       color,
-      fontFamily: mono,
+      fontFamily: sans,
       fontSize: 18,
-      fontWeight: 600,
-      letterSpacing: "0.18em",
+      fontWeight: 700,
+      letterSpacing: "0.16em",
       textTransform: "uppercase",
     }}
   >
-    <span style={{ width: 46, height: 3, backgroundColor: color }} />
+    <span style={{ width: 42, height: 3, background: color }} />
     {children}
   </div>
 );
 
-const SignalIndex: React.FC<{ current: string; dark?: boolean }> = ({
-  current,
-  dark = true,
-}) => (
-  <div
-    style={{
-      position: "absolute",
-      top: 82,
-      left: 72,
-      right: 72,
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      zIndex: 10,
-      color: dark ? palette.paper : palette.ink,
-      fontFamily: mono,
-      fontSize: 16,
-      letterSpacing: "0.14em",
-      textTransform: "uppercase",
-    }}
-  >
-    <span style={{ display: "flex", alignItems: "center", gap: 12 }}>
-      <span
-        style={{
-          width: 10,
-          height: 10,
-          borderRadius: "50%",
-          backgroundColor: palette.signal,
-          boxShadow: `0 0 22px ${palette.signal}`,
-        }}
-      />
-      Hope Atina
-    </span>
-    <span style={{ opacity: 0.64 }}>{current} / 06</span>
-  </div>
-);
-
-const ScanLine: React.FC<{ frame: number; color?: string }> = ({
-  frame,
-  color = palette.signal,
-}) => {
-  const x = interpolate(frame, [0, 92], [-180, 1080], {
-    ...clamp,
-    easing: Easing.inOut(Easing.quad),
-  });
-
-  return (
-    <div
-      style={{
-        position: "absolute",
-        left: x,
-        top: 0,
-        bottom: 0,
-        width: 2,
-        backgroundColor: color,
-        opacity: 0.58,
-        boxShadow: `0 0 26px ${color}`,
-      }}
-    />
-  );
-};
-
-const BrowserFrame: React.FC<{
-  asset: string;
-  top: number;
-  width?: number;
-  height?: number;
-  progress: number;
-  rotate?: number;
-  imageScale?: number;
-}> = ({
-  asset,
-  top,
-  width = 936,
-  height = 650,
-  progress,
-  rotate = 0,
-  imageScale = 1,
-}) => (
-  <div
-    style={{
-      position: "absolute",
-      top,
-      left: "50%",
-      width,
-      height,
-      overflow: "hidden",
-      borderRadius: 34,
-      border: `1px solid ${palette.line}`,
-      backgroundColor: "#0B0E0C",
-      boxShadow: "0 36px 100px rgba(0,0,0,0.48)",
-      transform: `translateX(-50%) translateY(${interpolate(progress, [0, 1], [72, 0])}px) scale(${interpolate(progress, [0, 1], [0.95, 1])}) rotate(${rotate}deg)`,
-      opacity: progress,
-    }}
-  >
-    <div
-      style={{
-        height: 54,
-        borderBottom: `1px solid ${palette.line}`,
-        display: "flex",
-        alignItems: "center",
-        gap: 9,
-        padding: "0 22px",
-      }}
-    >
-      {[0, 1, 2].map((dot) => (
-        <span
-          key={dot}
-          style={{
-            width: 9,
-            height: 9,
-            borderRadius: "50%",
-            backgroundColor: dot === 0 ? palette.signal : "rgba(241,240,234,0.24)",
-          }}
-        />
-      ))}
-      <span
-        style={{
-          marginLeft: "auto",
-          color: palette.muted,
-          fontFamily: mono,
-          fontSize: 13,
-          letterSpacing: "0.08em",
-        }}
-      >
-        HOPEATINA / LIVE PROOF
-      </span>
-    </div>
-    <Img
-      src={staticFile(`video/portfolio-film/${asset}`)}
-      style={{
-        width: "100%",
-        height: `calc(100% - 54px)`,
-        objectFit: "cover",
-        objectPosition: "center top",
-        transform: `scale(${imageScale})`,
-      }}
-    />
-  </div>
-);
-
-const HookScene = () => {
+const FaultlineFlash = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const first = enter(frame, fps, 4);
-  const second = enter(frame, fps, 38);
-  const portrait = enter(frame, fps, 10);
-  const portraitScale = interpolate(frame, [0, 135], [1.08, 1.015], clamp);
+  const cuts = [109, 274, 436, 517, 679];
+  const distance = Math.min(...cuts.map((cut) => Math.abs(frame - cut)));
+  const opacity = interpolate(distance, [0, 2, 5], [0.9, 0.38, 0], clamp);
+  if (opacity === 0) return null;
 
   return (
-    <AbsoluteFill style={{ backgroundColor: palette.ink, color: palette.paper, overflow: "hidden" }}>
-      <SignalIndex current="01" />
+    <AbsoluteFill style={{ zIndex: 100, pointerEvents: "none", opacity }}>
       <div
         style={{
           position: "absolute",
-          top: 270,
-          left: 72,
-          width: 880,
-          zIndex: 4,
+          top: "42%",
+          left: -20,
+          right: -20,
+          height: 5,
+          background: palette.signal,
+          transform: "rotate(-1.6deg)",
+          boxShadow: `0 -12px 0 ${palette.heat}, 0 12px 0 ${palette.cold}`,
         }}
-      >
-        <Kicker>The continuity question</Kicker>
+      />
+    </AbsoluteFill>
+  );
+};
+
+const SpokenFaultline = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const quote = "I’m less about talk and more about action.";
+  const characters = Math.floor(interpolate(frame, [5, 88], [0, quote.length], clamp));
+  const line = interpolate(frame, [0, 100], [0, 100], {
+    ...clamp,
+    easing: Easing.inOut(Easing.cubic),
+  });
+  const source = appear(frame, fps, 58, 18);
+  const imageScale = interpolate(frame, [0, 109], [1.18, 1.08], clamp);
+
+  return (
+    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
+      <Img
+        src={staticFile("images/generated/inspection-field.jpg")}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "53% center",
+          transform: `scale(${imageScale})`,
+          filter: "brightness(.48) contrast(1.18) saturate(.84)",
+        }}
+      />
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(8,8,6,.26), rgba(8,8,6,.93))" }} />
+      <FilmIndex label="A point of view" index="01" />
+      <div style={{ position: "absolute", left: 64, right: 64, top: 485 }}>
+        <Kicker>Hope Atina · Config 2021</Kicker>
         <div
           style={{
-            marginTop: 62,
-            fontFamily: sans,
-            fontSize: 132,
-            lineHeight: 0.87,
-            letterSpacing: "-0.075em",
-            fontWeight: 700,
-            textTransform: "uppercase",
+            marginTop: 48,
+            minHeight: 460,
+            fontFamily: serif,
+            fontSize: 112,
+            fontWeight: 400,
+            lineHeight: 0.94,
+            letterSpacing: "-0.052em",
+            textWrap: "balance",
           }}
         >
-          <div
-            style={{
-              opacity: first,
-              transform: `translateY(${interpolate(first, [0, 1], [48, 0])}px)`,
-            }}
-          >
-            AI can act.
-          </div>
-          <div
-            style={{
-              marginTop: 18,
-              color: palette.signal,
-              fontFamily: serif,
-              fontSize: 148,
-              lineHeight: 0.84,
-              letterSpacing: "-0.055em",
-              fontWeight: 400,
-              textTransform: "none",
-              opacity: second,
-              transform: `translateY(${interpolate(second, [0, 1], [54, 0])}px)`,
-            }}
-          >
-            Can it keep
-            <br />
-            the plot?
-          </div>
+          “{quote.slice(0, characters)}
+          <span style={{ color: palette.signal, opacity: characters < quote.length ? 1 : 0 }}>▌</span>
+          {characters >= quote.length ? "”" : ""}
         </div>
       </div>
-
       <div
         style={{
           position: "absolute",
           left: 0,
-          right: 0,
-          bottom: 0,
-          height: 940,
+          top: 1330,
+          height: 4,
+          width: `${line}%`,
+          background: palette.signal,
+          boxShadow: `0 -8px 0 ${palette.heat}, 0 8px 0 ${palette.cold}`,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 64,
+          bottom: 78,
+          opacity: source,
+          color: palette.dim,
+          fontFamily: sans,
+          fontSize: 17,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+        }}
+      >
+        Figma and Chill · connection, community, culture
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+const HeroPlane = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const heading = appear(frame, fps, 2);
+  const plane = appear(frame, fps, 12, 28);
+  const moveY = interpolate(frame, [0, 165], [44, -44], clamp);
+  const reveal = interpolate(frame, [10, 38], [0, 100], {
+    ...clamp,
+    easing: Easing.out(Easing.cubic),
+  });
+
+  return (
+    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
+      <Grid />
+      <FilmIndex label="The invisible layer" index="02" />
+      <div style={{ position: "absolute", top: 232, left: 64, right: 64, opacity: heading }}>
+        <Kicker>Engineer · founder · product thinker</Kicker>
+        <div
+          style={{
+            marginTop: 42,
+            fontFamily: sans,
+            fontSize: 104,
+            fontWeight: 760,
+            lineHeight: 0.89,
+            letterSpacing: "-0.075em",
+            textTransform: "uppercase",
+          }}
+        >
+          Make the
+          <br />
+          <span style={{ color: palette.signal }}>invisible</span>
+          <br />
+          layer visible.
+        </div>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          top: 845,
+          left: 64,
+          width: 952,
+          height: 720,
           overflow: "hidden",
-          opacity: portrait,
-          clipPath: `inset(${interpolate(portrait, [0, 1], [100, 0])}% 0 0 0)`,
+          opacity: plane,
+          clipPath: `inset(0 ${100 - reveal}% 0 0)`,
+          borderTop: `2px solid ${palette.signal}`,
+          background: palette.carbon,
         }}
       >
         <Img
-          src={staticFile("images/hope-profile.jpg")}
+          src={staticFile("video/portfolio-film/v4-home.png")}
           style={{
             position: "absolute",
-            width: 1080,
-            height: 1055,
-            bottom: -115,
-            objectFit: "cover",
-            objectPosition: "center top",
-            transform: `scale(${portraitScale})`,
-            filter: "contrast(1.05) saturate(0.88)",
+            top: moveY,
+            left: 0,
+            width: 1420,
+            height: "auto",
+            maxWidth: "none",
+          }}
+        />
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 64,
+          right: 64,
+          bottom: 82,
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: 16,
+          fontFamily: sans,
+          fontSize: 17,
+          fontWeight: 650,
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+        }}
+      >
+        {["Systems", "AI clients", "Interfaces"].map((item, index) => (
+          <div key={item} style={{ borderTop: `1px solid ${palette.line}`, paddingTop: 17, color: index === 1 ? palette.cold : palette.mineral }}>
+            {item}
+          </div>
+        ))}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+const ContinuityModel = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const title = appear(frame, fps, 0);
+  const scan = interpolate(frame, [0, 162], [0, 1], clamp);
+  const imageY = interpolate(scan, [0, 1], [0, -145], clamp);
+  const stages = ["Context survives", "Agents act", "Judgment gates risk", "Outcome becomes memory"];
+
+  return (
+    <AbsoluteFill style={{ background: palette.mineral, color: palette.carbon, overflow: "hidden" }}>
+      <Grid light />
+      <FilmIndex label="The operating model" index="03" light />
+      <div style={{ position: "absolute", top: 226, left: 64, right: 64, opacity: title }}>
+        <Kicker color={palette.heat}>Continuity is the real work</Kicker>
+        <div
+          style={{
+            marginTop: 36,
+            fontFamily: sans,
+            fontSize: 94,
+            fontWeight: 760,
+            lineHeight: 0.91,
+            letterSpacing: "-0.072em",
+            textTransform: "uppercase",
+          }}
+        >
+          Intelligence
+          <br />
+          <span style={{ fontFamily: serif, fontWeight: 400, textTransform: "none" }}>across handoffs.</span>
+        </div>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 64,
+          right: 64,
+          top: 670,
+          height: 655,
+          overflow: "hidden",
+          background: palette.carbon,
+          border: `2px solid ${palette.carbon}`,
+        }}
+      >
+        <Img
+          src={staticFile("video/portfolio-film/v4-continuity.png")}
+          style={{ width: "100%", height: "auto", transform: `translateY(${imageY}px) scale(1.08)`, transformOrigin: "top left" }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: `${interpolate(scan, [0, 1], [8, 92], clamp)}%`,
+            left: 0,
+            right: 0,
+            height: 3,
+            background: palette.signal,
+            boxShadow: `0 -5px 0 ${palette.heat}, 0 5px 0 ${palette.cold}`,
+          }}
+        />
+      </div>
+      <div style={{ position: "absolute", left: 64, right: 64, bottom: 74 }}>
+        {stages.map((stage, index) => {
+          const progress = appear(frame, fps, 20 + index * 18, 16);
+          return (
+            <div
+              key={stage}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "56px 1fr",
+                gap: 18,
+                alignItems: "center",
+                borderTop: "1px solid rgba(8,8,6,.22)",
+                padding: "20px 0",
+                opacity: progress,
+                transform: `translateX(${interpolate(progress, [0, 1], [30, 0])}px)`,
+                fontFamily: sans,
+                fontSize: 25,
+                fontWeight: 630,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              <span style={{ color: index === 2 ? palette.heat : palette.carbon, fontSize: 17, letterSpacing: ".12em" }}>0{index + 1}</span>
+              {stage}
+            </div>
+          );
+        })}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+const ReceiptProof = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const title = appear(frame, fps, 0, 16);
+  const aperture = interpolate(frame, [8, 58], [90, 420], {
+    ...clamp,
+    easing: Easing.out(Easing.cubic),
+  });
+  const drift = interpolate(frame, [0, 81], [0, -28], clamp);
+
+  return (
+    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
+      <FilmIndex label="Proof, not posture" index="04" />
+      <div style={{ position: "absolute", top: 208, left: 64, right: 64, opacity: title }}>
+        <div
+          style={{
+            fontFamily: sans,
+            fontSize: 88,
+            fontWeight: 760,
+            lineHeight: 0.91,
+            letterSpacing: "-0.068em",
+            textTransform: "uppercase",
+          }}
+        >
+          Autonomy is easy.
+          <br />
+          <span style={{ color: palette.signal }}>Continuity is the work.</span>
+        </div>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          top: 580,
+          left: 0,
+          right: 0,
+          height: 970,
+          overflow: "hidden",
+          borderTop: `2px solid ${palette.signal}`,
+          borderBottom: `2px solid ${palette.signal}`,
+        }}
+      >
+        <Img
+          src={staticFile("images/case-studies/orgx-v4/artifact-receipt.png")}
+          style={{
+            position: "absolute",
+            top: drift,
+            left: -130,
+            height: 970,
+            width: "auto",
+            filter: "brightness(.34) saturate(.72)",
           }}
         />
         <div
           style={{
             position: "absolute",
             inset: 0,
-            backgroundColor: "rgba(8,10,9,0.14)",
-            borderTop: `1px solid ${palette.line}`,
+            clipPath: `circle(${aperture}px at 67% 47%)`,
+          }}
+        >
+          <Img
+            src={staticFile("images/case-studies/orgx-v4/artifact-receipt.png")}
+            style={{ position: "absolute", top: drift, left: -130, height: 970, width: "auto" }}
+          />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            left: `calc(67% - ${aperture}px)`,
+            top: `calc(47% - ${aperture}px)`,
+            width: aperture * 2,
+            height: aperture * 2,
+            border: `3px solid ${palette.signal}`,
+            borderRadius: "50%",
           }}
         />
       </div>
-
       <div
         style={{
           position: "absolute",
-          left: 72,
-          bottom: 58,
-          zIndex: 4,
-          color: palette.paper,
-          fontFamily: mono,
+          left: 64,
+          bottom: 82,
+          display: "flex",
+          alignItems: "center",
+          gap: 18,
+          color: palette.dim,
+          fontFamily: sans,
           fontSize: 18,
-          letterSpacing: "0.13em",
+          fontWeight: 650,
+          letterSpacing: ".1em",
           textTransform: "uppercase",
         }}
       >
-        Hope Atina · AI systems engineer
+        <span style={{ width: 11, height: 11, background: palette.signal }} />
+        Authentic OrgX artifact receipt
       </div>
-      <ScanLine frame={frame} />
     </AbsoluteFill>
   );
 };
 
-const ThesisScene = () => {
+const ConstraintRange = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const title = enter(frame, fps, 8);
-  const panel = enter(frame, fps, 24);
-  const tags = ["Context", "Memory", "Review"];
-
-  return (
-    <AbsoluteFill style={{ backgroundColor: palette.ink, color: palette.paper, overflow: "hidden" }}>
-      <SignalIndex current="02" />
-      <div style={{ position: "absolute", top: 214, left: 72, right: 72 }}>
-        <Kicker>Founder · systems engineer</Kicker>
-        <h1
-          style={{
-            margin: "52px 0 0",
-            width: 930,
-            fontFamily: sans,
-            fontSize: 104,
-            fontWeight: 650,
-            lineHeight: 0.91,
-            letterSpacing: "-0.065em",
-            opacity: title,
-            transform: `translateY(${interpolate(title, [0, 1], [48, 0])}px)`,
-          }}
-        >
-          I build the
-          <br />
-          <em style={{ fontFamily: serif, color: palette.signal, fontWeight: 400 }}>
-            continuity layer.
-          </em>
-        </h1>
-      </div>
-
-      <BrowserFrame asset="hero.png" top={666} progress={panel} rotate={-1.4} />
-
-      <div
-        style={{
-          position: "absolute",
-          top: 1438,
-          left: 72,
-          right: 72,
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          borderTop: `1px solid ${palette.line}`,
-          borderBottom: `1px solid ${palette.line}`,
-        }}
-      >
-        {tags.map((tag, index) => {
-          const item = enter(frame, fps, 45 + index * 8);
-          return (
-            <div
-              key={tag}
-              style={{
-                padding: "34px 18px",
-                borderRight: index < tags.length - 1 ? `1px solid ${palette.line}` : undefined,
-                color: index === 0 ? palette.signal : palette.paper,
-                fontFamily: mono,
-                fontSize: 18,
-                letterSpacing: "0.14em",
-                textAlign: "center",
-                textTransform: "uppercase",
-                opacity: item,
-              }}
-            >
-              0{index + 1} / {tag}
-            </div>
-          );
-        })}
-      </div>
-
-      <p
-        style={{
-          position: "absolute",
-          left: 72,
-          right: 160,
-          top: 1624,
-          margin: 0,
-          color: palette.muted,
-          fontFamily: sans,
-          fontSize: 31,
-          lineHeight: 1.35,
-          letterSpacing: "-0.025em",
-        }}
-      >
-        The agent is only as reliable as what survives between one handoff and the next.
-      </p>
-      <ScanLine frame={frame - 16} />
-    </AbsoluteFill>
-  );
-};
-
-const ContinuityScene = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const title = enter(frame, fps, 4);
-  const panel = enter(frame, fps, 18);
-  const stages = [
-    ["01", "Context survives", "Memory carries decisions forward."],
-    ["02", "Agents act", "Delegation stays visible and scoped."],
-    ["03", "Humans decide", "Risk returns to a review boundary."],
+  const title = appear(frame, fps, 0);
+  const rangeY = interpolate(frame, [0, 162], [20, -125], clamp);
+  const constraints = [
+    { label: "Continuity", color: palette.signal },
+    { label: "Clinical ambiguity", color: palette.heat },
+    { label: "Decision latency", color: palette.cold },
+    { label: "Trustworthy automation", color: palette.mineral },
   ];
 
   return (
-    <AbsoluteFill style={{ backgroundColor: palette.ink, color: palette.paper, overflow: "hidden" }}>
-      <SignalIndex current="03" />
-      <div style={{ position: "absolute", top: 210, left: 72, right: 72 }}>
-        <Kicker>One continuity loop</Kicker>
-        <h1
+    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
+      <Grid />
+      <FilmIndex label="Range under constraint" index="05" />
+      <div style={{ position: "absolute", top: 220, left: 64, right: 64, opacity: title }}>
+        <Kicker>Different systems. Same judgment.</Kicker>
+        <div
           style={{
-            margin: "42px 0 0",
+            marginTop: 38,
             fontFamily: sans,
-            fontSize: 88,
-            fontWeight: 650,
-            lineHeight: 0.92,
-            letterSpacing: "-0.06em",
-            opacity: title,
-          }}
-        >
-          The work keeps
-          <br />
-          <em style={{ color: palette.signal, fontFamily: serif, fontWeight: 400 }}>
-            its state.
-          </em>
-        </h1>
-      </div>
-
-      <BrowserFrame asset="continuity.png" top={532} height={630} progress={panel} imageScale={1.025} />
-
-      <div
-        style={{
-          position: "absolute",
-          top: 1248,
-          left: 72,
-          right: 72,
-          borderTop: `1px solid ${palette.line}`,
-        }}
-      >
-        {stages.map(([number, heading, body], index) => {
-          const stage = enter(frame, fps, 42 + index * 14);
-          const active = frame >= 42 + index * 14;
-          return (
-            <div
-              key={number}
-              style={{
-                minHeight: 142,
-                display: "grid",
-                gridTemplateColumns: "92px 1fr",
-                alignItems: "center",
-                borderBottom: `1px solid ${palette.line}`,
-                opacity: stage,
-                transform: `translateX(${interpolate(stage, [0, 1], [32, 0])}px)`,
-              }}
-            >
-              <span
-                style={{
-                  color: active ? palette.signal : palette.muted,
-                  fontFamily: mono,
-                  fontSize: 18,
-                  letterSpacing: "0.1em",
-                }}
-              >
-                {number}
-              </span>
-              <div>
-                <div
-                  style={{
-                    fontFamily: sans,
-                    fontSize: 38,
-                    fontWeight: 600,
-                    letterSpacing: "-0.035em",
-                  }}
-                >
-                  {heading}
-                </div>
-                <div
-                  style={{
-                    marginTop: 8,
-                    color: palette.muted,
-                    fontFamily: sans,
-                    fontSize: 22,
-                  }}
-                >
-                  {body}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-const ProofScene = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const title = enter(frame, fps, 4);
-  const panel = enter(frame, fps, 18);
-  const proofs = [
-    ["61", "MCP tools shipped"],
-    ["12", "Repos on one platform"],
-    ["999", "Agent-authored commits"],
-    ["93%", "Fewer bugs at Vessel"],
-  ];
-
-  return (
-    <AbsoluteFill style={{ backgroundColor: palette.paper, color: palette.ink, overflow: "hidden" }}>
-      <SignalIndex current="04" dark={false} />
-      <div style={{ position: "absolute", top: 212, left: 72, right: 72 }}>
-        <Kicker color="#5D7115">Selected systems</Kicker>
-        <h1
-          style={{
-            margin: "44px 0 0",
-            fontFamily: sans,
-            fontSize: 96,
-            fontWeight: 650,
+            fontSize: 94,
+            fontWeight: 760,
             lineHeight: 0.9,
-            letterSpacing: "-0.065em",
-            opacity: title,
+            letterSpacing: "-0.072em",
+            textTransform: "uppercase",
           }}
         >
-          Proof
+          Not a list.
           <br />
-          <em style={{ color: "#92601B", fontFamily: serif, fontWeight: 400 }}>
-            compounds.
-          </em>
-        </h1>
+          <span style={{ fontFamily: serif, fontWeight: 400, textTransform: "none" }}>A way of seeing.</span>
+        </div>
       </div>
-
-      <div style={{ filter: "drop-shadow(0 30px 60px rgba(8,10,9,0.2))" }}>
-        <BrowserFrame asset="systems.png" top={558} height={596} progress={panel} rotate={1.1} />
-      </div>
-
       <div
         style={{
           position: "absolute",
-          top: 1240,
-          left: 72,
-          right: 72,
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          borderTop: "1px solid rgba(8,10,9,0.18)",
-          borderLeft: "1px solid rgba(8,10,9,0.18)",
+          top: 655,
+          left: 64,
+          right: 64,
+          height: 655,
+          overflow: "hidden",
+          borderTop: `2px solid ${palette.signal}`,
+          background: palette.carbon,
         }}
       >
-        {proofs.map(([figure, label], index) => {
-          const proof = enter(frame, fps, 42 + index * 10);
+        <Img
+          src={staticFile("video/portfolio-film/v4-range.png")}
+          style={{ width: "1120px", maxWidth: "none", height: "auto", transform: `translate(-38px, ${rangeY}px) scale(1.02)` }}
+        />
+      </div>
+      <div style={{ position: "absolute", left: 64, right: 64, bottom: 72 }}>
+        {constraints.map((constraint, index) => {
+          const progress = appear(frame, fps, 20 + index * 24, 17);
           return (
             <div
-              key={label}
+              key={constraint.label}
               style={{
-                height: 220,
-                padding: "30px 34px",
-                borderRight: "1px solid rgba(8,10,9,0.18)",
-                borderBottom: "1px solid rgba(8,10,9,0.18)",
-                opacity: proof,
-                transform: `translateY(${interpolate(proof, [0, 1], [28, 0])}px)`,
+                display: "grid",
+                gridTemplateColumns: "30px 1fr auto",
+                gap: 18,
+                alignItems: "center",
+                borderTop: `1px solid ${palette.line}`,
+                padding: "21px 0",
+                opacity: progress,
+                fontFamily: sans,
+                fontSize: 24,
+                fontWeight: 620,
+                letterSpacing: "-0.02em",
               }}
             >
-              <div
-                style={{
-                  fontFamily: sans,
-                  fontSize: 82,
-                  fontWeight: 700,
-                  lineHeight: 0.9,
-                  letterSpacing: "-0.06em",
-                }}
-              >
-                {figure}
-              </div>
-              <div
-                style={{
-                  marginTop: 18,
-                  color: "#50544F",
-                  fontFamily: mono,
-                  fontSize: 16,
-                  lineHeight: 1.35,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}
-              >
-                {label}
-              </div>
+              <span style={{ width: 11, height: 11, background: constraint.color }} />
+              {constraint.label}
+              <span style={{ color: palette.dim, fontSize: 16, letterSpacing: ".14em" }}>0{index + 1}</span>
             </div>
           );
         })}
@@ -623,155 +583,42 @@ const ProofScene = () => {
   );
 };
 
-const JudgmentScene = () => {
+const AuthoredClose = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const title = enter(frame, fps, 4);
-  const panel = enter(frame, fps, 20);
-  const orbit = interpolate(frame, [0, 150], [0, 15], clamp);
+  const portrait = appear(frame, fps, 5, 26);
+  const identity = appear(frame, fps, 16, 24);
+  const cta = appear(frame, fps, 42, 20);
+  const fieldScale = interpolate(frame, [0, 137], [1.14, 1.05], clamp);
 
   return (
-    <AbsoluteFill style={{ backgroundColor: palette.ink, color: palette.paper, overflow: "hidden" }}>
-      <SignalIndex current="05" />
-      <div style={{ position: "absolute", top: 204, left: 72, right: 72, zIndex: 3 }}>
-        <Kicker>The differentiator</Kicker>
-        <h1
-          style={{
-            margin: "46px 0 0",
-            fontFamily: sans,
-            fontSize: 82,
-            fontWeight: 650,
-            lineHeight: 0.92,
-            letterSpacing: "-0.058em",
-            opacity: title,
-          }}
-        >
-          It isn’t autonomy.
-          <br />
-          <em style={{ color: palette.signal, fontFamily: serif, fontWeight: 400 }}>
-            It’s judgment architecture.
-          </em>
-        </h1>
-      </div>
-
-      <BrowserFrame asset="judgment.png" top={616} height={662} progress={panel} imageScale={1.02} />
-
-      <div
+    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
+      <Img
+        src={staticFile("images/generated/reflection-field.jpg")}
         style={{
           position: "absolute",
-          left: "50%",
-          top: 878,
-          width: 300,
-          height: 300,
-          marginLeft: -150,
-          borderRadius: "50%",
-          border: `1px solid rgba(183,243,74,${0.22 + panel * 0.2})`,
-          transform: `rotate(${orbit}deg) scale(${0.9 + panel * 0.1})`,
-          boxShadow: `0 0 80px rgba(183,243,74,${0.08 * panel})`,
-          pointerEvents: "none",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center",
+          transform: `scale(${fieldScale})`,
+          filter: "brightness(.44) contrast(1.14) saturate(.86)",
         }}
       />
-
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(8,8,6,.15), rgba(8,8,6,.94))" }} />
+      <FilmIndex label="The person behind the system" index="06" />
       <div
         style={{
           position: "absolute",
-          top: 1360,
-          left: 72,
-          right: 72,
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 0,
-          borderTop: `1px solid ${palette.line}`,
-          borderLeft: `1px solid ${palette.line}`,
-        }}
-      >
-        {[
-          ["Preserve", "Context before speed"],
-          ["Delegate", "Leverage without theater"],
-          ["Escalate", "Risk returns to people"],
-          ["Remember", "Every decision compounds"],
-        ].map(([verb, detail], index) => {
-          const item = enter(frame, fps, 44 + index * 8);
-          return (
-            <div
-              key={verb}
-              style={{
-                minHeight: 155,
-                padding: "28px 30px",
-                borderRight: `1px solid ${palette.line}`,
-                borderBottom: `1px solid ${palette.line}`,
-                opacity: item,
-              }}
-            >
-              <div style={{ color: palette.signal, fontFamily: mono, fontSize: 16, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-                {String(index + 1).padStart(2, "0")} / {verb}
-              </div>
-              <div style={{ marginTop: 18, fontFamily: sans, fontSize: 27, letterSpacing: "-0.02em" }}>
-                {detail}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-const HandoffScene = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const title = enter(frame, fps, 4);
-  const portrait = enter(frame, fps, 24);
-  const identity = enter(frame, fps, 54);
-  const portraitScale = interpolate(frame, [0, 180], [1.05, 1], clamp);
-
-  return (
-    <AbsoluteFill style={{ backgroundColor: palette.ochre, color: palette.ink, overflow: "hidden" }}>
-      <SignalIndex current="06" dark={false} />
-      <div
-        style={{
-          position: "absolute",
-          top: 214,
-          left: 72,
-          right: 72,
-          zIndex: 4,
-        }}
-      >
-        <Kicker color={palette.ink}>The next handoff</Kicker>
-        <h1
-          style={{
-            margin: "54px 0 0",
-            width: 930,
-            fontFamily: sans,
-            fontSize: 116,
-            fontWeight: 650,
-            lineHeight: 0.87,
-            letterSpacing: "-0.07em",
-            opacity: title,
-            transform: `translateY(${interpolate(title, [0, 1], [50, 0])}px)`,
-          }}
-        >
-          I engineer
-          <br />
-          <em style={{ fontFamily: serif, fontWeight: 400 }}>
-            both sides
-          </em>
-          <br />
-          of the handoff.
-        </h1>
-      </div>
-
-      <div
-        style={{
-          position: "absolute",
-          left: -118,
-          bottom: -40,
-          width: 780,
-          height: 938,
+          top: 220,
+          left: 64,
+          right: 64,
+          height: 790,
           overflow: "hidden",
           opacity: portrait,
-          mixBlendMode: "multiply",
-          clipPath: `inset(${interpolate(portrait, [0, 1], [100, 0])}% 0 0 0)`,
+          clipPath: `polygon(0 0, ${interpolate(portrait, [0, 1], [0, 100])}% 0, 92% 100%, 0 100%)`,
+          borderBottom: `4px solid ${palette.signal}`,
         }}
       >
         <Img
@@ -780,155 +627,228 @@ const HandoffScene = () => {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center top",
-            transform: `scale(${portraitScale})`,
-            filter: "grayscale(1) sepia(0.5) contrast(1.15)",
+            objectPosition: "50% 28%",
+            filter: "grayscale(.16) contrast(1.07)",
+            transform: `scale(${interpolate(portrait, [0, 1], [1.08, 1])})`,
           }}
         />
       </div>
-
       <div
         style={{
           position: "absolute",
-          right: 70,
-          bottom: 336,
-          width: 470,
-          padding: "34px 0 0 34px",
-          borderTop: `3px solid ${palette.ink}`,
+          top: 1030,
+          left: 64,
+          right: 64,
           opacity: identity,
-          transform: `translateX(${interpolate(identity, [0, 1], [40, 0])}px)`,
-          zIndex: 5,
         }}
       >
-        <div style={{ fontFamily: sans, fontSize: 48, fontWeight: 700, letterSpacing: "-0.045em" }}>
-          Hope Atina
-        </div>
+        <Kicker>Hope Atina</Kicker>
         <div
           style={{
-            marginTop: 14,
-            fontFamily: mono,
-            fontSize: 17,
-            lineHeight: 1.55,
-            letterSpacing: "0.1em",
+            marginTop: 34,
+            fontFamily: sans,
+            fontSize: 108,
+            fontWeight: 780,
+            lineHeight: 0.88,
+            letterSpacing: "-0.076em",
             textTransform: "uppercase",
           }}
         >
-          AI systems engineer
+          Depth,
           <br />
-          Founder, OrgX
+          made visible.
         </div>
-        <div style={{ marginTop: 32, fontFamily: sans, fontSize: 26, fontWeight: 600 }}>
-          hopeatina@gmail.com
+        <div
+          style={{
+            marginTop: 42,
+            color: palette.mineral,
+            fontFamily: sans,
+            fontSize: 25,
+            fontWeight: 620,
+            letterSpacing: ".06em",
+            textTransform: "uppercase",
+          }}
+        >
+          Engineer <span style={{ color: palette.heat }}>↗</span> Founder <span style={{ color: palette.cold }}>↗</span> Product thinker
         </div>
       </div>
-
       <div
         style={{
           position: "absolute",
-          left: 72,
-          right: 72,
-          bottom: 236,
-          height: 3,
-          backgroundColor: palette.ink,
-          transformOrigin: "left center",
-          transform: `scaleX(${interpolate(frame, [38, 140], [0, 1], clamp)})`,
+          left: 64,
+          right: 64,
+          bottom: 62,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+          borderTop: `1px solid ${palette.line}`,
+          paddingTop: 24,
+          opacity: cta,
+          fontFamily: sans,
+          textTransform: "uppercase",
         }}
-      />
+      >
+        <div style={{ fontSize: 28, fontWeight: 740, letterSpacing: "-.02em" }}>hopeatina.com</div>
+        <div style={{ color: palette.dim, fontSize: 14, lineHeight: 1.45, letterSpacing: ".1em", textAlign: "right" }}>
+          Original track
+          <br />
+          tiktok_pipes
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };
 
 export const PortfolioFilm = () => {
-  const { fps } = useVideoConfig();
-  const transition = linearTiming({ durationInFrames: Math.round(fps * 0.5) });
+  const musicVolume = (audioFrame: number) => {
+    const ducked = audioFrame < 112 ? 0.22 : interpolate(audioFrame, [112, 132], [0.22, 0.72], clamp);
+    const finalFade = interpolate(audioFrame, [786, 815], [1, 0], clamp);
+    return ducked * finalFade;
+  };
 
   return (
-    <AbsoluteFill style={{ backgroundColor: palette.ink }}>
-      <TransitionSeries>
-        <TransitionSeries.Sequence durationInFrames={135} premountFor={fps}>
-          <HookScene />
-        </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={slide({ direction: "from-bottom" })} timing={transition} />
-        <TransitionSeries.Sequence durationInFrames={150} premountFor={fps}>
-          <ThesisScene />
-        </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={wipe({ direction: "from-left" })} timing={transition} />
-        <TransitionSeries.Sequence durationInFrames={150} premountFor={fps}>
-          <ContinuityScene />
-        </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={slide({ direction: "from-bottom" })} timing={transition} />
-        <TransitionSeries.Sequence durationInFrames={150} premountFor={fps}>
-          <ProofScene />
-        </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={fade()} timing={transition} />
-        <TransitionSeries.Sequence durationInFrames={150} premountFor={fps}>
-          <JudgmentScene />
-        </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={wipe({ direction: "from-right" })} timing={transition} />
-        <TransitionSeries.Sequence durationInFrames={180} premountFor={fps}>
-          <HandoffScene />
-        </TransitionSeries.Sequence>
-      </TransitionSeries>
-      <Audio
-        src={staticFile("video/portfolio-film/continuity-score.wav")}
-        volume={(frame) => interpolate(frame, [0, fps * 0.25, fps * 27.55, fps * 28], [0, 0.94, 0.94, 0], clamp)}
+    <AbsoluteFill style={{ background: palette.carbon }}>
+      <Audio src={staticFile("video/portfolio-film/tiktok-pipes.wav")} volume={musicVolume} />
+      <Sequence from={4} durationInFrames={107} premountFor={30}>
+        <Audio src={staticFile("video/portfolio-film/hope-config-voice.wav")} volume={1} />
+      </Sequence>
+      <Sequence from={SCENES.faultline.from} durationInFrames={SCENES.faultline.duration} premountFor={30}>
+        <SpokenFaultline />
+      </Sequence>
+      <Sequence from={SCENES.hero.from} durationInFrames={SCENES.hero.duration} premountFor={30}>
+        <HeroPlane />
+      </Sequence>
+      <Sequence from={SCENES.continuity.from} durationInFrames={SCENES.continuity.duration} premountFor={30}>
+        <ContinuityModel />
+      </Sequence>
+      <Sequence from={SCENES.receipt.from} durationInFrames={SCENES.receipt.duration} premountFor={30}>
+        <ReceiptProof />
+      </Sequence>
+      <Sequence from={SCENES.range.from} durationInFrames={SCENES.range.duration} premountFor={30}>
+        <ConstraintRange />
+      </Sequence>
+      <Sequence from={SCENES.close.from} durationInFrames={SCENES.close.duration} premountFor={30}>
+        <AuthoredClose />
+      </Sequence>
+      <FaultlineFlash />
+    </AbsoluteFill>
+  );
+};
+
+export const FramedPortfolioFilm = () => {
+  const { width, height } = useVideoConfig();
+  const scale = height / 1920;
+  const filmWidth = 1080 * scale;
+  const isWide = width / height > 1.3;
+
+  return (
+    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
+      <Img
+        src={staticFile("images/generated/reflection-field.jpg")}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "brightness(.25) contrast(1.2) saturate(.7)" }}
       />
+      <Grid />
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: (width - filmWidth) / 2,
+          width: 1080,
+          height: 1920,
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+          overflow: "hidden",
+          boxShadow: "0 0 100px rgba(0,0,0,.72)",
+        }}
+      >
+        <PortfolioFilm />
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: isWide ? 54 : 28,
+          top: isWide ? 52 : 34,
+          width: Math.max(150, (width - filmWidth) / 2 - (isWide ? 96 : 50)),
+          fontFamily: sans,
+          textTransform: "uppercase",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 12, color: palette.signal, fontSize: isWide ? 16 : 12, fontWeight: 720, letterSpacing: ".14em" }}>
+          <span style={{ width: 10, height: 10, background: palette.signal }} /> Hope Atina
+        </div>
+        {isWide ? (
+          <div style={{ marginTop: 210, fontSize: 68, fontWeight: 780, lineHeight: .88, letterSpacing: "-.07em" }}>
+            Depth,
+            <br />
+            made
+            <br />
+            visible.
+          </div>
+        ) : null}
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          right: isWide ? 54 : 28,
+          bottom: isWide ? 52 : 34,
+          width: Math.max(150, (width - filmWidth) / 2 - (isWide ? 96 : 50)),
+          fontFamily: sans,
+          textAlign: "right",
+          textTransform: "uppercase",
+        }}
+      >
+        {isWide ? (
+          <div style={{ color: palette.dim, fontSize: 15, fontWeight: 650, lineHeight: 1.65, letterSpacing: ".12em" }}>
+            Engineer
+            <br />
+            Founder
+            <br />
+            Product thinker
+          </div>
+        ) : null}
+        <div style={{ marginTop: 28, color: palette.mineral, fontSize: isWide ? 18 : 12, fontWeight: 720, letterSpacing: ".05em" }}>
+          hopeatina.com
+        </div>
+      </div>
+      <div style={{ position: "absolute", top: 0, bottom: 0, left: (width - filmWidth) / 2 - 3, width: 3, background: palette.heat }} />
+      <div style={{ position: "absolute", top: 0, bottom: 0, left: (width + filmWidth) / 2, width: 3, background: palette.cold }} />
     </AbsoluteFill>
   );
 };
 
 export const PortfolioFilmCover = () => (
-  <AbsoluteFill style={{ backgroundColor: palette.ochre, color: palette.ink, overflow: "hidden" }}>
-    <SignalIndex current="FILM" dark={false} />
-    <div style={{ position: "absolute", top: 218, left: 72, right: 72, zIndex: 3 }}>
-      <Kicker color={palette.ink}>Hope Atina · Portfolio film</Kicker>
-      <h1
-        style={{
-          margin: "58px 0 0",
-          fontFamily: sans,
-          fontSize: 132,
-          fontWeight: 650,
-          lineHeight: 0.86,
-          letterSpacing: "-0.075em",
-        }}
-      >
-        Keep
-        <br />
-        <em style={{ fontFamily: serif, fontWeight: 400 }}>the plot.</em>
-      </h1>
-    </div>
+  <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
     <Img
-      src={staticFile("images/hope-profile.jpg")}
+      src={staticFile("images/generated/inspection-field.jpg")}
       style={{
         position: "absolute",
-        left: -80,
-        bottom: -60,
-        width: 980,
-        height: 1120,
+        inset: 0,
+        width: "100%",
+        height: "100%",
         objectFit: "cover",
-        objectPosition: "center top",
-        filter: "grayscale(1) sepia(0.5) contrast(1.14)",
-        mixBlendMode: "multiply",
+        objectPosition: "54% center",
+        filter: "brightness(.42) contrast(1.18) saturate(.84)",
       }}
     />
-    <div
-      style={{
-        position: "absolute",
-        right: 72,
-        bottom: 112,
-        width: 410,
-        paddingTop: 24,
-        borderTop: `3px solid ${palette.ink}`,
-        fontFamily: mono,
-        fontSize: 18,
-        lineHeight: 1.55,
-        letterSpacing: "0.1em",
-        textTransform: "uppercase",
-      }}
-    >
-      AI systems engineer
-      <br />
-      Founder, OrgX
+    <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(8,8,6,.2), rgba(8,8,6,.96))" }} />
+    <div style={{ position: "absolute", top: 70, left: 64, right: 64, display: "flex", justifyContent: "space-between", fontFamily: sans, fontSize: 18, fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase" }}>
+      <span style={{ display: "flex", alignItems: "center", gap: 14 }}><span style={{ width: 12, height: 12, background: palette.signal }} />Hope Atina</span>
+      <span style={{ opacity: .6 }}>Portfolio / 2026</span>
+    </div>
+    <div style={{ position: "absolute", top: 545, left: 64, right: 64 }}>
+      <Kicker>A portfolio film</Kicker>
+      <div style={{ marginTop: 46, fontFamily: sans, fontSize: 122, fontWeight: 780, lineHeight: .86, letterSpacing: "-.078em", textTransform: "uppercase" }}>
+        Make the
+        <br />
+        <span style={{ color: palette.signal }}>invisible</span>
+        <br />
+        layer visible.
+      </div>
+    </div>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1360, height: 5, background: palette.signal, boxShadow: `0 -10px 0 ${palette.heat}, 0 10px 0 ${palette.cold}` }} />
+    <div style={{ position: "absolute", left: 64, right: 64, bottom: 72, display: "flex", justifyContent: "space-between", alignItems: "flex-end", borderTop: `1px solid ${palette.line}`, paddingTop: 25, fontFamily: sans, textTransform: "uppercase" }}>
+      <div style={{ fontSize: 24, fontWeight: 700, letterSpacing: ".02em" }}>Engineer · founder · product thinker</div>
+      <div style={{ color: palette.dim, fontSize: 14, lineHeight: 1.5, letterSpacing: ".12em", textAlign: "right" }}>Original track<br />tiktok_pipes</div>
     </div>
   </AbsoluteFill>
 );

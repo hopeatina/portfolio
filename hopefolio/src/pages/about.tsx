@@ -1,187 +1,164 @@
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import MaterializeHero from "@/components/site/MaterializeHero";
 import { experienceEntries } from "@/data/portfolio";
+import {
+  CausalFlow,
+  ContinuityPlayhead,
+  SectionSignal,
+  TextLink,
+} from "@/components/v4/V4Primitives";
 
 export default function About() {
   return (
     <>
       <Head>
-        <title>About | Hope Atina</title>
+        <title>About Hope Atina</title>
         <meta
           name="description"
-          content="Cameroon-born, Houston-based engineer building systems where aggressive delegation stays legible."
+          content="Hope Atina is a Houston-based engineer, founder, and product thinker building coherent systems across AI infrastructure and regulated products."
         />
       </Head>
 
-      <main id="main-content" className="page-frame">
-        <div className="page-stack">
-          <aside
-            className="contact-card"
-            style={{
-              padding: "0.9rem 1.1rem",
-              borderLeft: "3px solid var(--shell-border-strong)",
-              background: "rgba(255,255,255,0.02)",
-            }}
-          >
-            <p style={{ margin: 0, fontSize: "0.95rem", color: "var(--shell-text-soft)" }}>
-              <strong style={{ color: "var(--shell-text)" }}>Currently:</strong>{" "}
-              shipping OrgX — continuity infrastructure for AI agents.{" "}
-              <strong style={{ color: "var(--shell-text)" }}>Looking for:</strong>{" "}
-              senior/staff IC seats on agent platforms, MCP infra, or evals +
-              observability.{" "}
-              <Link href="/hiring" className="site-link-inline">
-                For hiring managers →
-              </Link>
-              {" · "}
-              <a
-                href="https://calendly.com/hopeatina/orgx-discovery"
-                target="_blank"
-                rel="noreferrer"
-                className="site-link-inline"
-              >
-                Book 30 min ↗
-              </a>
-            </p>
-          </aside>
+      <main id="main-content" className="v4-page v4-about-page">
+        <ContinuityPlayhead label="about" />
 
-          <MaterializeHero
-            variant="light"
-            storageKey="about"
-            className="about-grid"
-          >
-            <div className="page-header-stack">
-              <span
-                className="eyebrow"
-                data-materialize
-                style={{ ["--materialize-delay" as any]: "140ms" }}
-              >
-                About
-              </span>
-              <h1 data-materialize style={{ ["--materialize-delay" as any]: "220ms" }}>
-                Hope Atina
-              </h1>
-              <p
-                data-materialize
-                style={{
-                  margin: 0,
-                  fontSize: "1.25rem",
-                  color: "var(--shell-muted)",
-                  ["--materialize-delay" as any]: "300ms",
-                }}
-              >
-                Cameroon-born, Houston-based engineer building systems where
-                aggressive delegation stays legible.
+        <header className="v4-about-hero">
+          <Image
+            src="/images/generated/reflection-field.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            aria-hidden="true"
+          />
+          <div>
+            <span>About / inspection as a creative practice</span>
+            <h1>I build systems to understand what matters—and use the work to become more precise.</h1>
+            <p>
+              I am a Cameroon- and Estonia-rooted, Houston-based engineer, founder, and product thinker.
+              The throughline is not technology for its own sake. It is coherence: between a system's
+              ambition, the people operating it, and the evidence that earns trust.
+            </p>
+          </div>
+        </header>
+
+        <section className="v4-about-origin">
+          <SectionSignal index="01">How I came to the work</SectionSignal>
+          <div className="v4-about-origin-grid">
+            <h2>Engineering gave me rigor. Collaboration gave it range. Inspection gave it depth.</h2>
+            <div>
+              <p>
+                Bioengineering at Rice trained me to see interacting systems instead of isolated
+                features. Capital One taught me that reliability begins before the data moves.
+                Vessel Health expanded ownership across hardware, APIs, and operations. Alma made
+                consequence, privacy, and reversible rollout impossible to separate.
               </p>
-              <p
-                data-materialize
-                style={{
-                  margin: 0,
-                  maxWidth: "36rem",
-                  ["--materialize-delay" as any]: "360ms",
-                }}
-              >
-                7+ years shipping production systems across healthcare,
-                enterprise data, and AI infrastructure. B.S. Bioengineering,
-                Rice University.
+              <p>
+                Building OrgX pulled those lessons into one founder problem: how do many intelligent
+                actors move quickly without losing the shared context, judgment, and proof that make
+                the work accountable?
+              </p>
+              <p>
+                Music stays in the background, where it belongs: in pacing, tension, release, and a
+                sensitivity to when something is technically correct but not yet resolved.
               </p>
             </div>
+          </div>
+        </section>
 
-            <figure
-              className="visual-frame"
-              data-materialize
-              style={{ ["--materialize-delay" as any]: "200ms" }}
-            >
-              <div className="visual-frame-media">
-                <Image
-                  src="/images/hope-profile.jpg"
-                  alt="Portrait of Hope Atina"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 34vw, 100vw"
-                  className="object-cover"
-                />
+        <section className="v4-about-method">
+          <SectionSignal index="02">My operating pattern</SectionSignal>
+          <div className="v4-about-method-heading">
+            <h2>Inspect deeply. Locate the boundary. Compose the intervention. Leave a stronger system.</h2>
+            <p>
+              Challenges become useful when they reveal the mechanism underneath them. I prefer the
+              kind of collaboration where disagreement sharpens the model and evidence settles the next move.
+            </p>
+          </div>
+          <CausalFlow
+            steps={[
+              { glyph: "inspect", label: "Inspect", detail: "Observe the real system, including the awkward and invisible parts." },
+              { glyph: "context", label: "Name the boundary", detail: "Find where context, trust, or responsibility is being lost." },
+              { glyph: "judgment", label: "Intervene", detail: "Make the smallest structural decision that changes the cause chain.", tone: "heat" },
+              { glyph: "receipt", label: "Learn", detail: "Return the outcome as evidence that improves the next operating model." },
+            ]}
+          />
+        </section>
+
+        <section className="v4-about-experience">
+          <SectionSignal index="03">Production environments</SectionSignal>
+          <div className="v4-experience-list">
+            <article className="v4-experience-featured">
+              <span>Now</span>
+              <div>
+                <small>Founder / OrgX</small>
+                <h2>Building the continuity and proof layer for AI-delivered work.</h2>
               </div>
-              <figcaption>Profile portrait, re-framed into the darker shell.</figcaption>
-            </figure>
-          </MaterializeHero>
+              <p>
+                Product, architecture, distribution, quality systems, and the connective tissue across
+                Claude Code, Codex, Cursor, OpenCode, and OpenClaw.
+              </p>
+              <TextLink href="/projects/orgx">Inspect OrgX</TextLink>
+            </article>
+            {experienceEntries.map((entry) => (
+              <article key={entry.company}>
+                <span>{entry.period}</span>
+                <div>
+                  <small>{entry.role}</small>
+                  <h3>{entry.company}</h3>
+                </div>
+                <p>{entry.outcome}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-          <section className="contact-card">
-            <span className="eyebrow">Philosophy</span>
-            <div
-              style={{
-                display: "grid",
-                gap: "0.7rem",
-                marginTop: "0.9rem",
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(1.8rem, 4vw, 2.3rem)",
-                letterSpacing: "-0.03em",
-                lineHeight: 1.1,
-              }}
+        <section className="v4-about-collaboration">
+          <SectionSignal index="04">Collaboration is a creative technology</SectionSignal>
+          <div>
+            <h2>I started Figma and Chill because talking about making was not enough.</h2>
+            <p>
+              What began as an empty Clubhouse room grew into a global BIPOC design community where
+              people made things together in real time. At Config 2021, our team shared how play,
+              connection, community, and culture became a repeatable creative practice.
+            </p>
+            <a
+              href="https://www.youtube.com/watch?v=JSpfsuK75j0&t=171s"
+              target="_blank"
+              rel="noreferrer"
+              className="v4-text-link"
             >
-              <span>Make delegation aggressive.</span>
-              <span>Make provenance visible.</span>
-              <span>Make trust earned, not assumed.</span>
-              <span>Make failures inspectable.</span>
-              <span>Make the review surface the product.</span>
-              <span>Make it ship.</span>
-            </div>
-          </section>
+              Watch the Config talk from Hope's origin story <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <a
+            href="https://www.youtube.com/watch?v=JSpfsuK75j0&t=171s"
+            target="_blank"
+            rel="noreferrer"
+            className="v4-about-proof-link"
+          >
+            <Image
+              src="/images/evidence/figma-config-2021.jpg"
+              alt="Figma Config 2021 talk cover for Figma and Chill"
+              fill
+              sizes="(min-width: 900px) 44vw, 100vw"
+            />
+            <span>Connection → community → culture</span>
+          </a>
+        </section>
 
-          <section className="page-content">
-            <div className="page-header-stack" style={{ gap: "0.8rem" }}>
-              <span className="eyebrow">Experience</span>
-              <h2>Production environments</h2>
-            </div>
-            <div className="work-grid">
-              {experienceEntries.map((entry) => (
-                <article key={entry.company} className="contact-card">
-                  <div className="eyebrow">{entry.period}</div>
-                  <h3 style={{ margin: "0.35rem 0 0", fontFamily: "var(--font-heading)", fontSize: "1.75rem" }}>
-                    {entry.company}
-                  </h3>
-                  <p style={{ margin: 0, color: "var(--shell-muted)" }}>{entry.role}</p>
-                  <p style={{ margin: "0.9rem 0 0" }}>{entry.outcome}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="page-content">
-            <div className="page-header-stack" style={{ gap: "0.8rem" }}>
-              <span className="eyebrow">Beyond code</span>
-              <h2>Story and taste</h2>
-            </div>
-            <p style={{ maxWidth: "42rem" }}>
-              My story begins in Cameroon, where my family&apos;s
-              entrepreneurial energy and love of education shaped how I think
-              about range, ambition, and responsibility.
-            </p>
-            <p style={{ maxWidth: "42rem" }}>
-              The move to Houston widened the aperture. Rice gave me the
-              engineering vocabulary. Music gave me taste, pacing, and a feel
-              for when a system is technically correct but still not resolved.
-            </p>
-            <p style={{ maxWidth: "42rem" }}>
-              That mix is why the work sits where it does now: I care about
-              the hard infrastructure problems, but I care just as much about
-              the human surface wrapped around them.
-            </p>
-          </section>
-
-          <section className="contact-card">
-            <span className="eyebrow">Now · April 2026</span>
-            <h2 style={{ marginTop: "0.5rem" }}>Building the continuity layer for AI agents.</h2>
-            <p style={{ margin: "0.9rem 0 0", maxWidth: "42rem" }}>
-              Shipping OrgX MCP in public. Running a weekly agent benchmark
-              with independent judges. Writing about memory, provenance, and
-              trust in production agent systems. Looking for a senior/staff
-              IC seat on a team already building in this lane.
-            </p>
-          </section>
-        </div>
+        <section className="v4-about-now">
+          <span>Now / July 2026</span>
+          <h2>Building in public where AI infrastructure becomes a human operating system.</h2>
+          <p>
+            I am most interested in founder collaborations and senior/staff work where systems depth,
+            product judgment, and AI-native execution all matter at once.
+          </p>
+          <div>
+            <TextLink href="/hiring">How I work with teams</TextLink>
+            <TextLink href="mailto:hopeatina@gmail.com" external>Talk with me</TextLink>
+          </div>
+        </section>
       </main>
     </>
   );

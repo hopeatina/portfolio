@@ -32,7 +32,7 @@ export const navItems = [
   { label: "Work", href: "/projects" },
   { label: "Writing", href: "/blog" },
   { label: "About", href: "/about" },
-  { label: "Hire", href: "/hiring" },
+  { label: "Work with me", href: "/hiring" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -40,15 +40,15 @@ export const featuredProjects: PortfolioProject[] = [
   {
     slug: "orgx",
     title: "OrgX",
-    status: "Ready for review",
-    shortLabel: "Multi-agent orchestration",
+    status: "Live tool",
+    shortLabel: "AI continuity + proof",
     summary:
-      "Operational control plane for multi-agent work: routing, governance, memory, and review surfaces.",
+      "The continuity and proof layer for accountable AI-delivered work across clients.",
     description:
-      "Multi-agent orchestration with trust governance, approval gates, durable workflows, and the interfaces operators need when autonomy stops being a toy.",
-    proof: ["1,270+ commits", "61 MCP tools", "136+ benchmark tasks"],
-    heroImage: "/images/projects/orgx-illustration.png",
-    heroAlt: "OrgX multi-agent orchestration illustration",
+      "OrgX preserves organizational context, trust, decisions, and receipts across the interfaces where AI work actually happens.",
+    proof: ["Continuity across clients", "Receipt-first artifacts", "Human consequence gates"],
+    heroImage: "/images/case-studies/orgx-v4/artifact-receipt.png",
+    heroAlt: "OrgX artifact receipt with provenance and a visible quality bar",
     href: "/projects/orgx",
     primaryCta: "Read case study",
     secondaryHref: "https://useorgx.com",
@@ -64,7 +64,9 @@ export const featuredProjects: PortfolioProject[] = [
       "HIPAA-constrained backend systems for reassessments, notes, audits, and document workflows.",
     description:
       "Production backend engineering under compliance pressure: long-lived ownership, careful rollout, and reliability work that had to hold up in real clinical operations.",
-    proof: ["999 commits", "2.7 years", "HIPAA production"],
+    proof: ["HIPAA production", "72% reassessment adoption", "Reversible rollout"],
+    heroImage: "/images/projects/alma-system-v4.svg",
+    heroAlt: "Clinical workflow continuity and audit map",
     href: "/projects/alma",
     primaryCta: "Read case study",
     tier: "supporting",
@@ -78,7 +80,9 @@ export const featuredProjects: PortfolioProject[] = [
       "Rust system monitor with CLI, web dashboard, TUI, and distribution through Homebrew.",
     description:
       "A utility-grade developer tool that treats installation, runtime footprint, and operator clarity as product work, not afterthoughts.",
-    proof: ["Rust", "3 operator surfaces", "Homebrew"],
+    proof: ["Rust core", "CLI / TUI / web", "Distribution as product"],
+    heroImage: "/images/case-studies/perfpulse-dashboard.png",
+    heroAlt: "PerfPulse local system inspection dashboard",
     href: "/projects/perfpulse",
     primaryCta: "Read case study",
     secondaryHref: "https://github.com/hopeatina/perf-pulse",
@@ -87,14 +91,16 @@ export const featuredProjects: PortfolioProject[] = [
   },
   {
     slug: "openclaw",
-    title: "OpenClaw",
+    title: "OrgX for OpenClaw",
     status: "Live tool",
-    shortLabel: "Plugin architecture",
+    shortLabel: "Continuity plugin",
     summary:
-      "Browser-native mission control for agent workflows with MCP bridging, SSE, and resumable state.",
+      "Persistent organizational memory and coordinated execution for OpenClaw agents.",
     description:
-      "Plugin-based orchestration surface with real-time dashboarding, offline-first task state, and a local bridge that makes agent tooling usable from software people already run.",
-    proof: ["558 commits", "30 MCP tools", "SSE + SQLite"],
+      "The OrgX plugin meets operators inside OpenClaw, carrying shared context, resumable work, decisions, and receipts through one local bridge.",
+    proof: ["Host-native adoption", "Durable state", "Live control + receipts"],
+    heroImage: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",
+    heroAlt: "OrgX Live connected to OpenClaw agents and workstreams",
     href: "/projects/openclaw",
     primaryCta: "Read case study",
     secondaryHref: "https://github.com/useorgx/openclaw-plugin",
@@ -280,4 +286,3 @@ export const experienceEntries: ExperienceEntry[] = [
       "Built OR capacity monitoring dashboards in React and D3 for scientific and operational decision-making.",
   },
 ];
-

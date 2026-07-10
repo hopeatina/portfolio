@@ -1,189 +1,110 @@
-import Head from "next/head";
-import React from "react";
-import {
-  BuildSurface,
-  CalloutList,
-  CaseStudyEndcap,
-  CaseStudyHero,
-  CaseStudySection,
-  CaseStudySplit,
-  DiagramFrame,
-  TerminalPanel,
-} from "@/components/site/CaseStudyPrimitives";
-import NextProjectNav from "@/components/site/NextProjectNav";
-
-const architectureDiagram = `
-flowchart TB
-  subgraph API["Django / DRF"]
-    A[ViewSets + serializers] --> B[Feature flags]
-    A --> C[RBAC permissions]
-  end
-
-  subgraph Async["Celery workers"]
-    D[Reassessment jobs] --> E[Backfills]
-    D --> F[Cadence scheduling]
-    G[Session feedback] --> H[Hourly reminders]
-  end
-
-  subgraph Data["Data layer"]
-    I[PostgreSQL] --> J[Clinical models]
-    K[S3] --> L[PDFs + documents]
-  end
-
-  subgraph External["External systems"]
-    M[Brellium API] --> N[Audit requests]
-  end
-
-  A --> D
-  A --> G
-  D --> I
-  A --> K
-  A --> M
-`;
+import CaseStudyNarrative from "@/components/v4/CaseStudyNarrative";
 
 export default function AlmaPage() {
   return (
-    <>
-      <Head>
-        <title>Alma | Hope Atina</title>
-        <meta
-          name="description"
-          content="Alma case study: HIPAA-compliant backend engineering for automated reassessments, compliant progress notes, audit integrations, and document workflows."
-        />
-      </Head>
-
-      <main id="main-content" className="page-frame">
-        <div className="page-stack">
-          <CaseStudyHero
-            kicker="Case study 02"
-            status="Shipped in production"
-            title="Alma"
-            subtitle="999 commits in HIPAA production across reassessments, compliance, audit integrations, and document workflows."
-            description="Long-running, failure-sensitive backend ownership in a regulated environment: reassessment logic, audit integrations, Datadog observability, Celery workflows, and RBAC document management — all shipped without breaking production."
-            facts={[
-              { label: "Commits", value: "999" },
-              { label: "Tenure", value: "2.7 years" },
-              { label: "Feature areas", value: "7 shipped" },
-              { label: "Error reduction", value: "20%" },
-              { label: "Adoption", value: "72%" },
-            ]}
-            image="/images/projects/alma.svg"
-            imageAlt="Alma — HIPAA-compliant backend systems"
-            materialize="light"
-            materializeKey="alma"
-          />
-
-          <BuildSurface
-            items={[
-              { label: "Language", value: "Python" },
-              { label: "Framework", value: "Django + DRF" },
-              { label: "Async", value: "Celery workers" },
-              { label: "Storage", value: "PostgreSQL + S3" },
-            ]}
-          />
-
-          <CaseStudySection kicker="01 // production frame" title="What the work actually demanded">
-            <CaseStudySplit
-              media={
-                <TerminalPanel
-                  label="feature areas shipped"
-                  lines={[
-                    "automated_reassessments    → 72% adoption",
-                    "compliant_progress_notes   → HIPAA-safe workflows",
-                    "brellium_audit_integration → third-party audit hooks",
-                    "rbac_document_management   → permission-scoped docs",
-                    "celery_reminders           → async therapist comms",
-                    "datadog_observability      → 20% fewer prod errors",
-                    "serializer_evolution       → evolving compliance reqs",
-                    "",
-                    "over 999 commits · 2.7 years · operational ownership",
-                  ]}
-                />
-              }
-            >
-              <p>
-                Alma is where the portfolio proves I can operate under
-                healthcare constraints, not just prototype around them. The work
-                covered automated reassessment logic, serializer churn for
-                evolving compliance requirements, document pipelines, and
-                third-party audit integrations.
-              </p>
-              <p>
-                The constant here was operational care: feature flags, multi-PR
-                rollout strategy, reversible migrations, and background jobs
-                designed to survive large backfills and token-expiring external
-                APIs.
-              </p>
-            </CaseStudySplit>
-          </CaseStudySection>
-
-          <CaseStudySection kicker="02 // architecture" title="The system had to stay boring in the right ways" raised>
-            <DiagramFrame
-              title="Clinical backend architecture"
-              description="Django and DRF for request surfaces, Celery for asynchronous work, PostgreSQL and S3 for durable data, and Brellium for external audit flows."
-              diagram={architectureDiagram}
-            />
-          </CaseStudySection>
-
-          <CaseStudySection kicker="03 // feature areas" title="The seven areas that mattered">
-            <CalloutList
-              items={[
-                "Automated clinical reassessments with backfills, cadence logic, family-based assessment rules, and batch enrollment flows.",
-                "Compliant progress notes and PDF generation where serializer shape and audit requirements kept evolving.",
-                "Brellium audit integration with retries, re-authentication, and production-ready API handling.",
-                "Appointment document management with RBAC and S3-backed lifecycle rules.",
-                "Provider consent rollout decomposed into multiple safe PRs instead of one risky launch.",
-                "Session feedback and reminder systems tied back into the reassessment engine.",
-                "Audit-protection infrastructure for appointment-level compliance state.",
-              ]}
-            />
-          </CaseStudySection>
-
-          <CaseStudySection kicker="04 // decisions" title="Why the implementation choices mattered" raised>
-            <CaseStudySplit
-              media={
-                <CalloutList
-                  items={[
-                    "Celery handled backfills, reminders, and long-running work that should never block a request.",
-                    "Feature flags let production code land safely before provider-facing rollout.",
-                    "Multi-PR decomposition kept a sensitive consent feature reviewable and reversible.",
-                  ]}
-                />
-              }
-            >
-              <p>
-                In a HIPAA environment, velocity is not the same thing as rush.
-                The engineering challenge is to ship continuously while keeping
-                the failure modes controlled and the audit trail legible.
-              </p>
-              <p>
-                That kind of work rarely produces a glamorous demo, but it does
-                produce trust. That is the real artifact here.
-              </p>
-            </CaseStudySplit>
-          </CaseStudySection>
-
-          <CaseStudyEndcap
-            title="The work that holds when the system cannot break."
-            body={
-              <>
-                <p>
-                  Long-running, failure-sensitive backend ownership in a
-                  regulated environment. The same instinct carries directly
-                  into agent infrastructure: build systems that stay
-                  inspectable when they matter most.
-                </p>
-              </>
-            }
-            primaryHref="/projects/orgx"
-            primaryLabel="Read OrgX case study →"
-            secondaryHref="https://www.helloalma.com"
-            secondaryLabel="View Alma"
-          />
-
-          <NextProjectNav currentSlug="alma" />
-        </div>
-      </main>
-    </>
+    <CaseStudyNarrative
+      pageTitle="Alma case study — Hope Atina"
+      description="Production backend engineering under HIPAA constraints: reassessments, compliant workflows, observability, and reversible rollout."
+      index="Case 02 / regulated production"
+      status="Production ownership · 2.7 years"
+      title="Alma"
+      subtitle="Clinical systems that had to earn adoption and survive inspection."
+      introduction="Alma is the proof that I can own long-running backend systems where privacy, auditability, adoption, and reliability are not separate requirements. They are the product boundary."
+      facts={[
+        { label: "Constraint", value: "HIPAA production" },
+        { label: "Adoption", value: "72% reassessments" },
+        { label: "Reliability", value: "20% fewer errors" },
+        { label: "Operating model", value: "reversible rollout" },
+      ]}
+      heroProof={{
+        src: "/images/projects/alma-system-v4.svg",
+        alt: "Clinical workflow continuity map for reassessments, documentation, consent, and audit gates",
+        label: "Clinical workflow continuity",
+        caption: "Privacy enters at the first boundary; each branch returns through an explicit audit gate before becoming an accountable outcome.",
+      }}
+      problem={{
+        eyebrow: "The workflow lived longer than any request",
+        title: "Clinical state had to remain correct across time, actors, vendors, and changing requirements.",
+        body: (
+          <>
+            <p>
+              Reassessments, progress notes, appointment documents, consent, and external audits
+              cross synchronous requests, background jobs, provider workflows, and third-party APIs.
+              A small mistake could become a compliance problem long after the original code path ran.
+            </p>
+            <p>
+              The challenge was not merely shipping features. It was evolving the system without
+              making clinical operations absorb the risk.
+            </p>
+          </>
+        ),
+        notes: [
+          "Cadence and eligibility rules changed while work was already in flight.",
+          "Backfills and reminders could not block provider-facing requests.",
+          "External audit tokens and vendor APIs failed on their own timelines.",
+        ],
+      }}
+      insight={{
+        eyebrow: "Reliability was a product behavior",
+        title: "The safest implementation was the one operators could understand and reverse.",
+        body: (
+          <>
+            <p>
+              Feature flags, decomposed pull requests, explicit job state, and observable failure
+              paths made the work reviewable before it became production pressure. That discipline
+              also made adoption easier: clinicians did not have to become debuggers.
+            </p>
+          </>
+        ),
+      }}
+      decision={{
+        eyebrow: "Move consequence out of the request path",
+        title: "Decompose sensitive workflows into durable, observable, reversible stages.",
+        body: (
+          <>
+            <p>
+              Django and DRF handled clear request surfaces. Celery owned backfills, reminders, PDF
+              generation, and vendor interactions. PostgreSQL and S3 carried durable state. Datadog
+              made the failure path visible enough to intervene before operators felt it.
+            </p>
+          </>
+        ),
+      }}
+      flow={[
+        { glyph: "context", label: "Clinical event", detail: "Eligibility, cadence, consent, and prior state enter together." },
+        { glyph: "branch", label: "Durable workflows", detail: "Long-running work moves into explicit background stages.", tone: "cold" },
+        { glyph: "judgment", label: "Audit boundary", detail: "Flags, permissions, and external audit state gate rollout.", tone: "heat" },
+        { glyph: "receipt", label: "Operator trust", detail: "The result is traceable, observable, and safe to reverse." },
+      ]}
+      proofs={[
+        {
+          src: "/images/projects/alma-system-v4.svg",
+          alt: "High-contrast clinical backend workflow diagram",
+          label: "Seven feature areas; one operating principle",
+          caption: "Reassessments, notes, document workflows, reminders, consent, audit integrations, and observability were treated as one continuity problem.",
+        },
+      ]}
+      learning={{
+        eyebrow: "Production changed the meaning of velocity",
+        title: "Move quickly by making the failure mode smaller.",
+        body: (
+          <>
+            <p>
+              Alma taught me that care and speed are not opposites. A rollout can move continuously
+              when each step is reviewable, measurable, and reversible. That operating instinct now
+              shapes how I design trust boundaries for agent systems.
+            </p>
+          </>
+        ),
+        notes: [
+          "Design for the backfill, not only the happy-path request.",
+          "Treat observability as an operator interface.",
+          "Make sensitive rollout state explicit before adding automation.",
+        ],
+      }}
+      primaryLink={{ href: "https://www.helloalma.com", label: "Visit Alma", external: true }}
+      secondaryLink={{ href: "/projects/orgx", label: "See the continuity thesis" }}
+      next={{ href: "/projects/perfpulse", label: "Next / local tooling", title: "PerfPulse" }}
+    />
   );
 }

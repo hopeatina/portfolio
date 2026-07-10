@@ -4,8 +4,8 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ||
   "https://hopeatina.com";
 export const SITE_DESCRIPTION =
-  "Portfolio of Hope Atina, an AI agent infrastructure engineer building multi-agent orchestration, MCP tooling, developer platforms, and production AI systems.";
-export const SITE_IMAGE = "/images/hope-profile.jpg";
+  "Hope Atina is an engineer, founder, and product thinker building the continuity and proof layers that make ambitious AI systems coherent.";
+export const SITE_IMAGE = "/images/generated/inspection-field.jpg";
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/hopeatina",
@@ -17,14 +17,18 @@ export const SOCIAL_LINKS = {
 
 export const SITE_KEYWORDS = [
   "Hope Atina",
-  "AI agent infrastructure engineer",
+  "AI infrastructure engineer",
+  "founder",
+  "product thinker",
+  "AI continuity",
+  "AI proof systems",
   "multi-agent orchestration",
   "MCP protocol",
   "developer tooling",
   "production AI systems",
   "OrgX",
   "PerfPulse",
-  "OpenClaw",
+  "OrgX for OpenClaw",
 ];
 
 export type CrawlSection =
@@ -55,7 +59,7 @@ export const PRIMARY_PAGES: CrawlEntry[] = [
     path: "/",
     title: "Home",
     description:
-      "Homepage and overview of Hope Atina's work in multi-agent orchestration, MCP tooling, developer tooling, and production AI systems.",
+      "Hope Atina's work across AI continuity, accountable agent execution, regulated production, and developer tooling.",
     section: "Primary Pages",
     changeFrequency: "weekly",
     priority: 1,
@@ -103,16 +107,16 @@ export const CASE_STUDIES: CrawlEntry[] = [
     path: "/projects/orgx",
     title: "OrgX",
     description:
-      "Multi-agent orchestration platform with MCP integrations, durable workflows, trust-based governance, and organization memory.",
+      "The continuity and proof layer for accountable AI-delivered work across clients.",
     section: "Case Studies",
     changeFrequency: "weekly",
     priority: 0.9,
   },
   {
     path: "/projects/openclaw",
-    title: "OpenClaw Plugin",
+    title: "OrgX for OpenClaw",
     description:
-      "Browser-native agent interaction and orchestration tooling for developers, with real-time task management and CLI-first workflows.",
+      "Persistent organizational memory, coordinated execution, and receipts for OpenClaw agents.",
     section: "Case Studies",
     changeFrequency: "weekly",
     priority: 0.8,
