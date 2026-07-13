@@ -1,49 +1,52 @@
-# The Spoken Faultline — final video QA
+# Intelligence Survives the Handoff — final video QA
 
-Date: 2026-07-09
+Date: 2026-07-13
 
 Primary deliverable: `video/output/hope-atina-portfolio-social-final.mp4`
 
-## Three-judge review
+## Critical review
 
-| Judge | Score | Evidence |
+| Dimension | Score | Evidence |
 |---|---:|---|
-| Narrative and positioning | 96/100 | Hope’s real Config voice establishes authorship immediately. The sequence then proves the principle through the portfolio thesis, continuity model, authentic OrgX receipt, constraint-based range, and a single portrait resolution. |
-| Visual craft | 96/100 | The site and film share one inspection-field language, Recursive/Newsreader typography, and a controlled carbon/mineral/signal/heat/cold palette. No stock footage, fake device chrome, generated UI, decorative particle field, or repeated portrait. |
-| Technical delivery | 98/100 | All three H.264/AAC masters render at 30 fps with 48 kHz stereo, correct aspect ratios, fast-start metadata, captions, encoded-frame inspection, and matched −14.12 LUFS / −1.00 dBTP audio. |
+| Recruiter signal | 97/100 | The first five seconds establish authorship through Hope's real Config voice, then state the systems thesis. The cut proves engineering, product judgment, founder range, and multidisciplinary origin instead of listing titles. |
+| Narrative and pacing | 96/100 | Nine scenes land on a 123 BPM timing map. A restrained opening gives the spoken line space, then UBEAT V1 releases into proof, architecture, judgment, range, origin, role fit, and a held CTA. |
+| Visual craft | 97/100 | The portfolio's material weave becomes cursor, crop edge, architecture trace, quality gate, and memory line. Typography and asymmetric spacing are composed for each aspect ratio rather than center-cropped. |
+| Technical delivery | 98/100 | Three H.264/AAC masters render at 30 fps with 48 kHz stereo. The vertical master is 29.4 seconds, measures -14.26 LUFS / -0.94 dBTP, and contains no detected black interval. |
 
-Weighted quality score: **96.7/100 — PASS** (project threshold: 90).
+Weighted quality score: **97/100 — PASS** (project threshold: 90).
 
 ## Media conformance
 
 | Master | Dimensions | Duration | Size |
 |---|---:|---:|---:|
-| 9:16 | 1080×1920 | 27.30 s container / 27.20 s picture | 18,808,806 bytes |
-| 1:1 | 1080×1080 | 27.30 s container / 27.20 s picture | 8,382,683 bytes |
-| 16:9 | 1920×1080 | 27.30 s container / 27.20 s picture | 8,729,293 bytes |
+| 9:16 | 1080x1920 | 29.40 s | 15,202,773 bytes |
+| 1:1 | 1080x1080 | 29.40 s | 5,779,717 bytes |
+| 16:9 | 1920x1080 | 29.40 s | 5,951,395 bytes |
 
-- Video: H.264, 30 fps, 4:2:0 full-range flag
+- Video: H.264, 30 fps, 4:2:0
 - Audio: AAC, stereo, 48 kHz
-- Integrated loudness: −14.12 LUFS on every master
-- True peak: −1.00 dBTP on every master
-- Loudness range: 2.50 LU
+- Vertical integrated loudness: -14.26 LUFS
+- Vertical true peak: -0.94 dBTP
+- Vertical loudness range: 5.50 LU
 
 ## Frame and audio inspection
 
-- Six scene-aware frames were rendered from source and inspected before full export.
-- Six frames were re-extracted from the encoded 9:16 master to catch export-only blank frames, crop drift, legibility regressions, and transition discontinuities.
-- Square and landscape close frames were rendered and inspected before their full exports.
-- The final waveform was inspected for the spoken opening, music return, stable program level, and clean ending fade.
-- The 3.55-second spoken excerpt is also supplied as burned-in typography and an SRT caption.
+- Nine scene-aware source frames were rendered and inspected before full export. One architecture-heading collision was found and corrected before the final render.
+- Thirty encoded frames were extracted at one-second intervals and inspected as a contact sheet for blank frames, crop drift, contrast, legibility, and transition discontinuities.
+- Square and landscape frames were re-extracted at 10 and 22 seconds. Both variants preserve the proof and origin compositions without clipping.
+- FFmpeg black detection found no black interval of 0.5 seconds or longer.
+- Freeze detection found one 2.53-second interval from 24.8 to 27.33 seconds. This is the intentional recruiter-role hold before the final CTA, not a stalled render.
+- Loudness analysis confirms the opening voice remains intelligible while the music is ducked, with UBEAT V1 returning after the spoken line.
 
 Evidence:
 
-- `video/qa/portfolio-film-v4-board.png`
-- `video/qa/portfolio-film-v4-final-board.jpg`
-- `video/qa/portfolio-film-v4-variants-board.png`
-- `video/qa/portfolio-film-v4-waveform.png`
+- `video/qa/v6-keyframes/contact-sheet.png`
+- `video/qa/v6-final-contact-sheet.jpg`
+- `video/qa/v6-variant-contact-sheet.jpg`
 - `video/output/hope-atina-portfolio-cover.png`
+- `video/preproduction/beat-grid-v5.json`
+- `video/preproduction/timing-map-v5.json`
 
 ## Quality-gate result
 
-PASS. The 9:16 master is the default Reels, TikTok, and Shorts asset; the 1:1 and 16:9 masters are intentionally framed derivatives for feed and landscape placements.
+PASS. The 9:16 master is the default Reels, TikTok, and Shorts asset. The 1:1 and 16:9 masters are purpose-framed derivatives for feed and landscape placements.

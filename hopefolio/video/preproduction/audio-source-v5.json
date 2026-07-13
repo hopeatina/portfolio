@@ -1,0 +1,26 @@
+{
+  "music": {
+    "title": "UBEAT V1",
+    "artist": "Hope Atina",
+    "source": "https://soundcloud.com/hope-atina/ubeat-v1",
+    "profile": "https://soundcloud.com/hope-atina",
+    "published": "2024-08-09",
+    "source_duration_seconds": 76.826,
+    "source_tempo_bpm": 123.0,
+    "used_window": "00:12.040-00:41.332",
+    "used_duration_seconds": 29.292,
+    "derived_file": "public/video/portfolio-film/ubeat-portfolio-cut.mp3",
+    "license_on_source": "all-rights-reserved",
+    "usage_basis": "Hope explicitly requested use of a different, better sound from his own SoundCloud for his portfolio film.",
+    "selection_reason": "A 4.296-second textural runway gives Hope's voice space, followed by a 123 BPM entrance and thirteen downbeats for an elastic, proof-led edit."
+  },
+  "voice": {
+    "speaker": "Hope Atina",
+    "source": "https://www.youtube.com/watch?v=JSpfsuK75j0",
+    "event": "Figma Config 2021",
+    "source_window": "00:02:57-00:03:10",
+    "used_excerpt": "I'm less about talk and more about action.",
+    "used_duration_seconds": 3.55,
+    "usage_basis": "Hope supplied the talk as portfolio evidence and requested his voice in the social film."
+  }
+}

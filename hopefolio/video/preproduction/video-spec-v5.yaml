@@ -1,0 +1,79 @@
+project: portfolio-film-v5-elastic-signal
+status: approved_from_user_direction_2026-07-10
+audience: recruiter_founder_potential_collaborator
+format:
+  width: 1080
+  height: 1920
+  fps: 30
+  duration_frames: 879
+  duration_seconds: 29.3
+promise:
+  first_five_seconds: "Depth and creativity are unmistakable; this person sees systems differently."
+  identity_order: [engineer, founder, product_thinker]
+  supporting_identity: [AI_native_builder, design_community_speaker, Cameroonian_rooted]
+style:
+  visual_language: elastic editorial signal
+  motif_roles: [voice_cursor, crop_edge, system_connector, judgment_gate, memory_trace]
+  palette: ["#080A09", "#F2EFE7", "#B7F34A", "#D69A45", "#48A7D8"]
+  typography: Bricolage Grotesque with Instrument Serif counterpoint, Manrope body, JetBrains Mono evidence labels
+  whitespace: "52% opening, 14% proof sprint, 68% final hold"
+  timing: "one 4.296s inhale, asymmetric macro-scenes, compressed proof run, two deliberate holds"
+  avoid: [equal_scene_cards, persistent_chapter_labels, fake_browser_chrome, generated_UI, generic_particles, neon_glow, repeated_portrait, vanity_metrics, continuous_motion]
+sound:
+  music: Hope Atina - UBEAT V1
+  source_window: 00:12.040-00:41.332
+  tempo_bpm: 123.0
+  voice: Hope Atina at Config 2021
+  mix: voice_primary_first_3_7_seconds_then_music_release
+scenes:
+  - id: held_signal
+    frames: [0, 128]
+    spacing: 68_percent_negative_space
+    movement: one signal draws through an inspection field; quote reveals without a card
+    emotion: authored_intrigue
+  - id: visible_system
+    frames: [129, 244]
+    spacing: off_axis_hero_plane
+    movement: the signal becomes the crop edge of the current portfolio
+    emotion: awe
+  - id: proof_sprint
+    frames: [245, 302]
+    spacing: dense_irregular_mosaic
+    movement: authentic MCP widgets and OrgX proof snap into a two-beat burst
+    emotion: technical_range
+  - id: architecture_breath
+    frames: [303, 417]
+    spacing: left_void_with_right_system_spine
+    movement: surfaces connect through the same signal; labels arrive at different depths
+    emotion: comprehension
+  - id: judgment_gate
+    frames: [418, 475]
+    spacing: mineral_field_single_claim
+    movement: almost still; one decision receipt crosses the gate
+    emotion: conviction
+  - id: range_run
+    frames: [476, 589]
+    spacing: offset_vertical_spectrum
+    movement: work index travels past four different kinds of pressure
+    emotion: breadth
+  - id: human_signal
+    frames: [590, 705]
+    spacing: cultural_evidence_and_portrait_never_centered
+    movement: Config evidence, portrait, and woven line converge
+    emotion: warmth_and_authorship
+  - id: recruiter_resolution
+    frames: [706, 820]
+    spacing: large_thesis_with_small_receipts
+    movement: role stack and proof resolve around the viewer's hiring question
+    emotion: desire_to_collaborate
+  - id: memory_hold
+    frames: [821, 878]
+    spacing: 72_percent_negative_space
+    movement: the signal remembers one final path and stops
+    emotion: recall
+technical:
+  render_engine: Remotion
+  image_sources: Remotion Img plus staticFile only
+  animation_source: useCurrentFrame only
+  sequence_premount_frames: 30
+  export: H.264, yuv420p, AAC stereo, 48 kHz, fast-start
