@@ -1,5 +1,7 @@
-import { loadFont as loadNewsreader } from "@remotion/google-fonts/Newsreader";
-import { loadFont as loadRecursive } from "@remotion/google-fonts/Recursive";
+import { loadFont as loadBricolage } from "@remotion/google-fonts/BricolageGrotesque";
+import { loadFont as loadInstrument } from "@remotion/google-fonts/InstrumentSerif";
+import { loadFont as loadJetBrains } from "@remotion/google-fonts/JetBrainsMono";
+import { loadFont as loadManrope } from "@remotion/google-fonts/Manrope";
 import { Audio } from "@remotion/media";
 import React from "react";
 import {
@@ -14,723 +16,297 @@ import {
   useVideoConfig,
 } from "remotion";
 
-const { fontFamily: sans } = loadRecursive("normal", {
-  weights: ["300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-});
-const { fontFamily: serif } = loadNewsreader("italic", {
-  weights: ["300", "400", "500", "600"],
-  subsets: ["latin"],
-});
+const { fontFamily: display } = loadBricolage("normal", { weights: ["400", "500", "600", "700", "800"], subsets: ["latin"] });
+const { fontFamily: serif } = loadInstrument("italic", { weights: ["400"], subsets: ["latin"] });
+const { fontFamily: body } = loadManrope("normal", { weights: ["400", "500", "600", "700"], subsets: ["latin"] });
+const { fontFamily: mono } = loadJetBrains("normal", { weights: ["400", "500", "600"], subsets: ["latin"] });
 
-const palette = {
-  carbon: "#080806",
-  mineral: "#F2EFE4",
-  signal: "#C7FF36",
+const color = {
+  carbon: "#080A09",
+  mineral: "#F2EFE7",
+  signal: "#B7F34A",
+  amber: "#D69A45",
+  cold: "#48A7D8",
   heat: "#FF5738",
-  cold: "#48C7FF",
-  dim: "#9D9D92",
-  line: "rgba(242,239,228,0.2)",
+  dim: "#93958C",
+  rule: "rgba(242,239,231,.18)",
 };
 
-const clamp = {
-  extrapolateLeft: "clamp" as const,
-  extrapolateRight: "clamp" as const,
-};
+const clamp = { extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const };
 
-const SCENES = {
-  faultline: { from: 0, duration: 109 },
-  hero: { from: 109, duration: 165 },
-  continuity: { from: 274, duration: 162 },
-  receipt: { from: 436, duration: 81 },
-  range: { from: 517, duration: 162 },
-  close: { from: 679, duration: 137 },
-};
+const SCENES = [
+  { id: "held", from: 0, duration: 129 },
+  { id: "visible", from: 129, duration: 116 },
+  { id: "proof", from: 245, duration: 58 },
+  { id: "architecture", from: 303, duration: 115 },
+  { id: "gate", from: 418, duration: 58 },
+  { id: "range", from: 476, duration: 114 },
+  { id: "human", from: 590, duration: 116 },
+  { id: "resolution", from: 706, duration: 115 },
+  { id: "memory", from: 821, duration: 58 },
+];
 
-const appear = (frame: number, fps: number, delay = 0, duration = 22) =>
-  spring({
-    frame: frame - delay,
-    fps,
-    durationInFrames: duration,
-    config: { damping: 200, mass: 0.9, stiffness: 180 },
-  });
+const enter = (frame: number, fps: number, delay = 0, duration = 22) => spring({
+  frame: frame - delay,
+  fps,
+  durationInFrames: duration,
+  config: { damping: 200, stiffness: 170, mass: 0.9 },
+});
 
 const Grid = ({ light = false }: { light?: boolean }) => (
-  <AbsoluteFill
-    style={{
-      opacity: light ? 0.08 : 0.14,
-      backgroundImage: `linear-gradient(${light ? "rgba(8,8,6,.35)" : "rgba(242,239,228,.35)"} 1px, transparent 1px), linear-gradient(90deg, ${light ? "rgba(8,8,6,.35)" : "rgba(242,239,228,.35)"} 1px, transparent 1px)`,
-      backgroundSize: "72px 72px",
-    }}
-  />
+  <AbsoluteFill style={{
+    opacity: light ? 0.09 : 0.11,
+    backgroundImage: `linear-gradient(${light ? "rgba(8,10,9,.34)" : "rgba(242,239,231,.28)"} 1px, transparent 1px), linear-gradient(90deg, ${light ? "rgba(8,10,9,.34)" : "rgba(242,239,231,.28)"} 1px, transparent 1px)`,
+    backgroundSize: "60px 60px",
+  }} />
 );
 
-const FilmIndex = ({
-  label,
-  index,
-  total = "06",
-  light = false,
-}: {
-  label: string;
-  index: string;
-  total?: string;
-  light?: boolean;
-}) => (
-  <div
-    style={{
-      position: "absolute",
-      top: 62,
-      left: 64,
-      right: 64,
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      color: light ? palette.carbon : palette.mineral,
-      fontFamily: sans,
-      fontSize: 18,
-      fontWeight: 650,
-      letterSpacing: "0.13em",
-      textTransform: "uppercase",
-      zIndex: 20,
-    }}
-  >
-    <span style={{ display: "flex", alignItems: "center", gap: 14 }}>
-      <span style={{ width: 12, height: 12, background: palette.signal }} />
-      {label}
-    </span>
-    <span style={{ opacity: 0.55 }}>
-      {index} / {total}
-    </span>
-  </div>
-);
-
-const Kicker = ({ children, color = palette.signal }: { children: React.ReactNode; color?: string }) => (
-  <div
-    style={{
-      display: "flex",
-      alignItems: "center",
-      gap: 14,
-      color,
-      fontFamily: sans,
-      fontSize: 18,
-      fontWeight: 700,
-      letterSpacing: "0.16em",
-      textTransform: "uppercase",
-    }}
-  >
-    <span style={{ width: 42, height: 3, background: color }} />
+const Label = ({ children, light = false }: { children: React.ReactNode; light?: boolean }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 14, color: light ? color.carbon : color.signal, fontFamily: mono, fontSize: 16, fontWeight: 600, letterSpacing: ".11em", textTransform: "uppercase" }}>
+    <span style={{ width: 34, height: 2, background: light ? color.heat : color.signal }} />
     {children}
   </div>
 );
 
-const FaultlineFlash = () => {
+const MaterialWeave = ({ light = false, opacity = 1 }: { light?: boolean; opacity?: number }) => {
   const frame = useCurrentFrame();
-  const cuts = [109, 274, 436, 517, 679];
-  const distance = Math.min(...cuts.map((cut) => Math.abs(frame - cut)));
-  const opacity = interpolate(distance, [0, 2, 5], [0.9, 0.38, 0], clamp);
-  if (opacity === 0) return null;
-
+  const { durationInFrames } = useVideoConfig();
+  const draw = interpolate(frame, [0, Math.min(46, durationInFrames * 0.5)], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
+  const drift = interpolate(frame, [0, durationInFrames], [-18, 18], clamp);
+  const paths = [
+    "M-80 340C95 92 250 102 398 276S724 494 1180 86",
+    "M-60 104C132 442 354 486 520 230S870 -18 1180 350",
+    "M110 -60C238 180 334 260 538 268S884 174 1012 620",
+    "M-50 510C210 336 322 650 610 472S876 246 1160 530",
+  ];
   return (
-    <AbsoluteFill style={{ zIndex: 100, pointerEvents: "none", opacity }}>
-      <div
-        style={{
-          position: "absolute",
-          top: "42%",
-          left: -20,
-          right: -20,
-          height: 5,
-          background: palette.signal,
-          transform: "rotate(-1.6deg)",
-          boxShadow: `0 -12px 0 ${palette.heat}, 0 12px 0 ${palette.cold}`,
-        }}
-      />
-    </AbsoluteFill>
+    <svg viewBox="0 0 1080 620" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity, transform: `translateY(${drift}px) rotate(-1.4deg)`, overflow: "visible" }}>
+      <defs>
+        <linearGradient id="film-fiber" x1="0" x2="1"><stop stopColor={color.cold} /><stop offset=".45" stopColor={light ? color.carbon : color.mineral} /><stop offset="1" stopColor={color.signal} /></linearGradient>
+        <filter id="film-depth" x="-30%" y="-40%" width="160%" height="180%"><feDropShadow dx="0" dy="12" stdDeviation="9" floodColor="#000" floodOpacity={light ? ".25" : ".72"} /><feDropShadow dx="-5" dy="-3" stdDeviation="3" floodColor={color.heat} floodOpacity=".28" /></filter>
+      </defs>
+      <g filter="url(#film-depth)">{paths.map((d) => <path key={`shadow-${d}`} d={d} fill="none" stroke={light ? "#AAA99F" : "#5C5D58"} strokeWidth="18" strokeLinecap="round" strokeDasharray="1800" strokeDashoffset={(1 - draw) * 1800} />)}</g>
+      <g>{paths.map((d) => <path key={`core-${d}`} d={d} fill="none" stroke="url(#film-fiber)" strokeWidth="2" strokeLinecap="round" strokeDasharray="1800" strokeDashoffset={(1 - draw) * 1800} />)}</g>
+    </svg>
   );
 };
 
-const SpokenFaultline = () => {
+const SiteCrop = ({ src, top = 0, left = 0, width = 1320, scale = 1, dim = false }: { src: string; top?: number; left?: number; width?: number; scale?: number; dim?: boolean }) => (
+  <Img src={staticFile(src)} style={{ position: "absolute", top, left, width, height: "auto", maxWidth: "none", transform: `scale(${scale})`, transformOrigin: "top left", filter: dim ? "brightness(.5) saturate(.72)" : undefined }} />
+);
+
+const HeldSignal = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const quote = "I’m less about talk and more about action.";
-  const characters = Math.floor(interpolate(frame, [5, 88], [0, quote.length], clamp));
-  const line = interpolate(frame, [0, 100], [0, 100], {
-    ...clamp,
-    easing: Easing.inOut(Easing.cubic),
-  });
-  const source = appear(frame, fps, 58, 18);
-  const imageScale = interpolate(frame, [0, 109], [1.18, 1.08], clamp);
-
+  const characters = Math.floor(interpolate(frame, [8, 100], [0, quote.length], clamp));
+  const proof = enter(frame, fps, 70, 24);
   return (
-    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
-      <Img
-        src={staticFile("images/generated/inspection-field.jpg")}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: "53% center",
-          transform: `scale(${imageScale})`,
-          filter: "brightness(.48) contrast(1.18) saturate(.84)",
-        }}
-      />
-      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(8,8,6,.26), rgba(8,8,6,.93))" }} />
-      <FilmIndex label="A point of view" index="01" />
-      <div style={{ position: "absolute", left: 64, right: 64, top: 485 }}>
-        <Kicker>Hope Atina · Config 2021</Kicker>
-        <div
-          style={{
-            marginTop: 48,
-            minHeight: 460,
-            fontFamily: serif,
-            fontSize: 112,
-            fontWeight: 400,
-            lineHeight: 0.94,
-            letterSpacing: "-0.052em",
-            textWrap: "balance",
-          }}
-        >
-          “{quote.slice(0, characters)}
-          <span style={{ color: palette.signal, opacity: characters < quote.length ? 1 : 0 }}>▌</span>
-          {characters >= quote.length ? "”" : ""}
-        </div>
+    <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
+      <Img src={staticFile("images/generated/inspection-field.jpg")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "47% center", filter: "brightness(.34) contrast(1.25) saturate(.76)" }} />
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(8,10,9,.08), rgba(8,10,9,.92))" }} />
+      <div style={{ position: "absolute", inset: "170px -220px 540px 220px" }}><MaterialWeave opacity={0.88} /></div>
+      <div style={{ position: "absolute", left: 68, right: 68, top: 94 }}><Label>Hope Atina · Config 2021</Label></div>
+      <div style={{ position: "absolute", left: 68, right: 68, top: 560, minHeight: 500, fontFamily: serif, fontSize: 116, lineHeight: .92, letterSpacing: "-.052em" }}>
+        “{quote.slice(0, characters)}<span style={{ color: color.signal, opacity: characters < quote.length ? 1 : 0 }}>▌</span>{characters >= quote.length ? "”" : ""}
       </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 1330,
-          height: 4,
-          width: `${line}%`,
-          background: palette.signal,
-          boxShadow: `0 -8px 0 ${palette.heat}, 0 8px 0 ${palette.cold}`,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          left: 64,
-          bottom: 78,
-          opacity: source,
-          color: palette.dim,
-          fontFamily: sans,
-          fontSize: 17,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-        }}
-      >
-        Figma and Chill · connection, community, culture
+      <div style={{ position: "absolute", right: 68, bottom: 104, width: 370, height: 208, overflow: "hidden", borderTop: `2px solid ${color.signal}`, opacity: proof, transform: `translateY(${interpolate(proof, [0, 1], [34, 0])}px)` }}>
+        <Img src={staticFile("images/evidence/figma-config-2021.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
       </div>
+      <div style={{ position: "absolute", left: 68, bottom: 112, color: color.dim, fontFamily: mono, fontSize: 15, lineHeight: 1.6, letterSpacing: ".1em", textTransform: "uppercase" }}>Engineer / founder<br />product thinker</div>
     </AbsoluteFill>
   );
 };
 
-const HeroPlane = () => {
+const VisibleSystem = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const heading = appear(frame, fps, 2);
-  const plane = appear(frame, fps, 12, 28);
-  const moveY = interpolate(frame, [0, 165], [44, -44], clamp);
-  const reveal = interpolate(frame, [10, 38], [0, 100], {
-    ...clamp,
-    easing: Easing.out(Easing.cubic),
-  });
-
+  const title = enter(frame, fps, 0, 24);
+  const image = enter(frame, fps, 8, 30);
+  const travel = interpolate(frame, [0, 116], [0, -590], clamp);
   return (
-    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
+    <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
       <Grid />
-      <FilmIndex label="The invisible layer" index="02" />
-      <div style={{ position: "absolute", top: 232, left: 64, right: 64, opacity: heading }}>
-        <Kicker>Engineer · founder · product thinker</Kicker>
-        <div
-          style={{
-            marginTop: 42,
-            fontFamily: sans,
-            fontSize: 104,
-            fontWeight: 760,
-            lineHeight: 0.89,
-            letterSpacing: "-0.075em",
-            textTransform: "uppercase",
-          }}
-        >
-          Make the
-          <br />
-          <span style={{ color: palette.signal }}>invisible</span>
-          <br />
-          layer visible.
-        </div>
+      <div style={{ position: "absolute", left: 68, top: 96, opacity: title }}><Label>One authored system</Label></div>
+      <div style={{ position: "absolute", left: 68, top: 212, width: 760, opacity: title, fontFamily: display, fontSize: 112, fontWeight: 650, lineHeight: .87, letterSpacing: "-.073em" }}>
+        Intelligence<br /><span style={{ color: color.signal }}>survives</span><br />the handoff.
       </div>
-      <div
-        style={{
-          position: "absolute",
-          top: 845,
-          left: 64,
-          width: 952,
-          height: 720,
-          overflow: "hidden",
-          opacity: plane,
-          clipPath: `inset(0 ${100 - reveal}% 0 0)`,
-          borderTop: `2px solid ${palette.signal}`,
-          background: palette.carbon,
-        }}
-      >
-        <Img
-          src={staticFile("video/portfolio-film/v4-home.png")}
-          style={{
-            position: "absolute",
-            top: moveY,
-            left: 0,
-            width: 1420,
-            height: "auto",
-            maxWidth: "none",
-          }}
-        />
+      <div style={{ position: "absolute", right: -120, top: 672, width: 960, height: 1030, overflow: "hidden", opacity: image, transform: "rotate(2.2deg)", border: `1px solid ${color.rule}`, boxShadow: "-40px 50px 100px rgba(0,0,0,.55)" }}>
+        <SiteCrop src="video/portfolio-film/v6-home-full.png" top={travel} left={-50} width={1080} />
       </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 64,
-          right: 64,
-          bottom: 82,
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
-          gap: 16,
-          fontFamily: sans,
-          fontSize: 17,
-          fontWeight: 650,
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-        }}
-      >
-        {["Systems", "AI clients", "Interfaces"].map((item, index) => (
-          <div key={item} style={{ borderTop: `1px solid ${palette.line}`, paddingTop: 17, color: index === 1 ? palette.cold : palette.mineral }}>
-            {item}
-          </div>
-        ))}
-      </div>
+      <div style={{ position: "absolute", left: 68, bottom: 120, width: 290, color: color.dim, fontFamily: body, fontSize: 23, lineHeight: 1.45 }}>Not another AI wrapper. The context, quality, consequence, and proof beneath the clients.</div>
+      <div style={{ position: "absolute", left: 0, top: 654, width: `${interpolate(frame, [12, 70], [0, 100], clamp)}%`, height: 4, background: color.signal, boxShadow: `0 -8px 0 ${color.heat}, 0 8px 0 ${color.cold}` }} />
     </AbsoluteFill>
   );
 };
 
-const ContinuityModel = () => {
+const ProofSprint = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const title = appear(frame, fps, 0);
-  const scan = interpolate(frame, [0, 162], [0, 1], clamp);
-  const imageY = interpolate(scan, [0, 1], [0, -145], clamp);
-  const stages = ["Context survives", "Agents act", "Judgment gates risk", "Outcome becomes memory"];
-
-  return (
-    <AbsoluteFill style={{ background: palette.mineral, color: palette.carbon, overflow: "hidden" }}>
-      <Grid light />
-      <FilmIndex label="The operating model" index="03" light />
-      <div style={{ position: "absolute", top: 226, left: 64, right: 64, opacity: title }}>
-        <Kicker color={palette.heat}>Continuity is the real work</Kicker>
-        <div
-          style={{
-            marginTop: 36,
-            fontFamily: sans,
-            fontSize: 94,
-            fontWeight: 760,
-            lineHeight: 0.91,
-            letterSpacing: "-0.072em",
-            textTransform: "uppercase",
-          }}
-        >
-          Intelligence
-          <br />
-          <span style={{ fontFamily: serif, fontWeight: 400, textTransform: "none" }}>across handoffs.</span>
-        </div>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 64,
-          right: 64,
-          top: 670,
-          height: 655,
-          overflow: "hidden",
-          background: palette.carbon,
-          border: `2px solid ${palette.carbon}`,
-        }}
-      >
-        <Img
-          src={staticFile("video/portfolio-film/v4-continuity.png")}
-          style={{ width: "100%", height: "auto", transform: `translateY(${imageY}px) scale(1.08)`, transformOrigin: "top left" }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: `${interpolate(scan, [0, 1], [8, 92], clamp)}%`,
-            left: 0,
-            right: 0,
-            height: 3,
-            background: palette.signal,
-            boxShadow: `0 -5px 0 ${palette.heat}, 0 5px 0 ${palette.cold}`,
-          }}
-        />
-      </div>
-      <div style={{ position: "absolute", left: 64, right: 64, bottom: 74 }}>
-        {stages.map((stage, index) => {
-          const progress = appear(frame, fps, 20 + index * 18, 16);
-          return (
-            <div
-              key={stage}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "56px 1fr",
-                gap: 18,
-                alignItems: "center",
-                borderTop: "1px solid rgba(8,8,6,.22)",
-                padding: "20px 0",
-                opacity: progress,
-                transform: `translateX(${interpolate(progress, [0, 1], [30, 0])}px)`,
-                fontFamily: sans,
-                fontSize: 25,
-                fontWeight: 630,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              <span style={{ color: index === 2 ? palette.heat : palette.carbon, fontSize: 17, letterSpacing: ".12em" }}>0{index + 1}</span>
-              {stage}
-            </div>
-          );
-        })}
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-const ReceiptProof = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const title = appear(frame, fps, 0, 16);
-  const aperture = interpolate(frame, [8, 58], [90, 420], {
-    ...clamp,
-    easing: Easing.out(Easing.cubic),
-  });
-  const drift = interpolate(frame, [0, 81], [0, -28], clamp);
-
-  return (
-    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
-      <FilmIndex label="Proof, not posture" index="04" />
-      <div style={{ position: "absolute", top: 208, left: 64, right: 64, opacity: title }}>
-        <div
-          style={{
-            fontFamily: sans,
-            fontSize: 88,
-            fontWeight: 760,
-            lineHeight: 0.91,
-            letterSpacing: "-0.068em",
-            textTransform: "uppercase",
-          }}
-        >
-          Autonomy is easy.
-          <br />
-          <span style={{ color: palette.signal }}>Continuity is the work.</span>
-        </div>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: 580,
-          left: 0,
-          right: 0,
-          height: 970,
-          overflow: "hidden",
-          borderTop: `2px solid ${palette.signal}`,
-          borderBottom: `2px solid ${palette.signal}`,
-        }}
-      >
-        <Img
-          src={staticFile("images/case-studies/orgx-v4/artifact-receipt.png")}
-          style={{
-            position: "absolute",
-            top: drift,
-            left: -130,
-            height: 970,
-            width: "auto",
-            filter: "brightness(.34) saturate(.72)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            clipPath: `circle(${aperture}px at 67% 47%)`,
-          }}
-        >
-          <Img
-            src={staticFile("images/case-studies/orgx-v4/artifact-receipt.png")}
-            style={{ position: "absolute", top: drift, left: -130, height: 970, width: "auto" }}
-          />
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            left: `calc(67% - ${aperture}px)`,
-            top: `calc(47% - ${aperture}px)`,
-            width: aperture * 2,
-            height: aperture * 2,
-            border: `3px solid ${palette.signal}`,
-            borderRadius: "50%",
-          }}
-        />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 64,
-          bottom: 82,
-          display: "flex",
-          alignItems: "center",
-          gap: 18,
-          color: palette.dim,
-          fontFamily: sans,
-          fontSize: 18,
-          fontWeight: 650,
-          letterSpacing: ".1em",
-          textTransform: "uppercase",
-        }}
-      >
-        <span style={{ width: 11, height: 11, background: palette.signal }} />
-        Authentic OrgX artifact receipt
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-const ConstraintRange = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const title = appear(frame, fps, 0);
-  const rangeY = interpolate(frame, [0, 162], [20, -125], clamp);
-  const constraints = [
-    { label: "Continuity", color: palette.signal },
-    { label: "Clinical ambiguity", color: palette.heat },
-    { label: "Decision latency", color: palette.cold },
-    { label: "Trustworthy automation", color: palette.mineral },
+  const tiles = [
+    { src: "images/case-studies/widgets/initiative-pulse.png", x: 44, y: 330, w: 460, rot: -2 },
+    { src: "images/case-studies/orgx-v4/quality-settings.png", x: 358, y: 112, w: 700, rot: 1.6 },
+    { src: "images/case-studies/widgets/decisions.png", x: 620, y: 720, w: 410, rot: 2.2 },
+    { src: "images/case-studies/orgx-v4/artifact-receipt.png", x: 60, y: 1110, w: 820, rot: -1 },
   ];
-
   return (
-    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
+    <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
       <Grid />
-      <FilmIndex label="Range under constraint" index="05" />
-      <div style={{ position: "absolute", top: 220, left: 64, right: 64, opacity: title }}>
-        <Kicker>Different systems. Same judgment.</Kicker>
-        <div
-          style={{
-            marginTop: 38,
-            fontFamily: sans,
-            fontSize: 94,
-            fontWeight: 760,
-            lineHeight: 0.9,
-            letterSpacing: "-0.072em",
-            textTransform: "uppercase",
-          }}
-        >
-          Not a list.
-          <br />
-          <span style={{ fontFamily: serif, fontWeight: 400, textTransform: "none" }}>A way of seeing.</span>
-        </div>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: 655,
-          left: 64,
-          right: 64,
-          height: 655,
-          overflow: "hidden",
-          borderTop: `2px solid ${palette.signal}`,
-          background: palette.carbon,
-        }}
-      >
-        <Img
-          src={staticFile("video/portfolio-film/v4-range.png")}
-          style={{ width: "1120px", maxWidth: "none", height: "auto", transform: `translate(-38px, ${rangeY}px) scale(1.02)` }}
-        />
-      </div>
-      <div style={{ position: "absolute", left: 64, right: 64, bottom: 72 }}>
-        {constraints.map((constraint, index) => {
-          const progress = appear(frame, fps, 20 + index * 24, 17);
-          return (
-            <div
-              key={constraint.label}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "30px 1fr auto",
-                gap: 18,
-                alignItems: "center",
-                borderTop: `1px solid ${palette.line}`,
-                padding: "21px 0",
-                opacity: progress,
-                fontFamily: sans,
-                fontSize: 24,
-                fontWeight: 620,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              <span style={{ width: 11, height: 11, background: constraint.color }} />
-              {constraint.label}
-              <span style={{ color: palette.dim, fontSize: 16, letterSpacing: ".14em" }}>0{index + 1}</span>
-            </div>
-          );
-        })}
-      </div>
+      <div style={{ position: "absolute", left: 56, top: 62, zIndex: 10 }}><Label>Real surfaces / fast proof</Label></div>
+      {tiles.map((tile, index) => {
+        const p = enter(frame, fps, index * 6, 16);
+        return <Img key={tile.src} src={staticFile(tile.src)} style={{ position: "absolute", left: tile.x, top: tile.y, width: tile.w, height: "auto", opacity: p, transform: `translateY(${interpolate(p, [0, 1], [72, 0])}px) rotate(${tile.rot}deg) scale(${interpolate(p, [0, 1], [.94, 1])})`, border: `1px solid ${color.rule}`, boxShadow: "0 22px 70px rgba(0,0,0,.6)" }} />;
+      })}
+      <div style={{ position: "absolute", left: 56, right: 56, bottom: 70, display: "flex", justifyContent: "space-between", fontFamily: mono, fontSize: 15, color: color.dim, textTransform: "uppercase" }}><span>brief</span><span>quality</span><span>decision</span><span>receipt</span></div>
     </AbsoluteFill>
   );
 };
 
-const AuthoredClose = () => {
+const ArchitectureBreath = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const portrait = appear(frame, fps, 5, 26);
-  const identity = appear(frame, fps, 16, 24);
-  const cta = appear(frame, fps, 42, 20);
-  const fieldScale = interpolate(frame, [0, 137], [1.14, 1.05], clamp);
-
+  const mechanisms = ["Pass the work", "Set the bar", "Prove movement", "Govern tools", "Reweave failure"];
   return (
-    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
-      <Img
-        src={staticFile("images/generated/reflection-field.jpg")}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: "center",
-          transform: `scale(${fieldScale})`,
-          filter: "brightness(.44) contrast(1.14) saturate(.86)",
-        }}
-      />
-      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(8,8,6,.15), rgba(8,8,6,.94))" }} />
-      <FilmIndex label="The person behind the system" index="06" />
-      <div
-        style={{
-          position: "absolute",
-          top: 220,
-          left: 64,
-          right: 64,
-          height: 790,
-          overflow: "hidden",
-          opacity: portrait,
-          clipPath: `polygon(0 0, ${interpolate(portrait, [0, 1], [0, 100])}% 0, 92% 100%, 0 100%)`,
-          borderBottom: `4px solid ${palette.signal}`,
-        }}
-      >
-        <Img
-          src={staticFile("images/hope-profile.jpg")}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "50% 28%",
-            filter: "grayscale(.16) contrast(1.07)",
-            transform: `scale(${interpolate(portrait, [0, 1], [1.08, 1])})`,
-          }}
-        />
+    <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
+      <Grid />
+      <div style={{ position: "absolute", inset: "0 430px 0 -280px", opacity: .72 }}><MaterialWeave /></div>
+      <div style={{ position: "absolute", left: 68, top: 110 }}><Label>OrgX / system anatomy</Label></div>
+      <div style={{ position: "absolute", left: 68, top: 300, width: 440 }}>
+        <div style={{ fontFamily: display, fontSize: 94, fontWeight: 650, lineHeight: .9, letterSpacing: "-.07em" }}>One graph.</div>
+        <div style={{ marginTop: 18, color: color.signal, fontFamily: serif, fontSize: 78, fontWeight: 400, lineHeight: .94, letterSpacing: "-.04em" }}>Five controls.</div>
       </div>
-      <div
-        style={{
-          position: "absolute",
-          top: 1030,
-          left: 64,
-          right: 64,
-          opacity: identity,
-        }}
-      >
-        <Kicker>Hope Atina</Kicker>
-        <div
-          style={{
-            marginTop: 34,
-            fontFamily: sans,
-            fontSize: 108,
-            fontWeight: 780,
-            lineHeight: 0.88,
-            letterSpacing: "-0.076em",
-            textTransform: "uppercase",
-          }}
-        >
-          Depth,
-          <br />
-          made visible.
-        </div>
-        <div
-          style={{
-            marginTop: 42,
-            color: palette.mineral,
-            fontFamily: sans,
-            fontSize: 25,
-            fontWeight: 620,
-            letterSpacing: ".06em",
-            textTransform: "uppercase",
-          }}
-        >
-          Engineer <span style={{ color: palette.heat }}>↗</span> Founder <span style={{ color: palette.cold }}>↗</span> Product thinker
-        </div>
+      <div style={{ position: "absolute", right: 68, top: 218, width: 460 }}>
+        {mechanisms.map((item, index) => {
+          const p = enter(frame, fps, 12 + index * 12, 18);
+          return <div key={item} style={{ display: "grid", gridTemplateColumns: "48px 1fr", gap: 18, padding: "30px 0", borderTop: `1px solid ${color.rule}`, opacity: p, transform: `translateX(${interpolate(p, [0, 1], [42, 0])}px)` }}><span style={{ color: index === 3 ? color.heat : color.signal, fontFamily: mono, fontSize: 16 }}>0{index + 1}</span><span style={{ fontFamily: display, fontSize: 34, fontWeight: 550, letterSpacing: "-.035em" }}>{item}</span></div>;
+        })}
       </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 64,
-          right: 64,
-          bottom: 62,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-end",
-          borderTop: `1px solid ${palette.line}`,
-          paddingTop: 24,
-          opacity: cta,
-          fontFamily: sans,
-          textTransform: "uppercase",
-        }}
-      >
-        <div style={{ fontSize: 28, fontWeight: 740, letterSpacing: "-.02em" }}>hopeatina.com</div>
-        <div style={{ color: palette.dim, fontSize: 14, lineHeight: 1.45, letterSpacing: ".1em", textAlign: "right" }}>
-          Original track
-          <br />
-          tiktok_pipes
-        </div>
+      <div style={{ position: "absolute", left: 68, bottom: 100, width: 420, color: color.dim, fontFamily: body, fontSize: 22, lineHeight: 1.48 }}>A goal becomes work. Work meets a boundary. The result returns with enough evidence to teach the next run.</div>
+    </AbsoluteFill>
+  );
+};
+
+const JudgmentGate = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const p = enter(frame, fps, 0, 18);
+  const gate = interpolate(frame, [5, 48], [0, 1], clamp);
+  return (
+    <AbsoluteFill style={{ background: color.mineral, color: color.carbon, overflow: "hidden" }}>
+      <Grid light />
+      <div style={{ position: "absolute", left: 66, top: 86 }}><Label light>Judgment is a product surface</Label></div>
+      <div style={{ position: "absolute", left: 66, top: 248, right: 66, opacity: p, fontFamily: display, fontSize: 108, fontWeight: 650, lineHeight: .88, letterSpacing: "-.075em" }}>You set the bar.<br /><span style={{ fontFamily: serif, fontWeight: 400, color: color.heat }}>Consequence sets the gate.</span></div>
+      <div style={{ position: "absolute", left: 66, right: 66, top: 720, height: 850, overflow: "hidden", background: color.carbon, clipPath: `inset(0 ${100 - gate * 100}% 0 0)` }}>
+        <SiteCrop src="images/case-studies/orgx-v4/quality-settings.png" top={0} left={-70} width={1080} />
+      </div>
+      <div style={{ position: "absolute", left: 66, bottom: 66, fontFamily: mono, fontSize: 16, color: color.carbon, letterSpacing: ".08em", textTransform: "uppercase" }}>Owner-authored quality / human-gated external effects</div>
+    </AbsoluteFill>
+  );
+};
+
+const RangeRun = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const projects = [
+    ["OrgX", "agent continuity", color.signal],
+    ["Alma", "regulated production", color.heat],
+    ["PerfPulse", "local-first systems", color.cold],
+    ["OrgX for OpenClaw", "plugin architecture", color.mineral],
+  ] as const;
+  return (
+    <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
+      <Grid />
+      <div style={{ position: "absolute", left: 68, top: 92 }}><Label>Range under pressure</Label></div>
+      <div style={{ position: "absolute", left: 68, top: 210, right: 68, fontFamily: display, fontSize: 88, fontWeight: 650, lineHeight: .9, letterSpacing: "-.065em" }}>Different material.<br /><span style={{ fontFamily: serif, fontWeight: 400 }}>The same depth.</span></div>
+      <div style={{ position: "absolute", left: 68, right: 68, top: 580 }}>
+        {projects.map(([name, pressure, accent], index) => {
+          const p = enter(frame, fps, 12 + index * 17, 18);
+          return <div key={name} style={{ display: "grid", gridTemplateColumns: "54px 1fr auto", alignItems: "center", minHeight: 190, borderTop: `1px solid ${color.rule}`, opacity: p, transform: `translateY(${interpolate(p, [0, 1], [42, 0])}px)` }}><span style={{ color: accent, fontFamily: mono, fontSize: 16 }}>0{index + 1}</span><span style={{ color: accent, fontFamily: display, fontSize: name.length > 12 ? 48 : 66, fontWeight: 600, letterSpacing: "-.05em" }}>{name}</span><span style={{ color: color.dim, fontFamily: mono, fontSize: 14, letterSpacing: ".08em", textTransform: "uppercase" }}>{pressure}</span></div>;
+        })}
+      </div>
+      <div style={{ position: "absolute", left: 68, right: 68, bottom: 70, height: 170, overflow: "hidden", borderTop: `2px solid ${color.signal}` }}><SiteCrop src="video/portfolio-film/v6-work-full.png" top={-230} left={0} width={944} dim /></div>
+    </AbsoluteFill>
+  );
+};
+
+const HumanSignal = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const rice = enter(frame, fps, 2, 24);
+  const figma = enter(frame, fps, 18, 24);
+  const copy = enter(frame, fps, 34, 24);
+  return (
+    <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
+      <Grid />
+      <div style={{ position: "absolute", inset: "250px -260px 80px 330px", opacity: .38 }}><MaterialWeave /></div>
+      <div style={{ position: "absolute", left: 66, top: 88 }}><Label>The person is part of the architecture</Label></div>
+      <div style={{ position: "absolute", left: 58, top: 270, width: 610, height: 475, overflow: "hidden", border: `1px solid ${color.rule}`, opacity: rice, transform: `rotate(-2deg) translateY(${interpolate(rice, [0, 1], [46, 0])}px)` }}><Img src={staticFile("images/evidence/rice-dermashift-team.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover" }} /></div>
+      <div style={{ position: "absolute", right: 52, top: 710, width: 650, height: 366, overflow: "hidden", border: `1px solid ${color.rule}`, opacity: figma, transform: `rotate(1.8deg) translateY(${interpolate(figma, [0, 1], [46, 0])}px)` }}><Img src={staticFile("images/evidence/figma-config-2021.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover" }} /></div>
+      <div style={{ position: "absolute", left: 66, right: 66, bottom: 120, opacity: copy, fontFamily: display, fontSize: 65, fontWeight: 560, lineHeight: .98, letterSpacing: "-.052em" }}>Bioengineering taught me systems.<br /><span style={{ color: color.cold }}>Music taught me timing.</span><br /><span style={{ color: color.signal }}>Community made creation multiplayer.</span></div>
+    </AbsoluteFill>
+  );
+};
+
+const RecruiterResolution = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const portrait = enter(frame, fps, 4, 28);
+  const text = enter(frame, fps, 14, 24);
+  const receipts = ["Context that travels", "Quality you author", "ROI tied to goals", "Recovery with limits"];
+  return (
+    <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
+      <Img src={staticFile("images/generated/reflection-field.jpg")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "brightness(.28) contrast(1.25) saturate(.7)" }} />
+      <AbsoluteFill style={{ background: "linear-gradient(90deg, rgba(8,10,9,.98), rgba(8,10,9,.32))" }} />
+      <div style={{ position: "absolute", right: -70, top: 160, width: 640, height: 900, overflow: "hidden", opacity: portrait, clipPath: `polygon(12% 0,100% 0,100% 100%,0 92%)`, borderBottom: `4px solid ${color.signal}` }}><Img src={staticFile("images/hope-profile.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 24%" }} /></div>
+      <div style={{ position: "absolute", left: 66, top: 100 }}><Label>What I bring into the room</Label></div>
+      <div style={{ position: "absolute", left: 66, top: 300, width: 620, opacity: text, fontFamily: display, fontSize: 104, fontWeight: 650, lineHeight: .86, letterSpacing: "-.074em" }}>Founding<br />engineer.<br /><span style={{ color: color.cold }}>AI engineer.</span><br /><span style={{ fontFamily: serif, fontWeight: 400, color: color.signal }}>Product thinker.</span></div>
+      <div style={{ position: "absolute", left: 66, right: 66, bottom: 80, display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+        {receipts.map((item, index) => <div key={item} style={{ padding: "22px 14px 22px 0", borderTop: `1px solid ${color.rule}`, color: index === 3 ? color.signal : color.mineral, fontFamily: mono, fontSize: 15, letterSpacing: ".06em", textTransform: "uppercase" }}>{String(index + 1).padStart(2, "0")} / {item}</div>)}
       </div>
     </AbsoluteFill>
   );
 };
+
+const MemoryHold = () => {
+  const frame = useCurrentFrame();
+  const resolve = interpolate(frame, [0, 42], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
+  return (
+    <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
+      <Grid />
+      <div style={{ position: "absolute", inset: "260px -320px 480px 260px", opacity: .75 }}><MaterialWeave /></div>
+      <div style={{ position: "absolute", left: 66, top: 102 }}><Label>Hope Atina</Label></div>
+      <div style={{ position: "absolute", left: 66, top: 640, right: 66, fontFamily: display, fontSize: 116, fontWeight: 650, lineHeight: .87, letterSpacing: "-.075em" }}>Bring me the<br />system that needs<br /><span style={{ fontFamily: serif, fontWeight: 400, color: color.signal }}>to become coherent.</span></div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 1350, height: 4, transform: `scaleX(${resolve})`, transformOrigin: "left", background: color.signal, boxShadow: `0 -8px 0 ${color.heat}, 0 8px 0 ${color.cold}` }} />
+      <div style={{ position: "absolute", left: 66, right: 66, bottom: 70, display: "flex", justifyContent: "space-between", alignItems: "end", borderTop: `1px solid ${color.rule}`, paddingTop: 24, fontFamily: mono, textTransform: "uppercase" }}><span style={{ fontSize: 25, fontWeight: 600 }}>hopeatina.com</span><span style={{ color: color.dim, fontSize: 14, lineHeight: 1.55, letterSpacing: ".08em", textAlign: "right" }}>Original track<br />UBEAT V1</span></div>
+    </AbsoluteFill>
+  );
+};
+
+const CutTrace = () => {
+  const frame = useCurrentFrame();
+  const cuts = SCENES.slice(1).map((scene) => scene.from);
+  const distance = Math.min(...cuts.map((cut) => Math.abs(frame - cut)));
+  const opacity = interpolate(distance, [0, 2, 4], [.9, .28, 0], clamp);
+  return opacity <= 0 ? null : <AbsoluteFill style={{ zIndex: 100, pointerEvents: "none", opacity }}><div style={{ position: "absolute", left: -40, right: -40, top: "47%", height: 4, background: color.signal, transform: "rotate(-1.8deg)", boxShadow: `0 -8px 0 ${color.heat},0 8px 0 ${color.cold}` }} /></AbsoluteFill>;
+};
+
+const sceneComponents = [HeldSignal, VisibleSystem, ProofSprint, ArchitectureBreath, JudgmentGate, RangeRun, HumanSignal, RecruiterResolution, MemoryHold];
 
 export const PortfolioFilm = () => {
-  const musicVolume = (audioFrame: number) => {
-    const ducked = audioFrame < 112 ? 0.22 : interpolate(audioFrame, [112, 132], [0.22, 0.72], clamp);
-    const finalFade = interpolate(audioFrame, [786, 815], [1, 0], clamp);
-    return ducked * finalFade;
+  const musicVolume = (frame: number) => {
+    const release = interpolate(frame, [105, 139], [.2, .78], clamp);
+    const fade = interpolate(frame, [844, 878], [1, 0], clamp);
+    return release * fade;
   };
-
   return (
-    <AbsoluteFill style={{ background: palette.carbon }}>
-      <Audio src={staticFile("video/portfolio-film/tiktok-pipes.wav")} volume={musicVolume} />
-      <Sequence from={4} durationInFrames={107} premountFor={30}>
-        <Audio src={staticFile("video/portfolio-film/hope-config-voice.wav")} volume={1} />
-      </Sequence>
-      <Sequence from={SCENES.faultline.from} durationInFrames={SCENES.faultline.duration} premountFor={30}>
-        <SpokenFaultline />
-      </Sequence>
-      <Sequence from={SCENES.hero.from} durationInFrames={SCENES.hero.duration} premountFor={30}>
-        <HeroPlane />
-      </Sequence>
-      <Sequence from={SCENES.continuity.from} durationInFrames={SCENES.continuity.duration} premountFor={30}>
-        <ContinuityModel />
-      </Sequence>
-      <Sequence from={SCENES.receipt.from} durationInFrames={SCENES.receipt.duration} premountFor={30}>
-        <ReceiptProof />
-      </Sequence>
-      <Sequence from={SCENES.range.from} durationInFrames={SCENES.range.duration} premountFor={30}>
-        <ConstraintRange />
-      </Sequence>
-      <Sequence from={SCENES.close.from} durationInFrames={SCENES.close.duration} premountFor={30}>
-        <AuthoredClose />
-      </Sequence>
-      <FaultlineFlash />
+    <AbsoluteFill style={{ background: color.carbon }}>
+      <Audio src={staticFile("video/portfolio-film/ubeat-portfolio-cut.mp3")} volume={musicVolume} />
+      <Sequence from={6} durationInFrames={107} premountFor={30}><Audio src={staticFile("video/portfolio-film/hope-config-voice.wav")} volume={1} /></Sequence>
+      {SCENES.map((scene, index) => {
+        const Component = sceneComponents[index];
+        return <Sequence key={scene.id} from={scene.from} durationInFrames={scene.duration} premountFor={30}><Component /></Sequence>;
+      })}
+      <CutTrace />
     </AbsoluteFill>
   );
 };
@@ -739,116 +315,26 @@ export const FramedPortfolioFilm = () => {
   const { width, height } = useVideoConfig();
   const scale = height / 1920;
   const filmWidth = 1080 * scale;
-  const isWide = width / height > 1.3;
-
+  const wide = width / height > 1.3;
   return (
-    <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
-      <Img
-        src={staticFile("images/generated/reflection-field.jpg")}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "brightness(.25) contrast(1.2) saturate(.7)" }}
-      />
+    <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
       <Grid />
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: (width - filmWidth) / 2,
-          width: 1080,
-          height: 1920,
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
-          overflow: "hidden",
-          boxShadow: "0 0 100px rgba(0,0,0,.72)",
-        }}
-      >
-        <PortfolioFilm />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          left: isWide ? 54 : 28,
-          top: isWide ? 52 : 34,
-          width: Math.max(150, (width - filmWidth) / 2 - (isWide ? 96 : 50)),
-          fontFamily: sans,
-          textTransform: "uppercase",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 12, color: palette.signal, fontSize: isWide ? 16 : 12, fontWeight: 720, letterSpacing: ".14em" }}>
-          <span style={{ width: 10, height: 10, background: palette.signal }} /> Hope Atina
-        </div>
-        {isWide ? (
-          <div style={{ marginTop: 210, fontSize: 68, fontWeight: 780, lineHeight: .88, letterSpacing: "-.07em" }}>
-            Depth,
-            <br />
-            made
-            <br />
-            visible.
-          </div>
-        ) : null}
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          right: isWide ? 54 : 28,
-          bottom: isWide ? 52 : 34,
-          width: Math.max(150, (width - filmWidth) / 2 - (isWide ? 96 : 50)),
-          fontFamily: sans,
-          textAlign: "right",
-          textTransform: "uppercase",
-        }}
-      >
-        {isWide ? (
-          <div style={{ color: palette.dim, fontSize: 15, fontWeight: 650, lineHeight: 1.65, letterSpacing: ".12em" }}>
-            Engineer
-            <br />
-            Founder
-            <br />
-            Product thinker
-          </div>
-        ) : null}
-        <div style={{ marginTop: 28, color: palette.mineral, fontSize: isWide ? 18 : 12, fontWeight: 720, letterSpacing: ".05em" }}>
-          hopeatina.com
-        </div>
-      </div>
-      <div style={{ position: "absolute", top: 0, bottom: 0, left: (width - filmWidth) / 2 - 3, width: 3, background: palette.heat }} />
-      <div style={{ position: "absolute", top: 0, bottom: 0, left: (width + filmWidth) / 2, width: 3, background: palette.cold }} />
+      <div style={{ position: "absolute", top: 0, left: (width - filmWidth) / 2, width: 1080, height: 1920, transform: `scale(${scale})`, transformOrigin: "top left", overflow: "hidden", boxShadow: "0 0 120px rgba(0,0,0,.8)" }}><PortfolioFilm /></div>
+      <div style={{ position: "absolute", left: wide ? 52 : 26, top: wide ? 48 : 30, width: Math.max(140, (width - filmWidth) / 2 - 84), fontFamily: display, textTransform: "uppercase" }}><div style={{ color: color.signal, fontFamily: mono, fontSize: wide ? 16 : 11, letterSpacing: ".12em" }}>Hope Atina</div>{wide ? <div style={{ marginTop: 190, fontSize: 66, fontWeight: 650, lineHeight: .88, letterSpacing: "-.065em" }}>Depth<br />made<br />visible.</div> : null}</div>
+      <div style={{ position: "absolute", right: wide ? 52 : 26, bottom: wide ? 48 : 30, width: Math.max(140, (width - filmWidth) / 2 - 84), color: color.dim, fontFamily: mono, fontSize: wide ? 14 : 10, lineHeight: 1.65, letterSpacing: ".08em", textAlign: "right", textTransform: "uppercase" }}>{wide ? <>Engineer<br />Founder<br />Product thinker<br /></> : null}<span style={{ color: color.mineral }}>hopeatina.com</span></div>
+      <div style={{ position: "absolute", top: 0, bottom: 0, left: (width - filmWidth) / 2 - 3, width: 3, background: color.heat }} /><div style={{ position: "absolute", top: 0, bottom: 0, left: (width + filmWidth) / 2, width: 3, background: color.cold }} />
     </AbsoluteFill>
   );
 };
 
 export const PortfolioFilmCover = () => (
-  <AbsoluteFill style={{ background: palette.carbon, color: palette.mineral, overflow: "hidden" }}>
-    <Img
-      src={staticFile("images/generated/inspection-field.jpg")}
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        objectPosition: "54% center",
-        filter: "brightness(.42) contrast(1.18) saturate(.84)",
-      }}
-    />
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(8,8,6,.2), rgba(8,8,6,.96))" }} />
-    <div style={{ position: "absolute", top: 70, left: 64, right: 64, display: "flex", justifyContent: "space-between", fontFamily: sans, fontSize: 18, fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase" }}>
-      <span style={{ display: "flex", alignItems: "center", gap: 14 }}><span style={{ width: 12, height: 12, background: palette.signal }} />Hope Atina</span>
-      <span style={{ opacity: .6 }}>Portfolio / 2026</span>
-    </div>
-    <div style={{ position: "absolute", top: 545, left: 64, right: 64 }}>
-      <Kicker>A portfolio film</Kicker>
-      <div style={{ marginTop: 46, fontFamily: sans, fontSize: 122, fontWeight: 780, lineHeight: .86, letterSpacing: "-.078em", textTransform: "uppercase" }}>
-        Make the
-        <br />
-        <span style={{ color: palette.signal }}>invisible</span>
-        <br />
-        layer visible.
-      </div>
-    </div>
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1360, height: 5, background: palette.signal, boxShadow: `0 -10px 0 ${palette.heat}, 0 10px 0 ${palette.cold}` }} />
-    <div style={{ position: "absolute", left: 64, right: 64, bottom: 72, display: "flex", justifyContent: "space-between", alignItems: "flex-end", borderTop: `1px solid ${palette.line}`, paddingTop: 25, fontFamily: sans, textTransform: "uppercase" }}>
-      <div style={{ fontSize: 24, fontWeight: 700, letterSpacing: ".02em" }}>Engineer · founder · product thinker</div>
-      <div style={{ color: palette.dim, fontSize: 14, lineHeight: 1.5, letterSpacing: ".12em", textAlign: "right" }}>Original track<br />tiktok_pipes</div>
-    </div>
+  <AbsoluteFill style={{ background: color.carbon, color: color.mineral, overflow: "hidden" }}>
+    <Img src={staticFile("images/generated/inspection-field.jpg")} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "48% center", filter: "brightness(.32) contrast(1.28) saturate(.74)" }} />
+    <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(8,10,9,.05), rgba(8,10,9,.94))" }} />
+    <div style={{ position: "absolute", inset: "170px -260px 520px 220px" }}><MaterialWeave opacity={.82} /></div>
+    <div style={{ position: "absolute", left: 66, top: 78 }}><Label>Hope Atina · portfolio film</Label></div>
+    <div style={{ position: "absolute", left: 66, right: 66, top: 620, fontFamily: display, fontSize: 124, fontWeight: 650, lineHeight: .85, letterSpacing: "-.078em" }}>Intelligence<br /><span style={{ color: color.signal }}>survives</span><br />the handoff.</div>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1390, height: 4, background: color.signal, boxShadow: `0 -9px 0 ${color.heat}, 0 9px 0 ${color.cold}` }} />
+    <div style={{ position: "absolute", left: 66, right: 66, bottom: 70, display: "flex", justifyContent: "space-between", borderTop: `1px solid ${color.rule}`, paddingTop: 24, fontFamily: mono, fontSize: 15, letterSpacing: ".08em", textTransform: "uppercase" }}><span>Engineer · founder · product thinker</span><span style={{ color: color.dim }}>UBEAT V1</span></div>
   </AbsoluteFill>
 );

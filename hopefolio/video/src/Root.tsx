@@ -7,7 +7,7 @@ export const RemotionRoot = () => {
       <Composition
         id="PortfolioSocial"
         component={PortfolioFilm}
-        durationInFrames={816}
+        durationInFrames={879}
         fps={30}
         width={1080}
         height={1920}
@@ -15,7 +15,7 @@ export const RemotionRoot = () => {
       <Composition
         id="PortfolioSocialSquare"
         component={FramedPortfolioFilm}
-        durationInFrames={816}
+        durationInFrames={879}
         fps={30}
         width={1080}
         height={1080}
@@ -23,7 +23,7 @@ export const RemotionRoot = () => {
       <Composition
         id="PortfolioSocialLandscape"
         component={FramedPortfolioFilm}
-        durationInFrames={816}
+        durationInFrames={879}
         fps={30}
         width={1920}
         height={1080}

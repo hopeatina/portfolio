@@ -1,0 +1,29 @@
+{
+  "project": "portfolio-film-v5-elastic-signal",
+  "fps": 30,
+  "duration_seconds": 29.3,
+  "duration_frames": 879,
+  "tempo_bpm": 123.0,
+  "music_source": "UBEAT V1",
+  "scenes": [
+    { "id": "held_signal", "start_time": 0.0, "end_time": 4.296, "start_frame": 0, "end_frame": 128, "cut": "first_downbeat" },
+    { "id": "visible_system", "start_time": 4.296, "end_time": 8.173, "start_frame": 129, "end_frame": 244, "cut": "downbeat" },
+    { "id": "proof_sprint", "start_time": 8.173, "end_time": 10.077, "start_frame": 245, "end_frame": 302, "cut": "downbeat" },
+    { "id": "architecture_breath", "start_time": 10.077, "end_time": 13.932, "start_frame": 303, "end_frame": 417, "cut": "drop_adjacent" },
+    { "id": "judgment_gate", "start_time": 13.932, "end_time": 15.836, "start_frame": 418, "end_frame": 475, "cut": "downbeat" },
+    { "id": "range_run", "start_time": 15.836, "end_time": 19.667, "start_frame": 476, "end_frame": 589, "cut": "downbeat" },
+    { "id": "human_signal", "start_time": 19.667, "end_time": 23.522, "start_frame": 590, "end_frame": 705, "cut": "downbeat" },
+    { "id": "recruiter_resolution", "start_time": 23.522, "end_time": 27.353, "start_frame": 706, "end_frame": 820, "cut": "final_drop" },
+    { "id": "memory_hold", "start_time": 27.353, "end_time": 29.3, "start_frame": 821, "end_frame": 878, "cut": "resolved_tail" }
+  ],
+  "audio": {
+    "music_file": "public/video/portfolio-film/ubeat-portfolio-cut.mp3",
+    "voice_file": "public/video/portfolio-film/hope-config-voice.wav",
+    "voice_start_frame": 6,
+    "voice_end_frame": 113,
+    "music_duck_start": 0,
+    "music_release_frames": [105, 139],
+    "normalization_target_lufs": -14,
+    "true_peak_db": -1
+  }
+}

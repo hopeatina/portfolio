@@ -23,7 +23,7 @@ export default function Footer() {
           <a href="mailto:hopeatina@gmail.com">Email</a>
         </div>
         <p className="site-footer-meta">
-          Houston · Cameroon / Estonia · © {new Date().getFullYear()} ·{" "}
+          Houston · Cameroonian roots · © {new Date().getFullYear()} ·{" "}
           <a
             href="https://github.com/hopeatina/portfolio"
             target="_blank"

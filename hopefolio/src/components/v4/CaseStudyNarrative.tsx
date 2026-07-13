@@ -8,6 +8,8 @@ import {
   SectionSignal,
   TextLink,
 } from "./V4Primitives";
+import MaterialThreadField, { ThreadStory } from "@/components/v5/MaterialThreadField";
+import TechnologyAtlas, { ToolEvidence } from "@/components/v5/TechnologyAtlas";
 
 export interface NarrativeBlock {
   eyebrow: string;
@@ -38,6 +40,8 @@ export interface SystemChapter {
   surfaces: Array<{ name: string; mode: string; detail: string }>;
   technologies: Array<{ label: string; values: string[] }>;
   surfaceProofs?: NarrativeProof[];
+  decisions?: ThreadStory[];
+  toolEvidence?: ToolEvidence[];
 }
 
 interface CaseStudyNarrativeProps {
@@ -63,6 +67,18 @@ interface CaseStudyNarrativeProps {
 }
 
 function SystemDepth({ chapter }: { chapter: SystemChapter }) {
+  const decisions = chapter.decisions ?? chapter.rationale.map((item, index) => ({
+    id: `decision-${index}`,
+    label: item.pressure,
+    before: item.pressure,
+    decision: item.choice,
+    consequence: item.reason,
+    evidence: chapter.layers[index]?.technology,
+    tone: chapter.layers[index]?.tone === "heat" || chapter.layers[index]?.tone === "cold"
+      ? chapter.layers[index]?.tone
+      : "signal",
+  }));
+
   return (
     <div className="v4-system-depth">
       <div className="v4-system-depth-intro">
@@ -70,6 +86,13 @@ function SystemDepth({ chapter }: { chapter: SystemChapter }) {
         <h2>{chapter.title}</h2>
         <p>{chapter.introduction}</p>
       </div>
+
+      <MaterialThreadField
+        stories={decisions}
+        eyebrow="Decision anatomy / select a knot"
+        title="Pressure did not decorate the architecture. It determined it."
+        compact
+      />
 
       <div className="v4-architecture-map" role="list" aria-label="System architecture layers">
         {chapter.layers.map((layer, index) => (
@@ -126,6 +149,10 @@ function SystemDepth({ chapter }: { chapter: SystemChapter }) {
           </div>
         ))}
       </div>
+
+      {chapter.toolEvidence?.length ? (
+        <TechnologyAtlas tools={chapter.toolEvidence} />
+      ) : null}
 
       {chapter.surfaceProofs?.length ? (
         <div className="v4-surface-proof-field">

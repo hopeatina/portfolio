@@ -10,7 +10,7 @@ Approved by Hope after the audience, identity hierarchy, product evidence, typog
 
 Hope is an engineer, founder, and product thinker who makes complex systems coherent across technical, human, and organizational boundaries. The portfolio should behave like an authored inspection instrument: interaction reveals deeper layers of evidence, continuity connects them, and deliberate aberrations mark the places where handoffs can fail.
 
-Music supplies rhythm and compositional instinct, not a separate musician identity. Cameroonian, Estonian, Houston, and design-speaking influences appear through temperature, weave, collaboration, and confidence—not flags, biographies, or decorative motifs.
+Music supplies rhythm and compositional instinct, not a separate musician identity. Cameroonian, Houston, and design-speaking influences appear through temperature, weave, collaboration, and confidence—not flags, biographies, or decorative motifs.
 
 ## Five-second contract
 
@@ -194,7 +194,7 @@ Narrative:
 4. Creativity as projected self, inspection, and transformation.
 5. Collaboration as the mechanism that makes individual depth useful.
 
-Cameroon, Estonia, Houston, Rice, music, and Figma speaking remain subtle evidence threads. Use no flag palette, tourist imagery, or tokenized cultural pattern.
+Cameroon, Houston, Rice, music, and Figma speaking remain subtle evidence threads. Use no flag palette, tourist imagery, or tokenized cultural pattern.
 
 ## Generated asset specification
 
