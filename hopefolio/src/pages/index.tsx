@@ -12,6 +12,57 @@ import {
   SystemGlyph,
   TextLink,
 } from "@/components/v4/V4Primitives";
+import MaterialThreadField from "@/components/v5/MaterialThreadField";
+import TechnologyAtlas, { ToolEvidence } from "@/components/v5/TechnologyAtlas";
+
+const heroThreads = [
+  {
+    id: "continuity",
+    label: "carry the work",
+    before: "A capable agent starts the next session without the goal, the decisions, or the reason behind them.",
+    decision: "Compile the goal, constraints, prior proof, permissions, and next move into one handoff.",
+    consequence: "A decision made in Claude is still there when Codex takes over.",
+    evidence: "OrgX context pack + goal frame",
+    tone: "cold" as const,
+  },
+  {
+    id: "quality",
+    label: "set the bar",
+    before: "More output creates more review, while the standard remains trapped in one person's head.",
+    decision: "Let the owner author the global bar, then tune it by team and artifact type.",
+    consequence: "Work below the bar loops back before it reaches the reviewer.",
+    evidence: "OrgX quality bar + domain gates",
+    tone: "signal" as const,
+  },
+  {
+    id: "value",
+    label: "prove movement",
+    before: "Agent activity looks impressive even when it does not move the goal.",
+    decision: "Bind work, proof, cost, value, and budget to the goal that authorized it.",
+    consequence: "A person can see what moved, what it cost, and whether the next action still earns its place.",
+    evidence: "Goal ROI + economic ledger",
+    tone: "heat" as const,
+  },
+];
+
+const toolEvidence: ToolEvidence[] = [
+  { name: "Claude", icon: "anthropic", category: "AI clients", project: "OrgX", reason: "A strong native surface for long-context product and engineering work; OrgX carries the organizational state into it instead of replacing it." },
+  { name: "Codex", icon: "openai", category: "AI clients", project: "OrgX", reason: "Repo-native execution and verification. The continuity layer gives each run the goal, boundaries, and prior decisions before code changes begin." },
+  { name: "MCP", mark: "MCP", category: "Protocol", project: "OrgX", reason: "The portable contract that makes the same organizational memory and governed actions available across otherwise different AI clients." },
+  { name: "MCP Apps", mark: "UI", category: "Protocol", project: "OrgX", reason: "Turns a tool result into an inspectable, actionable surface inside the client—briefs, decisions, status, search, and proof." },
+  { name: "Next.js", icon: "next", category: "Product", project: "OrgX", reason: "One typed product surface for operator workflows, proof views, settings, and server-side read models." },
+  { name: "TypeScript", icon: "typescript", category: "Product", project: "OrgX + plugins", reason: "Keeps tool contracts, host integrations, UI state, and cross-repo packages legible as the ecosystem expands." },
+  { name: "Cloudflare", icon: "cloudflare", category: "Runtime", project: "OrgX MCP", reason: "Edge transport, OAuth, session isolation, and durable state close to every client connection." },
+  { name: "Inngest", mark: "IN", category: "Runtime", project: "OrgX", reason: "Durable background execution for work that must survive request boundaries, retries, and recovery." },
+  { name: "Supabase", icon: "supabase", category: "Data", project: "OrgX", reason: "A shared work graph for goals, initiatives, decisions, receipts, artifacts, and the economics connecting them." },
+  { name: "PostgreSQL", icon: "postgres", category: "Data", project: "Alma + OrgX", reason: "Durable relational state where traceability, long-running workflows, and accountable changes matter." },
+  { name: "Django", icon: "django", category: "Product", project: "Alma", reason: "Narrow, reviewable clinical API boundaries with a mature permissions and data model ecosystem." },
+  { name: "Datadog", icon: "datadog", category: "Proof", project: "Alma", reason: "Makes failure paths visible early enough for engineering to intervene before clinical operators absorb them." },
+  { name: "Rust", icon: "rust", category: "Runtime", project: "PerfPulse", reason: "A small local core lets the diagnostic tool respect the machine it is inspecting and ship as one binary." },
+  { name: "GitHub", icon: "github", category: "Proof", project: "Across the work", reason: "Source, review, CI, and merge receipts keep engineering claims attached to inspectable evidence." },
+  { name: "Figma", icon: "figma", category: "Creative", project: "Figma and Chill", reason: "A multiplayer creative surface where shared making—not presentation—became the mechanism for community and taste." },
+  { name: "OpenAI", icon: "openai", category: "AI clients", project: "OrgX", reason: "Agents and model judgment are used abundantly, but inside an authored goal, quality, and consequence system." },
+];
 
 const signatures = [
   {
@@ -110,7 +161,7 @@ export default function Home() {
             sizes="100vw"
             aria-hidden="true"
           />
-          <LivingMotif variant="weave" className="v4-hero-live-motif" label="Multiple systems resolving into one continuous signal" />
+          <MaterialThreadField stories={heroThreads} className="v5-hero-weave" compact />
           <div className="v4-home-hero-copy">
             <motion.span
               className="v4-hero-kicker"
@@ -126,7 +177,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
-              I build the invisible layer that makes ambitious systems coherent.
+              I build systems where intelligence survives the handoff.
             </motion.h1>
             <motion.p
               className="v4-hero-deck"
@@ -134,8 +185,8 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.18 }}
             >
-              Across AI clients, regulated products, and operator surfaces, I keep context alive,
-              judgment explicit, and outcomes inspectable.
+              Founder, engineer, and product thinker. I turn fragmented AI work into something a
+              person can continue, govern, judge, and trust.
             </motion.p>
             <motion.div
               className="v4-hero-actions"
@@ -163,7 +214,7 @@ export default function Home() {
             />
             <figcaption>
               <span>Houston</span>
-              <span>Cameroon / Estonia</span>
+              <span>Cameroonian roots</span>
             </figcaption>
           </motion.figure>
 
@@ -201,18 +252,18 @@ export default function Home() {
           <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="02">The system I keep building toward</SectionSignal>
           <div className="v4-continuity-heading">
-            <h2 id="continuity-title">Continuity is the product.</h2>
+            <h2 id="continuity-title">The prompt ends. The work should not.</h2>
             <p>
-              Autonomy is easy to demonstrate. The harder engineering problem is preserving what
-              matters as work branches, crosses clients, meets human judgment, and returns as memory.
+              Autonomy is easy to demonstrate. The harder problem is carrying the goal, decisions,
+              quality bar, and evidence as work crosses clients and people.
             </p>
           </div>
           <CausalFlow
             steps={[
-              { glyph: "context", label: "Context survives", detail: "Intent, constraints, decisions, and evidence enter together." },
-              { glyph: "branch", label: "Work branches", detail: "Specialists act across clients without losing the operating picture.", tone: "cold" },
-              { glyph: "judgment", label: "Risk meets judgment", detail: "The system escalates consequence, not mere activity.", tone: "heat" },
-              { glyph: "receipt", label: "Outcome becomes memory", detail: "Proof returns to the graph and improves the next decision." },
+              { glyph: "context", label: "Carry the why", detail: "The next agent receives the goal, constraints, decisions, and prior proof together." },
+              { glyph: "branch", label: "Use the right client", detail: "Claude, Codex, Cursor, and other specialists keep their native strengths.", tone: "cold" },
+              { glyph: "judgment", label: "Pause at consequence", detail: "High-consequence work waits for the right person—not every action.", tone: "heat" },
+              { glyph: "receipt", label: "Teach the next run", detail: "The result returns with enough evidence to improve what happens next." },
             ]}
           />
           <div className="v4-client-rail" aria-label="AI clients and surfaces">
@@ -226,9 +277,15 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="v5-tool-section v4-motif-backed">
+          <LivingMotif variant="weave" className="v4-section-motif" />
+          <SectionSignal index="03">The working ecosystem</SectionSignal>
+          <TechnologyAtlas tools={toolEvidence} title="A wide stack, held together by reasons." />
+        </section>
+
         <section className="v4-orgx-home v4-motif-backed" aria-labelledby="orgx-title">
           <LivingMotif variant="handoff" className="v4-section-motif" />
-          <SectionSignal index="03">Flagship / OrgX</SectionSignal>
+          <SectionSignal index="04">Flagship / OrgX</SectionSignal>
           <div className="v4-orgx-home-heading">
             <div>
               <span>Founder-built continuity infrastructure</span>
@@ -268,7 +325,7 @@ export default function Home() {
 
         <section className="v4-range-section v4-motif-backed" aria-labelledby="range-title">
           <LivingMotif variant="weave" className="v4-section-motif" />
-          <SectionSignal index="04">Range under constraint</SectionSignal>
+          <SectionSignal index="05">Range under constraint</SectionSignal>
           <div className="v4-range-heading">
             <h2 id="range-title">Four systems. Four different kinds of pressure.</h2>
             <p>
@@ -297,7 +354,7 @@ export default function Home() {
 
         <section className="v4-collaboration-section v4-motif-backed" aria-labelledby="collaboration-title">
           <LivingMotif variant="resolve" className="v4-section-motif" />
-          <SectionSignal index="05">Product taste is collaborative</SectionSignal>
+          <SectionSignal index="06">Product taste is collaborative</SectionSignal>
           <div className="v4-collaboration-grid">
             <a
               className="v4-config-proof"

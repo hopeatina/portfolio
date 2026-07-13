@@ -8,10 +8,10 @@ export default function OrgXPage() {
       index="Case 01 / flagship"
       status="Founder-built · active platform"
       title="OrgX"
-      subtitle="The continuity and proof layer for AI-delivered work."
-      introduction="OrgX is the clearest expression of how I think: make AI work resumable, reviewable, and provable across agents. The product is not another chat or a generic dashboard. It is the organizational state that survives both."
+      subtitle="The prompt ends. The company keeps moving."
+      introduction="OrgX lets a person manage a fleet of agents from the AI client they already use—without losing the goal, the decisions, the quality bar, or the proof when work changes hands. It is the shared operating context beneath the clients, not another chat destination."
       facts={[
-        { label: "Category", value: "organizational continuity" },
+        { label: "Job", value: "carry work across agents" },
         { label: "Ownership", value: "founder · product · architecture" },
         { label: "Boundary", value: "human consequence" },
         { label: "Delivery", value: "web · MCP · plugins · widgets" },
@@ -24,17 +24,17 @@ export default function OrgXPage() {
       }}
       problem={{
         eyebrow: "The failure was fragmentation, not intelligence",
-        title: "Agent work became powerful faster than it became accountable.",
+        title: "Agents could do more work than a person could reliably follow.",
         body: (
           <>
             <p>
               The model could draft, research, code, and coordinate. But the work scattered across
-              prompts, clients, repositories, and human memories. Every new session paid a context
-              tax. Every review asked the operator to reconstruct why the output existed.
+              prompts, clients, repositories, and human memory. A handoff between Claude and Codex
+              could erase the goal, the decision that shaped it, and the evidence already gathered.
             </p>
             <p>
-              More autonomy made that problem worse. Activity increased while the operating picture
-              became less coherent.
+              More autonomy made the gap more dangerous. Activity increased while the founder or
+              team lead had less confidence about what moved, why it moved, and what deserved attention.
             </p>
           </>
         ),
@@ -46,13 +46,13 @@ export default function OrgXPage() {
       }}
       insight={{
         eyebrow: "The prompt was the wrong primitive",
-        title: "The organization—not the conversation—had to remember.",
+        title: "The organization—not the conversation—had to remember why the work exists.",
         body: (
           <>
             <p>
-              A useful continuity layer carries intent, decisions, evidence, trust, and outcomes
-              forward. It lets Claude Code, Codex, Cursor, OpenCode, and OpenClaw enter the same
-              operating context without pretending those clients are the same product.
+              The next agent needs more than a summary. It needs the goal, definition of done,
+              decisions and why, available tools, missing permissions, budget, confidence, and the
+              next useful action. Those become a compiled handoff instead of a transcript dump.
             </p>
             <p>
               That reframed OrgX from an orchestration destination into infrastructure that can meet
@@ -63,14 +63,14 @@ export default function OrgXPage() {
       }}
       decision={{
         eyebrow: "The architecture followed the product thesis",
-        title: "Expose one work graph across clients, then make every consequential output prove itself.",
+        title: "Carry one work graph across clients, then make consequence—not activity—control the system.",
         body: (
           <>
             <p>
-              Initiatives, agents, decisions, artifacts, receipts, and proof rooms form the shared
-              language. Client plugins carry the context into execution. Trust and quality gates
-              decide what can move. The artifact returns with enough provenance to be reviewed on
-              its own terms.
+              The work graph connects goals, initiatives, agents, decisions, artifacts, receipts,
+              cost, and value. The owner's quality bar decides what returns for review. Tool policy
+              pauses publishing, payments, messages, merges, and other external effects at the human
+              boundary. Recovery can retry, narrow scope, ask a specialist, checkpoint, or stop.
             </p>
           </>
         ),
@@ -83,8 +83,8 @@ export default function OrgXPage() {
       ]}
       system={{
         eyebrow: "A platform, protocol surface, and proof system",
-        title: "The architecture carries organizational state across clients—then returns work with enough context to judge it.",
-        introduction: "The difficult part is not any one component. It is preserving the causal chain as a task moves from intent to tool execution, through a judgment boundary, into a durable artifact, and back into the next agent's context.",
+        title: "Five mechanisms turn a fleet of agents into accountable company movement.",
+        introduction: "The difficult part is preserving the cause chain: why the work exists, what the agent knew, which tools it could use, where a person had to decide, what the result proved, and whether the next move is still worth its cost.",
         layers: [
           {
             label: "client edge",
@@ -150,6 +150,53 @@ export default function OrgXPage() {
             reason: "A reviewer can inspect the artifact, status, provenance, and next action inside the client where the work arrived.",
           },
         ],
+        decisions: [
+          {
+            id: "context-pack",
+            label: "pass the work",
+            before: "A new agent receives a task title and reconstructs the company from scattered chats, docs, and repo state.",
+            decision: "Compile the goal, definition of done, decisions and why, proof, permissions, confidence, and next action into one context pack.",
+            consequence: "The next client can continue the work without pretending a transcript is organizational memory.",
+            evidence: "buildAgentContextPack · compileGoalFrame",
+            tone: "cold",
+          },
+          {
+            id: "quality-bar",
+            label: "control quality",
+            before: "The founder reviews every artifact because the real standard exists only in their head.",
+            decision: "Make the quality bar owner-authored, versionable, and tunable by team and artifact type.",
+            consequence: "Work below threshold can loop back before it consumes the reviewer's attention.",
+            evidence: "QualitySettingsPanel · domain quality gate",
+            tone: "signal",
+          },
+          {
+            id: "goal-roi",
+            label: "prove ROI",
+            before: "Agent volume and completed tasks can rise while the company goal stands still.",
+            decision: "Bind initiatives, proof receipts, realized cost, realized value, and budget remaining to the authorizing goal.",
+            consequence: "A person can judge movement and reallocate attention without rewarding activity theatre.",
+            evidence: "computeGoalRoi · economic_ledger",
+            tone: "heat",
+          },
+          {
+            id: "tool-policy",
+            label: "govern tools",
+            before: "A novel connector can create an external consequence that no static allowlist anticipated.",
+            decision: "Define explicit profiles, gate publishing and external effects, and classify unknown high-risk tools fail-closed.",
+            consequence: "Agents retain useful room to act while merges, messages, payments, and other consequential writes remain governed.",
+            evidence: "toolPolicyProfiles · consequence classifier",
+            tone: "heat",
+          },
+          {
+            id: "recovery",
+            label: "reweave failure",
+            before: "A timeout, failed tool, low-quality output, or blocked dependency turns a run into a dead end.",
+            decision: "Use bounded recovery: retry with context, fallback, reduce scope, ask a specialist, checkpoint, pause, then escalate.",
+            consequence: "A snapped thread can reveal the next safe weave without hiding the failure or retrying forever.",
+            evidence: "recoveryStrategies · escalation policy",
+            tone: "cold",
+          },
+        ],
         surfaces: [
           { name: "Agent desk + chat timeline", mode: "operator", detail: "Focus, delegation, approvals, tool calls, and outcomes stay attached to the agent's current work." },
           { name: "Live room + processing inspector", mode: "runtime", detail: "Active execution, handoffs, blocked decisions, and run state become legible without pretending raw telemetry is judgment." },
@@ -166,6 +213,20 @@ export default function OrgXPage() {
           { label: "Agent + workflow", values: ["OpenAI Agents SDK", "Anthropic Agent SDK", "Inngest", "E2B", "Trigger.dev"] },
           { label: "Protocol + edge", values: ["Model Context Protocol", "MCP Apps", "Cloudflare Workers", "Durable Objects", "Zod"] },
           { label: "Reliability + business", values: ["Sentry", "PostHog", "OpenTelemetry", "Upstash", "Stripe"] },
+        ],
+        toolEvidence: [
+          { name: "MCP", mark: "MCP", category: "Protocol", project: "Cross-client continuity", reason: "One portable contract exposes organizational memory and governed actions inside Claude, ChatGPT, Cursor, Codex, OpenCode, OpenClaw, and other MCP hosts." },
+          { name: "MCP Apps", mark: "UI", category: "Protocol", project: "Embedded OrgX", reason: "A tool response can become a brief, decision, plan, status view, or proof surface inside the client where the question was asked." },
+          { name: "Cloudflare", icon: "cloudflare", category: "Runtime", project: "MCP edge", reason: "Workers, OAuth, Durable Objects, and session-scoped state support authenticated client connections without treating them as anonymous chat requests." },
+          { name: "Next.js", icon: "next", category: "Product", project: "Operator app", reason: "The typed product surface connects live work, settings, proof, decisions, and server-side read models." },
+          { name: "TypeScript", icon: "typescript", category: "Product", project: "Platform + plugins", reason: "Shared types keep tool grammar, work-graph entities, plugins, widget payloads, and operator UI aligned across repositories." },
+          { name: "Supabase", icon: "supabase", category: "Data", project: "Work graph", reason: "Goals, initiatives, decisions, artifacts, receipts, approvals, and economics need durable, attributable relationships." },
+          { name: "Zod", icon: "zod", category: "Protocol", project: "Tool grammar", reason: "Structured contracts make the same action legible to multiple clients and reject malformed calls at the boundary." },
+          { name: "OpenAI", icon: "openai", category: "Agents", project: "Execution + judgment", reason: "Agent runtimes and model judges handle execution and evaluation inside an authored goal and quality system." },
+          { name: "Anthropic", icon: "anthropic", category: "Agents", project: "Execution + clients", reason: "Claude is both a strong specialist runtime and a native client surface for carrying shared organizational context." },
+          { name: "GitHub", icon: "github", category: "Proof", project: "Engineering receipts", reason: "Source, pull requests, checks, and merges let an engineering outcome return with independently inspectable evidence." },
+          { name: "Sentry", icon: "sentry", category: "Proof", project: "Runtime quality", reason: "Operational errors must remain attributable to the run and system boundary that produced them." },
+          { name: "Stripe", icon: "stripe", category: "Business", project: "Commercial boundary", reason: "Billing is treated as a consequential external system with explicit state and governance—not a decorative integration badge." },
         ],
         surfaceProofs: [
           {
@@ -185,6 +246,24 @@ export default function OrgXPage() {
             alt: "OrgX morning brief MCP widget summarizing priorities, decisions, and work requiring attention",
             label: "Morning brief",
             caption: "The next session begins with grounded organizational state and explicit judgment requests—not a blank prompt.",
+          },
+          {
+            src: "/images/case-studies/widgets/decisions.png",
+            alt: "OrgX decisions MCP widget with pending decisions and decision history",
+            label: "Decision surface",
+            caption: "The information needed to decide, the consequence, and the approval action stay together inside the client.",
+          },
+          {
+            src: "/images/case-studies/widgets/search-results.png",
+            alt: "OrgX search MCP widget returning organizational memory across artifacts and decisions",
+            label: "Memory search",
+            caption: "A new session can recover the relevant decision and artifact without reading the entire organizational transcript.",
+          },
+          {
+            src: "/images/case-studies/widgets/scaffolded-initiative.png",
+            alt: "OrgX scaffolded initiative MCP widget with workstreams, owners, and next actions",
+            label: "Plan becomes work",
+            caption: "The output is not a paragraph called a plan; it is an inspectable structure with owners, boundaries, and a next action.",
           },
         ],
       }}
