@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-07-15T09:48:09.603Z",
+    "updated": "2026-07-15T23:26:28.085Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1008,9 +1008,9 @@
         ],
         "notes": "Strong concept. Caption is textbook Hope voice-memo: opens on a concrete scene (second agent picking up 'finished' work), chains with 'and so i'm like, wait', drops claude/cursor/codex casually, compresses with 'the goal + the decisions + the quality bar', and ends rough ('still ripping out the old assumptions though'). No kill-list words. The line 'i've been treating the prompt as the unit this whole time, but the prompt ends and the company doesn't' is genuinely quotable and carries the whole reframe.\n\nAccuracy is clean — this concept earns its credibility from architecture + felt problem, not invented traction. 'for months' refers to the founder's own build (truthful confession, not a metric). Real tools named, real mechanism (context pack: goal / definition of done / decisions+why / budget / next action). No fabricated users, revenue, funding, or benchmarks. Passes the truth constraint fully.\n\nSlide arc is well-built: confession hook → tension (perfect prompt / dead transcript) → break (the 'why' was gone) → pivot ('the prompt was never the unit. the organization was.') → proof (context packs, the save-bait field list) → payoff ('the task outlives the chat') → soft question CTA. The 'wrong primitive' framing is the right kind of contrarian for a skeptical AI-founder — it's a technical-taste claim, not a growth brag, which is exactly what earns builder trust.\n\nOn the hook: keeping slide 1 as 'my agent system' rather than 'OrgX' is the correct cold-reach call — OrgX means nothing to a cold viewer, 'my agent system' is universally relatable. My revision only adds a touch of building-in-public sting ('shipped it that way') to raise the confession stakes without spoiling the slide-4 reframe; the original is already strong and either works. Keep it."
       },
-      "status": "ready",
-      "uses": 0,
-      "last_used": null,
+      "status": "used",
+      "uses": 1,
+      "last_used": "2026-07-15",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },

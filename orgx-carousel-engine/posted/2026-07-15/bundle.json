@@ -1,0 +1,168 @@
+{
+  "experiment": {
+    "id": "2026-07-15-orgx-bip-wrong-primitive",
+    "date": "2026-07-15",
+    "service": "tiktok",
+    "concept_id": "orgx-bip-wrong-primitive",
+    "pillar": "build-in-public",
+    "hook_type": "confession / mistake",
+    "slide_count": 8,
+    "topic_tags": [
+      "wrong-primitive",
+      "context-pack",
+      "handoff-pain",
+      "build-in-public"
+    ],
+    "title": "I built OrgX on the wrong primitive",
+    "hook": "i built my agent system on the wrong primitive. for months.",
+    "hypothesis": "a confession/mistake hook plus a 'wrong primitive' reframe earns more founder trust + saves than a feature-list hook does for cold reach",
+    "caption": "the moment it clicked was watching a second agent pick up work a first one 'finished.' it had the files. it had the last message. and it still had no idea why any of it existed — what we'd already ruled out, what done even meant, who was allowed to approve the thing. and so i'm like, wait, i've been treating the prompt as the unit this whole time, but the prompt ends and the company doesn't. the goal + the decisions + the quality bar have to live somewhere that isn't a chat window that evaporates the second the context runs out. so orgx became the layer underneath claude / cursor / codex instead of another place to go type — a context pack instead of a transcript dump. i changed my mind about the most basic thing i was building on and honestly everything after it got simpler. still ripping out the old assumptions though\n\n#buildinpublic #aiagents #multiagent #devtools #mcp #agentops #founder #aiengineering",
+    "hashtags": [
+      "#buildinpublic",
+      "#aiagents",
+      "#multiagent",
+      "#devtools",
+      "#mcp",
+      "#agentops",
+      "#founder",
+      "#aiengineering"
+    ],
+    "image_files": [
+      "slide-01.png",
+      "slide-02.png",
+      "slide-03.png",
+      "slide-04.png",
+      "slide-05.png",
+      "slide-06.png",
+      "slide-07.png",
+      "slide-08.png"
+    ],
+    "image_urls": [
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-15/slide-01.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-15/slide-02.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-15/slide-03.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-15/slide-04.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-15/slide-05.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-15/slide-06.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-15/slide-07.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-15/slide-08.png"
+    ],
+    "status": "rendered",
+    "buffer_idea_id": null,
+    "metrics": null,
+    "success": null,
+    "created": "2026-07-15T23:26:28.083Z"
+  },
+  "carousel": {
+    "id": "orgx-bip-wrong-primitive",
+    "pillar": "build-in-public",
+    "pillarLabel": "Building OrgX",
+    "handle": "@useorgx",
+    "url": "useorgx.com",
+    "slides": [
+      {
+        "role": "hook",
+        "kicker": "confession",
+        "headline": "i built my agent system on the wrong primitive. for months.",
+        "subtext": "and i didn't notice until the handoff broke.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "every task started with a perfect prompt. and ended as a dead transcript.",
+        "subtext": "",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "the break",
+        "headline": "hand the work to the next agent and the 'why' was just gone.",
+        "subtext": "",
+        "accentSignal": "danger",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "turn",
+        "kicker": "the reframe",
+        "headline": "the prompt was never the unit. the organization was.",
+        "subtext": "",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "so i stopped passing transcripts. i started passing context packs.",
+        "subtext": "",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "what's inside",
+        "headline": "goal. definition of done. decisions + why. budget. next action.",
+        "subtext": "structured context handed over, not a chat log to re-read.",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "the task outlives the chat now. that's the whole thing.",
+        "subtext": "",
+        "accentSignal": "lime",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "cta",
+        "kicker": "your turn",
+        "headline": "what primitive are you still building on that you shouldn't be?",
+        "subtext": "building OrgX in public @ useorgx.com",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      }
+    ]
+  },
+  "caption": {
+    "text": "the moment it clicked was watching a second agent pick up work a first one 'finished.' it had the files. it had the last message. and it still had no idea why any of it existed — what we'd already ruled out, what done even meant, who was allowed to approve the thing. and so i'm like, wait, i've been treating the prompt as the unit this whole time, but the prompt ends and the company doesn't. the goal + the decisions + the quality bar have to live somewhere that isn't a chat window that evaporates the second the context runs out. so orgx became the layer underneath claude / cursor / codex instead of another place to go type — a context pack instead of a transcript dump. i changed my mind about the most basic thing i was building on and honestly everything after it got simpler. still ripping out the old assumptions though\n\n#buildinpublic #aiagents #multiagent #devtools #mcp #agentops #founder #aiengineering",
+    "body": "the moment it clicked was watching a second agent pick up work a first one 'finished.' it had the files. it had the last message. and it still had no idea why any of it existed — what we'd already ruled out, what done even meant, who was allowed to approve the thing. and so i'm like, wait, i've been treating the prompt as the unit this whole time, but the prompt ends and the company doesn't. the goal + the decisions + the quality bar have to live somewhere that isn't a chat window that evaporates the second the context runs out. so orgx became the layer underneath claude / cursor / codex instead of another place to go type — a context pack instead of a transcript dump. i changed my mind about the most basic thing i was building on and honestly everything after it got simpler. still ripping out the old assumptions though",
+    "hashtags": [
+      "#buildinpublic",
+      "#aiagents",
+      "#multiagent",
+      "#devtools",
+      "#mcp",
+      "#agentops",
+      "#founder",
+      "#aiengineering"
+    ],
+    "firstComment": "#buildinpublic #aiagents #multiagent #devtools #mcp #agentops #founder #aiengineering"
+  }
+}
