@@ -143,11 +143,11 @@ function hookSlide(slide, carousel) {
     <div style="display:flex;align-items:center;gap:16px;">${markImg(56)}<span style="font-size:42px;font-weight:800;letter-spacing:-1px;color:${COLORS.fg};">OrgX</span></div>
     <span style="${MONO};font-size:22px;letter-spacing:5px;color:${COLORS.fgFaint};">USEORGX.COM</span>
   </div>
-  <div style="position:absolute;left:96px;right:96px;bottom:150px;z-index:3;">
+  <div style="position:absolute;left:96px;right:96px;bottom:420px;z-index:3;">
     <h1 style="font-size:${size}px;font-weight:800;letter-spacing:${-size * 0.035}px;line-height:0.99;color:${COLORS.fg};margin:0;">${rich(slide.headline)}${cursor(size)}</h1>
     ${slide.subtext ? `<p style="font-size:42px;line-height:1.35;color:${COLORS.fgMuted};margin:44px 0 0;max-width:820px;">${rich(slide.subtext)}</p>` : ''}
   </div>
-  <div style="position:absolute;left:96px;bottom:84px;z-index:3;display:flex;align-items:center;gap:26px;${MONO};">
+  <div style="position:absolute;left:96px;bottom:352px;z-index:3;display:flex;align-items:center;gap:26px;${MONO};">
     <span style="font-size:21px;letter-spacing:4px;color:${COLORS.fgFaint};">01 / ${String(carousel.slides.length).padStart(2, '0')}</span>
     <div style="width:60px;height:2px;background:${accent};"></div>
     <span style="font-size:21px;letter-spacing:4px;color:${accent};">HOLD &amp; READ</span>
@@ -255,7 +255,7 @@ function receiptSlide(slide, idx, total, carousel) {
   </div>
 
   <!-- the receipt -->
-  <div style="position:absolute;left:50%;transform:translateX(-50%) rotate(-1.6deg);bottom:210px;width:660px;z-index:4;filter:drop-shadow(0 40px 60px rgba(0,0,0,0.6));">
+  <div style="position:absolute;left:50%;transform:translateX(-50%) rotate(-1.6deg);bottom:330px;width:660px;z-index:4;filter:drop-shadow(0 40px 60px rgba(0,0,0,0.6));">
     <div style="height:26px;${zig};background-color:transparent;transform:rotate(180deg);"></div>
     <div style="background:#F2F0E9;padding:44px 48px 38px;position:relative;">
       <div style="display:flex;justify-content:space-between;align-items:center;">

@@ -605,10 +605,11 @@
         {
           "role": "hook",
           "kicker": "hot take",
-          "headline": "the prompt was the wrong primitive.",
+          "headline": "we built everything on the wrong primitive.",
           "subtext": "and we're all still building on top of it.",
           "accent": "lime",
-          "visual_note": "one huge lowercase line on near-black #02040a, a blinking terminal cursor after the period. nothing else. billboard energy."
+          "visual_note": "one huge lowercase line on near-black #02040a, a blinking terminal cursor after the period. nothing else. billboard energy.",
+          "headline_original": "the prompt was the wrong primitive."
         },
         {
           "role": "tension",
@@ -705,10 +706,11 @@
         {
           "role": "hook",
           "kicker": "read this",
-          "headline": "reviewing every agent action isn't oversight. it's a bottleneck you built.",
+          "headline": "you're the slowest agent in your fleet.",
           "subtext": "and it's why the one risky action slips through.",
           "accent": "danger",
-          "visual_note": "a wall of glowing 'approve' buttons filling the frame, one red irreversible action buried in the middle, easy to miss."
+          "visual_note": "a wall of glowing 'approve' buttons filling the frame, one red irreversible action buried in the middle, easy to miss.",
+          "headline_original": "reviewing every agent action isn't oversight. it's a bottleneck you built."
         },
         {
           "role": "tension",
@@ -811,10 +813,11 @@
         {
           "role": "hook",
           "kicker": "unpopular",
-          "headline": "your agents don't have a memory problem. your org does.",
+          "headline": "your agents remember fine. your org forgets.",
           "subtext": "the fix isn't a bigger context window.",
           "accent": "lime",
-          "visual_note": "the word 'memory' crossed out, 'org' written underneath it, on near-black. stark, two words doing all the work."
+          "visual_note": "the word 'memory' crossed out, 'org' written underneath it, on near-black. stark, two words doing all the work.",
+          "headline_original": "your agents don't have a memory problem. your org does."
         },
         {
           "role": "tension",
@@ -1120,10 +1123,11 @@
         {
           "role": "hook",
           "kicker": "steal this",
-          "headline": "7 fields i hand between agents. zero transcripts.",
+          "headline": "7 fields. zero transcripts. that's my whole handoff.",
           "subtext": "this is the entire handoff.",
           "accent": "iris",
-          "visual_note": "big '7' as a design element. mono 'steal this' tag signals save-bait immediately. numbered promise creates the open loop — they scroll to see all 7."
+          "visual_note": "big '7' as a design element. mono 'steal this' tag signals save-bait immediately. numbered promise creates the open loop — they scroll to see all 7.",
+          "headline_original": "7 fields i hand between agents. zero transcripts."
         },
         {
           "role": "tension",
@@ -1218,10 +1222,11 @@
         {
           "role": "hook",
           "kicker": "handoff / mechanism",
-          "headline": "you're pasting the whole chat into the next agent. that's the bug.",
+          "headline": "the transcript is not the handoff.",
           "subtext": "the next agent doesn't need your transcript. it needs the decision.",
           "accent": "amber",
-          "visual_note": "big amber headline on near-black #02040a; a dim scrolling chat transcript ghosted behind it with a red strike-through; small 'the bug' tag bottom-right."
+          "visual_note": "big amber headline on near-black #02040a; a dim scrolling chat transcript ghosted behind it with a red strike-through; small 'the bug' tag bottom-right.",
+          "headline_original": "you're pasting the whole chat into the next agent. that's the bug."
         },
         {
           "role": "tension",
@@ -1432,10 +1437,11 @@
         {
           "role": "hook",
           "kicker": "proof / mechanism",
-          "headline": "an agent saying 'done' is not proof. it's a vibe.",
+          "headline": "'done' is a claim. a receipt is proof.",
           "subtext": "you still open the file to check. every single time.",
           "accent": "amber",
-          "visual_note": "near-black; a green 'done ✓' chat bubble dimmed, a big amber '?' laid over it, small 'unverified' tag."
+          "visual_note": "near-black; a green 'done ✓' chat bubble dimmed, a big amber '?' laid over it, small 'unverified' tag.",
+          "headline_original": "an agent saying 'done' is not proof. it's a vibe."
         },
         {
           "role": "tension",
@@ -1542,10 +1548,11 @@
         {
           "role": "hook",
           "kicker": "the handoff",
-          "headline": "you didn't lose the code. you lost the why.",
+          "headline": "the code survived the handoff. the why didn't.",
           "subtext": "nobody noticed until the next agent confidently shipped the wrong thing.",
           "accent": "amber",
-          "visual_note": "two panels on near-black #02040a, left labeled 'Claude' right labeled 'Codex', a single bright thread snapping in the gap between them. big dominant line up top."
+          "visual_note": "two panels on near-black #02040a, left labeled 'Claude' right labeled 'Codex', a single bright thread snapping in the gap between them. big dominant line up top.",
+          "headline_original": "you didn't lose the code. you lost the why."
         },
         {
           "role": "tension",
@@ -1737,10 +1744,11 @@
         {
           "role": "hook",
           "kicker": "save this",
-          "headline": "your context isn't leaking. it's dying at 5 specific doors.",
+          "headline": "your context dies at 5 specific doors.",
           "subtext": "you walked through all of them this week.",
           "accent": "amber",
-          "visual_note": "5 numbered doorways lined across near-black #02040a, a faint thread passing through each one, thinning a little more at every door. sets up the loop."
+          "visual_note": "5 numbered doorways lined across near-black #02040a, a faint thread passing through each one, thinning a little more at every door. sets up the loop.",
+          "headline_original": "your context isn't leaking. it's dying at 5 specific doors."
         },
         {
           "role": "tension",
@@ -1846,10 +1854,11 @@
         {
           "role": "hook",
           "kicker": "THE LOOP",
-          "headline": "every piece of real work runs the same 7-step loop",
+          "headline": "real work runs one 7-step loop. agents break it.",
           "subtext": "your agents run 3 of them and call it done.",
           "accent": "iris",
-          "visual_note": "faint ring of 7 nodes on near-black, only 3 lit, the other 4 dark and unlabeled to open the loop"
+          "visual_note": "faint ring of 7 nodes on near-black, only 3 lit, the other 4 dark and unlabeled to open the loop",
+          "headline_original": "every piece of real work runs the same 7-step loop"
         },
         {
           "role": "tension",
@@ -1949,10 +1958,11 @@
         {
           "role": "hook",
           "kicker": "YOU'RE DOING THIS WRONG",
-          "headline": "stop approving every move your agents make",
+          "headline": "reversible. ambiguous. irreversible. only one should reach you.",
           "subtext": "you're the bottleneck you were trying to delete.",
           "accent": "danger",
-          "visual_note": "a tall stack of approval prompts flooding the frame, a tiny human silhouette pinned underneath"
+          "visual_note": "a tall stack of approval prompts flooding the frame, a tiny human silhouette pinned underneath",
+          "headline_original": "stop approving every move your agents make"
         },
         {
           "role": "tension",
@@ -2044,9 +2054,10 @@
         {
           "role": "hook",
           "kicker": "MENTAL MODEL",
-          "headline": "your agent said 'done.' that's not proof. that's a vibe.",
+          "headline": "your agent said 'done.' that's a vibe, not proof.",
           "accent": "danger",
-          "visual_note": "an isolated chat message reading '✅ done' magnified on near-black, nothing rendered behind it — deliberately empty"
+          "visual_note": "an isolated chat message reading '✅ done' magnified on near-black, nothing rendered behind it — deliberately empty",
+          "headline_original": "your agent said 'done.' that's not proof. that's a vibe."
         },
         {
           "role": "tension",
@@ -2137,5 +2148,161 @@
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     }
-  ]
+  ],
+  "guidance": {
+    "updated": "2026-07-15T18:23:06.099Z",
+    "source": "viral-mechanics research workflow wf_2e5f5e1f-40a",
+    "hook_rules": [
+      "≤8 words, largest text on the slide, lowercase, Inter — the hook must survive as a standalone screenshot.",
+      "State a falsifiable tension, not a claim: a named failure, a flat contrarian thesis, or a real artifact with something conspicuously missing. Never '10x', never superlatives, never emoji.",
+      "The hook must open a loop the viewer cannot resolve without swiping — and the payoff must honestly land on slide n-1, never rug-pull to a docs link.",
+      "If the concept has a real number (3 tiers, 5 doors, 7 fields), put the number in the hook — it sets the completion contract. Never invent a number.",
+      "Never open with the product name, logo, or 'OrgX' — brand presence on slide 1 is the small wordmark on the continuity line, nothing more.",
+      "Use second person and the reader's exact situation ('you're pasting the whole chat...') or first-person building-in-public ('7 fields i hand between agents') — never third-person marketing voice.",
+      "Every word must be defensible in an adversarial dev comment section; if a claim needs a caveat, it's not the hook.",
+      "Prefer the two-beat structure: setup, hard turn ('your agents remember. your org forgets.') — the turn is what stops the thumb."
+    ],
+    "viral_principles": [
+      {
+        "principle": "Slide 1 is a distribution decision — the algorithm gates cold reach on swipe-through from the first slide, and skeptical devs pattern-match hype and scroll.",
+        "apply": "Every carousel opens with a flat, falsifiable 5-8 word thesis or named failure in the instrument aesthetic. Never the product name, never a claim with a number we can't defend. A/B the three hook archetypes weekly in the learner loop: failure-story, thesis, artifact-render."
+      },
+      {
+        "principle": "Slide 2 is where carousels die — it must escalate, never restate or warm up.",
+        "apply": "Lock the 8-slide house format: (1) hook, (2) escalation — the concrete cost or failure, (3) reframe ('the prompt ends. the company keeps moving.'), (4-6) one mechanism per slide rendered as real UI, (7) numbered framework recap, (8) payoff + in-platform CTA. Kill any format where slide 1→2 drop-off exceeds ~40%."
+      },
+      {
+        "principle": "Open a specific loop on slide 1, pay it off on slide n-1 — the last slide is CTA/recap, and the loop must be honest or the audience blocks you.",
+        "apply": "Use OrgX's real taxonomies as loops: 'reversible, ambiguous, irreversible — only one should reach you' resolves on slide 7. Design one deliberately dense diagram per carousel (the context-pack schema or escalation ladder) to farm reverse-swipes, which are a tracked ranking signal."
+      },
+      {
+        "principle": "Saves come from reference density; shares come from identity — engineer them on DIFFERENT slides.",
+        "apply": "Every carousel carries exactly one save slide (the context pack as a copyable config-file schema in JetBrains Mono, or the run/ask/gate decision tree) and one share slide (a single large-type quotable line a founder DMs to a cofounder). Never combine them."
+      },
+      {
+        "principle": "Numbered frameworks are the save-rate engine and set a completion contract — but only real taxonomies survive dev comments.",
+        "apply": "Put the number in the slide-1 hook and show n/8 progress in mono chrome. Rotate OrgX's genuine numbers: 3 consequence tiers, 7 context-pack fields, the proof-return components, 7 named agents. Never pad a listicle."
+      },
+      {
+        "principle": "External-link CTAs suppress reach; in-platform CTAs (save/send/follow) multiply it.",
+        "apply": "Final slide: framework echo + 'save this before your next agent handoff.' + useorgx.com set small in mono as panel chrome (provenance, not a pitch). Real link lives in bio and pinned comment. Never write 'link in bio' on a slide. Design slide 8→1 as a loop seam for TikTok's photo-mode looping."
+      },
+      {
+        "principle": "For skeptical devs the anti-hype register IS the hook — product mechanisms rendered as real UI beat marketing graphics.",
+        "apply": "Every visual depicts a mechanism, never a metaphor and never a metric. One defensible-but-debatable claim per carousel (e.g. 'autonomy without a quality bar is delegation to a stranger') with technically deeper replies prepared — adversarial comment velocity is distribution."
+      },
+      {
+        "principle": "Named recurring characters drive follows, and follows compound the reach of every subsequent post in a daily cadence.",
+        "apply": "Run Pace, Eli, Mark, Sage, Orion, Dana, Xandy as a serialized cast of runtime chips (never mascots). Episode mark 'FLEET LOG ###' in mono chrome; incident-narrative carousels told through product frames; pinned intro-the-fleet carousel as profile anchor."
+      },
+      {
+        "principle": "TikTok photo mode is its own animal: audio is quasi-mandatory (~70% reach penalty without), slide text is OCR'd, captions are search queries.",
+        "apply": "Design 9:16-native (1080x1920) with text out of the right 120px rail and bottom 320px. Rotate 2-3 ambient/lo-fi sounds that fit the matte-HUD vibe. Write captions as searchable dev queries: 'agent handoff context pack', 'run multiple AI agents without losing context'. Export a recomposed 4:5 crop for IG."
+      }
+    ],
+    "tiktok": {
+      "safe_zones": "keep key text out of the bottom 320px and right 120px (TikTok UI overlay)",
+      "audio": "attach an ambient/lo-fi sound in the TikTok app before publishing — photo-mode posts without audio take a large reach penalty",
+      "caption": "write captions as searchable dev queries (e.g. \"agent handoff context pack\"); real link in bio + pinned comment, never \"link in bio\" on a slide",
+      "cta": "final slide CTA is save/send/follow language; useorgx.com appears as small panel chrome, not a pitch"
+    },
+    "visual_vocabulary": [
+      {
+        "name": "Continuity Line",
+        "concept": "the thesis itself — the prompt ends, the company keeps moving",
+        "type": "motif",
+        "when": "every slide, no exceptions — it is the signature and the narrative spine"
+      },
+      {
+        "name": "Agent Chip",
+        "concept": "named agents as a fleet (Pace, Eli, Mark, Sage, Orion, Dana, Xandy)",
+        "type": "icon",
+        "when": "any handoff, escalation, or FLEET LOG episode slide"
+      },
+      {
+        "name": "Context Pack Card",
+        "concept": "compiled handoff (goal, definition of done, decisions+why, permissions, budget, confidence, next action)",
+        "type": "diagram",
+        "when": "any handoff/context topic; full-size on the dense reference slide of context-pack carousels"
+      },
+      {
+        "name": "Transcript Scatter",
+        "concept": "the failure state — pasting the whole chat as a handoff",
+        "type": "diagram",
+        "when": "max one state-pair per carousel; before/after prompt-vs-org, transcript-vs-pack"
+      },
+      {
+        "name": "Handoff Break",
+        "concept": "the prompt ends — context dies between agents",
+        "type": "motif",
+        "when": "tension/escalation slides (slide 2) and 'felt' concepts like felt-handoff-why"
+      },
+      {
+        "name": "Escalation Ladder",
+        "concept": "consequence-based escalation: reversible → run, ambiguous → ask, irreversible → gate",
+        "type": "diagram",
+        "when": "escalation carousels; also the dense save slide when rendered with tier labels"
+      },
+      {
+        "name": "Gate Notch",
+        "concept": "tool policy gating publishing, payments, merges",
+        "type": "icon",
+        "when": "tool-policy and irreversible-action slides"
+      },
+      {
+        "name": "Quality Bar",
+        "concept": "owner-authored quality bar; sub-threshold work loops back",
+        "type": "diagram",
+        "when": "quality-bar and 'done is a vibe' concepts"
+      },
+      {
+        "name": "Receipt Stub",
+        "concept": "proof return: artifact + version + provenance + evaluation + receipt",
+        "type": "icon",
+        "when": "any proof/receipt concept; the line's ending on proof-themed carousels"
+      },
+      {
+        "name": "Work Graph Fragment",
+        "concept": "the work graph: initiatives, tasks, agents, decisions, artifacts, receipts",
+        "type": "diagram",
+        "when": "org-memory and 'the org remembers' concepts"
+      },
+      {
+        "name": "Decision Fork",
+        "concept": "decisions + why, carried forward",
+        "type": "icon",
+        "when": "felt-handoff-why, decision-log slides"
+      },
+      {
+        "name": "Five Doors",
+        "concept": "the 5 specific places context dies (felt-five-doors)",
+        "type": "diagram",
+        "when": "the five-doors carousel only — it is that concept's bespoke device"
+      },
+      {
+        "name": "Loop Circuit",
+        "concept": "the 7-step loop every piece of real work runs",
+        "type": "diagram",
+        "when": "the-loop-agents-break and recap slides for loop-themed carousels"
+      },
+      {
+        "name": "Memory Strata",
+        "concept": "shared operating context living beneath the clients, not in the chat",
+        "type": "diagram",
+        "when": "not-a-memory-problem and org-memory thesis slides"
+      },
+      {
+        "name": "HUD Frame + Index",
+        "concept": "instrument-panel provenance chrome",
+        "type": "motif",
+        "when": "every slide; slides 2+ carry the n/8 index"
+      },
+      {
+        "name": "Verified Stamp (end card)",
+        "concept": "the quality-bar verdict / proof return, dramatized",
+        "type": "motif",
+        "when": "every carousel's final slide; GATED red stamp variant for irreversible-action episodes"
+      }
+    ]
+  }
 }

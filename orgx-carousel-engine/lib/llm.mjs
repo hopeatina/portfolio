@@ -18,6 +18,8 @@ export async function authorFreshConcept(pb, { pillar, model = 'claude-opus-4-8'
   const p = (pb.pillars || []).find((x) => x.key === pillar) || (pb.pillars || [])[0];
   const formulas = (pb.hook_formulas || []).slice(0, 12)
     .map((f) => `- ${f.name}: ${f.template}`).join('\n');
+  const hookRules = ((pb.guidance && pb.guidance.hook_rules) || [])
+    .map((r) => `- ${r}`).join('\n');
   const recentHooks = (pb.concepts || []).filter((c) => c.uses > 0).slice(-8)
     .map((c) => c.slides?.[0]?.headline).filter(Boolean).join(' | ');
 
@@ -25,6 +27,9 @@ export async function authorFreshConcept(pb, { pillar, model = 'claude-opus-4-8'
   const user = `Write ONE fresh carousel concept for the "${p.name}" pillar (${p.desc || ''}).
 Default accent: ${p.accent}. Hook formulas you can draw on:
 ${formulas}
+
+Hook rules (follow strictly):
+${hookRules || '(none)'}
 
 Avoid repeating these recent hooks: ${recentHooks || '(none yet)'}.
 
