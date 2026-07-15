@@ -71,7 +71,9 @@ body::before {
 
 .site-shell {
   position: relative;
-  background: var(--v4-carbon);
+  /* transparent: the persistent ContinuitySignal canvas is the page's background now.
+     html/body still carry a solid --v4-carbon fallback (no FOUC before hydration). */
+  background: transparent;
 }
 
 .site-shell-body {
