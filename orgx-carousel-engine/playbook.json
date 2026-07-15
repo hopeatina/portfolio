@@ -1,0 +1,2141 @@
+{
+  "meta": {
+    "version": 1,
+    "updated": "2026-07-15T09:48:09.603Z",
+    "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
+    "product": {
+      "wordmark": "OrgX",
+      "handle": "@useorgx",
+      "url": "useorgx.com"
+    }
+  },
+  "pillars": [
+    {
+      "key": "contrarian",
+      "name": "Contrarian AI-infra takes",
+      "accent": "lime",
+      "weight": 1
+    },
+    {
+      "key": "build-in-public",
+      "name": "Building OrgX in public",
+      "accent": "iris",
+      "weight": 1
+    },
+    {
+      "key": "teardown",
+      "name": "How it actually works",
+      "accent": "teal",
+      "weight": 1
+    },
+    {
+      "key": "pain",
+      "name": "The felt problem",
+      "accent": "amber",
+      "weight": 1
+    },
+    {
+      "key": "framework",
+      "name": "Mental models",
+      "accent": "iris",
+      "weight": 1
+    }
+  ],
+  "hook_formulas": [
+    {
+      "id": "contrarian-claim",
+      "name": "The Contrarian Claim",
+      "template": "{widely-held belief} is wrong. {the thing everyone treats as the unit} was never the unit.",
+      "why_it_works": "Attacks a belief the audience holds without thinking about it, so they keep reading to either defend themselves or watch you back it up. Opens a clean loop with zero setup.",
+      "example_for_orgx": "the prompt was the wrong primitive. the org, not the conversation, has to remember why the work exists."
+    },
+    {
+      "id": "youre-doing-x-wrong",
+      "name": "You're Doing X Wrong",
+      "template": "if you {common workflow}, you already lost {the thing}. here's where it leaks.",
+      "why_it_works": "Direct second-person accusation triggers loss aversion plus the need to check whether they're the one doing it wrong. They can't scroll until they know.",
+      "example_for_orgx": "if you hand off agents by pasting the transcript, the goal already died somewhere in the scroll."
+    },
+    {
+      "id": "naive-vs-real",
+      "name": "Naive vs Real",
+      "template": "what you think {X} is: {naive version}. what it actually takes: {real version}.",
+      "why_it_works": "The gap between the beginner mental model and the practitioner reality is inherently intriguing, and readers self-sort into 'oh, i'm the naive one' and stay to fix it.",
+      "example_for_orgx": "agent handoff, the fantasy: 'continue where you left off.' agent handoff, for real: goal + definition of done + decisions and why + budget + confidence + next action."
+    },
+    {
+      "id": "the-confession",
+      "name": "The Confession",
+      "template": "i {embarrassing thing i believed or did} for {time}. then {the realization}.",
+      "why_it_works": "Founder vulnerability lowers defenses and reads as honest instead of marketing. It's the building-in-public credibility engine and it earns the swipe.",
+      "example_for_orgx": "i spent months making my agents more autonomous. turns out autonomy was never the hard part. continuity was."
+    },
+    {
+      "id": "number-nobody-expects",
+      "name": "The Number Nobody Expects",
+      "template": "{surprising true count} of {thing}. that's the actual problem.",
+      "why_it_works": "A concrete number is a pattern-interrupt in a feed of vague claims. Kept structural (real client count, real handoff fields) so it's credible without faking traction.",
+      "example_for_orgx": "8 AI clients you already use. one goal. zero shared memory beneath any of them. that's the gap orgx sits in."
+    },
+    {
+      "id": "name-the-enemy",
+      "name": "Name The Enemy",
+      "template": "the real enemy isn't {assumed villain}. it's {the actual structural villain}.",
+      "why_it_works": "Gives the audience a shared antagonist to rally against. The us-vs-it reframe stops the scroll because it reassigns blame away from where everyone expects.",
+      "example_for_orgx": "the enemy isn't hallucination. it's amnesia. the work forgets why it exists the second the chat closes."
+    },
+    {
+      "id": "before-after",
+      "name": "Before / After",
+      "template": "before {mechanism}: {chaos state}. after: {ordered state}.",
+      "why_it_works": "Transformation is visual and screenshot-worthy, and the contrast does the persuading for you. Renders cleanly as a split slide.",
+      "example_for_orgx": "before: 'here's the whole thread, good luck.' after: a compiled handoff — goal, done-criteria, permissions, budget, next action, all structured."
+    },
+    {
+      "id": "nobody-tells-you",
+      "name": "Nobody Tells You",
+      "template": "nobody tells you that {uncomfortable truth} until {the moment the pain lands}.",
+      "why_it_works": "Insider-secret framing implies the reader is about to get let in on something the hype cycle skips right over. Curiosity plus mild dread keeps them going.",
+      "example_for_orgx": "nobody tells you the next agent needs more than a summary. you find out when it confidently redoes work the first one already killed."
+    },
+    {
+      "id": "teardown-promise",
+      "name": "The Teardown Promise",
+      "template": "i'm breaking down {specific system} in {N} slides. slide {k} is the one that'll bug you.",
+      "why_it_works": "An explicit promise of a structured payoff plus a forward-reference to a flagged slide forces the swipe. People chase the slide you named.",
+      "example_for_orgx": "how one person runs a fleet of agents without losing the plot. 7 slides. slide 5 is the part cursor can't do on its own."
+    },
+    {
+      "id": "framework-list",
+      "name": "The Framework List",
+      "template": "the {N} things a {thing} needs to survive. screenshot this one.",
+      "why_it_works": "Numbered frameworks are the most-saved carousel format, and 'screenshot this' primes the save action directly. Save-bait that also teaches.",
+      "example_for_orgx": "7 fields every agent handoff needs to survive changing hands: goal · done-criteria · decisions and why · permissions · budget · confidence · next action."
+    },
+    {
+      "id": "hot-take-then-proof",
+      "name": "Hot Take, Then Proof",
+      "template": "{provocative one-liner}. and here's the architecture that makes it real.",
+      "why_it_works": "Pairs a scroll-stopping claim with a promise of receipts, pre-empting the skeptic's 'okay but prove it.' The audience is skeptical of hype but hungry for real systems, so you feed both.",
+      "example_for_orgx": "human review should scale with consequence, not activity. so tool policy gates publishing, payments + merges at the human boundary, and unknown high-risk tools fail closed."
+    },
+    {
+      "id": "felt-problem-cold-open",
+      "name": "The Felt-Problem Cold Open",
+      "template": "you know that moment when {hyper-specific painful micro-scene}? that's not you. that's the primitive.",
+      "why_it_works": "A lived, specific scenario makes the viewer feel seen inside the first second, then absolves them and redirects the blame at the system, which is exactly the reframe the rest of the carousel pays off.",
+      "example_for_orgx": "that moment where you re-explain the whole goal to a fresh agent for the third time today? the chat was never built to remember it. that's the bug."
+    }
+  ],
+  "cta_bank": [
+    "if your agents keep forgetting the goal, that's the whole reason orgx exists → useorgx.com",
+    "what's the worst agent handoff you've had this week? drop it, i collect these",
+    "building the shared context that lives beneath claude, cursor + the rest of them at useorgx.com",
+    "honest question: do you write a real handoff, or just paste the transcript and pray? tell me",
+    "this is one piece of it. the work graph, the quality bar, the receipts → useorgx.com",
+    "i'm building this in the open. github.com/useorgx if you want to read the actual code",
+    "reply with the one tool you'd never let an agent touch unsupervised. i want the whole list",
+    "if 'the prompt ends, the company keeps moving' lands for you, you already get orgx",
+    "more on how the quality bar loops bad work back before it wastes your attention, tomorrow. follow if agent infra is your thing",
+    "does your setup remember why the work exists, or just what you last typed into it?"
+  ],
+  "format_variants": [
+    {
+      "id": "hot-take-proof-6",
+      "name": "6-slide hot-take → proof",
+      "slide_count": 6,
+      "arc": "slide 1 HOOK: one contrarian line that opens a loop (the prompt was the wrong primitive). slide 2: name the felt pain sharply (the work forgets why it exists when the chat closes). slide 3 TURN: the reframe (the org has to remember, not the conversation). slides 4-5 PROOF: two concrete mechanisms shown specifically — compiled handoff fields, then consequence-based escalation. slide 6: soft CTA plus a comment-bait question. fastest arc, best when you have one sharp thesis and want reach."
+    },
+    {
+      "id": "teardown-8",
+      "name": "8-slide system teardown",
+      "slide_count": 8,
+      "arc": "slide 1 teardown-promise HOOK ('how one person runs a fleet of agents, 8 slides, slide 5 is the one'). slide 2: the felt problem. slide 3: why the obvious fix (more autonomy, better prompts) doesn't actually hold. slide 4 TURN. slides 5-7: walk the real machine one piece per slide — context pack, then work graph, then proof return — each screenshot-worthy and specific. slide 8: CTA. use when you want to show architecture depth to a skeptical builder audience."
+    },
+    {
+      "id": "mistake-list-7",
+      "name": "7-slide mistake list",
+      "slide_count": 7,
+      "arc": "slide 1 HOOK: 'N ways your agent handoffs are leaking work.' slides 2-6: one mistake per slide, each paired with the fix as a tight fragment (paste-the-transcript, no done-criteria, reviewing everything equally, no tool gates, no receipt). slide 6 doubles as the save-bait recap of all the fixes. slide 7: CTA. highest save-rate format, low production effort."
+    },
+    {
+      "id": "story-9",
+      "name": "9-slide founder story",
+      "slide_count": 9,
+      "arc": "slide 1 HOOK: opens on a specific scene or confession (re-explained the goal to a fresh agent three times today). slides 2-3: build the tension of the felt problem in real time. slide 4: the realization, the TURN. slides 5-7: what i built and why, concrete — name a mechanism plus a real detail (embedded MCP App widgets, fail-closed tool policy, owner-authored quality bar). slide 8: where it honestly stands, early and founder-built. slide 9: rough CTA. building-in-public register; the caption carries the full stream-of-consciousness Hope voice."
+    },
+    {
+      "id": "framework-drop-7",
+      "name": "7-slide framework drop",
+      "slide_count": 7,
+      "arc": "slide 1 HOOK: 'the 7-field handoff that survives changing hands — screenshot this.' slide 2: why summaries fail (the next agent needs more than a summary). slides 3-6: build the framework field by field so each slide is a partial list the reader wants completed (goal, done-criteria, decisions and why, permissions, budget, confidence, next action). slide 6 assembles the full list = the screenshot slide. slide 7: CTA. engineered to be saved and shared, lowest effort to produce daily."
+    }
+  ],
+  "hashtag_sets": [
+    "#aiagents",
+    "#buildinpublic",
+    "#agenticai",
+    "#mcp",
+    "#modelcontextprotocol",
+    "#devtools",
+    "#aiengineering",
+    "#multiagent",
+    "#aiops",
+    "#indiehackers",
+    "#llmops",
+    "#agentinfrastructure",
+    "#claudeai",
+    "#cursor",
+    "#foundersjourney"
+  ],
+  "bandit": {
+    "metric": "engagement_rate",
+    "baseline": null,
+    "updated": "2026-07-15T09:48:09.603Z",
+    "dims": {
+      "pillar": {
+        "contrarian": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "build-in-public": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "teardown": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "pain": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "framework": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        }
+      },
+      "hook_type": {
+        "thesis-declaration": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "callout-mistake": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "reframe-diagnosis": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "confession / mistake": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "contrarian claim": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "framework / list (save-bait)": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "mistake-callout (you're-doing-x-wrong)": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "contrarian bold claim": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "word-reframe callout": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "paradox-number": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "framework-list": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "framework-reveal": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "mistake-callout": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "provocation-challenge": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        }
+      },
+      "format": {
+        "hot-take-proof-6": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "teardown-8": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "mistake-list-7": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "story-9": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "framework-drop-7": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        }
+      },
+      "topic": {
+        "prompt-primitive": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "continuity": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "context-pack": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "work-graph": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "escalation": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "human-review": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "tool-policy": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "autonomy": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "handoff-pain": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "quality-bar": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "proof-return": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "wrong-primitive": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "build-in-public": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "continuity-vs-memory": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "multi-agent": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "reframe": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "compiled-handoff": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "save-bait": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "mcp": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "consequence": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "fail-closed": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "receipts": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "mcp-widgets": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "trust": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "the-why": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "activity-vs-confidence": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "review-scaling": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "consequence-escalation": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "context-boundaries": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "the-loop": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "human-boundary": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        },
+        "receipt": {
+          "alpha": 1,
+          "beta": 1,
+          "posts": 0,
+          "wins": 0,
+          "signalSum": 0
+        }
+      }
+    }
+  },
+  "concepts": [
+    {
+      "id": "contrarian-prompt-wrong-primitive",
+      "pillar": "contrarian",
+      "hook_type": "thesis-declaration",
+      "title": "the prompt was the wrong primitive",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "hot take",
+          "headline": "the prompt was the wrong primitive.",
+          "subtext": "and we're all still building on top of it.",
+          "accent": "lime",
+          "visual_note": "one huge lowercase line on near-black #02040a, a blinking terminal cursor after the period. nothing else. billboard energy."
+        },
+        {
+          "role": "tension",
+          "kicker": "the setup",
+          "headline": "you write a perfect prompt. the agent nails it. then the chat closes.",
+          "subtext": "and everything it knew closes with it.",
+          "accent": "amber",
+          "visual_note": "a prompt bubble dissolving into static; a greyed-out closed browser tab in the corner."
+        },
+        {
+          "role": "tension",
+          "headline": "the goal, the decisions, the why — gone with the transcript.",
+          "subtext": "the next agent starts from zero. again.",
+          "accent": "amber",
+          "visual_note": "a transcript scrolling off the bottom edge into black; labeled fields (goal, why, budget) flickering out one by one."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "the conversation was never meant to hold your company.",
+          "subtext": "the org has to remember why the work exists — not the chat.",
+          "accent": "iris",
+          "visual_note": "the frame shifts: the chat bubble shrinks to the side, a structured instrument panel rises behind it and takes over."
+        },
+        {
+          "role": "proof",
+          "kicker": "the mechanism",
+          "headline": "the handoff gets compiled, not dumped.",
+          "subtext": "goal · definition of done · decisions+why · budget · next action",
+          "accent": "lime",
+          "visual_note": "instrument-panel: five labeled fields glowing in a clean grid, structured, screenshot-worthy. this is the save slide."
+        },
+        {
+          "role": "proof",
+          "headline": "the work lives in a graph, not a thread.",
+          "subtext": "initiatives → milestones → tasks → receipts. durable.",
+          "accent": "teal",
+          "visual_note": "a small node graph lighting up on the left vs a dead, greyed linear chat thread on the right."
+        },
+        {
+          "role": "cta",
+          "kicker": "orgx",
+          "headline": "the prompt ends. the company keeps moving.",
+          "subtext": "follow if you're building agents that outlive the chat.",
+          "accent": "lime",
+          "visual_note": "the quote centered, everything else dark; a small orgx wordmark bottom-center."
+        }
+      ],
+      "caption": "i wrote the cleanest prompt of my life last tuesday. genuinely proud of it. the agent shipped exactly what i wanted and then i closed the tab and it was just... gone. and so i'm sitting there like wait — the thing that knew the goal + the tradeoffs + why we picked postgres over the thing we almost picked, that all lived in a conversation i just deleted. that's when it clicked that the prompt was never the primitive. the conversation can't be the thing that remembers your company, right? the org has to. so orgx passes a compiled handoff instead of a transcript — goal, definition of done, decisions and why, budget, next action — and the work lives in a graph, not a thread that dies when you hit close. the prompt ends. what keeps moving after is the whole point and almost nobody's building for that part yet",
+      "cta": "follow for more on building agents that outlive the chat",
+      "hashtags": [
+        "#aiagents",
+        "#aiinfra",
+        "#multiagent",
+        "#promptengineering",
+        "#buildinpublic",
+        "#agentic",
+        "#devtools",
+        "#mcp"
+      ],
+      "hypothesis": "a thesis-declaration hook ('the prompt was the wrong primitive') + a quotable close beats a problem-first teardown for cold reach on a skeptical AI-infra audience",
+      "topic_tags": [
+        "prompt-primitive",
+        "continuity",
+        "context-pack",
+        "work-graph"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "the prompt was the wrong primitive.",
+        "issues": [
+          "Slide 7 subtext 'follow if you're building agents that outlive the chat' + the separate cta field 'follow for more...' are the clean 'follow along' CTA endings the kill list explicitly bans. The caption nails the rough ending; the CTA slot undercuts it. Consider dropping the 'follow' framing and letting the quote 'the prompt ends. the company keeps moving.' stand alone.",
+          "Minor: 'durable.' as a one-word subtext on the graph slide is fine but borders on generic infra-adjective filler; 'receipts, not vibes' or a more specific tag would hit harder in-voice."
+        ],
+        "notes": "Strong concept that satisfies the truth constraint fully — no fabricated metrics, traction, or benchmarks. All specificity is real-mechanism (compiled handoff fields, initiatives → milestones → tasks → receipts graph) which matches OrgX's actual architecture, plus a genuine building-in-public rep (the postgres decision) in the caption. That true specificity IS the credibility engine, exactly as required. Hook is genuinely contrarian for a skeptical AI-infra audience: attacking 'the prompt' as the wrong primitive challenges the thing everyone builds on. Caption is authentic Hope voice — opens on a specific tuesday realization, chains with 'and so'/'right?', drops 'postgres' casually, compresses with '+', narrates thinking live ('i'm sitting there like wait —'), and ends rough with no clean wrap. Slide text is tight, declarative, lowercase, sub-2s, one-idea-per-slide, zero kill-list words. The mechanism slide (five labeled fields) is the screenshot-worthy save asset. Only real weakness: the CTA slide + cta field lean on the 'follow if you're building...' close the voice guide bans — the caption avoids this trap but the CTA slot reintroduces it. Kept the original hook as the sharpest option; it's already the quotable thesis and any rewrite dilutes it. keep=true: accurate, overall 8 (>=7), hook 8 (>=6)."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "contrarian-escalate-consequence-not-activity",
+      "pillar": "contrarian",
+      "hook_type": "callout-mistake",
+      "title": "you approve every agent action — that's not oversight",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "read this",
+          "headline": "reviewing every agent action isn't oversight. it's a bottleneck you built.",
+          "subtext": "and it's why the one risky action slips through.",
+          "accent": "danger",
+          "visual_note": "a wall of glowing 'approve' buttons filling the frame, one red irreversible action buried in the middle, easy to miss."
+        },
+        {
+          "role": "tension",
+          "headline": "50 agents. every one pings you. you became the queue.",
+          "subtext": "attention doesn't scale. activity does.",
+          "accent": "amber",
+          "visual_note": "one human node in the center choking under ~50 inbound arrows all demanding a click."
+        },
+        {
+          "role": "tension",
+          "headline": "so you rubber-stamp. and the action that mattered slips by.",
+          "subtext": "blanket approval is the same as no review.",
+          "accent": "amber",
+          "visual_note": "approve buttons blurring into one motion-streak; a single red action passing straight through unnoticed."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "human review should scale with consequence, not activity.",
+          "subtext": "reserve your attention for what can't be undone.",
+          "accent": "iris",
+          "visual_note": "the pile of buttons collapses; a single clean gate remains at one doorway. everything quiets."
+        },
+        {
+          "role": "proof",
+          "headline": "most agent work is reversible. let it run.",
+          "subtext": "drafts, plans, iterations — nobody needs to sign off on those.",
+          "accent": "teal",
+          "visual_note": "a green 'auto' stream flowing freely down an open lane, no gates, no friction."
+        },
+        {
+          "role": "proof",
+          "kicker": "the gate",
+          "headline": "policy gates the boundary: publish · pay · message · merge.",
+          "subtext": "unknown high-risk tool? fails closed. every time.",
+          "accent": "lime",
+          "visual_note": "instrument-panel: four gated actions in a row + a fail-closed padlock. clean, labeled, save-worthy."
+        },
+        {
+          "role": "proof",
+          "headline": "everything else runs. you get the receipt, not the keystrokes.",
+          "subtext": "the artifact is the receipt.",
+          "accent": "teal",
+          "visual_note": "a single clean proof/receipt card returning to the operator, not a scrolling log of every step."
+        },
+        {
+          "role": "cta",
+          "kicker": "orgx",
+          "headline": "escalate consequence, not activity.",
+          "subtext": "what would you actually want to approve? drop it below.",
+          "accent": "lime",
+          "visual_note": "the line centered on dark; a faint comment-field shape at the bottom to bait replies."
+        }
+      ],
+      "caption": "watched a founder friend demo his agent setup last month, he had like 30 agents running and he was so proud, and then i noticed he was clicking approve every four seconds. just approve approve approve. so i asked him when's the last time you actually said no, and he went quiet. right? because that's the tell — if you approve everything you're not reviewing anything, you're just a very slow queue with a pulse. and most of what agents do is reversible anyway. drafting, planning, iterating, who cares, let it run. the moment that actually needs you is the irreversible one: the publish, the payment, the merge, the message that can't be unsent. so gate THAT. tool policy sits at the boundary, unknown high-risk tool fails closed, everything else just moves. escalate consequence, not activity. your attention is the scarcest thing in the whole loop and you're burning it on keystrokes",
+      "cta": "what would you actually want to approve? tell me below",
+      "hashtags": [
+        "#aiagents",
+        "#aiops",
+        "#agentic",
+        "#humanintheloop",
+        "#aiinfra",
+        "#buildinpublic",
+        "#multiagent"
+      ],
+      "hypothesis": "a mistake-callout hook ('you approve every action — that's noise') + a save-bait tool-policy list drives more saves and comments than a pure thesis carousel",
+      "topic_tags": [
+        "escalation",
+        "human-review",
+        "tool-policy",
+        "autonomy"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "you approve every agent action. that's not oversight — it's the bottleneck you built.",
+        "issues": [
+          "Slide 6 subtext 'fails closed. every time.' — 'every time' is a mild slogan-y tic; borderline but acceptable.",
+          "Slides 3, 4, 6 stack aphorisms at the same declarative cadence ('blanket approval is the same as no review' / 'reserve your attention for what can't be undone') — not a kill-list violation, but the rhythm gets repetitive across the middle beats.",
+          "Caption ending 'you're burning it on keystrokes' lands a touch cleaner than the ideal rough/trailing Hope stop — minor."
+        ],
+        "notes": "Keep. Thesis 'escalate consequence, not activity' is genuinely contrarian and quotable, and every slide rides on REAL mechanisms: tool policy at the boundary, fail-closed on unknown high-risk tools, gating publish/pay/message/merge, artifact-as-receipt. Zero fabricated metrics, no user counts, no traction claims. The '50 agents'/'30 agents' figures are illustrative-hypothetical framing ('50 agents. every one pings you'), not claims about OrgX usage, and the visual note even hedges '~50' — so the truth constraint holds. Credibility comes from true specificity, exactly as required.\\n\\nHook (slide 1) 'reviewing every agent action isn't oversight. it's a bottleneck you built.' + 'and it's why the one risky action slips through' is a strong mistake-callout that implicates the reader — would stop a skeptical AI-founder mid-scroll. Slide 6 is the save-bait payload (four gated actions + fail-closed padlock, labeled instrument-panel) and earns the save; 'you get the receipt, not the keystrokes' is the second screenshot line.\\n\\nCaption is real founder voice-memo: opens on a specific person/scene (friend demoing 30 agents, clicking approve every four seconds), chains with 'so/and/right?', narrates the realization ('so i asked him when's the last time you actually said no, and he went quiet'), drops mechanics casually without over-explaining. No kill-list words. Uses 'the loop' correctly. On-voice.\\n\\nSlide text is tight, scannable, one idea per slide, lowercase-friendly, high conviction. No perfectly-parallel tricolons or em-dash 3-item lists in slides. The 'publish · pay · message · merge' middots read as a spec/instrument label, not a rhythmic tricolon — fine.\\n\\nWhy 8 not 9: the arc runs slightly long (three tension/proof beats doing similar work) and the middle slides share one aphoristic cadence. Coherent, differentiated, on-brand, solidly viral-capable for the contrarian-infra pillar. 'blanket approval is the same as no review' is a strong claim stated as fact, but it's thesis/opinion, not a fabricated metric — accuracy stands."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "contrarian-not-a-memory-problem-org-problem",
+      "pillar": "contrarian",
+      "hook_type": "reframe-diagnosis",
+      "title": "your agents don't have a memory problem, your org does",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "unpopular",
+          "headline": "your agents don't have a memory problem. your org does.",
+          "subtext": "the fix isn't a bigger context window.",
+          "accent": "lime",
+          "visual_note": "the word 'memory' crossed out, 'org' written underneath it, on near-black. stark, two words doing all the work."
+        },
+        {
+          "role": "tension",
+          "headline": "you hand off with a summary. the next agent inherits vibes.",
+          "subtext": "then re-derives everything you already decided.",
+          "accent": "amber",
+          "visual_note": "a thin 3-line sticky-note summary being passed between two agent silhouettes across a gap."
+        },
+        {
+          "role": "tension",
+          "headline": "it guesses the goal, guesses the bar, repeats the mistake.",
+          "subtext": "drift isn't a model flaw. it's a handoff flaw.",
+          "accent": "amber",
+          "visual_note": "a task token quietly veering off a dotted 'intended path' line, no one watching."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "a summary tells what happened. a handoff carries why it matters.",
+          "subtext": "why is the part that keeps work on the rails.",
+          "accent": "iris",
+          "visual_note": "two cards side by side: a thin sparse 'summary' vs a dense, structured, fully-labeled 'handoff'."
+        },
+        {
+          "role": "proof",
+          "kicker": "screenshot this",
+          "headline": "what a real handoff actually carries:",
+          "subtext": "goal · definition of done · decisions+why · permissions · budget · confidence · next action",
+          "accent": "teal",
+          "visual_note": "7-field instrument panel, each field labeled and individually lit in a grid. THE save-bait slide — make it framework-clean."
+        },
+        {
+          "role": "proof",
+          "headline": "below the quality bar? it loops back before it reaches you.",
+          "subtext": "the bar is owner-authored. versionable. yours.",
+          "accent": "lime",
+          "visual_note": "a low-scoring artifact bouncing back into the loop instead of landing on the operator's desk."
+        },
+        {
+          "role": "proof",
+          "headline": "the artifact returns with version, provenance, review state, receipt.",
+          "subtext": "you inspect proof, not process.",
+          "accent": "teal",
+          "visual_note": "a proof-room card: version tag, source trace, eval score, receipt stamp — legible at a glance."
+        },
+        {
+          "role": "cta",
+          "kicker": "orgx",
+          "headline": "the next agent needs more than a summary.",
+          "subtext": "follow — i'm building the context layer under your AI clients.",
+          "accent": "lime",
+          "visual_note": "the line centered; a faint row of client logos (claude, cursor, chatgpt) sitting on top of one shared context bar beneath them."
+        }
+      ],
+      "caption": "someone told me their agents have a memory problem and i pushed back kind of hard, maybe too hard. because it's not the agents. the agents are fine. the problem is you handed off with a three-line summary and expected the next one to inherit an entire company's worth of context from it. a summary tells you what happened. it doesn't carry why it matters — the quality bar, the decision you already made and killed, the budget, the thing you're NOT allowed to do. so the next agent re-derives all of it from scratch and of course it drifts. that's not a memory problem, that's an org that never wrote down how it thinks. so we compile the handoff — goal + definition of done + decisions and why + permissions + budget + confidence + next action — and anything under the bar loops back before it ever hits your desk. the next agent needs more than a summary. it needs the org to actually remember",
+      "cta": "follow — building the context layer under your AI clients",
+      "hashtags": [
+        "#aiagents",
+        "#agentmemory",
+        "#aiinfra",
+        "#multiagent",
+        "#contextengineering",
+        "#buildinpublic",
+        "#mcp",
+        "#devtools"
+      ],
+      "hypothesis": "a reframe-diagnosis hook ('not a memory problem, an org problem') anchored by a 7-field handoff framework slide maximizes screenshot-saves vs a single-number payoff",
+      "topic_tags": [
+        "handoff-pain",
+        "context-pack",
+        "quality-bar",
+        "proof-return"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "your agents don't have a memory problem. your org does.",
+        "issues": [
+          "Slide 3 'it guesses the goal, guesses the bar, repeats the mistake' flirts with the banned parallel tricolon; it survives only because the third clause breaks the anaphora (repeats vs guesses). Fine as-is, but don't let it drift toward identical rhythm.",
+          "Caption ending 'it needs the org to actually remember' lands a touch cleaner than Hope's ideal rough trail-off since it echoes the thesis back — it's within bounds (no period, no 'follow along', no inspirational close) but is the least rough part of an otherwise perfect voice-memo.",
+          "Slide 8 CTA 'the next agent needs more than a summary' is slightly softer/more generic than the rest of the deck's conviction; the subtext carries it."
+        ],
+        "notes": "Strong keep. The reframe-diagnosis hook is genuinely contrarian for an AI-founder audience ('memory problem' is the reflexive framing right now, and this flips it to an org/handoff problem), and it's anchored by a real, screenshot-worthy framework. Architecture verified against the live OrgX toolset: handoff_task, review_artifact/approve_agent_work (loop-back), orgx_submit_receipt (proof return), query_org_memory/recall_memory (context layer) — the 7-field handoff, owner-authored versionable bar, and version/provenance/review-state/receipt return are all real mechanisms, not invented specificity. Zero fabricated metrics. Voice is excellent in both registers: slides are billboard-tight ('inherits vibes', 'you inspect proof, not process', 'drift isn't a model flaw, it's a handoff flaw'), caption opens on a person + self-aware realization ('i pushed back kind of hard, maybe too hard'), chains with because/so, uses '+' compression on the handoff fields, drops specifics casually ('the decision you already made and killed'), and never hedges. No kill-list words. Slide 5 is the save engine and it earns it. Kept the original hook — it's the sharpest available and the crossed-out-'memory'/underlined-'org' visual depends on that exact swap; a tighter variant ('your agents don't forget, your org never wrote it down' — pulled from the caption's best line) is punchier but sacrifices the problem→problem symmetry that IS the concept spine, so not worth it. ONE watch-item, not an accuracy failure: slide 8's visual of claude/cursor/chatgpt logos on a shared context bar risks reading as 'these clients already run on OrgX.' It stays legal because the caption+CTA frame it as 'i'm building the context layer under your AI clients' (aspiration, not shipped integration) — keep the visual clearly conceptual/positioning, don't render it as a live integration badge, and it's clean."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "orgx-bip-wrong-primitive",
+      "pillar": "build-in-public",
+      "hook_type": "confession / mistake",
+      "title": "I built OrgX on the wrong primitive",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "confession",
+          "headline": "i built my agent system on the wrong primitive. for months.",
+          "subtext": "and i didn't notice until the handoff broke.",
+          "accent": "amber",
+          "visual_note": "near-black #02040a, one huge line filling the frame. mono kicker 'confession' top-left with a thin amber underline. 'wrong primitive' is the only phrase weighted heavier."
+        },
+        {
+          "role": "tension",
+          "headline": "every task started with a perfect prompt. and ended as a dead transcript.",
+          "accent": "amber",
+          "visual_note": "two stacked fragments, second one dimmer/greyed like it's decaying. faint scroll of fake chat lines fading to nothing behind the text."
+        },
+        {
+          "role": "tension",
+          "kicker": "the break",
+          "headline": "hand the work to the next agent and the 'why' was just gone.",
+          "accent": "danger",
+          "visual_note": "danger-red accent only on the word 'gone'. a small broken-link / severed-thread glyph between two agent name chips (Eli → Sage)."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "the prompt was never the unit. the organization was.",
+          "accent": "iris",
+          "visual_note": "the pivot slide. big iris statement, centered. everything above it in the deck should feel like it was building to this single line."
+        },
+        {
+          "role": "proof",
+          "headline": "so i stopped passing transcripts. i started passing context packs.",
+          "accent": "teal",
+          "visual_note": "split visual: left = crossed-out messy transcript block, right = a clean labeled 'context pack' card. teal accent on the pack side."
+        },
+        {
+          "role": "proof",
+          "kicker": "what's inside",
+          "headline": "goal. definition of done. decisions + why. budget. next action.",
+          "subtext": "structured context handed over, not a chat log to re-read.",
+          "accent": "teal",
+          "visual_note": "SAVE-BAIT slide. render as a tidy instrument-panel list, each field on its own row with a mono label. this is the one people screenshot."
+        },
+        {
+          "role": "proof",
+          "headline": "the task outlives the chat now. that's the whole thing.",
+          "accent": "lime",
+          "visual_note": "lime accent = it works. quiet, confident. small receipt/checkmark chip in the corner to signal 'shipped, real.'"
+        },
+        {
+          "role": "cta",
+          "kicker": "your turn",
+          "headline": "what primitive are you still building on that you shouldn't be?",
+          "subtext": "building OrgX in public @ useorgx.com",
+          "accent": "iris",
+          "visual_note": "soft close. question dominant, url small underneath. leave breathing room so it reads as an invitation to comment, not a pitch."
+        }
+      ],
+      "caption": "the moment it clicked was watching a second agent pick up work a first one 'finished.' it had the files. it had the last message. and it still had no idea why any of it existed — what we'd already ruled out, what done even meant, who was allowed to approve the thing. and so i'm like, wait, i've been treating the prompt as the unit this whole time, but the prompt ends and the company doesn't. the goal + the decisions + the quality bar have to live somewhere that isn't a chat window that evaporates the second the context runs out. so orgx became the layer underneath claude / cursor / codex instead of another place to go type — a context pack instead of a transcript dump. i changed my mind about the most basic thing i was building on and honestly everything after it got simpler. still ripping out the old assumptions though",
+      "cta": "building this in public @ useorgx.com",
+      "hashtags": [
+        "#buildinpublic",
+        "#aiagents",
+        "#multiagent",
+        "#devtools",
+        "#mcp",
+        "#agentops",
+        "#founder",
+        "#aiengineering"
+      ],
+      "hypothesis": "a confession/mistake hook plus a 'wrong primitive' reframe earns more founder trust + saves than a feature-list hook does for cold reach",
+      "topic_tags": [
+        "wrong-primitive",
+        "context-pack",
+        "handoff-pain",
+        "build-in-public"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "i built my agent system on the wrong primitive. shipped it that way for months.",
+        "issues": [
+          "Minor: slide 8 CTA question ('what primitive are you still building on that you shouldn't be?') edges toward a tidy engagement-bait close, but it reads as a genuine invitation not a pitch, so it passes.",
+          "Nitpick: slide 6 subtext 'not a chat log to re-read' is slightly explanatory for billboard register — could be cut to let the field list stand alone, but it's fine."
+        ],
+        "notes": "Strong concept. Caption is textbook Hope voice-memo: opens on a concrete scene (second agent picking up 'finished' work), chains with 'and so i'm like, wait', drops claude/cursor/codex casually, compresses with 'the goal + the decisions + the quality bar', and ends rough ('still ripping out the old assumptions though'). No kill-list words. The line 'i've been treating the prompt as the unit this whole time, but the prompt ends and the company doesn't' is genuinely quotable and carries the whole reframe.\n\nAccuracy is clean — this concept earns its credibility from architecture + felt problem, not invented traction. 'for months' refers to the founder's own build (truthful confession, not a metric). Real tools named, real mechanism (context pack: goal / definition of done / decisions+why / budget / next action). No fabricated users, revenue, funding, or benchmarks. Passes the truth constraint fully.\n\nSlide arc is well-built: confession hook → tension (perfect prompt / dead transcript) → break (the 'why' was gone) → pivot ('the prompt was never the unit. the organization was.') → proof (context packs, the save-bait field list) → payoff ('the task outlives the chat') → soft question CTA. The 'wrong primitive' framing is the right kind of contrarian for a skeptical AI-founder — it's a technical-taste claim, not a growth brag, which is exactly what earns builder trust.\n\nOn the hook: keeping slide 1 as 'my agent system' rather than 'OrgX' is the correct cold-reach call — OrgX means nothing to a cold viewer, 'my agent system' is universally relatable. My revision only adds a touch of building-in-public sting ('shipped it that way') to raise the confession stakes without spoiling the slide-4 reframe; the original is already strong and either works. Keep it."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "orgx-bip-memory-vs-continuity",
+      "pillar": "build-in-public",
+      "hook_type": "contrarian claim",
+      "title": "Your agents don't have a memory problem",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "hot take",
+          "headline": "your agents don't have a memory problem.",
+          "subtext": "you're patching the wrong bug.",
+          "accent": "amber",
+          "visual_note": "biggest type in the deck. 'memory problem' is the loaded phrase — let it dominate. mono 'hot take' tag top-left. open loop: subtext hints there's a real bug coming."
+        },
+        {
+          "role": "tension",
+          "headline": "more context window. better RAG. longer summaries. still lost.",
+          "accent": "danger",
+          "visual_note": "four short fragments stacked, the first three in muted grey, 'still lost' in danger-red. reads like a list of failed fixes."
+        },
+        {
+          "role": "tension",
+          "kicker": "the felt problem",
+          "headline": "a summary tells the next agent what happened. not why it matters.",
+          "accent": "amber",
+          "visual_note": "quote-weight styling. amber underline under 'why it matters'. echoes the OrgX line 'the next agent needs more than a summary.'"
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "memory is about the conversation. continuity is about the goal.",
+          "accent": "iris",
+          "visual_note": "the hinge of the whole carousel. two columns: MEMORY vs CONTINUITY, iris accent on CONTINUITY. clean, screenshot-worthy contrast."
+        },
+        {
+          "role": "turn",
+          "headline": "the organization has to remember why the work exists. not the chat.",
+          "accent": "iris",
+          "visual_note": "single centered conviction line. the chat window motif from earlier slides dissolves behind the text."
+        },
+        {
+          "role": "proof",
+          "kicker": "how it works",
+          "headline": "so OrgX keeps a work graph. goals, decisions, approvals, receipts. durable.",
+          "accent": "teal",
+          "visual_note": "small node-graph diagram: initiative → workstream → task → decision → receipt. teal edges. legible, not decorative. this proves the claim is real + specific."
+        },
+        {
+          "role": "proof",
+          "headline": "autonomy is useful. continuity is what makes it compound.",
+          "accent": "lime",
+          "visual_note": "lime = the payoff. this is a real OrgX line — set it as the confident closer to the argument, tight kerning, lots of negative space."
+        },
+        {
+          "role": "cta",
+          "kicker": "fight me",
+          "headline": "am i wrong that everyone's solving memory when the bug is continuity?",
+          "subtext": "building it in public @ useorgx.com",
+          "accent": "iris",
+          "visual_note": "provocative question sized to invite replies. url tucked small. the whole slide should feel like it wants an argument in the comments."
+        }
+      ],
+      "caption": "someone in my dms was like 'i just need my agents to remember more' and i sat with that for a second, because i used to think the exact same thing. and so we all keep reaching for the same fix — bigger context window, better retrieval, tighter summaries — and the agent still shows up to the next task not knowing what we already decided or what 'done' even means here. right? and that's when it hit me that remembering the conversation and remembering the work are two completely different problems. memory is 'what did we say.' continuity is 'why does this exist + what's the bar + who approves.' the chat can't hold that, because the chat ends. so orgx keeps it in a work graph underneath the client — decisions, approvals, receipts, the quality bar — and the agents read from that instead of from a transcript. anyway i keep watching people optimize the memory and skip the continuity entirely",
+      "cta": "am i wrong? tell me in the comments",
+      "hashtags": [
+        "#aiagents",
+        "#buildinpublic",
+        "#multiagent",
+        "#agentops",
+        "#mcp",
+        "#llm",
+        "#devtools"
+      ],
+      "hypothesis": "a single contrarian reframe (memory vs continuity) + a comment-bait CTA beats a build-log narrative for cold-reach engagement and shares",
+      "topic_tags": [
+        "continuity-vs-memory",
+        "work-graph",
+        "multi-agent",
+        "reframe"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "your agents don't have a memory problem.",
+        "issues": [
+          "Caption contains an em-dash parenthetical 3-item list ('the same fix — bigger context window, better retrieval, tighter summaries — and the agent still shows up') which is explicitly on the kill list. Fix: dissolve it into the run-on ('bigger context window, then better retrieval, then tighter summaries, and the agent STILL shows up') so it reads as talking, not a formatted aside.",
+          "Slide 1 uses the negation-hook template ('you don't have an X problem'), which is slightly formulaic — the specificity of 'memory' + the 'wrong bug' subtext rescue it, but it's the one spot that reads pattern-matched rather than found."
+        ],
+        "notes": "KEEP. This is the strongest kind of BIP concept: a real contrarian thesis (memory vs continuity) grounded in ACTUAL OrgX architecture — work graph, initiative→workstream→task→decision→receipt, approvals, the quality bar. Every one of those maps to real mechanisms, so the specificity is doing the credibility work, not invented traction. No fabricated metrics, no user counts, no fake benchmarks. The 'someone in my dms' opener is a soft anecdote-device, not a testimonial or a traction claim — low risk, standard BIP, leave it. If you want to be extra-clean you could make it 'someone asked me' but it's not required.\\n\\nHook: the open-loop design is smart — slide 1 negates the assumed problem, subtext ('patching the wrong bug') holds the loop, and 'continuity' isn't revealed until the turn. Don't let a redesign collapse hook+subtext onto slide 1; the delay is what makes slide 4 land. I kept the original headline — I couldn't beat it without either breaking the loop or getting wordier than a billboard allows.\\n\\nSave-worthy line: slide 4's MEMORY vs CONTINUITY column + the caption's 'memory = what did we say / continuity = why does this exist + what's the bar + who approves' is the screenshot. Make sure the slide carries that same '+' breakdown, not just the two words.\\n\\nOnly real fix before ship: the em-dash 3-item list in the caption (kill-list violation). One-line edit."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "orgx-bip-compiled-handoff",
+      "pillar": "build-in-public",
+      "hook_type": "framework / list (save-bait)",
+      "title": "The 7-field handoff that replaced my transcript dumps",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "steal this",
+          "headline": "7 fields i hand between agents. zero transcripts.",
+          "subtext": "this is the entire handoff.",
+          "accent": "iris",
+          "visual_note": "big '7' as a design element. mono 'steal this' tag signals save-bait immediately. numbered promise creates the open loop — they scroll to see all 7."
+        },
+        {
+          "role": "tension",
+          "kicker": "the wrong way",
+          "headline": "'here's the full chat log, good luck' isn't a handoff. it's a hazard.",
+          "accent": "danger",
+          "visual_note": "a fake 300-message transcript block rendered tiny and overwhelming, danger-red 'hazard' stamped across it. visceral 'don't do this' energy."
+        },
+        {
+          "role": "tension",
+          "headline": "the next agent shouldn't re-derive your goal from 400 messages.",
+          "accent": "amber",
+          "visual_note": "amber accent on '400 messages'. a lone agent chip staring at a wall of text — the felt pain, sized so it lands in under 2s."
+        },
+        {
+          "role": "proof",
+          "kicker": "the compiled handoff",
+          "headline": "the context pack. 7 fields, every time.",
+          "subtext": "goal · definition of done · decisions + why · permissions · budget · confidence · next action",
+          "accent": "teal",
+          "visual_note": "THE screenshot slide. render all 7 as a numbered instrument-panel list, mono labels, even spacing, teal number chips. this slide alone should be worth the save."
+        },
+        {
+          "role": "proof",
+          "headline": "goal + definition of done. the why and the bar, up front.",
+          "accent": "teal",
+          "visual_note": "zoom into fields 1-2 of the pack. show a real-looking definition-of-done line so it reads as an actual system, not a slogan."
+        },
+        {
+          "role": "proof",
+          "headline": "decisions + why. permissions. budget. confidence. next action.",
+          "accent": "lime",
+          "visual_note": "fields 3-7 as a compact stack. lime accent = this is executable, not theory. small 'passed as structured context' footnote chip."
+        },
+        {
+          "role": "turn",
+          "kicker": "why it works",
+          "headline": "the next agent inherits judgment, not a novel to re-read.",
+          "accent": "iris",
+          "visual_note": "iris reframe. echoes 'the next agent needs more than a summary.' clean centered line, the pack card glowing faintly behind it."
+        },
+        {
+          "role": "cta",
+          "kicker": "save it",
+          "headline": "screenshot slide 4. use it on your next handoff.",
+          "subtext": "building OrgX in public @ useorgx.com",
+          "accent": "iris",
+          "visual_note": "explicit save instruction, soft and specific. tiny arrow pointing back toward slide 4. url small underneath, no hard pitch."
+        }
+      ],
+      "caption": "i watched two of my agents 'collaborate' by one of them pasting a 300-message transcript to the other and it was so obviously broken. like the second agent had to reverse-engineer the goal, the decisions, what was already tried, all of it, from a wall of text. so i started writing down what a handoff actually needs to carry and it turned into 7 fields: goal, definition of done, decisions + why, permissions, budget, confidence, next action. that's the pack. structured context instead of 'here's everything we said, you figure out what mattered.' and the part that got me is once the handoff carries the why + the bar, work below the threshold just loops back before it ever burns my review time. the transcript was never the artifact. the compiled context is",
+      "cta": "screenshot slide 4 for your next agent handoff",
+      "hashtags": [
+        "#buildinpublic",
+        "#aiagents",
+        "#multiagent",
+        "#agentops",
+        "#mcp",
+        "#devtools",
+        "#aiengineering"
+      ],
+      "hypothesis": "a numbered framework hook + one dense screenshot-able list slide drives saves and shares harder than a personal narrative arc does",
+      "topic_tags": [
+        "compiled-handoff",
+        "context-pack",
+        "handoff-pain",
+        "save-bait"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "7 fields between my agents. zero transcripts.",
+        "issues": [],
+        "notes": "Strong keep. This is the cleanest kind of building-in-public save-bait: the credibility engine is a real, specific mechanism (a 7-field context pack) and a felt problem (transcript-dump handoffs), not invented traction. No fabricated metrics, user counts, revenue, or benchmarks anywhere. The 300/400 message numbers are illustrative of the pain scenario, not claimed OrgX traction — legitimate.\\n\\nVOICE: Slide text is billboard-tight and declarative. 'isn't a handoff. it's a hazard.' and 'inherits judgment, not a novel to re-read' are both quotable and in-register. Caption opens on a specific realization, chains with so/and/like, drops '300-message transcript' and 'why + the bar' casually, and ends rough on 'the compiled context is' — no clean wrap, no CTA close. Zero kill-list words. This reads like a real founder voice-memo, not an AI blog post.\\n\\nHOOK: 'steal this' + big 7 + 'zero transcripts' is the right save signal, and the contrarian punch (zero transcripts) is the scroll-stopper for a skeptical agent-builder. My revised headline just tightens the slightly awkward 'i hand between agents' to 'between my agents' while keeping the 'zero transcripts' gold — marginal, original is already strong.\\n\\nSAVE: Slide 4 (the full 7-field instrument-panel) is a genuine screenshot-worthy framework, and the CTA correctly points back to it. The framework carries the whole piece.\\n\\nONE QA NIT (fix before publishing, not a truth violation): the caption says '300-message transcript' and slide 2's visual note says 300, but slide 3's headline says '400 messages.' Pick one number and use it consistently across caption + slides so it reads as one true story."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "hiaw-context-pack",
+      "pillar": "teardown",
+      "hook_type": "mistake-callout (you're-doing-x-wrong)",
+      "title": "You're handing off a transcript. That's the bug.",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "handoff / mechanism",
+          "headline": "you're pasting the whole chat into the next agent. that's the bug.",
+          "subtext": "the next agent doesn't need your transcript. it needs the decision.",
+          "accent": "amber",
+          "visual_note": "big amber headline on near-black #02040a; a dim scrolling chat transcript ghosted behind it with a red strike-through; small 'the bug' tag bottom-right."
+        },
+        {
+          "role": "tension",
+          "kicker": "the felt problem",
+          "headline": "a transcript is 40k tokens of how. the next agent needs why.",
+          "subtext": "so it re-derives the goal, guesses the constraints, and drifts.",
+          "accent": "amber",
+          "visual_note": "split panel: left '40k tokens' dim and heavy, right '1 goal — missing' glowing amber. weight imbalance is the point."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "the next agent needs more than a summary. it needs a compile.",
+          "subtext": "stop dumping the conversation. hand over structured context.",
+          "accent": "teal",
+          "visual_note": "the quotable line dominant, teal; a small icon of a chat log collapsing into a tidy struct/card."
+        },
+        {
+          "role": "proof",
+          "kicker": "the anatomy — save this",
+          "headline": "a context pack is 7 fields, not a chat log:",
+          "subtext": "goal · definition of done · decisions + why · permissions · budget · confidence · next action",
+          "accent": "teal",
+          "visual_note": "instrument-panel card, numbered 1–7, mono field labels lit teal, looks like a compiled JSON handoff. this is the screenshot slide."
+        },
+        {
+          "role": "proof",
+          "kicker": "the field everyone skips",
+          "headline": "decisions + why is the one that matters. it's the whole point.",
+          "subtext": "without it the next agent re-litigates choices you already made.",
+          "accent": "teal",
+          "visual_note": "the '3. decisions + why' row from the previous card pulled out and enlarged, teal underline; others faded."
+        },
+        {
+          "role": "proof",
+          "kicker": "what changes",
+          "headline": "structured context in. the agent starts at the goal, not from scratch.",
+          "subtext": "no re-derivation. no drift. the task outlives the chat.",
+          "accent": "lime",
+          "visual_note": "a flow bar that skips the 're-derive' step entirely and lands straight on 'goal', lime; time-saved feel."
+        },
+        {
+          "role": "cta",
+          "kicker": "your turn",
+          "headline": "which of the 7 fields does your handoff drop first?",
+          "subtext": "i'm building this in the open at useorgx.com. follow for the next teardown.",
+          "accent": "teal",
+          "visual_note": "the 7-field list faded behind; one row circled with a '?'; soft comment prompt at the bottom."
+        }
+      ],
+      "caption": "watched a friend hand a half-finished feature off from claude to cursor last week by literally copy-pasting the entire thread. like 60k tokens of back-and-forth. and cursor spent its first ten minutes re-deriving what they'd already settled, then quietly picked a different auth approach because the *why* never crossed over. and i'm like, that's the bug, right there. a transcript is a record of how the work happened, but the next agent doesn't need how. it needs the goal + the definition of done + the decisions and why you landed on them + what it's even allowed to touch. that's a context pack, not a chat log. the prompt ends but the work keeps moving, and if all you pass forward is the transcript, the org forgets why the work exists the second it changes hands...",
+      "cta": "which of the 7 handoff fields do you drop first? tell me in the comments.",
+      "hashtags": [
+        "#aiagents",
+        "#promptengineering",
+        "#claude",
+        "#cursor",
+        "#buildinpublic",
+        "#aiops",
+        "#mcp",
+        "#devtools"
+      ],
+      "hypothesis": "A mistake-callout hook ('that's the bug') plus a numbered 7-field anatomy list (save-bait) drives saves + shares harder than a pure thesis hook for cold reach.",
+      "topic_tags": [
+        "context-pack",
+        "handoff-pain",
+        "compiled-handoff",
+        "mcp"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "claude → cursor, and you paste the whole thread. that's the bug.",
+        "issues": [
+          "CTA subtext 'follow for the next teardown' edges into the 'follow along' clean-CTA close the kill list warns against; end rougher (e.g. drop it or trail off) — the caption already ends perfectly with '...', but the last slide resolves too neatly.",
+          "Otherwise clean: slides are tight/declarative/lowercase, caption opens on a person, chains with 'and/so/right?', uses '+' compression, drops claude/cursor/60k casually, ends rough. No kill-list words.",
+          "No fabricated OrgX traction/users/revenue/funding. The '60k tokens'/'ten minutes'/'40k tokens of how' figures are illustrative details of a friend's claude→cursor handoff and a generic transcript, not claims about OrgX metrics — legitimate building-in-public specificity.",
+          "The '7 fields' context-pack anatomy reads as a real architecture/design claim (goal, DoD, decisions+why, permissions, budget, confidence, next action maps to OrgX's actual handoff/compile mechanism), which is the allowed credibility engine, not invented traction. Only risk: if that 7-field spec isn't actually how the product compiles handoffs — verify it matches the real mechanism before shipping."
+        ],
+        "notes": "Strong keep. The mistake-callout hook lands hard for the exact audience (AI founders doing claude→cursor handoffs by copy-pasting threads) because it names a behavior they do and reframes it as a defect — pattern interrupt, not thesis. Save-bait is real: the 7-field context-pack card ('goal · definition of done · decisions + why · permissions · budget · confidence · next action') is a genuine screenshot framework, and slide 5 correctly isolates 'decisions + why' as the load-bearing field, which sharpens rather than dilutes. Caption is the strongest asset — full Hope voice-memo, story-first, casual specificity, rough trail-off ending. Hypothesis (mistake-callout + numbered anatomy for saves+shares) is sound. Two fixes before shipping: (1) verify the 7-field spec is actually how OrgX compiles handoffs — if it's aspirational, keep it framed as the design thesis, not an existing feature; (2) the final CTA slide's 'follow for the next teardown' is the one clean-close/AI-growth-tell in an otherwise rough-edged piece — cut it or roughen it to match the caption's ending. My revised hook front-loads the concrete claude→cursor tool pair into slide 1 for a harder scroll-stop; the original is already good, so this is a marginal upgrade, not a rescue."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "hiaw-escalate-consequence",
+      "pillar": "teardown",
+      "hook_type": "contrarian bold claim",
+      "title": "Approving every agent action is why your fleet doesn't scale.",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "escalation / mechanism",
+          "headline": "approving every agent action is the reason you can't run a fleet.",
+          "subtext": "notification fatigue isn't a UX problem. it's a design problem.",
+          "accent": "danger",
+          "visual_note": "near-black; a stacked wall of dim 'approve?' toasts in muted danger-red, the top one glowing hot. overwhelm rendered literally."
+        },
+        {
+          "role": "tension",
+          "kicker": "the felt problem",
+          "headline": "review every unit of activity and you become the bottleneck you automated away.",
+          "subtext": "the fleet waits on you for things that never needed you.",
+          "accent": "amber",
+          "visual_note": "a single human icon buried under a pile of tiny task cards, amber; a queue backing up behind them."
+        },
+        {
+          "role": "tension",
+          "kicker": "the mismatch",
+          "headline": "most agent actions are reversible. you're guarding all of them equally.",
+          "subtext": "a file read and a wire transfer should not get the same gate.",
+          "accent": "amber",
+          "visual_note": "a flat row of identical-size locks, all amber, all the same — the visual of over-gating with no hierarchy."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "escalate consequence, not activity.",
+          "subtext": "human attention is for the irreversible + the ambiguous. nothing else.",
+          "accent": "teal",
+          "visual_note": "the line huge and centered, teal; everything else stripped away to negative space. the thesis slide."
+        },
+        {
+          "role": "proof",
+          "kicker": "where the gate sits — save this",
+          "headline": "the tool policy gates 4 things at the human boundary:",
+          "subtext": "publishing · payments · outbound messages · merges. everything else just runs.",
+          "accent": "teal",
+          "visual_note": "a flow line with four gates lit teal at the human boundary; the rest of the line flows through un-gated in lime. instrument-panel."
+        },
+        {
+          "role": "proof",
+          "kicker": "the safety default",
+          "headline": "unknown high-risk tool? it fails closed. no guess, no ship.",
+          "subtext": "the system never improvises with a boundary it doesn't understand.",
+          "accent": "danger",
+          "visual_note": "a tool call hitting a shut gate with a red 'FAIL CLOSED' stamp; one item held, everything else moving."
+        },
+        {
+          "role": "proof",
+          "kicker": "what you get back",
+          "headline": "you approve the boundaries. the fleet runs the rest.",
+          "subtext": "attention spent where consequence lives, not where activity happens.",
+          "accent": "lime",
+          "visual_note": "before/after: the slide-1 wall of toasts collapses to one clean approval prompt glowing lime."
+        },
+        {
+          "role": "cta",
+          "kicker": "your turn",
+          "headline": "how many approvals did your agents ask for today?",
+          "subtext": "if it's every action, the gate's in the wrong place. building this at useorgx.com.",
+          "accent": "teal",
+          "visual_note": "a large counter mid-tick; a prompt to comment your number; the four-gate line faint behind."
+        }
+      ],
+      "caption": "i counted the approval prompts my agents threw at me one afternoon and it was somewhere north of 40. forty times i clicked 'yes go ahead' on stuff like 'can i read this file' and 'can i write this draft.' and by like the fifth one i'm rubber-stamping without reading, which means the one approval that actually mattered — an agent about to send an email to a client — got the exact same reflexive yes as reading a file. that's the failure. human review should scale with consequence, not activity. so the escalation model in orgx just flips it: reversible stuff runs, and the gate only closes on the handful of things you can't take back. publishing, payments, outbound messages, merges. and anything high-risk it's never seen fails closed instead of guessing. it's not fewer guardrails, it's guardrails that are actually where the danger is...",
+      "cta": "count your approval prompts tomorrow. drop the number below.",
+      "hashtags": [
+        "#aiagents",
+        "#agentops",
+        "#aiautomation",
+        "#buildinpublic",
+        "#claude",
+        "#autonomousagents",
+        "#aiops",
+        "#devtools"
+      ],
+      "hypothesis": "A contrarian bold-claim hook ('approving everything is why you can't scale') plus a named-boundary list out-performs a soft educational hook for saves + comment volume.",
+      "topic_tags": [
+        "escalation",
+        "tool-policy",
+        "consequence",
+        "fail-closed"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "you clicked 'approve' 40 times today. one of them actually mattered.",
+        "issues": [
+          "'scale' in the title and in the caption line 'human review should scale with consequence' — Hope's lexicon prefers 'compounds' over 'scales'; here it reads literal so it survives, but a purist would swap it",
+          "CTA subtext 'building this at useorgx.com' is slightly product-promo for an otherwise rough-ending piece; the caption itself ends correctly (trails on '...') so this is contained to the CTA slide"
+        ],
+        "notes": "Strong concept, ships. Truth check: the 'north of 40' count is a personal founder anecdote (felt problem), NOT fabricated OrgX traction — clean. No user counts, revenue, benchmarks, or testimonials invented. The only claim to watch is the specific mechanism list on slide 5 ('gates 4 things: publishing · payments · outbound messages · merges') and 'fails closed on unknown high-risk tools' — these are presented as real architecture/design decisions, which is the credibility engine when true. They must match OrgX's actual tool-policy/escalation model verbatim before publish; if the real system gates a different set, fix the list rather than the framing. Nothing here is a metric fabrication, so accurate stays true.\n\nVoice: caption is genuinely in-register — opens on a specific realization, chains with 'and so', narrates thinking in real time ('by like the fifth one i'm rubber-stamping'), drops the client-email detail casually via a single em-dash insertion (not a banned 3-item em-dash list), and ends rough on '...'. No kill-list words. Slides are tight and declarative.\n\nWhy it works: 'escalate consequence, not activity' (slide 4) is the screenshot line and the spine of the whole deck — it's contrarian, memorable, and 100% on-thesis for governed autonomy. 'the bottleneck you automated away' (slide 2) is a second saveable line. Hook is a real, widely-shared pain (approval fatigue on agent fleets) framed as a design failure, not a UX gripe — that reframe is what stops a skeptical AI-founder.\n\nRevised hook rationale: the original ('approving every agent action is the reason you can't run a fleet') is good but abstract. The revision pulls the caption's sharpest realization forward — the concrete count plus the curiosity gap ('which one? why?') — which is stickier and still fully true. It also sidesteps the 'scale' lexicon nit. Keep the original slide-1 line as slide 2's tension beat if you adopt the revision.\n\nMinor polish: consider swapping 'scale' → 'run' or 'compound' in the title to stay in Hope's word-set; and soften the CTA's URL drop so the piece doesn't tonally lurch from voice-memo into ad on the last slide."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "hiaw-proof-receipt",
+      "pillar": "teardown",
+      "hook_type": "word-reframe callout",
+      "title": "'Done' is not proof. Here's what a receipt actually contains.",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "proof / mechanism",
+          "headline": "an agent saying 'done' is not proof. it's a vibe.",
+          "subtext": "you still open the file to check. every single time.",
+          "accent": "amber",
+          "visual_note": "near-black; a green 'done ✓' chat bubble dimmed, a big amber '?' laid over it, small 'unverified' tag."
+        },
+        {
+          "role": "tension",
+          "kicker": "the trust gap",
+          "headline": "'done' tells you the agent stopped. not that the work is right.",
+          "subtext": "stopped and correct are two completely different states.",
+          "accent": "amber",
+          "visual_note": "two states side by side: 'stopped' lit amber, 'correct' unlit and hollow. only one is on."
+        },
+        {
+          "role": "tension",
+          "kicker": "what it costs",
+          "headline": "so you audit everything by hand. and the autonomy stops compounding.",
+          "subtext": "every manual re-check is where the leverage leaks out.",
+          "accent": "amber",
+          "visual_note": "a loop diagram that snaps at the 'human re-checks' node, amber; the flow can't close."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "the artifact is the receipt.",
+          "subtext": "work should come back as evidence, not an announcement.",
+          "accent": "teal",
+          "visual_note": "the quotable line huge and centered, teal; a plain 'done' morphing into a stamped receipt."
+        },
+        {
+          "role": "proof",
+          "kicker": "what a receipt carries — save this",
+          "headline": "a proof return ships with 5 things attached:",
+          "subtext": "version · provenance · evaluation · review state · cost",
+          "accent": "teal",
+          "visual_note": "a single artifact card with 5 metadata rows lit teal, styled like a printed receipt. this is the screenshot slide."
+        },
+        {
+          "role": "proof",
+          "kicker": "where you see it",
+          "headline": "proof rooms + MCP widgets put the state inside the client you already use.",
+          "subtext": "no new dashboard to babysit. it renders in claude, cursor, wherever you are.",
+          "accent": "iris",
+          "visual_note": "an embedded widget inside a claude/cursor-style chat frame showing live review state, iris glow; state legible in-context."
+        },
+        {
+          "role": "proof",
+          "kicker": "what changes",
+          "headline": "you stop re-checking. you read the receipt and move.",
+          "subtext": "autonomy is useful. continuity is what makes it compound.",
+          "accent": "lime",
+          "visual_note": "the broken loop from slide 3, now closed and flowing lime through the 'read receipt' node."
+        },
+        {
+          "role": "cta",
+          "kicker": "your turn",
+          "headline": "if your agent said 'done' right now, could you prove it?",
+          "subtext": "this is the layer i'm building at useorgx.com. follow for the next teardown.",
+          "accent": "teal",
+          "visual_note": "a bare 'done ✓' next to an empty receipt outline waiting to be filled; soft comment prompt."
+        }
+      ],
+      "caption": "the thing that finally broke me on agent workflows was realizing i didn't trust a single 'done' i got back. an agent would come back all confident, task complete, and i'd still open every file and re-read every diff, because 'done' just means the agent stopped — it says nothing about whether the work is right. and so i'm re-auditing everything by hand, which means the autonomy never compounds, i'm just a slower reviewer with extra steps. so the fix isn't a better status message. the artifact has to come back as the receipt: version, provenance, how it was evaluated, what review state it's in, what it cost, all bolted to the thing itself. and then proof rooms + embedded mcp widgets render that state right inside claude or cursor so you're never leaving to go verify. the whole idea is you read the receipt instead of redoing the work...",
+      "cta": "if your agent said done right now, could you actually prove it? tell me.",
+      "hashtags": [
+        "#aiagents",
+        "#mcp",
+        "#buildinpublic",
+        "#aiops",
+        "#claude",
+        "#agentic",
+        "#devtools",
+        "#trustbutverify"
+      ],
+      "hypothesis": "A word-kill callout hook ('done is not proof') plus a 5-field receipt-anatomy list tests whether reframing a familiar word out-reaches a problem-first hook for cold traffic + saves.",
+      "topic_tags": [
+        "proof-return",
+        "receipts",
+        "mcp-widgets",
+        "trust"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "'done' is not proof. it's a vibe.",
+        "issues": [
+          "CTA slide subtext 'follow for the next teardown' brushes the kill-list ban on clean CTA / 'follow-for-more' endings; the caption ends rough (good) but the final slide could too instead of a tidy follow-ask.",
+          "Minor: 'proof return ships with 5 things attached:' reads slightly listy/announcer vs. billboard — the framework itself is fine, but the connective 'ships with X things attached' is the one phrase doing product-copy work rather than conviction."
+        ],
+        "notes": "Strong concept. TRUTH: clean — zero fabricated metrics, user counts, or traction. Every claim is mechanism/architecture (receipt = version/provenance/evaluation/review state/cost; proof rooms + MCP widgets rendering in claude/cursor), which is exactly the allowed 'true specificity' credibility engine. The felt problem (re-auditing every diff because 'done' just means the agent stopped) is real and lands. VOICE: caption is genuine Hope — opens on a realization ('the thing that finally broke me'), chains with so/and so, drops tools casually, narrates thinking, ends rough on '...instead of redoing the work'. Slides are tight and declarative; 'the artifact is the receipt' is the quotable spine. HOOK (8): 'not proof, it's a vibe' is a sharp, memeable, contrarian reframe on a pain skeptical AI-founders feel daily — the 'you still open the file to check. every single time.' subtext nails recognition. SAVE (8): slide 5 is a real, screenshot-able framework (5-field receipt anatomy) — that's the save driver. Only nits: the CTA slide's 'follow for the next teardown' is the one clean-CTA note the kill list warns about, and 'ships with 5 things attached' is faintly product-copy. Revised hook front-loads the killed word for a harder word-reframe punch and tightens by 3 words. keep=true (accurate, overall 8, hook 8)."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "felt-handoff-why",
+      "pillar": "pain",
+      "hook_type": "callout-mistake",
+      "title": "you didn't lose the code, you lost the why",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "the handoff",
+          "headline": "you didn't lose the code. you lost the why.",
+          "subtext": "nobody noticed until the next agent confidently shipped the wrong thing.",
+          "accent": "amber",
+          "visual_note": "two panels on near-black #02040a, left labeled 'Claude' right labeled 'Codex', a single bright thread snapping in the gap between them. big dominant line up top."
+        },
+        {
+          "role": "tension",
+          "kicker": "monday, 9am",
+          "headline": "you paste the transcript into the next agent and pray.",
+          "subtext": "10k tokens of chat. zero decisions it can actually act on.",
+          "accent": "amber",
+          "visual_note": "a wall of dim grey transcript text filling the frame, one amber line highlighted, everything else blurred back. feels like drowning in scroll."
+        },
+        {
+          "role": "tension",
+          "headline": "the goal lived in your head. the chat only kept the keystrokes.",
+          "subtext": "so agent two optimizes the wrong thing, and it looks certain doing it.",
+          "accent": "amber",
+          "visual_note": "a head silhouette with a glowing 'goal' node inside it, disconnected by a broken line from a transcript stream running below. the connection is severed."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "the prompt was the wrong primitive.",
+          "subtext": "the conversation can't remember why the work exists. the organization has to.",
+          "accent": "iris",
+          "visual_note": "the word 'prompt' struck through, 'org context' rendered underneath glowing iris. clean, single idea, lots of negative space."
+        },
+        {
+          "role": "proof",
+          "kicker": "context pack",
+          "headline": "handoffs should be compiled, not copy-pasted.",
+          "subtext": "goal · definition of done · decisions + why · permissions · budget · confidence · next action",
+          "accent": "teal",
+          "visual_note": "instrument-panel card, structured fields each with a value filled in, receipt-style monospaced. THIS is the screenshot slide — make it look like a real compiled artifact."
+        },
+        {
+          "role": "proof",
+          "headline": "the next agent needs more than a summary.",
+          "subtext": "it needs what you decided, and what you decided against.",
+          "accent": "teal",
+          "visual_note": "diff-style side by side: 'summary' column thin and vague, 'context pack' column dense and structured. the density contrast is the point."
+        },
+        {
+          "role": "cta",
+          "headline": "the prompt ends. the company keeps moving.",
+          "subtext": "building this in the open at useorgx.com. what dies in your handoffs?",
+          "accent": "amber",
+          "visual_note": "small OrgX wordmark, and the snapped thread from slide 1 now reconnected and steady across the Claude→Codex gap."
+        }
+      ],
+      "caption": "watched a friend hand a half-built feature from Claude to Codex last week and the second agent just confidently rebuilt the thing they'd already decided NOT to build. and he's scrolling back through the chat like where did i say that, and the answer is he didn't, it was never in the chat, it was in his head. that's the part nobody talks about — the transcript keeps every keystroke and none of the why. so you paste 10k tokens of conversation into the next agent and it's technically 'context' but it can't act on any of it, doesn't know the definition of done or the three things you already ruled out or how much budget is left. and so i keep landing on the same thing: the prompt was the wrong primitive. the conversation can't hold the goal across a boundary, the org has to — a compiled handoff, goal + decisions + why + permissions + next action, passed as structure instead of a chat dump. and once you see it you can't unsee it, every handoff you've ever done was really just",
+      "cta": "follow for more on agent continuity — and tell me what dies in your handoffs",
+      "hashtags": [
+        "#aiagents",
+        "#claudeai",
+        "#codex",
+        "#buildinpublic",
+        "#devtools",
+        "#aiengineering",
+        "#multiagent"
+      ],
+      "hypothesis": "a 'you didn't lose X, you lost Y' reframe hook + a screenshot-worthy context-pack field list beats a straight product explainer for cold saves",
+      "topic_tags": [
+        "handoff-pain",
+        "context-pack",
+        "the-why"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "you didn't lose the code. you lost the why.",
+        "issues": [
+          "The separate `cta` metadata field 'follow for more on agent continuity — and tell me what dies in your handoffs' is a clean-CTA / 'follow for more' construction the voice spec explicitly kills. The in-slide and in-caption endings are in-voice and rough, but this standalone cta field reads as generic creator boilerplate — cut or fold into the trailing-off caption.",
+          "'and once you see it you can't unsee it' is a mild cliche; survives because it's genuine conversational register, but it's the softest line in the caption."
+        ],
+        "notes": "Strong concept, keep. Truth: clean — no fabricated traction. '10k tokens' is a problem-descriptor, not an OrgX metric. Context-pack fields (goal/DoD/decisions+why/permissions/budget/confidence/next action) are real architecture specifics = the credibility engine, exactly right. Voice: slides are tight billboards ('the prompt was the wrong primitive' and 'handoffs should be compiled, not copy-pasted' are the quotables). Caption is textbook Hope — person-first open, so/and/but chaining, casual '10k tokens', '+' compression, rough trail-off ending on 'really just'. Hook (8): the 'you didn't lose X, you lost Y' reframe lands hard on the exact Claude->Codex handoff pain a skeptical agent-founder has felt; slide-1 stops the scroll. Save (8): slide 5's compiled context-pack field list is the genuine screenshot artifact; the summary-vs-context-pack diff on slide 6 reinforces it. One real fix: the standalone `cta` field ('follow for more on agent continuity') is off-voice boilerplate that contradicts the no-clean-CTA rule — drop it or let the caption's trail-off carry the ending. Original hook is already optimal; couldn't beat it, so repeated it. Hypothesis is sound and the execution matches it."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "felt-activity-confidence",
+      "pillar": "pain",
+      "hook_type": "paradox-number",
+      "title": "activity up, confidence down",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "the tell",
+          "headline": "your agents got busier. you got less sure.",
+          "subtext": "green dashboard. quiet dread. you refresh it anyway.",
+          "accent": "danger",
+          "visual_note": "two lines on near-black #02040a — 'activity' climbing in lime, 'confidence' sinking in danger-red, crossing near the middle. the crossing point is the whole hook."
+        },
+        {
+          "role": "tension",
+          "headline": "more PRs, more commits, more 'done.' less of it you'd sign your name to.",
+          "subtext": "the volume went up. the trust didn't come with it.",
+          "accent": "amber",
+          "visual_note": "a feed of green checkmarks stacked down the frame, one flagged amber, the rest slightly blurred — you literally cannot tell which one matters."
+        },
+        {
+          "role": "tension",
+          "kicker": "why it happens",
+          "headline": "review scaled with noise, not consequence.",
+          "subtext": "so you rubber-stamp everything, or you re-read everything. both lose.",
+          "accent": "danger",
+          "visual_note": "an inbox with 47 items all labeled 'review me', every one identical size and weight. equal volume, zero signal."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "escalate consequence, not activity.",
+          "subtext": "your attention is the scarce thing. stop spending it per-commit.",
+          "accent": "iris",
+          "visual_note": "the 47-item inbox collapsing down to 2 items marked 'irreversible' glowing iris, the rest auto-cleared and dimmed away. a big exhale of a slide."
+        },
+        {
+          "role": "proof",
+          "kicker": "how it works",
+          "headline": "human attention gets reserved for the boundaries that can't be undone.",
+          "subtext": "publish · payment · merge · message → gated at the human line. unknown high-risk tools fail closed.",
+          "accent": "teal",
+          "visual_note": "a tool-policy gate panel — most actions flowing straight through in green, four held at an amber gate labeled 'human boundary'. this is the screenshot slide."
+        },
+        {
+          "role": "proof",
+          "headline": "human review should scale with consequence, not activity.",
+          "subtext": "work below your quality bar loops back before it ever reaches you.",
+          "accent": "teal",
+          "visual_note": "a horizontal quality-bar threshold line; sub-threshold work bouncing back down, above-threshold work rising up to a node labeled 'your desk'. a filter, not a firehose."
+        },
+        {
+          "role": "cta",
+          "headline": "autonomy is useful. continuity is what makes it compound.",
+          "subtext": "building the layer beneath the clients at useorgx.com. how many green checks do you actually trust?",
+          "accent": "amber",
+          "visual_note": "the two lines from slide 1, now both climbing together instead of crossing. small OrgX wordmark bottom."
+        }
+      ],
+      "caption": "the moment that made me start OrgX: i had six agents running, the dashboard was all green, and i felt worse than when i was doing everything by hand. activity went straight up and my confidence went straight down, and those two aren't supposed to move opposite directions but they do the second you're orchestrating instead of typing. and i figured out why — every unit of work was asking for the same slice of my attention. a typo fix and a payment endpoint both showing up as 'review me', same size, same weight. so you either rubber-stamp the batch and something irreversible slips through, or you re-read all of it and you're the bottleneck again, congrats you built an expensive way to do your own job. the fix was never more review. it's escalating consequence, not activity — reserve the human boundary for the stuff that can't be undone, publish, payments, merges, and let everything under the bar loop back before it hits your desk. that's the whole difference between autonomy that quietly stresses you out and autonomy that actually",
+      "cta": "follow if you run multiple agents — how many of your green checks do you actually trust?",
+      "hashtags": [
+        "#aiagents",
+        "#aiops",
+        "#buildinpublic",
+        "#claudecode",
+        "#agentops",
+        "#devtools",
+        "#founder"
+      ],
+      "hypothesis": "an inverse-correlation paradox hook (activity up, confidence down) + a danger→teal color arc outperforms a positive product-benefit hook for cold reach with the skeptic audience",
+      "topic_tags": [
+        "activity-vs-confidence",
+        "review-scaling",
+        "consequence-escalation"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "your agents got busier. you got less sure.",
+        "issues": [
+          "Slide 5 headline ('human attention gets reserved for the boundaries that cant be undone.') is longer/softer than billboard spec — pushes past the sub-2s read; tighten to 'reserve humans for what cant be undone.'",
+          "Mid-caption goes briefly aphoristic/clean ('The fix was never more review. Its escalating consequence, not activity') — reads a touch composed vs pure voice-memo, though it recovers roughness by the end",
+          "Caption never uses the '+' compound-compression move (optional, not required, but a missed signature beat)"
+        ],
+        "notes": "Strong concept, clears every gate. TRUTH: clean — the only numbers ('six agents', '47 items') are a founding-moment anecdote and an illustrative visual example, not traction/metrics/testimonials. Architecture specificity ('publish · payment · merge · message gated at the human line', 'unknown high-risk tools fail closed', 'work below your quality bar loops back') is the credibility engine and it's real/mechanistic, not invented. Positioning stays present-tense/early ('building the layer beneath the clients'). VOICE: slides are tight and quotable, caption is genuinely Hope — story-first open, real-time thinking ('congrats you built an expensive way to do your own job'), chained with so/and/but, ends rough on 'autonomy that actually'. No kill-list words, no parallel tricolons, no clean CTA wrap. HOOK: the paradox + crossing-lines visual + 'green dashboard. quiet dread. you refresh it anyway.' is a precise felt-problem callout that will stop a skeptical agent-runner mid-scroll. SAVE: 'escalate consequence, not activity' / 'review should scale with consequence, not activity' is a real reframe, and slide 5 is explicitly built as the screenshot slide. Kept the original hook — it's already the sharpest true-in-voice line; every alternative I drafted was weaker. Biggest single upgrade available: tighten slide 5's headline to restore billboard rhythm."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "felt-five-doors",
+      "pillar": "pain",
+      "hook_type": "framework-list",
+      "title": "5 doors your context dies at",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "save this",
+          "headline": "your context isn't leaking. it's dying at 5 specific doors.",
+          "subtext": "you walked through all of them this week.",
+          "accent": "amber",
+          "visual_note": "5 numbered doorways lined across near-black #02040a, a faint thread passing through each one, thinning a little more at every door. sets up the loop."
+        },
+        {
+          "role": "tension",
+          "kicker": "door 1 + 2",
+          "headline": "1. Claude → Codex.  2. Codex → Cursor.",
+          "subtext": "every client swap resets the goal to zero. you re-explain from scratch.",
+          "accent": "amber",
+          "visual_note": "two door icons, a 'goal' node full on the entry side and empty on the far side. the reset is visible."
+        },
+        {
+          "role": "tension",
+          "kicker": "door 3 + 4",
+          "headline": "3. repo to repo.  4. client to client.",
+          "subtext": "the decisions you made in one boundary don't exist in the next.",
+          "accent": "amber",
+          "visual_note": "two boundaries side by side, a decisions ledger legible in the first, blank in the second. the record didn't travel."
+        },
+        {
+          "role": "tension",
+          "kicker": "door 5",
+          "headline": "5. today-you → next-week-you.",
+          "subtext": "you are the fifth agent. and you forgot the why too.",
+          "accent": "danger",
+          "visual_note": "a calendar boundary, past-you handing a note to future-you, the 'why' on the note faded almost to nothing. the gut-punch slide."
+        },
+        {
+          "role": "turn",
+          "kicker": "the reframe",
+          "headline": "context isn't a chat you scroll back through. it's a graph the org keeps.",
+          "subtext": "the task outlives the chat.",
+          "accent": "iris",
+          "visual_note": "a scrollbar of chat history dissolving into a connected node graph glowing iris. the primitive changes in front of you."
+        },
+        {
+          "role": "proof",
+          "kicker": "work graph",
+          "headline": "initiatives · decisions · approvals · artifacts · receipts — durable, not disposable.",
+          "subtext": "state lives beneath the client, not inside one conversation.",
+          "accent": "teal",
+          "visual_note": "a work-graph panel, nodes carrying provenance, one artifact stamped with a receipt. THIS is the save-bait screenshot — make it feel like real product state."
+        },
+        {
+          "role": "proof",
+          "headline": "every door becomes a pass-through, not a reset.",
+          "subtext": "the goal, the quality bar, and the proof travel with the work.",
+          "accent": "teal",
+          "visual_note": "the 5 doors from slide 1, now the thread passing through each at full strength — no thinning. the loop closes."
+        },
+        {
+          "role": "cta",
+          "headline": "the task outlives the chat.",
+          "subtext": "building the operating context beneath your clients at useorgx.com. which door kills yours?",
+          "accent": "amber",
+          "visual_note": "small OrgX wordmark, all 5 doors lit steady. invites the comment."
+        }
+      ],
+      "caption": "i counted it once — in a single afternoon i re-explained the same feature goal five separate times. once handing from Claude to Codex, once when i moved repos, once switching to Cursor for the frontend, once to a teammate, and once to myself on friday when i'd already forgotten why i started. and none of those were 'losing' context in some vague way, they were five specific doors and the context died at every single one. that's when it clicked that context isn't a transcript you scroll back through hoping the answer's buried in there, it's a graph the org is supposed to keep — the decisions, the approvals, the artifacts, the receipts, living underneath the client instead of trapped inside one conversation. because the task outlives the chat, always, the chat is the most disposable part of the whole thing and somehow we made it the primitive. so i'm building the layer that sits beneath Claude and Cursor and Codex and just remembers — the goal, the bar, the why — so every door is a pass-through instead of a reset. anyway. five times in one afternoon, that number still",
+      "cta": "save this + tell me which door kills your context",
+      "hashtags": [
+        "#aiagents",
+        "#buildinpublic",
+        "#devtools",
+        "#claudeai",
+        "#cursor",
+        "#aiengineering",
+        "#agentops",
+        "#mcp"
+      ],
+      "hypothesis": "a numbered 'X doors it dies at' save-bait list (screenshot-first, 8 slides) drives higher saves/shares than a single emotional scene, even at the cost of a slightly slower first-slide read",
+      "topic_tags": [
+        "context-boundaries",
+        "work-graph",
+        "handoff-pain",
+        "save-bait"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "you didn't lose context this week. it died at 5 specific doors.",
+        "issues": [
+          "Slide 6 'initiatives · decisions · approvals · artifacts · receipts — durable, not disposable' brushes against the banned list-with-dash pattern; it survives because it's a 5-item product-primitive enumeration (not a 3-item em-dash parenthetical) and the dash carries a real declarative payoff, but it's the one slide that reads as a spec sheet instead of a billboard.",
+          "CTA slide's 'which door kills yours?' is lightly engagement-baity/clean; it's saved by being a genuine comment prompt tied to the door motif, but it's the closest the deck gets to a tidy CTA.",
+          "Caption has two stacked parallel lists ('the decisions, the approvals, the artifacts, the receipts' then 'the goal, the bar, the why') — embedded in flowing prose so it reads as real speech, not rhetorical tricolon, but it's the one spot rhythm gets slightly showy."
+        ],
+        "notes": "Truth: clean. The '5 doors' are real workflow boundaries (Claude→Codex→Cursor, repo, client, today-you→next-week-you) and the proof slide names real OrgX primitives (initiatives/decisions/approvals/artifacts/receipts as a durable graph beneath the client). Zero fabricated traction — the 'i counted it once, five times in one afternoon' is a personal building-in-public rep, not an invented metric. Credibility engine is doing its job.\n\nVoice: caption is the strongest asset — story-first open ('i counted it once'), chains with and/so/because, drops tools casually, narrates the click in real time ('that's when it clicked that context isn't a transcript...'), and ends genuinely ROUGH ('anyway. five times in one afternoon, that number still'). No kill-list words. Slides are tight and lowercase-friendly. 'you are the fifth agent. and you forgot the why too.' is the standout gut-punch. 'context isn't a chat you scroll back through. it's a graph the org keeps' and 'the task outlives the chat' are the quotable spines.\n\nHook: strong reframe (leaking→dying at N specific doors) + personal 'this week' tag stops a skeptical scroll. The concept's own hypothesis concedes a slightly slower first-slide read vs a single emotional scene — fair, but the payoff of a numbered save-bait list is worth it. My revised headline subverts the exact phrase founders say ('I lost context') and folds the temporal punch into the headline itself, so the hook lands before the subtext loads — marginal but real improvement; original is already keep-worthy.\n\nVerdict: keep. High brand fit (this IS the OrgX thesis), high save potential (numbered framework + two quotable lines + a real product-state screenshot on slide 6), and it closes the loop visually (thread thinning at each door → passing through at full strength). One watch item: make slide 6 actually feel like real product state in render, or it reads as a feature list and undercuts the 'durable, not disposable' claim."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "the-loop-agents-break",
+      "pillar": "framework",
+      "hook_type": "framework-reveal",
+      "title": "The 7-step loop your agents keep breaking",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "THE LOOP",
+          "headline": "every piece of real work runs the same 7-step loop",
+          "subtext": "your agents run 3 of them and call it done.",
+          "accent": "iris",
+          "visual_note": "faint ring of 7 nodes on near-black, only 3 lit, the other 4 dark and unlabeled to open the loop"
+        },
+        {
+          "role": "tension",
+          "headline": "the prompt starts strong. then the context falls off a cliff.",
+          "subtext": "goal, decisions, quality bar. gone by the next handoff.",
+          "accent": "amber",
+          "visual_note": "a single signal line that starts bright and clean, degrades into noise at the right edge"
+        },
+        {
+          "role": "tension",
+          "headline": "a new chat isn't a fresh start. it's amnesia.",
+          "accent": "amber",
+          "visual_note": "two chat bubbles side by side, the second one hollow / empty, no fill"
+        },
+        {
+          "role": "turn",
+          "kicker": "THE REFRAME",
+          "headline": "the conversation was never supposed to remember. the org is.",
+          "accent": "iris",
+          "visual_note": "chat log dissolving into particles while a structured node-graph underneath stays fully lit"
+        },
+        {
+          "role": "proof",
+          "kicker": "THE 7 STEPS",
+          "headline": "goal → plan → work → decision → artifact → proof → next action",
+          "subtext": "break any arrow and the work forgets itself.",
+          "accent": "iris",
+          "visual_note": "the full 7-node loop, all lit, arrows drawn between each — this is the screenshot slide, one arrow pulsing"
+        },
+        {
+          "role": "proof",
+          "kicker": "WHAT EACH STEP CARRIES",
+          "headline": "every step holds why it exists, not just what happened",
+          "subtext": "definition of done, the decision and the reason, the receipt.",
+          "accent": "teal",
+          "visual_note": "one node expanded into a small field panel: goal / DoD / decision+why / receipt"
+        },
+        {
+          "role": "proof",
+          "headline": "close the last arrow and the loop compounds instead of resets",
+          "subtext": "the next action already knows everything the last one learned.",
+          "accent": "lime",
+          "visual_note": "loop spinning once, a small 'reps' counter ticking up, the continuity line thickening with each pass"
+        },
+        {
+          "role": "cta",
+          "headline": "which arrow does your setup break?",
+          "subtext": "the loop lives under the client at useorgx.com. follow for the rest.",
+          "accent": "iris",
+          "visual_note": "quiet 7-node loop with one arrow rendered as a faint question mark, everything else calm"
+        }
+      ],
+      "caption": "watched an agent nail a task last week and then completely lose the thread the second I handed it to the next one. and I'm sitting there like, it didn't forget the WORK. it forgot why the work existed. goal + definition of done + the one decision that made the whole thing make sense, gone. so I started drawing it out and it's always the same shape: goal → plan → work → decision → artifact → proof → next action. seven steps, and every agent setup I've seen runs like four of them and calls it done. the transcript remembers what happened, nothing remembers why, and that's the whole bet with OrgX honestly, the conversation was never supposed to hold continuity, the org is. close that last arrow and every rep starts where the last one ended instead of from zero. anyway I keep finding new places the loop breaks",
+      "cta": "which arrow does your setup break? follow for the rest of the loop.",
+      "hashtags": [
+        "#aiagents",
+        "#buildinpublic",
+        "#agentops",
+        "#mcp",
+        "#devtools",
+        "#aiinfra",
+        "#continuity"
+      ],
+      "hypothesis": "a numbered save-bait framework (the 7-step loop) drives saves + follows better than a pure teardown for the mental-models pillar",
+      "topic_tags": [
+        "the-loop",
+        "continuity",
+        "handoff-pain",
+        "work-graph"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 7,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "every real task runs a 7-step loop. your agents run 3 and call it shipped.",
+        "issues": [
+          "slide 6 headline 'every step holds why it exists, not just what happened' is slightly abstract vs the razor-sharp slides around it — could be more concrete",
+          "caption line 'the transcript remembers what happened, nothing remembers why' flirts with balanced parallelism, but it reads earned rather than mechanical so it stays in-voice"
+        ],
+        "notes": "Strong keeper. Clears the truth constraint cleanly: zero fabricated metrics/users/revenue/testimonials. The credibility comes from a true mental model (the 7-step loop), the real thesis ('the conversation was never supposed to remember, the org is'), and a real felt problem (agent handoff amnesia) — exactly the sanctioned credibility engine, not invented traction. Slide 5 is a genuine screenshot artifact and the numbered-loop format is purpose-built save-bait, matching the stated hypothesis. Caption is authentic Hope voice: person/story open, 'so'/'and'/'right?' chaining, casual '+' compression, real-time thinking, rough trail-off ending with no clean CTA. No kill-list words. Hook works via the self-indicting 7-vs-3 gap. Revised headline swaps 'runs the same 7-step loop / call it done' for 'runs a 7-step loop... run 3 and call it shipped' — 'shipped' cuts deeper for an AI-founder audience and tightens the accusation. Only soft spot is slide 6's abstraction relative to its neighbors; not disqualifying. Watch that the slide 7 'reps counter ticking up' visual never gets rendered with a fabricated number — keep it unlabeled/illustrative to stay truthful."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "escalate-consequence-not-activity",
+      "pillar": "framework",
+      "hook_type": "mistake-callout",
+      "title": "You're approving the wrong things",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "YOU'RE DOING THIS WRONG",
+          "headline": "stop approving every move your agents make",
+          "subtext": "you're the bottleneck you were trying to delete.",
+          "accent": "danger",
+          "visual_note": "a tall stack of approval prompts flooding the frame, a tiny human silhouette pinned underneath"
+        },
+        {
+          "role": "tension",
+          "headline": "50 notifications. 49 are noise. 1 could publish to prod.",
+          "accent": "amber",
+          "visual_note": "grid of grey notification chips, exactly one glowing red and buried in the middle"
+        },
+        {
+          "role": "tension",
+          "headline": "approve everything and you do the work. approve nothing and it ships blind.",
+          "accent": "amber",
+          "visual_note": "a seesaw with two failure states weighing each other down, no stable middle"
+        },
+        {
+          "role": "turn",
+          "kicker": "THE REFRAME",
+          "headline": "human review should scale with consequence, not activity",
+          "subtext": "reserve your attention for what can't be undone.",
+          "accent": "iris",
+          "visual_note": "two overlaid curves: activity flat and constant, consequence spiking sharply; attention line tracks the consequence spike only"
+        },
+        {
+          "role": "proof",
+          "kicker": "WHERE THE LINE IS",
+          "headline": "reversible + low-stakes runs. irreversible + ambiguous stops.",
+          "accent": "teal",
+          "visual_note": "two lanes: a green auto-lane flowing freely, a red lane hitting a human gate"
+        },
+        {
+          "role": "proof",
+          "headline": "publishing, payments, messages, merges gate at the human boundary",
+          "subtext": "an unknown high-risk tool fails closed. every time.",
+          "accent": "teal",
+          "visual_note": "policy diagram with 4 labeled gates plus a fifth 'unknown tool → blocked' node lit red"
+        },
+        {
+          "role": "cta",
+          "headline": "what did you approve today that a policy could've handled?",
+          "subtext": "consequence-based escalation lives in OrgX. follow for the systems.",
+          "accent": "iris",
+          "visual_note": "a calm dashboard with a single decision surfaced to the human, everything else auto-cleared in the background"
+        }
+      ],
+      "caption": "hit a point a few weeks ago where I was drowning in approve/deny prompts from my own agents and realized I'd basically rebuilt the exact job I was trying to get rid of. like every single step wanted a thumbs up. and most of them did not matter at all, renaming a file, drafting a doc, whatever. but buried in there was the one that could actually message a client or merge into main. so it clicked, I don't need to review activity, I need to review consequence. reversible + cheap, let it run. irreversible or ambiguous, that's mine, and everything else is just policy: publishing, payments, outbound messages, merges gate at the human boundary and an unknown high-risk tool fails closed instead of guessing. autonomy is useful but it's worthless if I'm still the bottleneck on every keystroke. still tuning exactly where the line sits but",
+      "cta": "what did you approve today a policy could've handled?",
+      "hashtags": [
+        "#agentops",
+        "#aiagents",
+        "#buildinpublic",
+        "#aiinfra",
+        "#humanintheloop",
+        "#devtools",
+        "#mcp"
+      ],
+      "hypothesis": "a 'you're doing X wrong' mistake-callout hook plus a single reframe line ('scale review with consequence, not activity') beats a framework list for cold reach",
+      "topic_tags": [
+        "escalation",
+        "consequence",
+        "tool-policy",
+        "human-boundary"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 7,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "you rebuilt the exact job you were trying to delete",
+        "issues": [
+          "Slide 4 headline 'scale with consequence, not activity' uses 'scale' — Hope's lexicon leans 'compounds'. Reads fine here as proportionality (not growth), so it's a watch-item not a fail, but it's the one lexicon slip.",
+          "Slide 7 subtext 'consequence-based escalation lives in OrgX. follow for the systems.' is the weakest line — 'follow for the systems' is a generic follow-CTA. The main CTA question carries it, but this cleans up an ending that should stay rougher.",
+          "Kicker 'YOU'RE DOING THIS WRONG' is generic clickbait-callout framing; effective but the least original element and slightly at odds with the otherwise specific, earned voice."
+        ],
+        "notes": "Strong keep. The mental model (review consequence, not activity; reversible+cheap runs, irreversible+ambiguous stops; unknown high-risk tool fails closed) is a real, screenshot-worthy framework grounded in actual mechanism — 'fails closed', 'gate at the human boundary', merge/publish/payment gating are true architecture claims, not invented traction. No fabricated metrics, user counts, or revenue anywhere. The '50 notifications / 49 noise / 1 could publish to prod' is illustrative rhetoric, not a traction claim, so it's clean — but keep it framed as a device, never let it drift into 'OrgX caught N of these.' Caption nails Hope voice: personal realization open, so/and/but chaining, casual specifics (merge into main, message a client), '+' compression, rough trail-off ending. Slides are tight and one-idea-each. Kill-list clean. Biggest lever: the hook's actual gold is buried in the caption ('rebuilt the exact job I was trying to get rid of') — promoting that to slide 1 hits harder than the generic 'YOU'RE DOING THIS WRONG / stop approving every move' framing, hence the revised headline. Keep the existing subtext 'you're the bottleneck you were trying to delete.' underneath it. Only real polish note: soften slide 7's 'follow for the systems' clean close."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    },
+    {
+      "id": "the-receipt-is-the-proof",
+      "pillar": "framework",
+      "hook_type": "provocation-challenge",
+      "title": "'Done' is not proof",
+      "slides": [
+        {
+          "role": "hook",
+          "kicker": "MENTAL MODEL",
+          "headline": "your agent said 'done.' that's not proof. that's a vibe.",
+          "accent": "danger",
+          "visual_note": "an isolated chat message reading '✅ done' magnified on near-black, nothing rendered behind it — deliberately empty"
+        },
+        {
+          "role": "tension",
+          "headline": "a transcript of what an agent did is not evidence it was right",
+          "accent": "amber",
+          "visual_note": "a long scrolling chat log that fades into a wall of question marks at the bottom"
+        },
+        {
+          "role": "tension",
+          "headline": "you either re-check everything yourself or you trust it blind",
+          "subtext": "both of those kill the reason you delegated.",
+          "accent": "amber",
+          "visual_note": "two doors, both marked with a small warning glyph, no good option"
+        },
+        {
+          "role": "turn",
+          "kicker": "THE REFRAME",
+          "headline": "the artifact is the receipt",
+          "subtext": "work should come back with proof attached, not a summary.",
+          "accent": "iris",
+          "visual_note": "an artifact tile with a perforated receipt stub tearing off along the bottom edge"
+        },
+        {
+          "role": "proof",
+          "kicker": "WHAT A RECEIPT CARRIES",
+          "headline": "version. provenance. evaluation. review state. the receipt.",
+          "subtext": "proof you can read without re-running the work.",
+          "accent": "teal",
+          "visual_note": "artifact card with 5 labeled fields lit in sequence — the screenshot slide"
+        },
+        {
+          "role": "proof",
+          "headline": "work below the quality bar loops back before it reaches you",
+          "subtext": "you spend attention on proof, not on triage.",
+          "accent": "teal",
+          "visual_note": "a quality-bar threshold line: failing work curves back down, passing work rises with a receipt attached"
+        },
+        {
+          "role": "proof",
+          "headline": "proof rooms make the state legible right inside the client",
+          "subtext": "Claude, Cursor, Codex. the proof shows up where you already work.",
+          "accent": "lime",
+          "visual_note": "an embedded MCP App widget sitting inside a familiar client window, state fully visible without leaving"
+        },
+        {
+          "role": "cta",
+          "headline": "if your agent can't show the receipt, did it actually finish?",
+          "subtext": "the proof layer is OrgX. follow for how it's built.",
+          "accent": "iris",
+          "visual_note": "a single clean receipt with a blinking cursor at the end, quiet and unresolved"
+        }
+      ],
+      "caption": "someone asked me last week how I actually trust the work my agents ship and I gave this long answer and then realized the honest version is way simpler: I don't trust 'done.' 'done' is a vibe. an agent typing a checkmark at the end of a transcript tells me nothing about whether the thing is right. and the two options everyone defaults to are both bad, either I re-check all of it myself which means I didn't really delegate, or I trust it blind which is how you wake up to something ugly in prod. so the reframe that actually fixed it: the artifact is the receipt. work comes back with its version + provenance + how it was evaluated + what review state it's in, proof I can read in ten seconds without re-running anything. and the stuff under the quality bar loops back before it ever reaches my attention, and it shows up right inside Claude or Cursor so I'm not leaving to go verify. still think most agent tools are shipping vibes not receipts but",
+      "cta": "if your agent can't show the receipt, did it actually finish?",
+      "hashtags": [
+        "#aiagents",
+        "#buildinpublic",
+        "#agentops",
+        "#aiinfra",
+        "#mcp",
+        "#devtools",
+        "#trust"
+      ],
+      "hypothesis": "a provocation hook that reframes a word everyone uses ('done' is a vibe) plus a screenshot-able 'what a receipt carries' list tests whether challenge-style hooks outperform mistake-callouts",
+      "topic_tags": [
+        "proof-return",
+        "receipt",
+        "quality-bar",
+        "trust"
+      ],
+      "review": {
+        "keep": true,
+        "overall": 8,
+        "hook_strength": 8,
+        "save_worthiness": 8,
+        "voice_ok": true,
+        "accurate": true,
+        "revised_hook_headline": "your agent typed 'done.' that's a vibe, not proof.",
+        "issues": [
+          "CTA subtext 'the proof layer is OrgX. follow for how it's built.' is a soft follow-CTA — brushes against the no-'follow along'/no-clean-CTA rule. Acceptable on a CTA slide but it's the least in-voice line in the set.",
+          "Proof slide 'version. provenance. evaluation. review state. the receipt.' — the trailing 'the receipt.' is redundant with the kicker 'WHAT A RECEIPT CARRIES' and softens an otherwise perfect screenshot line. Cut it."
+        ],
+        "notes": "Strong concept, dead-center brand fit. No fabricated metrics/traction/testimonials — every claim is architecture or felt-problem: receipts, quality bar, review state, loop-back, embedded MCP widgets in Claude/Cursor/Codex all map to real OrgX mechanisms (orgx_submit_receipt, review_artifact, the 0.85 quality gate, rework loop). 'done is a vibe' is a memeable, of-the-moment reframe (rides 'vibe coding' discourse) that will stop a skeptical AI-founder. 'the artifact is the receipt' + the four-field list is genuinely screenshot-able framework content. Caption is authentic Hope: opens on a person/realization, chains with and/so/but, uses '+' compression ('version + provenance + how it was evaluated + what review state it's in'), drops Claude/Cursor casually, ends rough mid-sentence ('...shipping vibes not receipts but'). No kill-list words. Two watch-items: (1) verify 'proof rooms' is a real OrgX product term and not an invented feature name — it describes real embedded MCP widgets so it's not a fabrication, but if the name isn't shipped, swap to plain 'the proof shows up inside the client' to stay honest. (2) Revised hook compresses three sentences into one concrete line ('typed' beats 'said' — matches the checkmark-in-a-transcript image) and lands 'vibe, not proof' harder; original is fine if you want the setup beat. keep: true (accurate, overall 8, hook 8)."
+      },
+      "status": "ready",
+      "uses": 0,
+      "last_used": null,
+      "origin": "seed-workflow",
+      "created": "2026-07-15T09:48:09.603Z"
+    }
+  ]
+}
