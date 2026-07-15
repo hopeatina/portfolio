@@ -68,14 +68,14 @@ export default function MaterialThreadField({
         >
           <defs>
             <linearGradient id={`${rawId}-fiber`} x1="0" x2="1">
-              <stop offset="0" stopColor="#48c7ff" />
+              <stop offset="0" stopColor="#8a877e" />
               <stop offset="0.45" stopColor="#f2efe4" />
-              <stop offset="1" stopColor="#c7ff36" />
+              <stop offset="1" stopColor="#b7f34a" />
             </linearGradient>
             <filter id={`${rawId}-depth`} x="-30%" y="-40%" width="160%" height="180%">
               <feDropShadow dx="0" dy="7" stdDeviation="6" floodColor="#000" floodOpacity="0.62" />
-              <feDropShadow dx="-4" dy="-2" stdDeviation="2" floodColor="#ff5738" floodOpacity="0.28" />
-              <feDropShadow dx="5" dy="2" stdDeviation="3" floodColor="#48c7ff" floodOpacity="0.22" />
+              <feDropShadow dx="-4" dy="-2" stdDeviation="2" floodColor="#d69a45" floodOpacity="0.22" />
+              <feDropShadow dx="5" dy="2" stdDeviation="3" floodColor="#4e5854" floodOpacity="0.2" />
             </filter>
             <filter id={`${rawId}-rough`} x="-10%" y="-20%" width="120%" height="140%">
               <feTurbulence type="fractalNoise" baseFrequency="0.012 0.12" numOctaves="2" seed="8" result="noise" />

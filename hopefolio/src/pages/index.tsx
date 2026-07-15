@@ -7,7 +7,6 @@ import {
   CausalFlow,
   ContinuityPlayhead,
   EvidenceSpecimen,
-  LivingMotif,
   SectionSignal,
   SystemGlyph,
   TextLink,
@@ -227,7 +226,6 @@ export default function Home() {
         </section>
 
         <section className="v4-signature-section v4-motif-backed" aria-labelledby="signatures-title">
-          <LivingMotif variant="aperture" className="v4-section-motif" />
           <SectionSignal index="01">Capability signatures</SectionSignal>
           <div className="v4-signature-intro">
             <h2 id="signatures-title">Range is only useful when it resolves into judgment.</h2>
@@ -249,7 +247,6 @@ export default function Home() {
         </section>
 
         <section className="v4-continuity-section v4-motif-backed" aria-labelledby="continuity-title">
-          <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="02">The system I keep building toward</SectionSignal>
           <div className="v4-continuity-heading">
             <h2 id="continuity-title">The prompt ends. The work should not.</h2>
@@ -278,13 +275,11 @@ export default function Home() {
         </section>
 
         <section className="v5-tool-section v4-motif-backed">
-          <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="03">The working ecosystem</SectionSignal>
           <TechnologyAtlas tools={toolEvidence} title="A wide stack, held together by reasons." />
         </section>
 
         <section className="v4-orgx-home v4-motif-backed" aria-labelledby="orgx-title">
-          <LivingMotif variant="handoff" className="v4-section-motif" />
           <SectionSignal index="04">Flagship / OrgX</SectionSignal>
           <div className="v4-orgx-home-heading">
             <div>
@@ -324,7 +319,6 @@ export default function Home() {
         </section>
 
         <section className="v4-range-section v4-motif-backed" aria-labelledby="range-title">
-          <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="05">Range under constraint</SectionSignal>
           <div className="v4-range-heading">
             <h2 id="range-title">Four systems. Four different kinds of pressure.</h2>
@@ -353,7 +347,6 @@ export default function Home() {
         </section>
 
         <section className="v4-collaboration-section v4-motif-backed" aria-labelledby="collaboration-title">
-          <LivingMotif variant="resolve" className="v4-section-motif" />
           <SectionSignal index="06">Product taste is collaborative</SectionSignal>
           <div className="v4-collaboration-grid">
             <a
@@ -394,7 +387,6 @@ export default function Home() {
         </section>
 
         <section className="v4-home-close v4-motif-backed">
-          <LivingMotif variant="memory" className="v4-home-close-motif" />
           <span>Depth becomes visible through inspection.</span>
           <h2>Bring me the system that needs to become coherent.</h2>
           <div>

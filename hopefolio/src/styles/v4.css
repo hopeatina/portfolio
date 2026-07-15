@@ -4,7 +4,7 @@
   --v4-mineral: #f2efe4;
   --v4-mineral-soft: #c9c5b9;
   --v4-dim: #8a877e;
-  --v4-signal: #c7ff36;
+  --v4-signal: #b7f34a;
   --v4-heat: #ff5738;
   --v4-ochre: #d9a62e;
   --v4-cold: #48c7ff;
@@ -26,8 +26,8 @@
   --shell-muted: #a6a296;
   --shell-dim: #77746c;
   --shell-accent: var(--v4-signal);
-  --shell-accent-soft: rgba(199, 255, 54, 0.09);
-  --shell-accent-line: rgba(199, 255, 54, 0.46);
+  --shell-accent-soft: rgba(183, 243, 74, 0.09);
+  --shell-accent-line: rgba(183, 243, 74, 0.46);
   --shell-live: var(--v4-cold);
   --shell-exp: var(--v4-ochre);
   --shell-review: var(--v4-heat);
@@ -71,7 +71,9 @@ body::before {
 
 .site-shell {
   position: relative;
-  background: var(--v4-carbon);
+  /* transparent: the persistent ContinuitySignal canvas is the page's background now.
+     html/body still carry a solid --v4-carbon fallback (no FOUC before hydration). */
+  background: transparent;
 }
 
 .site-shell-body {
@@ -218,7 +220,7 @@ body::before {
   height: 7px;
   border-radius: 50%;
   background: var(--v4-signal);
-  box-shadow: 0 0 0 4px rgba(199, 255, 54, 0.09);
+  box-shadow: 0 0 0 4px rgba(183, 243, 74, 0.09);
 }
 
 .site-menu-toggle {
@@ -542,7 +544,7 @@ body::before {
   width: clamp(140px, 22vw, 320px);
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 1px solid rgba(199, 255, 54, 0.8);
+  border: 1px solid rgba(183, 243, 74, 0.8);
   background-repeat: no-repeat;
   background-position: 58% 44%;
   background-size: 180%;
@@ -1409,7 +1411,7 @@ body::before {
 }
 
 .v4-learning-section {
-  background-image: linear-gradient(90deg, transparent 0, transparent 72%, rgba(199, 255, 54, 0.025) 72%);
+  background-image: linear-gradient(90deg, transparent 0, transparent 72%, rgba(183, 243, 74, 0.025) 72%);
 }
 
 .v4-learning-section .v4-narrative-copy > span {
@@ -1714,7 +1716,7 @@ body::before {
 
 .v4-experience-featured {
   min-height: 230px;
-  background: rgba(199, 255, 54, 0.025);
+  background: rgba(183, 243, 74, 0.025);
 }
 
 .v4-experience-featured > span,
@@ -3276,7 +3278,7 @@ body::before {
 
 .v4-about-chapter-featured {
   min-height: 260px !important;
-  background: rgba(199, 255, 54, 0.028);
+  background: rgba(183, 243, 74, 0.028);
   box-shadow: inset 4px 0 0 var(--v4-signal);
 }
 
@@ -3570,7 +3572,7 @@ body::before {
   border-bottom: 1px solid var(--v4-rule-strong);
   background:
     radial-gradient(circle at 22% 48%, rgba(72, 199, 255, 0.1), transparent 28%),
-    radial-gradient(circle at 76% 54%, rgba(199, 255, 54, 0.08), transparent 31%),
+    radial-gradient(circle at 76% 54%, rgba(183, 243, 74, 0.08), transparent 31%),
     #080806;
   overflow: hidden;
 }
@@ -3774,7 +3776,7 @@ body::before {
 
 .v5-thread-state > div.is-knot::before {
   background: var(--v4-signal);
-  box-shadow: 0 0 0 4px rgba(199, 255, 54, 0.1);
+  box-shadow: 0 0 0 4px rgba(183, 243, 74, 0.1);
 }
 
 .v5-thread-state p {
@@ -3955,7 +3957,7 @@ body::before {
 
 .v5-tool-grid button:hover,
 .v5-tool-grid button.is-active {
-  background: rgba(199, 255, 54, 0.045);
+  background: rgba(183, 243, 74, 0.045);
   box-shadow: inset 0 2px 0 var(--v4-signal);
 }
 
