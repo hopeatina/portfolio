@@ -157,7 +157,7 @@ export default function OrgXPage() {
             before: "A new agent receives a task title and reconstructs the company from scattered chats, docs, and repo state.",
             decision: "Compile the goal, definition of done, decisions and why, proof, permissions, confidence, and next action into one context pack.",
             consequence: "The next client can continue the work without pretending a transcript is organizational memory.",
-            evidence: "buildAgentContextPack · compileGoalFrame",
+            evidence: "buildAgentContextPack · compileGoalFrame · private core",
             tone: "cold",
           },
           {
@@ -166,7 +166,8 @@ export default function OrgXPage() {
             before: "The founder reviews every artifact because the real standard exists only in their head.",
             decision: "Make the quality bar owner-authored, versionable, and tunable by team and artifact type.",
             consequence: "Work below threshold can loop back before it consumes the reviewer's attention.",
-            evidence: "QualitySettingsPanel · domain quality gate",
+            evidence: "quality gates · benchmark methodology (public)",
+            evidenceHref: "https://useorgx.com/blog/orgx-autonomous-initiative-benchmark-methodology",
             tone: "signal",
           },
           {
@@ -175,7 +176,7 @@ export default function OrgXPage() {
             before: "Agent volume and completed tasks can rise while the company goal stands still.",
             decision: "Bind initiatives, proof receipts, realized cost, realized value, and budget remaining to the authorizing goal.",
             consequence: "A person can judge movement and reallocate attention without rewarding activity theatre.",
-            evidence: "computeGoalRoi · economic_ledger",
+            evidence: "computeGoalRoi · economic_ledger · private core",
             tone: "heat",
           },
           {
@@ -184,7 +185,7 @@ export default function OrgXPage() {
             before: "A novel connector can create an external consequence that no static allowlist anticipated.",
             decision: "Define explicit profiles, gate publishing and external effects, and classify unknown high-risk tools fail-closed.",
             consequence: "Agents retain useful room to act while merges, messages, payments, and other consequential writes remain governed.",
-            evidence: "toolPolicyProfiles · consequence classifier",
+            evidence: "toolPolicyProfiles · consequence classifier · private core",
             tone: "heat",
           },
           {
@@ -193,7 +194,7 @@ export default function OrgXPage() {
             before: "A timeout, failed tool, low-quality output, or blocked dependency turns a run into a dead end.",
             decision: "Use bounded recovery: retry with context, fallback, reduce scope, ask a specialist, checkpoint, pause, then escalate.",
             consequence: "A snapped thread can reveal the next safe weave without hiding the failure or retrying forever.",
-            evidence: "recoveryStrategies · escalation policy",
+            evidence: "recoveryStrategies · escalation policy · private core",
             tone: "cold",
           },
         ],

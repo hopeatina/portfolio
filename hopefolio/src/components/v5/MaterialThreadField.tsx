@@ -8,6 +8,8 @@ export interface ThreadStory {
   decision: string;
   consequence: string;
   evidence?: string;
+  /** When present, the evidence label becomes a real receipt: a link you can open. */
+  evidenceHref?: string;
   tone?: "signal" | "heat" | "cold";
 }
 
@@ -180,7 +182,17 @@ export default function MaterialThreadField({
             <p>{active.consequence}</p>
           </div>
         </div>
-        {active.evidence ? <small>{active.evidence}</small> : null}
+        {active.evidence ? (
+          active.evidenceHref ? (
+            <small>
+              <a href={active.evidenceHref} target="_blank" rel="noreferrer">
+                {active.evidence} <span aria-hidden="true">↗</span>
+              </a>
+            </small>
+          ) : (
+            <small>{active.evidence}</small>
+          )
+        ) : null}
       </div>
     </section>
   );

@@ -1,9 +1,21 @@
 import type { GetServerSideProps } from "next";
 import { getAllPosts } from "@/modules/blog/posts";
 import { absoluteUrl, getAllCrawlEntries } from "@/lib/site-metadata";
+import { proofReceipts } from "@/data/proof";
+
+function proofSummaries() {
+  return proofReceipts.map((receipt) => ({
+    slug: receipt.slug,
+    title: receipt.title,
+    question: receipt.question,
+    date: receipt.date,
+    scoreEarned: receipt.score.length,
+  }));
+}
+
 
 function buildSitemapXml() {
-  const entries = getAllCrawlEntries(getAllPosts());
+  const entries = getAllCrawlEntries(getAllPosts(), proofSummaries());
 
   const urls = entries
     .map((entry) => {

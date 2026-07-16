@@ -70,7 +70,9 @@ export default function Header() {
                 ? router.pathname.startsWith("/projects")
                 : item.href === "/blog"
                   ? router.pathname.startsWith("/blog")
-                  : router.pathname === item.href;
+                  : item.href === "/proof"
+                    ? router.pathname.startsWith("/proof")
+                    : router.pathname === item.href;
             const isHireCta = item.href === "/hiring";
 
             return (

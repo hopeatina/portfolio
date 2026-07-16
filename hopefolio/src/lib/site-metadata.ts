@@ -10,7 +10,8 @@ export const SITE_IMAGE = "/images/generated/inspection-field.jpg";
 export const SOCIAL_LINKS = {
   github: "https://github.com/hopeatina",
   linkedin: "https://linkedin.com/in/hopeatina",
-  medium: "https://medium.com/@hopeatina",
+  // NOTE: the Medium handle is @emerginghope — medium.com/@hopeatina 404s (verified 2026-07-16)
+  medium: "https://medium.com/@emerginghope",
   x: "https://x.com/emerginghope_",
   email: "mailto:hopeatina@gmail.com",
 };
@@ -34,7 +35,8 @@ export const SITE_KEYWORDS = [
 export type CrawlSection =
   | "Primary Pages"
   | "Case Studies"
-  | "Technical Writing";
+  | "Technical Writing"
+  | "Proof Ledger";
 
 export interface CrawlEntry {
   path: string;
@@ -78,6 +80,15 @@ export const PRIMARY_PAGES: CrawlEntry[] = [
     title: "Projects",
     description:
       "Index of flagship case studies and selected systems spanning agent infrastructure, production AI, and developer tooling.",
+    section: "Primary Pages",
+    changeFrequency: "weekly",
+    priority: 0.9,
+  },
+  {
+    path: "/proof",
+    title: "Proof",
+    description:
+      "A ledger of falsifiable receipts: question, baseline, method, measured result, documented failure, and inspectable artifacts — each scored against six proof criteria.",
     section: "Primary Pages",
     changeFrequency: "weekly",
     priority: 0.9,
@@ -286,8 +297,36 @@ export function getBlogEntries(posts: BlogEntrySummary[]): CrawlEntry[] {
   }));
 }
 
-export function getAllCrawlEntries(posts: BlogEntrySummary[]) {
-  return [...PRIMARY_PAGES, ...CASE_STUDIES, ...getBlogEntries(posts)];
+export interface ProofEntrySummary {
+  slug: string;
+  title: string;
+  question: string;
+  date: string;
+  scoreEarned: number;
+}
+
+export function getProofCrawlEntries(receipts: ProofEntrySummary[]): CrawlEntry[] {
+  return receipts.map((receipt) => ({
+    path: `/proof/${receipt.slug}`,
+    title: receipt.title,
+    description: `${receipt.question} Proof score: ${receipt.scoreEarned}/6.`,
+    section: "Proof Ledger",
+    changeFrequency: "monthly",
+    priority: 0.8,
+    lastModified: receipt.date,
+  }));
+}
+
+export function getAllCrawlEntries(
+  posts: BlogEntrySummary[],
+  proofReceipts: ProofEntrySummary[] = [],
+) {
+  return [
+    ...PRIMARY_PAGES,
+    ...CASE_STUDIES,
+    ...getProofCrawlEntries(proofReceipts),
+    ...getBlogEntries(posts),
+  ];
 }
 
 export function getCanonicalPath(pathname: string) {
@@ -298,8 +337,12 @@ function renderEntry(entry: CrawlEntry) {
   return `- [${entry.title}](${absoluteUrl(entry.path)}): ${entry.description}`;
 }
 
-export function renderLlmsTxt(posts: BlogEntrySummary[]) {
+export function renderLlmsTxt(
+  posts: BlogEntrySummary[],
+  proofReceipts: ProofEntrySummary[] = [],
+) {
   const blogEntries = getBlogEntries(posts);
+  const proofEntries = getProofCrawlEntries(proofReceipts);
 
   return [
     `# ${SITE_NAME}`,
@@ -309,6 +352,10 @@ export function renderLlmsTxt(posts: BlogEntrySummary[]) {
     `Sitemap: ${absoluteUrl("/sitemap.xml")}`,
     `RSS: ${absoluteUrl("/rss.xml")}`,
     `Full reference: ${absoluteUrl("/llms-full.txt")}`,
+    "",
+    "## Proof Ledger",
+    "Falsifiable receipts — each with a baseline, measured result, documented failure, and inspectable artifacts. Start here for verification.",
+    ...proofEntries.map(renderEntry),
     "",
     "## Primary Pages",
     ...PRIMARY_PAGES.map(renderEntry),
@@ -327,8 +374,12 @@ export function renderLlmsTxt(posts: BlogEntrySummary[]) {
   ].join("\n");
 }
 
-export function renderLlmsFullTxt(posts: BlogEntrySummary[]) {
+export function renderLlmsFullTxt(
+  posts: BlogEntrySummary[],
+  proofReceipts: ProofEntrySummary[] = [],
+) {
   const blogEntries = getBlogEntries(posts);
+  const proofEntries = getProofCrawlEntries(proofReceipts);
 
   return [
     `# ${SITE_NAME}: Full Website Reference`,
@@ -336,7 +387,11 @@ export function renderLlmsFullTxt(posts: BlogEntrySummary[]) {
     "## Summary",
     SITE_DESCRIPTION,
     "",
-    "Hope Atina builds multi-agent orchestration systems, MCP integrations, developer tooling, and production AI infrastructure. The portfolio is organized around proof-heavy case studies rather than a simple project gallery.",
+    "Hope Atina builds multi-agent orchestration systems, MCP integrations, developer tooling, and production AI infrastructure. The portfolio is organized around a falsifiable proof ledger and proof-heavy case studies rather than a simple project gallery.",
+    "",
+    "## Proof Ledger (start here for verification)",
+    "Each receipt: falsifiable question, baseline, method, measured result, documented failure, artifacts, and an honest score against six criteria (artifact, baseline, measured, reproducible, failure, external validation).",
+    ...proofEntries.map(renderEntry),
     "",
     "## Focus Areas",
     "- Multi-agent orchestration and governance",
