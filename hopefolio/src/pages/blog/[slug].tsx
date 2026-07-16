@@ -6,7 +6,8 @@ import { marked } from "marked";
 import BlogProgressBar from "@/components/site/BlogProgressBar";
 import BlogToc, { TocEntry } from "@/components/site/BlogToc";
 import MaterializeHero from "@/components/site/MaterializeHero";
-import { getAllPosts, getPostBySlug } from "@/modules/blog/posts";
+import { getAllPosts, getPostBySlug, type PostReceiptMeta } from "@/modules/blog/posts";
+import { PROOF_SCORE_LABELS, PROOF_SCORE_ORDER, type ProofScoreKey } from "@/data/proof";
 
 function slugify(text: string) {
   return text
@@ -28,6 +29,60 @@ interface PostData {
   readTime: string;
   tags: string[];
   relatedPosts: string[];
+  type: "essay" | "receipt";
+  receipt: PostReceiptMeta | null;
+}
+
+function ReceiptPanel({ receipt }: { receipt: PostReceiptMeta }) {
+  return (
+    <aside className="blog-receipt-panel" aria-label="Receipt summary">
+      <p className="blog-receipt-question">
+        <span>The falsifiable question</span>
+        {receipt.question}
+      </p>
+      <div className="v4-proof-scorecard" role="list" aria-label="Proof criteria scored">
+        {PROOF_SCORE_ORDER.map((key: ProofScoreKey) => {
+          const earned = receipt.score.includes(key);
+          return (
+            <div
+              role="listitem"
+              key={key}
+              className={`v4-proof-crit ${earned ? "is-earned" : "is-withheld"}`}
+            >
+              <b>{PROOF_SCORE_LABELS[key].short}</b>
+              <strong>{PROOF_SCORE_LABELS[key].label}</strong>
+              <span>{earned ? "earned" : "withheld"}</span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="blog-receipt-cells">
+        {receipt.result ? (
+          <div className="is-result">
+            <span>Measured result</span>
+            <p>{receipt.result}</p>
+          </div>
+        ) : null}
+        {receipt.failure ? (
+          <div className="is-failure">
+            <span>Where it broke</span>
+            <p>{receipt.failure}</p>
+          </div>
+        ) : null}
+      </div>
+      {receipt.artifacts.length > 0 ? (
+        <ul className="blog-receipt-artifacts">
+          {receipt.artifacts.map((artifact) => (
+            <li key={artifact.href}>
+              <a href={artifact.href} target="_blank" rel="noreferrer">
+                {artifact.label} <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </aside>
+  );
 }
 
 interface RelatedPost {
@@ -107,6 +162,10 @@ export default function PostPage({ post, related, toc }: PostPageProps) {
                   ))}
                 </div>
               </MaterializeHero>
+
+              {post.type === "receipt" && post.receipt ? (
+                <ReceiptPanel receipt={post.receipt} />
+              ) : null}
 
               <div className="prose-shell" dangerouslySetInnerHTML={{ __html: html }} />
 

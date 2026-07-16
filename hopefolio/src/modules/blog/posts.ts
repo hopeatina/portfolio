@@ -4,6 +4,15 @@ import matter from "gray-matter";
 
 const postsDirectory = path.join(process.cwd(), "src/data/blog");
 
+export interface PostReceiptMeta {
+  question: string;
+  result: string;
+  failure: string;
+  /** Earned proof criteria: subset of artifact|baseline|measured|reproducible|failure|external */
+  score: string[];
+  artifacts: Array<{ label: string; href: string }>;
+}
+
 interface PostData {
   slug: string;
   title: string;
@@ -14,9 +23,30 @@ interface PostData {
   readTime: string;
   tags: string[];
   relatedPosts: string[];
+  /** "receipt" posts are daily autonomy receipts; default is "essay". */
+  type: "essay" | "receipt";
+  receipt: PostReceiptMeta | null;
 }
 
 type PostDataPartial = Omit<PostData, 'content'>;
+
+function parseReceiptMeta(data: Record<string, unknown>): PostReceiptMeta | null {
+  const raw = data.receipt as Partial<PostReceiptMeta> | undefined;
+  if (!raw || typeof raw !== "object" || !raw.question) return null;
+  return {
+    question: String(raw.question),
+    result: String(raw.result || ""),
+    failure: String(raw.failure || ""),
+    score: Array.isArray(raw.score) ? raw.score.map(String) : [],
+    artifacts: Array.isArray(raw.artifacts)
+      ? raw.artifacts
+          .filter((a): a is { label: string; href: string } =>
+            Boolean(a && typeof a === "object" && (a as { href?: string }).href),
+          )
+          .map((a) => ({ label: String(a.label || a.href), href: String(a.href) }))
+      : [],
+  };
+}
 
 function calculateReadTime(content: string) {
   const words = content.trim().split(/\s+/).length;
@@ -55,6 +85,8 @@ export function getAllPosts(): PostDataPartial[] {
             readTime: data.readTime || calculateReadTime(fileContents),
             tags: Array.isArray(data.tags) ? data.tags : [],
             relatedPosts: Array.isArray(data.relatedPosts) ? data.relatedPosts : [],
+            type: data.type === "receipt" ? "receipt" : "essay",
+            receipt: parseReceiptMeta(data),
           };
         } catch (error) {
           console.error(`Error processing file ${fileName}:`, error);
@@ -104,6 +136,8 @@ export function getPostBySlug(slug: string): PostData {
       readTime: data.readTime || calculateReadTime(processedContent),
       tags: Array.isArray(data.tags) ? data.tags : [],
       relatedPosts: Array.isArray(data.relatedPosts) ? data.relatedPosts : [],
+      type: data.type === "receipt" ? "receipt" : "essay",
+      receipt: parseReceiptMeta(data),
     };
   } catch (error) {
     console.error(`Error getting post by slug ${slug}:`, error);
