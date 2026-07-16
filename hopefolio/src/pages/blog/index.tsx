@@ -11,6 +11,11 @@ const CATEGORY_GROUPS = [
     matches: (_category: string) => true,
   },
   {
+    id: "receipts",
+    label: "Daily receipts",
+    matches: (category: string) => /receipt/i.test(category),
+  },
+  {
     id: "mcp-infra",
     label: "MCP & Infrastructure",
     matches: (category: string) =>
@@ -44,6 +49,8 @@ interface BlogIndexProps {
     category: string;
     readTime: string;
     tags: string[];
+    type: "essay" | "receipt";
+    receipt: { score: string[] } | null;
   }>;
 }
 
@@ -134,13 +141,34 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
       <main id="main-content" className="page-frame">
         <div className="page-stack">
           <header className="page-header-stack">
-            <span className="eyebrow">Writing</span>
+            <span className="eyebrow">Writing / the living ledger</span>
             <h1>What breaks when you put agents in production.</h1>
             <p style={{ maxWidth: "42rem", margin: 0 }}>
               Essays on memory, MCP, trust scoring, decision provenance, and
-              why single-shot benchmarks hide what matters. On-site first,
-              then the OrgX essays in order of strength.
+              why single-shot benchmarks hide what matters — plus the daily
+              autonomy receipts as they land.
             </p>
+            {(() => {
+              const receipts = posts.filter((p) => p.type === "receipt");
+              if (receipts.length === 0) return null;
+              const latest = receipts[0];
+              return (
+                <p className="blog-live-strip" aria-label="Ledger status">
+                  <i aria-hidden="true" />
+                  <span>
+                    Live · {receipts.length} daily receipt{receipts.length === 1 ? "" : "s"} on
+                    record · latest{" "}
+                    {new Date(`${latest.date}T12:00:00`).toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                  <Link href="/proof" className="site-link-inline">
+                    flagship ledger →
+                  </Link>
+                </p>
+              );
+            })()}
           </header>
 
           {featured ? (
@@ -215,7 +243,14 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
             <div className="blog-list">
               {filteredRest.map((post) => (
                 <article key={post.slug} className="blog-list-item">
-                  <span className="eyebrow">{post.category}</span>
+                  <span className="eyebrow">
+                    {post.category}
+                    {post.type === "receipt" && post.receipt ? (
+                      <em className="blog-receipt-chip">
+                        {post.receipt.score.length}/6 proof
+                      </em>
+                    ) : null}
+                  </span>
                   <h2 style={{ margin: 0, fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </h2>
