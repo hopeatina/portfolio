@@ -66,23 +66,23 @@ const toolEvidence: ToolEvidence[] = [
 const signatures = [
   {
     glyph: "context" as const,
-    title: "Protocol → product",
-    body: "I turn technical capability into a surface people can understand, trust, and actually use.",
-  },
-  {
-    glyph: "branch" as const,
-    title: "Continuity across clients",
-    body: "One operating context can survive the jump between Claude, Codex, Cursor, OpenCode, and OpenClaw.",
+    title: "Memory",
+    body: "The next run inherits the goal, the decisions, and the prior proof — compiled context, not a re-typed prompt.",
   },
   {
     glyph: "judgment" as const,
-    title: "Production under pressure",
-    body: "Regulated systems taught me to make risk visible, rollout reversible, and reliability part of the design.",
+    title: "Authority",
+    body: "Agents act inside bounded permission tiers; high-consequence work waits for the right person, not every action.",
+  },
+  {
+    glyph: "branch" as const,
+    title: "Execution",
+    body: "One operating context survives the jump between Claude, Codex, Cursor, OpenCode, and OpenClaw — each keeps its native strength.",
   },
   {
     glyph: "receipt" as const,
-    title: "Taste with receipts",
-    body: "The interaction, evidence, and final mile matter as much as the architecture underneath them.",
+    title: "Proof",
+    body: "Every claim carries a receipt: a baseline, a measured result, a documented failure, and an artifact you can open.",
   },
 ];
 
@@ -140,7 +140,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Hope Atina — Engineer, founder, product thinker</title>
+        <title>Hope Atina — Memory, authority, execution, proof</title>
         <meta
           name="description"
           content="Hope Atina builds the continuity, product, and proof layers that make ambitious AI systems coherent."
@@ -168,7 +168,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              Hope Atina · engineer / founder / product thinker
+              Hope Atina · the execution layer for governed agent work
             </motion.span>
             <motion.h1
               id="hero-title"
@@ -184,8 +184,8 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.18 }}
             >
-              Founder, engineer, and product thinker. I turn fragmented AI work into something a
-              person can continue, govern, judge, and trust.
+              Memory, authority, execution, proof: I build the layer that lets a real
+              organization continue, govern, judge, and trust the work its agents deliver.
             </motion.p>
             <motion.div
               className="v4-hero-actions"
@@ -193,8 +193,8 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.28 }}
             >
-              <TextLink href="/projects/orgx">Inspect the flagship</TextLink>
-              <TextLink href="/hiring">Work with me</TextLink>
+              <TextLink href="/proof">See the receipts</TextLink>
+              <TextLink href="/projects/orgx">Read the flagship case</TextLink>
             </motion.div>
           </div>
 
@@ -226,12 +226,12 @@ export default function Home() {
         </section>
 
         <section className="v4-signature-section v4-motif-backed" aria-labelledby="signatures-title">
-          <SectionSignal index="01">Capability signatures</SectionSignal>
+          <SectionSignal index="01">Memory · Authority · Execution · Proof</SectionSignal>
           <div className="v4-signature-intro">
-            <h2 id="signatures-title">Range is only useful when it resolves into judgment.</h2>
+            <h2 id="signatures-title">Four words. Every system I build serves one of them.</h2>
             <p>
-              The common thread is not a stack or a number. It is the ability to see the whole
-              system, locate the consequential boundary, and make it legible.
+              The territory is the organizational runtime for governed agent work: what the
+              next run remembers, what it may do, where it runs, and how it proves what happened.
             </p>
           </div>
           <div className="v4-signature-grid">

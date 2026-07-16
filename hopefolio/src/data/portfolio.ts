@@ -30,6 +30,7 @@ export interface ExperienceEntry {
 
 export const navItems = [
   { label: "Work", href: "/projects" },
+  { label: "Proof", href: "/proof" },
   { label: "Writing", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Work with me", href: "/hiring" },

@@ -105,7 +105,8 @@ export default function OrgXForOpenClawPage() {
             before: "Moving an OpenClaw operator into a second orchestration destination would fracture the workflow the plugin is meant to improve.",
             decision: "Let OpenClaw own the runtime and tools while OrgX adds the missing organizational context through one native plugin seam.",
             consequence: "Agents keep the host's strengths and gain shared goals, decisions, trust state, and receipts where they already work.",
-            evidence: "OpenClaw plugin entry point · OrgX MCP bridge",
+            evidence: "openclaw-plugin · public source",
+            evidenceHref: "https://github.com/useorgx/openclaw-plugin",
             tone: "cold",
           },
           {
