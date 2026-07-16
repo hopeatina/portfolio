@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-07-15T23:26:28.085Z",
+    "updated": "2026-07-16T23:17:03.520Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1207,9 +1207,9 @@
         "issues": [],
         "notes": "Strong keep. This is the cleanest kind of building-in-public save-bait: the credibility engine is a real, specific mechanism (a 7-field context pack) and a felt problem (transcript-dump handoffs), not invented traction. No fabricated metrics, user counts, revenue, or benchmarks anywhere. The 300/400 message numbers are illustrative of the pain scenario, not claimed OrgX traction — legitimate.\\n\\nVOICE: Slide text is billboard-tight and declarative. 'isn't a handoff. it's a hazard.' and 'inherits judgment, not a novel to re-read' are both quotable and in-register. Caption opens on a specific realization, chains with so/and/like, drops '300-message transcript' and 'why + the bar' casually, and ends rough on 'the compiled context is' — no clean wrap, no CTA close. Zero kill-list words. This reads like a real founder voice-memo, not an AI blog post.\\n\\nHOOK: 'steal this' + big 7 + 'zero transcripts' is the right save signal, and the contrarian punch (zero transcripts) is the scroll-stopper for a skeptical agent-builder. My revised headline just tightens the slightly awkward 'i hand between agents' to 'between my agents' while keeping the 'zero transcripts' gold — marginal, original is already strong.\\n\\nSAVE: Slide 4 (the full 7-field instrument-panel) is a genuine screenshot-worthy framework, and the CTA correctly points back to it. The framework carries the whole piece.\\n\\nONE QA NIT (fix before publishing, not a truth violation): the caption says '300-message transcript' and slide 2's visual note says 300, but slide 3's headline says '400 messages.' Pick one number and use it consistently across caption + slides so it reads as one true story."
       },
-      "status": "ready",
-      "uses": 0,
-      "last_used": null,
+      "status": "used",
+      "uses": 1,
+      "last_used": "2026-07-16",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
