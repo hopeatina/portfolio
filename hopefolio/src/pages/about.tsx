@@ -4,6 +4,7 @@ import {
   ContinuityPlayhead,
   LivingMotif,
   SectionSignal,
+  SystemGlyph,
   TextLink,
 } from "@/components/v4/V4Primitives";
 import MaterialThreadField from "@/components/v5/MaterialThreadField";
@@ -84,6 +85,63 @@ export default function About() {
             </figure>
           </div>
         </header>
+
+        <section className="v4-life-thread" aria-labelledby="life-thread-title">
+          <SectionSignal index="00">One thread, four scales</SectionSignal>
+          <div className="v4-life-thread-heading">
+            <h2 id="life-thread-title">The biography and the metaphor are the same drawing.</h2>
+            <p>
+              Every system I build makes something survive a handoff. I learned each form of
+              that thread at a different scale, in order.
+            </p>
+          </div>
+          <ol className="v4-life-thread-list">
+            <li>
+              <SystemGlyph name="context" />
+              <div>
+                <span>Weave · Cameroonian roots</span>
+                <h3>Meaning has to survive translation.</h3>
+                <p>
+                  The same thing carries different weight depending on context, history, and who is
+                  interpreting it. Inspect the structure before trusting the surface.
+                </p>
+              </div>
+            </li>
+            <li>
+              <SystemGlyph name="judgment" />
+              <div>
+                <span>Registration · Rice → DermaShift → clinical production</span>
+                <h3>At the human boundary, a dropped handoff costs a person.</h3>
+                <p>
+                  Bioengineering, then healthcare systems under HIPAA: risk made visible, rollout
+                  reversible, evidence attached — because the boundary is where consequence lives.
+                </p>
+              </div>
+            </li>
+            <li>
+              <SystemGlyph name="branch" />
+              <div>
+                <span>Branch · Figma &amp; Chill</span>
+                <h3>One thread, many hands, nothing lost in the fork.</h3>
+                <p>
+                  A community built through shared making instead of talk — each person keeping
+                  their own strength while the thing held together. Figma platformed the result.
+                </p>
+              </div>
+            </li>
+            <li>
+              <SystemGlyph name="receipt" />
+              <div>
+                <span>Memory knot · OrgX</span>
+                <h3>The decision returns as a receipt the next run inherits.</h3>
+                <p>
+                  The continuity layer itself: memory, authority, execution, and proof for
+                  governed agent work. The thread, shipped as infrastructure.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </section>
 
         <section className="v4-about-origin v4-motif-backed">
           <LivingMotif variant="weave" className="v4-section-motif" />
