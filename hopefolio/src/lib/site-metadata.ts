@@ -4,7 +4,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ||
   "https://hopeatina.com";
 export const SITE_DESCRIPTION =
-  "Hope Atina is an engineer, founder, and product thinker building the continuity and proof layers that make ambitious AI systems coherent.";
+  "Hope Atina builds the execution layer for governed agent work: memory the next run inherits, bounded authority, execution across clients, and proof you can open.";
 export const SITE_IMAGE = "/images/generated/inspection-field.jpg";
 
 export const SOCIAL_LINKS = {
@@ -151,109 +151,10 @@ export const CASE_STUDIES: CrawlEntry[] = [
     priority: 0.8,
   },
   {
-    path: "/projects/brain-buffet",
-    title: "BrainBuffet",
+    path: "/projects/archive",
+    title: "Project Archive",
     description:
-      "AI course platform using multi-step LLM pipelines, retrieval, and structured generation to ship customer-facing content.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.7,
-  },
-  {
-    path: "/projects/deep-human",
-    title: "Deep Human",
-    description:
-      "MCP-based digital twin framework for structured human context and identity-aware agent interfaces.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.7,
-  },
-  {
-    path: "/projects/neuromosaic",
-    title: "Neuromosaic",
-    description:
-      "Distributed machine learning infrastructure and research-oriented system design work.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
-    path: "/projects/framefx",
-    title: "FrameFX",
-    description:
-      "Token-driven motion design system and Remotion monorepo focused on reusable motion primitives.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
-    path: "/projects/meridian",
-    title: "Meridian",
-    description:
-      "Trading signal platform with multi-source ingestion, approval workflows, and real-time analytics.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.6,
-  },
-  {
-    path: "/projects/belief-map",
-    title: "Belief Map",
-    description:
-      "Exploratory interface for modeling beliefs, relationships, and meaning structures.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.5,
-  },
-  {
-    path: "/projects/bodyfx",
-    title: "BodyFX",
-    description:
-      "Experimental system exploring embodiment, media, and interaction design.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.5,
-  },
-  {
-    path: "/projects/evalvybes",
-    title: "EvalVybes",
-    description:
-      "Experimental evaluation tooling and interaction concepts for AI systems.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.5,
-  },
-  {
-    path: "/projects/tasktomodel",
-    title: "TaskToModel",
-    description:
-      "Tooling for matching tasks to appropriate model capabilities and execution paths.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.5,
-  },
-  {
-    path: "/projects/theaicookup",
-    title: "The AI Cook-Up",
-    description:
-      "Experimentation around AI workflows, creative tooling, and user-facing interaction surfaces.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.5,
-  },
-  {
-    path: "/projects/transmorph",
-    title: "Transmorph",
-    description:
-      "Exploratory transformation and media tooling project.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.5,
-  },
-  {
-    path: "/projects/upload-to-mail",
-    title: "Upload to Mail",
-    description:
-      "Utility tooling for moving uploaded content into email workflows.",
+      "Twelve archived systems, 2017-2024, kept as an honest ledger of range with real links only where the source is public.",
     section: "Case Studies",
     changeFrequency: "monthly",
     priority: 0.5,

@@ -4650,3 +4650,457 @@ body::before {
 }
 
 .blog-receipt-artifacts a:hover { color: var(--v4-signal); border-bottom-color: var(--v4-signal); }
+
+/* ============================================================
+   Archive ledger — dense honest rows, no fake doors
+   ============================================================ */
+
+.archive-ledger { display: flex; flex-direction: column; border-top: 1px solid var(--v4-rule); }
+
+.archive-ledger-row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) minmax(0, 0.8fr) auto;
+  gap: clamp(1rem, 2.5vw, 2.2rem);
+  align-items: baseline;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--v4-rule);
+  text-decoration: none;
+  color: inherit;
+}
+
+.archive-ledger-row.is-linked:hover,
+.archive-ledger-row.is-linked:focus-visible { background: rgba(183, 243, 74, 0.03); }
+
+.archive-ledger-label {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--v4-dim);
+}
+
+.archive-ledger-copy h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.archive-ledger-copy p { margin: 0; font-size: 0.85rem; color: var(--v4-mineral-soft); line-height: 1.5; }
+
+.archive-ledger-proof { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; }
+
+.archive-ledger-proof span {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.68rem;
+  color: var(--v4-dim);
+}
+
+.archive-ledger-cta {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--v4-mineral-soft);
+  white-space: nowrap;
+}
+
+.archive-ledger-row.is-linked .archive-ledger-cta { color: var(--v4-signal); }
+.archive-ledger-cta i { font-style: normal; }
+.archive-ledger-cta em { font-style: normal; color: var(--v4-dim); }
+
+@media (max-width: 860px) {
+  .archive-ledger-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .archive-ledger-label { grid-column: 1 / -1; }
+  .archive-ledger-proof { grid-column: 1 / -1; }
+}
+
+/* ============================================================
+   404 — the snapped thread
+   ============================================================ */
+
+.v4-notfound {
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+  max-width: var(--v4-page);
+  margin: 0 auto;
+  padding: 0 clamp(1.2rem, 4.5vw, 5rem);
+}
+
+.v4-notfound-inner { max-width: 40rem; }
+
+.v4-notfound-code {
+  display: block;
+  font-variation-settings: "MONO" 1;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--v4-ochre);
+  margin-bottom: 1.3rem;
+}
+
+.v4-notfound h1 {
+  font-size: clamp(2rem, 4.8vw, 3.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.1rem;
+}
+
+.v4-notfound p { color: var(--v4-mineral-soft); margin: 0 0 1.8rem; max-width: 34rem; }
+
+.v4-notfound-actions { display: flex; flex-wrap: wrap; gap: 1.6rem; }
+
+/* ============================================================
+   Clean hero — one weave (the live thread), type on carbon,
+   one receipt under the claim
+   ============================================================ */
+
+.v4-home-hero.is-clean {
+  background: transparent;
+}
+
+.v4-home-hero.is-clean::after {
+  /* soft left-anchored scrim so type sits on quiet ground over the thread */
+  background: linear-gradient(100deg, rgba(8, 8, 6, 0.82) 0%, rgba(8, 8, 6, 0.55) 46%, rgba(8, 8, 6, 0) 78%);
+}
+
+.v4-home-hero.is-clean .v4-home-hero-copy {
+  width: min(74%, 1000px);
+}
+
+.v4-hero-receipt {
+  margin-top: clamp(2.2rem, 5vh, 3.4rem);
+  max-width: 620px;
+  border: 1px solid var(--v4-rule);
+  border-left: 2px solid var(--v4-signal);
+  background: rgba(8, 8, 6, 0.72);
+  padding: 1.1rem 1.25rem 1.05rem;
+}
+
+.v4-hero-receipt-tag {
+  display: block;
+  font-variation-settings: "MONO" 1;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--v4-signal);
+  margin-bottom: 0.85rem;
+}
+
+.v4-hero-receipt-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.v4-hero-receipt-panels > div > b {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+  color: var(--v4-mineral);
+}
+
+.v4-hero-receipt-panels > div > p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--v4-mineral-soft);
+}
+
+.v4-hero-receipt-panels > i {
+  font-style: normal;
+  color: var(--v4-signal);
+  padding-top: 0.1rem;
+}
+
+.v4-hero-receipt-link {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-variation-settings: "MONO" 1;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--v4-dim);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--v4-rule-strong);
+}
+
+.v4-hero-receipt-link:hover,
+.v4-hero-receipt-link:focus-visible {
+  color: var(--v4-signal);
+  border-bottom-color: var(--v4-signal);
+}
+
+@media (max-width: 720px) {
+  .v4-home-hero.is-clean .v4-home-hero-copy { width: 100%; }
+  .v4-hero-receipt-panels { grid-template-columns: 1fr; }
+  .v4-hero-receipt-panels > i { display: none; }
+}
+
+/* portrait, relocated to /about with a duotone grade */
+.v4-about-portrait {
+  position: relative;
+  width: min(320px, 62vw);
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--v4-rule-strong);
+  overflow: hidden;
+}
+
+.v4-about-portrait img {
+  object-fit: cover;
+  filter: grayscale(0.9) contrast(1.06) brightness(0.92);
+}
+
+.v4-about-portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(183, 243, 74, 0.10), rgba(8, 8, 6, 0.28) 70%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.v4-about-portrait figcaption {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.7rem;
+  display: flex;
+  gap: 1rem;
+  font-variation-settings: "MONO" 1;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--v4-mineral);
+  text-shadow: 0 1px 6px rgba(8, 8, 6, 0.9);
+}
+
+/* ---- proof ledger upgrades: heartbeat, latest row, external chip, updates, nav ---- */
+
+.v4-proof-heartbeat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 1.6rem;
+  font-variation-settings: "MONO" 1;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--v4-dim);
+}
+
+.v4-proof-heartbeat i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--v4-signal);
+  box-shadow: 0 0 9px rgba(183, 243, 74, 0.7);
+  animation: ledgerPulse 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v4-proof-heartbeat i { animation: none; }
+}
+
+.v4-proof-row.is-latest { padding-top: 2rem; padding-bottom: 2rem; }
+.v4-proof-row.is-latest .v4-proof-row-main h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+
+.v4-proof-latest-tag {
+  margin-left: 0.8rem;
+  padding: 2px 7px;
+  border: 1px solid rgba(183, 243, 74, 0.5);
+  border-radius: 2px;
+  color: var(--v4-signal);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+}
+
+.v4-proof-row-failure {
+  margin: 0.65rem 0 0 !important;
+  border-left: 2px solid var(--v4-ochre);
+  padding-left: 0.8rem;
+  font-size: 0.85rem !important;
+  color: var(--v4-mineral-soft);
+}
+
+.v4-proof-row-failure span {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--v4-ochre);
+  margin-right: 0.4rem;
+}
+
+/* External validation: the scarce column gets its own weight */
+.v4-proof-score i.is-external { border-style: dashed; }
+.v4-proof-score i.is-external.is-earned {
+  border-style: solid;
+  box-shadow: 0 0 10px rgba(183, 243, 74, 0.55);
+}
+
+.v4-proof-crit.is-external { border-top: 1px dashed var(--v4-rule-strong); }
+.v4-proof-crit.is-external.is-earned b,
+.v4-proof-crit.is-external.is-earned span { text-shadow: 0 0 8px rgba(183, 243, 74, 0.6); }
+
+.v4-proof-crit em {
+  font-style: normal;
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--v4-dim);
+  margin-top: 0.15rem;
+}
+
+.v4-proof-crit.is-earned em { color: var(--v4-mineral-soft); }
+
+.v4-receipt-updates {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.v4-receipt-updates li {
+  display: flex;
+  gap: 1.1rem;
+  align-items: baseline;
+  font-size: 0.88rem;
+  color: var(--v4-mineral-soft);
+}
+
+.v4-receipt-updates time {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.7rem;
+  color: var(--v4-signal);
+  white-space: nowrap;
+}
+
+.v4-receipt-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.v4-receipt-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--v4-rule);
+  text-decoration: none;
+  color: inherit;
+}
+
+.v4-receipt-nav a:hover { border-color: rgba(183, 243, 74, 0.4); }
+.v4-receipt-nav a.is-next { text-align: right; }
+
+.v4-receipt-nav a span {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--v4-dim);
+}
+
+.v4-receipt-nav a b { font-size: 0.88rem; font-weight: 500; color: var(--v4-mineral); }
+
+/* ---- the disclosure type style: one honest voice for provenance ---- */
+.v4-disclosure {
+  display: block;
+  font-style: normal;
+  font-variation-settings: "MONO" 1;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--v4-dim);
+  margin-top: 0.3rem;
+}
+
+/* ---- ledger receipts strip inside case studies ---- */
+.v4-case-receipts {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0 0 clamp(2rem, 5vh, 3rem);
+  border-top: 1px solid var(--v4-rule);
+}
+
+.v4-case-receipts-label {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--v4-signal);
+  padding: 0.9rem 0 0.3rem;
+}
+
+.v4-case-receipt {
+  display: flex;
+  align-items: baseline;
+  gap: 1.1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--v4-rule);
+  text-decoration: none;
+  color: inherit;
+}
+
+.v4-case-receipt:hover .v4-case-receipt-title { color: var(--v4-signal); }
+
+.v4-case-receipt > b {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--v4-dim);
+  white-space: nowrap;
+}
+
+.v4-case-receipt-title { flex: 1; font-size: 0.92rem; color: var(--v4-mineral); }
+.v4-case-receipt > i { font-style: normal; color: var(--v4-signal); }
+
+@media (max-width: 720px) {
+  .v4-case-receipt { flex-wrap: wrap; gap: 0.5rem 1rem; }
+  .v4-case-receipt-title { flex-basis: 100%; }
+}
+
+.v4-hiring-ace {
+  margin: 1.6rem 0 0;
+  max-width: 34rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--v4-mineral-soft);
+  border-left: 2px solid var(--v4-signal);
+  padding-left: 1rem;
+}
+
+.blog-receipt-ledgerline {
+  margin: 2.2rem 0 0;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--v4-rule);
+  font-variation-settings: "MONO" 1;
+  font-size: 0.78rem;
+  color: var(--v4-dim);
+}
+
+/* ---- the spectrum, delivered by geometry: flagship row dominates ---- */
+.v4-work-entry.is-flagship { min-height: 360px; }
+.v4-work-entry.is-flagship .v4-work-entry-title h2 { font-size: clamp(3rem, 6vw, 6.4rem); }
+.v4-work-entry.is-flagship .v4-work-entry-image { opacity: 0.9; }
+
+.v4-work-flagship-tag {
+  font-style: normal;
+  margin-left: 0.8rem;
+  padding: 2px 8px;
+  border: 1px solid rgba(183, 243, 74, 0.5);
+  border-radius: 2px;
+  color: var(--v4-signal);
+  font-variation-settings: "MONO" 1;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}

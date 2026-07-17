@@ -66,10 +66,22 @@ export default function About() {
             <span>About / inspection as a creative practice</span>
             <h1>Every thread I pull should reveal more of what people can become.</h1>
             <p>
-              I am a Houston-based engineer, founder, and product thinker with Cameroonian roots.
-              The throughline is not technology for its own sake. It is amplification: understand the
-              system deeply enough that a person, a team, or a generation can move with more agency.
+              I am a Houston-based builder with Cameroonian roots. The throughline is not
+              technology for its own sake. It is amplification: understand the system deeply
+              enough that a person, a team, or a generation can move with more agency.
             </p>
+            <figure className="v4-about-portrait">
+              <Image
+                src="/images/hope-profile.jpg"
+                alt="Hope Atina"
+                fill
+                sizes="(min-width: 900px) 320px, 62vw"
+              />
+              <figcaption>
+                <span>Houston</span>
+                <span>Cameroonian roots</span>
+              </figcaption>
+            </figure>
           </div>
         </header>
 

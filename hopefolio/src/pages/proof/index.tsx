@@ -42,27 +42,40 @@ export default function ProofIndex() {
 
         <section className="v4-proof-ledger" aria-label="Receipts">
           <SectionSignal index="01">Receipts, newest first</SectionSignal>
+          <p className="v4-proof-heartbeat" aria-label="Ledger cadence">
+            <i aria-hidden="true" />
+            {proofReceipts.length} receipts on the ledger · next drafted daily at 07:10 ·
+            external validation earned by {proofReceipts.filter((r) => r.score.includes("external")).length} of {proofReceipts.length}
+          </p>
           <div className="v4-proof-list">
             {[...proofReceipts]
               .sort((a, b) => (a.date < b.date ? 1 : -1))
-              .map((receipt) => (
+              .map((receipt, rowIndex) => (
                 <Link
                   href={`/proof/${receipt.slug}`}
-                  className="v4-proof-row"
+                  className={`v4-proof-row ${rowIndex === 0 ? "is-latest" : ""}`}
                   key={receipt.slug}
                 >
                   <span className="v4-proof-row-index">{receipt.index}</span>
                   <div className="v4-proof-row-main">
-                    <span className="v4-proof-row-domain">{receipt.domain}</span>
+                    <span className="v4-proof-row-domain">
+                      {receipt.domain}
+                      {rowIndex === 0 ? <b className="v4-proof-latest-tag">latest</b> : null}
+                    </span>
                     <h2>{receipt.title}</h2>
                     <p>{receipt.question}</p>
+                    {rowIndex === 0 ? (
+                      <p className="v4-proof-row-failure">
+                        <span>Where it broke:</span> {receipt.failure.split(". ")[0]}.
+                      </p>
+                    ) : null}
                   </div>
                   <div className="v4-proof-row-meta">
                     <span className="v4-proof-score" aria-label={`Proof score ${receipt.score.length} of 6`}>
                       {PROOF_SCORE_ORDER.map((key) => (
                         <i
                           key={key}
-                          className={receipt.score.includes(key) ? "is-earned" : ""}
+                          className={`${receipt.score.includes(key) ? "is-earned" : ""} ${key === "external" ? "is-external" : ""}`}
                           title={`${PROOF_SCORE_LABELS[key].label}${receipt.score.includes(key) ? "" : " — not earned"}`}
                         >
                           {PROOF_SCORE_LABELS[key].short}

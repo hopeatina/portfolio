@@ -10,19 +10,19 @@ export default function ProjectsArchive() {
         <title>Project Archive | Hope Atina</title>
         <meta
           name="description"
-          content="Archived projects and experiments that are no longer part of the main curated portfolio narrative."
+          content="Twelve archived systems, 2017–2024 — kept as an honest ledger of range, not as the lead story."
         />
       </Head>
 
       <main id="main-content" className="page-frame">
         <div className="page-stack">
           <header className="page-header-stack">
-            <span className="eyebrow">Archive</span>
-            <h1>Additional projects</h1>
+            <span className="eyebrow">Archive · 12 systems · 2017—2024</span>
+            <h1>The earlier chapters, kept honest.</h1>
             <p style={{ maxWidth: "38rem", margin: 0 }}>
-              These projects remain available for context, but they do not lead
-              the current story about agent infrastructure, observability, and
-              production systems work.
+              These systems remain on the record for range and context, but they do not lead
+              the current story. Where the source is public, the link is real; where it is
+              not, there is no door pretending to open.
             </p>
             <p style={{ margin: 0 }}>
               <Link href="/projects" className="site-link-inline">
@@ -32,24 +32,49 @@ export default function ProjectsArchive() {
           </header>
 
           <section className="page-content">
-            <div className="work-grid-supporting">
-              {archivedProjects.map((project) => (
-                <Link key={project.slug} href={project.href} className="work-card">
-                  <div className="work-card-body">
-                    <span className="eyebrow">{project.shortLabel}</span>
-                    <div className="work-card-copy">
+            <div className="archive-ledger" role="list">
+              {archivedProjects.map((project) => {
+                const row = (
+                  <>
+                    <span className="archive-ledger-label">{project.shortLabel}</span>
+                    <div className="archive-ledger-copy">
                       <h3>{project.title}</h3>
                       <p>{project.summary}</p>
                     </div>
-                    <div className="work-card-proof">
+                    <div className="archive-ledger-proof">
                       {project.proof.map((item) => (
                         <span key={item}>{item}</span>
                       ))}
                     </div>
-                    <div className="work-card-link">Open archive entry →</div>
+                    <span className="archive-ledger-cta">
+                      {project.href ? (
+                        <>
+                          {project.primaryCta} <i aria-hidden="true">↗</i>
+                        </>
+                      ) : (
+                        <em>no public source</em>
+                      )}
+                    </span>
+                  </>
+                );
+
+                return project.href ? (
+                  <a
+                    key={project.slug}
+                    role="listitem"
+                    href={project.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="archive-ledger-row is-linked"
+                  >
+                    {row}
+                  </a>
+                ) : (
+                  <div key={project.slug} role="listitem" className="archive-ledger-row">
+                    {row}
                   </div>
-                </Link>
-              ))}
+                );
+              })}
             </div>
           </section>
         </div>

@@ -123,10 +123,15 @@ const orgxEssays: OrgXEssay[] = [
 export default function BlogIndex({ posts }: BlogIndexProps) {
   const [featured, ...rest] = posts;
   const [activeGroup, setActiveGroup] = useState<GroupId>("all");
+  // "All" keeps the featured card + the rest; a specific filter searches EVERY post,
+  // featured included, so the receipts tab can never hide the only receipt.
+  const showFeatured = activeGroup === "all";
   const filteredRest = useMemo(() => {
     const group = CATEGORY_GROUPS.find((g) => g.id === activeGroup) ?? CATEGORY_GROUPS[0];
-    return rest.filter((p) => group.matches(p.category));
-  }, [rest, activeGroup]);
+    return activeGroup === "all"
+      ? rest.filter((p) => group.matches(p.category))
+      : posts.filter((p) => group.matches(p.category));
+  }, [posts, rest, activeGroup]);
 
   return (
     <>
@@ -171,9 +176,14 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
             })()}
           </header>
 
-          {featured ? (
+          {featured && showFeatured ? (
             <article className="blog-featured">
-              <span className="eyebrow">{featured.category}</span>
+              <span className="eyebrow">
+                {featured.category}
+                {featured.type === "receipt" && featured.receipt ? (
+                  <em className="blog-receipt-chip">{featured.receipt.score.length}/6 proof</em>
+                ) : null}
+              </span>
               <h2>{featured.title}</h2>
               <p style={{ margin: "0.8rem 0 0", color: "var(--shell-text-soft)", maxWidth: "40rem" }}>
                 {featured.excerpt}
@@ -209,7 +219,7 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
                 const count =
                   g.id === "all"
                     ? rest.length
-                    : rest.filter((p) => g.matches(p.category)).length;
+                    : posts.filter((p) => g.matches(p.category)).length;
                 if (g.id !== "all" && count === 0) return null;
                 return (
                   <button

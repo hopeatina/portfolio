@@ -169,6 +169,15 @@ export default function PostPage({ post, related, toc }: PostPageProps) {
 
               <div className="prose-shell" dangerouslySetInnerHTML={{ __html: html }} />
 
+              {post.type === "receipt" ? (
+                <p className="blog-receipt-ledgerline">
+                  This is a daily entry in the living ledger.{" "}
+                  <Link href="/proof" className="site-link-inline">
+                    The flagship receipts live at /proof →
+                  </Link>
+                </p>
+              ) : null}
+
               <section className="contact-card">
                 <span className="eyebrow">Read next</span>
                 {related.length > 0 ? (

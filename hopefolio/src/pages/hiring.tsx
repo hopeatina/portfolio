@@ -49,12 +49,13 @@ export default function Hiring() {
         <header className="v4-hiring-hero v4-motif-backed">
           <LivingMotif variant="handoff" className="v4-hiring-hero-motif" label="A signal crossing engineering, product, and founder boundaries" />
           <span>For founders / recruiters / ambitious teams</span>
-          <h1>If the hard problem lives between AI capability, product judgment, and production consequence—that is my lane.</h1>
+          <h1>The hard problems between AI capability and production consequence. That&apos;s my lane.</h1>
           <div>
             <p>
-              I am an engineer, founder, and product thinker with deep production ownership across
-              healthcare, fintech data, developer tooling, and AI infrastructure. I am strongest when
-              the work needs both systems depth and a surface people can trust.
+              I build the execution layer for governed agent work — memory, authority, execution,
+              proof — with production ownership across healthcare, fintech data, developer tooling,
+              and AI infrastructure. Strongest where the work needs systems depth and a surface
+              people can trust.
             </p>
             <div className="v4-hiring-actions">
               <TextLink href="mailto:hopeatina@gmail.com?subject=Consequential%20work%20%E2%80%94%20%5Bcompany%5D" external>
@@ -64,6 +65,13 @@ export default function Hiring() {
                 Book 30 minutes
               </TextLink>
             </div>
+            <p className="v4-hiring-ace">
+              Don&apos;t take the claims. Take the receipts — every one scored against six proof
+              criteria, failures included.{" "}
+              <Link href="/proof" className="v4-text-link">
+                Open the ledger <span aria-hidden="true">→</span>
+              </Link>
+            </p>
           </div>
         </header>
 

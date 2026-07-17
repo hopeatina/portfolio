@@ -14,7 +14,7 @@ export default function PerfPulsePage() {
         { label: "Core", value: "Rust" },
         { label: "Surfaces", value: "CLI / TUI / web" },
         { label: "Footprint", value: "3.3 MiB" },
-        { label: "Distribution", value: "Homebrew" },
+        { label: "Install", value: "brew install perf-pulse", note: "public tap · pinned SHA-256 · real binaries" },
       ]}
       heroProof={{
         src: "/images/case-studies/perfpulse-dashboard.png",
@@ -151,6 +151,7 @@ export default function PerfPulsePage() {
           { name: "Homebrew", mark: "BR", category: "Delivery", project: "Distribution", reason: "One familiar command closes the final mile between discovering the tool and using it under pressure." },
         ],
       }}
+      receiptSlugs={["perf-pulse-homebrew"]}
       proofs={[
         {
           src: "/images/case-studies/perfpulse-dashboard.png",

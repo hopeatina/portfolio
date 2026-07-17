@@ -83,6 +83,10 @@ export interface ProofReceipt {
   score: ProofScoreKey[];
   /** Optional one-line justification for hard-earned or withheld criteria. */
   scoreNote?: string;
+  /** Per-criterion one-liners: why earned, or why withheld. Rendered inside the scorecard cells. */
+  scoreReasons?: Partial<Record<ProofScoreKey, string>>;
+  /** The receipt's own history. Receipts are documents that age in public. */
+  updates?: Array<{ date: string; note: string }>;
   next?: string;
 }
 
@@ -123,6 +127,18 @@ export const proofReceipts: ProofReceipt[] = [
     score: ["artifact", "baseline", "measured", "reproducible", "failure"],
     scoreNote:
       "External validation withheld: no one outside this site depends on the component yet.",
+    scoreReasons: {
+      artifact: "Merged PR + the component + this site itself",
+      baseline: "The 32 draw-once decals are in git history, measurable",
+      measured: "3.1-8ms frames; 12.46% lit pixels post-navigation",
+      reproducible: "Tag the canvas node, navigate, check it survived",
+      failure: "Three defects named, each with its fix",
+      external: "No one outside this site depends on it yet",
+    },
+    updates: [
+      { date: "2026-07-15", note: "Published. Merged as PR #24." },
+      { date: "2026-07-16", note: "Occlusion defect found on the live site (.site-shell opaque background) and fixed; failure section updated." },
+    ],
     next: "Page-transition FLIP handoff: the lit node slides through the door into the case-study spine instead of easing in place.",
   },
   {
@@ -150,6 +166,15 @@ export const proofReceipts: ProofReceipt[] = [
     score: ["artifact", "measured", "failure", "external"],
     scoreNote:
       "Baseline and reproducible withheld: the cold-start baseline is argued, not measured, and the server is a product, not a rerunnable harness. The benchmark receipt covers that ground.",
+    scoreReasons: {
+      artifact: "Public repo, live manifest, running product",
+      baseline: "Cold-start pain is argued, not measured — see receipt 003",
+      measured: "57 tools, 654 tests, 98.271% public uptime",
+      reproducible: "A product, not a rerunnable harness",
+      failure: "Outages on the public status page; near-zero stars named",
+      external: "External stargazers; live users on the status page",
+    },
+    updates: [{ date: "2026-07-16", note: "Published to the ledger." }],
     next: "Publish per-tool success-rate and latency numbers from production traffic.",
   },
   {
@@ -176,6 +201,15 @@ export const proofReceipts: ProofReceipt[] = [
     score: ["artifact", "baseline", "measured", "reproducible", "failure"],
     scoreNote:
       "External validation withheld until judges or reproductions come from outside the project.",
+    scoreReasons: {
+      artifact: "Public repo with catalog, harness, and 59 result bundles",
+      baseline: "Single-agent AND human baselines through the same harness",
+      measured: "12/12 validated run; pass^k=1.0 on 4 of 5 worlds",
+      reproducible: "Bundle validator + scorecard recompute keep reruns honest",
+      failure: "12/15 catalog coverage and the 1-of-5 world miss, documented",
+      external: "Judges are still inside the project",
+    },
+    updates: [{ date: "2026-07-16", note: "Published to the ledger." }],
     next: "Independent judges scoring runs they did not build — then the E column gets earned.",
   },
   {
@@ -202,6 +236,15 @@ export const proofReceipts: ProofReceipt[] = [
     score: ["artifact", "measured", "reproducible", "failure"],
     scoreNote:
       "Baseline withheld (no measured comparison against existing monitors); external withheld until install counts or user reports exist.",
+    scoreReasons: {
+      artifact: "Tap formula + 2MB binaries serving over HTTP",
+      baseline: "No measured comparison against existing monitors",
+      measured: "2,071,219-byte arm64 tarball, pinned SHA-256s",
+      reproducible: "brew install perf-pulse is the rerun",
+      failure: "Tap lagged source 1.3.1 vs 1.6.0; flaky test hardened",
+      external: "No install counts or user reports yet",
+    },
+    updates: [{ date: "2026-07-16", note: "Published to the ledger." }],
     next: "Wire release automation so the tap can never lag source again, then publish install telemetry.",
   },
   {
@@ -227,6 +270,15 @@ export const proofReceipts: ProofReceipt[] = [
     score: ["artifact", "baseline", "failure", "external"],
     scoreNote:
       "Measured and reproducible withheld: community size claims are not independently verifiable today, and a community is not a rerunnable experiment.",
+    scoreReasons: {
+      artifact: "The talk itself, on Figma's official channel",
+      baseline: "Conversation-only community was the visible default",
+      measured: "Community size claims are not independently verifiable today",
+      reproducible: "A community is not a rerunnable experiment",
+      failure: "The canonical talk URL rotted; the venue declined",
+      external: "Figma platformed and published the work",
+    },
+    updates: [{ date: "2026-07-16", note: "Published to the ledger." }],
   },
   {
     slug: "framefx-npm",
@@ -251,6 +303,15 @@ export const proofReceipts: ProofReceipt[] = [
     score: ["artifact", "measured", "failure"],
     scoreNote:
       "Three of six — the weakest receipt on the ledger, kept here because an honest ledger includes its own thin entries.",
+    scoreReasons: {
+      artifact: "Eight packages live on the public registry",
+      baseline: "No comparison worth claiming",
+      measured: "8 packages verified at v0.1.0, one maintainer",
+      reproducible: "No runnable example gallery yet",
+      failure: "Dead repository field on all eight packages, found in audit",
+      external: "Published, not yet adopted",
+    },
+    updates: [{ date: "2026-07-16", note: "Published to the ledger, dead repository field and all." }],
     next: "Fix the repository field, publish 0.2.0, and earn R with a runnable example gallery.",
   },
 ];

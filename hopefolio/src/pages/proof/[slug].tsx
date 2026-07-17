@@ -6,12 +6,21 @@ import {
   PROOF_SCORE_ORDER,
   getAllProofSlugs,
   getProofReceipt,
+  proofReceipts,
   type ProofReceipt,
 } from "@/data/proof";
 import { TextLink } from "@/components/v4/V4Primitives";
 
+interface ProofNeighbor {
+  slug: string;
+  index: string;
+  title: string;
+}
+
 interface ProofPageProps {
   receipt: ProofReceipt;
+  prev: ProofNeighbor | null;
+  next: ProofNeighbor | null;
 }
 
 const ARTIFACT_KIND_LABELS: Record<ProofReceipt["artifacts"][number]["kind"], string> = {
@@ -26,7 +35,7 @@ const ARTIFACT_KIND_LABELS: Record<ProofReceipt["artifacts"][number]["kind"], st
   site: "SITE",
 };
 
-export default function ProofPage({ receipt }: ProofPageProps) {
+export default function ProofPage({ receipt, prev, next }: ProofPageProps) {
   return (
     <>
       <Head>
@@ -57,11 +66,12 @@ export default function ProofPage({ receipt }: ProofPageProps) {
                   <div
                     role="listitem"
                     key={key}
-                    className={`v4-proof-crit ${earned ? "is-earned" : "is-withheld"}`}
+                    className={`v4-proof-crit ${earned ? "is-earned" : "is-withheld"} ${key === "external" ? "is-external" : ""}`}
                   >
                     <b>{PROOF_SCORE_LABELS[key].short}</b>
                     <strong>{PROOF_SCORE_LABELS[key].label}</strong>
                     <span>{earned ? "earned" : "withheld"}</span>
+                    {receipt.scoreReasons?.[key] ? <em>{receipt.scoreReasons[key]}</em> : null}
                   </div>
                 );
               })}
@@ -88,6 +98,19 @@ export default function ProofPage({ receipt }: ProofPageProps) {
               <h2>Where it broke</h2>
               <p>{receipt.failure}</p>
             </section>
+            {receipt.updates && receipt.updates.length > 0 ? (
+              <section className="is-updates">
+                <h2>Updates</h2>
+                <ul className="v4-receipt-updates">
+                  {receipt.updates.map((u) => (
+                    <li key={`${u.date}-${u.note.slice(0, 12)}`}>
+                      <time dateTime={u.date}>{u.date}</time>
+                      <span>{u.note}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
             {receipt.next ? (
               <section>
                 <h2>Next test</h2>
@@ -116,6 +139,24 @@ export default function ProofPage({ receipt }: ProofPageProps) {
                 );
               })}
             </ul>
+            <nav className="v4-receipt-nav" aria-label="Adjacent receipts">
+              {prev ? (
+                <Link href={`/proof/${prev.slug}`}>
+                  <span>&larr; Receipt {prev.index}</span>
+                  <b>{prev.title}</b>
+                </Link>
+              ) : (
+                <span aria-hidden="true" />
+              )}
+              {next ? (
+                <Link href={`/proof/${next.slug}`} className="is-next">
+                  <span>Receipt {next.index} &rarr;</span>
+                  <b>{next.title}</b>
+                </Link>
+              ) : (
+                <span aria-hidden="true" />
+              )}
+            </nav>
             <TextLink href="/proof">Back to the ledger</TextLink>
           </footer>
         </article>
@@ -132,5 +173,15 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 export const getStaticProps: GetStaticProps<ProofPageProps> = async ({ params }) => {
   const receipt = getProofReceipt(String(params?.slug));
   if (!receipt) return { notFound: true };
-  return { props: { receipt } };
+  const ordered = [...proofReceipts].sort((a, b) => (a.index < b.index ? -1 : 1));
+  const i = ordered.findIndex((r) => r.slug === receipt.slug);
+  const pick = (r: ProofReceipt | undefined) =>
+    r ? { slug: r.slug, index: r.index, title: r.title } : null;
+  return {
+    props: {
+      receipt,
+      prev: pick(ordered[i - 1]),
+      next: pick(ordered[i + 1]),
+    },
+  };
 };

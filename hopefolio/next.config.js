@@ -9,6 +9,19 @@ const nextConfig = {
   images: {
     domains: [], // Add any external image domains here
   },
+  async redirects() {
+    // Legacy project pages were retired into the archive ledger (2026-07).
+    const archived = [
+      "deep-human", "meridian", "framefx", "evalvybes", "neuromosaic",
+      "theaicookup", "brain-buffet", "belief-map", "bodyfx", "tasktomodel",
+      "transmorph", "upload-to-mail",
+    ];
+    return archived.map((slug) => ({
+      source: `/projects/${slug}`,
+      destination: "/projects/archive",
+      permanent: true,
+    }));
+  },
   webpack: (config) => {
     // Add support for 3D model files
     config.module.rules.push({
