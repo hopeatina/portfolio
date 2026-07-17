@@ -632,7 +632,20 @@ export default function ContinuitySignal() {
       dirty = true;
       schedule();
     }
+    // The thread knows what room it's in: full volume on heroes, quiet in reading
+    // surfaces, mid in proof detail. Applied as canvas opacity — cheap, GPU-composited.
+    const intensityFor = (path: string) => {
+      if (path.startsWith("/blog/")) return 0.3; // long-form reading
+      if (path.startsWith("/proof/")) return 0.55; // receipt detail
+      if (path.startsWith("/blog")) return 0.65; // stream index
+      return 1;
+    };
+    const applyIntensity = () => {
+      canvas.style.opacity = String(intensityFor(window.location.pathname));
+    };
+
     const onRoute = () => {
+      applyIntensity();
       dirty = true;
       schedule();
     };
@@ -656,6 +669,7 @@ export default function ContinuitySignal() {
       tickId = requestAnimationFrame(tick);
     }
 
+    applyIntensity();
     resize();
 
     return () => {
@@ -680,6 +694,7 @@ export default function ContinuitySignal() {
         height: "100vh",
         zIndex: 0,
         pointerEvents: "none",
+        transition: "opacity 600ms ease",
       }}
     />
   );

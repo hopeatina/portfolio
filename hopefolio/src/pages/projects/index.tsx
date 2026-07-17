@@ -81,7 +81,7 @@ export default function Projects() {
           {projects.map((project) => (
             <Link
               href={project.href}
-              className={`v4-work-entry is-${project.tone}`}
+              className={`v4-work-entry is-${project.tone} ${project.index === "01" ? "is-flagship" : ""}`}
               key={project.title}
             >
               <div className="v4-work-entry-index">
@@ -89,7 +89,10 @@ export default function Projects() {
                 <small>{project.tension}</small>
               </div>
               <div className="v4-work-entry-title">
-                <span>{project.role}</span>
+                <span>
+                  {project.role}
+                  {project.index === "01" ? <em className="v4-work-flagship-tag">flagship</em> : null}
+                </span>
                 <h2>{project.title}</h2>
               </div>
               <p>{project.thesis}</p>
@@ -121,7 +124,7 @@ export default function Projects() {
           <LivingMotif variant="resolve" className="v4-section-motif" />
           <span>Earlier experiments still matter; they just do not all deserve the same stage.</span>
           <h2>The archive holds the breadth. This page holds the signal.</h2>
-          <TextLink href="/projects/archive">Open the project archive</TextLink>
+          <TextLink href="/projects/archive">Archive · 12 systems · 2017—2024</TextLink>
         </section>
       </main>
     </>

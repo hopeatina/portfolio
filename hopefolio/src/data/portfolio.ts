@@ -14,8 +14,9 @@ export interface PortfolioProject {
   proof: string[];
   heroImage?: string;
   heroAlt?: string;
-  href: string;
-  primaryCta: string;
+  href?: string;
+  hrefExternal?: boolean;
+  primaryCta?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
   tier: "flagship" | "supporting" | "archive";
@@ -86,8 +87,8 @@ export const featuredProjects: PortfolioProject[] = [
     heroAlt: "PerfPulse local system inspection dashboard",
     href: "/projects/perfpulse",
     primaryCta: "Read case study",
-    secondaryHref: "https://github.com/hopeatina/perf-pulse",
-    secondaryLabel: "View source",
+    secondaryHref: "https://github.com/hopeatina/homebrew-perf-pulse",
+    secondaryLabel: "Homebrew tap",
     tier: "supporting",
   },
   {
@@ -119,8 +120,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "AI course platform with structured generation and paid usage.",
     description: "Archived from the primary narrative pending a deeper case study.",
     proof: ["774 commits", "LLM pipelines", "Stripe"],
-    href: "/projects/brain-buffet",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
   {
@@ -131,8 +130,9 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Hackathon prototype exploring persona-as-a-service interactions.",
     description: "Kept for reference, not as a lead signal for the main portfolio narrative.",
     proof: ["FastMCP", "7 tools", "persona graph"],
-    href: "/projects/deep-human",
-    primaryCta: "Open archive entry",
+    href: "https://github.com/hopeatina/deep-human",
+    hrefExternal: true,
+    primaryCta: "View source",
     tier: "archive",
   },
   {
@@ -143,8 +143,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Distributed ML infrastructure work from an earlier systems chapter.",
     description: "Archived to keep the current site tightly aligned with agent infrastructure.",
     proof: ["Distributed ML", "Python", "research infra"],
-    href: "/projects/neuromosaic",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
   {
@@ -155,8 +153,9 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Remotion monorepo for token-driven motion design.",
     description: "Archived while the main portfolio foregrounds infrastructure work.",
     proof: ["8 packages", "Remotion", "design tokens"],
-    href: "/projects/framefx",
-    primaryCta: "Open archive entry",
+    href: "https://github.com/hopeatina/framefx",
+    hrefExternal: true,
+    primaryCta: "View source",
     tier: "archive",
   },
   {
@@ -167,8 +166,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Analytics and approvals for a premium trading signal product.",
     description: "Archived until its case study is developed to flagship depth.",
     proof: ["Convex", "TimescaleDB", "IBKR"],
-    href: "/projects/meridian",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
   {
@@ -179,8 +176,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Conversational AI evaluation platform.",
     description: "Archived from the curated index.",
     proof: ["Voice AI", "evals"],
-    href: "/projects/evalvybes",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
   {
@@ -191,8 +186,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Community tooling for AI events and hackathons.",
     description: "Archived from the main narrative because it weakens the infrastructure story.",
     proof: ["Community", "events"],
-    href: "/projects/theaicookup",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
   {
@@ -203,8 +196,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Interactive belief mapping interface.",
     description: "Archived from the curated index.",
     proof: ["Experimental", "visualization"],
-    href: "/projects/belief-map",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
   {
@@ -215,8 +206,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Service for sending online documents as physical mail.",
     description: "Archived from the main narrative.",
     proof: ["Full stack", "utility"],
-    href: "/projects/upload-to-mail",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
   {
@@ -227,8 +216,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Convert plain-text descriptions into custom AI models.",
     description: "Archived from the curated index.",
     proof: ["AI platform", "generation"],
-    href: "/projects/tasktomodel",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
   {
@@ -239,8 +226,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "Turn APIs into AI-callable tools.",
     description: "Archived until expanded into a stronger proof surface.",
     proof: ["Developer tools", "MCP"],
-    href: "/projects/transmorph",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
   {
@@ -251,8 +236,6 @@ export const archivedProjects: PortfolioProject[] = [
     summary: "AI video segmentation for After Effects.",
     description: "Archived from the curated index.",
     proof: ["Computer vision", "video tooling"],
-    href: "/projects/bodyfx",
-    primaryCta: "Open archive entry",
     tier: "archive",
   },
 ];

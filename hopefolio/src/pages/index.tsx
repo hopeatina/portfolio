@@ -11,38 +11,7 @@ import {
   SystemGlyph,
   TextLink,
 } from "@/components/v4/V4Primitives";
-import MaterialThreadField from "@/components/v5/MaterialThreadField";
 import TechnologyAtlas, { ToolEvidence } from "@/components/v5/TechnologyAtlas";
-
-const heroThreads = [
-  {
-    id: "continuity",
-    label: "carry the work",
-    before: "A capable agent starts the next session without the goal, the decisions, or the reason behind them.",
-    decision: "Compile the goal, constraints, prior proof, permissions, and next move into one handoff.",
-    consequence: "A decision made in Claude is still there when Codex takes over.",
-    evidence: "OrgX context pack + goal frame",
-    tone: "cold" as const,
-  },
-  {
-    id: "quality",
-    label: "set the bar",
-    before: "More output creates more review, while the standard remains trapped in one person's head.",
-    decision: "Let the owner author the global bar, then tune it by team and artifact type.",
-    consequence: "Work below the bar loops back before it reaches the reviewer.",
-    evidence: "OrgX quality bar + domain gates",
-    tone: "signal" as const,
-  },
-  {
-    id: "value",
-    label: "prove movement",
-    before: "Agent activity looks impressive even when it does not move the goal.",
-    decision: "Bind work, proof, cost, value, and budget to the goal that authorized it.",
-    consequence: "A person can see what moved, what it cost, and whether the next action still earns its place.",
-    evidence: "Goal ROI + economic ledger",
-    tone: "heat" as const,
-  },
-];
 
 const toolEvidence: ToolEvidence[] = [
   { name: "Claude", icon: "anthropic", category: "AI clients", project: "OrgX", reason: "A strong native surface for long-context product and engineering work; OrgX carries the organizational state into it instead of replacing it." },
@@ -143,24 +112,14 @@ export default function Home() {
         <title>Hope Atina — Memory, authority, execution, proof</title>
         <meta
           name="description"
-          content="Hope Atina builds the continuity, product, and proof layers that make ambitious AI systems coherent."
+          content="The execution layer for governed agent work: memory the next run inherits, bounded authority, execution across clients, and proof you can open."
         />
       </Head>
 
       <main id="main-content" className="v4-page v4-home">
         <ContinuityPlayhead />
 
-        <section className="v4-home-hero" aria-labelledby="hero-title">
-          <Image
-            className="v4-hero-field"
-            src="/images/generated/inspection-field.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            aria-hidden="true"
-          />
-          <MaterialThreadField stories={heroThreads} className="v5-hero-weave" compact />
+        <section className="v4-home-hero is-clean" aria-labelledby="hero-title">
           <div className="v4-home-hero-copy">
             <motion.span
               className="v4-hero-kicker"
@@ -196,26 +155,36 @@ export default function Home() {
               <TextLink href="/proof">See the receipts</TextLink>
               <TextLink href="/projects/orgx">Read the flagship case</TextLink>
             </motion.div>
+            <motion.aside
+              className="v4-hero-receipt"
+              aria-label="One receipt, up front"
+              initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <span className="v4-hero-receipt-tag">Receipt, not claim</span>
+              <div className="v4-hero-receipt-panels">
+                <div>
+                  <b>Decided in Claude</b>
+                  <p>
+                    The goal, constraints, prior proof, and permissions are compiled into one
+                    context pack at the session boundary.
+                  </p>
+                </div>
+                <i aria-hidden="true">→</i>
+                <div>
+                  <b>Inherited by Codex</b>
+                  <p>
+                    The next run starts with the decision intact — same goal, same quality bar,
+                    no re-briefing.
+                  </p>
+                </div>
+              </div>
+              <Link href="/proof/orgx-mcp-server" className="v4-hero-receipt-link">
+                57 tools · 654 tests · live — verified on the ledger <span aria-hidden="true">→</span>
+              </Link>
+            </motion.aside>
           </div>
-
-          <motion.figure
-            className="v4-hero-portrait"
-            initial={reduceMotion ? false : { opacity: 1, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.75, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Image
-              src="/images/hope-profile.jpg"
-              alt="Hope Atina"
-              fill
-              priority
-              sizes="(min-width: 1000px) 28vw, 42vw"
-            />
-            <figcaption>
-              <span>Houston</span>
-              <span>Cameroonian roots</span>
-            </figcaption>
-          </motion.figure>
 
           <div className="v4-hero-register" aria-label="Working modes">
             <span>Systems</span>
@@ -387,11 +356,11 @@ export default function Home() {
         </section>
 
         <section className="v4-home-close v4-motif-backed">
-          <span>Depth becomes visible through inspection.</span>
-          <h2>Bring me the system that needs to become coherent.</h2>
+          <span>Watch the thread hold as you leave this page.</span>
+          <h2>Everything above has a receipt. Ask for the one you need.</h2>
           <div>
+            <TextLink href="/proof">See the receipts</TextLink>
             <TextLink href="mailto:hopeatina@gmail.com" external>Start a conversation</TextLink>
-            <TextLink href="/projects">Inspect the work</TextLink>
           </div>
         </section>
       </main>

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import {
   CausalFlow,
   ContinuityPlayhead,
@@ -8,6 +9,7 @@ import {
   SectionSignal,
   TextLink,
 } from "./V4Primitives";
+import { PROOF_SCORE_LABELS, PROOF_SCORE_ORDER, getProofReceipt } from "@/data/proof";
 import MaterialThreadField, { ThreadStory } from "@/components/v5/MaterialThreadField";
 import TechnologyAtlas, { ToolEvidence } from "@/components/v5/TechnologyAtlas";
 
@@ -52,7 +54,7 @@ interface CaseStudyNarrativeProps {
   title: string;
   subtitle: string;
   introduction: string;
-  facts: Array<{ label: string; value: string }>;
+  facts: Array<{ label: string; value: string; note?: string }>;
   heroProof: NarrativeProof;
   problem: NarrativeBlock;
   insight: NarrativeBlock;
@@ -60,6 +62,8 @@ interface CaseStudyNarrativeProps {
   flow: Array<{ glyph: GlyphName; label: string; detail: string; tone?: "heat" | "cold" }>;
   system?: SystemChapter;
   proofs: NarrativeProof[];
+  /** Ledger receipts backing this case — slugs resolved against the proof data. */
+  receiptSlugs?: string[];
   learning: NarrativeBlock;
   primaryLink: { href: string; label: string; external?: boolean };
   secondaryLink?: { href: string; label: string; external?: boolean };
@@ -222,6 +226,7 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
               <div key={fact.label}>
                 <span>{fact.label}</span>
                 <strong>{fact.value}</strong>
+                {fact.note ? <em className="v4-disclosure">{fact.note}</em> : null}
               </div>
             ))}
           </div>
@@ -258,6 +263,30 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
 
         <section className="v4-proof-field v4-motif-backed">
           <LivingMotif variant="aperture" className="v4-section-motif" />
+          {props.receiptSlugs && props.receiptSlugs.length > 0 ? (
+            <div className="v4-case-receipts" aria-label="Ledger receipts for this system">
+              <span className="v4-case-receipts-label">On the ledger</span>
+              {props.receiptSlugs.map((slug) => {
+                const receipt = getProofReceipt(slug);
+                if (!receipt) return null;
+                return (
+                  <Link href={`/proof/${receipt.slug}`} key={slug} className="v4-case-receipt">
+                    <span className="v4-proof-score" aria-label={`Proof score ${receipt.score.length} of 6`}>
+                      {PROOF_SCORE_ORDER.map((key) => (
+                        <i key={key} className={`${receipt.score.includes(key) ? "is-earned" : ""} ${key === "external" ? "is-external" : ""}`}>
+                          {PROOF_SCORE_LABELS[key].short}
+                        </i>
+                      ))}
+                    </span>
+                    <b>Receipt {receipt.index}</b>
+                    <span className="v4-case-receipt-title">{receipt.title}</span>
+                    <i aria-hidden="true">&rarr;</i>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : null}
+
           <SectionSignal index={props.system ? "05" : "04"}>Authentic proof</SectionSignal>
           <div className="v4-proof-grid">
             {props.proofs.map((proof, index) => (

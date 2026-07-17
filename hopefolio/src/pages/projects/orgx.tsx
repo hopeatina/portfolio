@@ -268,6 +268,7 @@ export default function OrgXPage() {
           },
         ],
       }}
+      receiptSlugs={["orgx-mcp-server", "autonomous-initiative-benchmark"]}
       proofs={[
         {
           src: "/images/case-studies/orgx-v4/live-desk.png",

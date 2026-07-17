@@ -163,6 +163,7 @@ export default function OrgXForOpenClawPage() {
           { name: "GitHub", icon: "github", category: "Proof", project: "Published plugin", reason: "The public plugin source, tests, checks, and releases distinguish the OrgX integration from OpenClaw itself." },
         ],
       }}
+      receiptSlugs={["orgx-mcp-server"]}
       proofs={[
         {
           src: "/images/case-studies/orgx-openclaw-v4/mission-control.png",

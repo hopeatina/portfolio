@@ -12,8 +12,8 @@ export default function AlmaPage() {
       introduction="Alma is the proof that I can own long-running backend systems where privacy, auditability, adoption, and reliability are not separate requirements. They are the product boundary."
       facts={[
         { label: "Constraint", value: "HIPAA production" },
-        { label: "Adoption", value: "72% reassessments · self-reported, internal metrics" },
-        { label: "Reliability", value: "20% fewer errors · self-reported, internal metrics" },
+        { label: "Adoption", value: "72% reassessments", note: "self-reported · internal metrics" },
+        { label: "Reliability", value: "20% fewer errors", note: "self-reported · internal metrics" },
         { label: "Current", value: "Spring Health integration" },
       ]}
       heroProof={{
