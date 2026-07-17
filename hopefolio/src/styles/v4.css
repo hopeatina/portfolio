@@ -5104,3 +5104,150 @@ body::before {
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
+
+/* ---- the knot mark: the material answering the selection ---- */
+.v5-thread-knotmark circle {
+  fill: none;
+  stroke: var(--v4-signal);
+  stroke-width: 1.6;
+}
+
+.v5-thread-knotmark circle.is-core { fill: var(--v4-signal); stroke: none; }
+
+.v5-thread-knotmark path {
+  stroke: var(--v4-heat);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  fill: none;
+}
+
+/* ============================================================
+   Life thread — the biography and the metaphor, one drawing
+   ============================================================ */
+
+.v4-life-thread {
+  max-width: var(--v4-page);
+  margin: 0 auto;
+  padding: clamp(3.5rem, 8vh, 6rem) clamp(1.2rem, 4.5vw, 5rem) 0;
+}
+
+.v4-life-thread-heading { max-width: 46rem; margin-bottom: clamp(2rem, 5vh, 3rem); }
+
+.v4-life-thread-heading h2 {
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.9rem;
+}
+
+.v4-life-thread-heading p { margin: 0; color: var(--v4-mineral-soft); max-width: 36rem; }
+
+.v4-life-thread-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.6rem, 4vh, 2.6rem);
+}
+
+/* the drawn thread connecting the chapters */
+.v4-life-thread-list::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(183, 243, 74, 0.7),
+    rgba(214, 154, 69, 0.55) 38%,
+    rgba(183, 243, 74, 0.5) 66%,
+    var(--v4-signal)
+  );
+}
+
+.v4-life-thread-list li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.v4-life-thread-list li .v4-system-glyph {
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  color: var(--v4-signal);
+  background: var(--v4-carbon);
+  border: 1px solid var(--v4-rule-strong);
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+
+.v4-life-thread-list li:nth-child(2) .v4-system-glyph { color: var(--v4-ochre); }
+
+.v4-life-thread-list li > div { max-width: 44rem; padding-top: 0.2rem; }
+
+.v4-life-thread-list li span {
+  display: block;
+  font-variation-settings: "MONO" 1;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--v4-dim);
+  margin-bottom: 0.4rem;
+}
+
+.v4-life-thread-list li h3 {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  letter-spacing: -0.01em;
+}
+
+.v4-life-thread-list li p { margin: 0; color: var(--v4-mineral-soft); font-size: 0.94rem; line-height: 1.6; }
+
+/* ---- terminal-first hero signature (PerfPulse) ---- */
+.v4-hero-terminal {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.9rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--v4-rule-strong);
+  background: rgba(8, 8, 6, 0.8);
+}
+
+.v4-hero-terminal code {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.82rem;
+  color: var(--v4-mineral);
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.v4-hero-terminal code span { color: var(--v4-signal); }
+
+.v4-hero-terminal button {
+  font-variation-settings: "MONO" 1;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--v4-signal);
+  background: transparent;
+  border: 1px solid rgba(183, 243, 74, 0.5);
+  border-radius: 2px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+}
+
+.v4-hero-terminal button:hover { background: rgba(183, 243, 74, 0.08); }
+
+.v4-hero-terminal .v4-disclosure { flex-basis: 100%; margin-top: 0.1rem; }

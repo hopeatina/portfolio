@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 import Link from "next/link";
 import {
   CausalFlow,
@@ -55,6 +56,8 @@ interface CaseStudyNarrativeProps {
   subtitle: string;
   introduction: string;
   facts: Array<{ label: string; value: string; note?: string }>;
+  /** Terminal-first signature move: a copyable install/run command in the hero. */
+  heroTerminal?: { command: string; note?: string };
   heroProof: NarrativeProof;
   problem: NarrativeBlock;
   insight: NarrativeBlock;
@@ -192,6 +195,31 @@ function NarrativeCopy({ block }: { block: NarrativeBlock }) {
   );
 }
 
+function HeroTerminal({ command, note }: { command: string; note?: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div className="v4-hero-terminal">
+      <code>
+        <span aria-hidden="true">$ </span>
+        {command}
+      </code>
+      <button
+        type="button"
+        onClick={() => {
+          navigator.clipboard?.writeText(command).then(() => {
+            setCopied(true);
+            window.setTimeout(() => setCopied(false), 1800);
+          });
+        }}
+        aria-label={copied ? "Copied" : "Copy install command"}
+      >
+        {copied ? "copied" : "copy"}
+      </button>
+      {note ? <em className="v4-disclosure">{note}</em> : null}
+    </div>
+  );
+}
+
 export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
   return (
     <>
@@ -229,6 +257,9 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
                 {fact.note ? <em className="v4-disclosure">{fact.note}</em> : null}
               </div>
             ))}
+            {props.heroTerminal ? (
+              <HeroTerminal command={props.heroTerminal.command} note={props.heroTerminal.note} />
+            ) : null}
           </div>
 
           <EvidenceSpecimen {...props.heroProof} priority className="v4-case-hero-proof" />

@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 export interface ThreadStory {
   id: string;
@@ -21,13 +21,46 @@ interface MaterialThreadFieldProps {
   compact?: boolean;
 }
 
-const paths = [
-  "M-50 96C80 22 168 176 302 106S520 14 878 98",
-  "M-42 170C108 258 190 40 344 154S588 266 870 146",
-  "M-60 238C110 142 206 300 368 220S618 92 876 232",
-  "M104 -32C184 84 224 172 308 326",
-  "M646 -22C564 98 554 208 506 328",
+const SAMPLES = 44;
+const VIEW_W = 820;
+const KNOT_Y = 152;
+
+/** Base ribbon waves — five strands of the woven field. */
+const RIBBONS = [
+  (u: number) => 96 + Math.sin(u * Math.PI * 2.2 + 0.4) * 62,
+  (u: number) => 152 + Math.sin(u * Math.PI * 2.6 + 2.1) * 74,
+  (u: number) => 216 + Math.sin(u * Math.PI * 2.0 + 4.0) * 58,
+  (u: number) => 120 + Math.sin(u * Math.PI * 3.1 + 1.2) * 40,
+  (u: number) => 196 + Math.sin(u * Math.PI * 2.9 + 5.1) * 44,
 ];
+
+function bump(u: number, center: number, width: number) {
+  const d = Math.abs(u - center) / width;
+  return d >= 1 ? 0 : (1 - d * d) * (1 - d * d);
+}
+
+/**
+ * The material answers the selection: strands cinch into a knot at the active
+ * decision's position — "pressure reveals structure" as geometry, not a caption.
+ */
+function ribbonPath(ribbonIndex: number, knotU: number | null, cinch: number) {
+  const wave = RIBBONS[ribbonIndex];
+  let d = "";
+  for (let i = 0; i < SAMPLES; i++) {
+    const u = i / (SAMPLES - 1);
+    let y = wave(u);
+    if (knotU !== null) {
+      y = y + (KNOT_Y - y) * cinch * bump(u, knotU, 0.17);
+    }
+    const x = -40 + (VIEW_W + 80) * u;
+    d += `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`;
+  }
+  return d;
+}
+
+function knotUFor(index: number, count: number) {
+  return (18 + index * (64 / Math.max(1, count - 1))) / 100;
+}
 
 export default function MaterialThreadField({
   stories,
@@ -46,6 +79,65 @@ export default function MaterialThreadField({
   const active = stories.find((story) => story.id === activeId) ?? stories[0];
 
   if (!active) return null;
+
+  const activeIndex = Math.max(0, stories.findIndex((story) => story.id === active.id));
+  const knotU = knotUFor(activeIndex, stories.length);
+  const cinch = active.tone === "heat" ? -0.55 : 0.82; // heat = strain apart, else cinch tight
+  const initialDs = RIBBONS.map((_, index) => ribbonPath(index, knotU, cinch));
+  const knotX = -40 + (VIEW_W + 80) * knotU;
+
+  // The re-weave: interpolate (knotU, cinch) imperatively — the material answers
+  // the selection with real motion, not a caption swap.
+  const groupsRef = useRef<Array<SVGGElement | null>>([]);
+  const markRef = useRef<SVGGElement | null>(null);
+  const morphState = useRef({ u: knotU, c: cinch, raf: 0 });
+
+  useEffect(() => {
+    const state = morphState.current;
+    const fromU = state.u;
+    const fromC = state.c;
+    const apply = (u: number, c: number) => {
+      state.u = u;
+      state.c = c;
+      const ds = RIBBONS.map((_, index) => ribbonPath(index, u, c));
+      for (const group of groupsRef.current) {
+        if (!group) continue;
+        const nodes = group.querySelectorAll("path");
+        nodes.forEach((node, index) => {
+          if (ds[index]) node.setAttribute("d", ds[index]);
+        });
+      }
+      if (markRef.current) {
+        const x = -40 + (VIEW_W + 80) * u;
+        markRef.current.style.transform = `translate(${x}px, ${KNOT_Y}px)`;
+      }
+    };
+
+    cancelAnimationFrame(state.raf);
+    if (reduceMotion || (fromU === knotU && fromC === cinch)) {
+      apply(knotU, cinch);
+      return;
+    }
+
+    const started = performance.now();
+    const duration = 620;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - started) / duration);
+      const e = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      apply(fromU + (knotU - fromU) * e, fromC + (cinch - fromC) * e);
+      if (t < 1) state.raf = requestAnimationFrame(tick);
+    };
+    state.raf = requestAnimationFrame(tick);
+    // rAF is throttled/suspended in background tabs — guarantee the final state lands.
+    const settle = window.setTimeout(() => {
+      if (state.u !== knotU || state.c !== cinch) apply(knotU, cinch);
+    }, duration + 120);
+    return () => {
+      cancelAnimationFrame(state.raf);
+      window.clearTimeout(settle);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [knotU, cinch, reduceMotion]);
 
   return (
     <section className={`v5-thread-field ${compact ? "is-compact" : ""} ${className}`}>
@@ -85,13 +177,21 @@ export default function MaterialThreadField({
             </filter>
           </defs>
 
-          <g className="v5-thread-shadow" filter={`url(#${rawId}-depth)`}>
-            {paths.map((path, index) => <path d={path} key={`shadow-${index}`} />)}
+          <g
+            className="v5-thread-shadow"
+            filter={`url(#${rawId}-depth)`}
+            ref={(node) => { groupsRef.current[0] = node; }}
+          >
+            {initialDs.map((d, index) => <path d={d} key={`shadow-${index}`} />)}
           </g>
-          <g className="v5-thread-ribbon" filter={`url(#${rawId}-rough)`}>
-            {paths.map((path, index) => (
+          <g
+            className="v5-thread-ribbon"
+            filter={`url(#${rawId}-rough)`}
+            ref={(node) => { groupsRef.current[1] = node; }}
+          >
+            {initialDs.map((d, index) => (
               <motion.path
-                d={path}
+                d={d}
                 key={`ribbon-${index}`}
                 initial={reduceMotion ? false : { pathLength: 0, opacity: 0.25 }}
                 whileInView={{ pathLength: 1, opacity: 1 }}
@@ -100,10 +200,27 @@ export default function MaterialThreadField({
               />
             ))}
           </g>
-          <g className="v5-thread-highlight" stroke={`url(#${rawId}-fiber)`}>
-            {paths.map((path, index) => <path d={path} key={`highlight-${index}`} />)}
+          <g
+            className="v5-thread-highlight"
+            stroke={`url(#${rawId}-fiber)`}
+            ref={(node) => { groupsRef.current[2] = node; }}
+          >
+            {initialDs.map((d, index) => <path d={d} key={`highlight-${index}`} />)}
           </g>
-          <path className="v5-thread-snap" d="M352 154l18-18m-18 18 20 17" />
+          <g
+            className={`v5-thread-knotmark ${active.tone === "heat" ? "is-heat" : ""}`}
+            ref={markRef}
+            style={{ transform: `translate(${knotX}px, ${KNOT_Y}px)` }}
+          >
+            {active.tone === "heat" ? (
+              <path d="M-11 -11 L11 11 M-11 11 L11 -11" />
+            ) : (
+              <>
+                <circle r="9" />
+                <circle r="3.2" className="is-core" />
+              </>
+            )}
+          </g>
         </motion.svg>
 
         <div className="v5-thread-knots" role="tablist" aria-label="Inspect the decisions in the weave">

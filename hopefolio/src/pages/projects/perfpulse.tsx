@@ -151,6 +151,10 @@ export default function PerfPulsePage() {
           { name: "Homebrew", mark: "BR", category: "Delivery", project: "Distribution", reason: "One familiar command closes the final mile between discovering the tool and using it under pressure." },
         ],
       }}
+      heroTerminal={{
+        command: "brew install hopeatina/perf-pulse/perf-pulse",
+        note: "public tap · pinned SHA-256 · the install path is the product",
+      }}
       receiptSlugs={["perf-pulse-homebrew"]}
       proofs={[
         {
