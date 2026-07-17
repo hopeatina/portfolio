@@ -1,0 +1,17 @@
+{
+  "name": "orgx-carousel-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OrgX TikTok carousel engine — daily viral-carousel publisher + self-learning experimentation loop.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "generate": "node bin/generate.mjs",
+    "preview": "node bin/preview.mjs",
+    "learn": "node bin/learn.mjs",
+    "channels": "node bin/channels.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.58.2"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "id": "orgx-brand-pack",
+  "name": "OrgX Brand Pack",
+  "version": "2.0.0",
+  "supersedes": "orgx-logo-pack@1.0.0",
+  "generatedAt": "2026-06-26",
+  "northStar": "Instrument-grade matte control surface where the OrgX gradient is EMISSIVE light, never glossy reflection. Resolves the tension between the luminous 3D mark and the matte product system: the world is machined and dark; light is the one reserved reward, and it glows from within.",
+
+  "notes": {
+    "markSource": "The repository contains PNG masters for the OrgX mark, but no native vector source file for the mark itself.",
+    "svgStatus": "orgx-mark.svg is an SVG wrapper around the canonical PNG mark. orgx-wordmark.svg is a true SVG path export built from the repo's Geist font.",
+    "v2": "v1 (orgx-logo-pack) was a logo-asset manifest. v2 adds materiality, depth, light behavior, motion, and the UI-vs-film grain distinction required for brand-true motion/film work. Asset paths preserved from v1."
+  },
+
+  "assets": {
+    "markPng": "/orgx-logo.png",
+    "markSvg": "/orgx-mark.svg",
+    "wordmarkSvg": "/orgx-wordmark.svg",
+    "logoSvg": "/orgx-logo.svg",
+    "logoDarkSvg": "/orgx-logo-dark.svg",
+    "logoLightSvg": "/orgx-logo-light.svg"
+  },
+
+  "materialResolution": {
+    "principle": "Matte world + emissive accent. The mark's gloss is honored as LUMINESCENCE (edge-light, underglow, the gradient line, the gate bloom), not as glossy SaaS plastic.",
+    "world": "matte machined dark — dark-aluminum / smoked-glass / precision-cut bezels; flat, never gradient-washed",
+    "accentBehavior": "emitted, not reflected — light pools, glowing seams, inner-glow; appears only as signal/identity/reward",
+    "heroObject": "the OrgX mark is the ONE permitted glossy, dimensional, specular artifact — used sparingly, like a hero product render",
+    "honors": ["philosophy.md materiality (matte instrument panel)", "the luminous 3D mark"]
+  },
+
+  "color": {
+    "surface": "#02040A",
+    "surfaceLadder": ["#02040A", "#070B12", "#0A0F16", "#121821"],
+    "ink": "#F2F7FF",
+    "textOnDark": "#E0E0E0",
+    "inkMuted": "rgba(255,255,255,0.5)",
+    "border": "rgba(255,255,255,0.08)",
+    "borderStrong": "rgba(255,255,255,0.15)",
+    "signatureGradient": {
+      "stops": ["#FFE066", "#BFFF00", "#4AE08C", "#14B8A6", "#0AD4C4"],
+      "role": "RESERVED reward energy — the only place warm-lime→teal→cyan appears; it is light, not fill",
+      "angle": "diagonal, mark-knot direction (yellow top-left → cyan bottom-right)"
+    },
+    "statusDark": {
+      "lime": "#D4ED31",
+      "teal": "#00C9A7",
+      "cyan": "#06B6D4",
+      "danger": "#F43F5E",
+      "warning": "#FBBF24",
+      "iris": "#6366F1"
+    },
+    "domainPrimaries": {
+      "execution_lime": "191,255,0",
+      "health_teal": "0,201,167",
+      "attention_amber": "251,191,36",
+      "creation_iris": "99,102,241"
+    },
+    "reservedRewardForFilm": "teal→cyan emissive — appears NOWHERE until the gate-pass peak; red (#F43F5E) appears exactly once (the leak)"
+  },
+
+  "depthModel": {
+    "layers": ["page void (deepest, subtle 20px grid + radial primary glow)", "card (one elevation, single shadow)", "well (recessed inset)", "overlay (only floating layer)"],
+    "rule": "shallow deliberate depth — no elevation soup, no stacked cards, no floating badges",
+    "shadowDark": "0 16px 40px -10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)"
+  },
+
+  "light": {
+    "edgeLight": "1px gradient seam across card top (the signature OrgX detail) — linear-gradient(90deg, transparent, rgba(primary,0.5), transparent)",
+    "gridGlow": "radial-gradient(circle at 50% 0%, rgba(primary,0.08), transparent 60%) over a 20px matte grid",
+    "underglow": "for film: a soft pool of the reserved gradient beneath the hero card (EPTA WOLTAO/Torque move) — emissive, diffuse, low",
+    "bloomPolicy": "bloom + contrast spike ONLY on the peak frame (gate pass); world stays matte and even elsewhere"
+  },
+
+  "typography": {
+    "primary": "Geist",
+    "fontSource": "/app/fonts/GeistVF.woff",
+    "wordmarkWeight": 620,
+    "wordmarkTracking": -30,
+    "tracking": -30,
+    "mono": "JetBrains Mono",
+    "voices": {
+      "label": "mono, 0.55-0.65rem, 600-700, +0.08-0.14em, uppercase, muted",
+      "value": "Geist/mono, 0.88-2rem, 600-700, -0.02 to -0.06em",
+      "hero": "Geist, 140-280px display for film headlines, tracking -1 to -3"
+    },
+    "filmHeadline": "Geist display, brutal scale contrast (hero word >=6:1 vs label), mask/clip reveal not opacity fade"
+  },
+
+  "motion": {
+    "uiEase": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "filmHouseEase": "cubic-bezier(0.22, 1, 0.36, 1)",
+    "personality": "clinical — fast attack, smooth settle; NO bounce, NO overshoot on data, NO confetti",
+    "exception": "Process/scaffold surfaces only: controlled emergence (orb drift, sparkle) — the one place OrgX celebrates",
+    "durations": {"micro": "160ms", "standard": "220ms", "ring": "360ms", "entrance": "600ms", "ambient": "1.8-2.4s"}
+  },
+
+  "uiVsFilm": {
+    "ui": "matte, NO grain, NO noise, NO glossy fills, clinical motion, surveillance-calm — per philosophy.md",
+    "film": "SAME matte world, but a cinematic grade LAYER on top: 2-5% film grain, vignette, faint chromatic aberration at edges, bloom on the peak — to defeat the clean-vector AI look. Grain lives in the film grade, never in shipped UI.",
+    "rule": "the product UI shown inside the film must remain pixel-real and matte; the grain/bloom are a post layer over the whole frame, not a UI texture"
+  },
+
+  "filmMaterialDirection": {
+    "void": "near-black #02040A, depth haze, subtle machined grid barely visible",
+    "cards": "smoked-glass / dark-aluminum, precision bezels, matte faces, 1px emissive edge-light seam",
+    "accentLight": "lime->teal->cyan underglow pooling beneath the hero card; emissive, never a glossy reflection",
+    "heroMark": "the glossy 3D OrgX knot as the one specular object — reserved for the lock/peak",
+    "negativePrompt_for_genVideo": "no text, no glossy plastic, no rainbow, no neon clutter, no lens flare spam, no warped UI glyphs, no busy background"
+  },
+
+  "usage": {
+    "clearSpace": "24px minimum",
+    "minimumMarkSize": "32px",
+    "minimumFullLogoSize": "80px",
+    "reservedColorDiscipline": "the lime-teal-cyan gradient is signal/reward only — never decorative headers, never tinted backgrounds, never accent section labels"
+  }
+}
