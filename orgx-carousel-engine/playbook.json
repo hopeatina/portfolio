@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-07-16T23:17:03.520Z",
+    "updated": "2026-07-23T15:02:15.084Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1108,9 +1108,9 @@
         ],
         "notes": "KEEP. This is the strongest kind of BIP concept: a real contrarian thesis (memory vs continuity) grounded in ACTUAL OrgX architecture — work graph, initiative→workstream→task→decision→receipt, approvals, the quality bar. Every one of those maps to real mechanisms, so the specificity is doing the credibility work, not invented traction. No fabricated metrics, no user counts, no fake benchmarks. The 'someone in my dms' opener is a soft anecdote-device, not a testimonial or a traction claim — low risk, standard BIP, leave it. If you want to be extra-clean you could make it 'someone asked me' but it's not required.\\n\\nHook: the open-loop design is smart — slide 1 negates the assumed problem, subtext ('patching the wrong bug') holds the loop, and 'continuity' isn't revealed until the turn. Don't let a redesign collapse hook+subtext onto slide 1; the delay is what makes slide 4 land. I kept the original headline — I couldn't beat it without either breaking the loop or getting wordier than a billboard allows.\\n\\nSave-worthy line: slide 4's MEMORY vs CONTINUITY column + the caption's 'memory = what did we say / continuity = why does this exist + what's the bar + who approves' is the screenshot. Make sure the slide carries that same '+' breakdown, not just the two words.\\n\\nOnly real fix before ship: the em-dash 3-item list in the caption (kill-list violation). One-line edit."
       },
-      "status": "ready",
-      "uses": 0,
-      "last_used": null,
+      "status": "used",
+      "uses": 1,
+      "last_used": "2026-07-23",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },

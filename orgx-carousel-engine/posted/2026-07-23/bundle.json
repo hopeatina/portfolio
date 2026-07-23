@@ -1,0 +1,167 @@
+{
+  "experiment": {
+    "id": "2026-07-23-orgx-bip-memory-vs-continuity",
+    "date": "2026-07-23",
+    "service": "tiktok",
+    "concept_id": "orgx-bip-memory-vs-continuity",
+    "pillar": "build-in-public",
+    "hook_type": "contrarian claim",
+    "slide_count": 8,
+    "topic_tags": [
+      "continuity-vs-memory",
+      "work-graph",
+      "multi-agent",
+      "reframe"
+    ],
+    "title": "Your agents don't have a memory problem",
+    "hook": "your agents don't have a memory problem.",
+    "hypothesis": "a single contrarian reframe (memory vs continuity) + a comment-bait CTA beats a build-log narrative for cold-reach engagement and shares",
+    "caption": "someone in my dms was like 'i just need my agents to remember more' and i sat with that for a second, because i used to think the exact same thing. and so we all keep reaching for the same fix — bigger context window, better retrieval, tighter summaries — and the agent still shows up to the next task not knowing what we already decided or what 'done' even means here. right? and that's when it hit me that remembering the conversation and remembering the work are two completely different problems. memory is 'what did we say.' continuity is 'why does this exist + what's the bar + who approves.' the chat can't hold that, because the chat ends. so orgx keeps it in a work graph underneath the client — decisions, approvals, receipts, the quality bar — and the agents read from that instead of from a transcript. anyway i keep watching people optimize the memory and skip the continuity entirely\n\n#aiagents #buildinpublic #multiagent #agentops #mcp #llm #devtools",
+    "hashtags": [
+      "#aiagents",
+      "#buildinpublic",
+      "#multiagent",
+      "#agentops",
+      "#mcp",
+      "#llm",
+      "#devtools"
+    ],
+    "image_files": [
+      "slide-01.png",
+      "slide-02.png",
+      "slide-03.png",
+      "slide-04.png",
+      "slide-05.png",
+      "slide-06.png",
+      "slide-07.png",
+      "slide-08.png"
+    ],
+    "image_urls": [
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-23/slide-01.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-23/slide-02.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-23/slide-03.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-23/slide-04.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-23/slide-05.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-23/slide-06.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-23/slide-07.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-23/slide-08.png"
+    ],
+    "status": "rendered",
+    "buffer_idea_id": null,
+    "metrics": null,
+    "success": null,
+    "created": "2026-07-23T15:02:15.084Z"
+  },
+  "carousel": {
+    "id": "orgx-bip-memory-vs-continuity",
+    "pillar": "build-in-public",
+    "pillarLabel": "Building OrgX",
+    "handle": "@useorgx",
+    "url": "useorgx.com",
+    "slides": [
+      {
+        "role": "hook",
+        "kicker": "hot take",
+        "headline": "your agents don't have a memory problem.",
+        "subtext": "you're patching the wrong bug.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "refresh",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "more context window. better RAG. longer summaries. still lost.",
+        "subtext": "",
+        "accentSignal": "danger",
+        "visual": {
+          "icon": "refresh",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "the felt problem",
+        "headline": "a summary tells the next agent what happened. not why it matters.",
+        "subtext": "",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "refresh",
+          "flow": false
+        }
+      },
+      {
+        "role": "turn",
+        "kicker": "the reframe",
+        "headline": "memory is about the conversation. continuity is about the goal.",
+        "subtext": "",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "refresh",
+          "flow": false
+        }
+      },
+      {
+        "role": "turn",
+        "kicker": "",
+        "headline": "the organization has to remember why the work exists. not the chat.",
+        "subtext": "",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "refresh",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "how it works",
+        "headline": "so OrgX keeps a work graph. goals, decisions, approvals, receipts. durable.",
+        "subtext": "",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "decision",
+          "flow": true,
+          "flowStep": 3
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "autonomy is useful. continuity is what makes it compound.",
+        "subtext": "",
+        "accentSignal": "lime",
+        "visual": {
+          "icon": "refresh",
+          "flow": false
+        }
+      },
+      {
+        "role": "cta",
+        "kicker": "fight me",
+        "headline": "am i wrong that everyone's solving memory when the bug is continuity?",
+        "subtext": "building it in public @ useorgx.com",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "refresh",
+          "flow": false
+        }
+      }
+    ]
+  },
+  "caption": {
+    "text": "someone in my dms was like 'i just need my agents to remember more' and i sat with that for a second, because i used to think the exact same thing. and so we all keep reaching for the same fix — bigger context window, better retrieval, tighter summaries — and the agent still shows up to the next task not knowing what we already decided or what 'done' even means here. right? and that's when it hit me that remembering the conversation and remembering the work are two completely different problems. memory is 'what did we say.' continuity is 'why does this exist + what's the bar + who approves.' the chat can't hold that, because the chat ends. so orgx keeps it in a work graph underneath the client — decisions, approvals, receipts, the quality bar — and the agents read from that instead of from a transcript. anyway i keep watching people optimize the memory and skip the continuity entirely\n\n#aiagents #buildinpublic #multiagent #agentops #mcp #llm #devtools",
+    "body": "someone in my dms was like 'i just need my agents to remember more' and i sat with that for a second, because i used to think the exact same thing. and so we all keep reaching for the same fix — bigger context window, better retrieval, tighter summaries — and the agent still shows up to the next task not knowing what we already decided or what 'done' even means here. right? and that's when it hit me that remembering the conversation and remembering the work are two completely different problems. memory is 'what did we say.' continuity is 'why does this exist + what's the bar + who approves.' the chat can't hold that, because the chat ends. so orgx keeps it in a work graph underneath the client — decisions, approvals, receipts, the quality bar — and the agents read from that instead of from a transcript. anyway i keep watching people optimize the memory and skip the continuity entirely",
+    "hashtags": [
+      "#aiagents",
+      "#buildinpublic",
+      "#multiagent",
+      "#agentops",
+      "#mcp",
+      "#llm",
+      "#devtools"
+    ],
+    "firstComment": "#aiagents #buildinpublic #multiagent #agentops #mcp #llm #devtools"
+  }
+}
