@@ -1,0 +1,175 @@
+{
+  "experiment": {
+    "id": "2026-07-16-orgx-bip-compiled-handoff",
+    "date": "2026-07-16",
+    "service": "tiktok",
+    "concept_id": "orgx-bip-compiled-handoff",
+    "pillar": "build-in-public",
+    "hook_type": "framework / list (save-bait)",
+    "slide_count": 8,
+    "topic_tags": [
+      "compiled-handoff",
+      "context-pack",
+      "handoff-pain",
+      "save-bait"
+    ],
+    "title": "The 7-field handoff that replaced my transcript dumps",
+    "hook": "7 fields. zero transcripts. that's my whole handoff.",
+    "hypothesis": "a numbered framework hook + one dense screenshot-able list slide drives saves and shares harder than a personal narrative arc does",
+    "caption": "i watched two of my agents 'collaborate' by one of them pasting a 300-message transcript to the other and it was so obviously broken. like the second agent had to reverse-engineer the goal, the decisions, what was already tried, all of it, from a wall of text. so i started writing down what a handoff actually needs to carry and it turned into 7 fields: goal, definition of done, decisions + why, permissions, budget, confidence, next action. that's the pack. structured context instead of 'here's everything we said, you figure out what mattered.' and the part that got me is once the handoff carries the why + the bar, work below the threshold just loops back before it ever burns my review time. the transcript was never the artifact. the compiled context is\n\n#buildinpublic #aiagents #multiagent #agentops #mcp #devtools #aiengineering",
+    "hashtags": [
+      "#buildinpublic",
+      "#aiagents",
+      "#multiagent",
+      "#agentops",
+      "#mcp",
+      "#devtools",
+      "#aiengineering"
+    ],
+    "image_files": [
+      "slide-01.png",
+      "slide-02.png",
+      "slide-03.png",
+      "slide-04.png",
+      "slide-05.png",
+      "slide-06.png",
+      "slide-07.png",
+      "slide-08.png"
+    ],
+    "image_urls": [
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-16/slide-01.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-16/slide-02.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-16/slide-03.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-16/slide-04.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-16/slide-05.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-16/slide-06.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-16/slide-07.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/codex/portfolio-film-v2/orgx-carousel-engine/posted/2026-07-16/slide-08.png"
+    ],
+    "status": "rendered",
+    "buffer_idea_id": null,
+    "metrics": null,
+    "success": null,
+    "created": "2026-07-16T23:17:03.519Z"
+  },
+  "carousel": {
+    "id": "orgx-bip-compiled-handoff",
+    "pillar": "build-in-public",
+    "pillarLabel": "Building OrgX",
+    "handle": "@useorgx",
+    "url": "useorgx.com",
+    "slides": [
+      {
+        "role": "hook",
+        "kicker": "steal this",
+        "headline": "7 fields. zero transcripts. that's my whole handoff.",
+        "subtext": "this is the entire handoff.",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "the wrong way",
+        "headline": "'here's the full chat log, good luck' isn't a handoff. it's a hazard.",
+        "subtext": "",
+        "accentSignal": "danger",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "the next agent shouldn't re-derive your goal from 400 messages.",
+        "subtext": "",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "the compiled handoff",
+        "headline": "the context pack. 7 fields, every time.",
+        "subtext": "",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        },
+        "items": [
+          "goal",
+          "definition of done",
+          "decisions + why",
+          "permissions",
+          "budget",
+          "confidence",
+          "next action"
+        ]
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "goal + definition of done. the why and the bar, up front.",
+        "subtext": "",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "decisions + why. permissions. budget. confidence. next action.",
+        "subtext": "",
+        "accentSignal": "lime",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "turn",
+        "kicker": "why it works",
+        "headline": "the next agent inherits judgment, not a novel to re-read.",
+        "subtext": "",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "cta",
+        "kicker": "save it",
+        "headline": "screenshot slide 4. use it on your next handoff.",
+        "subtext": "building OrgX in public @ useorgx.com",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      }
+    ]
+  },
+  "caption": {
+    "text": "i watched two of my agents 'collaborate' by one of them pasting a 300-message transcript to the other and it was so obviously broken. like the second agent had to reverse-engineer the goal, the decisions, what was already tried, all of it, from a wall of text. so i started writing down what a handoff actually needs to carry and it turned into 7 fields: goal, definition of done, decisions + why, permissions, budget, confidence, next action. that's the pack. structured context instead of 'here's everything we said, you figure out what mattered.' and the part that got me is once the handoff carries the why + the bar, work below the threshold just loops back before it ever burns my review time. the transcript was never the artifact. the compiled context is\n\n#buildinpublic #aiagents #multiagent #agentops #mcp #devtools #aiengineering",
+    "body": "i watched two of my agents 'collaborate' by one of them pasting a 300-message transcript to the other and it was so obviously broken. like the second agent had to reverse-engineer the goal, the decisions, what was already tried, all of it, from a wall of text. so i started writing down what a handoff actually needs to carry and it turned into 7 fields: goal, definition of done, decisions + why, permissions, budget, confidence, next action. that's the pack. structured context instead of 'here's everything we said, you figure out what mattered.' and the part that got me is once the handoff carries the why + the bar, work below the threshold just loops back before it ever burns my review time. the transcript was never the artifact. the compiled context is",
+    "hashtags": [
+      "#buildinpublic",
+      "#aiagents",
+      "#multiagent",
+      "#agentops",
+      "#mcp",
+      "#devtools",
+      "#aiengineering"
+    ],
+    "firstComment": "#buildinpublic #aiagents #multiagent #agentops #mcp #devtools #aiengineering"
+  }
+}

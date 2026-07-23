@@ -1,0 +1,36 @@
+{
+  "cadence": {
+    "postsPerDay": 1,
+    "timezone": "America/Chicago",
+    "note": "Cron lives in the GitHub Actions workflow. This is documentation of intent."
+  },
+  "publish": {
+    "mode": "review-queue",
+    "backend": "buffer-idea",
+    "services": ["tiktok"],
+    "bufferOrganizationId": "6248957fca837c62f84e2dcf",
+    "bufferGraphqlEndpoint": "https://graph.buffer.com",
+    "ideaGroupTitle": "TikTok carousels (auto)",
+    "note": "review-queue => creates a Buffer Idea (draft) tagged with the service. Never auto-publishes. Hope reviews + publishes from Buffer. Works even before TikTok is a connected channel, since idea.service is metadata."
+  },
+  "hosting": {
+    "mode": "git-raw",
+    "repo": "hopeatina/portfolio",
+    "branch": "main",
+    "pathPrefix": "orgx-carousel-engine/posted",
+    "note": "git-raw => slide PNGs are committed and served via raw.githubusercontent.com so Buffer can ingest them. Requires a PUBLIC repo. In CI, repo+branch come from GITHUB_REPOSITORY / GITHUB_REF_NAME."
+  },
+  "render": { "scale": 2 },
+  "selection": { "strategy": "thompson", "noveltyBoost": 1.6 },
+  "learning": {
+    "lookbackDays": 30,
+    "successMetric": "engagement_rate",
+    "minPostsForBaseline": 4,
+    "note": "Learner joins posts->experiments by date+service, computes a success signal vs the running baseline, and nudges the bandit Beta weights per pillar / hook_type / topic."
+  },
+  "llm": {
+    "enabled": false,
+    "model": "claude-opus-4-8",
+    "note": "Optional. If enabled AND ANTHROPIC_API_KEY is set, the daily run can author a fresh concept from the playbook formulas instead of drawing from the seed bank. Off by default => deterministic, uses the vetted seed bank."
+  }
+}

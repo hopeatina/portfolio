@@ -1,0 +1,87 @@
+name: OrgX carousel — daily publisher
+
+# Always-on cloud routine. Renders the day's OrgX TikTok carousel, commits the slides
+# (so raw.githubusercontent URLs resolve), and queues a review Idea into Buffer.
+# It NEVER auto-publishes — Hope reviews + publishes from Buffer's Ideas board.
+
+on:
+  schedule:
+    - cron: "17 14 * * *" # 14:17 UTC ≈ 9:17am America/Chicago. Off-minute on purpose.
+  workflow_dispatch:
+    inputs:
+      concept:
+        description: "Force a specific concept id (optional)"
+        required: false
+      author:
+        description: "Author a fresh concept via LLM (needs ANTHROPIC_API_KEY)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: orgx-carousel-daily
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: orgx-carousel-engine/package-lock.json
+
+      - name: Install deps
+        working-directory: orgx-carousel-engine
+        run: npm ci
+
+      - name: Install Chromium
+        working-directory: orgx-carousel-engine
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate + render carousel
+        working-directory: orgx-carousel-engine
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.concept }}" ]; then ARGS="$ARGS --concept ${{ github.event.inputs.concept }}"; fi
+          if [ "${{ github.event.inputs.author }}" = "true" ]; then ARGS="$ARGS --author"; fi
+          node bin/generate.mjs $ARGS
+
+      - name: Commit slides + state
+        run: |
+          git config user.name "orgx-carousel-bot"
+          git config user.email "actions@github.com"
+          git add orgx-carousel-engine/posted orgx-carousel-engine/state orgx-carousel-engine/playbook.json
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "carousel: render $(date -u +%F) [skip ci]"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            git push
+          else
+            echo "nothing to commit"
+          fi
+
+      - name: Wait for raw CDN
+        run: sleep 8
+
+      - name: Queue review Idea into Buffer
+        working-directory: orgx-carousel-engine
+        env:
+          BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+        run: node bin/queue.mjs
+
+      - name: Commit queue status
+        run: |
+          git add orgx-carousel-engine/state
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "carousel: queued $(date -u +%F) [skip ci]"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            git push
+          else
+            echo "no status change"
+          fi

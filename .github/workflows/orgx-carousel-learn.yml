@@ -1,0 +1,51 @@
+name: OrgX carousel — weekly learner
+
+# Always-on cloud routine. Pulls post performance from Buffer, joins it to the
+# experiment log, and nudges the playbook's bandit weights (which pillars / hooks /
+# topics get picked more often). Commits the updated playbook + a learning report.
+
+on:
+  schedule:
+    - cron: "23 15 * * 1" # Mondays 15:23 UTC. Off-minute.
+  workflow_dispatch: {}
+
+concurrency:
+  group: orgx-carousel-learn
+  cancel-in-progress: false
+
+jobs:
+  learn:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: orgx-carousel-engine/package-lock.json
+
+      - name: Install deps
+        working-directory: orgx-carousel-engine
+        run: npm ci
+
+      - name: Learn from results
+        working-directory: orgx-carousel-engine
+        env:
+          BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+        run: node bin/learn.mjs
+
+      - name: Commit playbook + report
+        run: |
+          git config user.name "orgx-carousel-bot"
+          git config user.email "actions@github.com"
+          git add orgx-carousel-engine/playbook.json orgx-carousel-engine/state orgx-carousel-engine/reports
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "carousel: learn $(date -u +%F) [skip ci]"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            git push
+          else
+            echo "nothing to learn yet"
+          fi
