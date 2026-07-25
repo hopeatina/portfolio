@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-07-24T14:59:28.954Z",
+    "updated": "2026-07-25T14:46:20.507Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1839,9 +1839,9 @@
         ],
         "notes": "Truth: clean. The '5 doors' are real workflow boundaries (Claude→Codex→Cursor, repo, client, today-you→next-week-you) and the proof slide names real OrgX primitives (initiatives/decisions/approvals/artifacts/receipts as a durable graph beneath the client). Zero fabricated traction — the 'i counted it once, five times in one afternoon' is a personal building-in-public rep, not an invented metric. Credibility engine is doing its job.\n\nVoice: caption is the strongest asset — story-first open ('i counted it once'), chains with and/so/because, drops tools casually, narrates the click in real time ('that's when it clicked that context isn't a transcript...'), and ends genuinely ROUGH ('anyway. five times in one afternoon, that number still'). No kill-list words. Slides are tight and lowercase-friendly. 'you are the fifth agent. and you forgot the why too.' is the standout gut-punch. 'context isn't a chat you scroll back through. it's a graph the org keeps' and 'the task outlives the chat' are the quotable spines.\n\nHook: strong reframe (leaking→dying at N specific doors) + personal 'this week' tag stops a skeptical scroll. The concept's own hypothesis concedes a slightly slower first-slide read vs a single emotional scene — fair, but the payoff of a numbered save-bait list is worth it. My revised headline subverts the exact phrase founders say ('I lost context') and folds the temporal punch into the headline itself, so the hook lands before the subtext loads — marginal but real improvement; original is already keep-worthy.\n\nVerdict: keep. High brand fit (this IS the OrgX thesis), high save potential (numbered framework + two quotable lines + a real product-state screenshot on slide 6), and it closes the loop visually (thread thinning at each door → passing through at full strength). One watch item: make slide 6 actually feel like real product state in render, or it reads as a feature list and undercuts the 'durable, not disposable' claim."
       },
-      "status": "ready",
-      "uses": 0,
-      "last_used": null,
+      "status": "used",
+      "uses": 1,
+      "last_used": "2026-07-25",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
