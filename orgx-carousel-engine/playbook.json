@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-07-27T15:21:00.049Z",
+    "updated": "2026-07-28T15:07:40.618Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1943,9 +1943,9 @@
         ],
         "notes": "Strong keeper. Clears the truth constraint cleanly: zero fabricated metrics/users/revenue/testimonials. The credibility comes from a true mental model (the 7-step loop), the real thesis ('the conversation was never supposed to remember, the org is'), and a real felt problem (agent handoff amnesia) — exactly the sanctioned credibility engine, not invented traction. Slide 5 is a genuine screenshot artifact and the numbered-loop format is purpose-built save-bait, matching the stated hypothesis. Caption is authentic Hope voice: person/story open, 'so'/'and'/'right?' chaining, casual '+' compression, real-time thinking, rough trail-off ending with no clean CTA. No kill-list words. Hook works via the self-indicting 7-vs-3 gap. Revised headline swaps 'runs the same 7-step loop / call it done' for 'runs a 7-step loop... run 3 and call it shipped' — 'shipped' cuts deeper for an AI-founder audience and tightens the accusation. Only soft spot is slide 6's abstraction relative to its neighbors; not disqualifying. Watch that the slide 7 'reps counter ticking up' visual never gets rendered with a fabricated number — keep it unlabeled/illustrative to stay truthful."
       },
-      "status": "ready",
-      "uses": 0,
-      "last_used": null,
+      "status": "used",
+      "uses": 1,
+      "last_used": "2026-07-28",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },

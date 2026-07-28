@@ -1,0 +1,167 @@
+{
+  "experiment": {
+    "id": "2026-07-28-the-loop-agents-break",
+    "date": "2026-07-28",
+    "service": "tiktok",
+    "concept_id": "the-loop-agents-break",
+    "pillar": "framework",
+    "hook_type": "framework-reveal",
+    "slide_count": 8,
+    "topic_tags": [
+      "the-loop",
+      "continuity",
+      "handoff-pain",
+      "work-graph"
+    ],
+    "title": "The 7-step loop your agents keep breaking",
+    "hook": "real work runs one 7-step loop. agents break it.",
+    "hypothesis": "a numbered save-bait framework (the 7-step loop) drives saves + follows better than a pure teardown for the mental-models pillar",
+    "caption": "watched an agent nail a task last week and then completely lose the thread the second I handed it to the next one. and I'm sitting there like, it didn't forget the WORK. it forgot why the work existed. goal + definition of done + the one decision that made the whole thing make sense, gone. so I started drawing it out and it's always the same shape: goal → plan → work → decision → artifact → proof → next action. seven steps, and every agent setup I've seen runs like four of them and calls it done. the transcript remembers what happened, nothing remembers why, and that's the whole bet with OrgX honestly, the conversation was never supposed to hold continuity, the org is. close that last arrow and every rep starts where the last one ended instead of from zero. anyway I keep finding new places the loop breaks\n\n#aiagents #buildinpublic #agentops #mcp #devtools #aiinfra #continuity",
+    "hashtags": [
+      "#aiagents",
+      "#buildinpublic",
+      "#agentops",
+      "#mcp",
+      "#devtools",
+      "#aiinfra",
+      "#continuity"
+    ],
+    "image_files": [
+      "slide-01.png",
+      "slide-02.png",
+      "slide-03.png",
+      "slide-04.png",
+      "slide-05.png",
+      "slide-06.png",
+      "slide-07.png",
+      "slide-08.png"
+    ],
+    "image_urls": [
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-28/slide-01.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-28/slide-02.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-28/slide-03.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-28/slide-04.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-28/slide-05.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-28/slide-06.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-28/slide-07.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-07-28/slide-08.png"
+    ],
+    "status": "rendered",
+    "buffer_idea_id": null,
+    "metrics": null,
+    "success": null,
+    "created": "2026-07-28T15:07:40.617Z"
+  },
+  "carousel": {
+    "id": "the-loop-agents-break",
+    "pillar": "framework",
+    "pillarLabel": "Mental model",
+    "handle": "@useorgx",
+    "url": "useorgx.com",
+    "slides": [
+      {
+        "role": "hook",
+        "kicker": "THE LOOP",
+        "headline": "real work runs one 7-step loop. agents break it.",
+        "subtext": "your agents run 3 of them and call it done.",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "the prompt starts strong. then the context falls off a cliff.",
+        "subtext": "goal, decisions, quality bar. gone by the next handoff.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "a new chat isn't a fresh start. it's amnesia.",
+        "subtext": "",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "turn",
+        "kicker": "THE REFRAME",
+        "headline": "the conversation was never supposed to remember. the org is.",
+        "subtext": "",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "THE 7 STEPS",
+        "headline": "goal → plan → work → decision → artifact → proof → next action",
+        "subtext": "break any arrow and the work forgets itself.",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": true,
+          "flowStep": 3
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "WHAT EACH STEP CARRIES",
+        "headline": "every step holds why it exists, not just what happened",
+        "subtext": "definition of done, the decision and the reason, the receipt.",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "close the last arrow and the loop compounds instead of resets",
+        "subtext": "the next action already knows everything the last one learned.",
+        "accentSignal": "lime",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "cta",
+        "kicker": "",
+        "headline": "which arrow does your setup break?",
+        "subtext": "the loop lives under the client at useorgx.com. follow for the rest.",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      }
+    ]
+  },
+  "caption": {
+    "text": "watched an agent nail a task last week and then completely lose the thread the second I handed it to the next one. and I'm sitting there like, it didn't forget the WORK. it forgot why the work existed. goal + definition of done + the one decision that made the whole thing make sense, gone. so I started drawing it out and it's always the same shape: goal → plan → work → decision → artifact → proof → next action. seven steps, and every agent setup I've seen runs like four of them and calls it done. the transcript remembers what happened, nothing remembers why, and that's the whole bet with OrgX honestly, the conversation was never supposed to hold continuity, the org is. close that last arrow and every rep starts where the last one ended instead of from zero. anyway I keep finding new places the loop breaks\n\n#aiagents #buildinpublic #agentops #mcp #devtools #aiinfra #continuity",
+    "body": "watched an agent nail a task last week and then completely lose the thread the second I handed it to the next one. and I'm sitting there like, it didn't forget the WORK. it forgot why the work existed. goal + definition of done + the one decision that made the whole thing make sense, gone. so I started drawing it out and it's always the same shape: goal → plan → work → decision → artifact → proof → next action. seven steps, and every agent setup I've seen runs like four of them and calls it done. the transcript remembers what happened, nothing remembers why, and that's the whole bet with OrgX honestly, the conversation was never supposed to hold continuity, the org is. close that last arrow and every rep starts where the last one ended instead of from zero. anyway I keep finding new places the loop breaks",
+    "hashtags": [
+      "#aiagents",
+      "#buildinpublic",
+      "#agentops",
+      "#mcp",
+      "#devtools",
+      "#aiinfra",
+      "#continuity"
+    ],
+    "firstComment": "#aiagents #buildinpublic #agentops #mcp #devtools #aiinfra #continuity"
+  }
+}
