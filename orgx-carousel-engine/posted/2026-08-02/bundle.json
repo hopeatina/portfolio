@@ -1,0 +1,161 @@
+{
+  "experiment": {
+    "id": "2026-08-02-felt-handoff-why",
+    "date": "2026-08-02",
+    "service": "tiktok",
+    "concept_id": "felt-handoff-why",
+    "pillar": "pain",
+    "hook_type": "callout-mistake",
+    "slide_count": 7,
+    "topic_tags": [
+      "handoff-pain",
+      "context-pack",
+      "the-why"
+    ],
+    "title": "you didn't lose the code, you lost the why",
+    "hook": "the code survived the handoff. the why didn't.",
+    "hypothesis": "a 'you didn't lose X, you lost Y' reframe hook + a screenshot-worthy context-pack field list beats a straight product explainer for cold saves",
+    "caption": "watched a friend hand a half-built feature from Claude to Codex last week and the second agent just confidently rebuilt the thing they'd already decided NOT to build. and he's scrolling back through the chat like where did i say that, and the answer is he didn't, it was never in the chat, it was in his head. that's the part nobody talks about — the transcript keeps every keystroke and none of the why. so you paste 10k tokens of conversation into the next agent and it's technically 'context' but it can't act on any of it, doesn't know the definition of done or the three things you already ruled out or how much budget is left. and so i keep landing on the same thing: the prompt was the wrong primitive. the conversation can't hold the goal across a boundary, the org has to — a compiled handoff, goal + decisions + why + permissions + next action, passed as structure instead of a chat dump. and once you see it you can't unsee it, every handoff you've ever done was really just\n\n#aiagents #claudeai #codex #buildinpublic #devtools #aiengineering #multiagent",
+    "hashtags": [
+      "#aiagents",
+      "#claudeai",
+      "#codex",
+      "#buildinpublic",
+      "#devtools",
+      "#aiengineering",
+      "#multiagent"
+    ],
+    "image_files": [
+      "slide-01.png",
+      "slide-02.png",
+      "slide-03.png",
+      "slide-04.png",
+      "slide-05.png",
+      "slide-06.png",
+      "slide-07.png"
+    ],
+    "image_urls": [
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-02/slide-01.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-02/slide-02.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-02/slide-03.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-02/slide-04.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-02/slide-05.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-02/slide-06.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-02/slide-07.png"
+    ],
+    "status": "rendered",
+    "buffer_idea_id": null,
+    "metrics": null,
+    "success": null,
+    "created": "2026-08-02T14:46:27.214Z"
+  },
+  "carousel": {
+    "id": "felt-handoff-why",
+    "pillar": "pain",
+    "pillarLabel": "The problem",
+    "handle": "@useorgx",
+    "url": "useorgx.com",
+    "slides": [
+      {
+        "role": "hook",
+        "kicker": "the handoff",
+        "headline": "the code survived the handoff. the why didn't.",
+        "subtext": "nobody noticed until the next agent confidently shipped the wrong thing.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "monday, 9am",
+        "headline": "you paste the transcript into the next agent and pray.",
+        "subtext": "10k tokens of chat. zero decisions it can actually act on.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "the goal lived in your head. the chat only kept the keystrokes.",
+        "subtext": "so agent two optimizes the wrong thing, and it looks certain doing it.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "turn",
+        "kicker": "the reframe",
+        "headline": "the prompt was the wrong primitive.",
+        "subtext": "the conversation can't remember why the work exists. the organization has to.",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "context pack",
+        "headline": "handoffs should be compiled, not copy-pasted.",
+        "subtext": "",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        },
+        "items": [
+          "goal",
+          "definition of done",
+          "decisions + why",
+          "permissions",
+          "budget",
+          "confidence",
+          "next action"
+        ]
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "the next agent needs more than a summary.",
+        "subtext": "it needs what you decided, and what you decided against.",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "cta",
+        "kicker": "",
+        "headline": "the prompt ends. the company keeps moving.",
+        "subtext": "building this in the open at useorgx.com. what dies in your handoffs?",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      }
+    ]
+  },
+  "caption": {
+    "text": "watched a friend hand a half-built feature from Claude to Codex last week and the second agent just confidently rebuilt the thing they'd already decided NOT to build. and he's scrolling back through the chat like where did i say that, and the answer is he didn't, it was never in the chat, it was in his head. that's the part nobody talks about — the transcript keeps every keystroke and none of the why. so you paste 10k tokens of conversation into the next agent and it's technically 'context' but it can't act on any of it, doesn't know the definition of done or the three things you already ruled out or how much budget is left. and so i keep landing on the same thing: the prompt was the wrong primitive. the conversation can't hold the goal across a boundary, the org has to — a compiled handoff, goal + decisions + why + permissions + next action, passed as structure instead of a chat dump. and once you see it you can't unsee it, every handoff you've ever done was really just\n\n#aiagents #claudeai #codex #buildinpublic #devtools #aiengineering #multiagent",
+    "body": "watched a friend hand a half-built feature from Claude to Codex last week and the second agent just confidently rebuilt the thing they'd already decided NOT to build. and he's scrolling back through the chat like where did i say that, and the answer is he didn't, it was never in the chat, it was in his head. that's the part nobody talks about — the transcript keeps every keystroke and none of the why. so you paste 10k tokens of conversation into the next agent and it's technically 'context' but it can't act on any of it, doesn't know the definition of done or the three things you already ruled out or how much budget is left. and so i keep landing on the same thing: the prompt was the wrong primitive. the conversation can't hold the goal across a boundary, the org has to — a compiled handoff, goal + decisions + why + permissions + next action, passed as structure instead of a chat dump. and once you see it you can't unsee it, every handoff you've ever done was really just",
+    "hashtags": [
+      "#aiagents",
+      "#claudeai",
+      "#codex",
+      "#buildinpublic",
+      "#devtools",
+      "#aiengineering",
+      "#multiagent"
+    ],
+    "firstComment": "#aiagents #claudeai #codex #buildinpublic #devtools #aiengineering #multiagent"
+  }
+}
