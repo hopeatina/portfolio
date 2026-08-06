@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-08-05T15:04:06.375Z",
+    "updated": "2026-08-06T15:03:28.554Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -2040,8 +2040,8 @@
         "notes": "Strong keep. The mental model (review consequence, not activity; reversible+cheap runs, irreversible+ambiguous stops; unknown high-risk tool fails closed) is a real, screenshot-worthy framework grounded in actual mechanism — 'fails closed', 'gate at the human boundary', merge/publish/payment gating are true architecture claims, not invented traction. No fabricated metrics, user counts, or revenue anywhere. The '50 notifications / 49 noise / 1 could publish to prod' is illustrative rhetoric, not a traction claim, so it's clean — but keep it framed as a device, never let it drift into 'OrgX caught N of these.' Caption nails Hope voice: personal realization open, so/and/but chaining, casual specifics (merge into main, message a client), '+' compression, rough trail-off ending. Slides are tight and one-idea-each. Kill-list clean. Biggest lever: the hook's actual gold is buried in the caption ('rebuilt the exact job I was trying to get rid of') — promoting that to slide 1 hits harder than the generic 'YOU'RE DOING THIS WRONG / stop approving every move' framing, hence the revised headline. Keep the existing subtext 'you're the bottleneck you were trying to delete.' underneath it. Only real polish note: soften slide 7's 'follow for the systems' clean close."
       },
       "status": "used",
-      "uses": 1,
-      "last_used": "2026-07-27",
+      "uses": 2,
+      "last_used": "2026-08-06",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },

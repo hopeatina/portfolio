@@ -1,0 +1,153 @@
+{
+  "experiment": {
+    "id": "2026-08-06-escalate-consequence-not-activity",
+    "date": "2026-08-06",
+    "service": "tiktok",
+    "concept_id": "escalate-consequence-not-activity",
+    "pillar": "framework",
+    "hook_type": "mistake-callout",
+    "slide_count": 7,
+    "topic_tags": [
+      "escalation",
+      "consequence",
+      "tool-policy",
+      "human-boundary"
+    ],
+    "title": "You're approving the wrong things",
+    "hook": "reversible. ambiguous. irreversible. only one should reach you.",
+    "hypothesis": "a 'you're doing X wrong' mistake-callout hook plus a single reframe line ('scale review with consequence, not activity') beats a framework list for cold reach",
+    "caption": "hit a point a few weeks ago where I was drowning in approve/deny prompts from my own agents and realized I'd basically rebuilt the exact job I was trying to get rid of. like every single step wanted a thumbs up. and most of them did not matter at all, renaming a file, drafting a doc, whatever. but buried in there was the one that could actually message a client or merge into main. so it clicked, I don't need to review activity, I need to review consequence. reversible + cheap, let it run. irreversible or ambiguous, that's mine, and everything else is just policy: publishing, payments, outbound messages, merges gate at the human boundary and an unknown high-risk tool fails closed instead of guessing. autonomy is useful but it's worthless if I'm still the bottleneck on every keystroke. still tuning exactly where the line sits but\n\n#agentops #aiagents #buildinpublic #aiinfra #humanintheloop #devtools #mcp",
+    "hashtags": [
+      "#agentops",
+      "#aiagents",
+      "#buildinpublic",
+      "#aiinfra",
+      "#humanintheloop",
+      "#devtools",
+      "#mcp"
+    ],
+    "image_files": [
+      "slide-01.png",
+      "slide-02.png",
+      "slide-03.png",
+      "slide-04.png",
+      "slide-05.png",
+      "slide-06.png",
+      "slide-07.png"
+    ],
+    "image_urls": [
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-06/slide-01.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-06/slide-02.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-06/slide-03.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-06/slide-04.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-06/slide-05.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-06/slide-06.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-06/slide-07.png"
+    ],
+    "status": "rendered",
+    "buffer_idea_id": null,
+    "metrics": null,
+    "success": null,
+    "created": "2026-08-06T15:03:28.554Z"
+  },
+  "carousel": {
+    "id": "escalate-consequence-not-activity",
+    "pillar": "framework",
+    "pillarLabel": "Mental model",
+    "handle": "@useorgx",
+    "url": "useorgx.com",
+    "slides": [
+      {
+        "role": "hook",
+        "kicker": "YOU'RE DOING THIS WRONG",
+        "headline": "reversible. ambiguous. irreversible. only one should reach you.",
+        "subtext": "you're the bottleneck you were trying to delete.",
+        "accentSignal": "danger",
+        "visual": {
+          "icon": "decision",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "50 notifications. 49 are noise. 1 could publish to prod.",
+        "subtext": "",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "decision",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "approve everything and you do the work. approve nothing and it ships blind.",
+        "subtext": "",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "decision",
+          "flow": false
+        }
+      },
+      {
+        "role": "turn",
+        "kicker": "THE REFRAME",
+        "headline": "human review should scale with consequence, not activity",
+        "subtext": "reserve your attention for what can't be undone.",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "decision",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "WHERE THE LINE IS",
+        "headline": "reversible + low-stakes runs. irreversible + ambiguous stops.",
+        "subtext": "",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "decision",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "publishing, payments, messages, merges gate at the human boundary",
+        "subtext": "an unknown high-risk tool fails closed. every time.",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "decision",
+          "flow": false
+        }
+      },
+      {
+        "role": "cta",
+        "kicker": "",
+        "headline": "what did you approve today that a policy could've handled?",
+        "subtext": "consequence-based escalation lives in OrgX. follow for the systems.",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "decision",
+          "flow": false
+        }
+      }
+    ]
+  },
+  "caption": {
+    "text": "hit a point a few weeks ago where I was drowning in approve/deny prompts from my own agents and realized I'd basically rebuilt the exact job I was trying to get rid of. like every single step wanted a thumbs up. and most of them did not matter at all, renaming a file, drafting a doc, whatever. but buried in there was the one that could actually message a client or merge into main. so it clicked, I don't need to review activity, I need to review consequence. reversible + cheap, let it run. irreversible or ambiguous, that's mine, and everything else is just policy: publishing, payments, outbound messages, merges gate at the human boundary and an unknown high-risk tool fails closed instead of guessing. autonomy is useful but it's worthless if I'm still the bottleneck on every keystroke. still tuning exactly where the line sits but\n\n#agentops #aiagents #buildinpublic #aiinfra #humanintheloop #devtools #mcp",
+    "body": "hit a point a few weeks ago where I was drowning in approve/deny prompts from my own agents and realized I'd basically rebuilt the exact job I was trying to get rid of. like every single step wanted a thumbs up. and most of them did not matter at all, renaming a file, drafting a doc, whatever. but buried in there was the one that could actually message a client or merge into main. so it clicked, I don't need to review activity, I need to review consequence. reversible + cheap, let it run. irreversible or ambiguous, that's mine, and everything else is just policy: publishing, payments, outbound messages, merges gate at the human boundary and an unknown high-risk tool fails closed instead of guessing. autonomy is useful but it's worthless if I'm still the bottleneck on every keystroke. still tuning exactly where the line sits but",
+    "hashtags": [
+      "#agentops",
+      "#aiagents",
+      "#buildinpublic",
+      "#aiinfra",
+      "#humanintheloop",
+      "#devtools",
+      "#mcp"
+    ],
+    "firstComment": "#agentops #aiagents #buildinpublic #aiinfra #humanintheloop #devtools #mcp"
+  }
+}
