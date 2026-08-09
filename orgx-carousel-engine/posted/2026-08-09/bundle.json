@@ -1,0 +1,169 @@
+{
+  "experiment": {
+    "id": "2026-08-09-felt-five-doors",
+    "date": "2026-08-09",
+    "service": "tiktok",
+    "concept_id": "felt-five-doors",
+    "pillar": "pain",
+    "hook_type": "framework-list",
+    "slide_count": 8,
+    "topic_tags": [
+      "context-boundaries",
+      "work-graph",
+      "handoff-pain",
+      "save-bait"
+    ],
+    "title": "5 doors your context dies at",
+    "hook": "your context dies at 5 specific doors.",
+    "hypothesis": "a numbered 'X doors it dies at' save-bait list (screenshot-first, 8 slides) drives higher saves/shares than a single emotional scene, even at the cost of a slightly slower first-slide read",
+    "caption": "i counted it once — in a single afternoon i re-explained the same feature goal five separate times. once handing from Claude to Codex, once when i moved repos, once switching to Cursor for the frontend, once to a teammate, and once to myself on friday when i'd already forgotten why i started. and none of those were 'losing' context in some vague way, they were five specific doors and the context died at every single one. that's when it clicked that context isn't a transcript you scroll back through hoping the answer's buried in there, it's a graph the org is supposed to keep — the decisions, the approvals, the artifacts, the receipts, living underneath the client instead of trapped inside one conversation. because the task outlives the chat, always, the chat is the most disposable part of the whole thing and somehow we made it the primitive. so i'm building the layer that sits beneath Claude and Cursor and Codex and just remembers — the goal, the bar, the why — so every door is a pass-through instead of a reset. anyway. five times in one afternoon, that number still\n\n#aiagents #buildinpublic #devtools #claudeai #cursor #aiengineering #agentops #mcp",
+    "hashtags": [
+      "#aiagents",
+      "#buildinpublic",
+      "#devtools",
+      "#claudeai",
+      "#cursor",
+      "#aiengineering",
+      "#agentops",
+      "#mcp"
+    ],
+    "image_files": [
+      "slide-01.png",
+      "slide-02.png",
+      "slide-03.png",
+      "slide-04.png",
+      "slide-05.png",
+      "slide-06.png",
+      "slide-07.png",
+      "slide-08.png"
+    ],
+    "image_urls": [
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-09/slide-01.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-09/slide-02.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-09/slide-03.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-09/slide-04.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-09/slide-05.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-09/slide-06.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-09/slide-07.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-09/slide-08.png"
+    ],
+    "status": "rendered",
+    "buffer_idea_id": null,
+    "metrics": null,
+    "success": null,
+    "created": "2026-08-09T14:30:48.195Z"
+  },
+  "carousel": {
+    "id": "felt-five-doors",
+    "pillar": "pain",
+    "pillarLabel": "The problem",
+    "handle": "@useorgx",
+    "url": "useorgx.com",
+    "slides": [
+      {
+        "role": "hook",
+        "kicker": "save this",
+        "headline": "your context dies at 5 specific doors.",
+        "subtext": "you walked through all of them this week.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "door 1 + 2",
+        "headline": "1. Claude → Codex.  2. Codex → Cursor.",
+        "subtext": "every client swap resets the goal to zero. you re-explain from scratch.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "door 3 + 4",
+        "headline": "3. repo to repo.  4. client to client.",
+        "subtext": "the decisions you made in one boundary don't exist in the next.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "door 5",
+        "headline": "5. today-you → next-week-you.",
+        "subtext": "you are the fifth agent. and you forgot the why too.",
+        "accentSignal": "danger",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "turn",
+        "kicker": "the reframe",
+        "headline": "context isn't a chat you scroll back through. it's a graph the org keeps.",
+        "subtext": "the task outlives the chat.",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "work graph",
+        "headline": "initiatives · decisions · approvals · artifacts · receipts — durable, not disposable.",
+        "subtext": "",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": true,
+          "flowStep": 3
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "every door becomes a pass-through, not a reset.",
+        "subtext": "the goal, the quality bar, and the proof travel with the work.",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "cta",
+        "kicker": "",
+        "headline": "the task outlives the chat.",
+        "subtext": "building the operating context beneath your clients at useorgx.com. which door kills yours?",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      }
+    ]
+  },
+  "caption": {
+    "text": "i counted it once — in a single afternoon i re-explained the same feature goal five separate times. once handing from Claude to Codex, once when i moved repos, once switching to Cursor for the frontend, once to a teammate, and once to myself on friday when i'd already forgotten why i started. and none of those were 'losing' context in some vague way, they were five specific doors and the context died at every single one. that's when it clicked that context isn't a transcript you scroll back through hoping the answer's buried in there, it's a graph the org is supposed to keep — the decisions, the approvals, the artifacts, the receipts, living underneath the client instead of trapped inside one conversation. because the task outlives the chat, always, the chat is the most disposable part of the whole thing and somehow we made it the primitive. so i'm building the layer that sits beneath Claude and Cursor and Codex and just remembers — the goal, the bar, the why — so every door is a pass-through instead of a reset. anyway. five times in one afternoon, that number still\n\n#aiagents #buildinpublic #devtools #claudeai #cursor #aiengineering #agentops #mcp",
+    "body": "i counted it once — in a single afternoon i re-explained the same feature goal five separate times. once handing from Claude to Codex, once when i moved repos, once switching to Cursor for the frontend, once to a teammate, and once to myself on friday when i'd already forgotten why i started. and none of those were 'losing' context in some vague way, they were five specific doors and the context died at every single one. that's when it clicked that context isn't a transcript you scroll back through hoping the answer's buried in there, it's a graph the org is supposed to keep — the decisions, the approvals, the artifacts, the receipts, living underneath the client instead of trapped inside one conversation. because the task outlives the chat, always, the chat is the most disposable part of the whole thing and somehow we made it the primitive. so i'm building the layer that sits beneath Claude and Cursor and Codex and just remembers — the goal, the bar, the why — so every door is a pass-through instead of a reset. anyway. five times in one afternoon, that number still",
+    "hashtags": [
+      "#aiagents",
+      "#buildinpublic",
+      "#devtools",
+      "#claudeai",
+      "#cursor",
+      "#aiengineering",
+      "#agentops",
+      "#mcp"
+    ],
+    "firstComment": "#aiagents #buildinpublic #devtools #claudeai #cursor #aiengineering #agentops #mcp"
+  }
+}
