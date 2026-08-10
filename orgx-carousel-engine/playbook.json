@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-08-09T14:30:48.196Z",
+    "updated": "2026-08-10T14:40:59.847Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1423,8 +1423,8 @@
         "notes": "Strong concept, ships. Truth check: the 'north of 40' count is a personal founder anecdote (felt problem), NOT fabricated OrgX traction — clean. No user counts, revenue, benchmarks, or testimonials invented. The only claim to watch is the specific mechanism list on slide 5 ('gates 4 things: publishing · payments · outbound messages · merges') and 'fails closed on unknown high-risk tools' — these are presented as real architecture/design decisions, which is the credibility engine when true. They must match OrgX's actual tool-policy/escalation model verbatim before publish; if the real system gates a different set, fix the list rather than the framing. Nothing here is a metric fabrication, so accurate stays true.\n\nVoice: caption is genuinely in-register — opens on a specific realization, chains with 'and so', narrates thinking in real time ('by like the fifth one i'm rubber-stamping'), drops the client-email detail casually via a single em-dash insertion (not a banned 3-item em-dash list), and ends rough on '...'. No kill-list words. Slides are tight and declarative.\n\nWhy it works: 'escalate consequence, not activity' (slide 4) is the screenshot line and the spine of the whole deck — it's contrarian, memorable, and 100% on-thesis for governed autonomy. 'the bottleneck you automated away' (slide 2) is a second saveable line. Hook is a real, widely-shared pain (approval fatigue on agent fleets) framed as a design failure, not a UX gripe — that reframe is what stops a skeptical AI-founder.\n\nRevised hook rationale: the original ('approving every agent action is the reason you can't run a fleet') is good but abstract. The revision pulls the caption's sharpest realization forward — the concrete count plus the curiosity gap ('which one? why?') — which is stickier and still fully true. It also sidesteps the 'scale' lexicon nit. Keep the original slide-1 line as slide 2's tension beat if you adopt the revision.\n\nMinor polish: consider swapping 'scale' → 'run' or 'compound' in the title to stay in Hope's word-set; and soften the CTA's URL drop so the piece doesn't tonally lurch from voice-memo into ad on the last slide."
       },
       "status": "used",
-      "uses": 1,
-      "last_used": "2026-07-26",
+      "uses": 2,
+      "last_used": "2026-08-10",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
