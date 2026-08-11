@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-08-10T14:40:59.847Z",
+    "updated": "2026-08-11T14:40:56.588Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -692,8 +692,8 @@
         "notes": "Strong concept that satisfies the truth constraint fully — no fabricated metrics, traction, or benchmarks. All specificity is real-mechanism (compiled handoff fields, initiatives → milestones → tasks → receipts graph) which matches OrgX's actual architecture, plus a genuine building-in-public rep (the postgres decision) in the caption. That true specificity IS the credibility engine, exactly as required. Hook is genuinely contrarian for a skeptical AI-infra audience: attacking 'the prompt' as the wrong primitive challenges the thing everyone builds on. Caption is authentic Hope voice — opens on a specific tuesday realization, chains with 'and so'/'right?', drops 'postgres' casually, compresses with '+', narrates thinking live ('i'm sitting there like wait —'), and ends rough with no clean wrap. Slide text is tight, declarative, lowercase, sub-2s, one-idea-per-slide, zero kill-list words. The mechanism slide (five labeled fields) is the screenshot-worthy save asset. Only real weakness: the CTA slide + cta field lean on the 'follow if you're building...' close the voice guide bans — the caption avoids this trap but the CTA slot reintroduces it. Kept the original hook as the sharpest option; it's already the quotable thesis and any rewrite dilutes it. keep=true: accurate, overall 8 (>=7), hook 8 (>=6)."
       },
       "status": "used",
-      "uses": 1,
-      "last_used": "2026-07-30",
+      "uses": 2,
+      "last_used": "2026-08-11",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
