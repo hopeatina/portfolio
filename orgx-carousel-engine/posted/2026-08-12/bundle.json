@@ -1,0 +1,169 @@
+{
+  "experiment": {
+    "id": "2026-08-12-contrarian-not-a-memory-problem-org-problem",
+    "date": "2026-08-12",
+    "service": "tiktok",
+    "concept_id": "contrarian-not-a-memory-problem-org-problem",
+    "pillar": "contrarian",
+    "hook_type": "reframe-diagnosis",
+    "slide_count": 8,
+    "topic_tags": [
+      "handoff-pain",
+      "context-pack",
+      "quality-bar",
+      "proof-return"
+    ],
+    "title": "your agents don't have a memory problem, your org does",
+    "hook": "your agents remember fine. your org forgets.",
+    "hypothesis": "a reframe-diagnosis hook ('not a memory problem, an org problem') anchored by a 7-field handoff framework slide maximizes screenshot-saves vs a single-number payoff",
+    "caption": "someone told me their agents have a memory problem and i pushed back kind of hard, maybe too hard. because it's not the agents. the agents are fine. the problem is you handed off with a three-line summary and expected the next one to inherit an entire company's worth of context from it. a summary tells you what happened. it doesn't carry why it matters — the quality bar, the decision you already made and killed, the budget, the thing you're NOT allowed to do. so the next agent re-derives all of it from scratch and of course it drifts. that's not a memory problem, that's an org that never wrote down how it thinks. so we compile the handoff — goal + definition of done + decisions and why + permissions + budget + confidence + next action — and anything under the bar loops back before it ever hits your desk. the next agent needs more than a summary. it needs the org to actually remember\n\n#aiagents #agentmemory #aiinfra #multiagent #contextengineering #buildinpublic #mcp #devtools",
+    "hashtags": [
+      "#aiagents",
+      "#agentmemory",
+      "#aiinfra",
+      "#multiagent",
+      "#contextengineering",
+      "#buildinpublic",
+      "#mcp",
+      "#devtools"
+    ],
+    "image_files": [
+      "slide-01.png",
+      "slide-02.png",
+      "slide-03.png",
+      "slide-04.png",
+      "slide-05.png",
+      "slide-06.png",
+      "slide-07.png",
+      "slide-08.png"
+    ],
+    "image_urls": [
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-12/slide-01.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-12/slide-02.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-12/slide-03.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-12/slide-04.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-12/slide-05.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-12/slide-06.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-12/slide-07.png",
+      "https://raw.githubusercontent.com/hopeatina/portfolio/main/orgx-carousel-engine/posted/2026-08-12/slide-08.png"
+    ],
+    "status": "rendered",
+    "buffer_idea_id": null,
+    "metrics": null,
+    "success": null,
+    "created": "2026-08-12T14:41:13.697Z"
+  },
+  "carousel": {
+    "id": "contrarian-not-a-memory-problem-org-problem",
+    "pillar": "contrarian",
+    "pillarLabel": "Hot take",
+    "handle": "@useorgx",
+    "url": "useorgx.com",
+    "slides": [
+      {
+        "role": "hook",
+        "kicker": "unpopular",
+        "headline": "your agents remember fine. your org forgets.",
+        "subtext": "the fix isn't a bigger context window.",
+        "accentSignal": "lime",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "you hand off with a summary. the next agent inherits vibes.",
+        "subtext": "then re-derives everything you already decided.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "tension",
+        "kicker": "",
+        "headline": "it guesses the goal, guesses the bar, repeats the mistake.",
+        "subtext": "drift isn't a model flaw. it's a handoff flaw.",
+        "accentSignal": "sun",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "turn",
+        "kicker": "the reframe",
+        "headline": "a summary tells what happened. a handoff carries why it matters.",
+        "subtext": "why is the part that keeps work on the rails.",
+        "accentSignal": "purple",
+        "visual": {
+          "icon": "artifact",
+          "flow": true,
+          "flowStep": 3
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "screenshot this",
+        "headline": "what a real handoff actually carries:",
+        "subtext": "goal · definition of done · decisions+why · permissions · budget · confidence · next action",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "below the quality bar? it loops back before it reaches you.",
+        "subtext": "the bar is owner-authored. versionable. yours.",
+        "accentSignal": "lime",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "proof",
+        "kicker": "",
+        "headline": "the artifact returns with version, provenance, review state, receipt.",
+        "subtext": "you inspect proof, not process.",
+        "accentSignal": "cyan",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      },
+      {
+        "role": "cta",
+        "kicker": "orgx",
+        "headline": "the next agent needs more than a summary.",
+        "subtext": "follow — i'm building the context layer under your AI clients.",
+        "accentSignal": "lime",
+        "visual": {
+          "icon": "artifact",
+          "flow": false
+        }
+      }
+    ]
+  },
+  "caption": {
+    "text": "someone told me their agents have a memory problem and i pushed back kind of hard, maybe too hard. because it's not the agents. the agents are fine. the problem is you handed off with a three-line summary and expected the next one to inherit an entire company's worth of context from it. a summary tells you what happened. it doesn't carry why it matters — the quality bar, the decision you already made and killed, the budget, the thing you're NOT allowed to do. so the next agent re-derives all of it from scratch and of course it drifts. that's not a memory problem, that's an org that never wrote down how it thinks. so we compile the handoff — goal + definition of done + decisions and why + permissions + budget + confidence + next action — and anything under the bar loops back before it ever hits your desk. the next agent needs more than a summary. it needs the org to actually remember\n\n#aiagents #agentmemory #aiinfra #multiagent #contextengineering #buildinpublic #mcp #devtools",
+    "body": "someone told me their agents have a memory problem and i pushed back kind of hard, maybe too hard. because it's not the agents. the agents are fine. the problem is you handed off with a three-line summary and expected the next one to inherit an entire company's worth of context from it. a summary tells you what happened. it doesn't carry why it matters — the quality bar, the decision you already made and killed, the budget, the thing you're NOT allowed to do. so the next agent re-derives all of it from scratch and of course it drifts. that's not a memory problem, that's an org that never wrote down how it thinks. so we compile the handoff — goal + definition of done + decisions and why + permissions + budget + confidence + next action — and anything under the bar loops back before it ever hits your desk. the next agent needs more than a summary. it needs the org to actually remember",
+    "hashtags": [
+      "#aiagents",
+      "#agentmemory",
+      "#aiinfra",
+      "#multiagent",
+      "#contextengineering",
+      "#buildinpublic",
+      "#mcp",
+      "#devtools"
+    ],
+    "firstComment": "#aiagents #agentmemory #aiinfra #multiagent #contextengineering #buildinpublic #mcp #devtools"
+  }
+}
