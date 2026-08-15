@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-08-14T14:48:56.082Z",
+    "updated": "2026-08-15T14:29:43.789Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1632,8 +1632,8 @@
         "notes": "Strong concept, keep. Truth: clean — no fabricated traction. '10k tokens' is a problem-descriptor, not an OrgX metric. Context-pack fields (goal/DoD/decisions+why/permissions/budget/confidence/next action) are real architecture specifics = the credibility engine, exactly right. Voice: slides are tight billboards ('the prompt was the wrong primitive' and 'handoffs should be compiled, not copy-pasted' are the quotables). Caption is textbook Hope — person-first open, so/and/but chaining, casual '10k tokens', '+' compression, rough trail-off ending on 'really just'. Hook (8): the 'you didn't lose X, you lost Y' reframe lands hard on the exact Claude->Codex handoff pain a skeptical agent-founder has felt; slide-1 stops the scroll. Save (8): slide 5's compiled context-pack field list is the genuine screenshot artifact; the summary-vs-context-pack diff on slide 6 reinforces it. One real fix: the standalone `cta` field ('follow for more on agent continuity') is off-voice boilerplate that contradicts the no-clean-CTA rule — drop it or let the caption's trail-off carry the ending. Original hook is already optimal; couldn't beat it, so repeated it. Hypothesis is sound and the execution matches it."
       },
       "status": "used",
-      "uses": 1,
-      "last_used": "2026-08-02",
+      "uses": 2,
+      "last_used": "2026-08-15",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
