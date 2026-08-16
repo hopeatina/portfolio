@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-08-15T14:29:43.789Z",
+    "updated": "2026-08-16T14:29:09.283Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -799,8 +799,8 @@
         "notes": "Keep. Thesis 'escalate consequence, not activity' is genuinely contrarian and quotable, and every slide rides on REAL mechanisms: tool policy at the boundary, fail-closed on unknown high-risk tools, gating publish/pay/message/merge, artifact-as-receipt. Zero fabricated metrics, no user counts, no traction claims. The '50 agents'/'30 agents' figures are illustrative-hypothetical framing ('50 agents. every one pings you'), not claims about OrgX usage, and the visual note even hedges '~50' — so the truth constraint holds. Credibility comes from true specificity, exactly as required.\\n\\nHook (slide 1) 'reviewing every agent action isn't oversight. it's a bottleneck you built.' + 'and it's why the one risky action slips through' is a strong mistake-callout that implicates the reader — would stop a skeptical AI-founder mid-scroll. Slide 6 is the save-bait payload (four gated actions + fail-closed padlock, labeled instrument-panel) and earns the save; 'you get the receipt, not the keystrokes' is the second screenshot line.\\n\\nCaption is real founder voice-memo: opens on a specific person/scene (friend demoing 30 agents, clicking approve every four seconds), chains with 'so/and/right?', narrates the realization ('so i asked him when's the last time you actually said no, and he went quiet'), drops mechanics casually without over-explaining. No kill-list words. Uses 'the loop' correctly. On-voice.\\n\\nSlide text is tight, scannable, one idea per slide, lowercase-friendly, high conviction. No perfectly-parallel tricolons or em-dash 3-item lists in slides. The 'publish · pay · message · merge' middots read as a spec/instrument label, not a rhythmic tricolon — fine.\\n\\nWhy 8 not 9: the arc runs slightly long (three tension/proof beats doing similar work) and the middle slides share one aphoristic cadence. Coherent, differentiated, on-brand, solidly viral-capable for the contrarian-infra pillar. 'blanket approval is the same as no review' is a strong claim stated as fact, but it's thesis/opinion, not a fabricated metric — accuracy stands."
       },
       "status": "used",
-      "uses": 1,
-      "last_used": "2026-07-31",
+      "uses": 2,
+      "last_used": "2026-08-16",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
