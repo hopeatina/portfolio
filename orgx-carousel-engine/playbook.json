@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-08-16T14:29:09.283Z",
+    "updated": "2026-08-17T14:29:49.885Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1730,8 +1730,8 @@
         "notes": "Strong concept, clears every gate. TRUTH: clean — the only numbers ('six agents', '47 items') are a founding-moment anecdote and an illustrative visual example, not traction/metrics/testimonials. Architecture specificity ('publish · payment · merge · message gated at the human line', 'unknown high-risk tools fail closed', 'work below your quality bar loops back') is the credibility engine and it's real/mechanistic, not invented. Positioning stays present-tense/early ('building the layer beneath the clients'). VOICE: slides are tight and quotable, caption is genuinely Hope — story-first open, real-time thinking ('congrats you built an expensive way to do your own job'), chained with so/and/but, ends rough on 'autonomy that actually'. No kill-list words, no parallel tricolons, no clean CTA wrap. HOOK: the paradox + crossing-lines visual + 'green dashboard. quiet dread. you refresh it anyway.' is a precise felt-problem callout that will stop a skeptical agent-runner mid-scroll. SAVE: 'escalate consequence, not activity' / 'review should scale with consequence, not activity' is a real reframe, and slide 5 is explicitly built as the screenshot slide. Kept the original hook — it's already the sharpest true-in-voice line; every alternative I drafted was weaker. Biggest single upgrade available: tighten slide 5's headline to restore billboard rhythm."
       },
       "status": "used",
-      "uses": 1,
-      "last_used": "2026-08-04",
+      "uses": 2,
+      "last_used": "2026-08-17",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
