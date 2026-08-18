@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-08-17T14:29:49.885Z",
+    "updated": "2026-08-18T14:31:14.619Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -2143,8 +2143,8 @@
         "notes": "Strong concept, dead-center brand fit. No fabricated metrics/traction/testimonials — every claim is architecture or felt-problem: receipts, quality bar, review state, loop-back, embedded MCP widgets in Claude/Cursor/Codex all map to real OrgX mechanisms (orgx_submit_receipt, review_artifact, the 0.85 quality gate, rework loop). 'done is a vibe' is a memeable, of-the-moment reframe (rides 'vibe coding' discourse) that will stop a skeptical AI-founder. 'the artifact is the receipt' + the four-field list is genuinely screenshot-able framework content. Caption is authentic Hope: opens on a person/realization, chains with and/so/but, uses '+' compression ('version + provenance + how it was evaluated + what review state it's in'), drops Claude/Cursor casually, ends rough mid-sentence ('...shipping vibes not receipts but'). No kill-list words. Two watch-items: (1) verify 'proof rooms' is a real OrgX product term and not an invented feature name — it describes real embedded MCP widgets so it's not a fabrication, but if the name isn't shipped, swap to plain 'the proof shows up inside the client' to stay honest. (2) Revised hook compresses three sentences into one concrete line ('typed' beats 'said' — matches the checkmark-in-a-transcript image) and lands 'vibe, not proof' harder; original is fine if you want the setup beat. keep: true (accurate, overall 8, hook 8)."
       },
       "status": "used",
-      "uses": 1,
-      "last_used": "2026-08-01",
+      "uses": 2,
+      "last_used": "2026-08-18",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     }
