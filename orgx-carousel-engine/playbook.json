@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-08-19T14:30:35.414Z",
+    "updated": "2026-08-20T14:31:45.090Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1313,8 +1313,8 @@
         "notes": "Strong keep. The mistake-callout hook lands hard for the exact audience (AI founders doing claude→cursor handoffs by copy-pasting threads) because it names a behavior they do and reframes it as a defect — pattern interrupt, not thesis. Save-bait is real: the 7-field context-pack card ('goal · definition of done · decisions + why · permissions · budget · confidence · next action') is a genuine screenshot framework, and slide 5 correctly isolates 'decisions + why' as the load-bearing field, which sharpens rather than dilutes. Caption is the strongest asset — full Hope voice-memo, story-first, casual specificity, rough trail-off ending. Hypothesis (mistake-callout + numbered anatomy for saves+shares) is sound. Two fixes before shipping: (1) verify the 7-field spec is actually how OrgX compiles handoffs — if it's aspirational, keep it framed as the design thesis, not an existing feature; (2) the final CTA slide's 'follow for the next teardown' is the one clean-close/AI-growth-tell in an otherwise rough-edged piece — cut it or roughen it to match the caption's ending. My revised hook front-loads the concrete claude→cursor tool pair into slide 1 for a harder scroll-stop; the original is already good, so this is a marginal upgrade, not a rescue."
       },
       "status": "used",
-      "uses": 2,
-      "last_used": "2026-08-08",
+      "uses": 3,
+      "last_used": "2026-08-20",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
