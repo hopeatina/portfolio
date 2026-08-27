@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-08-26T14:32:52.932Z",
+    "updated": "2026-08-27T18:01:04.911Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -1534,8 +1534,8 @@
         "notes": "Strong concept. TRUTH: clean — zero fabricated metrics, user counts, or traction. Every claim is mechanism/architecture (receipt = version/provenance/evaluation/review state/cost; proof rooms + MCP widgets rendering in claude/cursor), which is exactly the allowed 'true specificity' credibility engine. The felt problem (re-auditing every diff because 'done' just means the agent stopped) is real and lands. VOICE: caption is genuine Hope — opens on a realization ('the thing that finally broke me'), chains with so/and so, drops tools casually, narrates thinking, ends rough on '...instead of redoing the work'. Slides are tight and declarative; 'the artifact is the receipt' is the quotable spine. HOOK (8): 'not proof, it's a vibe' is a sharp, memeable, contrarian reframe on a pain skeptical AI-founders feel daily — the 'you still open the file to check. every single time.' subtext nails recognition. SAVE (8): slide 5 is a real, screenshot-able framework (5-field receipt anatomy) — that's the save driver. Only nits: the CTA slide's 'follow for the next teardown' is the one clean-CTA note the kill list warns about, and 'ships with 5 things attached' is faintly product-copy. Revised hook front-loads the killed word for a harder word-reframe punch and tightens by 3 words. keep=true (accurate, overall 8, hook 8)."
       },
       "status": "used",
-      "uses": 2,
-      "last_used": "2026-08-14",
+      "uses": 3,
+      "last_used": "2026-08-27",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
