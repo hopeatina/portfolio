@@ -180,7 +180,7 @@ export default function AlmaPage() {
       }}
       primaryLink={{ href: "https://www.helloalma.com", label: "Visit Alma", external: true }}
       secondaryLink={{ href: "/projects/orgx", label: "See the continuity thesis" }}
-      next={{ href: "/projects/perfpulse", label: "Next / local tooling", title: "PerfPulse" }}
+      next={{ href: "/projects/perfpulse", label: "Next / local tooling", title: "Perf Pulse" }}
     />
   );
 }
