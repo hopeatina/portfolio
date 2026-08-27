@@ -77,12 +77,11 @@ export default function MaterialThreadField({
   const x = useSpring(pointerX, { stiffness: 110, damping: 22, mass: 0.8 });
   const y = useSpring(pointerY, { stiffness: 110, damping: 22, mass: 0.8 });
   const active = stories.find((story) => story.id === activeId) ?? stories[0];
-
-  if (!active) return null;
-
-  const activeIndex = Math.max(0, stories.findIndex((story) => story.id === active.id));
+  const activeIndex = active
+    ? Math.max(0, stories.findIndex((story) => story.id === active.id))
+    : 0;
   const knotU = knotUFor(activeIndex, stories.length);
-  const cinch = active.tone === "heat" ? -0.55 : 0.82; // heat = strain apart, else cinch tight
+  const cinch = active?.tone === "heat" ? -0.55 : 0.82; // heat = strain apart, else cinch tight
   const initialDs = RIBBONS.map((_, index) => ribbonPath(index, knotU, cinch));
   const knotX = -40 + (VIEW_W + 80) * knotU;
 
@@ -138,6 +137,8 @@ export default function MaterialThreadField({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [knotU, cinch, reduceMotion]);
+
+  if (!active) return null;
 
   return (
     <section className={`v5-thread-field ${compact ? "is-compact" : ""} ${className}`}>
