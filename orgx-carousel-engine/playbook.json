@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updated": "2026-09-02T14:29:30.726Z",
+    "updated": "2026-09-03T14:30:48.568Z",
     "generatedBy": "orgx-carousel-concept-bank workflow + manual scaffold",
     "product": {
       "wordmark": "OrgX",
@@ -907,8 +907,8 @@
         "notes": "Strong keep. The reframe-diagnosis hook is genuinely contrarian for an AI-founder audience ('memory problem' is the reflexive framing right now, and this flips it to an org/handoff problem), and it's anchored by a real, screenshot-worthy framework. Architecture verified against the live OrgX toolset: handoff_task, review_artifact/approve_agent_work (loop-back), orgx_submit_receipt (proof return), query_org_memory/recall_memory (context layer) — the 7-field handoff, owner-authored versionable bar, and version/provenance/review-state/receipt return are all real mechanisms, not invented specificity. Zero fabricated metrics. Voice is excellent in both registers: slides are billboard-tight ('inherits vibes', 'you inspect proof, not process', 'drift isn't a model flaw, it's a handoff flaw'), caption opens on a person + self-aware realization ('i pushed back kind of hard, maybe too hard'), chains with because/so, uses '+' compression on the handoff fields, drops specifics casually ('the decision you already made and killed'), and never hedges. No kill-list words. Slide 5 is the save engine and it earns it. Kept the original hook — it's the sharpest available and the crossed-out-'memory'/underlined-'org' visual depends on that exact swap; a tighter variant ('your agents don't forget, your org never wrote it down' — pulled from the caption's best line) is punchier but sacrifices the problem→problem symmetry that IS the concept spine, so not worth it. ONE watch-item, not an accuracy failure: slide 8's visual of claude/cursor/chatgpt logos on a shared context bar risks reading as 'these clients already run on OrgX.' It stays legal because the caption+CTA frame it as 'i'm building the context layer under your AI clients' (aspiration, not shipped integration) — keep the visual clearly conceptual/positioning, don't render it as a live integration badge, and it's clean."
       },
       "status": "used",
-      "uses": 2,
-      "last_used": "2026-08-12",
+      "uses": 3,
+      "last_used": "2026-09-03",
       "origin": "seed-workflow",
       "created": "2026-07-15T09:48:09.603Z"
     },
