@@ -1,3 +1,5 @@
+import MaterialSpecimen from "@/components/material/MaterialSpecimen";
+import { materialContexts } from "@/components/material/material-context";
 import Head from "next/head";
 import Link from "next/link";
 import {
@@ -20,6 +22,7 @@ export default function ProofIndex() {
 
       <main id="main-content" className="v4-page v4-proof-page">
         <section className="v4-proof-hero" aria-labelledby="proof-title">
+          <MaterialSpecimen context={materialContexts.proof} className="material-inner-object" compact />
           <span className="v4-proof-kicker">Proof / the ledger</span>
           <h1 id="proof-title">Claims are cheap. Receipts are the interface.</h1>
           <p className="v4-proof-deck">

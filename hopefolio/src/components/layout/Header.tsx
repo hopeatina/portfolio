@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { navItems } from "@/data/portfolio";
@@ -7,6 +7,10 @@ export default function Header() {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+  const mobileNavRef = useRef<HTMLElement>(null);
+  const isCurrentPage = (href: string) =>
+    router.pathname === href || (href !== "/" && router.pathname.startsWith(`${href}/`));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,19 +31,37 @@ export default function Header() {
 
     const previousOverflow = document.body.style.overflow;
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsMobileMenuOpen(false);
+      if (event.key !== "Escape") return;
+      setIsMobileMenuOpen(false);
+      menuToggleRef.current?.focus();
+    };
+    const desktop = window.matchMedia("(min-width: 821px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setIsMobileMenuOpen(false);
     };
 
     document.body.style.overflow = "hidden";
+    const activeLink = mobileNavRef.current?.querySelector<HTMLAnchorElement>('[aria-current="page"]');
+    (activeLink ?? mobileNavRef.current?.querySelector<HTMLAnchorElement>("a"))?.focus();
     window.addEventListener("keydown", closeOnEscape);
+    desktop.addEventListener("change", closeOnDesktop);
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
+      desktop.removeEventListener("change", closeOnDesktop);
     };
   }, [isMobileMenuOpen]);
 
   return (
-    <header className={`site-header ${isScrolled ? "site-header-scrolled" : ""}`}>
+    <header
+      className={`site-header ${isScrolled ? "site-header-scrolled" : ""}`}
+      onBlur={(event) => {
+        // Navigation is a disclosure: tabbing into the page dismisses it normally.
+        if (isMobileMenuOpen && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsMobileMenuOpen(false);
+        }
+      }}
+    >
       <nav className="site-header-inner" aria-label="Primary">
         <Link href="/" className="site-logo" aria-label="Hope Atina — home">
           <span className="site-logo-monogram" aria-hidden="true">
@@ -52,6 +74,7 @@ export default function Header() {
         </Link>
 
         <button
+          ref={menuToggleRef}
           type="button"
           onClick={() => setIsMobileMenuOpen((current) => !current)}
           className={`site-menu-toggle ${isMobileMenuOpen ? "site-menu-toggle-open" : ""}`}
@@ -65,20 +88,14 @@ export default function Header() {
 
         <div className="site-nav-desktop">
           {navItems.map((item) => {
-            const isActive =
-              item.href === "/projects"
-                ? router.pathname.startsWith("/projects")
-                : item.href === "/blog"
-                  ? router.pathname.startsWith("/blog")
-                  : item.href === "/proof"
-                    ? router.pathname.startsWith("/proof")
-                    : router.pathname === item.href;
+            const isActive = isCurrentPage(item.href);
             const isHireCta = item.href === "/hiring";
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActive ? "page" : undefined}
                 className={`site-nav-link ${isActive ? "site-nav-link-active" : ""} ${
                   isHireCta ? "site-nav-link-cta" : ""
                 }`}
@@ -96,11 +113,17 @@ export default function Header() {
       </nav>
 
       {isMobileMenuOpen ? (
-        <div id="site-mobile-nav" className="site-nav-mobile site-nav-mobile-open">
+        <nav
+          ref={mobileNavRef}
+          id="site-mobile-nav"
+          className="site-nav-mobile site-nav-mobile-open"
+          aria-label="Mobile navigation"
+        >
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
+              aria-current={isCurrentPage(item.href) ? "page" : undefined}
               className={`site-nav-mobile-link ${
                 item.href === "/hiring" ? "site-nav-mobile-link-cta" : ""
               }`}
@@ -109,7 +132,7 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
-        </div>
+        </nav>
       ) : null}
     </header>
   );

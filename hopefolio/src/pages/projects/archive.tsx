@@ -10,14 +10,14 @@ export default function ProjectsArchive() {
         <title>Project Archive | Hope Atina</title>
         <meta
           name="description"
-          content="Twelve archived systems, 2017–2024 — kept as an honest ledger of range, not as the lead story."
+          content={`${archivedProjects.length} archived systems — earlier experiments and supporting work from Hope Atina's practice.`}
         />
       </Head>
 
       <main id="main-content" className="page-frame">
         <div className="page-stack">
           <header className="page-header-stack">
-            <span className="eyebrow">Archive · 12 systems · 2017—2024</span>
+            <span className="eyebrow">Archive · {archivedProjects.length} systems</span>
             <h1>The earlier chapters, kept honest.</h1>
             <p style={{ maxWidth: "38rem", margin: 0 }}>
               These systems remain on the record for range and context, but they do not lead

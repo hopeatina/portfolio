@@ -1,54 +1,10 @@
+import { selectedProjects } from "@/data/selected-projects";
+import { archivedProjects } from "@/data/portfolio";
+import MaterialProjectIndex from "@/components/material/MaterialProjectIndex";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { ContinuityPlayhead, LivingMotif, SectionSignal, TextLink } from "@/components/v4/V4Primitives";
-
-const projects = [
-  {
-    index: "01",
-    title: "OrgX",
-    role: "Founder · engineering · product",
-    thesis: "Make AI-delivered work accountable after the prompt disappears.",
-    tension: "distributed autonomy",
-    evidence: "receipts / trust / continuity",
-    image: "/images/case-studies/orgx-v4/artifact-receipt.png",
-    href: "/projects/orgx",
-    tone: "signal",
-  },
-  {
-    index: "02",
-    title: "Alma",
-    role: "Production backend engineering",
-    thesis: "Ship continuously where reliability, privacy, and auditability are inseparable.",
-    tension: "regulated consequence",
-    evidence: "HIPAA / rollout / adoption",
-    image: "/images/projects/alma.svg",
-    href: "/projects/alma",
-    tone: "heat",
-  },
-  {
-    index: "03",
-    title: "Perf Pulse",
-    role: "Product engineering · Rust",
-    thesis: "Warn before runaway memory or low disk headroom takes the Mac down.",
-    tension: "pre-crash intervention",
-    evidence: "Guard / launchd / local / brew",
-    image: "/images/case-studies/perf-pulse-crash-guard.jpg",
-    href: "/projects/perfpulse",
-    tone: "paper",
-  },
-  {
-    index: "04",
-    title: "OrgX for OpenClaw",
-    role: "Plugin architecture · agent operations",
-    thesis: "Add organizational memory and accountable execution where agents already work.",
-    tension: "hosted continuity",
-    evidence: "state / streaming / proof",
-    image: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",
-    href: "/projects/openclaw",
-    tone: "cold",
-  },
-];
 
 export default function Projects() {
   return (
@@ -57,20 +13,19 @@ export default function Projects() {
         <title>Selected work — Hope Atina</title>
         <meta
           name="description"
-          content="Selected systems work by Hope Atina across AI continuity, regulated production, developer tooling, and plugin architecture."
+          content="Eight projects by Hope Atina across AI infrastructure, learning, distributed ML, games, market research, clinical systems, and developer tooling."
         />
       </Head>
 
       <main id="main-content" className="v4-page v4-work-page">
         <ContinuityPlayhead label="selected work" />
         <header className="v4-work-hero v4-motif-backed">
-          <LivingMotif variant="branch" className="v4-work-hero-motif" label="One practice branching across four systems" />
+          <MaterialProjectIndex />
           <span>Selected systems / 2017—now</span>
-          <h1>Range, measured by the constraints that changed the work.</h1>
+          <h1>Different worlds. One way of seeing.</h1>
           <p>
-            This is not a grid of equal projects. It is a spectrum—from founder-led AI
-            infrastructure to regulated production and local tools—showing how I think when the
-            system, audience, and consequence change.
+            Agent infrastructure, learning, distributed intelligence, games, and market research.
+            Eight projects, each shaped by a different kind of pressure.
           </p>
         </header>
 
@@ -78,7 +33,7 @@ export default function Projects() {
           <LivingMotif variant="handoff" className="v4-section-motif" />
           <SectionSignal index="01">Constraint spectrum</SectionSignal>
           <h2 id="spectrum-title" className="sr-only">Selected project spectrum</h2>
-          {projects.map((project) => (
+          {selectedProjects.map((project) => (
             <Link
               href={project.href}
               className={`v4-work-entry is-${project.tone} ${project.index === "01" ? "is-flagship" : ""}`}
@@ -92,13 +47,14 @@ export default function Projects() {
                 <span>
                   {project.role}
                   {project.index === "01" ? <em className="v4-work-flagship-tag">flagship</em> : null}
+                  {project.stageLabel ? <em className="material-project-stage">{project.stageLabel}</em> : null}
                 </span>
                 <h2>{project.title}</h2>
               </div>
               <p>{project.thesis}</p>
               <div className="v4-work-entry-evidence">{project.evidence}</div>
               <div className="v4-work-entry-image" aria-hidden="true">
-                <Image src={project.image} alt="" fill sizes="32vw" />
+                <Image src={project.heroImage} alt="" fill sizes="(max-width: 820px) 85vw, 32vw" />
               </div>
               <b aria-hidden="true">inspect ↗</b>
             </Link>
@@ -124,7 +80,7 @@ export default function Projects() {
           <LivingMotif variant="resolve" className="v4-section-motif" />
           <span>Earlier experiments still matter; they just do not all deserve the same stage.</span>
           <h2>The archive holds the breadth. This page holds the signal.</h2>
-          <TextLink href="/projects/archive">Archive · 12 systems · 2017—2024</TextLink>
+          <TextLink href="/projects/archive">Archive · {archivedProjects.length} systems</TextLink>
         </section>
       </main>
     </>

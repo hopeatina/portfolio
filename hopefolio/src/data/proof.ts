@@ -154,12 +154,14 @@ export const proofReceipts: ProofReceipt[] = [
     method:
       "A Cloudflare Worker MCP server (orgx-mcp) exposing 57 tools across memory, planning, delegation, decisions, receipts, and lifecycle — with OAuth, session isolation, and durable state. Distribution manifests shipped for Smithery, Glama, and the ChatGPT apps directory. Test suite: 654 automated cases across ~90 spec files.",
     result:
-      "Live at mcp.useorgx.com with a public .well-known/mcp.json manifest. 57 published tools, 654 passing tests, and a public status page showing 98.271% uptime since April 2026 — the incidents are on the record, not hidden. Repos under github.com/useorgx have external stargazers.",
+      "Live at mcp.useorgx.com with a public .well-known/mcp.json manifest. 57 published tools and 654 passing tests. On July 27, 2026, Smithery independently reported 3,683 tool calls, 99.87% 30-day uptime, and a 95/100 listing score. The longer-window OrgX status page shows 98.283% uptime since April — the incidents remain on the record.",
     failure:
-      "98.271% is not 99.9%: real outages sit on the public status page. And GitHub star counts are near zero — distribution manifests shipped, but registry-driven adoption is still an open bet, not a result.",
+      "Smithery's platform-reported call count proves traffic reached the server through its registry surface, not retention, customer outcomes, or revenue. The longer-window 98.283% uptime is not 99.9%, real outages sit on the public status page, and GitHub star counts remain near zero.",
     artifacts: [
       { label: "orgx-mcp — public source", href: "https://github.com/useorgx/orgx-mcp", kind: "repo" },
       { label: "Live MCP manifest", href: "https://mcp.useorgx.com/.well-known/mcp.json", kind: "demo" },
+      { label: "Smithery — calls, uptime, and install path", href: "https://smithery.ai/servers/useorgx/orgx-mcp", kind: "site" },
+      { label: "Live MCP widget gallery", href: "https://mcp.useorgx.com/widgets/index.html", kind: "demo" },
       { label: "Public status page — uptime, incidents included", href: "https://status.useorgx.com", kind: "site" },
       { label: "OrgX — the product it serves", href: "https://useorgx.com", kind: "site" },
     ],
@@ -169,13 +171,16 @@ export const proofReceipts: ProofReceipt[] = [
     scoreReasons: {
       artifact: "Public repo, live manifest, running product",
       baseline: "Cold-start pain is argued, not measured — see receipt 003",
-      measured: "57 tools, 654 tests, 98.271% public uptime",
+      measured: "57 tools, 654 tests, 3,683 Smithery calls, and two explicit uptime windows",
       reproducible: "A product, not a rerunnable harness",
       failure: "Outages on the public status page; near-zero stars named",
-      external: "External stargazers; live users on the status page",
+      external: "Smithery reports external calls and 30-day uptime",
     },
-    updates: [{ date: "2026-07-16", note: "Published to the ledger." }],
-    next: "Publish per-tool success-rate and latency numbers from production traffic.",
+    updates: [
+      { date: "2026-07-16", note: "Published to the ledger." },
+      { date: "2026-07-27", note: "Added Smithery's external call, uptime, and listing-score evidence; retained the longer-window outage record." },
+    ],
+    next: "Bind external calls to retained users and independently verified customer outcomes without exposing private traffic.",
   },
   {
     slug: "autonomous-initiative-benchmark",
@@ -313,6 +318,42 @@ export const proofReceipts: ProofReceipt[] = [
     },
     updates: [{ date: "2026-07-16", note: "Published to the ledger, dead repository field and all." }],
     next: "Fix the repository field, publish 0.2.0, and earn R with a runnable example gallery.",
+  },
+  {
+    slug: "agent-work-receipt-contract",
+    index: "007",
+    title: "A portable contract that rejects missing authority",
+    question:
+      "Can another runtime validate what an agent was asked to do, what it was authorized to do, what changed, and how the result was checked — without an OrgX account?",
+    date: "2026-07-27",
+    domain: "Agent accountability",
+    baseline:
+      "A completion message is a self-authored claim. It usually omits the delegated authority, action lineage, artifact digests, evidence references, verification checks, cost, and human interventions required for a second system to audit the work.",
+    method:
+      "Published Agent Work Receipt v0.1 as an account-free Apache-2.0 contract: JSON Schema Draft 2020-12, deterministic TypeScript validator source, Codex/Claude Code/OpenClaw fixtures, explicit negative fixtures, and cross-language integrity vectors. A public endpoint validates receipts without persisting them.",
+    result:
+      "Live verification on July 27 accepted the 5,877-byte Codex fixture with HTTP 200 and ok=true. The 1,599-byte missing-authority fixture failed with HTTP 422, ok=false, issue_count=1, path=/authority, and code=schema.required.",
+    failure:
+      "The package is still a repository preview and is not published to npm. All current emitters and conformance vectors originate inside the project; no independent runtime has published a receipt or completed an external reproduction yet.",
+    artifacts: [
+      { label: "Agent Work Receipt — public source", href: "https://github.com/useorgx/agent-work-receipt", kind: "repo" },
+      { label: "Live account-free validator", href: "https://useorgx.com/agent-work-receipts", kind: "demo" },
+      { label: "Machine-readable JSON Schema", href: "https://useorgx.com/schemas/agent-work-receipt/v0.1/schema.json", kind: "doc" },
+      { label: "Missing-authority negative fixture", href: "https://useorgx.com/agent-work-receipts/examples/invalid-missing-authority.json", kind: "doc" },
+    ],
+    score: ["artifact", "measured", "reproducible", "failure"],
+    scoreNote:
+      "External validation withheld until a runtime outside OrgX emits and independently verifies a receipt.",
+    scoreReasons: {
+      artifact: "Public source, live schema, validator, and fixtures",
+      baseline: "The completion-message baseline is characterized, not experimentally measured",
+      measured: "Valid HTTP 200; missing authority HTTP 422 with one deterministic issue",
+      reproducible: "Download both fixtures and POST them to the public validator",
+      failure: "No npm release and no independent emitter yet",
+      external: "Every current emitter and conformance vector is project-authored",
+    },
+    updates: [{ date: "2026-07-27", note: "Published after re-running the live positive and negative validation paths." }],
+    next: "Earn the external criterion with an independently maintained emitter and public conformance run.",
   },
 ];
 

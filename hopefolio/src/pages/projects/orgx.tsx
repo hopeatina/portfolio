@@ -1,4 +1,5 @@
 import CaseStudyNarrative from "@/components/v4/CaseStudyNarrative";
+import OrgXProofChain from "@/components/v5/OrgXProofChain";
 
 export default function OrgXPage() {
   return (
@@ -6,7 +7,7 @@ export default function OrgXPage() {
       pageTitle="OrgX case study — Hope Atina"
       description="How Hope Atina designed OrgX as a continuity and proof layer for accountable AI-delivered work across clients."
       index="Case 01 / flagship"
-      status="Founder-built · active platform"
+      status="Founder-built · live · externally measured"
       title="OrgX"
       subtitle="The prompt ends. The company keeps moving."
       introduction="OrgX lets a person manage a fleet of agents from the AI client they already use—without losing the goal, the decisions, the quality bar, or the proof when work changes hands. It is the shared operating context beneath the clients, not another chat destination."
@@ -15,9 +16,20 @@ export default function OrgXPage() {
         { label: "Ownership", value: "founder · product · architecture" },
         { label: "Boundary", value: "human consequence" },
         { label: "Delivery", value: "web · MCP · plugins · widgets" },
+        {
+          label: "External signal",
+          value: "3,683 Smithery calls",
+          note: "platform-reported · captured 27 Jul 2026",
+        },
       ]}
+      heroTerminal={{
+        command: "npx @useorgx/wizard@latest setup",
+        note: "Detects supported clients, pairs auth, and writes managed MCP configuration.",
+      }}
       heroProof={{
         src: "/images/case-studies/orgx-v4/artifact-receipt.png",
+        width: 1280,
+        height: 900,
         alt: "OrgX artifact viewer showing a lead claim pack, decision provenance, and evidence score",
         label: "The artifact is the receipt",
         caption: "Output, provenance, quality, and review state are inspected together—not reconstructed after the fact.",
@@ -81,6 +93,7 @@ export default function OrgXPage() {
         { glyph: "judgment", label: "Trust boundary", detail: "Consequence determines when human judgment must enter.", tone: "heat" },
         { glyph: "receipt", label: "Proof returns", detail: "The artifact, provenance, and quality outcome become memory." },
       ]}
+      validation={<OrgXProofChain />}
       system={{
         eyebrow: "A platform, protocol surface, and proof system",
         title: "Five mechanisms turn a fleet of agents into accountable company movement.",
@@ -232,58 +245,76 @@ export default function OrgXPage() {
         surfaceProofs: [
           {
             src: "/images/case-studies/widgets/initiative-pulse.png",
+            width: 560,
+            height: 1017,
             alt: "OrgX initiative pulse MCP widget showing health, blockers, workstreams, decisions, and outputs",
             label: "Initiative pulse",
             caption: "Organizational health, the blocking boundary, workstream progress, and a live continuation action in one embedded surface.",
           },
           {
             src: "/images/case-studies/widgets/agent-status.png",
+            width: 560,
+            height: 1686,
             alt: "OrgX agent status MCP widget showing focus, blockers, tasks, artifacts, and progress",
             label: "Agent status",
             caption: "The widget distinguishes current focus, blocked work, review, artifacts, and progress instead of compressing everything into online or offline.",
           },
           {
             src: "/images/case-studies/widgets/morning-brief.png",
+            width: 560,
+            height: 1167,
             alt: "OrgX morning brief MCP widget summarizing priorities, decisions, and work requiring attention",
             label: "Morning brief",
             caption: "The next session begins with grounded organizational state and explicit judgment requests—not a blank prompt.",
           },
           {
             src: "/images/case-studies/widgets/decisions.png",
+            width: 560,
+            height: 2825,
             alt: "OrgX decisions MCP widget with pending decisions and decision history",
             label: "Decision surface",
             caption: "The information needed to decide, the consequence, and the approval action stay together inside the client.",
           },
           {
             src: "/images/case-studies/widgets/search-results.png",
+            width: 560,
+            height: 1264,
             alt: "OrgX search MCP widget returning organizational memory across artifacts and decisions",
             label: "Memory search",
             caption: "A new session can recover the relevant decision and artifact without reading the entire organizational transcript.",
           },
           {
             src: "/images/case-studies/widgets/scaffolded-initiative.png",
+            width: 560,
+            height: 1342,
             alt: "OrgX scaffolded initiative MCP widget with workstreams, owners, and next actions",
             label: "Plan becomes work",
             caption: "The output is not a paragraph called a plan; it is an inspectable structure with owners, boundaries, and a next action.",
           },
         ],
       }}
-      receiptSlugs={["orgx-mcp-server", "autonomous-initiative-benchmark"]}
+      receiptSlugs={["orgx-mcp-server", "autonomous-initiative-benchmark", "agent-work-receipt-contract"]}
       proofs={[
         {
           src: "/images/case-studies/orgx-v4/live-desk.png",
+          width: 856,
+          height: 1003,
           alt: "OrgX live desk showing an agent's focus, trust state, work, and recent outcomes",
           label: "The operator's desk",
           caption: "The interface privileges current focus, the next consequential boundary, and grounded history over raw activity.",
         },
         {
           src: "/images/case-studies/orgx-v4/live-timeline.png",
+          width: 856,
+          height: 404,
           alt: "OrgX timeline showing decisions, trust events, and work outcomes",
           label: "What happened, when",
           caption: "Decision, trust, and work events remain attributable in the same timeline instead of dissolving into logs.",
         },
         {
           src: "/images/case-studies/orgx-v4/quality-settings.png",
+          width: 1280,
+          height: 1600,
           alt: "OrgX quality settings showing task-specific quality bars and model judges",
           label: "A quality bar that can be inspected",
           caption: "The bar is explicit, versioned, and task-specific; observed signals stay visible without masquerading as the standard.",

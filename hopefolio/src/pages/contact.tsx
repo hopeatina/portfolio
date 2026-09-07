@@ -1,3 +1,5 @@
+import MaterialSpecimen from "@/components/material/MaterialSpecimen";
+import { materialContexts } from "@/components/material/material-context";
 import Head from "next/head";
 import { ContinuityPlayhead, LivingMotif, TextLink } from "@/components/v4/V4Primitives";
 
@@ -15,7 +17,7 @@ export default function Contact() {
       <main id="main-content" className="v4-page v4-contact-page">
         <ContinuityPlayhead label="contact" />
         <section className="v4-contact-hero v4-motif-backed">
-          <LivingMotif variant="resolve" className="v4-contact-hero-motif" label="Separate systems resolving into a shared starting point" />
+          <MaterialSpecimen context={materialContexts.home} className="material-inner-object" compact />
           <span>Contact / Houston CT</span>
           <h1>Bring me the system that needs to become coherent.</h1>
           <p>

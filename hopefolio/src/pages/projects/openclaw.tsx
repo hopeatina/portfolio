@@ -18,6 +18,8 @@ export default function OrgXForOpenClawPage() {
       ]}
       heroProof={{
         src: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",
+        width: 2880,
+        height: 1800,
         alt: "OrgX Live dashboard connected to OpenClaw with agents, activity, and next-up work",
         label: "OrgX Live inside the OpenClaw operating loop",
         caption: "Named agents, current work, blocked decisions, activity, and next-up actions remain visible in one live control surface.",
@@ -88,13 +90,13 @@ export default function OrgXForOpenClawPage() {
           { label: "host", title: "OpenClaw agents and gateway", detail: "Coding, research, marketing, and operations agents keep their existing tools, workspaces, and runtime lifecycle.", technology: "OpenClaw gateway · agent workspaces", tone: "cold" },
           { label: "plugin bootstrap", title: "Register one host-native integration", detail: "A strict TypeScript ES module registers tools, services, dashboard routes, and background behavior through the host's single plugin entry point.", technology: "TypeScript · Node 18+ · native fetch" },
           { label: "local protocol", title: "Expose the work graph through MCP", detail: "The local bridge at /orgx/mcp gives OpenClaw, Claude, Cursor, and Codex structured access without forcing a second cloud OAuth flow.", technology: "MCP tools · structured JSON · client config backups", tone: "signal" },
-          { label: "durable edge", title: "Buffer what the network cannot guarantee", detail: "Credentials, snapshots, run records, and a local outbox survive disconnection. Queued events replay after sync and remain visible in local projections while offline.", technology: "file-backed JSON stores · outbox replay", tone: "heat" },
+          { label: "durable edge", title: "Buffer what the network cannot guarantee", detail: "SQLite stores run records, snapshots, and a local outbox. Queued events replay after sync; legacy JSON import and dead-letter records preserve a recovery path.", technology: "SQLite · JSON migration · outbox replay", tone: "heat" },
           { label: "live projection", title: "Stream the view; recover from the snapshot", detail: "SSE is the primary live transport, with polling against the canonical snapshot as a fallback. Next Up intent stays separate from In Progress runtime state.", technology: "SSE · snapshot fallback · React hooks", tone: "cold" },
           { label: "shared graph", title: "Return work to OrgX", detail: "Initiatives, workstreams, milestones, tasks, decisions, activity, and receipts become shared context for every future agent and client.", technology: "OrgX API · entity graph · receipt model", tone: "signal" },
         ],
         rationale: [
-          { pressure: "The plugin runs inside many local environments", choice: "Keep zero production dependencies and use native fetch", reason: "The installed bridge stays portable and avoids turning local setup into a package-resolution problem." },
-          { pressure: "Native SQLite adds build and platform complexity", choice: "Use inspectable, file-backed stores with recovery code", reason: "Local state remains portable across OpenClaw environments and easy for an operator to audit." },
+          { pressure: "The plugin runs inside many local environments", choice: "Use the host's Node runtime with explicit dependency recovery", reason: "Native fetch handles transport, while the SQLite store includes repair handling for missing native bindings." },
+          { pressure: "Concurrent work needs durable local state", choice: "Use SQLite with WAL and import earlier JSON records", reason: "Indexed run, snapshot, and outbox tables keep recovery state together while preserving a migration path for existing installations." },
           { pressure: "Realtime connections fail", choice: "SSE-first with canonical snapshot fallback", reason: "The interface can recover its operating picture without presenting the stream as durable truth." },
           { pressure: "Queued intent is not active execution", choice: "Separate Next Up from In Progress", reason: "Operators can distinguish scheduling, runtime state, blockers, and recovery instead of reading one ambiguous activity feed." },
         ],
@@ -122,9 +124,9 @@ export default function OrgXForOpenClawPage() {
             id: "offline-seam",
             label: "survive disconnection",
             before: "Local agents continue to produce events when the OrgX connection is unavailable.",
-            decision: "Persist an inspectable local outbox, replay it after sync, and keep queued intent separate from active execution.",
+            decision: "Persist the local outbox in SQLite, replay it after sync, and keep queued intent separate from active execution.",
             consequence: "Offline work remains visible and resumable without pretending the network guaranteed delivery.",
-            evidence: "file-backed JSON · outbox replay · Next Up vs In Progress",
+            evidence: "SQLite outbox · JSON migration · Next Up vs In Progress",
             tone: "heat",
           },
           {
@@ -149,30 +151,35 @@ export default function OrgXForOpenClawPage() {
           { label: "Core", values: ["TypeScript strict mode", "ES modules", "Node 18+", "native fetch"] },
           { label: "Dashboard", values: ["React 18", "Vite", "Tailwind", "Framer Motion"] },
           { label: "Protocol + transport", values: ["MCP", "SSE", "HTTP", "snapshot polling"] },
-          { label: "Durability", values: ["JSON stores", "local outbox", "automatic replay", "gateway watchdog"] },
+          { label: "Durability", values: ["SQLite / better-sqlite3", "JSON migration", "local outbox", "automatic replay"] },
           { label: "Verification", values: ["node:test", "Playwright", "strict typecheck", "end-to-end harness"] },
         ],
         toolEvidence: [
-          { name: "OpenClaw", mark: "OC", category: "Host", project: "OrgX plugin", reason: "The host retains agent runtime, workspaces, tools, and lifecycle; the plugin adds the organizational layer instead of replacing it." },
-          { name: "TypeScript", icon: "typescript", category: "Bridge", project: "Plugin core", reason: "Strict types keep the host entry point, tool contracts, stores, routes, and background behavior aligned with zero production dependencies." },
-          { name: "Node.js", icon: "node", category: "Bridge", project: "Local runtime", reason: "Native fetch and the existing Node runtime keep installation portable across OpenClaw environments." },
-          { name: "MCP", mark: "MCP", category: "Protocol", project: "Local bridge", reason: "One structured protocol exposes the OrgX work graph to OpenClaw and other local AI clients without inventing a private command language." },
+          { name: "OpenClaw", category: "Host", project: "OrgX plugin", reason: "The host retains agent runtime, workspaces, tools, and lifecycle; the plugin adds the organizational layer instead of replacing it." },
+          { name: "TypeScript", icon: "typescript", category: "Bridge", project: "Plugin core", reason: "Strict types keep the host entry point, tool contracts, stores, routes, and background behavior aligned across the Node.js plugin." },
+          { name: "MCP", category: "Protocol", project: "Local bridge", reason: "One structured protocol exposes the OrgX work graph to OpenClaw and other local AI clients without inventing a private command language." },
+          { name: "SQLite", category: "Durability", project: "Local state + outbox", reason: "Indexed run records, snapshots, and queued events survive disconnection, with legacy JSON import and replay recovery." },
           { name: "React", icon: "react", category: "Surface", project: "OrgX Live", reason: "Mission control, queue, triage, activity, and session controls need a responsive projection over durable state." },
-          { name: "Tailwind", icon: "tailwind", category: "Surface", project: "OrgX Live", reason: "A compact host-native styling layer supports fast iteration while the OrgX design system governs hierarchy and interaction." },
-          { name: "Playwright", mark: "PW", category: "Proof", project: "Plugin verification", reason: "The value is in the complete host flow, so browser-level checks cover pairing, live state, recovery, and operator controls." },
-          { name: "GitHub", icon: "github", category: "Proof", project: "Published plugin", reason: "The public plugin source, tests, checks, and releases distinguish the OrgX integration from OpenClaw itself." },
+          { name: "Tailwind CSS", icon: "tailwind", category: "Surface", project: "OrgX Live", reason: "A compact host-native styling layer supports fast iteration while the OrgX design system governs hierarchy and interaction." },
+          { name: "Framer Motion", category: "Interaction", project: "OrgX Live", reason: "Queue reordering, expanding detail, and animated state changes preserve context as the operator moves through work." },
+          { name: "Vite", category: "Delivery", project: "Embedded dashboard", reason: "The dashboard compiles into the plugin package so its React interface can be served inside the host environment." },
+          { name: "Playwright", category: "Proof", project: "Plugin verification", reason: "The value is in the complete host flow, so browser-level checks cover pairing, live state, recovery, and operator controls." },
         ],
       }}
       receiptSlugs={["orgx-mcp-server"]}
       proofs={[
         {
           src: "/images/case-studies/orgx-openclaw-v4/mission-control.png",
+          width: 2880,
+          height: 1800,
           alt: "Mission control view for OrgX for OpenClaw showing active work and next actions",
           label: "Mission control",
           caption: "The next action remains explicit even when multiple workstreams are active or degraded.",
         },
         {
           src: "/images/case-studies/orgx-openclaw-v4/activity-timeline.png",
+          width: 2880,
+          height: 1800,
           alt: "OrgX for OpenClaw activity timeline with completed and failed agent work",
           label: "Activity with consequence",
           caption: "Completion, failure, and intervention remain attached to named work instead of collapsing into a terminal feed.",
@@ -202,7 +209,7 @@ export default function OrgXForOpenClawPage() {
         external: true,
       }}
       secondaryLink={{ href: "/projects/orgx", label: "See the OrgX platform" }}
-      next={{ href: "/projects/orgx", label: "Return / flagship system", title: "OrgX" }}
+      next={{ href: "/projects/brain-buffet", label: "Next / learning experience", title: "BrainBuffet" }}
     />
   );
 }

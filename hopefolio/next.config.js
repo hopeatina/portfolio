@@ -10,10 +10,10 @@ const nextConfig = {
     domains: [], // Add any external image domains here
   },
   async redirects() {
-    // Legacy project pages were retired into the archive ledger (2026-07).
+    // Only projects that still live in the archive should redirect there.
     const archived = [
-      "deep-human", "meridian", "framefx", "evalvybes", "neuromosaic",
-      "theaicookup", "brain-buffet", "belief-map", "bodyfx", "tasktomodel",
+      "deep-human", "framefx", "evalvybes",
+      "theaicookup", "belief-map", "bodyfx", "tasktomodel",
       "transmorph", "upload-to-mail",
     ];
     return archived.map((slug) => ({

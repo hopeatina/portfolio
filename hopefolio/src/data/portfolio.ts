@@ -1,3 +1,5 @@
+import { selectedProjects } from "./selected-projects";
+
 export type ProjectStatus =
   | "Shipped in production"
   | "Live tool"
@@ -38,90 +40,9 @@ export const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
-export const featuredProjects: PortfolioProject[] = [
-  {
-    slug: "orgx",
-    title: "OrgX",
-    status: "Live tool",
-    shortLabel: "AI continuity + proof",
-    summary:
-      "The continuity and proof layer for accountable AI-delivered work across clients.",
-    description:
-      "OrgX preserves organizational context, trust, decisions, and receipts across the interfaces where AI work actually happens.",
-    proof: ["Continuity across clients", "Receipt-first artifacts", "Human consequence gates"],
-    heroImage: "/images/case-studies/orgx-v4/artifact-receipt.png",
-    heroAlt: "OrgX artifact receipt with provenance and a visible quality bar",
-    href: "/projects/orgx",
-    primaryCta: "Read case study",
-    secondaryHref: "https://useorgx.com",
-    secondaryLabel: "View live platform",
-    tier: "flagship",
-  },
-  {
-    slug: "alma",
-    title: "Alma",
-    status: "Shipped in production",
-    shortLabel: "Production systems",
-    summary:
-      "HIPAA-constrained backend systems for reassessments, notes, audits, and document workflows.",
-    description:
-      "Production backend engineering under compliance pressure: long-lived ownership, careful rollout, and reliability work that had to hold up in real clinical operations.",
-    proof: ["HIPAA production", "72% reassessment adoption", "Reversible rollout"],
-    heroImage: "/images/projects/alma-system-v4.svg",
-    heroAlt: "Clinical workflow continuity and audit map",
-    href: "/projects/alma",
-    primaryCta: "Read case study",
-    tier: "supporting",
-  },
-  {
-    slug: "perfpulse",
-    title: "PerfPulse",
-    status: "Live tool",
-    shortLabel: "Developer tooling",
-    summary:
-      "Rust system monitor with CLI, web dashboard, TUI, and distribution through Homebrew.",
-    description:
-      "A utility-grade developer tool that treats installation, runtime footprint, and operator clarity as product work, not afterthoughts.",
-    proof: ["Rust core", "CLI / TUI / web", "Distribution as product"],
-    heroImage: "/images/case-studies/perfpulse-dashboard.png",
-    heroAlt: "PerfPulse local system inspection dashboard",
-    href: "/projects/perfpulse",
-    primaryCta: "Read case study",
-    secondaryHref: "https://github.com/hopeatina/homebrew-perf-pulse",
-    secondaryLabel: "Homebrew tap",
-    tier: "supporting",
-  },
-  {
-    slug: "openclaw",
-    title: "OrgX for OpenClaw",
-    status: "Live tool",
-    shortLabel: "Continuity plugin",
-    summary:
-      "Persistent organizational memory and coordinated execution for OpenClaw agents.",
-    description:
-      "The OrgX plugin meets operators inside OpenClaw, carrying shared context, resumable work, decisions, and receipts through one local bridge.",
-    proof: ["Host-native adoption", "Durable state", "Live control + receipts"],
-    heroImage: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",
-    heroAlt: "OrgX Live connected to OpenClaw agents and workstreams",
-    href: "/projects/openclaw",
-    primaryCta: "Read case study",
-    secondaryHref: "https://github.com/useorgx/openclaw-plugin",
-    secondaryLabel: "View source",
-    tier: "supporting",
-  },
-];
+export const featuredProjects: PortfolioProject[] = selectedProjects;
 
 export const archivedProjects: PortfolioProject[] = [
-  {
-    slug: "brain-buffet",
-    title: "BrainBuffet",
-    status: "Experimental",
-    shortLabel: "LLM product",
-    summary: "AI course platform with structured generation and paid usage.",
-    description: "Archived from the primary narrative pending a deeper case study.",
-    proof: ["774 commits", "LLM pipelines", "Stripe"],
-    tier: "archive",
-  },
   {
     slug: "deep-human",
     title: "Deep Human",
@@ -136,36 +57,16 @@ export const archivedProjects: PortfolioProject[] = [
     tier: "archive",
   },
   {
-    slug: "neuromosaic",
-    title: "Neuromosaic",
-    status: "Experimental",
-    shortLabel: "ML infrastructure",
-    summary: "Distributed ML infrastructure work from an earlier systems chapter.",
-    description: "Archived to keep the current site tightly aligned with agent infrastructure.",
-    proof: ["Distributed ML", "Python", "research infra"],
-    tier: "archive",
-  },
-  {
     slug: "framefx",
     title: "FrameFX",
     status: "Experimental",
     shortLabel: "Motion systems",
     summary: "Remotion monorepo for token-driven motion design.",
-    description: "Archived while the main portfolio foregrounds infrastructure work.",
+    description: "An exploration of reusable motion systems and a consistent visual language.",
     proof: ["8 packages", "Remotion", "design tokens"],
     href: "https://github.com/hopeatina/framefx",
     hrefExternal: true,
     primaryCta: "View source",
-    tier: "archive",
-  },
-  {
-    slug: "meridian",
-    title: "Meridian",
-    status: "Experimental",
-    shortLabel: "Trading platform",
-    summary: "Analytics and approvals for a premium trading signal product.",
-    description: "Archived until its case study is developed to flagship depth.",
-    proof: ["Convex", "TimescaleDB", "IBKR"],
     tier: "archive",
   },
   {
@@ -184,7 +85,7 @@ export const archivedProjects: PortfolioProject[] = [
     status: "Experimental",
     shortLabel: "Community platform",
     summary: "Community tooling for AI events and hackathons.",
-    description: "Archived from the main narrative because it weakens the infrastructure story.",
+    description: "Community infrastructure for bringing people together through AI events and shared making.",
     proof: ["Community", "events"],
     tier: "archive",
   },

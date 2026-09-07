@@ -1,10 +1,10 @@
+import ProjectVisual, { ProjectVisualProps } from "./ProjectVisual";
 import Head from "next/head";
 import { useState } from "react";
 import Link from "next/link";
 import {
   CausalFlow,
   ContinuityPlayhead,
-  EvidenceSpecimen,
   GlyphName,
   LivingMotif,
   SectionSignal,
@@ -21,12 +21,7 @@ export interface NarrativeBlock {
   notes?: string[];
 }
 
-export interface NarrativeProof {
-  src: string;
-  alt: string;
-  label: string;
-  caption: string;
-}
+export type NarrativeProof = Omit<ProjectVisualProps, "priority" | "className">;
 
 export interface SystemChapter {
   eyebrow: string;
@@ -63,6 +58,8 @@ interface CaseStudyNarrativeProps {
   insight: NarrativeBlock;
   decision: NarrativeBlock;
   flow: Array<{ glyph: GlyphName; label: string; detail: string; tone?: "heat" | "cold" }>;
+  /** Optional independent validation or reproducibility chapter for thesis-heavy work. */
+  validation?: React.ReactNode;
   system?: SystemChapter;
   proofs: NarrativeProof[];
   /** Ledger receipts backing this case — slugs resolved against the proof data. */
@@ -135,7 +132,7 @@ function SystemDepth({ chapter }: { chapter: SystemChapter }) {
       <div className="v4-surface-atlas">
         <div className="v4-surface-atlas-heading">
           <span>Surface atlas</span>
-          <p>The architecture is only complete when every operator and client boundary has a legible surface.</p>
+          <p>The system becomes tangible through the places people encounter and use it.</p>
         </div>
         <div className="v4-surface-atlas-grid">
           {chapter.surfaces.map((surface, index) => (
@@ -169,7 +166,7 @@ function SystemDepth({ chapter }: { chapter: SystemChapter }) {
           </div>
           <div className="v4-surface-proof-grid">
             {chapter.surfaceProofs.map((proof) => (
-              <EvidenceSpecimen {...proof} key={proof.src} className="v4-widget-specimen" />
+              <ProjectVisual {...proof} key={proof.src} className="v4-widget-specimen" />
             ))}
           </div>
         </div>
@@ -221,6 +218,16 @@ function HeroTerminal({ command, note }: { command: string; note?: string }) {
 }
 
 export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
+  const systemIndex = props.validation ? "05" : "04";
+  const proofIndex = props.validation
+    ? props.system
+      ? "06"
+      : "05"
+    : props.system
+      ? "05"
+      : "04";
+  const learningIndex = String(Number(proofIndex) + 1).padStart(2, "0");
+
   return (
     <>
       <Head>
@@ -232,14 +239,18 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
         <ContinuityPlayhead label={props.title} />
 
         <header className="v4-case-hero">
-          <LivingMotif variant="handoff" className="v4-case-hero-motif" label="A continuity signal crossing a system boundary" />
           <div className="v4-case-hero-copy">
             <div className="v4-case-meta">
               <span>{props.index}</span>
               <span>{props.status}</span>
             </div>
-            <h1>{props.title}</h1>
+            <h1 className={props.title.split(/\s+/).some((word) => word.length > 9) ? "v4-case-title-long" : undefined}>{props.title}</h1>
             <p className="v4-case-subtitle">{props.subtitle}</p>
+          </div>
+
+          <ProjectVisual {...props.heroProof} priority className="v4-case-hero-proof" />
+
+          <div className="v4-case-overview">
             <p className="v4-case-intro">{props.introduction}</p>
             <div className="v4-case-links">
               <TextLink {...props.primaryLink}>{props.primaryLink.label}</TextLink>
@@ -261,38 +272,44 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
               <HeroTerminal command={props.heroTerminal.command} note={props.heroTerminal.note} />
             ) : null}
           </div>
-
-          <EvidenceSpecimen {...props.heroProof} priority className="v4-case-hero-proof" />
         </header>
 
-        <section className="v4-narrative-section v4-narrative-section-problem v4-motif-backed">
+        <section data-material-form="weave" className="v4-narrative-section v4-narrative-section-problem v4-motif-backed">
           <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="01">The consequential problem</SectionSignal>
           <NarrativeCopy block={props.problem} />
         </section>
 
-        <section className="v4-narrative-section v4-narrative-section-insight v4-motif-backed">
+        <section data-material-form="orbit" className="v4-narrative-section v4-narrative-section-insight v4-motif-backed">
           <LivingMotif variant="aperture" className="v4-section-motif" />
           <SectionSignal index="02">What I saw</SectionSignal>
           <NarrativeCopy block={props.insight} />
         </section>
 
-        <section className="v4-narrative-section v4-narrative-section-decision v4-motif-backed">
+        <section data-material-form="bridge" className="v4-narrative-section v4-narrative-section-decision v4-motif-backed">
           <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="03">The decision that changed the system</SectionSignal>
           <NarrativeCopy block={props.decision} />
           <CausalFlow steps={props.flow} />
         </section>
 
+        {props.validation ? (
+          <section className="v4-validation-section v4-motif-backed">
+            <LivingMotif variant="memory" className="v4-section-motif" />
+            <SectionSignal index="04">Independent evidence / reproducible use</SectionSignal>
+            {props.validation}
+          </section>
+        ) : null}
+
         {props.system ? (
           <section className="v4-system-chapter v4-motif-backed">
             <LivingMotif variant="handoff" className="v4-system-chapter-motif" />
-            <SectionSignal index="04">System anatomy / rationale / surfaces</SectionSignal>
+            <SectionSignal index={systemIndex}>System anatomy / rationale / surfaces</SectionSignal>
             <SystemDepth chapter={props.system} />
           </section>
         ) : null}
 
-        <section className="v4-proof-field v4-motif-backed">
+        <section id="project-evidence" data-material-form="orbit" className="v4-proof-field v4-motif-backed">
           <LivingMotif variant="aperture" className="v4-section-motif" />
           {props.receiptSlugs && props.receiptSlugs.length > 0 ? (
             <div className="v4-case-receipts" aria-label="Ledger receipts for this system">
@@ -318,10 +335,10 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
             </div>
           ) : null}
 
-          <SectionSignal index={props.system ? "05" : "04"}>Authentic proof</SectionSignal>
+          <SectionSignal index={proofIndex}>Authentic proof</SectionSignal>
           <div className="v4-proof-grid">
             {props.proofs.map((proof, index) => (
-              <EvidenceSpecimen
+              <ProjectVisual
                 {...proof}
                 key={proof.src}
                 className={index === 0 ? "v4-proof-primary" : ""}
@@ -330,9 +347,9 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
           </div>
         </section>
 
-        <section className="v4-learning-section v4-motif-backed">
+        <section data-material-form="weave" className="v4-learning-section v4-motif-backed">
           <LivingMotif variant="memory" className="v4-section-motif" />
-          <SectionSignal index={props.system ? "06" : "05"}>What changed in my operating model</SectionSignal>
+          <SectionSignal index={learningIndex}>What changed in my operating model</SectionSignal>
           <NarrativeCopy block={props.learning} />
         </section>
 

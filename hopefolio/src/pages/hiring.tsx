@@ -1,6 +1,9 @@
+import MaterialSpecimen from "@/components/material/MaterialSpecimen";
+import { materialContexts } from "@/components/material/material-context";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { practiceCapabilities } from "@/data/practice";
 import {
   ContinuityPlayhead,
   LivingMotif,
@@ -39,7 +42,7 @@ export default function Hiring() {
         <title>Work with Hope Atina</title>
         <meta
           name="description"
-          content="A concise brief for founders and hiring teams considering Hope Atina for consequential AI infrastructure, product engineering, or senior/staff systems work."
+          content="Hope Atina brings production backend and data experience, AI systems engineering, product design, research, and interactive 3D to ambitious teams."
         />
       </Head>
 
@@ -47,15 +50,14 @@ export default function Hiring() {
         <ContinuityPlayhead label="work with me" />
 
         <header className="v4-hiring-hero v4-motif-backed">
-          <LivingMotif variant="handoff" className="v4-hiring-hero-motif" label="A signal crossing engineering, product, and founder boundaries" />
+          <MaterialSpecimen context={materialContexts.home} className="material-inner-object" compact />
           <span>For founders / recruiters / ambitious teams</span>
-          <h1>The hard problems between AI capability and production consequence. That&apos;s my lane.</h1>
+          <h1>Systems depth. Product taste. Room to build across disciplines.</h1>
           <div>
             <p>
-              I build the execution layer for governed agent work — memory, authority, execution,
-              proof — with production ownership across healthcare, fintech data, developer tooling,
-              and AI infrastructure. Strongest where the work needs systems depth and a surface
-              people can trust.
+              I bring production ownership across healthcare, fintech data, and backend systems,
+              alongside founder-led work in AI infrastructure, learning products, research tools,
+              and interactive 3D. I connect the architecture to the experience people actually use.
             </p>
             <div className="v4-hiring-actions">
               <TextLink href="mailto:hopeatina@gmail.com?subject=Consequential%20work%20%E2%80%94%20%5Bcompany%5D" external>
@@ -95,6 +97,13 @@ export default function Hiring() {
               </article>
             ))}
           </div>
+        </section>
+
+        <section className="practice-brief v4-motif-backed" aria-labelledby="practice-brief-title">
+          <span>Capabilities / the full range</span>
+          <h2 id="practice-brief-title">Different disciplines. Useful together.</h2>
+          <ul>{practiceCapabilities.map((item) => <li key={item.name}><strong>{item.name}</strong><span>{item.skills.join(" · ")}</span></li>)}</ul>
+          <TextLink href="/about#skills">Explore skills, tools, and the work behind them</TextLink>
         </section>
 
         <section className="v4-hiring-proof v4-motif-backed">
@@ -143,8 +152,8 @@ export default function Hiring() {
             <div>
               <p>
                 Founder collaborations, senior/staff IC roles, and small high-agency teams building
-                agent platforms, AI developer experience, MCP infrastructure, evals, observability,
-                or operational products where trust has to be designed into the workflow.
+                agent platforms, developer tools, data-intensive products, learning experiences,
+                or operational software where architecture and interaction need equal care.
               </p>
               <ul>
                 <li>Houston-based and remote-friendly</li>
