@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { GetStaticProps } from "next";
 import { getAllPosts } from "@/modules/blog/posts";
+import { ContinuityPlayhead } from "@/components/v4/V4Primitives";
 
 const CATEGORY_GROUPS = [
   {
@@ -143,12 +144,13 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
         />
       </Head>
 
-      <main id="main-content" className="page-frame">
+      <main id="main-content" className="v4-page material-writing-page">
+        <ContinuityPlayhead label="writing" />
         <div className="page-stack">
-          <header className="page-header-stack">
+          <header className="page-header-stack material-writing-hero">
             <span className="eyebrow">Writing / the living ledger</span>
             <h1>What breaks when you put agents in production.</h1>
-            <p style={{ maxWidth: "42rem", margin: 0 }}>
+            <p className="material-writing-deck">
               Essays on memory, MCP, trust scoring, decision provenance, and
               why single-shot benchmarks hide what matters — plus the daily
               autonomy receipts as they land.
@@ -185,17 +187,17 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
                 ) : null}
               </span>
               <h2>{featured.title}</h2>
-              <p style={{ margin: "0.8rem 0 0", color: "var(--shell-text-soft)", maxWidth: "40rem" }}>
+              <p className="material-writing-excerpt">
                 {featured.excerpt}
               </p>
-              <div className="proof-bar" style={{ marginTop: "1rem" }}>
+              <div className="proof-bar">
                 <span>{new Date(featured.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
                 <span>{featured.readTime}</span>
                 {featured.tags.map((tag) => (
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
-              <p style={{ margin: "1.1rem 0 0" }}>
+              <p className="material-writing-read">
                 <Link href={`/blog/${featured.slug}`} className="site-link-inline">
                   Read featured post →
                 </Link>
@@ -203,53 +205,34 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
             </article>
           ) : null}
 
-          <section className="page-content">
+          <section className="page-content material-writing-section">
             <div
-              role="tablist"
+              role="group"
               aria-label="Blog category filter"
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "0.5rem",
-                marginBottom: "1.5rem",
-              }}
+              className="material-writing-filters"
             >
               {CATEGORY_GROUPS.map((g) => {
                 const isActive = g.id === activeGroup;
                 const count =
                   g.id === "all"
-                    ? rest.length
+                    ? posts.length
                     : posts.filter((p) => g.matches(p.category)).length;
                 if (g.id !== "all" && count === 0) return null;
                 return (
                   <button
                     key={g.id}
-                    role="tab"
-                    aria-selected={isActive}
+                    type="button"
+                    aria-pressed={isActive}
                     onClick={() => setActiveGroup(g.id)}
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.72rem",
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                      padding: "0.45rem 0.9rem",
-                      borderRadius: "999px",
-                      border: isActive
-                        ? "1px solid rgba(0, 229, 160, 0.55)"
-                        : "1px solid rgba(255, 255, 255, 0.1)",
-                      background: isActive
-                        ? "rgba(0, 229, 160, 0.1)"
-                        : "transparent",
-                      color: isActive ? "var(--shell-text)" : "var(--shell-muted)",
-                      cursor: "pointer",
-                      transition: "all 150ms ease",
-                    }}
                   >
-                    {g.label} <span style={{ opacity: 0.6 }}>({count})</span>
+                    {g.label} <span>{count}</span>
                   </button>
                 );
               })}
             </div>
+            <p className="sr-only" aria-live="polite">
+              {filteredRest.length + (showFeatured && featured ? 1 : 0)} posts shown.
+            </p>
             <div className="blog-list">
               {filteredRest.map((post) => (
                 <article key={post.slug} className="blog-list-item">
@@ -261,10 +244,10 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
                       </em>
                     ) : null}
                   </span>
-                  <h2 style={{ margin: 0, fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>
+                  <h2>
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </h2>
-                  <p style={{ margin: 0, maxWidth: "42rem" }}>{post.excerpt}</p>
+                  <p>{post.excerpt}</p>
                   <div className="blog-meta">
                     {new Date(post.date).toLocaleDateString("en-US", {
                       year: "numeric",
@@ -278,11 +261,11 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
             </div>
           </section>
 
-          <section className="page-content">
-            <div className="page-header-stack" style={{ gap: "0.8rem" }}>
+          <section className="page-content material-writing-section">
+            <div className="page-header-stack material-writing-section-header">
               <span className="eyebrow">OrgX essays · useorgx.com/blog</span>
               <h2>Writing from the platform itself</h2>
-              <p style={{ maxWidth: "42rem", margin: 0 }}>
+              <p className="material-writing-deck">
                 The OrgX blog is where the substrate work gets argued out:
                 memory, benchmarks, MCP, trust, and where autonomy stops
                 being a demo and starts being real infrastructure.
@@ -292,12 +275,12 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
               {orgxEssays.map((essay) => (
                 <article key={essay.title} className="blog-list-item">
                   <span className="eyebrow">{essay.focus}</span>
-                  <h2 style={{ margin: 0, fontSize: "clamp(1.5rem, 4vw, 2rem)" }}>
+                  <h2>
                     <a href={essay.url} target="_blank" rel="noreferrer">
                       {essay.title}
                     </a>
                   </h2>
-                  <p style={{ margin: 0, maxWidth: "42rem" }}>{essay.summary}</p>
+                  <p>{essay.summary}</p>
                   <div className="blog-meta">
                     Published on useorgx.com ↗
                   </div>

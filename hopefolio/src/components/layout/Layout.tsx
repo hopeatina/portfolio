@@ -7,9 +7,10 @@ import SiteSeo from "./SiteSeo";
 interface LayoutProps {
   children: React.ReactNode;
   showFooter?: boolean;
+  pageProps?: React.ComponentProps<typeof SiteSeo>["pageProps"];
 }
 
-export default function Layout({ children, showFooter = true }: LayoutProps) {
+export default function Layout({ children, showFooter = true, pageProps }: LayoutProps) {
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function Layout({ children, showFooter = true }: LayoutProps) {
 
   return (
     <>
-      <SiteSeo />
+      <SiteSeo pageProps={pageProps} />
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>

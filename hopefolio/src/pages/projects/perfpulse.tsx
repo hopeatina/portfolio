@@ -18,6 +18,8 @@ export default function PerfPulsePage() {
       ]}
       heroProof={{
         src: "/images/case-studies/perf-pulse-crash-guard.jpg",
+        width: 1274,
+        height: 717,
         alt: "Perf Pulse Crash Guard dashboard showing protection status, memory and disk thresholds, incidents, and stop controls",
         label: "Crash Guard / one local operating picture",
         caption: "The notification opens the exact live dashboard developers need: current risk, tunable thresholds, recent incidents, and identity-checked stop controls in one place.",
@@ -146,14 +148,14 @@ export default function PerfPulsePage() {
         ],
         toolEvidence: [
           { name: "Rust", icon: "rust", category: "Core", project: "Perf Pulse", reason: "A memory-safe, compact core keeps continuous collection predictable on the machine it is protecting." },
-          { name: "Tokio", mark: "TK", category: "Runtime", project: "Crash Guard", reason: "Async scheduling coordinates recurring checks, alert delivery, and the local server without turning protection into a heavyweight daemon." },
-          { name: "sysinfo", mark: "SI", category: "Collection", project: "Perf Pulse", reason: "Process and system state feed one shared model across Crash Guard, CLI, TUI, and dashboard surfaces." },
-          { name: "launchd", mark: "LD", category: "Runtime", project: "Crash Guard", reason: "A per-user LaunchAgent keeps protection available across logins without root privileges or a system extension." },
-          { name: "Axum", mark: "AX", category: "Surface", project: "Local dashboard", reason: "A small localhost server binds each alert to a focused live incident and control surface." },
-          { name: "Clap", mark: "CL", category: "Surface", project: "CLI", reason: "Guard status, checks, storage diagnostics, and installation remain scriptable from the terminal." },
-          { name: "Crossterm", mark: "CT", category: "Surface", project: "TUI", reason: "A persistent live view supports inspection without forcing the operator into a browser." },
+          { name: "Tokio", category: "Runtime", project: "Crash Guard", reason: "Async scheduling coordinates recurring checks, alert delivery, and the local server without turning protection into a heavyweight daemon." },
+          { name: "sysinfo", category: "Collection", project: "Perf Pulse", reason: "Process and system state feed one shared model across Crash Guard, CLI, TUI, and dashboard surfaces." },
+          { name: "launchd", category: "Runtime", project: "Crash Guard", reason: "A per-user LaunchAgent keeps protection available across logins without root privileges or a system extension." },
+          { name: "Axum", category: "Surface", project: "Local dashboard", reason: "A small localhost server binds each alert to a focused live incident and control surface." },
+          { name: "Clap", category: "Surface", project: "CLI", reason: "Guard status, checks, storage diagnostics, and installation remain scriptable from the terminal." },
+          { name: "Crossterm", category: "Surface", project: "TUI", reason: "A persistent live view supports inspection without forcing the operator into a browser." },
           { name: "GitHub", icon: "github", category: "Delivery", project: "Releases + CI", reason: "Tests, Clippy, architecture builds, checksums, and releases make a small binary independently inspectable." },
-          { name: "Homebrew", mark: "BR", category: "Delivery", project: "Distribution", reason: "One familiar command closes the final mile between discovering the tool and using it under pressure." },
+          { name: "Homebrew", category: "Delivery", project: "Distribution", reason: "One familiar command closes the final mile between discovering the tool and using it under pressure." },
         ],
       }}
       heroTerminal={{
@@ -164,24 +166,32 @@ export default function PerfPulsePage() {
       proofs={[
         {
           src: "/images/case-studies/perf-pulse-crash-guard.jpg",
+          width: 1274,
+          height: 717,
           alt: "Perf Pulse Crash Guard live dashboard with protection status, thresholds, incidents, and process controls",
           label: "Early warning / Crash Guard",
           caption: "Protection state, threshold controls, incident history, and the next safe action stay in one focused local surface.",
         },
         {
           src: "/images/case-studies/perfpulse-cli-live.png",
+          width: 1024,
+          height: 298,
           alt: "Perf Pulse CLI product preview showing JSON analysis piped to Claude",
           label: "Immediate / CLI",
           caption: "The shortest path from machine state to an actionable explanation stays in the terminal and can feed another tool when needed.",
         },
         {
           src: "/images/case-studies/perfpulse-tui-live.png",
+          width: 1024,
+          height: 321,
           alt: "Perf Pulse terminal TUI product preview with live CPU and memory process state",
           label: "Sustained / TUI",
           caption: "The same core signal earns a persistent terminal surface when the operator needs to watch change over time.",
         },
         {
           src: "/images/case-studies/perfpulse-meeting-mode-live.png",
+          width: 1024,
+          height: 629,
           alt: "Perf Pulse Meeting Mode product preview showing paused processes and automatic restore timing",
           label: "Reversible action / Meeting Mode",
           caption: "The interface makes the intervention, resources freed, paused processes, and restore path visible in one state.",

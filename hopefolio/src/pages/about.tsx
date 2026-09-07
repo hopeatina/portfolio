@@ -1,3 +1,5 @@
+import MaterialSpecimen from "@/components/material/MaterialSpecimen";
+import { materialContexts } from "@/components/material/material-context";
 import Head from "next/head";
 import Image from "next/image";
 import {
@@ -8,6 +10,8 @@ import {
   TextLink,
 } from "@/components/v4/V4Primitives";
 import MaterialThreadField from "@/components/v5/MaterialThreadField";
+import TechnologyAtlas from "@/components/v5/TechnologyAtlas";
+import { practiceCapabilities, practiceTools } from "@/data/practice";
 
 const practiceThreads = [
   {
@@ -46,7 +50,7 @@ export default function About() {
         <title>About Hope Atina</title>
         <meta
           name="description"
-          content="Hope Atina is a Houston-based engineer, founder, and product thinker building coherent systems across AI infrastructure and regulated products."
+          content="Hope Atina is a Houston-based engineer, founder, and product thinker working across production software, data, AI, research, interactive 3D, and creative communities."
         />
       </Head>
 
@@ -62,7 +66,7 @@ export default function About() {
             sizes="100vw"
             aria-hidden="true"
           />
-          <LivingMotif variant="weave" className="v4-about-hero-motif" label="Roots, disciplines, and experiences weaving into one practice" />
+          <MaterialSpecimen context={materialContexts.about} className="material-inner-object" compact />
           <div>
             <span>About / inspection as a creative practice</span>
             <h1>Every thread I pull should reveal more of what people can become.</h1>
@@ -71,6 +75,7 @@ export default function About() {
               technology for its own sake. It is amplification: understand the system deeply
               enough that a person, a team, or a generation can move with more agency.
             </p>
+            <TextLink href="#skills">Explore my skills and tools</TextLink>
             <figure className="v4-about-portrait">
               <Image
                 src="/images/hope-profile.jpg"
@@ -143,7 +148,7 @@ export default function About() {
           </ol>
         </section>
 
-        <section className="v4-about-origin v4-motif-backed">
+        <section id="origins" className="v4-about-origin v4-motif-backed">
           <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="01">The root system</SectionSignal>
           <div className="v4-about-origin-grid">
@@ -212,7 +217,7 @@ export default function About() {
           />
         </section>
 
-        <section className="v4-about-experience v4-motif-backed">
+        <section id="experience" className="v4-about-experience v4-motif-backed">
           <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="03">The questions got harder</SectionSignal>
           <div className="v4-about-arc-heading">
@@ -238,6 +243,12 @@ export default function About() {
               <p>HIPAA production taught me to make privacy enter early, failure visible, rollout reversible, and operator trust part of engineering quality.</p>
               <small>Django · Celery · PostgreSQL · Datadog</small>
             </article>
+            <article>
+              <span>Research / MD Anderson · visualization</span>
+              <h3>Can the right picture change an operational decision?</h3>
+              <p>Research work connected operating-room capacity to a visual system people could inspect and use.</p>
+              <small>React · D3.js · scientific and operational visualization</small>
+            </article>
             <article className="v4-about-chapter-featured">
               <span>04 / OrgX · synthesis</span>
               <h3>How can many intelligent actors move without losing the organization?</h3>
@@ -248,7 +259,7 @@ export default function About() {
           </div>
         </section>
 
-        <section className="v4-about-collaboration v4-motif-backed">
+        <section id="community" className="v4-about-collaboration v4-motif-backed">
           <LivingMotif variant="handoff" className="v4-section-motif" />
           <SectionSignal index="04">Collaboration is a creative technology</SectionSignal>
           <div>
@@ -283,9 +294,13 @@ export default function About() {
           </a>
         </section>
 
+        <section id="skills" data-material-form="weave" className="v5-tool-section v4-motif-backed">
+          <TechnologyAtlas tools={practiceTools} capabilities={practiceCapabilities} title="What I bring to the work." />
+        </section>
+
         <section className="v4-about-now v4-motif-backed">
           <LivingMotif variant="resolve" className="v4-about-now-motif" />
-          <span>Now / July 2026</span>
+          <span>Now / September 2026</span>
           <h2>Building in public where AI infrastructure becomes a human operating system.</h2>
           <p>
             I am most interested in founder collaborations and senior/staff work where systems depth,

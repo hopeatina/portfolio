@@ -1,37 +1,23 @@
 import type { AppProps } from "next/app";
-import { Newsreader, Recursive } from "next/font/google";
+import { recursive, newsreader } from "@/lib/local-fonts";
 import { ThemeProvider } from "@/modules/mode-switch/ThemeContext";
+import MaterialAtmosphere from "@/components/material/MaterialAtmosphere";
 import Layout from "@/components/layout/Layout";
-import ContinuitySignal from "@/components/v5/ContinuitySignal";
 import "@/styles/globals.css";
 import "@/styles/v4.css";
-
-const recursive = Recursive({
-  subsets: ["latin"],
-  weight: "variable",
-  axes: ["CASL", "CRSV", "MONO", "slnt"],
-  display: "swap",
-  variable: "--font-recursive",
-});
-
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  weight: "variable",
-  style: ["normal", "italic"],
-  axes: ["opsz"],
-  adjustFontFallback: false,
-  display: "swap",
-  variable: "--font-newsreader",
-});
+import "@/styles/material-surfaces.css";
+import "@/styles/material.css";
+import "@/styles/material-atmosphere.css";
+import "@/styles/practice.css";
+import "@/styles/project-visual.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
-      <div className={`${recursive.variable} ${newsreader.variable}`}>
-        {/* Persistent above the router: the signal survives every route handoff */}
-        <ContinuitySignal />
+      <div className={`material-root ${recursive.variable} ${newsreader.variable}`}>
+        <MaterialAtmosphere />
         <div style={{ position: "relative", zIndex: 1 }}>
-          <Layout>
+          <Layout pageProps={pageProps}>
             <Component {...pageProps} />
           </Layout>
         </div>

@@ -1,10 +1,13 @@
+import { selectedProjects } from "@/data/selected-projects";
+import { archivedProjects } from "@/data/portfolio";
+
 export const SITE_NAME = "Hope Atina";
 export const SITE_HANDLE = "@emerginghope_";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ||
   "https://hopeatina.com";
 export const SITE_DESCRIPTION =
-  "Hope Atina builds the execution layer for governed agent work: memory the next run inherits, bounded authority, execution across clients, and proof you can open.";
+  "Hope Atina is an engineer, founder, and product thinker working across production software, data platforms, AI systems, research, interactive 3D, and creative communities.";
 export const SITE_IMAGE = "/images/generated/inspection-field.jpg";
 
 export const SOCIAL_LINKS = {
@@ -27,10 +30,23 @@ export const SITE_KEYWORDS = [
   "MCP protocol",
   "developer tooling",
   "production AI systems",
+  "backend engineering",
+  "data engineering",
+  "machine learning",
+  "product design",
+  "scientific computing",
+  "Three.js",
+  "Blender",
+  "game development",
+  "creative direction",
   "OrgX",
   "Perf Pulse",
   "Crash Guard for macOS",
   "OrgX for OpenClaw",
+  "BrainBuffet",
+  "Neuromosaic",
+  "Chaos Riders",
+  "Meridian",
 ];
 
 export type CrawlSection =
@@ -62,7 +78,7 @@ export const PRIMARY_PAGES: CrawlEntry[] = [
     path: "/",
     title: "Home",
     description:
-      "Hope Atina's work across AI continuity, accountable agent execution, regulated production, and developer tooling.",
+      "Hope Atina's work across production engineering, data platforms, AI systems, machine learning, interactive 3D, and creative practice.",
     section: "Primary Pages",
     changeFrequency: "weekly",
     priority: 1,
@@ -80,7 +96,7 @@ export const PRIMARY_PAGES: CrawlEntry[] = [
     path: "/projects",
     title: "Projects",
     description:
-      "Index of flagship case studies and selected systems spanning agent infrastructure, production AI, and developer tooling.",
+      "Eight case studies spanning AI infrastructure, learning, distributed intelligence, games, clinical systems, and market research.",
     section: "Primary Pages",
     changeFrequency: "weekly",
     priority: 0.9,
@@ -115,47 +131,18 @@ export const PRIMARY_PAGES: CrawlEntry[] = [
 ];
 
 export const CASE_STUDIES: CrawlEntry[] = [
-  {
-    path: "/projects/orgx",
-    title: "OrgX",
-    description:
-      "The continuity and proof layer for accountable AI-delivered work across clients.",
+  ...selectedProjects.map((project): CrawlEntry => ({
+    path: project.href,
+    title: project.title,
+    description: project.summary,
     section: "Case Studies",
-    changeFrequency: "weekly",
-    priority: 0.9,
-  },
-  {
-    path: "/projects/openclaw",
-    title: "OrgX for OpenClaw",
-    description:
-      "Persistent organizational memory, coordinated execution, and receipts for OpenClaw agents.",
-    section: "Case Studies",
-    changeFrequency: "weekly",
-    priority: 0.8,
-  },
-  {
-    path: "/projects/perfpulse",
-    title: "Perf Pulse",
-    description:
-      "A local-first macOS performance suite that warns about runaway memory and shrinking disk headroom, then opens the live Crash Guard dashboard for deliberate intervention.",
-    section: "Case Studies",
-    changeFrequency: "weekly",
-    priority: 0.8,
-  },
-  {
-    path: "/projects/alma",
-    title: "Alma",
-    description:
-      "Production AI systems in a HIPAA-compliant environment, including automated reassessments and clinical workflow infrastructure.",
-    section: "Case Studies",
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
+    changeFrequency: project.tier === "flagship" ? "weekly" : "monthly",
+    priority: project.tier === "flagship" ? 0.9 : 0.8,
+  })),
   {
     path: "/projects/archive",
     title: "Project Archive",
-    description:
-      "Twelve archived systems, 2017-2024, kept as an honest ledger of range with real links only where the source is public.",
+    description: `${archivedProjects.length} earlier systems and experiments, with public source links where available.`,
     section: "Case Studies",
     changeFrequency: "monthly",
     priority: 0.5,

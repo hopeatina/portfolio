@@ -18,6 +18,8 @@ export default function AlmaPage() {
       ]}
       heroProof={{
         src: "/images/projects/alma-system-v4.svg",
+        width: 1600,
+        height: 900,
         alt: "Clinical workflow continuity map for reassessments, documentation, consent, and audit gates",
         label: "Clinical workflow continuity",
         caption: "Privacy enters at the first boundary; each branch returns through an explicit audit gate before becoming an accountable outcome.",
@@ -144,17 +146,20 @@ export default function AlmaPage() {
         toolEvidence: [
           { name: "Python", icon: "python", category: "Application", project: "Alma", reason: "A mature language ecosystem for production backend systems, clinical business rules, and integration work." },
           { name: "Django", icon: "django", category: "Application", project: "Alma", reason: "Reviewable request boundaries, permissions, data modeling, and administrative tooling for a long-lived healthcare product." },
-          { name: "Celery", mark: "CY", category: "Workflow", project: "Alma", reason: "Moves backfills, reminders, documents, and vendor operations out of the synchronous clinical request path." },
+          { name: "Django REST Framework", category: "API", project: "Alma", reason: "API contracts connect clinical workflows and integration boundaries to the underlying Django application." },
+          { name: "Celery", category: "Workflow", project: "Alma", reason: "Moves backfills, reminders, documents, and vendor operations out of the synchronous clinical request path." },
           { name: "Redis", icon: "redis", category: "Workflow", project: "Alma", reason: "Supports background execution and coordination where job state must remain operationally visible." },
           { name: "PostgreSQL", icon: "postgres", category: "Data", project: "Alma", reason: "Durable relational state for workflows that unfold across time, actors, permissions, and audits." },
-          { name: "AWS", icon: "aws", category: "Infrastructure", project: "Alma", reason: "Durable object storage and production infrastructure for document-heavy backend workflows." },
+          { name: "Amazon S3", category: "Storage", project: "Alma", reason: "Durable object storage supports document-heavy backend workflows alongside relational application state." },
           { name: "Datadog", icon: "datadog", category: "Proof", project: "Alma", reason: "Turns the failure path into an engineering surface so the team can intervene before clinicians become debuggers." },
-          { name: "Spring Health", mark: "SH", category: "Integration", project: "Alma · current", reason: "The current integration is treated as a system seam: contract, authentication, durable state, observability, and compliance—not a logo hookup." },
+          { name: "Spring Health", category: "Integration", project: "Alma · in progress", reason: "The integration work brings contract, authentication, durable state, and observability into the same backend boundary." },
         ],
       }}
       proofs={[
         {
           src: "/images/projects/alma-system-v4.svg",
+          width: 1600,
+          height: 900,
           alt: "High-contrast clinical backend workflow diagram",
           label: "Seven feature areas; one operating principle",
           caption: "Reassessments, notes, document workflows, reminders, consent, audit integrations, and observability were treated as one continuity problem.",

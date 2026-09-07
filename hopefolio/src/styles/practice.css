@@ -1,0 +1,165 @@
+/* A shared vocabulary for skills, tools, and their actual product marks. */
+.technology-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  color: var(--v4-mineral);
+  line-height: 1;
+}
+.technology-mark > svg,
+.technology-mark > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(var(--technology-optical-scale, 1));
+}
+.technology-mark-text {
+  font-family: var(--font-recursive), monospace;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.v5-tool-grid .technology-mark {
+  grid-row: 1 / 3;
+  align-self: center;
+  width: 27px;
+  height: 29px;
+}
+.v5-tool-grid .technology-mark > svg { color: inherit; width: 100%; height: 100%; }
+.v5-tool-grid .technology-mark-text { font-size: 9px; }
+.v5-tool-grid .technology-name { min-width: 0; overflow-wrap: anywhere; align-self: end; }
+.v5-tool-grid small { min-width: 0; overflow-wrap: anywhere; }
+.v5-tool-grid button { transition: background 180ms ease, box-shadow 180ms ease; }
+.v5-tool-grid button .technology-mark { transition: transform 230ms ease, color 180ms ease; }
+.v5-tool-grid button:hover .technology-mark { transform: translateY(-2px); }
+.v5-tool-grid button.is-active .technology-mark { color: var(--v4-signal); }
+.v4-client-rail .technology-mark { width: 23px; height: 23px; }
+.v4-client-rail .technology-mark > svg,
+.v4-client-rail .technology-mark > img { width: 100%; height: 100%; }
+.v4-ai-proof-row .technology-mark { width: 24px; height: 24px; }
+.practice-domains {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2.5rem;
+  margin-top: 3.5rem;
+}
+.practice-domain {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr) 1rem;
+  align-items: start;
+  gap: .7rem;
+  min-height: 110px;
+  padding: 1.35rem .25rem;
+  border: 0;
+  border-top: 1px solid var(--v4-rule);
+  background: transparent;
+  color: var(--v4-mineral);
+  text-align: left;
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+.practice-domain strong { display: block; font-size: clamp(.95rem, 1.4vw, 1.2rem); font-weight: 520; line-height: 1.3; }
+.practice-domain small { display: block; margin-top: .6rem; font-size: .71rem; line-height: 1.65; color: var(--v4-dim); }
+.practice-domain-index { font-size: .62rem; color: var(--v4-dim); padding-top: .25rem; font-variation-settings: "MONO" 1; }
+.practice-domain-arrow { color: var(--v4-dim); transition: transform 200ms ease; }
+.practice-domain[aria-pressed="true"] { border-top-color: var(--v4-signal); }
+.practice-domain[aria-pressed="true"] strong,
+.practice-domain[aria-pressed="true"] .practice-domain-index,
+.practice-domain:hover .practice-domain-arrow { color: var(--v4-signal); }
+.practice-domain:hover .practice-domain-arrow { transform: translate(2px, -2px); }
+.practice-domain-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(160px, .4fr);
+  gap: 2rem;
+  margin: 1.5rem 0;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--v4-rule);
+}
+.practice-domain-detail > p { max-width: 70ch; margin: 0; font-size: .93rem; line-height: 1.7; }
+.practice-domain-detail > div { display: flex; flex-direction: column; gap: .75rem; justify-content: center; }
+.practice-domain-detail a,
+.practice-evidence-link { color: var(--v4-signal); font-size: .75rem; line-height: 1.6; text-decoration: none; }
+.practice-domain-detail a:hover,
+.practice-evidence-link:hover { text-decoration: underline; text-underline-offset: 5px; }
+.practice-search-row { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 1rem 2rem; margin-top: 2rem; }
+.practice-search-row label { display: flex; flex-direction: column; gap: .7rem; width: min(100%, 380px); }
+.practice-search-row label > span { color: var(--v4-dim); font-size: .66rem; letter-spacing: .03em; }
+.practice-search-row input {
+  min-width: 0;
+  min-height: 44px;
+  padding: .7rem .1rem;
+  border: 0;
+  border-bottom: 1px solid var(--v4-rule-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--v4-mineral);
+  font: inherit;
+  font-size: .83rem;
+}
+.practice-search-row input::placeholder { color: var(--v4-dim); opacity: .8; }
+.practice-search-row > p { margin: 0 0 .65rem; color: var(--v4-dim); font-size: .64rem; font-variation-settings: "MONO" 1; }
+.practice-atlas .v5-tool-atlas-body { align-items: start; }
+.practice-active-tool { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 2.5rem; }
+.practice-active-tool > .technology-mark { width: 34px; height: 34px; }
+.practice-active-tool > h3 { min-width: 0; max-width: 100%; margin: 0; overflow-wrap: anywhere; }
+.practice-evidence-link { display: inline-block; margin-top: 1.5rem; }
+.practice-expand,
+.practice-empty button { display: flex; gap: 2rem; align-items: center; min-height: 44px; margin-top: 1rem; padding: .8rem 0; border: 0; border-bottom: 1px solid var(--v4-rule); background: transparent; color: var(--v4-signal); font: inherit; font-size: .78rem; cursor: pointer; }
+.practice-empty { padding: 2.5rem 0; }
+.practice-empty p { font-size: .9rem; }
+.practice-brief { padding: clamp(4rem, 8vw, 8rem) 4.5vw; border-top: 1px solid var(--v4-rule); }
+.practice-brief > span { color: var(--v4-signal); font-size: .7rem; }
+.practice-brief h2 { max-width: 800px; margin: 1.5rem 0 3rem; font-size: clamp(2.8rem, 5vw, 5.5rem); line-height: 1; }
+.practice-brief ul { padding: 0; margin: 0 0 2rem; list-style: none; }
+.practice-brief li { display: grid; grid-template-columns: minmax(220px, .65fr) minmax(0, 1fr); gap: 1rem 2rem; padding: 1.2rem 0; border-top: 1px solid var(--v4-rule); }
+.practice-brief li strong { font-size: .95rem; font-weight: 500; }
+.practice-brief li > span { color: var(--v4-dim); font-size: .85rem; line-height: 1.6; }
+#skills, #experience, #origins, #community { scroll-margin-top: 100px; }
+.practice-atlas :is(button, input, a):focus-visible,
+.v5-tool-atlas button:focus-visible { outline: 2px solid var(--v4-signal); outline-offset: 5px; }
+@media (max-width: 900px) {
+  .practice-domains { gap: 0 1.5rem; }
+  .practice-atlas .v5-tool-atlas-body { display: flex; flex-direction: column; }
+  .practice-atlas .v5-tool-atlas-body > div { width: 100%; }
+}
+@media (max-width: 560px) {
+  .practice-domains { grid-template-columns: minmax(0, 1fr); margin-top: 2rem; }
+  .practice-domain { min-height: 95px; padding: 1.2rem 0; gap: .6rem; }
+  .practice-domain strong { font-size: 1rem; }
+  .practice-domain small { font-size: .7rem; }
+  .practice-domain-detail { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .practice-domain-detail > div { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: .5rem 1.5rem; }
+  .practice-brief li { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .practice-search-row input { font-size: 16px; }
+  .v5-tool-grid button { grid-template-columns: 25px minmax(0, 1fr); gap: .5rem; min-height: 112px; }
+  .v5-tool-grid .technology-mark { width: 24px; height: 27px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .practice-domain, .practice-domain-arrow, .v5-tool-grid button, .v5-tool-grid button .technology-mark { transition: none; }
+  .v5-tool-grid button:hover .technology-mark, .practice-domain:hover .practice-domain-arrow { transform: none; }
+}
+.practice-inline-rationale { display: none; }
+@media (max-width: 900px) {
+  .v5-tool-atlas .v5-tool-atlas-body { grid-template-columns: minmax(0, 1fr); }
+  .v5-tool-atlas .v5-tool-rationale { display: none; }
+  .v5-tool-grid li.is-active { grid-column: 1 / -1; }
+  .v5-tool-grid li.is-active > button { height: auto; min-height: 76px; }
+  .practice-inline-rationale { display: block; padding: .4rem 1.2rem 1.35rem; border-right: 1px solid var(--v4-rule); border-bottom: 1px solid var(--v4-rule); background: rgba(183, 243, 74, .045); }
+  .practice-inline-rationale .practice-tool-context { display: block; color: var(--v4-dim); font-size: .6rem; line-height: 1.6; }
+  .practice-inline-rationale .practice-active-tool { display: none; }
+  .practice-inline-rationale p { margin: .8rem 0 0; font-size: .86rem; line-height: 1.65; }
+  .practice-inline-rationale .practice-evidence-link { margin-top: 1rem; }
+}
+/* Unbranded utilities are named plainly; a cramped word is not a logo. */
+.technology-mark[data-mark-kind="text"] { display: none; }
+.v5-tool-grid button:has(> .technology-mark[data-mark-kind="text"]) { grid-template-columns: minmax(0, 1fr); }
+.v5-tool-grid { background: rgba(8, 10, 7, .58); }
+#skills.v5-tool-section { padding-top: clamp(3rem, 5vw, 5rem); }
+.practice-atlas .v5-tool-atlas-heading h2,
+.practice-brief h2 { font-family: var(--font-newsreader), Georgia, serif; font-weight: 400; }
