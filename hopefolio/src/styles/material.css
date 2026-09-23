@@ -2,7 +2,6 @@
 :root { --material-gutter: clamp(1.25rem, 4.5vw, 5rem); --material-quiet: #92958a; }
 .material-root { --font-editorial: var(--font-newsreader), Georgia, serif; --font-heading: var(--font-recursive), sans-serif; --font-body: var(--font-recursive), sans-serif; --font-mono: var(--font-recursive), monospace; font-family: var(--font-body); }
 html { scroll-padding-top: 100px; }
-.v4-living-motif { display: none; }
 .v4-motif-backed::after { opacity: 0.2; }
 
 .material-eyebrow,
@@ -208,3 +207,12 @@ html { scroll-padding-top: 100px; }
 .material-journey-header h2, .material-chapters h3 { font-variation-settings: "wght" 400, "opsz" 72; }
 .material-controls button.material-zoom { min-width: 42px; font-size: 1.15rem; }
 @media (max-width: 480px) { .material-controls p { flex: 1 1 100%; max-width: none; } .material-controls { flex-wrap: wrap; } .material-controls button.material-reset { margin-left: auto; } }
+/* Study lenses: name a strand, or try the same material in another form. */
+.material-lenses { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--v4-rule); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.material-lenses > div { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.material-lenses button { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 34px; padding: 0.35rem 0.6rem; border: 1px solid #eff2d91f; border-radius: 2px; color: var(--material-quiet); background: transparent; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; transition: color 160ms, border-color 160ms, background 160ms; }
+.material-lenses button:is(:hover, :focus-visible, [aria-pressed="true"]) { color: var(--v4-mineral); border-color: rgba(var(--material-reflection), 0.7); background: rgba(var(--material-reflection), 0.06); }
+.material-lenses button i { width: 14px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #5b6257, #d9ded2 45%, #7a8276); }
+.material-lenses button[data-strand="1"] i { box-shadow: inset 0 -1px 0 var(--v4-signal); }
+.material-specimen[data-strand] .material-caption-marker { background: rgb(var(--material-reflection)); box-shadow: 0 0 10px rgba(var(--material-reflection), 0.7); }
+@media (max-width: 480px) { .material-lenses { justify-content: flex-start; } .material-lenses button { min-height: 38px; } }

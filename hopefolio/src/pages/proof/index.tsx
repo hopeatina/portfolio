@@ -24,11 +24,11 @@ export default function ProofIndex() {
         <section className="v4-proof-hero" aria-labelledby="proof-title">
           <MaterialSpecimen context={materialContexts.proof} className="material-inner-object" compact />
           <span className="v4-proof-kicker">Proof / the ledger</span>
-          <h1 id="proof-title">Claims are cheap. Receipts are the interface.</h1>
+          <h1 data-thread="" id="proof-title">Claims are cheap. Receipts are the interface.</h1>
           <p className="v4-proof-deck">
-            Every entry answers a falsifiable question with a baseline, a method, a measured
-            result, a documented failure, and artifacts you can open. Each one scores itself
-            against six criteria — honestly, which means most do not earn all six.
+            Every entry answers a question that could have gone the other way. A baseline, a
+            method, a measured result, what broke, and artifacts you can open. Each one is scored
+            against six criteria. Most don't earn all six.
           </p>
           <dl className="v4-proof-legend" aria-label="Proof criteria">
             {PROOF_SCORE_ORDER.map((key) => (
@@ -95,9 +95,8 @@ export default function ProofIndex() {
 
         <section className="v4-proof-close">
           <p>
-            The standard for this page: at least four of six criteria before an entry ships,
-            and the failure field is never empty. External validation is the hardest column
-            to earn — that is what makes it worth tracking.
+            The rule here: four of six criteria before an entry ships, and the failure field is
+            never empty. External validation is the hardest one to earn. That's why it's tracked.
           </p>
           <TextLink href="/projects">Inspect the systems behind the receipts</TextLink>
         </section>

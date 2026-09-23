@@ -9,7 +9,7 @@ export default function PerfPulsePage() {
       status="Live product · v1.7"
       title="Perf Pulse"
       subtitle="Crash Guard for developer Macs."
-      introduction="Perf Pulse came from a recurring failure mode: multiple agents, builds, and desktop apps could consume memory or disk until the Mac stopped responding—while Activity Monitor waited to be checked. Crash Guard turns that late diagnosis into an always-on warning, a relevant local dashboard, and a deliberate next move."
+      introduction="Perf Pulse came from a failure I kept hitting. Agents, builds, and desktop apps would eat memory or disk until the Mac stopped responding, while Activity Monitor sat there unopened. Crash Guard turns that late diagnosis into an always-on warning, a local dashboard, and a deliberate next move."
       facts={[
         { label: "Core", value: "Rust" },
         { label: "Protection", value: "Memory + disk" },
@@ -36,14 +36,13 @@ export default function PerfPulsePage() {
             </p>
             <p>
               A useful guard had to run continuously, explain which resource was approaching danger,
-              and lead directly to a safe response—without requiring root access or becoming another
-              heavyweight service.
+              and lead straight to a safe response. No root access, and no new heavyweight service.
             </p>
           </>
         ),
         notes: [
           "Warn while there is still time to act.",
-          "Open the relevant local incident surface—not an editor or an opaque script.",
+          "Open the local incident view. Not an editor, not an opaque script.",
           "Never delete files automatically; keep destructive action explicit.",
         ],
       }}
@@ -69,8 +68,8 @@ export default function PerfPulsePage() {
             <p>
               A headless launchd agent samples memory pressure and writable-disk headroom even when the
               dashboard is closed. When a threshold is crossed, a native alert can reopen the dedicated
-              Crash Guard tab on the live localhost server. The user—not the monitor—keeps authority over
-              stopping processes, changing thresholds, and disabling protection.
+              Crash Guard tab on the live localhost server. The person at the keyboard decides what to
+              stop, which thresholds to change, and when to turn protection off. The monitor doesn't.
             </p>
           </>
         ),

@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   motion,
-  useInView,
   useMotionTemplate,
   useMotionValue,
   useReducedMotion,
@@ -10,123 +9,9 @@ import {
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
+import { arrivalFor, roomTitle } from "@/components/v5/thread/memory";
+
 export type GlyphName = "context" | "branch" | "judgment" | "receipt" | "inspect";
-export type MotifVariant = "weave" | "handoff" | "aperture" | "branch" | "memory" | "resolve";
-
-const motifPaths: Record<MotifVariant, string[]> = {
-  weave: [
-    "M-40 236C92 74 216 78 348 184S624 330 850 82",
-    "M-24 82C134 274 286 284 414 142S668 6 844 214",
-    "M92 -20C180 116 252 160 390 168S654 126 740 334",
-  ],
-  handoff: [
-    "M-30 186H194C266 186 274 76 352 76H526C600 76 606 226 680 226H840",
-    "M352 76V226H526",
-  ],
-  aperture: [
-    "M-30 164H252C290 164 302 136 320 106C348 58 432 56 470 106C494 138 500 164 548 164H840",
-    "M395 35A112 112 0 1 0 395 259A112 112 0 1 0 395 35",
-    "M395 70A77 77 0 1 0 395 224A77 77 0 1 0 395 70",
-  ],
-  branch: [
-    "M-30 154H190C274 154 270 58 356 58H842",
-    "M190 154H842",
-    "M190 154C274 154 270 252 356 252H842",
-  ],
-  memory: [
-    "M-30 208C108 208 118 78 250 78S392 220 520 220S656 90 842 90",
-    "M250 78V220H520",
-    "M104 208V254H654V90",
-  ],
-  resolve: [
-    "M-30 70C122 70 160 246 314 246S514 70 670 70H842",
-    "M-30 246C122 246 160 70 314 70S514 246 670 246H842",
-    "M670 70V246",
-  ],
-};
-
-export function LivingMotif({
-  variant,
-  label,
-  className = "",
-  interactive = true,
-}: {
-  variant: MotifVariant;
-  label?: string;
-  className?: string;
-  interactive?: boolean;
-}) {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(rootRef, { once: true, margin: "-12%" });
-  const reduceMotion = useReducedMotion();
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const x = useSpring(pointerX, { stiffness: 150, damping: 24, mass: 0.65 });
-  const y = useSpring(pointerY, { stiffness: 150, damping: 24, mass: 0.65 });
-
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!interactive || reduceMotion) return;
-    const bounds = event.currentTarget.getBoundingClientRect();
-    pointerX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 18);
-    pointerY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 12);
-  };
-
-  const releasePointer = () => {
-    pointerX.set(0);
-    pointerY.set(0);
-  };
-
-  return (
-    <div
-      ref={rootRef}
-      className={`v4-living-motif is-${variant} ${className}`}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={releasePointer}
-      aria-label={label}
-      role={label ? "img" : undefined}
-      aria-hidden={label ? undefined : true}
-    >
-      <motion.div className="v4-living-motif-plane" style={{ x, y }}>
-        <svg viewBox="0 0 800 300" preserveAspectRatio="none">
-          <g className="v4-motif-registration is-cold">
-            {motifPaths[variant].map((path, index) => (
-              <path d={path} key={`cold-${index}`} />
-            ))}
-          </g>
-          <g className="v4-motif-registration is-heat">
-            {motifPaths[variant].map((path, index) => (
-              <path d={path} key={`heat-${index}`} />
-            ))}
-          </g>
-          <g className="v4-motif-signal">
-            {motifPaths[variant].map((path, index) => (
-              <motion.path
-                d={path}
-                key={`signal-${index}`}
-                initial={reduceMotion ? false : { pathLength: 0, opacity: 0.25 }}
-                animate={inView ? { pathLength: 1, opacity: 1 } : undefined}
-                transition={{
-                  type: "spring",
-                  stiffness: 34,
-                  damping: 18,
-                  mass: 0.8,
-                  delay: index * 0.08,
-                }}
-              />
-            ))}
-          </g>
-          <g className="v4-motif-nodes">
-            <circle cx="190" cy="154" r="5" />
-            <circle cx="395" cy="164" r="5" />
-            <circle cx="670" cy="70" r="5" />
-          </g>
-        </svg>
-      </motion.div>
-      {label ? <span className="v4-living-motif-label">{label}</span> : null}
-    </div>
-  );
-}
-
 export function SystemGlyph({ name }: { name: GlyphName }) {
   const common = {
     fill: "none",
@@ -174,9 +59,16 @@ export function SystemGlyph({ name }: { name: GlyphName }) {
 
 export function ContinuityPlayhead({ label = "continuity" }: { label?: string }) {
   const fillRef = useRef<HTMLSpanElement>(null);
-  const railFillRef = useRef<HTMLSpanElement>(null);
-  const railNodeRef = useRef<HTMLSpanElement>(null);
   const valueRef = useRef<HTMLElement>(null);
+  const [carried, setCarried] = useState<string | null>(null);
+
+  // what this page inherited from the one before it
+  useEffect(() => {
+    const arrival = arrivalFor(window.location.pathname);
+    if (!arrival) return;
+    const from = roomTitle(arrival.fromTitle, arrival.from);
+    setCarried(arrival.section ? `${from} · ${arrival.section}` : from);
+  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -186,8 +78,6 @@ export function ContinuityPlayhead({ label = "continuity" }: { label?: string })
         const available = document.documentElement.scrollHeight - window.innerHeight;
         const progress = available > 0 ? Math.min(1, window.scrollY / available) : 0;
         fillRef.current?.style.setProperty("transform", `scaleX(${progress})`);
-        railFillRef.current?.style.setProperty("transform", `scaleY(${progress})`);
-        railNodeRef.current?.style.setProperty("top", `${progress * 100}%`);
         if (valueRef.current) valueRef.current.textContent = `${Math.round(progress * 100)}`.padStart(2, "0");
       });
     };
@@ -203,25 +93,24 @@ export function ContinuityPlayhead({ label = "continuity" }: { label?: string })
   }, []);
 
   return (
-    <>
-      <div className="v4-playhead" aria-label="Page progress">
-        <span className="v4-playhead-label">{label}</span>
-        <span className="v4-playhead-track" aria-hidden="true">
-          <span ref={fillRef} />
+    <div className={`v4-playhead ${carried ? "has-carried" : ""}`} aria-label="Page progress">
+      <span className="v4-playhead-label">{label}</span>
+      <span className="v4-playhead-track" aria-hidden="true">
+        <span ref={fillRef} />
+      </span>
+      {carried ? (
+        <span className="v4-playhead-carried">
+          <i aria-hidden="true">↳</i> from {carried}
         </span>
-        <strong ref={valueRef}>00</strong>
-      </div>
-      <div className="v4-continuity-spine" aria-hidden="true">
-        <span className="v4-continuity-spine-fill" ref={railFillRef} />
-        <span className="v4-continuity-spine-node" ref={railNodeRef} />
-      </div>
-    </>
+      ) : null}
+      <strong ref={valueRef}>00</strong>
+    </div>
   );
 }
 
 export function SectionSignal({ index, children }: { index: string; children: React.ReactNode }) {
   return (
-    <div className="v4-section-signal">
+    <div className="v4-section-signal" data-thread="">
       <span>{index}</span>
       <i aria-hidden="true" />
       <p>{children}</p>

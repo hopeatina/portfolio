@@ -1,8 +1,10 @@
 import React from "react";
+import ThreadLedger from "@/components/v5/thread/ThreadLedger";
 
 export default function Footer() {
   return (
     <footer className="site-footer">
+      <ThreadLedger />
       <div className="site-footer-inner">
         <div className="site-footer-thesis">
           <div className="site-footer-signature" aria-hidden="true">

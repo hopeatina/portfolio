@@ -6,7 +6,6 @@ import Link from "next/link";
 import { practiceCapabilities } from "@/data/practice";
 import {
   ContinuityPlayhead,
-  LivingMotif,
   SectionSignal,
   SystemGlyph,
   TextLink,
@@ -16,22 +15,22 @@ const contribution = [
   {
     glyph: "context" as const,
     title: "I see the whole system",
-    body: "Architecture, product surface, rollout, evidence, and adoption remain one problem until the user can trust the result.",
+    body: "Architecture, the product surface, rollout, and adoption are one problem until the person using it trusts the result.",
   },
   {
     glyph: "branch" as const,
     title: "I work AI-natively",
-    body: "Agents expand my execution surface across code, research, quality, and distribution; judgment and accountability stay authored.",
+    body: "Agents stretch how much I can ship across code, research, and distribution. The judgment is still mine.",
   },
   {
     glyph: "judgment" as const,
     title: "I stay calm near consequence",
-    body: "Healthcare and regulated data systems trained me to make failure modes smaller, rollouts reversible, and decisions legible.",
+    body: "Healthcare and regulated data taught me to shrink failure modes, keep rollouts reversible, and make decisions readable.",
   },
   {
     glyph: "receipt" as const,
     title: "I finish the product",
-    body: "Install paths, operator hierarchy, interaction details, and proof are not polish after the engineering. They complete it.",
+    body: "The install path, the interaction details, and the proof finish the engineering. They aren't polish on top.",
   },
 ];
 
@@ -52,12 +51,12 @@ export default function Hiring() {
         <header className="v4-hiring-hero v4-motif-backed">
           <MaterialSpecimen context={materialContexts.home} className="material-inner-object" compact />
           <span>For founders / recruiters / ambitious teams</span>
-          <h1>Systems depth. Product taste. Room to build across disciplines.</h1>
+          <h1 data-thread="">Systems depth. Product taste. Range that ships.</h1>
           <div>
             <p>
-              I bring production ownership across healthcare, fintech data, and backend systems,
-              alongside founder-led work in AI infrastructure, learning products, research tools,
-              and interactive 3D. I connect the architecture to the experience people actually use.
+              I've owned production systems in healthcare, fintech data, and backend infrastructure.
+              As a founder I build AI infrastructure, learning products, research tools, and 3D worlds.
+              I connect the architecture to the thing people actually touch.
             </p>
             <div className="v4-hiring-actions">
               <TextLink href="mailto:hopeatina@gmail.com?subject=Consequential%20work%20%E2%80%94%20%5Bcompany%5D" external>
@@ -68,8 +67,8 @@ export default function Hiring() {
               </TextLink>
             </div>
             <p className="v4-hiring-ace">
-              Don&apos;t take the claims. Take the receipts — every one scored against six proof
-              criteria, failures included.{" "}
+              Skip the claims and read the receipts. Each one is scored against six criteria,
+              failures included.{" "}
               <Link href="/proof" className="v4-text-link">
                 Open the ledger <span aria-hidden="true">→</span>
               </Link>
@@ -78,13 +77,12 @@ export default function Hiring() {
         </header>
 
         <section className="v4-hiring-contribution v4-motif-backed">
-          <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="01">What changes when I join the problem</SectionSignal>
           <div className="v4-hiring-contribution-heading">
-            <h2>Depth without tunnel vision. Range without hand-waving.</h2>
+            <h2>Deep enough to fix it. Wide enough to see what it breaks.</h2>
             <p>
-              I can move from a failing background workflow to a product hierarchy, a trust model,
-              or a founder decision without losing the connective tissue between them.
+              I can go from a failing background job to a product decision to a trust model and keep
+              track of how they connect.
             </p>
           </div>
           <div className="v4-hiring-contribution-grid">
@@ -107,16 +105,15 @@ export default function Hiring() {
         </section>
 
         <section className="v4-hiring-proof v4-motif-backed">
-          <LivingMotif variant="aperture" className="v4-section-motif" />
           <SectionSignal index="02">Three ways to inspect the claim</SectionSignal>
           <div className="v4-hiring-proof-grid">
             <Link href="/projects/orgx" className="v4-hiring-proof-featured">
               <div>
                 <span>Founder proof / OrgX</span>
-                <h2>I designed the continuity and proof layer I believed agent work was missing.</h2>
+                <h2>I built the proof layer I thought agent work was missing.</h2>
                 <p>
-                  Product thesis, shared work graph, client ecosystem, trust boundaries, quality bars,
-                  receipts, distribution, and the operator surfaces that connect them.
+                  The thesis, the shared work graph, the client integrations, the trust boundaries,
+                  the receipts, and the surfaces operators use every day.
                 </p>
                 <b>Inspect the flagship →</b>
               </div>
@@ -137,7 +134,7 @@ export default function Hiring() {
             </Link>
             <a href="https://www.youtube.com/watch?v=JSpfsuK75j0&t=171s" target="_blank" rel="noreferrer">
               <span>Product-culture proof / Config</span>
-              <h3>I turn collaboration into a making environment—not a meeting.</h3>
+              <h3>I turn collaboration into making things, not another meeting.</h3>
               <p>Figma and Chill · global BIPOC design community · play, iteration, and action.</p>
               <b>Watch the talk ↗</b>
             </a>
@@ -145,29 +142,27 @@ export default function Hiring() {
         </section>
 
         <section className="v4-hiring-fit v4-motif-backed">
-          <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="03">Where the fit is strongest</SectionSignal>
           <div className="v4-hiring-fit-grid">
-            <h2>Give me the consequential system, not the isolated ticket.</h2>
+            <h2>Give me the system that matters, not an isolated ticket.</h2>
             <div>
               <p>
-                Founder collaborations, senior/staff IC roles, and small high-agency teams building
-                agent platforms, developer tools, data-intensive products, learning experiences,
-                or operational software where architecture and interaction need equal care.
+                Founder collaborations, senior or staff IC roles, and small teams with real ownership.
+                Agent platforms, developer tools, data-heavy products, learning, or operational software
+                where the architecture and the interaction both matter.
               </p>
               <ul>
                 <li>Houston-based and remote-friendly</li>
                 <li>Comfortable across backend, product surface, and system narrative</li>
-                <li>Best with ownership, candid collaboration, and an evidence-driven bar</li>
+                <li>Best with ownership, honest feedback, and a bar set by evidence</li>
               </ul>
             </div>
           </div>
         </section>
 
         <section className="v4-hiring-close v4-motif-backed">
-          <LivingMotif variant="resolve" className="v4-hiring-close-motif" />
           <span>A good first conversation is concrete.</span>
-          <h2>Show me the system, the pressure, and what has resisted becoming clear.</h2>
+          <h2 data-thread="">Bring the system, the pressure on it, and the part that still won't make sense.</h2>
           <div>
             <TextLink href="https://calendly.com/hopeatina/orgx-discovery" external>Book 30 minutes</TextLink>
             <TextLink href="mailto:hopeatina@gmail.com?subject=Work%20together%20%E2%80%94%20%5Bcompany%5D" external>Email me</TextLink>

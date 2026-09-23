@@ -4,7 +4,6 @@ import Head from "next/head";
 import Image from "next/image";
 import {
   ContinuityPlayhead,
-  LivingMotif,
   SectionSignal,
   SystemGlyph,
   TextLink,
@@ -17,27 +16,27 @@ const practiceThreads = [
   {
     id: "human-consequence",
     label: "human consequence",
-    before: "A technical problem can look complete while the person living with it still carries the cost.",
-    decision: "Start with the human consequence, then combine the disciplines the intervention actually requires.",
-    consequence: "Bioengineering became a durable product instinct: understand the system, build the mechanism, prove the outcome.",
+    before: "A problem can look solved while the person living with it still pays for it.",
+    decision: "Start with the person. Then bring whatever disciplines the fix actually needs.",
+    consequence: "Bioengineering stuck as a product instinct. Understand the system, build the mechanism, prove it worked.",
     evidence: "Rice bioengineering · DermaShift",
     tone: "heat" as const,
   },
   {
     id: "creative-rhythm",
     label: "creative rhythm",
-    before: "A technically correct interface can still feel flat, rushed, or impossible to inhabit.",
-    decision: "Compose software with timing, tension, release, and room for another person's contribution.",
-    consequence: "Music and dance stay subtle in the work, but they shape its pacing, movement, and sense of life.",
+    before: "An interface can be technically correct and still feel flat.",
+    decision: "Compose software with timing, tension, release, and room for someone else to play.",
+    consequence: "Music and dance stay quiet in the work. They still set the pacing.",
     evidence: "Music production · shared making",
     tone: "cold" as const,
   },
   {
     id: "amplification",
     label: "amplify people",
-    before: "A person's best contribution is often hidden by the room, the process, or the tools around them.",
-    decision: "Design the conditions where people can make together, inspect the work, and reveal more of what is uniquely theirs.",
-    consequence: "The system becomes an amplifier—whether it is a community, a product team, or a fleet of agents aligned to one company.",
+    before: "People's best work gets hidden by the room, the process, or the tools.",
+    decision: "Set up the conditions where people make things together and can see each other's work.",
+    consequence: "The system becomes an amplifier. A community, a product team, a fleet of agents working for one company.",
     evidence: "Figma and Chill · OrgX",
     tone: "signal" as const,
   },
@@ -69,11 +68,11 @@ export default function About() {
           <MaterialSpecimen context={materialContexts.about} className="material-inner-object" compact />
           <div>
             <span>About / inspection as a creative practice</span>
-            <h1>Every thread I pull should reveal more of what people can become.</h1>
+            <h1 data-thread="">Every thread I pull should reveal more of what people can become.</h1>
             <p>
-              I am a Houston-based builder with Cameroonian roots. The throughline is not
-              technology for its own sake. It is amplification: understand the system deeply
-              enough that a person, a team, or a generation can move with more agency.
+              Houston builder, Cameroonian roots. What I keep coming back to is amplification.
+              Understand a system well enough that a person, a team, or a generation can move with
+              more agency.
             </p>
             <TextLink href="#skills">Explore my skills and tools</TextLink>
             <figure className="v4-about-portrait">
@@ -94,10 +93,10 @@ export default function About() {
         <section className="v4-life-thread" aria-labelledby="life-thread-title">
           <SectionSignal index="00">One thread, four scales</SectionSignal>
           <div className="v4-life-thread-heading">
-            <h2 id="life-thread-title">The biography and the metaphor are the same drawing.</h2>
+            <h2 id="life-thread-title">The biography and the thread are the same drawing.</h2>
             <p>
-              Every system I build makes something survive a handoff. I learned each form of
-              that thread at a different scale, in order.
+              Everything I build makes something survive a handoff. I learned each version of that
+              at a different scale.
             </p>
           </div>
           <ol className="v4-life-thread-list">
@@ -105,10 +104,10 @@ export default function About() {
               <SystemGlyph name="context" />
               <div>
                 <span>Weave · Cameroonian roots</span>
-                <h3>Meaning has to survive translation.</h3>
+                <h3 data-thread="">Meaning has to survive translation.</h3>
                 <p>
-                  The same thing carries different weight depending on context, history, and who is
-                  interpreting it. Inspect the structure before trusting the surface.
+                  The same words carry different weight depending on who is listening and what they
+                  have lived. Check the structure before you trust the surface.
                 </p>
               </div>
             </li>
@@ -116,10 +115,10 @@ export default function About() {
               <SystemGlyph name="judgment" />
               <div>
                 <span>Registration · Rice → DermaShift → clinical production</span>
-                <h3>At the human boundary, a dropped handoff costs a person.</h3>
+                <h3 data-thread="">At the human boundary, a dropped handoff costs a person.</h3>
                 <p>
-                  Bioengineering, then healthcare systems under HIPAA: risk made visible, rollout
-                  reversible, evidence attached — because the boundary is where consequence lives.
+                  Bioengineering, then healthcare systems under HIPAA. Make the risk visible, keep the
+                  rollout reversible, attach the evidence. The boundary is where the consequence lives.
                 </p>
               </div>
             </li>
@@ -127,10 +126,10 @@ export default function About() {
               <SystemGlyph name="branch" />
               <div>
                 <span>Branch · Figma &amp; Chill</span>
-                <h3>One thread, many hands, nothing lost in the fork.</h3>
+                <h3 data-thread="">One thread, many hands, nothing lost in the fork.</h3>
                 <p>
-                  A community built through shared making instead of talk — each person keeping
-                  their own strength while the thing held together. Figma platformed the result.
+                  A community built by making things together. Everyone kept their own strength and
+                  the thing still held. Figma platformed it.
                 </p>
               </div>
             </li>
@@ -138,10 +137,10 @@ export default function About() {
               <SystemGlyph name="receipt" />
               <div>
                 <span>Memory knot · OrgX</span>
-                <h3>The decision returns as a receipt the next run inherits.</h3>
+                <h3 data-thread="">The decision returns as a receipt the next run inherits.</h3>
                 <p>
-                  The continuity layer itself: memory, authority, execution, and proof for
-                  governed agent work. The thread, shipped as infrastructure.
+                  Memory, authority, execution, and proof for agent work. The thread, shipped as
+                  infrastructure.
                 </p>
               </div>
             </li>
@@ -149,26 +148,24 @@ export default function About() {
         </section>
 
         <section id="origins" className="v4-about-origin v4-motif-backed">
-          <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="01">The root system</SectionSignal>
           <div className="v4-about-origin-grid">
             <h2>Multidisciplinary from the first serious problem.</h2>
             <div>
               <p>
-                My Cameroonian roots are not a moodboard. They are an early lesson in translation:
-                the same thing can carry different meaning depending on context, history, and the
-                people interpreting it. I learned to inspect the structure before assuming the
-                surface told the whole story.
+                My Cameroonian roots were my first lesson in translation. The same thing can mean
+                something different depending on context and history. I learned early to look at
+                the structure before believing the surface.
               </p>
               <p>
-                Bioengineering at Rice gave that instinct technical rigor. With DermaShift, our team
-                built a low-cost way to detect pressure-ulcer risk and won a national undergraduate
-                design competition. The work joined a human need, clinical collaboration, sensing,
-                product design, and proof. That pattern never left.
+                Bioengineering at Rice gave that instinct rigor. With DermaShift, our team built a
+                low-cost way to detect pressure-ulcer risk and won a national undergraduate design
+                competition. A human need, clinicians, sensors, product design, proof. I still work
+                that way.
               </p>
               <p>
-                Music and dance stay in the background of the practice: timing, tension, counterpoint,
-                release, and the feeling that a technically correct composition can still be unresolved.
+                Music and dance sit in the background. Timing, tension, release. A composition can be
+                technically correct and still feel unfinished.
               </p>
             </div>
           </div>
@@ -191,22 +188,21 @@ export default function About() {
               <span>2015 / rehabilitation + assistive devices</span>
               <h3>A real person. A physical system. A device that had to earn belief.</h3>
               <p>
-                Pressure-ulcer formation is not a dashboard problem. The team had to understand the
-                clinical need, create a portable diagnostic device, make the economics credible, and
-                explain the evidence clearly. That is still how I want engineering to meet the world.
+                Pressure ulcers aren't a dashboard problem. We had to understand the clinical need,
+                build a portable device, make the economics work, and explain the evidence plainly.
+                That's still how I want engineering to meet the world.
               </p>
             </div>
           </div>
         </section>
 
         <section className="v4-about-method v4-motif-backed">
-          <LivingMotif variant="aperture" className="v4-section-motif" />
           <SectionSignal index="02">The practice</SectionSignal>
           <div className="v4-about-method-heading">
-            <h2>Inspect deeply. Locate the boundary. Compose the intervention. Leave a stronger system.</h2>
+            <h2>Look closely. Find the boundary. Build the fix. Leave it stronger.</h2>
             <p>
-              Challenges become useful when they reveal the mechanism underneath them. I prefer the
-              kind of collaboration where disagreement sharpens the model and evidence settles the next move.
+              A hard problem is useful once it shows you the mechanism underneath. I like working
+              with people where disagreement sharpens the model and evidence settles the next move.
             </p>
           </div>
           <MaterialThreadField
@@ -218,41 +214,40 @@ export default function About() {
         </section>
 
         <section id="experience" className="v4-about-experience v4-motif-backed">
-          <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="03">The questions got harder</SectionSignal>
           <div className="v4-about-arc-heading">
             <h2>Each environment added a boundary I could no longer ignore.</h2>
-            <p>This is one evolving practice—not a list of unrelated roles.</p>
+            <p>One practice that kept growing. Not a list of unrelated jobs.</p>
           </div>
           <div className="v4-about-chapter-list">
             <article>
               <span>01 / Capital One · scale</span>
               <h3>Can data be trusted before it starts moving?</h3>
-              <p>Regulated finance made data quality, lineage, and reliable ingestion part of the system—not cleanup after the pipeline.</p>
+              <p>In regulated finance, data quality and lineage were part of the system. You didn't get to clean up after the pipeline.</p>
               <small>Spark · Scala · Snowflake · near-real-time ETL</small>
             </article>
             <article>
               <span>02 / Vessel Health · ownership</span>
               <h3>What changes when the API touches hardware and operations?</h3>
-              <p>Leading backend work across authentication, calibration, AWS infrastructure, and internal workflows expanded the unit of ownership beyond code.</p>
+              <p>I led backend work across auth, calibration, AWS, and internal workflows. Ownership stopped ending at the code.</p>
               <small>API architecture · hardware calibration · AWS · operations</small>
             </article>
             <article>
               <span>03 / Alma · consequence</span>
               <h3>How do you move continuously when failure reaches clinical work?</h3>
-              <p>HIPAA production taught me to make privacy enter early, failure visible, rollout reversible, and operator trust part of engineering quality.</p>
+              <p>HIPAA production taught me to bring privacy in early, make failure visible, keep rollouts reversible, and treat operator trust as engineering quality.</p>
               <small>Django · Celery · PostgreSQL · Datadog</small>
             </article>
             <article>
               <span>Research / MD Anderson · visualization</span>
               <h3>Can the right picture change an operational decision?</h3>
-              <p>Research work connected operating-room capacity to a visual system people could inspect and use.</p>
+              <p>Research that turned operating-room capacity into a picture people could actually use.</p>
               <small>React · D3.js · scientific and operational visualization</small>
             </article>
             <article className="v4-about-chapter-featured">
               <span>04 / OrgX · synthesis</span>
               <h3>How can many intelligent actors move without losing the organization?</h3>
-              <p>OrgX integrates the questions: shared context, client-native execution, consequence-aware judgment, and proof that improves the next decision.</p>
+              <p>OrgX pulls all of it together. Shared context, agents working in the clients you already use, judgment where it matters, and proof that improves the next decision.</p>
               <small>Founder · product · architecture · distribution</small>
               <TextLink href="/projects/orgx">Inspect the system</TextLink>
             </article>
@@ -260,14 +255,13 @@ export default function About() {
         </section>
 
         <section id="community" className="v4-about-collaboration v4-motif-backed">
-          <LivingMotif variant="handoff" className="v4-section-motif" />
           <SectionSignal index="04">Collaboration is a creative technology</SectionSignal>
           <div>
-            <h2>I started Figma and Chill because talking about making was not enough.</h2>
+            <h2>I started Figma and Chill because talking about design wasn't enough.</h2>
             <p>
-              What began as an empty Clubhouse room grew into a global BIPOC design community where
-              people made things together in real time. At Config 2021, our team shared how play,
-              connection, community, and culture became a repeatable creative practice.
+              It started as an empty Clubhouse room. It grew into a global BIPOC design community
+              where people made things together in real time. At Config 2021 we shared how it
+              worked.
             </p>
             <a
               href="https://www.youtube.com/watch?v=JSpfsuK75j0&t=171s"
@@ -275,7 +269,7 @@ export default function About() {
               rel="noreferrer"
               className="v4-text-link"
             >
-              Watch the Config talk from Hope's origin story <span aria-hidden="true">↗</span>
+              Watch the Config talk <span aria-hidden="true">↗</span>
             </a>
           </div>
           <a
@@ -299,12 +293,11 @@ export default function About() {
         </section>
 
         <section className="v4-about-now v4-motif-backed">
-          <LivingMotif variant="resolve" className="v4-about-now-motif" />
           <span>Now / September 2026</span>
-          <h2>Building in public where AI infrastructure becomes a human operating system.</h2>
+          <h2 data-thread="">Building OrgX in public. Proof for AI-delivered work.</h2>
           <p>
-            I am most interested in founder collaborations and senior/staff work where systems depth,
-            product judgment, and AI-native execution all matter at once.
+            Open to founder collaborations and senior or staff roles where systems depth, product
+            judgment, and AI-native execution all matter at once.
           </p>
           <div>
             <TextLink href="/hiring">How I work with teams</TextLink>

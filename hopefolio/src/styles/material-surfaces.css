@@ -72,10 +72,6 @@ html {
   box-shadow: 0 0 0 1px var(--v4-carbon), 0 14px 36px rgba(0, 0, 0, 0.35);
 }
 
-.v4-continuity-spine-node {
-  box-shadow: 0 0 0 4px rgba(183, 243, 74, 0.07);
-}
-
 .v4-flow-step:hover .v4-system-glyph {
   filter: none;
 }
