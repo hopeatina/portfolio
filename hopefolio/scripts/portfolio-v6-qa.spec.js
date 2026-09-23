@@ -66,9 +66,12 @@ test("reduced motion preserves the full story", async ({ browser }) => {
     reducedMotion: "reduce",
   });
   const page = await context.newPage();
-  for (const [name, route] of [["home", "/"], ["orgx", "/projects/orgx"]]) {
+  // what carries the story on each page: the material study on home, the decision field on a case
+  for (const [name, route, story] of [["home", "/", ".material-specimen"], ["orgx", "/projects/orgx", ".v5-thread-field"]]) {
     await visit(page, route);
-    await expect(page.locator(".v5-thread-field").first()).toBeVisible();
+    await expect(page.locator(story).first()).toBeVisible();
+    // the page thread still renders, statically, with motion reduced
+    await expect(page.locator(".thread-stitch.is-over:not([data-empty])")).toHaveCount(1);
     await page.screenshot({ path: path.join(OUT, `reduced-${name}.jpg`), type: "jpeg", quality: 80, fullPage: true });
   }
   await context.close();
