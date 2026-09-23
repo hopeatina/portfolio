@@ -11,6 +11,12 @@ export interface MaterialObjectProps {
   reducedMotion: boolean;
   ambient?: boolean;
   zoom?: number;
+  /** Strand to bring forward (0 memory, 1 execution, 2 authority); null keeps all three even. */
+  highlight?: number | null;
+  /** Hands the caller a picker: normalized device coords in, strand index (or null) out. */
+  onPickerReady?: (pick: (x: number, y: number) => number | null) => void;
+  /** Let a study drift slowly on its own while nobody is holding it. */
+  idle?: boolean;
   onReady?: (backend: 'webgpu' | 'webgl') => void;
   onCaptureReady?: (capture: () => Promise<string>) => void;
   onError?: () => void;
@@ -86,8 +92,9 @@ export default function MaterialObject(props: MaterialObjectProps) {
       releaseScene = release;
 
       try {
-        const [THREE, { createRibbonGeometry }] = await Promise.all([
+        const [THREE, TSL, { createRibbonGeometry }] = await Promise.all([
           import('three/webgpu'),
+          import('three/tsl'),
           import('./knot-geometry'),
         ]);
         if (disposed) return;
@@ -171,25 +178,35 @@ export default function MaterialObject(props: MaterialObjectProps) {
           bridge: new THREE.Color(0xd6a965),
           orbit: new THREE.Color(0xd6e1c7),
         };
-        const inlay = own(new THREE.MeshPhysicalMaterial({
+        const inlay = own(new THREE.MeshPhysicalNodeMaterial({
           color: inlayColors.knot,
           metalness: 0.3,
           roughness: 0.27,
-          emissive: inlayColors.knot.clone().multiplyScalar(0.55),
-          emissiveIntensity: ambient ? 0.22 : 0.3,
           clearcoat: 0.6,
         }));
+        // The signal travels: two pulses of light run the length of the inlay,
+        // the thing that has to survive every handoff, moving through the knot.
+        const inlayTint = TSL.uniform(inlayColors.knot.clone());
+        const pulseGain = TSL.uniform(ambient ? 0.9 : 1.6);
+        const phase = TSL.fract(TSL.uv().x.mul(2).sub(TSL.time.mul(ambient ? 0.05 : 0.11)));
+        const pulse = TSL.smoothstep(0, 0.05, phase).mul(TSL.smoothstep(0.16, 0.05, phase));
+        inlay.emissiveNode = inlayTint.mul(TSL.float(ambient ? 0.12 : 0.16).add(pulse.mul(pulseGain)));
         const groups: InstanceType<ThreeModule['Group']>[] = [];
         const meshes: InstanceType<ThreeModule['Mesh']>[] = [];
+        const strandOf = new Map<unknown, number>();
+        const strandMaterials = [paleSilver, silver, graphite];
+        const strandBase = strandMaterials.map((material) => material.color.clone());
         for (let strand = 0; strand < 3; strand++) {
           const group = new THREE.Group();
-          const ribbon = new THREE.Mesh(own(createRibbonGeometry(strand)), [paleSilver, silver, graphite][strand]);
+          const ribbon = new THREE.Mesh(own(createRibbonGeometry(strand)), strandMaterials[strand]);
           group.add(ribbon);
           meshes.push(ribbon);
+          strandOf.set(ribbon, strand);
           if (strand === 1) {
             const trace = new THREE.Mesh(own(createRibbonGeometry(strand, true)), inlay);
             group.add(trace);
             meshes.push(trace);
+            strandOf.set(trace, strand);
           }
           sculpture.add(group);
           groups.push(group);
@@ -203,7 +220,18 @@ export default function MaterialObject(props: MaterialObjectProps) {
         rim.position.set(4, -1, -2);
         scene.add(rim);
 
-        const state = { x: 0.16, y: -0.36, progress: 0, exploded: 0, weave: 0, orbit: 0, bridge: 0, zoom: 1 };
+        const raycaster = new THREE.Raycaster();
+        const pointer = new THREE.Vector2();
+        const pick = (x: number, y: number) => {
+          if (disposed || !visible) return null;
+          pointer.set(x, y);
+          sculpture.updateMatrixWorld();
+          raycaster.setFromCamera(pointer, camera);
+          const hit = raycaster.intersectObjects(meshes, false)[0];
+          return hit ? strandOf.get(hit.object) ?? null : null;
+        };
+
+        const state = { x: 0.16, y: -0.36, progress: 0, exploded: 0, weave: 0, orbit: 0, bridge: 0, zoom: 1, hl0: 1, hl1: 1, hl2: 1 };
         resize = () => {
           if (!renderer || disposed) return;
           const width = Math.max(host.clientWidth, 1);
@@ -266,6 +294,7 @@ export default function MaterialObject(props: MaterialObjectProps) {
 
         let previousTime = 0;
         let ambientTime = 0;
+        let drift = 0;
         let nextAmbientFrame = 0;
         const ambientFrameDuration = 1000 / 24;
         let ready = false;
@@ -273,7 +302,8 @@ export default function MaterialObject(props: MaterialObjectProps) {
           if (!renderer || disposed || !visible || document.hidden) return;
           const current = latest.current;
           const now = performance.now();
-          const ambientMoving = ambient && !current.reducedMotion;
+          // Ambient breathes; a study stays alive so the signal keeps travelling.
+          const ambientMoving = !current.reducedMotion;
           if (ambientMoving) {
             if (now < nextAmbientFrame) { schedule(); return; }
             // Retain the fractional remainder, yielding 24 renders per second
@@ -287,6 +317,8 @@ export default function MaterialObject(props: MaterialObjectProps) {
           // Advance only while actually visible so returning to a tab does not
           // jump the atmospheric object forward through an unseen animation.
           if (ambientMoving) ambientTime += dt;
+          // Nobody holding it: a slow turn, accumulated so taking hold never jumps.
+          if (!ambient && current.idle && !current.reducedMotion) drift += dt * 0.07;
           const damping = current.reducedMotion ? 1 : 1 - Math.exp(-dt * 10);
           const progress = Math.max(0, Math.min(1, current.progress));
           const targets = {
@@ -298,6 +330,9 @@ export default function MaterialObject(props: MaterialObjectProps) {
             orbit: current.form === 'orbit' ? 1 : 0,
             bridge: current.form === 'bridge' ? 1 : 0,
             zoom: Math.max(0.8, Math.min(1.4, current.zoom ?? 1)),
+            hl0: current.highlight == null ? 1 : current.highlight === 0 ? 1.3 : 0.32,
+            hl1: current.highlight == null ? 1 : current.highlight === 1 ? 1.3 : 0.32,
+            hl2: current.highlight == null ? 1 : current.highlight === 2 ? 1.3 : 0.32,
           };
           let unsettled = false;
           for (const name of Object.keys(state) as (keyof typeof state)[]) {
@@ -308,10 +343,16 @@ export default function MaterialObject(props: MaterialObjectProps) {
             } else state[name] = targets[name];
           }
           camera.position.z = cameraDistance * Math.max(1, 0.91 / camera.aspect) / state.zoom;
-          const breathX = ambientMoving ? Math.sin(ambientTime * Math.PI * 2 / 23) * 0.018 : 0;
-          const breathY = ambientMoving ? Math.sin(ambientTime * Math.PI * 2 / 29) * 0.025 : 0;
-          const breathScale = ambientMoving ? Math.sin(ambientTime * Math.PI * 2 / 19) * 0.004 : 0;
-          sculpture.rotation.set(state.x + state.progress * 0.16 + breathX, state.y + state.progress * 0.28 + breathY, -0.2 + state.progress * 0.09);
+          const breathing = ambient && ambientMoving;
+          const breathX = breathing ? Math.sin(ambientTime * Math.PI * 2 / 23) * 0.018 : 0;
+          const breathY = breathing ? Math.sin(ambientTime * Math.PI * 2 / 29) * 0.025 : 0;
+          const breathScale = breathing ? Math.sin(ambientTime * Math.PI * 2 / 19) * 0.004 : 0;
+          sculpture.rotation.set(state.x + state.progress * 0.16 + breathX, state.y + state.progress * 0.28 + breathY + drift, -0.2 + state.progress * 0.09);
+          const highlights = [state.hl0, state.hl1, state.hl2];
+          strandMaterials.forEach((material, i) => {
+            material.color.copy(strandBase[i]).multiplyScalar(Math.min(1.12, highlights[i]));
+            material.envMapIntensity = 1.1 * highlights[i];
+          });
           sculpture.scale.setScalar((1 - state.exploded * 0.1) * (ambient ? 0.98 + breathScale : 1));
           for (let i = 0; i < groups.length; i++) {
             const lane = i - 1;
@@ -331,7 +372,7 @@ export default function MaterialObject(props: MaterialObjectProps) {
             inlayColors.knot.g * knotWeight + inlayColors.weave.g * state.weave + inlayColors.bridge.g * state.bridge + inlayColors.orbit.g * state.orbit,
             inlayColors.knot.b * knotWeight + inlayColors.weave.b * state.weave + inlayColors.bridge.b * state.bridge + inlayColors.orbit.b * state.orbit,
           );
-          inlay.emissive.copy(inlay.color).multiplyScalar(0.55);
+          inlayTint.value.copy(inlay.color);
           try {
             renderMotion = ambientMoving ? 'ambient' : unsettled ? 'interacting' : 'settled';
             renderer.render(scene, camera);
@@ -342,6 +383,7 @@ export default function MaterialObject(props: MaterialObjectProps) {
               const backend = renderer.backend as typeof renderer.backend & { isWebGPUBackend?: boolean };
               latest.current.onReady?.(backend.isWebGPUBackend ? 'webgpu' : 'webgl');
               if (!ambient) latest.current.onCaptureReady?.(capture);
+              if (!ambient) latest.current.onPickerReady?.(pick);
             }
             if (unsettled || ambientMoving) schedule();
           } catch {

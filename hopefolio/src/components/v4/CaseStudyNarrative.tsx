@@ -6,7 +6,6 @@ import {
   CausalFlow,
   ContinuityPlayhead,
   GlyphName,
-  LivingMotif,
   SectionSignal,
   TextLink,
 } from "./V4Primitives";
@@ -244,7 +243,7 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
               <span>{props.index}</span>
               <span>{props.status}</span>
             </div>
-            <h1 className={props.title.split(/\s+/).some((word) => word.length > 9) ? "v4-case-title-long" : undefined}>{props.title}</h1>
+            <h1 data-thread="" className={props.title.split(/\s+/).some((word) => word.length > 9) ? "v4-case-title-long" : undefined}>{props.title}</h1>
             <p className="v4-case-subtitle">{props.subtitle}</p>
           </div>
 
@@ -275,19 +274,16 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
         </header>
 
         <section data-material-form="weave" className="v4-narrative-section v4-narrative-section-problem v4-motif-backed">
-          <LivingMotif variant="weave" className="v4-section-motif" />
           <SectionSignal index="01">The consequential problem</SectionSignal>
           <NarrativeCopy block={props.problem} />
         </section>
 
         <section data-material-form="orbit" className="v4-narrative-section v4-narrative-section-insight v4-motif-backed">
-          <LivingMotif variant="aperture" className="v4-section-motif" />
           <SectionSignal index="02">What I saw</SectionSignal>
           <NarrativeCopy block={props.insight} />
         </section>
 
         <section data-material-form="bridge" className="v4-narrative-section v4-narrative-section-decision v4-motif-backed">
-          <LivingMotif variant="branch" className="v4-section-motif" />
           <SectionSignal index="03">The decision that changed the system</SectionSignal>
           <NarrativeCopy block={props.decision} />
           <CausalFlow steps={props.flow} />
@@ -295,7 +291,6 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
 
         {props.validation ? (
           <section className="v4-validation-section v4-motif-backed">
-            <LivingMotif variant="memory" className="v4-section-motif" />
             <SectionSignal index="04">Independent evidence / reproducible use</SectionSignal>
             {props.validation}
           </section>
@@ -303,14 +298,12 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
 
         {props.system ? (
           <section className="v4-system-chapter v4-motif-backed">
-            <LivingMotif variant="handoff" className="v4-system-chapter-motif" />
             <SectionSignal index={systemIndex}>System anatomy / rationale / surfaces</SectionSignal>
             <SystemDepth chapter={props.system} />
           </section>
         ) : null}
 
         <section id="project-evidence" data-material-form="orbit" className="v4-proof-field v4-motif-backed">
-          <LivingMotif variant="aperture" className="v4-section-motif" />
           {props.receiptSlugs && props.receiptSlugs.length > 0 ? (
             <div className="v4-case-receipts" aria-label="Ledger receipts for this system">
               <span className="v4-case-receipts-label">On the ledger</span>
@@ -348,14 +341,12 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
         </section>
 
         <section data-material-form="weave" className="v4-learning-section v4-motif-backed">
-          <LivingMotif variant="memory" className="v4-section-motif" />
           <SectionSignal index={learningIndex}>What changed in my operating model</SectionSignal>
           <NarrativeCopy block={props.learning} />
         </section>
 
         <footer className="v4-case-next v4-motif-backed">
-          <LivingMotif variant="resolve" className="v4-case-next-motif" />
-          <span>{props.next.label}</span>
+          <span data-thread="" data-thread-label={props.next.title}>{props.next.label}</span>
           <TextLink href={props.next.href}>{props.next.title}</TextLink>
         </footer>
       </main>

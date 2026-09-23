@@ -9,7 +9,7 @@ export default function OrgXForOpenClawPage() {
       status="Published plugin · active"
       title="OrgX for OpenClaw"
       subtitle="Persistent organizational memory and coordinated execution inside OpenClaw."
-      introduction="This is not OpenClaw itself and not another standalone dashboard. It is the OrgX bridge that lets OpenClaw agents enter shared organizational context, coordinate work, and return evidence without leaving the host environment."
+      introduction="The OrgX bridge for OpenClaw. OpenClaw agents get the shared company context, coordinate work, and bring evidence back without leaving the host. It isn't OpenClaw itself, and it isn't another dashboard."
       facts={[
         { label: "Product", value: "OrgX plugin" },
         { label: "Host", value: "OpenClaw" },
@@ -65,7 +65,7 @@ export default function OrgXForOpenClawPage() {
       }}
       decision={{
         eyebrow: "One local bridge; durable work on the other side",
-        title: "Treat live transport as a view of state—not the source of truth.",
+        title: "The live stream is a view of state. It is not the source of truth.",
         body: (
           <>
             <p>
@@ -84,7 +84,7 @@ export default function OrgXForOpenClawPage() {
       ]}
       system={{
         eyebrow: "Host-native architecture",
-        title: "A local bridge, durable recovery path, and live control surface—without replacing OpenClaw.",
+        title: "A local bridge, a durable recovery path, and live controls. OpenClaw stays OpenClaw.",
         introduction: "The plugin has to respect two truths at once: OpenClaw owns the agent runtime, while OrgX owns the shared organizational context. The bridge is designed so either side can restart without making live transport the source of truth.",
         layers: [
           { label: "host", title: "OpenClaw agents and gateway", detail: "Coding, research, marketing, and operations agents keep their existing tools, workspaces, and runtime lifecycle.", technology: "OpenClaw gateway · agent workspaces", tone: "cold" },

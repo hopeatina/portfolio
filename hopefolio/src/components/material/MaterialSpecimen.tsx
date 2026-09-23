@@ -3,7 +3,21 @@ import Link from "next/link";
 import { useMaterialReducedMotion } from "./use-material-motion";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { MaterialContext, materialContextForPath } from "./material-context";
+import { MaterialContext, MaterialForm, materialContextForPath } from "./material-context";
+
+/** The three strands, in geometry order. The green inlay rides execution. */
+const STRANDS = [
+  { name: "Memory", line: "What the next run inherits. The goal, the decisions, the proof so far." },
+  { name: "Execution", line: "Where the work runs. Claude, Codex, Cursor. The green line rides it through every handoff." },
+  { name: "Authority", line: "What an agent can do alone, and where a person has to say yes." },
+];
+
+const FORMS: Array<{ form: MaterialForm; line: string }> = [
+  { form: "knot", line: "Held together." },
+  { form: "weave", line: "Context travels as a whole." },
+  { form: "bridge", line: "A guarded crossing." },
+  { form: "orbit", line: "The result comes back." },
+];
 
 const MaterialObject = dynamic(() => import("./MaterialObject"), { ssr: false });
 
@@ -32,7 +46,27 @@ export default function MaterialSpecimen({ context, className = "", compact = fa
   const exportOperation = useRef(0);
   const mounted = useRef(false);
   const captureRef = useRef<(() => Promise<string>) | null>(null);
-  const drag = useRef<{ x: number; y: number; rotation: [number, number] } | null>(null);
+  const drag = useRef<{ x: number; y: number; rotation: [number, number]; moved: number; t: number; vx: number; vy: number } | null>(null);
+  const pickRef = useRef<((x: number, y: number) => number | null) | null>(null);
+  const lastPick = useRef(0);
+  const momentum = useRef(0);
+  const lastTouch = useRef(0);
+  const [hover, setHover] = useState<number | null>(null);
+  const [pinned, setPinned] = useState<number | null>(null);
+  const [formOverride, setFormOverride] = useState<MaterialForm | null>(null);
+  const [idle, setIdle] = useState(false);
+  const form = formOverride ?? study.form;
+  const strand = pinned ?? hover;
+  const pickerReady = useCallback((pick: (x: number, y: number) => number | null) => { pickRef.current = pick; }, []);
+  const touch = () => {
+    lastTouch.current = performance.now();
+    setIdle(false);
+  };
+  const pickAt = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!pickRef.current) return null;
+    const box = event.currentTarget.getBoundingClientRect();
+    return pickRef.current(((event.clientX - box.left) / box.width) * 2 - 1, -(((event.clientY - box.top) / box.height) * 2 - 1));
+  };
   const ready = useCallback((backend: "webgpu" | "webgl") => setStatus(backend), []);
   const failed = useCallback(() => setStatus("still"), []);
   const captureReady = useCallback((capture: () => Promise<string>) => {
@@ -43,6 +77,19 @@ export default function MaterialSpecimen({ context, className = "", compact = fa
     mounted.current = true;
     return () => { mounted.current = false; };
   }, []);
+  // left alone, the study drifts; any touch hands control back
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      if (performance.now() - lastTouch.current > 3500) setIdle(true);
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+  useEffect(() => () => cancelAnimationFrame(momentum.current), []);
+  useEffect(() => {
+    setFormOverride(null);
+    setPinned(null);
+    setHover(null);
+  }, [study.id]);
   useEffect(() => {
     setShareStatus("");
     setShareUrl("");
@@ -131,7 +178,7 @@ export default function MaterialSpecimen({ context, className = "", compact = fa
 
   return (
     <figure id={`material-${study.id}`} className={`material-specimen ${compact ? "is-compact" : ""} ${className}`}
-      data-form={study.form} data-renderer={status} data-layers={exploded ? "open" : "held"} data-zoom={closeView ? "close" : "wide"}>
+      data-form={form} data-strand={strand ?? undefined} data-renderer={status} data-layers={exploded ? "open" : "held"} data-zoom={closeView ? "close" : "wide"}>
       <div className="material-specimen-register" aria-hidden="true">
         <span>Study {study.index} / {study.name}</span><span>HA—{study.index}</span>
       </div>
@@ -139,6 +186,7 @@ export default function MaterialSpecimen({ context, className = "", compact = fa
         aria-describedby={instructionId} tabIndex={status === "still" ? -1 : 0}
         data-rotation={rotation.map((value) => value.toFixed(2)).join(",")}
         onKeyDown={(event) => {
+          touch();
           if (event.key === "+" || event.key === "=") { event.preventDefault(); setCloseView(true); return; }
           if (event.key === "-") { event.preventDefault(); setCloseView(false); return; }
           const move: Record<string, [number, number]> = {
@@ -152,11 +200,19 @@ export default function MaterialSpecimen({ context, className = "", compact = fa
         }}
         onPointerDown={(event) => {
           if (event.pointerType === "mouse" && event.button !== 0) return;
-          drag.current = { x: event.clientX, y: event.clientY, rotation };
+          touch();
+          cancelAnimationFrame(momentum.current);
+          drag.current = { x: event.clientX, y: event.clientY, rotation, moved: 0, t: performance.now(), vx: 0, vy: 0 };
           event.currentTarget.setPointerCapture(event.pointerId);
         }}
         onPointerMove={(event) => {
           if (!drag.current) {
+            touch();
+            // hovering a strand names it
+            if (event.pointerType !== "touch" && performance.now() - lastPick.current > 70) {
+              lastPick.current = performance.now();
+              setHover(pickAt(event));
+            }
             if (reducedMotion || event.pointerType === "touch" || performance.now() - lastTilt.current < 45) return;
             lastTilt.current = performance.now();
             const box = event.currentTarget.getBoundingClientRect();
@@ -164,39 +220,91 @@ export default function MaterialSpecimen({ context, className = "", compact = fa
             return;
           }
           const start = drag.current;
+          const now = performance.now();
+          const dt = Math.max(8, now - start.t);
+          start.vx = (event.movementX || 0) / dt;
+          start.vy = (event.movementY || 0) / dt;
+          start.t = now;
+          start.moved = Math.max(start.moved, Math.hypot(event.clientX - start.x, event.clientY - start.y));
           setRotation([
             Math.max(-1.2, Math.min(1.2, start.rotation[0] + (event.clientY - start.y) * 0.006)),
             start.rotation[1] + (event.clientX - start.x) * 0.008,
           ]);
         }}
         onPointerUp={(event) => {
+          const released = drag.current;
           drag.current = null;
           if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+          if (!released) return;
+          if (released.moved < 6) {
+            // a tap pins the strand under the finger, or lets go
+            const hit = pickAt(event);
+            setPinned((current) => (hit === null || hit === current ? null : hit));
+            return;
+          }
+          if (reducedMotion) return;
+          // let go with momentum; the knot keeps turning, then settles
+          let vx = released.vx * 16 * 0.008;
+          let vy = released.vy * 16 * 0.006;
+          const coast = () => {
+            vx *= 0.93;
+            vy *= 0.93;
+            setRotation(([x, y]) => [Math.max(-1.2, Math.min(1.2, x + vy)), y + vx]);
+            if (Math.abs(vx) + Math.abs(vy) > 0.0006) momentum.current = requestAnimationFrame(coast);
+          };
+          momentum.current = requestAnimationFrame(coast);
         }}
         onPointerCancel={() => { drag.current = null; }}
-        onPointerLeave={() => setTilt([0, 0])}
+        onPointerLeave={() => { setTilt([0, 0]); setHover(null); }}
         onLostPointerCapture={() => { drag.current = null; }}>
         <div className={`material-still ${status === "webgpu" || status === "webgl" ? "is-hidden" : ""}`} aria-hidden="true">
           {/* Deterministic still from this exact mesh, before GPU initialization. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`/images/material/study-${study.form}.svg`} alt="" width="600" height="600" />
+          <img src={`/images/material/study-${form}.svg`} alt="" width="600" height="600" />
         </div>
-        <MaterialObject form={study.form} exploded={exploded} rotation={[rotation[0] + tilt[0], rotation[1] + tilt[1]]} zoom={closeView ? 1.25 : 1} progress={progress}
+        <MaterialObject form={form} exploded={exploded} highlight={strand} idle={idle} onPickerReady={pickerReady} rotation={[rotation[0] + tilt[0], rotation[1] + tilt[1]]} zoom={closeView ? 1.25 : 1} progress={progress}
           reducedMotion={!!reducedMotion} onReady={ready} onError={failed} onCaptureReady={captureReady} />
         <span className="material-stage-axis" aria-hidden="true">+<i />+</span>
         <span className="material-stage-note" aria-hidden="true">{exploded ? "02 / structure exposed" : "01 / held together"}</span>
       </div>
       <div className="material-controls">
-        <p id={instructionId}>{status === "still" ? "Still study · interaction unavailable" : "Drag to turn · arrow keys to inspect"}</p>
+        <p id={instructionId}>{status === "still" ? "Still study · interaction unavailable" : "Drag to turn · tap a strand"}</p>
         <button type="button" aria-pressed={exploded} onClick={() => setExploded(!exploded)}>
           <span aria-hidden="true">{exploded ? "↙" : "↗"}</span> {exploded ? "Bring together" : "Separate layers"}
         </button>
         <button type="button" className="material-reset" aria-label="Reset object orientation" onClick={() => setRotation([0, 0])}>↺</button>
         <button type="button" className="material-zoom" aria-pressed={closeView} aria-label={closeView ? "Widen the view" : "Inspect the material up close"} title={closeView ? "Widen the view" : "Inspect the material up close"} onClick={() => setCloseView(!closeView)}>{closeView ? "−" : "+"}</button>
       </div>
-      <figcaption className="material-caption">
+      <div className="material-lenses">
+        <div role="group" aria-label="Strands">
+          {STRANDS.map((item, index) => (
+            <button type="button" key={item.name} aria-pressed={pinned === index} data-strand={index}
+              onClick={() => { touch(); setPinned(pinned === index ? null : index); }}
+              onPointerEnter={() => setHover(index)} onPointerLeave={() => setHover(null)}>
+              <i aria-hidden="true" />{item.name}
+            </button>
+          ))}
+        </div>
+        <div role="group" aria-label="Form">
+          {FORMS.map((item) => (
+            <button type="button" key={item.form} aria-pressed={form === item.form} title={item.line}
+              onClick={() => { touch(); setFormOverride(item.form === study.form ? null : item.form); }}>
+              {item.form}
+            </button>
+          ))}
+        </div>
+      </div>
+      <figcaption className="material-caption" aria-live="polite">
         <span className="material-caption-marker" aria-hidden="true" />
-        <div><strong>{study.principle}</strong><p>{exploded ? study.layers : study.detail}</p></div>
+        <div>
+          {strand !== null ? (
+            <><strong>{STRANDS[strand].name}</strong><p>{STRANDS[strand].line}</p></>
+          ) : formOverride ? (
+            <><strong>{formOverride[0].toUpperCase() + formOverride.slice(1)}. {FORMS.find((item) => item.form === formOverride)?.line}</strong><p>Same material, same three strands. Only the shape of the handoff changed.</p></>
+          ) : (
+            <><strong>{study.principle}</strong><p>{exploded ? study.layers : study.detail}</p></>
+          )}
+        </div>
         <button type="button" onClick={share} aria-label={`Copy link to ${study.name}`} title="Copy a link to this study">↗</button>
       </figcaption>
       {!compact && <Link className="material-evidence-link" href={study.href}>{study.link}<span aria-hidden="true">→</span></Link>}

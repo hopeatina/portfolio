@@ -9,7 +9,7 @@ export default function AlmaPage() {
       status="Production ownership · 2.7 years"
       title="Alma"
       subtitle="Clinical systems that had to earn adoption and survive inspection."
-      introduction="Alma is the proof that I can own long-running backend systems where privacy, auditability, adoption, and reliability are not separate requirements. They are the product boundary."
+      introduction="At Alma I owned long-running backend systems where privacy, auditability, adoption, and reliability were one requirement. They were the product boundary."
       facts={[
         { label: "Constraint", value: "HIPAA production" },
         { label: "Adoption", value: "72% reassessments", note: "self-reported · internal metrics" },
@@ -117,7 +117,7 @@ export default function AlmaPage() {
             label: "shrink failure",
             before: "A large release makes clinical operations absorb the uncertainty all at once.",
             decision: "Decompose changes, ship behind flags, instrument the failure path, and preserve rollback.",
-            consequence: "Velocity comes from making each failure smaller, diagnosable, and reversible—not from ignoring consequence.",
+            consequence: "Speed came from making each failure smaller, easier to diagnose, and reversible. Not from ignoring the stakes.",
             evidence: "Feature flags · Datadog · decomposed PRs",
             tone: "signal",
           },

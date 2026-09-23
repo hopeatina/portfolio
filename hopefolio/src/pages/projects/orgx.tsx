@@ -10,7 +10,7 @@ export default function OrgXPage() {
       status="Founder-built · live · externally measured"
       title="OrgX"
       subtitle="The prompt ends. The company keeps moving."
-      introduction="OrgX lets a person manage a fleet of agents from the AI client they already use—without losing the goal, the decisions, the quality bar, or the proof when work changes hands. It is the shared operating context beneath the clients, not another chat destination."
+      introduction="OrgX lets one person run a fleet of agents from the AI client they already use. The goal, the decisions, the quality bar, and the proof survive every handoff. It lives underneath the clients. It isn't another chat app."
       facts={[
         { label: "Job", value: "carry work across agents" },
         { label: "Ownership", value: "founder · product · architecture" },
@@ -32,21 +32,21 @@ export default function OrgXPage() {
         height: 900,
         alt: "OrgX artifact viewer showing a lead claim pack, decision provenance, and evidence score",
         label: "The artifact is the receipt",
-        caption: "Output, provenance, quality, and review state are inspected together—not reconstructed after the fact.",
+        caption: "Output, provenance, quality, and review state in one place. Nothing reconstructed after the fact.",
       }}
       problem={{
         eyebrow: "The failure was fragmentation, not intelligence",
-        title: "Agents could do more work than a person could reliably follow.",
+        title: "Agents could do more work than one person could follow.",
         body: (
           <>
             <p>
-              The model could draft, research, code, and coordinate. But the work scattered across
-              prompts, clients, repositories, and human memory. A handoff between Claude and Codex
-              could erase the goal, the decision that shaped it, and the evidence already gathered.
+              The models could draft, research, code, and coordinate. The work still scattered across
+              prompts, clients, repos, and whoever happened to remember. One handoff from Claude to
+              Codex could wipe the goal, the decision behind it, and the evidence already gathered.
             </p>
             <p>
-              More autonomy made the gap more dangerous. Activity increased while the founder or
-              team lead had less confidence about what moved, why it moved, and what deserved attention.
+              More autonomy made it worse. Activity went up while the person in charge got less sure
+              about what moved, why, and what needed them.
             </p>
           </>
         ),
@@ -58,31 +58,31 @@ export default function OrgXPage() {
       }}
       insight={{
         eyebrow: "The prompt was the wrong primitive",
-        title: "The organization—not the conversation—had to remember why the work exists.",
+        title: "The company has to remember why the work exists. The chat can't.",
         body: (
           <>
             <p>
-              The next agent needs more than a summary. It needs the goal, definition of done,
-              decisions and why, available tools, missing permissions, budget, confidence, and the
-              next useful action. Those become a compiled handoff instead of a transcript dump.
+              The next agent needs more than a summary. It needs the goal, what done looks like, the
+              decisions and why, the tools, the missing permissions, the budget, and the next useful
+              move. OrgX compiles that into the handoff instead of dumping a transcript.
             </p>
             <p>
-              That reframed OrgX from an orchestration destination into infrastructure that can meet
-              the operator where the work already happens.
+              That turned OrgX from a place you go to orchestrate into infrastructure that meets you
+              where the work already happens.
             </p>
           </>
         ),
       }}
       decision={{
         eyebrow: "The architecture followed the product thesis",
-        title: "Carry one work graph across clients, then make consequence—not activity—control the system.",
+        title: "One work graph across every client. Consequence decides when a person steps in.",
         body: (
           <>
             <p>
               The work graph connects goals, initiatives, agents, decisions, artifacts, receipts,
-              cost, and value. The owner's quality bar decides what returns for review. Tool policy
-              pauses publishing, payments, messages, merges, and other external effects at the human
-              boundary. Recovery can retry, narrow scope, ask a specialist, checkpoint, or stop.
+              cost, and value. The owner's quality bar decides what comes back for review. Publishing,
+              payments, messages, and merges pause at the human boundary. When something fails, the
+              system can retry, narrow the scope, ask a specialist, checkpoint, or stop.
             </p>
           </>
         ),
@@ -155,7 +155,7 @@ export default function OrgXPage() {
           {
             pressure: "Autonomy increases review volume",
             choice: "Escalate by consequence and return receipts",
-            reason: "Human attention is reserved for irreversible or ambiguous boundaries—not every unit of agent activity.",
+            reason: "A person only gets pulled in for irreversible or ambiguous calls. Not every agent action.",
           },
           {
             pressure: "Proof must travel",
@@ -240,7 +240,7 @@ export default function OrgXPage() {
           { name: "Anthropic", icon: "anthropic", category: "Agents", project: "Execution + clients", reason: "Claude is both a strong specialist runtime and a native client surface for carrying shared organizational context." },
           { name: "GitHub", icon: "github", category: "Proof", project: "Engineering receipts", reason: "Source, pull requests, checks, and merges let an engineering outcome return with independently inspectable evidence." },
           { name: "Sentry", icon: "sentry", category: "Proof", project: "Runtime quality", reason: "Operational errors must remain attributable to the run and system boundary that produced them." },
-          { name: "Stripe", icon: "stripe", category: "Business", project: "Commercial boundary", reason: "Billing is treated as a consequential external system with explicit state and governance—not a decorative integration badge." },
+          { name: "Stripe", icon: "stripe", category: "Business", project: "Commercial boundary", reason: "Billing is a real external system with explicit state and rules. Not a logo on an integrations page." },
         ],
         surfaceProofs: [
           {
@@ -265,7 +265,7 @@ export default function OrgXPage() {
             height: 1167,
             alt: "OrgX morning brief MCP widget summarizing priorities, decisions, and work requiring attention",
             label: "Morning brief",
-            caption: "The next session begins with grounded organizational state and explicit judgment requests—not a blank prompt.",
+            caption: "The next session starts from the company's actual state and the calls waiting on you. Not a blank prompt.",
           },
           {
             src: "/images/case-studies/widgets/decisions.png",
@@ -289,7 +289,7 @@ export default function OrgXPage() {
             height: 1342,
             alt: "OrgX scaffolded initiative MCP widget with workstreams, owners, and next actions",
             label: "Plan becomes work",
-            caption: "The output is not a paragraph called a plan; it is an inspectable structure with owners, boundaries, and a next action.",
+            caption: "A plan with owners, boundaries, and a next action. Not a paragraph called a plan.",
           },
         ],
       }}
@@ -322,16 +322,16 @@ export default function OrgXPage() {
       ]}
       learning={{
         eyebrow: "The control surface is not a dashboard afterthought",
-        title: "The product is the quality of judgment the system makes possible.",
+        title: "The product is the quality of the judgment it makes possible.",
         body: (
           <>
             <p>
-              OrgX changed my operating model from “automate the workflow” to “design the cause chain.”
-              Every meaningful action should preserve context, expose its boundary, and return proof
-              that improves the next decision.
+              OrgX moved me from “automate the workflow” to “design the cause chain.” Every action that
+              matters should keep its context, show its boundary, and come back with proof the next
+              decision can use.
             </p>
             <p>
-              Autonomy remains useful. Continuity is what makes it compound.
+              Autonomy is useful. Continuity is what makes it compound.
             </p>
           </>
         ),

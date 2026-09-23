@@ -37,8 +37,8 @@ export default function Home() {
         <section data-material-form="knot" className="material-home-hero" aria-labelledby="hero-title">
           <div className="material-home-copy">
             <span className="material-eyebrow"><i aria-hidden="true" /> Hope Atina / engineer, founder, product thinker</span>
-            <h1 id="hero-title">Intelligence<br />survives the<br /><em>handoff.</em></h1>
-            <p>I build the memory, authority, and proof that make ambitious systems hold together. Across clinical software, data platforms, AI agents, and interactive worlds.</p>
+            <h1 data-thread="" id="hero-title">Intelligence<br />survives the<br /><em>handoff.</em></h1>
+            <p>I build the memory, authority, and proof that keep ambitious systems together. Clinical software, data platforms, AI agents, game worlds.</p>
             <div className="material-home-actions">
               <Link href="/projects" className="material-primary-link">Explore the work <span aria-hidden="true">↗</span></Link>
               <TextLink href="/proof">See the receipts</TextLink>
@@ -62,15 +62,15 @@ export default function Home() {
           <div className="v4-continuity-heading">
             <h2 id="continuity-title">The prompt ends. The work should not.</h2>
             <p>
-              Autonomy is easy to demonstrate. The harder problem is carrying the goal, decisions,
-              quality bar, and evidence as work crosses clients and people.
+              Autonomy demos well. Carrying the goal, the decisions, and the evidence across tools
+              and people is the hard part.
             </p>
           </div>
           <CausalFlow
             steps={[
-              { glyph: "context", label: "Carry the why", detail: "The next agent receives the goal, constraints, decisions, and prior proof together." },
+              { glyph: "context", label: "Carry the why", detail: "The next agent gets the goal, the constraints, and the prior proof in one go." },
               { glyph: "branch", label: "Use the right client", detail: "Claude, Codex, Cursor, and other specialists keep their native strengths.", tone: "cold" },
-              { glyph: "judgment", label: "Pause at consequence", detail: "High-consequence work waits for the right person—not every action.", tone: "heat" },
+              { glyph: "judgment", label: "Pause at consequence", detail: "Only the high-consequence calls wait for a person.", tone: "heat" },
               { glyph: "receipt", label: "Teach the next run", detail: "The result returns with enough evidence to improve what happens next." },
             ]}
           />
@@ -98,8 +98,8 @@ export default function Home() {
               <h2 id="orgx-title">The proof layer for AI-delivered work.</h2>
             </div>
             <p>
-              OrgX turns agent activity into accountable work: initiatives, agents, decisions,
-              artifacts, receipts, and proof rooms that remain legible after the prompt is gone.
+              OrgX turns agent activity into work you can account for. Decisions, artifacts, and
+              receipts that still make sense after the chat is gone.
             </p>
           </div>
 
@@ -116,14 +116,14 @@ export default function Home() {
               src="/images/case-studies/orgx-v4/live-desk.png"
               alt="OrgX live desk showing an agent's current work, trust state, and recent outcomes"
               label="Operator desk"
-              caption="Trust is expressed through what the agent may do next—not through a generic status badge."
+              caption="Trust shows up as what the agent is allowed to do next."
             />
           </div>
 
           <div className="v4-orgx-home-footer">
             <p>
-              The consequential decision was making the operating context accessible across clients.
-              That turns OrgX from one destination into a continuity layer.
+              The big call: make the context work in every client. OrgX stops being a place you go
+              and becomes the layer underneath.
             </p>
             <TextLink href="/projects/orgx">Read the OrgX case study</TextLink>
           </div>
@@ -134,8 +134,8 @@ export default function Home() {
           <div className="v4-range-heading">
             <h2 id="range-title">Eight projects. Different kinds of pressure.</h2>
             <p>
-              Learning, collective intelligence, games, clinical software, and market research.
-              The domain changes. The attention to how a system holds together stays.
+              Learning, research, games, clinical software, markets. Different pressure every time.
+              Same question: does it hold together?
             </p>
           </div>
           <div className="v4-range-list">
@@ -180,8 +180,8 @@ export default function Home() {
               <span>Figma &amp; Chill</span>
               <h2 id="collaboration-title">Less talk. More action. More people in the file.</h2>
               <p>
-                I started Figma and Chill because conversation alone was not enough. It became a
-                global BIPOC design community built through play, shared making, iteration, and culture.
+                I started Figma and Chill because talking about design wasn't enough. It became a
+                global BIPOC design community that learned by making things together.
               </p>
               <blockquote>
                 “I’m less about talk and more about action.”
@@ -198,8 +198,8 @@ export default function Home() {
         </section>
 
         <section data-material-form="bridge" className="v4-home-close v4-motif-backed">
-          <span>Watch the thread hold as you leave this page.</span>
-          <h2>Everything above has a receipt. Ask for the one you need.</h2>
+          <span>Click anywhere. The thread comes with you.</span>
+          <h2 data-thread="">Everything above has a receipt. Ask for the one you need.</h2>
           <div>
             <TextLink href="/proof">See the receipts</TextLink>
               <TextLink href="#skills">Skills &amp; tools</TextLink>

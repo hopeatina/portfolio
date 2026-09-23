@@ -85,7 +85,7 @@ const usageSteps = [
     index: "03",
     title: "Run a continuity test, not a dashboard tour.",
     command: "Show me what shipped, who approved it, and the evidence.",
-    detail: "Ask in one client, then continue in another. The claim is that the work graph—not the transcript—survives the handoff.",
+    detail: "Ask in one client, then continue in another. The claim: the work graph survives the handoff, not just the transcript.",
     href: "https://github.com/useorgx/orgx-mcp/tree/main/docs/benchmarks/agent-amnesia-test",
     linkLabel: "Open the Agent Amnesia Test",
   },

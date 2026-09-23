@@ -46,14 +46,14 @@ export default function MaterialJourney() {
 
   return (
     <section className="material-journey" ref={root} aria-labelledby="material-journey-title" data-material-form={chapters[active].context.form}>
-      <header className="material-journey-header"><span>01 / A working philosophy, in four forms</span>
+      <header className="material-journey-header"><span data-thread="" data-thread-label="The shape of how I work">01 / A working philosophy, in four forms</span>
         <h2 id="material-journey-title">The shape of<br /><em>how I work.</em></h2>
         <p>One material. Different constraints.<br />Follow the thread as the work changes.</p>
       </header>
       <div className="material-journey-grid">
         <div className="material-chapters">
           {chapters.map((chapter, index) => <article key={chapter.label} id={`chapter-${chapter.label.toLowerCase()}`} data-material-chapter={index} className={active === index ? "is-active" : ""}>
-            <span className="material-chapter-index">0{index + 1} / {chapter.label}</span>
+            <span className="material-chapter-index" data-thread="">0{index + 1} / {chapter.label}</span>
             <h3>{chapter.title}</h3><p>{chapter.body}</p>
             <Link href={chapter.context.href}>{chapter.context.link} <span aria-hidden="true">↗</span></Link>
           </article>)}

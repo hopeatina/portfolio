@@ -125,6 +125,5 @@ export default function MaterialAtmosphere() {
       <MaterialObject form={form} exploded={false} rotation={rotation} progress={progress}
         reducedMotion={!!reducedMotion} ambient onReady={() => setReady(true)} onError={() => setReady(false)} />
     </div>
-    <div className="material-atmosphere-thread" />
   </div>;
 }
