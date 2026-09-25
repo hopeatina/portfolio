@@ -16,6 +16,13 @@ export default function AlmaPage() {
         { label: "Reliability", value: "20% fewer errors", note: "self-reported · internal metrics" },
         { label: "Current", value: "Spring Health integration" },
       ]}
+      heroReel={{
+        src: "/video/reels/alma.mp4",
+        poster: "/video/reels/alma.jpg",
+        label: "Project film · The request path stays narrow",
+        caption: "Clinical consequence lifts off the request path into audited, reversible stages.",
+        score: "“Kdila” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/projects/alma-system-v4.svg",
         width: 1600,

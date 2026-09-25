@@ -16,6 +16,13 @@ export default function NeuromosaicPage() {
         { label: "Core", value: "Python + PyTorch" },
         { label: "Surfaces", value: "Explorer + CLI", note: "research prototype; incomplete search strategies" },
       ]}
+      heroReel={{
+        src: "/video/reels/neuromosaic.mp4",
+        poster: "/video/reels/neuromosaic.jpg",
+        label: "Project film · A paper, shattered into an architecture",
+        caption: "Scattered architecture choices become named, bounded tiles, then versioned code and a recorded run.",
+        score: "“Synthyrecover” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/neuromosaic/identity.png",
         width: 2048,

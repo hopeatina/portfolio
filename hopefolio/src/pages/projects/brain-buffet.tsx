@@ -16,6 +16,13 @@ export default function BrainBuffetPage() {
         { label: "Experience", value: "Context → course → practice" },
         { label: "Scope", value: "Web application", note: "generation service integrated through an API" },
       ]}
+      heroReel={{
+        src: "/video/reels/brainbuffet.mp4",
+        poster: "/video/reels/brainbuffet.jpg",
+        label: "Project film · A buffet, not a search box",
+        caption: "A learner plates one choice per beat; the plate becomes a course with a plan.",
+        score: "“Feeling” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/brain-buffet/desktop-study.png",
         width: 1501,

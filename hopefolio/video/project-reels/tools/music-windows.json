@@ -1,0 +1,74 @@
+{
+ "alma": {
+  "track": "kdila",
+  "file": "music/1283128960_kdila.wav",
+  "bpm": 107.67,
+  "start": 53.15,
+  "drop": 58.677,
+  "drop_in_window": 5.526,
+  "contrast": 2.09
+ },
+ "perfpulse": {
+  "track": "tues",
+  "file": "music/1263392470_tues.wav",
+  "bpm": 143.55,
+  "start": 50.178,
+  "drop": 58.329,
+  "drop_in_window": 8.15,
+  "contrast": 2.84
+ },
+ "openclaw": {
+  "track": "bop",
+  "file": "music/1175845462_bop.wav",
+  "bpm": 117.45,
+  "start": 25.751,
+  "drop": 30.79,
+  "drop_in_window": 5.039,
+  "contrast": 2.7
+ },
+ "brainbuffet": {
+  "track": "feeling",
+  "file": "music/1239284911_feeling.wav",
+  "bpm": 112.35,
+  "start": 3.228,
+  "drop": 8.359,
+  "drop_in_window": 5.132,
+  "contrast": 3.29
+ },
+ "neuromosaic": {
+  "track": "synthyrecover",
+  "file": "music/908598592_synthyrecover.wav",
+  "bpm": 123.05,
+  "start": 88.654,
+  "drop": 95.248,
+  "drop_in_window": 6.594,
+  "contrast": 2.62
+ },
+ "chaosriders": {
+  "track": "drvn",
+  "file": "music/1310557633_drvn.wav",
+  "bpm": 143.55,
+  "start": 7.663,
+  "drop": 12.725,
+  "drop_in_window": 5.062,
+  "contrast": 3.27
+ },
+ "meridian": {
+  "track": "montay",
+  "file": "music/990019960_montay.wav",
+  "bpm": 143.55,
+  "start": 69.404,
+  "drop": 77.601,
+  "drop_in_window": 8.197,
+  "contrast": 6.25
+ },
+ "highlight": {
+  "track": "ubeat-v1",
+  "file": "music/1893461586_ubeat-v1.wav",
+  "bpm": 123.05,
+  "start": 39.869,
+  "drop": 45.163,
+  "drop_in_window": 5.294,
+  "contrast": 3.22
+ }
+}

@@ -16,6 +16,13 @@ export default function OrgXForOpenClawPage() {
         { label: "Continuity", value: "persistent state" },
         { label: "Control", value: "live + resumable" },
       ]}
+      heroReel={{
+        src: "/video/reels/openclaw.mp4",
+        poster: "/video/reels/openclaw.jpg",
+        label: "Project film · The lobster that forgot",
+        caption: "An OpenClaw agent wakes up without the company every session, until one local bridge carries it in.",
+        score: "“Bop” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",
         width: 2880,

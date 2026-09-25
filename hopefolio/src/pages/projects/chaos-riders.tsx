@@ -16,6 +16,13 @@ export default function ChaosRidersPage() {
         { label: "Runtime", value: "Three.js + React", note: "browser prototype" },
         { label: "Interaction", value: "Steer / steady / flow", note: "touch + keyboard controls" },
       ]}
+      heroReel={{
+        src: "/video/reels/chaosriders.mp4",
+        poster: "/video/reels/chaosriders.jpg",
+        label: "Project film · Read the road",
+        caption: "Concept art, then the road: potholes on the beat, and the golden line into flow.",
+        score: "“Drvn” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/chaos-riders/world-market.webp",
         width: 3840,
