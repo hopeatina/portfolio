@@ -159,6 +159,19 @@ def make(kind, prm, i):
     if kind == 'rewind':
         a = int(prm['at'] / FPS * SR); src = bed[:, max(0, a - int(0.34 * SR)):a][:, ::-1]
         return fade(hp(signal.resample(src, int(src.shape[1] / 2.1), axis=1), 180), 0.004, 0.03)
+    if kind == 'knock':
+        one = fade(lp(K['whump'][:, : int(0.16 * SR)], 900), 0.0005, 0.06) + stereo(hp(pink(int(0.16 * SR), 5), 1200) * np.exp(-np.arange(int(0.16 * SR)) / (0.01 * SR)) * 0.25)
+        out = np.zeros((2, int(0.6 * SR)))
+        for t in (0.0, 0.19, 0.36):
+            i0 = int(t * SR); out[:, i0:i0 + one.shape[1]] += one * (1.0 if t < 0.3 else 0.8)
+        return out
+    if kind == 'click':
+        n = int(0.03 * SR); x = hp(pink(n, 17 + i), 2500) * np.exp(-np.arange(n) / (0.003 * SR))
+        return stereo(x / (np.abs(x).max() + 1e-9) * 0.5)
+    if kind == 'lid':
+        return fade(lp(K['whump'][:, : int(0.35 * SR)], 260), 0.002, 0.2) * 0.8
+    if kind == 'clock':
+        return pitch(CLOCK[(i * 3) % len(CLOCK)], prm.get('st', 0))
     raise ValueError(kind)
 
 

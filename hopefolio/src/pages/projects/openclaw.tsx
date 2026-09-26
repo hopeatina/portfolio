@@ -20,7 +20,7 @@ export default function OrgXForOpenClawPage() {
         src: "/video/reels/openclaw.mp4",
         poster: "/video/reels/openclaw.jpg",
         label: "Project film · The lobster that forgot",
-        caption: "Every session the lobster wakes up asking who it works for, until one local bridge carries the company in and an outage loses nothing.",
+        caption: "Every morning the lobster wakes up asking who it works for, until a bridge to OrgX carries the company in. A storm cuts the Wi-Fi; nothing is lost.",
         score: "“Ravioli” by Hope Atina",
       }}
       heroProof={{

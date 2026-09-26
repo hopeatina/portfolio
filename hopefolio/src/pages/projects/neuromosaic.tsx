@@ -20,7 +20,7 @@ export default function NeuromosaicPage() {
         src: "/video/reels/neuromosaic.mp4",
         poster: "/video/reels/neuromosaic.jpg",
         label: "Project film · A paper, shattered into an architecture",
-        caption: "A paper’s architecture shatters into named, bounded tiles, encodes into one vector, and becomes versioned code and a run that traces back to its tiles.",
+        caption: "Under a desk lamp, a paper’s choices break free as tiles, lock into the Neuromosaic sphere, and become versioned code and a run that traces back to them.",
         score: "“Macros” by Hope Atina",
       }}
       heroProof={{

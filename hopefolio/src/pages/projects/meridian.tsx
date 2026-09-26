@@ -20,7 +20,7 @@ export default function MeridianPage() {
         src: "/video/reels/meridian.mp4",
         poster: "/video/reels/meridian.jpg",
         label: "Project film · The score is not the reason",
-        caption: "The score 84 slices into its ingredients and their evidence, including the concern it hid, with live execution disabled.",
+        caption: "On a trading desk at night, 84 lifts off the screen and breaks into its evidence, including the concern it was hiding. Live execution stays disabled.",
         score: "“Montay” by Hope Atina",
       }}
       heroProof={{

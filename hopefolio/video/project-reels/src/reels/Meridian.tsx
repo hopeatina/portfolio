@@ -1,32 +1,38 @@
 import React from 'react';
-import { AbsoluteFill, Img, staticFile, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, Img, random, staticFile, useCurrentFrame } from 'remotion';
 import { Audio } from '@remotion/media';
 import { HOUSE, RESOLVE, TRAVEL, clamp, mix, prog, settle } from '../lib/ease';
 import { GRIDS } from '../lib/grid';
-import { T, rec } from '../lib/theme';
-import { EndCard, Flash, Grain, Vignette } from '../lib/Frame';
+import { rec } from '../lib/theme';
+import { Flash, Grain, Vignette } from '../lib/Frame';
 import { resolveText } from '../lib/decode';
-import { Cam, Key, X, Y, Z, keyedCamera, spinAbout, v3 } from '../lib/space';
-import { Blur, Fog, Plane } from '../lib/World';
+import { Cam, Key, X, Y, edit, spinAbout, v3, vlerp } from '../lib/space';
+import { Blur, Box, DofCtx, Fog, Plane } from '../lib/World';
+import { Bokeh, Glow, Grade, Letterbox } from '../lib/Env';
+import { BrandEnd } from '../lib/BrandEnd';
 import cues from '../data/cues_meridian.json';
 
 /**
- * MERIDIAN v2: "The score is not the reason."
- * Frame 0: one number, 84, huge on a trading desk at night, and a cursor
- * already drifting toward BUY. The number is the hero. On every downbeat the
- * camera leans closer; on the kick a question types itself: why? On the drop
- * the numeral physically slices into its ingredients (each slice's height is
- * its weight), the stack pulls apart, and the camera walks down it while each
- * piece of evidence resolves on a snare. The concern that was hiding under
- * the score rises last, in red. Then the structured plan, and the honest
- * ending: live execution disabled. Demo values, labelled (the case study's
- * own rule). Rewatch: 24 + 21 + 26 + 9 + 12 − 8 = 84; the plan's values are
- * the ones on Meridian's real signal preview.
+ * MERIDIAN v3: "The score is not the reason."
+ * A navy trading desk at night, three monitors, the city in gold. Surface: the
+ * conviction score on the real signal card, 84, and a cursor creeping toward
+ * BUY. The pressure is edited like a thriller: tele inserts on the snares, a
+ * Dutch tilt, the digit filling the frame, "why?" typed beside it. Drop: the
+ * 84 lifts out of the screen into the room and explodes into its ingredients
+ * (each slice's height is its weight). Reality: the camera walks the stack as
+ * each piece of evidence resolves; the concern the score was hiding rises last,
+ * in red (24 + 21 + 26 + 9 + 12 − 8 = 84). The plan lands on the second
+ * monitor with the real preview values, then the honest stamp: live execution
+ * disabled. Demo values, labelled.
  */
 const g = GRIDS.meridian;
 const C = cues.cue;
-const TEAL = '#3ee6b4';
-const FOG: Fog = { near: 2600, far: 8000 };
+const GOLD = '#e6b85c';
+const NAVY = '#1e3a5f';
+const BLUE = '#1e40af';
+const SERIF = 'Newsreader, Georgia, serif';
+const SANS = 'system-ui, -apple-system, Helvetica Neue, sans-serif';
+const FOG: Fog = { near: 3200, far: 11000 };
 const STACK = [
   { k: 'Regime', v: 24, ev: 'Range-bound regime, 3 sessions' },
   { k: 'Positioning', v: 21, ev: 'Crowded shorts into support' },
@@ -35,152 +41,215 @@ const STACK = [
   { k: 'History', v: 12, ev: '7 of 10 similar setups resolved up' },
 ];
 const CONCERN = { k: 'Concern', v: -8, ev: 'Dollar strength into the close' };
-const NUM = v3(0, -520, 0); // the numeral's centre
 const NW = 1300;
 const NH = 1000;
-const G0 = 148; // glyph top inside the box (px, measured on frame 0)
-const G1 = 754; // glyph baseline
+const G0 = 148;
+const G1 = 754;
 const TOTAL = STACK.reduce((a, s) => a + s.v, 0);
 const sliceY = STACK.map((_, i) => G0 + ((G1 - G0) * STACK.slice(0, i).reduce((a, s) => a + s.v, 0)) / TOTAL);
 const sliceH = STACK.map((s) => ((G1 - G0) * s.v) / TOTAL);
-const STACK_GAP = 250;
-const splitY = (i: number) => -560 + (i - 2) * STACK_GAP;
-const PLAN = v3(1750, -520, -120);
 
-const KEYS: Key[] = [
-  [0, 0, -570, 0, 1250, 0, 0, 0], // 84, square on
-  [C.downs[1], 40, -570, 0, 1120, -3, 0, 0],
-  [C.downs[2], 60, -570, 0, 1000, 3, 0, 0],
-  [C.downs[3], 80, -560, 0, 900, -2, 0, 0],
-  [C.hover, 260, -420, 0, 820, 4, 2, 0],
-  [C.drop, 200, -480, 0, 950, 2, 1, 0],
-  [C.split + 22, 250, -560, 0, 2300, 24, 4, 0], // the stack, three-quarter
-  [C.evidence[0] + 14, 450, splitY(0), 0, 1200, 22, 3, 0], // walk down it
-  [C.evidence[1] + 8, 450, splitY(1), 0, 1200, 20, 2, 0],
-  [C.evidence[2] + 8, 450, splitY(2), 0, 1200, 18, 1, 0],
-  [C.evidence[3] + 8, 450, splitY(3), 0, 1200, 16, 0, 0],
-  [C.evidence[4] + 8, 450, splitY(4), 0, 1250, 14, -1, 0],
-  [C.evidence[5] + 10, 450, splitY(5), 0, 1350, 12, -2, 0], // the concern
-  [C.plan + 16, PLAN.x, PLAN.y, PLAN.z, 1150, -4, 0, 0], // the plan
-  [C.stamp + 14, PLAN.x, PLAN.y, PLAN.z, 1100, -4, 0, 0],
-  [C.pullback + 24, 700, -500, -200, 3000, 8, 3, 0], // all of it
-  [900, 700, -500, -200, 3150, 8, 3, 0],
-];
-const CAM = keyedCamera(KEYS, [
-  { frames: C.downs, tau: 5, punch: 0.035, px: 5 },
-  { frames: [C.split], tau: 6, punch: 0.05, px: 12 },
-  { frames: C.evidence, tau: 4, punch: 0.012, px: 3 },
-  { frames: [C.stamp], tau: 4, punch: 0.03, px: 8 },
+// the desk: main monitor centre, and where the 84 sits on it
+const MON = v3(0, -760, -700);
+const SW = 1600;
+const SH = 900;
+const onScreen = (px: number, py: number) => v3(MON.x - SW / 2 + px, MON.y - SH / 2 + py, MON.z + 2);
+const NUM_ON = onScreen(470, 500);
+const NUM_S = 0.46;
+const BUY = onScreen(1330, 790);
+const BASE = v3(-200, -950, -120); // the exploded stack, floating in front of the monitors
+const splitY = (i: number) => BASE.y + (i - 2) * 250;
+const RMON = v3(1780, -740, -420);
+const RU = spinAbout(X, Y, -0.45);
+const LMON = v3(-1780, -740, -420);
+const LU = spinAbout(X, Y, 0.45);
+
+const EDIT = edit([
+  { name: 'monitor', from: 0, keys: [[0, MON.x, MON.y, MON.z, 4100, 5, 2, 0, 85], [C.snares[0], MON.x - 80, MON.y + 20, MON.z, 3500, 3, 2, 0, 85]] },
+  { name: 'num', from: C.snares[0], keys: [[C.snares[0], NUM_ON.x, NUM_ON.y, MON.z, 2100, 2, 0, 0, 135], [C.snares[1], NUM_ON.x, NUM_ON.y, MON.z, 1900, 2, 0, 0, 135]] },
+  { name: 'buy', from: C.snares[1], keys: [[C.snares[1], BUY.x - 100, BUY.y, MON.z, 1900, -6, 0, 0, 135], [C.snares[2], BUY.x - 60, BUY.y, MON.z, 1700, -6, 0, 0, 135]] },
+  { name: 'wide', from: C.snares[2], keys: [[C.snares[2], 0, -620, -600, 4300, -10, 7, 0, 24], [C.snares[3], 0, -640, -620, 3900, -6, 6, 0, 24]], hand: { px: 4, roll: 0.3 } },
+  { name: 'dutch', from: C.snares[3], keys: [[C.snares[3], NUM_ON.x + 160, NUM_ON.y, MON.z, 2300, 8, 1, 9, 85], [C.snares[4], NUM_ON.x + 200, NUM_ON.y, MON.z, 2000, 10, 1, 11, 85]] },
+  { name: 'hover', from: C.snares[4], keys: [[C.snares[4], BUY.x - 40, BUY.y, MON.z, 1500, -8, 0, -7, 135], [C.snares[5], BUY.x - 20, BUY.y, MON.z, 1350, -8, 0, -8, 135]], hand: { px: 3, roll: 0.4 } },
+  { name: 'digit', from: C.snares[5], keys: [[C.snares[5], NUM_ON.x + 60, NUM_ON.y - 60, MON.z, 1250, 0, 0, 0, 135], [C.drop, NUM_ON.x + 60, NUM_ON.y - 60, MON.z, 1050, 0, 0, 3, 135]] },
+  { name: 'lift', from: C.drop, keys: [[C.drop, NUM_ON.x, NUM_ON.y, MON.z, 2200, 0, 0, 0, 50], [C.split + 16, BASE.x + 350, BASE.y + 40, BASE.z, 3600, 22, 6, 0, 35], [C.evidence[0] - 1, BASE.x + 400, BASE.y, BASE.z, 3300, 22, 6, 0, 35]], kicks: [{ frames: [C.split], tau: 6, punch: 0.05, px: 12 }] },
+  {
+    name: 'walk',
+    from: C.evidence[0],
+    keys: [
+      [C.evidence[0], BASE.x + 600, splitY(0), BASE.z, 1700, 22, 4, 0, 35],
+      [C.evidence[1] + 8, BASE.x + 600, splitY(1), BASE.z, 1700, 20, 3, 0, 35],
+      [C.evidence[2] + 8, BASE.x + 600, splitY(2), BASE.z, 1700, 18, 2, 0, 35],
+      [C.evidence[3] + 8, BASE.x + 600, splitY(3), BASE.z, 1700, 16, 1, 0, 35],
+      [C.evidence[4] + 8, BASE.x + 600, splitY(4), BASE.z, 1750, 14, 0, 0, 35],
+      [C.evidence[5] + 12, BASE.x + 600, splitY(5), BASE.z, 1850, 12, -1, 0, 35],
+      [C.plan - 12, BASE.x + 300, BASE.y + 100, BASE.z, 3000, 10, 2, 0, 35],
+    ],
+    kicks: [{ frames: C.evidence, tau: 4, punch: 0.012, px: 3 }],
+  },
+  { name: 'plan', from: C.plan - 12, keys: [[C.plan - 12, RMON.x, RMON.y, RMON.z, 2400, -26, 1, 0, 50], [C.stamp + 14, RMON.x, RMON.y, RMON.z, 1900, -26, 1, 0, 50]], kicks: [{ frames: [C.stamp], tau: 4, punch: 0.03, px: 8 }] },
+  { name: 'pull', from: C.pullback, keys: [[C.pullback, RMON.x, RMON.y, RMON.z, 1900, -26, 1, 0, 50], [C.end, 0, -700, -500, 4600, -6, 6, 0, 24]] },
 ]);
 
-/** one horizontal slice of the numeral (the slices together are the number) */
-const Slice: React.FC<{ y0: number; h: number; shade: number; glow: number }> = ({ y0, h, shade, glow }) => (
-  <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
-    <div style={{ position: 'absolute', left: 0, top: -y0, width: NW, height: NH, fontFamily: T.serif, fontSize: 1000, lineHeight: 1, textAlign: 'center', color: T.mineral, filter: `brightness(${shade})`, textShadow: glow > 0 ? `0 0 ${60 * glow}px rgba(62,230,180,${0.6 * glow})` : 'none' }}>84</div>
-  </div>
-);
-
-const Ingredient: React.FC<{ k: string; v: number; ev: string; t: number; f: number }> = ({ k, v, ev, t, f }) => {
-  const neg = v < 0;
-  const col = neg ? T.heat : TEAL;
+const Signal: React.FC<{ f: number }> = ({ f }) => {
+  const lifted = f >= C.drop;
+  const cursor = HOUSE(prog(f, 20, C.hover));
+  const whyT = prog(f, C.why, C.why + 16);
+  const pressed = false;
   return (
-    <div style={{ position: 'absolute', inset: 0, borderRadius: 16, background: 'rgba(8,12,12,0.94)', boxShadow: `inset 0 0 0 2px ${neg ? 'rgba(255,87,56,0.7)' : 'rgba(62,230,180,0.45)'}`, padding: '20px 26px', display: 'flex', alignItems: 'center', gap: 26 }}>
-      <div style={{ fontFamily: T.serif, fontSize: 88, lineHeight: 1, color: col, width: 150 }}>{neg ? `−${-v}` : `+${v}`}</div>
-      <div>
-        <div style={{ ...rec(1, 0, 700), fontSize: 20, letterSpacing: '0.16em', color: col }}>{k.toUpperCase()}</div>
-        <div style={{ ...rec(0, 0.3, 480), fontSize: 32, color: T.mineral, marginTop: 6, whiteSpace: 'pre' }}>{resolveText(''.padEnd(ev.length, ' '), ev, t, `m${k}`, f)}</div>
+    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, #0b1422, #0a1830)', fontFamily: SANS, color: '#eef2f8', overflow: 'hidden' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '26px 40px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 26, fontWeight: 700, letterSpacing: '0.02em' }}>
+          <span style={{ width: 16, height: 16, borderRadius: 8, background: GOLD }} /> MERIDIAN
+        </div>
+        <div style={{ ...rec(1, 0, 600), fontSize: 18, letterSpacing: '0.16em', color: 'rgba(238,242,248,0.5)' }}>DEMO VALUES · NOT A TRADING RECORD</div>
+      </div>
+      <div style={{ position: 'absolute', left: 60, top: 130, fontSize: 36, color: 'rgba(238,242,248,0.8)' }}>
+        GC · <span style={{ color: '#34d399', fontWeight: 700 }}>LONG</span> · Liquidity Sweep Reversal
+      </div>
+      <div style={{ position: 'absolute', left: 60, top: 170, fontSize: 18, ...rec(1, 0, 600), letterSpacing: '0.14em', color: GOLD }}>CONVICTION</div>
+      {!lifted ? (
+        <div style={{ position: 'absolute', left: 470 - NW * NUM_S / 2, top: 500 - (NH * NUM_S) / 2, width: NW * NUM_S, height: NH * NUM_S, fontFamily: SERIF, fontSize: 1000 * NUM_S, lineHeight: 1, textAlign: 'center', color: '#f5f1e6' }}>84</div>
+      ) : (
+        <div style={{ position: 'absolute', left: 470 - 260, top: 290, width: 520, height: 420, borderRadius: 20, border: '4px dashed rgba(230,184,92,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', ...rec(1, 0, 600), fontSize: 26, color: GOLD, letterSpacing: '0.1em' }}>WHY 84?</div>
+      )}
+      {whyT > 0 && !lifted ? <div style={{ position: 'absolute', left: 780, top: 360, fontFamily: SERIF, fontStyle: 'italic', fontSize: 130, color: '#ff6b52' }}>{resolveText('    ', 'why?', whyT, 'why', f)}</div> : null}
+      {/* a sparkline for texture */}
+      <svg width={560} height={200} style={{ position: 'absolute', right: 60, top: 140 }}>
+        <polyline points={new Array(40).fill(0).map((_, i) => `${i * 14},${120 - Math.sin(i / 4) * 40 - i * 1.5 + random(`sp${i}`) * 16}`).join(' ')} stroke={GOLD} strokeWidth={4} fill="none" />
+      </svg>
+      <div style={{ position: 'absolute', right: 60, bottom: 70, width: 300, height: 110, borderRadius: 18, background: lifted ? 'rgba(255,255,255,0.1)' : GOLD, color: lifted ? 'rgba(255,255,255,0.4)' : '#1b1405', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 46, fontWeight: 800, transform: `scale(${pressed ? 0.95 : 1})` }}>BUY</div>
+      {!lifted ? (
+        <svg width={60} height={60} viewBox="0 0 24 24" style={{ position: 'absolute', left: mix(1600, 1390, cursor), top: mix(900, 800, cursor) }}>
+          <path d="M3 2l7 19 3-8 8-3z" fill="#fff" stroke="#000" strokeWidth={1} />
+        </svg>
+      ) : null}
+    </div>
+  );
+};
+
+const PlanScreen: React.FC<{ f: number }> = ({ f }) => {
+  const planT = HOUSE(prog(f, C.plan - 6, C.plan + 16));
+  const stampT = settle(prog(f, C.stamp - 4, C.stamp + 6), 1.4);
+  return (
+    <div style={{ position: 'absolute', inset: 0, background: '#08101c' }}>
+      <Img src={staticFile('img/public-landing.png')} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 1 - planT }} />
+      <div style={{ position: 'absolute', inset: 0, padding: '46px 56px', opacity: planT, fontFamily: SANS, color: '#eef2f8' }}>
+        <div style={{ ...rec(1, 0, 650), fontSize: 22, letterSpacing: '0.16em', color: GOLD, marginBottom: 24 }}>GC · LONG · TRADE PLAN · STRUCTURED</div>
+        {[
+          ['Entry', 'Limit @ 2285'],
+          ['Stop', '2271'],
+          ['Target', '2310'],
+          ['Size', '$4,200'],
+        ].map(([k, v], i) => (
+          <div key={k} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 50, padding: '16px 0', borderBottom: '1px solid rgba(255,255,255,0.1)', opacity: HOUSE(prog(f, C.plan + i * 5, C.plan + 12 + i * 5)) }}>
+            <span style={{ color: 'rgba(238,242,248,0.55)' }}>{k}</span>
+            <span style={{ fontWeight: 700 }}>{v}</span>
+          </div>
+        ))}
+        {stampT > 0.01 ? <div style={{ marginTop: 34, padding: '18px 20px', border: '6px solid #ff5738', color: '#ff5738', ...rec(1, 0, 800), fontSize: 40, letterSpacing: '0.12em', textAlign: 'center', transform: `rotate(-4deg) scale(${stampT})` }}>LIVE EXECUTION: DISABLED</div> : null}
       </div>
     </div>
   );
 };
 
+const Slice: React.FC<{ y0: number; shade: number; glow: number }> = ({ y0, shade, glow }) => (
+  <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+    <div style={{ position: 'absolute', left: 0, top: -y0, width: NW, height: NH, fontFamily: SERIF, fontSize: 1000, lineHeight: 1, textAlign: 'center', color: '#f5f1e6', filter: `brightness(${shade})`, textShadow: glow > 0 ? `0 0 ${60 * glow}px rgba(230,184,92,${0.8 * glow})` : 'none' }}>84</div>
+  </div>
+);
+
+const Ingredient: React.FC<{ k: string; v: number; ev: string; t: number; f: number }> = ({ k, v, ev, t, f }) => {
+  const neg = v < 0;
+  const col = neg ? '#ff6b52' : GOLD;
+  return (
+    <div style={{ position: 'absolute', inset: 0, borderRadius: 18, background: 'rgba(8,16,30,0.95)', boxShadow: `inset 0 0 0 2px ${neg ? 'rgba(255,107,82,0.8)' : 'rgba(230,184,92,0.5)'}, 0 20px 50px rgba(0,0,0,0.5)`, padding: '22px 30px', display: 'flex', alignItems: 'center', gap: 28, fontFamily: SANS }}>
+      <div style={{ fontFamily: SERIF, fontSize: 96, lineHeight: 1, color: col, width: 160 }}>{neg ? `−${-v}` : `+${v}`}</div>
+      <div>
+        <div style={{ ...rec(1, 0, 700), fontSize: 22, letterSpacing: '0.16em', color: col }}>{k.toUpperCase()}</div>
+        <div style={{ fontSize: 36, fontWeight: 600, color: '#eef2f8', marginTop: 6, whiteSpace: 'pre' }}>{resolveText(''.padEnd(ev.length, ' '), ev, t, `m${k}`, f)}</div>
+      </div>
+    </div>
+  );
+};
+
+const Monitor: React.FC<{ cam: Cam; c: typeof MON; U?: typeof X; w: number; h: number; children: React.ReactNode; glow?: string }> = ({ cam, c, U = X, w, h, children, glow = 'rgba(59,110,220,0.35)' }) => (
+  <>
+    <Plane cam={cam} c={c} U={U} V={Y} w={w + 40} h={h + 40} fog={FOG} z={-1}>
+      <div style={{ position: 'absolute', inset: 0, borderRadius: 16, background: '#05080e', boxShadow: `0 0 140px ${glow}` }} />
+    </Plane>
+    <Plane cam={cam} c={c} U={U} V={Y} w={w} h={h} fog={FOG} z={2}>
+      {children}
+    </Plane>
+    <Box cam={cam} c={v3(c.x, c.y + h / 2 + 200, c.z - 60)} size={[80, 400, 60]} color="#10141c" fog={FOG} />
+  </>
+);
+
 const World: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => {
-  const split = TRAVEL(prog(f, C.split, C.split + 30));
-  const cursor = HOUSE(prog(f, 20, C.hover));
-  const planT = HOUSE(prog(f, C.plan - 6, C.plan + 16));
-  const stampT = settle(prog(f, C.stamp - 4, C.stamp + 6), 1.4);
+  const lift = TRAVEL(prog(f, C.drop, C.split));
+  const split = TRAVEL(prog(f, C.split, C.split + 26));
   const concernT = TRAVEL(prog(f, C.evidence[5] - 20, C.evidence[5] + 6));
-  const sumT = HOUSE(prog(f, C.plan, C.plan + 20));
+  const sumT = HOUSE(prog(f, C.plan - 30, C.plan - 10)) * (1 - HOUSE(prog(f, C.pullback, C.pullback + 10)));
+  const numC = vlerp(v3(NUM_ON.x, NUM_ON.y, NUM_ON.z + 4), BASE, lift);
+  const s = mix(NUM_S, 1, lift);
   return (
     <>
-      {/* the desk + the room */}
-      <Plane cam={cam} c={v3(0, 80, -800)} U={X} V={Z} w={9000} h={5000} z={-400000}>
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, #020405, #07100e 60%, #0a1512)' }} />
+      {/* the city at night */}
+      <Plane cam={cam} c={v3(0, -1800, -3200)} w={16000} h={7000} z={-500000}>
+        <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, #050a14 0%, #0b1a33 55%, ${NAVY} 75%, #0a1426 100%)` }}>
+          {new Array(140).fill(0).map((_, i) => {
+            const x = random(`bx${i}`) * 16000;
+            const w = 300 + random(`bw${i}`) * 700;
+            const hgt = 1200 + random(`bh${i}`) * 2600;
+            return (
+              <div key={i} style={{ position: 'absolute', left: x, bottom: 1400, width: w, height: hgt, background: '#08111f', backgroundImage: `radial-gradient(circle, rgba(230,184,92,${0.35 + random(`bl${i}`) * 0.4}) 0 6px, transparent 7px)`, backgroundSize: `${60 + (i % 3) * 20}px ${80 + (i % 4) * 20}px` }} />
+            );
+          })}
+        </div>
       </Plane>
-      {[
-        { src: 'img/signal-preview.png', c: v3(-1900, -760, -1900), yaw: 0.35 },
-        { src: 'img/public-landing.png', c: v3(2600, -760, -2600), yaw: -0.45 },
-      ].map((m) => (
-        <Plane key={m.src} cam={cam} c={m.c} U={spinAbout(X, Y, m.yaw)} V={Y} w={1800} h={1143} fog={FOG} z={-200000}>
-          <Img src={staticFile(m.src)} style={{ width: 1800, height: 1143, opacity: 0.22, borderRadius: 16, boxShadow: '0 0 80px rgba(62,230,180,0.18)' }} />
-        </Plane>
-      ))}
-      {/* the numeral, as its slices (extruded) */}
-      {STACK.map((s, i) => {
-        const y0 = sliceY[i];
-        const h = sliceH[i];
-        const homeY = NUM.y - NH / 2 + y0 + h / 2;
-        const y = mix(homeY, splitY(i), split);
-        const x = mix(0, -260, split) + Math.sin(i * 1.7) * 40 * split;
-        const zz = Math.cos(i * 2.3) * 120 * split;
-        const U = spinAbout(X, Y, (i % 2 ? 1 : -1) * 0.12 * split);
-        const lit = f >= C.evidence[i] ? 1 : 0;
-        return [3, 2, 1, 0].map((k) => (
-          <Plane key={`${i}${k}`} cam={cam} c={v3(x, y, zz - k * 9)} U={U} V={Y} w={NW} h={h + 1} fog={FOG} z={k === 0 ? 5 : -k}>
-            <Slice y0={y0} h={h} shade={k === 0 ? 1 : 0.28 - k * 0.05} glow={k === 0 ? lit * Math.exp(-(f - C.evidence[i]) / 20) : 0} />
-          </Plane>
-        ));
-      })}
-      {/* each slice's ingredient, and its evidence */}
-      {STACK.map((s, i) => {
+      <Box cam={cam} c={v3(0, 60, -300)} size={[6200, 120, 2000]} color="#0a1322" z={-300000} top={<div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, #13223d, #0a1322 70%)' }} />} />
+      <Monitor cam={cam} c={LMON} U={LU} w={1400} h={800}>
+        <Img src={staticFile('img/signal-preview.png')} style={{ width: 1400, height: 800, objectFit: 'cover' }} />
+      </Monitor>
+      <Monitor cam={cam} c={MON} w={SW} h={SH} glow="rgba(230,184,92,0.25)">
+        <Signal f={f} />
+      </Monitor>
+      <Monitor cam={cam} c={RMON} U={RU} w={1400} h={800}>
+        <PlanScreen f={f} />
+      </Monitor>
+      {/* the 84, out of the screen and apart */}
+      {f >= C.drop
+        ? STACK.map((st, i) => {
+            const y0 = sliceY[i];
+            const h = sliceH[i];
+            const home = v3(numC.x, numC.y + (-NH / 2 + y0 + h / 2) * s, numC.z);
+            const apart = v3(BASE.x - 300 + Math.sin(i * 1.7) * 40, splitY(i), BASE.z + Math.cos(i * 2.3) * 120);
+            const c = vlerp(home, apart, split);
+            const lit = f >= C.evidence[i] ? Math.exp(-(f - C.evidence[i]) / 20) : 0;
+            return [3, 2, 1, 0].map((k) => (
+              <Plane key={`${i}${k}`} cam={cam} c={v3(c.x, c.y, c.z - k * 10)} U={spinAbout(X, Y, (i % 2 ? 1 : -1) * 0.14 * split)} V={Y} w={NW * s} h={(h + 1) * s} fog={FOG} z={k === 0 ? 5 : -k}>
+                <div style={{ position: 'absolute', left: 0, top: 0, width: NW, height: h + 1, transform: `scale(${s})`, transformOrigin: '0 0' }}>
+                  <Slice y0={y0} shade={k === 0 ? 1 : 0.3 - k * 0.06} glow={k === 0 ? lit : 0} />
+                </div>
+              </Plane>
+            ));
+          })
+        : null}
+      {STACK.map((st, i) => {
         const on = HOUSE(prog(f, C.split + 14 + i * 3, C.split + 30 + i * 3));
         const t = RESOLVE(prog(f, C.evidence[i], C.evidence[i] + 18));
         return (
-          <Plane key={s.k} cam={cam} c={v3(920, splitY(i), 60)} w={980} h={170} fog={FOG} opacity={on} z={20}>
-            <Ingredient k={s.k} v={s.v} ev={s.ev} t={t} f={f} />
+          <Plane key={st.k} cam={cam} c={v3(BASE.x + 900, splitY(i), BASE.z + 60)} w={1060} h={180} fog={FOG} opacity={on * (1 - HOUSE(prog(f, C.plan - 12, C.plan)))} z={20}>
+            <Ingredient k={st.k} v={st.v} ev={st.ev} t={t} f={f} />
           </Plane>
         );
       })}
-      {/* the concern: hiding under the score */}
-      <Plane cam={cam} c={v3(920, mix(900, splitY(5), concernT), 60)} w={980} h={170} fog={FOG} opacity={clamp(concernT * 2)} z={20}>
+      <Plane cam={cam} c={v3(BASE.x + 900, mix(900, splitY(5), concernT), BASE.z + 60)} w={1060} h={180} fog={FOG} opacity={clamp(concernT * 2) * (1 - HOUSE(prog(f, C.plan - 12, C.plan)))} z={20}>
         <Ingredient k={CONCERN.k} v={CONCERN.v} ev={CONCERN.ev} t={RESOLVE(prog(f, C.evidence[5], C.evidence[5] + 18))} f={f} />
       </Plane>
-      <Plane cam={cam} c={v3(-260, splitY(5), 0)} w={1100} h={80} opacity={sumT}>
-        <div style={{ ...rec(1, 0, 600), fontSize: 40, color: T.mineral2, textAlign: 'center', whiteSpace: 'nowrap' }}>
-          24 + 21 + 26 + 9 + 12 <span style={{ color: T.heat }}>− 8</span> = <span style={{ color: TEAL }}>84</span>
-        </div>
-      </Plane>
-      {/* BUY, and the cursor drifting toward it */}
-      {f < C.split + 20 ? (
-        <>
-          <Plane cam={cam} c={v3(740, -330, 120)} w={260} h={96} opacity={1 - HOUSE(prog(f, C.split, C.split + 16))}>
-            <div style={{ position: 'absolute', inset: 0, borderRadius: 16, background: f >= C.drop ? 'rgba(242,239,228,0.12)' : T.signal, color: T.carbon, display: 'flex', alignItems: 'center', justifyContent: 'center', ...rec(1, 0, 800), fontSize: 38 }}>BUY</div>
-          </Plane>
-          <Plane cam={cam} c={v3(mix(1080, 800, cursor), mix(-60, -310, cursor), 122)} w={44} h={44} opacity={1 - HOUSE(prog(f, C.drop, C.drop + 10))}>
-            <svg width={44} height={44} viewBox="0 0 24 24">
-              <path d="M3 2l7 19 3-8 8-3z" fill="#fff" stroke="#000" strokeWidth={1} />
-            </svg>
-          </Plane>
-        </>
-      ) : null}
-      {/* the plan: explicit before any consequential step */}
-      <Plane cam={cam} c={PLAN} w={760} h={560} fog={FOG} opacity={planT}>
-        <div style={{ position: 'absolute', inset: 0, borderRadius: 18, background: 'rgba(11,15,15,0.97)', boxShadow: 'inset 0 0 0 2px rgba(242,239,228,0.14)', padding: '30px 36px' }}>
-          <div style={{ ...rec(1, 0, 650), fontSize: 20, letterSpacing: '0.16em', color: T.mineral3, marginBottom: 18 }}>GC · LONG · TRADE PLAN · STRUCTURED</div>
-          {[
-            ['Entry', 'Limit @ 2285'],
-            ['Stop', '2271'],
-            ['Target', '2310'],
-            ['Size', '$4,200'],
-          ].map(([k, v], i) => (
-            <div key={k} style={{ display: 'flex', justifyContent: 'space-between', ...rec(1, 0, 500), fontSize: 36, padding: '10px 0', color: T.mineral, borderBottom: '1px solid rgba(242,239,228,0.08)', opacity: HOUSE(prog(f, C.plan + i * 5, C.plan + 12 + i * 5)) }}>
-              <span style={{ color: T.mineral3 }}>{k}</span>
-              <span>{v}</span>
-            </div>
-          ))}
-          {stampT > 0.01 ? (
-            <div style={{ marginTop: 26, padding: '16px 18px', border: `4px solid ${T.heat}`, color: T.heat, ...rec(1, 0, 800), fontSize: 28, letterSpacing: '0.12em', textAlign: 'center', transform: `rotate(-4deg) scale(${stampT})` }}>LIVE EXECUTION: DISABLED</div>
-          ) : null}
+      <Plane cam={cam} c={v3(BASE.x + 700, splitY(5) + 200, BASE.z + 60)} w={1300} h={90} opacity={sumT}>
+        <div style={{ fontFamily: SERIF, fontSize: 64, color: '#eef2f8', textAlign: 'center', whiteSpace: 'nowrap' }}>
+          24 + 21 + 26 + 9 + 12 <span style={{ color: '#ff6b52' }}>− 8</span> = <span style={{ color: GOLD }}>84</span>
         </div>
       </Plane>
     </>
@@ -189,51 +258,51 @@ const World: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => {
 
 export const Meridian: React.FC = () => {
   const f = useCurrentFrame();
-  const cam = CAM.at(f);
-  const endDim = HOUSE(prog(f, C.end - 10, C.end + 16));
-  const whyT = prog(f, C.why, C.why + 18);
-  const line = (a: number, b: number) => HOUSE(prog(f, a, a + 14)) * (1 - HOUSE(prog(f, b, b + 10)));
+  const { cam, shot, focus } = EDIT.at(f);
+  const tele = ['num', 'buy', 'hover', 'digit', 'monitor', 'dutch'].includes(shot.name);
+  const dof = { focus, aperture: tele ? 1.0 : 0.35 };
   const words: [string, number][] = [
-    ['A confidence score can hide the decision.', line(30, C.why - 6)],
-    ['Conviction, with its ingredients showing.', line(C.split + 30, C.plan - 8)],
+    ['A confidence score can hide the decision.', HOUSE(prog(f, 190, 204)) * (1 - HOUSE(prog(f, C.snares[3] - 8, C.snares[3])))],
+    ['Conviction, with its ingredients showing.', HOUSE(prog(f, C.split + 30, C.split + 44)) * (1 - HOUSE(prog(f, C.plan - 14, C.plan - 4)))],
   ];
-  const TICKER = 'GC 2284.6 ▲   ES 5612.25 ▼   NQ 19840.5 ▲   CL 71.02 ▼   ZN 110.14 ▲   6E 1.0842 ▼   ';
   return (
-    <AbsoluteFill style={{ background: 'radial-gradient(ellipse 90% 70% at 50% 35%, #07110f, #020304 75%)', overflow: 'hidden' }}>
-      <Blur
-        ranges={[
-          [C.split - 2, C.split + 32, 10],
-          [C.evidence[5] + 10, C.plan + 18, 8],
-          [C.pullback, C.pullback + 26, 8],
-        ]}
-      >
-        <AbsoluteFill style={{ filter: `brightness(${1 - 0.72 * endDim}) blur(${5 * endDim}px)` }}>
-          <World f={f} cam={cam} />
-        </AbsoluteFill>
+    <AbsoluteFill style={{ background: '#050a14', overflow: 'hidden' }}>
+      <Blur ranges={[[C.drop, C.split + 26, 8], [C.plan - 14, C.plan + 8, 6], [C.pullback, C.end, 6]]}>
+        <DofCtx.Provider value={dof}>
+          <AbsoluteFill style={{ isolation: 'isolate' }}>
+            <World f={f} cam={cam} />
+          </AbsoluteFill>
+        </DofCtx.Provider>
       </Blur>
-      <AbsoluteFill style={{ opacity: 1 - endDim }}>
-        <div style={{ position: 'absolute', left: 120, top: 92, ...rec(1, 0, 600), fontSize: 20, letterSpacing: '0.2em', color: TEAL }}>MERIDIAN · RESEARCH DESK · DEMO VALUES, NOT A TRADING RECORD</div>
-        <div style={{ position: 'absolute', left: 120, top: 128, ...rec(1, 0, 600), fontSize: 30, color: T.mineral2, opacity: HOUSE(prog(f, 4, 18)) * (1 - HOUSE(prog(f, C.split, C.split + 10))) }}>
-          GC · <span style={{ color: TEAL }}>LONG</span> · Liquidity Sweep Reversal
-        </div>
-        {whyT > 0 && f < C.split + 10 ? (
-          <div style={{ position: 'absolute', right: 160, top: 300, fontFamily: T.serif, fontStyle: 'italic', fontSize: 150, color: T.heat, opacity: 1 - HOUSE(prog(f, C.split, C.split + 10)) }}>{resolveText('    ', 'why?', whyT, 'why', f)}</div>
-        ) : null}
-        {words.map(([w, o]) =>
-          o > 0.002 ? (
-            <div key={w} style={{ position: 'absolute', left: 120, bottom: 110, fontFamily: T.serif, fontStyle: 'italic', fontSize: 72, color: T.mineral, opacity: o, clipPath: `inset(0 ${(1 - o) * 100}% -20% 0)`, textShadow: '0 4px 30px rgba(0,0,0,0.8)' }}>
-              {w}
-            </div>
-          ) : null
-        )}
-        <div style={{ position: 'absolute', left: 0, bottom: 44, whiteSpace: 'nowrap', ...rec(1, 0, 500), fontSize: 24, color: 'rgba(242,239,228,0.3)', transform: `translateX(${-((f * (f < C.split ? 7 : 2)) % 1500)}px)` }}>{TICKER.repeat(6)}</div>
-      </AbsoluteFill>
-      <Flash a={f >= C.split ? 0.16 * Math.exp(-(f - C.split) / 5) : 0} color="62,230,180" />
-      <Flash a={f >= C.stamp ? 0.06 * Math.exp(-(f - C.stamp) / 4) : 0} color="255,87,56" />
-      <EndCard g={g} index="08 / DECISION INTERFACES" title="Meridian" line="Conviction is useful when its ingredients stay visible." accent={TEAL} from={C.end} />
-      <Vignette s={0.6} />
+      <Bokeh n={30} seed="md" colors={['rgba(230,184,92,0.55)', 'rgba(120,160,255,0.35)']} area={[0, 0, 1920, 620]} size={[8, 28]} f={f} a={0.3} />
+      <Glow x={960} y={560} r={1100} color="rgba(59,110,220,0.3)" a={0.5} />
+      <Grade tint={BLUE} a={0.14} />
+      <Letterbox t={['wide', 'dutch', 'lift', 'walk'].includes(shot.name) ? 1 : 0} />
+      {f < C.end ? <div style={{ position: 'absolute', left: 120, top: 88, ...rec(1, 0, 600), fontSize: 20, letterSpacing: '0.2em', color: GOLD, zIndex: 910000 }}>MERIDIAN · RESEARCH DESK · DEMO VALUES</div> : null}
+      {words.map(([w, o]) =>
+        o > 0.002 ? (
+          <div key={w} style={{ position: 'absolute', left: 120, bottom: 110, fontFamily: SERIF, fontSize: 76, color: '#fff', opacity: o, clipPath: `inset(0 ${(1 - o) * 100}% -20% 0)`, textShadow: '0 4px 30px rgba(0,0,0,0.8)', zIndex: 910000 }}>
+            {w}
+          </div>
+        ) : null
+      )}
+      <Flash a={f >= C.split ? 0.16 * Math.exp(-(f - C.split) / 5) : 0} color="230,184,92" />
+      <Flash a={f >= C.stamp ? 0.08 * Math.exp(-(f - C.stamp) / 4) : 0} color="255,87,56" />
+      <BrandEnd
+        g={g}
+        from={C.end}
+        bg={`linear-gradient(135deg, ${NAVY}, ${BLUE})`}
+        accent={GOLD}
+        kicker="THE OPERATING SYSTEM FOR CONVICTION"
+        wipe="left"
+        font={SERIF}
+        logo={<div style={{ fontFamily: SANS, fontSize: 170, fontWeight: 700, letterSpacing: '-0.03em', color: '#fff' }}>Meridian</div>}
+        line="Conviction is useful when its ingredients stay visible."
+      />
+      <Vignette s={0.55} />
       <Grain />
       <Audio src={staticFile('audio/meridian_mix.wav')} />
     </AbsoluteFill>
   );
 };
+

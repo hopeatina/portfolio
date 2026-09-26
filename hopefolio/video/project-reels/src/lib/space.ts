@@ -1,4 +1,5 @@
 import { random } from 'remotion';
+import { noise2D } from '@remotion/noise';
 import { monotone } from './spline';
 
 /**
@@ -122,14 +123,22 @@ export const orbit = (t: Vec3, d: number, yaw: number, pitch: number, roll: numb
   f,
 });
 
-/** [frame, target x, y, z, distance, yaw°, pitch°, roll°] — every channel a monotone cubic (a graph editor). */
-export type Key = [number, number, number, number, number, number, number, number];
-export type Shake = { frames: number[]; tau?: number; punch?: number; px?: number };
+/** Focal length in px for a full-frame lens in mm (36 mm sensor across 1920 px): 18 mm ≈ the old FOCAL. */
+export const mm = (lens: number) => (960 * lens) / 18;
 
-export const keyedCamera = (keys: Key[], shakes: Shake[] = []) => {
+/**
+ * [frame, target x, y, z, distance, yaw°, pitch°, roll°, lens mm?] — every channel a monotone cubic
+ * (a graph editor). The lens channel lets a shot push in on a 35 or pull a dolly-zoom on an 85.
+ */
+export type Key = [number, number, number, number, number, number, number, number, number?];
+export type Shake = { frames: number[]; tau?: number; punch?: number; px?: number };
+/** Handheld: slow noise drift in screen px and degrees of roll (an operator breathing). */
+export type Hand = { px: number; roll?: number; hz?: number };
+
+export const keyedCamera = (keys: Key[], shakes: Shake[] = [], hand?: Hand) => {
   const xs = keys.map((k) => k[0]);
   for (let i = 1; i < xs.length; i++) if (!(xs[i] > xs[i - 1])) throw new Error(`camera keys must be strictly increasing: key ${i} at frame ${xs[i]} follows ${xs[i - 1]}`);
-  const ch = (i: number, m: (v: number) => number = (v) => v) => monotone(xs, keys.map((k) => m(k[i])));
+  const ch = (i: number, m: (v: number) => number = (v) => v, dflt = 0) => monotone(xs, keys.map((k) => m(k[i] ?? dflt)));
   const TX = ch(1);
   const TY = ch(2);
   const TZ = ch(3);
@@ -137,6 +146,7 @@ export const keyedCamera = (keys: Key[], shakes: Shake[] = []) => {
   const YA = ch(5);
   const PI = ch(6);
   const RO = ch(7);
+  const LENS = ch(8, (v) => v, 18);
   const kickAt = (f: number) => {
     let k = 0;
     let p = 0;
@@ -154,13 +164,46 @@ export const keyedCamera = (keys: Key[], shakes: Shake[] = []) => {
     return { k, p, px };
   };
   const at = (f: number): Cam => {
+    const focal = mm(LENS(f));
     let d = Math.exp(LD(f));
     const { k, p, px } = kickAt(f);
     d *= 1 - p * k;
     const fi = Math.floor(f);
-    const u = (d / FOCAL) * px * k;
-    const T = { x: TX(f) + (random(`kx${fi}`) - 0.5) * 2 * u, y: TY(f) + (random(`ky${fi}`) - 0.5) * 1.4 * u, z: TZ(f) };
-    return orbit(T, d, YA(f) * DEG, PI(f) * DEG, RO(f) * DEG);
+    const u = (d / focal) * px * k;
+    let hx = 0;
+    let hy = 0;
+    let hr = 0;
+    if (hand) {
+      const t = (f / 60) * (hand.hz ?? 0.6);
+      const w = d / focal;
+      hx = noise2D('hx', t, 0) * hand.px * w;
+      hy = noise2D('hy', t, 3.1) * hand.px * 0.8 * w;
+      hr = noise2D('hr', t, 7.7) * (hand.roll ?? 0.6);
+    }
+    const T = { x: TX(f) + (random(`kx${fi}`) - 0.5) * 2 * u + hx, y: TY(f) + (random(`ky${fi}`) - 0.5) * 1.4 * u + hy, z: TZ(f) };
+    return orbit(T, d, YA(f) * DEG, PI(f) * DEG, (RO(f) + hr) * DEG, focal);
   };
-  return { at, kickAt: (f: number) => kickAt(f).k };
+  return { at, kickAt: (f: number) => kickAt(f).k, dist: (f: number) => Math.exp(LD(f)) };
+};
+
+/**
+ * An edit: several shots, each its own camera (keys in film frames), hard cuts between them.
+ * A shot runs from its `from` until the next shot's `from`.
+ */
+export type ShotDef = { name: string; from: number; keys: Key[]; kicks?: Shake[]; hand?: Hand };
+export const edit = (shots: ShotDef[]) => {
+  const cams = shots.map((s) => keyedCamera(s.keys, s.kicks, s.hand));
+  const index = (f: number) => {
+    let i = 0;
+    for (let k = 0; k < shots.length; k++) if (f >= shots[k].from) i = k;
+    return i;
+  };
+  return {
+    shots,
+    index,
+    at: (f: number) => {
+      const i = index(f);
+      return { cam: cams[i].at(f), shot: shots[i], i, local: f - shots[i].from, focus: cams[i].dist(f) };
+    },
+  };
 };

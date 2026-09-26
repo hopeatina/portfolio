@@ -3,236 +3,298 @@ import { AbsoluteFill, Img, random, staticFile, useCurrentFrame } from 'remotion
 import { Audio } from '@remotion/media';
 import { HOUSE, TRAVEL, clamp, mix, prog } from '../lib/ease';
 import { GRIDS } from '../lib/grid';
-import { T, rec } from '../lib/theme';
-import { EndCard, Flash, Grain, Vignette } from '../lib/Frame';
-import { Cam, Key, X, Z, keyedCamera, project, v3 } from '../lib/space';
-import { Blur, Box, Fog, Plane } from '../lib/World';
+import { rec } from '../lib/theme';
+import { Flash, Grain, Vignette } from '../lib/Frame';
+import { Cam, Key, X, Z, edit, v3 } from '../lib/space';
+import { Blur, Box, DofCtx, Fog, Plane } from '../lib/World';
+import { Dust, Glow, Grade, Letterbox, ramp } from '../lib/Env';
+import { BrandEnd } from '../lib/BrandEnd';
 import cues from '../data/cues_chaosriders.json';
 
 /**
- * CHAOS RIDERS v2: "Read the road. Find the line. Hold your nerve."
- * Frame 0 is the concept art (labelled: the visual target), pushing in.
- * On the snare the camera flies through it into a true 3D road: red dirt,
- * market stalls, a low-poly taxi. Before the drop the driver fights the road:
- * potholes land on the snares, the taxi jolts and overcorrects. On the drop
- * the golden line draws itself through the field ahead and the run goes into
- * FLOW: faster, every pothole dodged on the beat. Then the camera rises to
- * the captured browser prototype, labelled as the playable build (the case
- * study's rule: target and build always identified). Rewatch: the taxi's
- * plate is the concept art's plate; the golden line is the same route
- * function the prototype's track uses.
+ * CHAOS RIDERS v3: "Read the road."
+ * Golden hour in Yaoundé, and car-chase grammar. Frame 0 is the concept art
+ * (labelled: the visual target), pushing in on the taxi. Match cut: the same
+ * taxi, same framing, now a real 3D car on a red-dirt road through the market.
+ * The driver fights the road: a low front tracking shot, a side track with
+ * stalls whipping past, a bumper cam, Dutch-angle impacts on the snares. Time
+ * slows into the drop as a golden line shimmers onto the road; on the drop it
+ * snaps to full speed: FLOW, every pothole read and missed, a drone shot of the
+ * line threading the field. Then the HUD match-cuts into the captured, playable
+ * browser prototype (target and build always labelled). The golden line in the
+ * concept art is the gameplay line; the taxi's plate is the concept art's.
  */
 const g = GRIDS.chaosriders;
 const C = cues.cue;
 const D = C.drop;
 const GOLD = '#ffb02e';
-const FOG: Fog = { near: 2500, far: 11000 };
-const Z0 = -2600; // where the ride starts, just past the concept art
+const SUN = '#ffcf6a';
+const FOG: Fog = { near: 3000, far: 14000 };
+const Z0 = -2600;
 const ART = v3(0, -420, -1600);
 
-// distance travelled after the ride starts: steady, then FLOW, then parked for the prototype
-const travelled = (f: number) => {
+// world time: slow motion into the drop, then the snap
+const worldT = (f: number) => ramp(f, C.slow, D, 0.35);
+const travelled = (t: number) => {
   let d = 0;
-  for (let k = C.ride; k < Math.min(f, C.proto + 20); k++) d += k < D ? 34 : k < D + 12 ? mix(34, 62, (k - D) / 12) : 62;
+  for (let k = C.match; k < Math.min(t, C.proto + 30); k++) d += k < D - 20 ? 36 : k < D ? 36 : k < D + 10 ? mix(36, 66, (k - D) / 10) : 66;
   return d;
 };
-const zT = (f: number) => Z0 - travelled(f);
-const line = (z: number) => 230 * Math.sin((z - Z0) * 0.0011); // the route through the field
+const zT = (f: number) => Z0 - travelled(worldT(f));
+const line = (z: number) => 230 * Math.sin((z - Z0) * 0.0011);
 const bumpAt = (f: number) => C.bumps.reduce((a, b) => a + (f >= b ? Math.exp(-(f - b) / 5) * Math.sin((f - b) * 1.1) : 0), 0);
 const xT = (f: number) => {
   if (f < D) {
-    // fights the road: overcorrects after every pothole
-    const k = C.bumps.reduce((a, b, i) => a + (f >= b ? (i % 2 ? -1 : 1) * 150 * Math.exp(-(f - b) / 22) * Math.cos((f - b) * 0.16) : 0), 0);
-    return 60 * Math.sin(f * 0.05) + k;
+    const k = C.bumps.reduce((a, b, i) => a + (f >= b ? (i % 2 ? -1 : 1) * 160 * Math.exp(-(f - b) / 22) * Math.cos((f - b) * 0.16) : 0), 0);
+    return 60 * Math.sin(worldT(f) * 0.05) + k;
   }
-  return mix(60 * Math.sin(D * 0.05), line(zT(f) - 300), HOUSE(prog(f, D, D + 20)));
+  return mix(60 * Math.sin(worldT(D) * 0.05), line(zT(f) - 300), HOUSE(prog(f, D, D + 20)));
 };
-// potholes: the ones you hit (before the drop), the ones you read and miss (after)
 const HOLES = [
   ...C.bumps.map((b) => ({ z: zT(b) - 120, x: xT(b) + 20, r: 1 })),
-  ...new Array(26).fill(0).map((_, i) => ({ z: zT(C.ride) - 2200 - i * 900 - random(`hz${i}`) * 400, x: (random(`hx${i}`) - 0.5) * 760, r: 0.7 + random(`hr${i}`) * 0.6 })),
-  ...C.dodges.map((d, i) => ({ z: zT(d) - 140, x: line(zT(d) - 140) + (i % 2 ? 220 : -220), r: 1.2 })),
+  ...new Array(30).fill(0).map((_, i) => ({ z: zT(C.match) - 2200 - i * 900 - random(`hz${i}`) * 400, x: (random(`hx${i}`) - 0.5) * 760, r: 0.7 + random(`hr${i}`) * 0.6 })),
+  ...C.dodges.map((d, i) => ({ z: zT(d) - 140, x: line(zT(d) - 140) + (i % 2 ? 230 : -230), r: 1.2 })),
 ];
-const STALL_COLS = ['#c0392b', '#e67e22', '#f1c40f', '#2980b9', '#27ae60', '#8e44ad'];
+const UMB = ['#e63946', '#f4a261', '#2a9d8f', '#e9c46a', '#457b9d', '#9d4edd'];
 
-const KEYS: Key[] = [
-  // before C.ride targets are absolute; after, z is relative to the taxi (added below)
-  [0, 0, -420, -1600, 1500, 0, 0, 0], // the concept art, square on
-  [C.through - 6, 0, -420, -1600, 820, 0, 0, 0],
-  [C.ride, 0, -110, 0, 900, 0, 12, 0], // through it: behind the taxi
-  [D - 10, 0, -110, 0, 820, 0, 10, 0],
-  [D + 14, 0, -150, -500, 1250, -10, 17, 0], // FLOW: up and over the roof, the line running ahead
-  [C.proto - 4, 0, -150, -500, 1300, -8, 16, 0],
-  [C.proto + 30, 0, -700, -2700, 1700, 0, 3, 0], // up to the playable prototype
-  [900, 0, -700, -2700, 1780, 0, 3, 0],
-];
-const REL = keyedCamera(KEYS, [
-  { frames: C.bumps, tau: 4, punch: 0.03, px: 16 },
-  { frames: [D], tau: 6, punch: 0.06, px: 12 },
-  { frames: C.dodges, tau: 4, punch: 0.01, px: 4 },
+// shots: keys relative to the taxi (added below), except the concept art
+const rel = (from: number, keys: Key[], extra: object = {}) => ({ name: 'rel', from, keys, ...extra });
+const EDIT = edit([
+  { name: 'art', from: 0, keys: [[0, 0, -420, -1600, 1500, 0, 0, 0, 18], [C.match, 0, -470, -1600, 820, 0, 0, 0, 18]] },
+  { ...rel(C.match, [[C.match, 0, -120, 0, 900, 160, 4, 0, 35], [C.bumps[0], 0, -120, 0, 820, 166, 5, 0, 35]], { hand: { px: 5, roll: 0.5 } }), name: 'front' },
+  { ...rel(C.cuts[0], [[C.cuts[0], 0, -110, 0, 820, 92, 2, 0, 35], [C.cuts[1], 0, -110, 0, 760, 86, 2, 0, 35]], { hand: { px: 6, roll: 0.6 }, kicks: [{ frames: [C.bumps[0]], tau: 4, punch: 0.03, px: 18 }] }), name: 'side' },
+  { ...rel(C.cuts[1], [[C.cuts[1], 0, -70, 0, 560, 0, 3, 0, 24], [C.cuts[2], 0, -70, 0, 520, 0, 3, 0, 24]], { hand: { px: 8, roll: 0.4 } }), name: 'bumper' },
+  { ...rel(C.cuts[2], [[C.cuts[2], 0, -120, 0, 760, -32, 10, 12, 35], [C.cuts[3], 0, -120, 0, 720, -26, 9, 10, 35]], { kicks: [{ frames: [C.bumps[1]], tau: 4, punch: 0.04, px: 24 }] }), name: 'impact' },
+  { ...rel(C.cuts[3], [[C.cuts[3], 0, -60, 250, 620, 24, 2, -6, 24], [C.cuts[4], 0, -60, 250, 580, 20, 2, -6, 24]], { kicks: [{ frames: [C.bumps[2]], tau: 3, punch: 0.04, px: 20 }] }), name: 'wheel' },
+  { ...rel(C.cuts[4], [[C.cuts[4], 0, -120, 0, 900, 8, 6, -8, 35], [C.slow, 0, -120, 0, 880, 6, 6, -6, 35]], { kicks: [{ frames: [C.bumps[3]], tau: 4, punch: 0.04, px: 20 }] }), name: 'rear' },
+  { ...rel(C.slow, [[C.slow, 0, -120, 0, 900, 6, 6, 0, 35], [D, 0, -150, -500, 1250, -8, 16, 0, 35]]), name: 'rise' },
+  { ...rel(D, [[D, 0, -150, -500, 1250, -10, 17, 0, 35], [C.drone, 0, -150, -500, 1300, -8, 16, 0, 35]], { kicks: [{ frames: [D], tau: 6, punch: 0.06, px: 12 }] }), name: 'flow' },
+  { ...rel(C.drone, [[C.drone, 0, 0, -700, 3000, 0, 86, 0, 24], [C.side, 0, 0, -900, 3300, 0, 86, 0, 24]]), name: 'drone' },
+  { ...rel(C.side, [[C.side, 0, -110, 0, 950, -78, 3, 0, 35], [C.proto, 0, -110, 0, 900, -84, 3, 0, 35]], { hand: { px: 5, roll: 0.4 }, kicks: [{ frames: C.dodges.slice(4), tau: 4, punch: 0.01, px: 6 }] }), name: 'side2' },
+  { ...rel(C.proto, [[C.proto, 0, -150, -500, 1250, 0, 12, 0, 35], [C.end, 0, -150, -500, 1300, 0, 12, 0, 35]]), name: 'hud' },
 ]);
-const camAt = (f: number): Cam => {
-  const c = REL.at(f);
-  if (f < C.through) return c;
-  const w = HOUSE(prog(f, C.through, C.ride)); // key targets turn taxi-relative across the fly-through
-  const lead = w * (1 - HOUSE(prog(f, C.proto, C.proto + 30)));
-  return { ...c, x: c.x + xT(f) * 0.55 * lead, z: c.z + w * zT(f) };
+const camAt = (f: number) => {
+  const { cam, shot, focus } = EDIT.at(f);
+  if (shot.name === 'art') return { cam, shot, focus };
+  return { cam: { ...cam, x: cam.x + xT(f) * 0.6, z: cam.z + zT(f) } as Cam, shot, focus };
 };
 
 const Taxi: React.FC<{ cam: Cam; f: number }> = ({ cam, f }) => {
   const x = xT(f);
   const z = zT(f);
   const b = bumpAt(f) * 26;
-  const body = '#e2b93b';
-  const plate = (
+  const rear = (
     <div style={{ position: 'absolute', inset: 0 }}>
       <div style={{ position: 'absolute', left: 20, right: 20, top: 16, height: 14, background: '#2a6fb0' }} />
-      <div style={{ position: 'absolute', left: 16, top: 36, width: 46, height: 22, borderRadius: 4, background: '#ff3b2a', boxShadow: f >= D ? 'none' : '0 0 24px #ff3b2a' }} />
-      <div style={{ position: 'absolute', right: 16, top: 36, width: 46, height: 22, borderRadius: 4, background: '#ff3b2a', boxShadow: f >= D ? 'none' : '0 0 24px #ff3b2a' }} />
-      <div style={{ position: 'absolute', left: '50%', top: 34, transform: 'translateX(-50%)', padding: '2px 8px', background: '#f2efe4', ...rec(1, 0, 800), fontSize: 18, color: '#111', whiteSpace: 'nowrap' }}>04 12 81</div>
+      <div style={{ position: 'absolute', left: 16, top: 38, width: 46, height: 22, borderRadius: 4, background: '#ff3b2a', boxShadow: '0 0 24px #ff3b2a' }} />
+      <div style={{ position: 'absolute', right: 16, top: 38, width: 46, height: 22, borderRadius: 4, background: '#ff3b2a', boxShadow: '0 0 24px #ff3b2a' }} />
+      <div style={{ position: 'absolute', left: '50%', top: 36, transform: 'translateX(-50%)', padding: '2px 8px', background: '#f2efe4', ...rec(1, 0, 800), fontSize: 18, color: '#111', whiteSpace: 'nowrap' }}>04 12 81</div>
     </div>
   );
+  const front = (
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <div style={{ position: 'absolute', left: 30, right: 30, top: 18, height: 30, background: 'repeating-linear-gradient(90deg, #2b2b2b 0 8px, #555 8px 12px)' }} />
+      <div style={{ position: 'absolute', left: 12, top: 20, width: 40, height: 30, borderRadius: 8, background: '#fff6d8', boxShadow: '0 0 40px 10px rgba(255,240,190,0.7)' }} />
+      <div style={{ position: 'absolute', right: 12, top: 20, width: 40, height: 30, borderRadius: 8, background: '#fff6d8', boxShadow: '0 0 40px 10px rgba(255,240,190,0.7)' }} />
+      <div style={{ position: 'absolute', left: '50%', top: 56, transform: 'translateX(-50%)', padding: '2px 8px', background: '#f2efe4', ...rec(1, 0, 800), fontSize: 18, color: '#111', whiteSpace: 'nowrap' }}>04 12 81</div>
+    </div>
+  );
+  const hood = <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent 40%, #2a6fb0 40% 60%, transparent 60%)' }} />;
   return (
     <>
-      <Box cam={cam} c={v3(x, -80 - b, z)} size={[300, 96, 560]} color={body} fog={FOG} face={plate} edge="rgba(0,0,0,0.25)" />
-      <Box cam={cam} c={v3(x, -162 - b, z + 30)} size={[250, 72, 290]} color="#cfa42f" fog={FOG} face={<div style={{ position: 'absolute', inset: 8, background: 'rgba(20,30,40,0.85)' }} />} edge="rgba(0,0,0,0.25)" />
-      {[-1, 1].map((sx) =>
-        [-1, 1].map((sz) => <Box key={`${sx}${sz}`} cam={cam} c={v3(x + sx * 150, -40, z + sz * 190)} size={[46, 80, 80]} color="#141414" fog={FOG} edge="rgba(0,0,0,0.3)" />)
-      )}
+      <Box cam={cam} c={v3(x, -82 - b, z)} size={[300, 96, 560]} color="#e2b93b" fog={FOG} face={rear} back={front} top={hood} edge="rgba(0,0,0,0.25)" />
+      <Box cam={cam} c={v3(x, -164 - b, z + 30)} size={[250, 72, 290]} color="#cfa42f" fog={FOG} face={<div style={{ position: 'absolute', inset: 8, background: 'rgba(20,30,40,0.85)' }} />} back={<div style={{ position: 'absolute', inset: 8, background: 'linear-gradient(180deg, rgba(255,210,150,0.5), rgba(20,30,40,0.85))' }} />} edge="rgba(0,0,0,0.25)" />
+      <Box cam={cam} c={v3(x, -214 - b, z + 30)} size={[120, 30, 60]} color="#f2efe4" fog={FOG} face={<div style={{ ...rec(1, 0, 800), fontSize: 20, textAlign: 'center', color: '#111', lineHeight: '30px' }}>TAXI</div>} back={<div style={{ ...rec(1, 0, 800), fontSize: 20, textAlign: 'center', color: '#111', lineHeight: '30px' }}>TAXI</div>} />
+      {[-1, 1].map((sx) => [-1, 1].map((sz) => <Box key={`${sx}${sz}`} cam={cam} c={v3(x + sx * 150, -40, z + sz * 190)} size={[46, 80, 80]} color="#141414" fog={FOG} edge="rgba(0,0,0,0.3)" />))}
     </>
   );
 };
+
+const Stall: React.FC<{ cam: Cam; x: number; z: number; i: number }> = ({ cam, x, z, i }) => {
+  const col = UMB[i % UMB.length];
+  const h = 180 + (i % 3) * 40;
+  return (
+    <>
+      <Box cam={cam} c={v3(x, -h / 2, z)} size={[300, h, 300]} color="#6b4428" fog={FOG} top={<div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(90deg, #e76f51 0 30px, #f4a261 30px 60px, #8ab17d 60px 90px)' }} />} />
+      <Box cam={cam} c={v3(x, -h - 160, z)} size={[12, 320, 12]} color="#3a2a1a" fog={FOG} />
+      <Plane cam={cam} c={v3(x, -h - 320, z)} U={X} V={Z} w={440} h={440} fog={FOG}>
+        <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: `repeating-conic-gradient(${col} 0 30deg, #fff4e0 30deg 60deg)`, boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} />
+      </Plane>
+      {i % 2 === 0 ? (
+        <Plane cam={cam} c={v3(x + (x > 0 ? -210 : 210), -170, z + 40)} w={120} h={340} fog={FOG}>
+          <svg width={120} height={340} viewBox="0 0 120 340">
+            <circle cx={60} cy={40} r={28} fill="#2a1a10" />
+            <path d="M20 90 Q60 60 100 90 L108 250 L12 250 Z" fill={UMB[(i + 2) % UMB.length]} opacity={0.9} />
+            <rect x={30} y={250} width={22} height={90} fill="#2a1a10" />
+            <rect x={68} y={250} width={22} height={90} fill="#2a1a10" />
+          </svg>
+        </Plane>
+      ) : null}
+    </>
+  );
+};
+
+const Palm: React.FC<{ cam: Cam; x: number; z: number }> = ({ cam, x, z }) => (
+  <Plane cam={cam} c={v3(x, -700, z)} w={700} h={1400} fog={FOG}>
+    <svg width={700} height={1400} viewBox="0 0 700 1400">
+      <path d="M350 1400 C340 1000 380 600 360 300" stroke="#5a3d22" strokeWidth={34} fill="none" />
+      {[0, 1, 2, 3, 4, 5].map((k) => (
+        <path key={k} d={`M360 300 Q${200 + k * 60} ${140 + (k % 2) * 60} ${40 + k * 125} ${320 + (k % 3) * 40}`} stroke="#3f7a2c" strokeWidth={40} fill="none" strokeLinecap="round" />
+      ))}
+    </svg>
+  </Plane>
+);
 
 const World: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => {
   const zt = zT(f);
   const seg = 900;
-  const segs = [];
-  for (let k = 0; k < 18; k++) {
-    const zc = Math.floor((zt + 1200) / seg) * seg - k * seg - seg / 2;
+  const segs: number[] = [];
+  for (let k = 0; k < 20; k++) {
+    const zc = Math.floor((zt + 1800) / seg) * seg - k * seg - seg / 2;
     if (zc > -1700) continue;
     segs.push(zc);
   }
-  const flow = HOUSE(prog(f, D, D + 20));
-  const lineReveal = TRAVEL(prog(f, D - 2, D + 26));
-  // the golden line: glowing segments painted on the road (in the world, so the taxi occludes it)
-  const gold: { c: { x: number; y: number; z: number }; a: number; b: number; o: number }[] = [];
-  if (lineReveal > 0)
-    for (let z = zt + 200; z > zt - 9000 * lineReveal; z -= 160) {
+  const reveal = f < C.slow ? 0 : f < D ? 0.12 * prog(f, C.slow, D) : TRAVEL(prog(f, D - 2, D + 24));
+  const gold: { x: number; z: number; a: number; b: number; o: number }[] = [];
+  if (reveal > 0)
+    for (let z = zt + 400; z > zt - 10000 * Math.max(0.08, reveal); z -= 160) {
       const dx = 230 * 0.0011 * Math.cos((z - Z0) * 0.0011) * -160;
       const l = Math.hypot(dx, 160);
-      gold.push({ c: v3(line(z - 80), -3, z - 80), a: dx / l, b: -160 / l, o: clamp((z - (zt - 9000 * lineReveal)) / 800) });
+      gold.push({ x: line(z - 80), z: z - 80, a: dx / l, b: -160 / l, o: f < D ? 0.35 + 0.35 * Math.sin(f / 3 + z / 300) : clamp((z - (zt - 10000 * reveal)) / 900) });
     }
-  const artT = f < C.ride + 4;
-  const protoOn = HOUSE(prog(f, C.proto, C.proto + 20));
+  const artOn = f < C.match + 2;
   return (
     <>
-      {/* the far world */}
-      <Plane cam={cam} c={v3(0, -1500, zt - 11000)} w={14000} h={7800} z={-500000} opacity={f >= C.through - 4 ? 1 : 0}>
-        <Img src={staticFile('img/bamenda-world.webp')} style={{ width: 14000, height: 7800, objectFit: 'cover', filter: 'sepia(0.35) brightness(0.7) blur(3px)' }} />
+      {/* sky, sun, the hills */}
+      <Plane cam={cam} c={v3(0, -3200, zt - 14000)} w={30000} h={9000} z={-500000}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, #6b3a1c 0%, #d9822b 40%, #ffcf6a 62%, #f3a64a 70%, #b8652a 100%)' }} />
       </Plane>
-      {/* the road, in segments */}
+      <Plane cam={cam} c={v3(0, -1600, zt - 13000)} w={16000} h={4400} z={-490000}>
+        <Img src={staticFile('img/bamenda-world.webp')} style={{ width: 16000, height: 4400, objectFit: 'cover', opacity: 0.55, mixBlendMode: 'multiply', filter: 'sepia(0.6) blur(4px)' }} />
+      </Plane>
       {segs.map((zc) => (
         <React.Fragment key={zc}>
-          <Plane cam={cam} c={v3(0, 0, zc)} U={X} V={Z} w={1200} h={seg + 4} z={-400000}>
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, #5a2e14, #9a5428 18%, #a85d2c 50%, #9a5428 82%, #5a2e14)' }} />
-            <div style={{ position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(0deg, rgba(40,18,8,0.18) 0 6px, transparent 6px 60px)' }} />
+          <Plane cam={cam} c={v3(0, 0, zc)} U={X} V={Z} w={1300} h={seg + 4} z={-400000}>
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, #7a3a18, #c46a32 18%, #d4783a 50%, #c46a32 82%, #7a3a18)' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent 30%, rgba(60,25,10,0.3) 34%, transparent 38%, transparent 62%, rgba(60,25,10,0.3) 66%, transparent 70%)' }} />
           </Plane>
-          <Plane cam={cam} c={v3(-1800, 2, zc)} U={X} V={Z} w={2400} h={seg + 4} z={-410000}>
-            <div style={{ position: 'absolute', inset: 0, background: '#3c2414' }} />
+          <Plane cam={cam} c={v3(-2200, 2, zc)} U={X} V={Z} w={3200} h={seg + 4} z={-410000}>
+            <div style={{ position: 'absolute', inset: 0, background: '#8a4e26' }} />
           </Plane>
-          <Plane cam={cam} c={v3(1800, 2, zc)} U={X} V={Z} w={2400} h={seg + 4} z={-410000}>
-            <div style={{ position: 'absolute', inset: 0, background: '#3c2414' }} />
+          <Plane cam={cam} c={v3(2200, 2, zc)} U={X} V={Z} w={3200} h={seg + 4} z={-410000}>
+            <div style={{ position: 'absolute', inset: 0, background: '#8a4e26' }} />
           </Plane>
           {[-1, 1].map((side) => {
             const i = Math.abs(Math.round(zc / seg)) * 2 + (side > 0 ? 1 : 0);
-            const col = STALL_COLS[i % STALL_COLS.length];
-            const h = 220 + (i % 3) * 60;
-            return <Box key={side} cam={cam} c={v3(side * (820 + (i % 2) * 80), -h / 2, zc)} size={[300, h, 380]} color="#2a1a10" fog={FOG} top={<div style={{ position: 'absolute', inset: 0, background: col }} />} face={<div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 60, background: col, opacity: 0.9 }} />} />;
+            return <Stall key={side} cam={cam} x={side * (900 + (i % 2) * 90)} z={zc} i={i} />;
           })}
+          {Math.abs(Math.round(zc / seg)) % 3 === 0 ? <Palm cam={cam} x={(Math.round(zc / seg) % 2 ? 1 : -1) * 1700} z={zc - 300} /> : null}
         </React.Fragment>
       ))}
-      {/* potholes */}
       {HOLES.map((h, i) =>
-        h.z < zt + 800 && h.z > zt - 10000 ? (
-          <Plane key={i} cam={cam} c={v3(h.x, -1, h.z)} U={X} V={Z} w={130 * h.r} h={90 * h.r} z={-300000}>
-            <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'radial-gradient(ellipse, #1a0c05 40%, #3a1c0c 70%, rgba(0,0,0,0) 72%)' }} />
+        h.z < zt + 800 && h.z > zt - 12000 ? (
+          <Plane key={i} cam={cam} c={v3(h.x, -1, h.z)} U={X} V={Z} w={140 * h.r} h={96 * h.r} z={-300000}>
+            <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'radial-gradient(ellipse, #2a1206 40%, #5a2a10 70%, transparent 72%)' }} />
           </Plane>
         ) : null
       )}
       {gold.map((gs, k) => (
-        <Plane key={`g${k}`} cam={cam} c={gs.c} U={v3(gs.b, 0, -gs.a)} V={v3(gs.a, 0, gs.b)} w={34} h={172} z={-250000} opacity={gs.o}>
-          <div style={{ position: 'absolute', inset: 0, borderRadius: 17, background: '#ffe2a0', boxShadow: `0 0 26px 10px ${GOLD}` }} />
+        <Plane key={`g${k}`} cam={cam} c={v3(gs.x, -3, gs.z)} U={v3(gs.b, 0, -gs.a)} V={v3(gs.a, 0, gs.b)} w={36} h={172} z={-250000} opacity={gs.o}>
+          <div style={{ position: 'absolute', inset: 0, borderRadius: 18, background: '#fff0c2', boxShadow: `0 0 30px 12px ${GOLD}` }} />
         </Plane>
       ))}
-      {/* the concept art: the visual target (flown through) */}
-      {artT ? (
+      {artOn ? (
         <Plane cam={cam} c={ART} w={2400} h={1340} z={100000}>
           <Img src={staticFile('img/world-market.webp')} style={{ width: 2400, height: 1340 }} />
         </Plane>
-      ) : null}
-      {f >= C.through - 4 ? <Taxi cam={cam} f={f} /> : null}
-      {/* the playable prototype */}
-      <Plane cam={cam} c={v3(0, -700, zT(C.proto + 20) - 2700)} w={2304} h={1440} opacity={protoOn} z={150000}>
-        <Img src={staticFile('img/prototype-gameplay.png')} style={{ width: 2304, height: 1440, boxShadow: `0 0 120px rgba(255,176,46,0.35)` }} />
-      </Plane>
-      {flow > 0 && f < C.proto
-        ? new Array(14).fill(0).map((_, k) => {
-            const zz = zt - ((f * 90 + k * 400) % 5600);
-            const a = project(cam, v3((k % 2 ? 1 : -1) * (560 + (k % 3) * 60), -60 - (k % 4) * 40, zz));
-            const b = project(cam, v3((k % 2 ? 1 : -1) * (560 + (k % 3) * 60), -60 - (k % 4) * 40, zz - 700));
-            if (a.d < 40 || b.d < 40) return null;
-            return (
-              <svg key={k} width={1920} height={1080} style={{ position: 'absolute', inset: 0, zIndex: 250000 }}>
-                <line x1={a.sx} y1={a.sy} x2={b.sx} y2={b.sy} stroke="rgba(255,217,138,0.5)" strokeWidth={3} />
-              </svg>
-            );
-          })
-        : null}
+      ) : (
+        <Taxi cam={cam} f={f} />
+      )}
     </>
   );
 };
 
+/** The prototype's own HUD, drawn where the real capture has it, so the cut to the capture is a match. */
+const Hud: React.FC<{ f: number; a: number }> = ({ f, a }) => {
+  const secs = 19.39 - (f - C.proto) / 60;
+  return (
+    <AbsoluteFill style={{ opacity: a, zIndex: 905000 }}>
+      <div style={{ position: 'absolute', left: 58, top: 76, ...rec(1, 0, 600), fontSize: 18, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.8)' }}>TIME LEFT</div>
+      <div style={{ position: 'absolute', left: 56, top: 100, ...rec(1, 0, 800), fontSize: 50, color: '#ffc21a', fontVariantNumeric: 'tabular-nums' }}>00:{secs.toFixed(2).padStart(5, '0')}</div>
+      <div style={{ position: 'absolute', right: 60, bottom: 50, width: 150, height: 150, borderRadius: 75, border: '10px solid rgba(255,255,255,0.15)', borderTopColor: GOLD, borderRightColor: GOLD, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', ...rec(1, 0, 800), color: '#fff' }}>
+        <span style={{ fontSize: 56, lineHeight: 1 }}>45</span>
+        <span style={{ fontSize: 14, letterSpacing: '0.1em' }}>KM/H</span>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+const Brand: React.FC<{ size: number }> = ({ size }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: size * 0.2 }}>
+    <svg width={size} height={size} viewBox="0 0 100 100">
+      <circle cx={50} cy={50} r={40} stroke={GOLD} strokeWidth={12} fill="none" />
+      <path d="M30 72 L70 28" stroke={GOLD} strokeWidth={12} strokeLinecap="round" />
+    </svg>
+    <div style={{ fontFamily: 'system-ui, -apple-system, Helvetica Neue, sans-serif', fontWeight: 900, fontStyle: 'italic', fontSize: size * 0.72, letterSpacing: '-0.02em', color: '#ffc21a', lineHeight: 0.9 }}>CHAOS RIDERS</div>
+  </div>
+);
+
 export const ChaosRiders: React.FC = () => {
   const f = useCurrentFrame();
-  const cam = camAt(f);
-  const endDim = HOUSE(prog(f, C.end - 10, C.end + 16));
-  const flowT = HOUSE(prog(f, D, D + 12));
+  const { cam, shot, focus } = camAt(f);
+  const dof = { focus, aperture: shot.name === 'art' ? 0 : shot.name === 'bumper' ? 0 : shot.name === 'drone' || shot.name === 'wheel' ? 0.15 : 0.4 };
+  const slowT = f >= C.slow && f < D ? 1 : 0;
+  const hudA = HOUSE(prog(f, C.proto, C.proto + 8));
+  const capture = HOUSE(prog(f, C.proto + 12, C.proto + 22));
+  const zoomOut = HOUSE(prog(f, C.proto + 24, C.end - 2));
+  const sunX = shot.name === 'front' ? 1500 : shot.name === 'side' || shot.name === 'side2' ? 200 : 960;
   return (
-    <AbsoluteFill style={{ background: 'linear-gradient(180deg, #2a180c, #7a4a24 55%, #3c2010)', overflow: 'hidden' }}>
-      <Blur
-        ranges={[
-          [C.through - 8, C.ride + 6, 10],
-          [D - 2, D + 12, 8],
-          [C.proto, C.proto + 30, 10],
-        ]}
-      >
-        <AbsoluteFill style={{ filter: `brightness(${1 - 0.72 * endDim}) blur(${5 * endDim}px)` }}>
-          <World f={f} cam={cam} />
-        </AbsoluteFill>
+    <AbsoluteFill style={{ background: '#d9822b', overflow: 'hidden' }}>
+      <Blur ranges={[[C.match - 4, C.match + 6, 8], [C.cuts[0], C.cuts[1], 5, 180], [C.side, C.proto, 5, 160]]}>
+        <DofCtx.Provider value={dof}>
+          <AbsoluteFill style={{ isolation: 'isolate', filter: slowT ? 'saturate(1.25) contrast(1.05)' : undefined }}>
+            <World f={f} cam={cam} />
+          </AbsoluteFill>
+        </DofCtx.Provider>
       </Blur>
-      <AbsoluteFill style={{ opacity: 1 - endDim }}>
-        <div style={{ position: 'absolute', left: 120, top: 92, ...rec(1, 0, 600), fontSize: 20, letterSpacing: '0.2em', color: GOLD }}>CHAOS RIDERS · GAME WORLD</div>
-        {f < C.ride ? (
-          <div style={{ position: 'absolute', left: 120, bottom: 100, ...rec(1, 0, 700), fontSize: 20, letterSpacing: '0.2em', color: T.mineral, background: 'rgba(8,8,6,0.6)', padding: '8px 14px' }}>CONCEPT ART · THE VISUAL TARGET · YAOUNDÉ MARKET</div>
-        ) : null}
-        {f >= C.ride && f < D ? (
-          <div style={{ position: 'absolute', left: 120, top: 128, fontFamily: T.serif, fontStyle: 'italic', fontSize: 84, color: T.mineral, opacity: HOUSE(prog(f, C.ride, C.ride + 16)), textShadow: '0 4px 30px rgba(0,0,0,0.6)' }}>
-            {f < 280 ? 'Read the road.' : 'Find the line.'}
+      {shot.name !== 'art' && shot.name !== 'drone' ? (
+        <>
+          <Glow x={sunX} y={380} r={900} color="rgba(255,207,106,0.8)" a={0.65} />
+          <div style={{ position: 'absolute', left: 0, right: 0, top: 360, height: 6, background: `linear-gradient(90deg, transparent, rgba(255,230,170,0.5) ${(sunX / 1920) * 100}%, transparent)`, filter: 'blur(3px)' }} />
+          <Dust n={70} seed="cr" f={f} speed={slowT ? 0.6 : 3} color="rgba(255,210,150,0.9)" a={0.35} />
+        </>
+      ) : null}
+      <Grade tint={SUN} a={0.2} />
+      <Letterbox t={['front', 'side', 'impact', 'rise', 'side2', 'wheel', 'rear', 'bumper'].includes(shot.name) ? 1 : 0} />
+      {/* the playable build: the HUD matches, then the real capture takes over */}
+      {f >= C.proto ? <Hud f={f} a={hudA * (1 - capture)} /> : null}
+      {capture > 0 ? (
+        <AbsoluteFill style={{ opacity: capture, background: '#efeae0', zIndex: 906000 }}>
+          <div style={{ position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transformOrigin: '50% 50%', transform: `scale(${mix(1, 0.8, zoomOut)})` }}>
+            <Img src={staticFile('img/prototype-gameplay.png')} style={{ position: 'absolute', width: mix(2120, 1920 * 0.98, zoomOut), height: mix(1325, 1200 * 0.98, zoomOut), left: mix(-100, 0, zoomOut), top: mix(-171, -60, zoomOut) }} />
           </div>
-        ) : null}
-        {f >= D && f < C.proto ? (
-          <div style={{ position: 'absolute', left: 120, top: 120, fontFamily: T.serif, fontSize: 200, lineHeight: 0.9, color: GOLD, letterSpacing: `${mix(-0.04, 0.12, flowT)}em`, opacity: flowT * (1 - HOUSE(prog(f, C.proto - 12, C.proto))), textShadow: '0 6px 40px rgba(0,0,0,0.5)' }}>FLOW</div>
-        ) : null}
-        {f >= C.proto + 14 ? (
-          <div style={{ position: 'absolute', left: 120, bottom: 100, ...rec(1, 0, 700), fontSize: 22, letterSpacing: '0.16em', color: GOLD, background: 'rgba(8,8,6,0.7)', padding: '8px 14px', opacity: HOUSE(prog(f, C.proto + 14, C.proto + 26)) }}>CAPTURED BROWSER PROTOTYPE · THREE.JS + REACT · PLAYABLE</div>
-        ) : null}
-      </AbsoluteFill>
-      <Flash a={f >= D ? 0.18 * Math.exp(-(f - D) / 5) : 0} color="255,176,46" />
-      <Flash a={C.bumps.reduce((a, b) => a + (f >= b ? 0.05 * Math.exp(-(f - b) / 3) : 0), 0)} />
-      <EndCard g={g} index="07 / GAME WORLD" title="Chaos Riders" line="Cameroon's roads, under your thumb." accent={GOLD} from={C.end} />
-      <Vignette s={0.62} />
-      <Grain opacity={0.08} />
+          <div style={{ position: 'absolute', left: 120, bottom: 80, ...rec(1, 0, 700), fontSize: 22, letterSpacing: '0.16em', color: '#1a1a1a', background: GOLD, padding: '8px 14px', opacity: zoomOut }}>CAPTURED BROWSER PROTOTYPE · THREE.JS + REACT · PLAYABLE</div>
+        </AbsoluteFill>
+      ) : null}
+      {f < C.match ? <div style={{ position: 'absolute', left: 120, bottom: 100, ...rec(1, 0, 700), fontSize: 20, letterSpacing: '0.2em', color: '#fff', background: 'rgba(8,8,6,0.6)', padding: '8px 14px', zIndex: 910000 }}>CONCEPT ART · THE VISUAL TARGET · YAOUNDÉ MARKET</div> : null}
+      {f >= C.match && f < D ? <div style={{ position: 'absolute', left: 120, top: 120, fontFamily: 'Newsreader, Georgia, serif', fontStyle: 'italic', fontSize: 84, color: '#fff', textShadow: '0 4px 30px rgba(80,30,0,0.7)', zIndex: 910000, opacity: HOUSE(prog(f, C.match + 6, C.match + 20)) }}>{f < C.slow ? 'Read the road.' : 'Find the line.'}</div> : null}
+      {f >= D && f < C.proto ? <div style={{ position: 'absolute', left: 120, top: 110, fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: 900, fontStyle: 'italic', fontSize: 190, lineHeight: 0.9, color: '#ffc21a', letterSpacing: `${mix(-0.06, 0.08, HOUSE(prog(f, D, D + 12)))}em`, textShadow: '0 8px 40px rgba(120,40,0,0.6)', zIndex: 910000, opacity: 1 - HOUSE(prog(f, C.drone - 10, C.drone)) }}>FLOW</div> : null}
+      <Flash a={f >= D ? 0.2 * Math.exp(-(f - D) / 5) : 0} color="255,176,46" />
+      <Flash a={C.bumps.reduce((a, b) => a + (f >= b ? 0.06 * Math.exp(-(f - b) / 3) : 0), 0)} />
+      <BrandEnd
+        g={g}
+        from={C.end}
+        bg="linear-gradient(180deg, #2a1206 0%, #7a3a18 55%, #d9822b 100%)"
+        accent={GOLD}
+        kicker="GAME WORLD · YAOUNDÉ"
+        wipe="left"
+        logo={<Brand size={150} />}
+        line="Cameroon's roads, under your thumb."
+      />
+      <Vignette s={0.55} />
+      <Grain opacity={0.07} />
       <Audio src={staticFile('audio/chaosriders_mix.wav')} />
     </AbsoluteFill>
   );
 };
+

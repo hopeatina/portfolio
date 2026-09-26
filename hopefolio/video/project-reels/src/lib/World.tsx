@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import { useCurrentFrame } from 'remotion';
 import { CameraMotionBlur } from '@remotion/motion-blur';
 import { Cam, Vec3, X, Y, Z, placePlane, vadd, vscale } from './space';
 import { clamp } from './ease';
 
 export type Fog = { near: number; far: number };
+
+/** Depth of field for the current shot: planes blur with distance from the focus plane. */
+export type Dof = { focus: number; aperture: number; max?: number };
+export const DofCtx = createContext<Dof | null>(null);
+const dofBlur = (dof: Dof | null, d: number) => (dof && dof.aperture > 0 ? Math.min(dof.max ?? 14, dof.aperture * Math.abs(1 - dof.focus / Math.max(1, d)) * 10) : 0);
 
 /**
  * One planar element in the film's world. Depth-sorted by zIndex (painter's
@@ -21,9 +26,11 @@ export const Plane: React.FC<{
   oneSided?: boolean;
   z?: number;
   opacity?: number;
+  noDof?: boolean;
   style?: React.CSSProperties;
   children?: React.ReactNode;
-}> = ({ cam, c, U = X, V = Y, w, h, fog, oneSided, z = 0, opacity = 1, style, children }) => {
+}> = ({ cam, c, U = X, V = Y, w, h, fog, oneSided, z = 0, opacity = 1, noDof, style, children }) => {
+  const dof = useContext(DofCtx);
   if (opacity <= 0.002) return null;
   const p = placePlane(cam, c, U, V, w, h);
   if (!p || (oneSided && p.back)) return null;
@@ -40,6 +47,8 @@ export const Plane: React.FC<{
         transform: p.transform,
         zIndex: Math.round(200000 - p.d * 4) + z,
         opacity: opacity * (1 - dim * 0.92),
+        // a CSS filter on a very large layer exceeds Chrome's texture limit and drops the plane: skip DOF there
+        ...(!noDof && w * h < 8e6 && dofBlur(dof, p.d) > 0.4 ? { filter: `blur(${dofBlur(dof, p.d).toFixed(1)}px)` } : {}),
         ...style,
       }}
     >
@@ -59,15 +68,16 @@ export const Box: React.FC<{
   color: string;
   fog?: Fog;
   face?: React.ReactNode;
+  back?: React.ReactNode;
   top?: React.ReactNode;
   edge?: string;
   opacity?: number;
   z?: number;
-}> = ({ cam, c, size, color, fog, face, top, edge = 'rgba(242,239,228,0.18)', opacity = 1, z = 0 }) => {
+}> = ({ cam, c, size, color, fog, face, back, top, edge = 'rgba(242,239,228,0.18)', opacity = 1, z = 0 }) => {
   const [w, h, d] = size;
   const faces: { c: Vec3; U: Vec3; V: Vec3; w: number; h: number; shade: number; content?: React.ReactNode }[] = [
     { c: vadd(c, vscale(Z, d / 2)), U: X, V: Y, w, h, shade: 1, content: face },
-    { c: vadd(c, vscale(Z, -d / 2)), U: vscale(X, -1), V: Y, w, h, shade: 0.55 },
+    { c: vadd(c, vscale(Z, -d / 2)), U: vscale(X, -1), V: Y, w, h, shade: 0.55, content: back },
     { c: vadd(c, vscale(X, w / 2)), U: vscale(Z, -1), V: Y, w: d, h, shade: 0.72 },
     { c: vadd(c, vscale(X, -w / 2)), U: Z, V: Y, w: d, h, shade: 0.62 },
     { c: vadd(c, vscale(Y, -h / 2)), U: X, V: Z, w, h: d, shade: 1.18, content: top },

@@ -20,7 +20,7 @@ export default function BrainBuffetPage() {
         src: "/video/reels/brainbuffet.mp4",
         poster: "/video/reels/brainbuffet.jpg",
         label: "Project film · A buffet, not a search box",
-        caption: "An answer is a snack on a saucer. A learner plates one choice per beat, and the tray stands up into a course.",
+        caption: "An answer is a snack on a saucer. Under BrainBuffet’s smiling host, a learner plates one choice per beat, and the tray stands up into a course.",
         score: "“Feeling” by Hope Atina",
       }}
       heroProof={{

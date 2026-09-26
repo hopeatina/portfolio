@@ -1,35 +1,255 @@
 {
-  "cue": {
-    "glow": [8, 47, 96, 145, 194, 242],
-    "lift": [23, 72, 120, 169, 218, 266],
-    "gather": 315,
-    "drop": 399,
-    "code": [446, 461, 485, 510, 534, 558],
-    "version": 582,
-    "run": 616,
-    "attach": 666,
-    "end": 706,
-    "button": 782
-  },
-  "sfx": [
-    ["glow", "tick", -26, null, {"st": 7, "spread": [-0.3, 0.3]}],
-    ["lift", "metal", -20, null, {"st": 9, "spread": [-0.4, 0.4], "ramp": 0.5}],
-    ["lift", "air_in", -26, null, {"len": 0.22, "f0": 1500, "f1": 9000, "spread": [-0.4, 0.4]}],
-    ["lift", "glint", -32, null, {"len": 0.3}],
-    ["gather", "riser", -24, null, {"len": 1.4}],
-    ["drop", "whump", -5, null, {"duck": 3}],
-    ["drop", "drop_sub", -10, null],
-    ["drop", "chord", -17, null, {"len": 3.0}],
-    ["drop", "pass", -20, null, {"len": 1.3, "f0": 400, "f1": 3200, "p0": -0.7, "p1": 0.7}],
-    ["code", "key", -26, 0.3, {"jit": 3}],
-    ["version", "stamp", -17, 0.2],
-    ["run", "bell", -24, 0.4, {"deg": 4}],
-    ["run", "bell", -26, 0.4, {"deg": 7, "off": 8}],
-    ["run", "bell", -28, 0.4, {"deg": 9, "off": 16}],
-    ["attach", "metal", -20, 0, {"st": 12}],
-    ["attach", "bell", -24, 0, {"deg": 11}],
-    ["attach", "pass", -24, null, {"len": 0.7, "f0": 2400, "f1": 500, "p0": 0.6, "p1": -0.6}],
-    ["button", "whump", -15, null],
-    ["button", "chord", -21, null, {"len": 3.4}]
+ "cue": {
+  "glow": [
+   8,
+   47,
+   96,
+   145,
+   194,
+   242
+  ],
+  "lift": [
+   23,
+   72,
+   120,
+   169,
+   218,
+   266
+  ],
+  "gather": 315,
+  "drop": 399,
+  "code": [
+   446,
+   461,
+   485,
+   510,
+   534,
+   558
+  ],
+  "version": 582,
+  "run": 616,
+  "attach": 666,
+  "end": 706,
+  "button": 782,
+  "form": 368
+ },
+ "sfx": [
+  [
+   "glow",
+   "tick",
+   -26,
+   null,
+   {
+    "st": 7,
+    "spread": [
+     -0.3,
+     0.3
+    ]
+   }
+  ],
+  [
+   "lift",
+   "metal",
+   -20,
+   null,
+   {
+    "st": 9,
+    "spread": [
+     -0.4,
+     0.4
+    ],
+    "ramp": 0.5
+   }
+  ],
+  [
+   "lift",
+   "air_in",
+   -26,
+   null,
+   {
+    "len": 0.22,
+    "f0": 1500,
+    "f1": 9000,
+    "spread": [
+     -0.4,
+     0.4
+    ]
+   }
+  ],
+  [
+   "lift",
+   "glint",
+   -32,
+   null,
+   {
+    "len": 0.3
+   }
+  ],
+  [
+   "gather",
+   "riser",
+   -24,
+   null,
+   {
+    "len": 1.4
+   }
+  ],
+  [
+   "drop",
+   "whump",
+   -5,
+   null,
+   {
+    "duck": 3
+   }
+  ],
+  [
+   "drop",
+   "drop_sub",
+   -10,
+   null
+  ],
+  [
+   "drop",
+   "chord",
+   -17,
+   null,
+   {
+    "len": 3.0
+   }
+  ],
+  [
+   "drop",
+   "pass",
+   -20,
+   null,
+   {
+    "len": 1.3,
+    "f0": 400,
+    "f1": 3200,
+    "p0": -0.7,
+    "p1": 0.7
+   }
+  ],
+  [
+   "code",
+   "key",
+   -26,
+   0.3,
+   {
+    "jit": 3
+   }
+  ],
+  [
+   "version",
+   "stamp",
+   -17,
+   0.2
+  ],
+  [
+   "run",
+   "bell",
+   -24,
+   0.4,
+   {
+    "deg": 4
+   }
+  ],
+  [
+   "run",
+   "bell",
+   -26,
+   0.4,
+   {
+    "deg": 7,
+    "off": 8
+   }
+  ],
+  [
+   "run",
+   "bell",
+   -28,
+   0.4,
+   {
+    "deg": 9,
+    "off": 16
+   }
+  ],
+  [
+   "attach",
+   "metal",
+   -20,
+   0,
+   {
+    "st": 12
+   }
+  ],
+  [
+   "attach",
+   "bell",
+   -24,
+   0,
+   {
+    "deg": 11
+   }
+  ],
+  [
+   "attach",
+   "pass",
+   -24,
+   null,
+   {
+    "len": 0.7,
+    "f0": 2400,
+    "f1": 500,
+    "p0": 0.6,
+    "p1": -0.6
+   }
+  ],
+  [
+   "button",
+   "whump",
+   -15,
+   null
+  ],
+  [
+   "button",
+   "chord",
+   -21,
+   null,
+   {
+    "len": 3.4
+   }
+  ],
+  [
+   "form",
+   "glint",
+   -22,
+   null,
+   {
+    "len": 0.6
+   }
+  ],
+  [
+   "form",
+   "bell",
+   -24,
+   0,
+   {
+    "deg": 7,
+    "len": 1.6
+   }
+  ],
+  [
+   "form",
+   "bell",
+   -27,
+   0,
+   {
+    "deg": 9,
+    "len": 1.6,
+    "off": 6
+   }
   ]
+ ]
 }
