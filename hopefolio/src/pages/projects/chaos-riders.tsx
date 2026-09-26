@@ -19,8 +19,8 @@ export default function ChaosRidersPage() {
       heroReel={{
         src: "/video/reels/chaosriders.mp4",
         poster: "/video/reels/chaosriders.jpg",
-        label: "Project film · Read the road",
-        caption: "From the concept art to the road at golden hour: potholes on the snares, then the golden line into flow, then the captured playable prototype.",
+        label: "Project film · It looked like Lego",
+        caption: "The first taxi looked like Lego. The rebuild is the real Survivor, rendered from its saved Blender geometry, then the fleet, then captured gameplay from the live demo: find the line through the pothole field and hold your nerve. The Blender models aren’t in the game build yet; the demo still drives the older car.",
         score: "“Drvn” by Hope Atina",
       }}
       heroProof={{

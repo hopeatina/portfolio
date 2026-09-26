@@ -83,6 +83,12 @@ const frameOn = (n: Vec3, spin: number) => {
   return { p: v3(M.x + nn.x * R, M.y + nn.y * R, M.z + nn.z * R), U: Math.hypot(U.x, U.y, U.z) < 0.01 ? X : U, V };
 };
 const spinAt = (f: number) => (f - C.gather) * 0.012;
+/** Rewatch layer: for 7 frames the five shell tiles nearest the lens spell DEPTH, left to right. */
+const DEPTH_AT = (f: number, spin: number): Record<number, string> => {
+  if (f < C.form + 8 || f >= C.form + 15) return {};
+  const near = shell.map((sh, k) => ({ k, p: frameOn(sh.n, spin).p })).sort((a, b) => b.p.z - a.p.z).slice(0, 5).sort((a, b) => a.p.x - b.p.x);
+  return Object.fromEntries(near.map((n, i) => [n.k, 'DEPTH'[i]]));
+};
 const CELL = 104;
 const cellPos = (k: number) => v3(-2300 + k * (CELL + 10), -1150, -300);
 const NCELL = 6 + NT;
@@ -213,6 +219,7 @@ const World: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => {
       </Plane>
       {/* shards → the sphere → cells of the vector */}
       {shell.map((s, k) => {
+        const letter = DEPTH_AT(f, spin)[k];
         const src = k % 6;
         const born = C.lift[src];
         if (f < born) return null;
@@ -227,7 +234,7 @@ const World: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => {
         const hue = [VIO, BLUE, MAG][k % 3];
         return (
           <Plane key={k} cam={cam} c={p} U={U} V={V} w={mix(200, CELL, enc)} h={mix(150, CELL, enc)} fog={FOG} opacity={clamp(out * 3) * (1 - 0.65 * formT * (1 - enc))}>
-            <div style={{ position: 'absolute', inset: 0, borderRadius: 14, background: `linear-gradient(${(k * 47) % 360}deg, ${hue}, #1b1433 70%, ${MAG})`, boxShadow: `inset 0 0 0 2px rgba(255,255,255,${0.15 + 0.25 * formT})`, display: 'flex', alignItems: 'center', justifyContent: 'center', ...rec(1, 0, 600), fontSize: 20, color: enc > 0.6 ? '#fff' : 'transparent' }}>{((random(`v${k}`) - 0.5) * 2).toFixed(2)}</div>
+            <div style={{ position: 'absolute', inset: 0, borderRadius: 14, background: `linear-gradient(${(k * 47) % 360}deg, ${hue}, #1b1433 70%, ${MAG})`, boxShadow: `inset 0 0 0 2px rgba(255,255,255,${0.15 + 0.25 * formT})`, display: 'flex', alignItems: 'center', justifyContent: 'center', ...rec(1, 0, 600), fontSize: letter ? 64 : 20, fontWeight: letter ? 800 : undefined, color: letter ? 'rgba(255,255,255,0.9)' : enc > 0.6 ? '#fff' : 'transparent' }}>{letter ?? ((random(`v${k}`) - 0.5) * 2).toFixed(2)}</div>
           </Plane>
         );
       })}

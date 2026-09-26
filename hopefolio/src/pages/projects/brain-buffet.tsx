@@ -19,8 +19,8 @@ export default function BrainBuffetPage() {
       heroReel={{
         src: "/video/reels/brainbuffet.mp4",
         poster: "/video/reels/brainbuffet.jpg",
-        label: "Project film · A buffet, not a search box",
-        caption: "An answer is a snack on a saucer. Under BrainBuffet’s smiling host, a learner plates one choice per beat, and the tray stands up into a course.",
+        label: "Project film · From a question to a course",
+        caption: "One answer isn’t a subject. The real create flow, part by part: expertise that skips what you know, subtopics you choose, a quiz that finds where your knowledge stops, a preview of what you’ll be able to do, and a chapter that remembers your notes. A question to a course plan in under five minutes.",
         score: "“Feeling” by Hope Atina",
       }}
       heroProof={{

@@ -1,0 +1,372 @@
+{
+ "perfpulse": {
+  "track": "tues",
+  "file": "music/1263392470_tues.wav",
+  "bpm": 140.08,
+  "anchor": 54.45,
+  "beats": 35,
+  "ops": [
+   {
+    "at": 0,
+    "src": 8,
+    "beats": 2.3,
+    "stop": 0.5,
+    "fin": 0.002
+   },
+   {
+    "at": 4.2,
+    "src": 6,
+    "beats": 1.8,
+    "rev": true,
+    "gain": -3,
+    "hp": [
+     300,
+     1200
+    ]
+   },
+   {
+    "at": 6,
+    "src": -32,
+    "beats": 8,
+    "lp": [
+     420,
+     2400
+    ],
+    "fin": 0.3
+   },
+   {
+    "at": 14,
+    "src": -4,
+    "beats": 1,
+    "stutter": 4,
+    "hp": [
+     200,
+     2000
+    ],
+    "gain": -2
+   },
+   {
+    "at": 16,
+    "src": 0,
+    "beats": 12.5,
+    "fout": 0.03
+   }
+  ],
+  "button": 28,
+  "button_src": 12,
+  "markers": {
+   "freeze": 1.75,
+   "rewind": 4.2,
+   "inside": 6,
+   "notify": 15,
+   "drop": 16,
+   "stop": 22,
+   "out": 25,
+   "end": 28
+  }
+ },
+ "alma": {
+  "track": "kdila",
+  "file": "music/1283128960_kdila.wav",
+  "bpm": 110.06,
+  "anchor": 17.006,
+  "beats": 27.5,
+  "ops": [
+   {
+    "at": 0,
+    "src": -28,
+    "beats": 8,
+    "lp": [
+     1400,
+     380
+    ],
+    "fin": 0.02
+   },
+   {
+    "at": 8,
+    "src": -4,
+    "beats": 1.75,
+    "stutter": 2,
+    "hp": [
+     250,
+     2600
+    ],
+    "gain": -2
+   },
+   {
+    "at": 10,
+    "src": 0,
+    "beats": 12.5,
+    "fout": 0.03
+   }
+  ],
+  "button": 22,
+  "button_src": 12,
+  "markers": {
+   "pile": 0,
+   "dash": 5,
+   "sprint": 8,
+   "drop": 10,
+   "flagged": 12,
+   "hub": 14,
+   "wire": 18,
+   "outcome": 20.5,
+   "end": 22
+  }
+ },
+ "meridian": {
+  "track": "montay",
+  "file": "music/990019960_montay.wav",
+  "bpm": 147.85,
+  "anchor": 79.645,
+  "beats": 37,
+  "ops": [
+   {
+    "at": 0,
+    "src": -32,
+    "beats": 8.2,
+    "stop": 0.12,
+    "fin": 0.02
+   },
+   {
+    "at": 10.5,
+    "src": -4,
+    "beats": 1.5,
+    "rev": true,
+    "gain": -3
+   },
+   {
+    "at": 12,
+    "src": -8,
+    "beats": 8,
+    "lp": [
+     900,
+     9000
+    ]
+   },
+   {
+    "at": 20,
+    "src": 0,
+    "beats": 8.4,
+    "fout": 0.03
+   }
+  ],
+  "button": 28,
+  "button_src": 8,
+  "markers": {
+   "usual": 0,
+   "buy": 8,
+   "cpi": 9,
+   "why": 10.5,
+   "replay": 12,
+   "stack": 13,
+   "concern": 17,
+   "drop": 20,
+   "cpi2": 22,
+   "record": 24,
+   "honest": 26.5,
+   "end": 28
+  }
+ },
+ "brainbuffet": {
+  "track": "feeling",
+  "file": "music/1239284911_feeling.wav",
+  "bpm": 115.07,
+  "anchor": 10.538,
+  "beats": 28.8,
+  "ops": [
+   {
+    "at": 0,
+    "src": -20,
+    "beats": 4,
+    "hp": [
+     500,
+     180
+    ],
+    "fin": 0.02
+   },
+   {
+    "at": 4,
+    "src": -8,
+    "beats": 8,
+    "lp": [
+     1600,
+     12000
+    ]
+   },
+   {
+    "at": 12,
+    "src": 0,
+    "beats": 11.4,
+    "fout": 0.03
+   }
+  ],
+  "button": 23,
+  "button_src": 11,
+  "markers": {
+   "hook": 0,
+   "landing": 4,
+   "c1": 6,
+   "c2": 8,
+   "c3": 10,
+   "drop": 12,
+   "mountain": 14,
+   "study": 16,
+   "notes": 18,
+   "outcome": 20,
+   "end": 23
+  }
+ },
+ "chaosriders": {
+  "track": "drvn",
+  "file": "music/1310557633_drvn.wav",
+  "bpm": 143.63,
+  "anchor": 70.263,
+  "beats": 35.9,
+  "ops": [
+   {
+    "at": 0,
+    "src": -4,
+    "beats": 3.5,
+    "lp": [
+     700,
+     500
+    ],
+    "stop": 0.35,
+    "fin": 0.02
+   },
+   {
+    "at": 4,
+    "src": -24,
+    "beats": 11,
+    "hp": [
+     40,
+     40
+    ]
+   },
+   {
+    "at": 15,
+    "src": -5,
+    "beats": 1,
+    "rev": true,
+    "gain": -2
+   },
+   {
+    "at": 16,
+    "src": 0,
+    "beats": 12.4,
+    "fout": 0.03
+   }
+  ],
+  "button": 28,
+  "button_src": 12,
+  "markers": {
+   "lego": 0,
+   "rebuild": 4,
+   "panels": 6,
+   "glazing": 8,
+   "paint": 10,
+   "fleet": 12,
+   "needle": 12.5,
+   "tank": 13.5,
+   "line": 15,
+   "drop": 16,
+   "flow": 20,
+   "nerve": 24,
+   "end": 28
+  }
+ },
+ "openclaw": {
+  "track": "ravioli",
+  "file": "music/1191958234_ravioli.wav",
+  "bpm": 156.8,
+  "anchor": 12.331,
+  "beats": 39.2,
+  "ops": [
+   {
+    "at": 0,
+    "src": -32,
+    "beats": 9,
+    "fin": 0.02
+   },
+   {
+    "at": 9,
+    "src": 0,
+    "beats": 17
+   },
+   {
+    "at": 26,
+    "src": 17,
+    "beats": 2.5,
+    "lp": [
+     700,
+     380
+    ],
+    "gain": -2
+   },
+   {
+    "at": 28.5,
+    "src": 19.5,
+    "beats": 3.7,
+    "fout": 0.03
+   }
+  ],
+  "button": 32,
+  "button_src": 23,
+  "markers": {
+   "day1": 0.6,
+   "day2": 3,
+   "day3": 5,
+   "day4": 7,
+   "drop": 9,
+   "items": 11.5,
+   "day5": 13.5,
+   "dive": 15,
+   "t2": 17.5,
+   "t3": 20,
+   "t4": 22.5,
+   "t5": 24.5,
+   "storm": 26,
+   "reconnect": 28.5,
+   "pull": 30.5,
+   "end": 32
+  }
+ },
+ "neuromosaic": {
+  "track": "macros",
+  "file": "music/912648628_macros.wav",
+  "bpm": 147.66,
+  "anchor": 6.356,
+  "beats": 37,
+  "ops": [
+   {
+    "at": 0,
+    "src": -16.4,
+    "beats": 14.8,
+    "lp": [
+     5000,
+     1400
+    ],
+    "fin": 0.02
+   },
+   {
+    "at": 14.8,
+    "src": -1.5,
+    "beats": 1.5,
+    "rev": true,
+    "gain": -2
+   },
+   {
+    "at": 16.3,
+    "src": 0,
+    "beats": 16.2,
+    "fout": 0.03
+   }
+  ],
+  "button": 32.0,
+  "button_src": 15.7,
+  "markers": {
+   "drop": 16.3
+  }
+ }
+}

@@ -1,4 +1,4 @@
-"""Measured drum hits per film (reel frames @60) from the mastered cut.
+"""Measured (kick/snare/hat by band flux, note = harmonic onsets via HPSS) drum hits per film (reel frames @60) from the mastered cut.
 kick = 30-150 Hz flux, snare = 150-2500 Hz, hat = 5-16 kHz. Writes src/data/hits_<proj>.json"""
 import sys, json, numpy as np, librosa
 proj = sys.argv[1]
@@ -11,8 +11,11 @@ out = {}
 for name, (a, b, thr, gap) in {'kick': (30, 150, 0.28, 10), 'snare': (150, 2500, 0.3, 14), 'hat': (5000, 16000, 0.3, 4)}.items():
     e = flux(a, b)
     pk = librosa.util.peak_pick(e, pre_max=6, post_max=6, pre_avg=14, post_avg=14, delta=0.06, wait=gap * 4)
-    out[name] = [[round(p * hop / sr * 60, 1), round(float(e[p]), 2)] for p in pk if e[p] >= thr and p * hop / sr < 14.4]
+    out[name] = [[round(p * hop / sr * 60, 1), round(float(e[p]), 2)] for p in pk if e[p] >= thr and p * hop / sr < len(y) / sr - 0.3]
 rms = librosa.feature.rms(y=y, hop_length=hop)[0]
-out['energy'] = [round(float(v), 3) for v in np.interp(np.arange(0, 900, 15), np.arange(len(rms)) * hop / sr * 60, rms / rms.max())]
+yh, _ = librosa.effects.hpss(y)
+on = librosa.onset.onset_detect(y=yh, sr=sr, hop_length=hop, backtrack=False, units='time', delta=0.12, wait=8)
+out['note'] = [round(t * 60, 1) for t in on if t < len(y) / sr - 0.3]
+out['energy'] = [round(float(v), 3) for v in np.interp(np.arange(0, int(len(y) / sr * 60), 15), np.arange(len(rms)) * hop / sr * 60, rms / rms.max())]
 json.dump(out, open(f'src/data/hits_{proj}.json', 'w'))
 print(proj, {k: len(v) for k, v in out.items() if k != 'energy'})

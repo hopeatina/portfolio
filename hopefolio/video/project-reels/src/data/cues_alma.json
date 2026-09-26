@@ -1,50 +1,291 @@
 {
-  "cue": {
-    "click": 14,
-    "loads": [48, 146, 180, 279, 312],
-    "clock": [279, 296],
-    "knock": 346,
-    "black": 380,
-    "type": [384, 392, 400, 407],
-    "drop": 414,
-    "crane": 426,
-    "fall": [436, 442, 448, 454, 460],
-    "stamps": [478, 511, 542, 560],
-    "fail": 493,
-    "retry": 577,
-    "flagOff": 610,
-    "flagOn": 674,
-    "up": 692,
-    "lid": 732,
-    "end": 750,
-    "button": 793
-  },
-  "sfx": [
-    ["click", "click", -12, 0.2],
-    ["click", "thup", -24, 0.2],
-    ["loads", "metal", -24, 0.1, {"st": -7, "ramp": 1.0}],
-    ["loads", "whump_lo", -18, null, {"len": 0.35, "fc": 260, "ramp": 1.5}],
-    ["clock", "clock", -20, 0.3, {"st": -2}],
-    ["knock", "knock", -6, 0.5],
-    ["black", "whump_lo", -14, null, {"len": 0.6, "fc": 180}],
-    ["type", "key", -18, 0],
-    ["drop", "click", -10, 0.2],
-    ["drop", "whump", -5, null, {"duck": 3}],
-    ["drop", "chord", -16, null, {"len": 3.0}],
-    ["crane", "pass", -18, null, {"len": 0.7, "f0": 2400, "f1": 300, "p0": 0, "p1": 0}],
-    ["fall", "whump_lo", -18, null, {"len": 0.35, "fc": 300, "spread": [-0.6, 0.6]}],
-    ["stamps", "stamp", -15, null, {"spread": [-0.4, 0.4]}],
-    ["stamps", "bell", -30, null, {"deg": 4, "spread": [-0.4, 0.4]}],
-    ["fail", "glitch", -19, 0.3, {"len": 0.14}],
-    ["retry", "stamp", -14, 0.2],
-    ["retry", "bell", -26, 0.2, {"deg": 9}],
-    ["flagOff", "thup", -12, -0.3],
-    ["flagOff", "metal", -20, -0.3, {"st": -5}],
-    ["flagOn", "thup", -12, -0.3],
-    ["flagOn", "metal", -20, -0.3, {"st": 7}],
-    ["up", "pass", -20, null, {"len": 0.8, "f0": 300, "f1": 2200, "p0": 0, "p1": 0}],
-    ["lid", "lid", -12, 0],
-    ["button", "whump", -14, null],
-    ["button", "chord", -20, null, {"len": 3.4}]
+ "cue": {
+  "cal": [
+   33,
+   65,
+   98,
+   131,
+   164
+  ],
+  "dash": 164,
+  "rows": [
+   174,
+   185,
+   196,
+   207,
+   218,
+   229,
+   240,
+   251
+  ],
+  "sprint": 262,
+  "sprint2": 278,
+  "nodes": [
+   300,
+   306
+  ],
+  "drop": 327,
+  "above": 404,
+  "card": 418,
+  "checks": [
+   430,
+   438,
+   446,
+   454
+  ],
+  "hub": 458,
+  "tip": 476,
+  "note": 512,
+  "nchecks": [
+   528,
+   536,
+   544
+  ],
+  "passed": 554,
+  "wire": 589,
+  "quiet": 615,
+  "alert": 619,
+  "poll": 623,
+  "outcome": 671,
+  "end": 720,
+  "button": 720
+ },
+ "sfx": [
+  [
+   "cal",
+   "tick",
+   -26,
+   0.3,
+   {
+    "st": -5,
+    "spread": [
+     -0.4,
+     0.4
+    ]
+   }
+  ],
+  [
+   30,
+   "air_out",
+   -24,
+   null,
+   {
+    "len": 1.6,
+    "f0": 3000,
+    "f1": 300
+   }
+  ],
+  [
+   "dash",
+   "thup",
+   -18,
+   0.2
+  ],
+  [
+   "rows",
+   "key",
+   -32,
+   0.3
+  ],
+  [
+   "sprint",
+   "stamp",
+   -14,
+   -0.2
+  ],
+  [
+   "sprint2",
+   "stamp",
+   -14,
+   0.2
+  ],
+  [
+   "nodes",
+   "click",
+   -20,
+   null,
+   {
+    "spread": [
+     -0.4,
+     0.4
+    ]
+   }
+  ],
+  [
+   287,
+   "riser",
+   -20,
+   null,
+   {
+    "len": 0.7
+   }
+  ],
+  [
+   "drop",
+   "whump",
+   -5,
+   null,
+   {
+    "duck": 3
+   }
+  ],
+  [
+   "drop",
+   "drop_sub",
+   -10,
+   null
+  ],
+  [
+   "drop",
+   "pass",
+   -16,
+   null,
+   {
+    "len": 1.2,
+    "f0": 300,
+    "f1": 5000,
+    "p0": 0,
+    "p1": 0
+   }
+  ],
+  [
+   "drop",
+   "chord",
+   -19,
+   null,
+   {
+    "len": 2.6
+   }
+  ],
+  [
+   "above",
+   "glint",
+   -26,
+   0
+  ],
+  [
+   "card",
+   "thup",
+   -16,
+   0
+  ],
+  [
+   "checks",
+   "click",
+   -20,
+   0.2
+  ],
+  [
+   "hub",
+   "air_in",
+   -22,
+   null,
+   {
+    "len": 0.3
+   }
+  ],
+  [
+   "tip",
+   "bell",
+   -26,
+   0.3,
+   {
+    "deg": 4
+   }
+  ],
+  [
+   "note",
+   "thup",
+   -20,
+   -0.2
+  ],
+  [
+   "nchecks",
+   "click",
+   -18,
+   null,
+   {
+    "spread": [
+     -0.3,
+     0.3
+    ]
+   }
+  ],
+  [
+   "passed",
+   "bell",
+   -20,
+   0,
+   {
+    "deg": 7
+   }
+  ],
+  [
+   "wire",
+   "air_in",
+   -22,
+   null,
+   {
+    "len": 0.3
+   }
+  ],
+  [
+   "quiet",
+   "glitch",
+   -20,
+   0.4,
+   {
+    "len": 0.15
+   }
+  ],
+  [
+   "alert",
+   "beep",
+   -14,
+   0.6
+  ],
+  [
+   "poll",
+   "tick",
+   -26,
+   0.2,
+   {
+    "st": -3
+   }
+  ],
+  [
+   "outcome",
+   "whump_lo",
+   -16,
+   null,
+   {
+    "len": 0.6,
+    "fc": 240
+   }
+  ],
+  [
+   "outcome",
+   "chord",
+   -22,
+   null,
+   {
+    "len": 2.0
+   }
+  ],
+  [
+   "button",
+   "whump",
+   -15,
+   null
+  ],
+  [
+   "button",
+   "chord",
+   -21,
+   null,
+   {
+    "len": 3.4
+   }
   ]
+ ]
 }

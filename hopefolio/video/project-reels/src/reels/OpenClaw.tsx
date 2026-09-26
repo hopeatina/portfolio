@@ -10,7 +10,14 @@ import { BrandEnd } from '../lib/BrandEnd';
 import cues from '../data/cues_openclaw.json';
 
 /**
- * ORGX × OPENCLAW v3: "The lobster that forgot."
+ * ORGX × OPENCLAW v4: "The lobster that forgot" — then walks into the product.
+ * v4: Days 1–4 accelerate (4, 2, 2 beats) so the joke tightens; after Day 5 the
+ * camera dives into the lobster's terminal and the pixels resolve into the real
+ * OpenClaw control UI. The lobster narrates a tour of the real screens (Overview,
+ * Sessions, OrgX Live agents, Activity, Next Up vs In Progress), the Wi-Fi dies
+ * inside the UI (the real "Live degraded" toast; the outbox counts on the hats),
+ * replays, and we pull back out through the terminal to the island.
+ * (v3 notes follow.)
  * A 2D pixel diorama with an orthographic camera snapped to whole pixels:
  * a different camera grammar from every other film. Days 1–4 are the SAME
  * locked-off frame, hard-cut on each downbeat (the joke is the repetition):
@@ -24,6 +31,7 @@ import cues from '../data/cues_openclaw.json';
  * OpenClaw's own control UI. OpenClaw stays OpenClaw.
  */
 const g = GRIDS.openclaw;
+const ACCEL2 = (t: number) => t * t * t;
 const C = cues.cue;
 const D = C.drop;
 const RED = '#ff4f40';
@@ -293,23 +301,93 @@ const Overlays: React.FC<{ f: number }> = ({ f }) => {
   );
 };
 
+
+// ── v4: the lobster walks into the real interface
+type Step = { from: number; to: number; img: string; W: number; H: number; keys: [number, number, number, number][]; ring: [number, number, number, number]; say: string; chip: string };
+const STEPS: Step[] = [
+  { from: C.dive, to: C.t2, img: 'oc-overview.png', W: 1440, H: 900, keys: [[C.dive, 720, 450, 1.34], [C.dive + 20, 720, 470, 1.4], [C.t2, 760, 640, 1.8]], ring: [285, 630, 1400, 710], say: 'OpenClaw stays OpenClaw.', chip: 'OPENCLAW · OVERVIEW' },
+  { from: C.t2, to: C.t3, img: 'oc-sessions.png', W: 1440, H: 900, keys: [[C.t2, 860, 520, 2.3], [C.t3, 900, 540, 2.4]], ring: [285, 510, 1395, 572], say: 'My session: agent:orgx:main.', chip: 'OPENCLAW · SESSIONS' },
+  { from: C.t3, to: C.t4, img: 'oc-live.png', W: 2880, H: 1800, keys: [[C.t3, 700, 800, 0.8], [C.t4, 420, 900, 1.0]], ring: [40, 150, 700, 1780], say: 'Named agents. What each one is doing.', chip: 'ORGX LIVE · INSIDE OPENCLAW' },
+  { from: C.t4, to: C.t5, img: 'oc-activity.png', W: 2880, H: 1800, keys: [[C.t4, 1300, 800, 0.95], [C.t5, 1420, 950, 1.05]], ring: [760, 170, 2090, 1760], say: 'Every step, on the record.', chip: 'ORGX LIVE · ACTIVITY' },
+  { from: C.t5, to: C.storm, img: 'oc-live.png', W: 2880, H: 1800, keys: [[C.t5, 2350, 700, 0.95], [C.storm, 2450, 760, 1.05]], ring: [2150, 150, 2850, 1780], say: 'Next Up stays separate from In Progress.', chip: 'ORGX LIVE · NEXT UP' },
+  { from: C.storm, to: C.reconnect2, img: 'oc-mission.png', W: 2880, H: 1800, keys: [[C.storm, 1800, 420, 1.1], [C.reconnect2, 1900, 380, 1.2]], ring: [1700, 110, 2530, 310], say: 'Wi-Fi’s down. Queuing locally…', chip: 'ORGX LIVE · MISSION CONTROL' },
+  { from: C.reconnect2, to: C.pull + 40, img: 'oc-mission.png', W: 2880, H: 1800, keys: [[C.reconnect2, 1440, 1000, 0.72], [C.pull + 40, 1440, 1000, 0.66]], ring: [330, 520, 2560, 1780], say: 'Back online. All 5 replayed. Nothing lost.', chip: 'ORGX LIVE · MISSION CONTROL' },
+];
+const stepCam = (st: Step, f: number) => {
+  const ks = st.keys;
+  let i = 0;
+  while (i < ks.length - 2 && f >= ks[i + 1][0]) i++;
+  const t = HOUSE(prog(f, ks[i][0], ks[i + 1][0]));
+  return { x: mix(ks[i][1], ks[i + 1][1], t), y: mix(ks[i][2], ks[i + 1][2], t), s: mix(ks[i][3], ks[i + 1][3], t) };
+};
+
+const Tour: React.FC<{ f: number }> = ({ f }) => {
+  const st = STEPS.find((q) => f >= q.from && f < q.to) ?? STEPS[STEPS.length - 1];
+  const cam = stepCam(st, f);
+  const since = f - st.from;
+  const pix = st === STEPS[0] ? Math.max(1, Math.round(mix(24, 1, prog(f, C.dive, C.dive + 14)))) : 1;
+  const ringT = HOUSE(prog(since, 6, 16));
+  const storm = f >= C.storm && f < C.reconnect2;
+  const queued = C.queue.filter((q) => f >= q).length;
+  const replayed = C.replay2.filter((r) => f >= r).length;
+  const hop = Math.exp(-((f % 12) / 3)) * 10;
+  const bubbleT = settle(prog(since, 4, 14), 1.1);
+  const [x0, y0, x1, y1] = st.ring;
+  return (
+    <AbsoluteFill style={{ background: '#0b0c0f', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: st.W, height: st.H, transformOrigin: '0 0', transform: `translate(${960 - cam.x * cam.s}px, ${540 - cam.y * cam.s}px) scale(${cam.s})`, filter: storm ? `grayscale(0.7) brightness(0.7)` : undefined }}>
+        {pix > 1 ? (
+          <Img src={staticFile(`img/${st.img}`)} style={{ position: 'absolute', left: 0, top: 0, width: st.W / pix, height: st.H / pix, transformOrigin: '0 0', transform: `scale(${pix})`, imageRendering: 'pixelated' }} />
+        ) : (
+          <Img src={staticFile(`img/${st.img}`)} style={{ position: 'absolute', left: 0, top: 0, width: st.W, height: st.H }} />
+        )}
+        {ringT > 0.01 ? <div style={{ position: 'absolute', left: x0 - 10, top: y0 - 10, width: x1 - x0 + 20, height: y1 - y0 + 20, border: `${6 / cam.s}px solid ${storm ? '#e8a33a' : LIME}`, boxShadow: `0 0 ${30 / cam.s}px ${storm ? '#e8a33a' : LIME}`, opacity: ringT, clipPath: `inset(0 ${(1 - ringT) * 100}% 0 0)` }} /> : null}
+      </div>
+      {storm ? <AbsoluteFill style={{ background: 'repeating-linear-gradient(100deg, rgba(160,190,230,0.10) 0 2px, transparent 2px 40px)', backgroundPosition: `${f * 9}px ${f * 22}px` }} /> : null}
+      {/* the lobster, narrating */}
+      <div style={{ position: 'absolute', left: 90, bottom: 80, display: 'flex', alignItems: 'flex-end', gap: 26, zIndex: 5 }}>
+        <svg width={128} height={128} viewBox="0 0 16 16" shapeRendering="crispEdges" style={{ transform: `translateY(${-hop}px)` }}>
+          <Lobster blink={f % 70 < 4} claw={Math.floor(f / 10) % 2 ? 0.6 : 0} />
+        </svg>
+        <div style={{ marginBottom: 70, transform: `scale(${mix(0.6, 1, clamp(bubbleT))})`, transformOrigin: '0% 100%', opacity: clamp(bubbleT * 2), padding: '18px 26px', background: storm ? '#e8a33a' : LIME, color: '#111', ...rec(1, 0, 800), fontSize: 38, boxShadow: `8px 8px 0 ${storm ? '#4a2c08' : '#2c4a10'}`, whiteSpace: 'nowrap' }}>
+          {st.say}
+          {storm ? <span style={{ marginLeft: 16 }}>outbox: {queued}</span> : null}
+          {f >= C.reconnect2 ? <span style={{ marginLeft: 16 }}>{replayed}/5</span> : null}
+        </div>
+      </div>
+      <div style={{ position: 'absolute', left: 90, top: 70, ...rec(1, 0, 800), fontSize: 26, letterSpacing: '0.14em', color: '#fff', padding: '10px 16px', background: 'rgba(0,0,0,0.6)', boxShadow: `4px 4px 0 ${RED}` }}>{st.chip}</div>
+      <div style={{ position: 'absolute', right: 90, top: 78, ...rec(1, 0, 600), fontSize: 20, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.6)' }}>REAL SCREENS · ORGX PLUGIN IN OPENCLAW</div>
+    </AbsoluteFill>
+  );
+};
+
 export const OpenClaw: React.FC = () => {
   const f = useCurrentFrame();
   const day = dayIndex(f);
   const since = f - dayStart(f);
   const pull = HOUSE(prog(f, C.pullback, C.pullback + 26));
+  const diveT = ACCEL2(prog(f, C.dive - 20, C.dive));
+  const backT = HOUSE(prog(f, C.pull, C.end));
+  const touring = f >= C.dive && f < C.pull;
+  const term = toScreen(Math.min(f, C.dive - 1), HUT.x, HUT.y + 18);
   const flip = day > 0 ? HOUSE(prog(since, 0, 8)) : 1;
   const storm = f >= C.cut && f < C.reconnect;
   return (
     <AbsoluteFill style={{ background: '#0e1014', overflow: 'hidden' }}>
       {/* OpenClaw's own control UI: the diorama is one card inside it */}
       {pull > 0 ? <Img src={staticFile('img/oc-overview.png')} style={{ position: 'absolute', inset: 0, width: 1920, height: 1200, opacity: pull }} /> : null}
-      <AbsoluteFill style={{ transformOrigin: '72% 62%', transform: `scale(${mix(1, 0.34, pull)})`, borderRadius: 30 * pull, overflow: 'hidden', boxShadow: pull > 0 ? `0 0 0 ${8 / Math.max(0.34, 1 - pull)}px ${RED}` : 'none' }}>
-        <Scene f={f} />
-        <Overlays f={f} />
-      </AbsoluteFill>
+      {!touring ? (
+        <AbsoluteFill style={{ transformOrigin: `${term.x}px ${term.y}px`, transform: `scale(${f < C.pull ? mix(1, 14, diveT) : mix(14, 1, backT)})`, overflow: 'hidden' }}>
+          <Scene f={f < C.pull ? f : C.day5 + 30} />
+          <Overlays f={f < C.pull ? f : C.day5 + 30} />
+        </AbsoluteFill>
+      ) : null}
+      {touring ? <Tour f={f} /> : null}
+      {f >= C.pull && f < C.end ? (
+        <div style={{ position: 'absolute', left: 90, bottom: 90, ...rec(1, 0, 800), fontSize: 44, color: '#fff', textShadow: '4px 4px 0 #14200a', opacity: HOUSE(prog(f, C.pull + 14, C.pull + 24)) }}>Same lobster. Now it knows the company.</div>
+      ) : null}
       {/* day counter: the joke's punctuation */}
-      {f < C.pullback ? (
+      {f < C.dive ? (
         <div style={{ position: 'absolute', left: 90, top: 70, ...rec(1, 0, 900), fontSize: 92, color: day === 5 ? LIME : '#fff', textShadow: `6px 6px 0 ${day === 5 ? '#2c4a10' : '#3a0a0d'}`, clipPath: `inset(0 ${(1 - flip) * 100}% -20% 0)` }}>
           DAY {Math.max(1, day)}
           {day === 5 ? <span style={{ fontSize: 40, marginLeft: 20, color: '#fff' }}>it remembers.</span> : null}
@@ -317,7 +395,8 @@ export const OpenClaw: React.FC = () => {
       ) : null}
       {f >= D + 30 && f < C.day5 ? <div style={{ position: 'absolute', right: 90, top: 86, ...rec(1, 0, 800), fontSize: 30, color: '#fff', textShadow: '4px 4px 0 #14200a' }}>OrgX hands it the company.</div> : null}
       <Flash a={f >= D ? 0.16 * Math.exp(-(f - D) / 5) : 0} color="183,243,74" />
-      <Flash a={f >= C.cut ? 0.5 * Math.exp(-(f - C.cut) / 3) : 0} />
+      <Flash a={0.5 * Math.max(f >= C.dive ? Math.exp(-(f - C.dive) / 4) : 0, f >= C.pull ? Math.exp(-(f - C.pull) / 4) : 0)} color="183,243,74" />
+      <Flash a={f >= C.storm && f < C.storm + 20 ? 0.4 * Math.exp(-(f - C.storm) / 3) : 0} />
       {storm ? <AbsoluteFill style={{ background: 'rgba(10,14,24,0.25)' }} /> : null}
       <BrandEnd
         g={g}

@@ -6,465 +6,515 @@ import { GRIDS } from '../lib/grid';
 import { rec } from '../lib/theme';
 import { Flash, Grain, Vignette } from '../lib/Frame';
 import { resolveText } from '../lib/decode';
-import { Cam, Key, Vec3, X, Y, Z, edit, project, v3, vlerp, vscale } from '../lib/space';
-import { Blur, Box, DofCtx, Fog, Plane, polyline } from '../lib/World';
-import { Bokeh, Dip, Glow, Grade, Letterbox } from '../lib/Env';
+import { Cam, X, Z, edit, v3 } from '../lib/space';
+import { Box, DofCtx, Plane } from '../lib/World';
+import { Dust, Glow, Letterbox } from '../lib/Env';
 import { BrandEnd } from '../lib/BrandEnd';
-import cues from '../data/cues_alma.json';
+import { at, handheld, pulse, sub } from '../lib/score';
+import hitsJson from '../data/hits_alma.json';
 
 /**
- * ALMA v3: "Saved."
- * Surface: a therapist's office at dusk, ten minutes between clients. In the
- * world where everything rides on Save, each kick appends another consequence
- * to the request, the spinner drags, the mug's steam stops, the clock reaches
- * 10:59, and someone knocks. Smash to black: In Alma, Save only saves.
- * Click: Saved, instantly; the steam moves again. Reality: the camera drops
- * through the desk into the green underworld where the same five jobs run as
- * durable lanes, stamped by Alma's shield at the audit gates (one retries),
- * behind a switch that can be thrown back. Crane up: the door is open, it's
- * 11:00, the lid closes. Only verified numbers: 72%, 999, 2.7 years.
+ * ALMA v4: "Two clinicians, a thousand notes."
+ *
+ * Told the way Hope tells it. Insurance needs therapy notes to be auditable;
+ * the goal was a thousand audits a month, and the people doing it were two
+ * clinical reviewers reading a Metabase table one row at a time. One card,
+ * then the impossible drone rise: a field of a thousand notes to the horizon
+ * with two desk lamps at its edge. Hope ran a two-day prototype sprint with
+ * the clinical lead: the AI reads first, clinicians judge. On the drop a mint
+ * scan line crosses the field; nine in ten cards go quiet, the rest stand up
+ * for a human (from directly above, the flagged cards spell CARE for a moment).
+ * Then the person on the other side: a therapist's compliance hub, where a
+ * strike tracks toward a violation (the stick) and a coaching tip fixes the
+ * next note (the carrot). Underneath, the two-way workflow survives the partner
+ * going quiet: signed, idempotent webhooks; polling takes over; an alert fires;
+ * nothing is lost. 72% of eligible clinicians adopted it.
+ *
+ * Camera psychology: overwhelm rises (the higher we go, the smaller the people);
+ * the table is handheld and close (reading, reading); the scan is a slow,
+ * stately aerial; the therapist is eye level and still (dignity).
+ * Note content is illustrative; no names, no patient data.
  */
 const g = GRIDS.alma;
-const C = cues.cue;
-const D = C.drop;
+const M = g.markers as Record<string, number>;
+const H = { hat: at(hitsJson.hat as [number, number][]), snare: at(hitsJson.snare as [number, number][]), kick: at(hitsJson.kick as [number, number][]), note: hitsJson.note as number[] };
+const DASH = Math.round(M.dash);
+const SPRINT = Math.round(M.sprint);
+const D = Math.round(M.drop);
+const FLAG = Math.round(M.flagged);
+const HUB = Math.round(M.hub);
+const WIRE = Math.round(M.wire);
+const OUTC = Math.round(M.outcome);
+const END = Math.round(M.end);
+const beats = g.beats;
+
 const MINT = '#00e5a0';
 const GREEN = '#03291c';
 const AMBER = '#ffb46b';
-const SANS = 'system-ui, -apple-system, Helvetica Neue, sans-serif';
+const RED = '#ff6b52';
+const CREAM = '#efe9dc';
+const SANS = 'system-ui, -apple-system, "Helvetica Neue", sans-serif';
 
-const JOBS = [
-  { label: 'Render document', phi: true },
-  { label: 'Send reminders', phi: true },
-  { label: 'Vendor audit token', phi: false },
-  { label: 'Backfill history', phi: false },
-  { label: 'Eligibility + cadence', phi: true },
-];
-
-// ── the office (desk top at y = 0; the laptop hinges at the back of its base)
-const SW = 940;
-const SH = 600;
-const HINGE = v3(0, -22, -380);
-const lidAngle = (f: number) => mix(0.24, -Math.PI / 2, HOUSE(prog(f, C.lid - 18, C.lid + 4)));
-const screenFrame = (f: number) => {
-  const th = lidAngle(f);
-  const V = v3(0, Math.cos(th), Math.sin(th));
-  const top = v3(HINGE.x, HINGE.y - SH * Math.cos(th), HINGE.z - SH * Math.sin(th));
-  return { V, center: vlerp(top, HINGE, 0.5), at: (u: number, v: number): Vec3 => v3(top.x - SW / 2 + u, top.y + v * V.y, top.z + v * V.z) };
+// ── the field: 40 × 25 = 1,000 notes
+const COLS = 40;
+const ROWS = 25;
+const CW = 180;
+const CH = 120;
+const PX = 210;
+const PZ = 150;
+const FW = COLS * PX;
+const FD = ROWS * PZ;
+const cellX = (c: number) => (c - (COLS - 1) / 2) * PX;
+const cellZ = (r: number) => (r - (ROWS - 1) / 2) * PZ;
+// the flagged cards spell CARE from directly above (5×7 glyphs)
+const GLYPH: Record<string, string[]> = {
+  C: ['.###.', '#...#', '#....', '#....', '#....', '#...#', '.###.'],
+  A: ['.###.', '#...#', '#...#', '#####', '#...#', '#...#', '#...#'],
+  R: ['####.', '#...#', '#...#', '####.', '#.#..', '#..#.', '#...#'],
+  E: ['#####', '#....', '#....', '####.', '#....', '#....', '#####'],
 };
-const MUG = v3(760, -130, -60);
-const DOOR = v3(1750, -1500, -2980);
+const FLAGGED = new Set<string>();
+'CARE'.split('').forEach((ch, li) => {
+  GLYPH[ch].forEach((row, r) => row.split('').forEach((px, c) => px === '#' && FLAGGED.add(`${7 + li * 7 + c},${8 + r}`)));
+});
+const FAILED = new Set<string>();
+for (let i = 0; i < 14; i++) FAILED.add(`${Math.floor(random(`fx${i}`) * COLS)},${Math.floor(random(`fy${i}`) * ROWS)}`);
+// camouflage: ordinary flags scattered everywhere, so CARE only resolves from directly above
+for (let i = 0; i < 70; i++) FLAGGED.add(`${Math.floor(random(`gx${i}`) * COLS)},${Math.floor(random(`gy${i}`) * ROWS)}`);
+const NEEDS = FLAGGED.size + FAILED.size;
+const HERO = { c: 20, r: 20 };
 
-// ── the underworld (reality), below the desk
-const UY = 2600;
-const LANE_Z = (i: number) => -300 - i * 300;
-const LANE_X0 = -1300;
-const GATE_X = 700;
-const GATE_AT = [C.stamps[0], C.stamps[1], C.retry, C.stamps[2], C.stamps[3]];
-const SWITCH = v3(-1750, UY - 90, -500);
-const FOG: Fog = { near: 2200, far: 7600 };
+// the scan crosses the field near → far on the drop
+const scanRow = (f: number) => mix(ROWS + 1, -2, prog(f, D, D + 70));
+const cardState = (c: number, r: number, f: number) => {
+  if (f < D || r < scanRow(f)) return 'pending';
+  const k = `${c},${r}`;
+  return FAILED.has(k) ? 'fail' : FLAGGED.has(k) ? 'flag' : 'pass';
+};
 
-const btn = screenFrame(0).at(810, 540);
-const listAt = screenFrame(0).at(330, 320);
-const clockAt = screenFrame(0).at(820, 52);
-const EDIT = edit([
-  { name: 'save', from: 0, keys: [[0, btn.x - 60, btn.y, btn.z, 1500, -4, 3, 0, 85], [48, btn.x - 20, btn.y, btn.z, 1380, -2, 3, 0, 85]] },
-  { name: 'office', from: C.loads[0], keys: [[C.loads[0], 0, -230, -260, 3600, -6, 5, 0, 50], [C.loads[1], 0, -230, -260, 3350, -3, 5, 0, 50]], kicks: [{ frames: [C.loads[0]], tau: 5, punch: 0.02, px: 5 }] },
-  { name: 'list', from: C.loads[1], keys: [[C.loads[1], listAt.x, listAt.y, listAt.z, 1700, 6, 2, 0, 85], [C.loads[2], listAt.x, listAt.y, listAt.z, 1560, 4, 2, 0, 85]] },
-  { name: 'mug', from: C.loads[2], keys: [[C.loads[2], MUG.x, MUG.y - 30, MUG.z, 1500, -14, 4, 0, 85], [C.loads[3], MUG.x, MUG.y - 30, MUG.z, 1300, -10, 4, 0, 85]], hand: { px: 5, roll: 0.3 } },
-  { name: 'clock', from: C.loads[3], keys: [[C.loads[3], clockAt.x, clockAt.y, clockAt.z, 1100, 0, 1, 0, 85], [C.loads[4], clockAt.x, clockAt.y, clockAt.z, 980, 0, 1, 0, 85]] },
-  { name: 'waiting', from: C.loads[4], keys: [[C.loads[4], 300, -300, -600, 4200, -14, 4, 0, 50], [C.knock, 700, -500, -900, 4000, -20, 3, 0, 50]], kicks: [{ frames: [C.loads[4]], tau: 5, punch: 0.02, px: 5 }] },
-  { name: 'door', from: C.knock, keys: [[C.knock, DOOR.x, 1900, DOOR.z, 1800, -8, 4, 0, 35], [C.black, DOOR.x, 1950, DOOR.z, 1600, -6, 4, 0, 35]], hand: { px: 10, roll: 0.8, hz: 0.9 }, kicks: [{ frames: [C.knock, C.knock + 11, C.knock + 21], tau: 3, punch: 0.01, px: 8 }] },
-  { name: 'saved', from: D, keys: [[D, btn.x - 20, btn.y, btn.z, 1500, -2, 3, 0, 85], [C.crane, btn.x - 20, btn.y, btn.z, 1650, -2, 3, 0, 85]] },
-  {
-    name: 'crane',
-    from: C.crane,
-    keys: [
-      [C.crane, 0, -200, -300, 2600, 0, 8, 0, 35],
-      [C.crane + 20, 0, 900, -500, 2600, 0, 40, 0, 35],
-      [C.fall[4] + 10, -400, UY - 300, -900, 3400, 22, 26, 0, 28],
-    ],
-  },
-  { name: 'lanes', from: C.fall[4] + 10, keys: [[C.fall[4] + 10, -400, UY - 300, -900, 3400, 22, 26, 0, 28], [C.stamps[1], 200, UY - 200, -900, 3000, 34, 20, 0, 28], [C.retry, 500, UY - 200, -1000, 2800, 40, 18, 0, 28]], hand: { px: 3 } },
-  { name: 'switch', from: C.flagOff - 12, keys: [[C.flagOff - 12, SWITCH.x, SWITCH.y - 40, SWITCH.z, 1500, 12, 8, 0, 50], [C.up, SWITCH.x, SWITCH.y - 40, SWITCH.z, 1350, 8, 8, 0, 50]], kicks: [{ frames: [C.flagOff, C.flagOn], tau: 4, punch: 0.02, px: 6 }] },
-  {
-    name: 'up',
-    from: C.up,
-    keys: [
-      [C.up, -400, UY - 300, -900, 3200, 0, 30, 0, 28],
-      [C.up + 22, 0, 600, -500, 2800, 0, 40, 0, 35],
-      [C.lid - 10, 600, -500, -700, 4600, -12, 5, 0, 50],
-      [C.end, 500, -400, -600, 4400, -10, 5, 0, 50],
-    ],
-  },
-]);
-
-const Redact: React.FC<{ w: number; h?: number }> = ({ w, h = 14 }) => <span style={{ display: 'inline-block', width: w, height: h, borderRadius: 4, background: 'rgba(242,239,228,0.2)', verticalAlign: 'middle' }} />;
-
-const Shield: React.FC<{ size: number; color: string; check?: number }> = ({ size, color, check = 1 }) => (
+const Shield: React.FC<{ size: number; color: string; check?: number; stroke?: number }> = ({ size, color, check = 1, stroke = 8 }) => (
   <svg width={size} height={size * 1.3} viewBox="-6 -6 132 172">
-    <path d="M60 0 L120 30 L120 80 C120 120 90 150 60 160 C30 150 0 120 0 80 L0 30 Z" fill="none" stroke={color} strokeWidth={8} strokeLinejoin="round" />
-    <path d="M32 82 L54 104 L92 60" fill="none" stroke={color} strokeWidth={11} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={`${check} 1`} />
+    <path d="M60 0 L120 30 L120 80 C120 120 90 150 60 160 C30 150 0 120 0 80 L0 30 Z" fill="none" stroke={color} strokeWidth={stroke} strokeLinejoin="round" />
+    <path d="M32 82 L54 104 L92 60" fill="none" stroke={color} strokeWidth={stroke * 1.4} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={`${check} 1`} />
   </svg>
 );
 
-/** What the therapist sees: the Alma note. Before the drop, in the world where everything rides on Save. */
-const Screen: React.FC<{ f: number }> = ({ f }) => {
-  const saving = f >= C.click + 2 && f < D;
-  const saved = f >= D;
-  const pressed = (f >= C.click && f < C.click + 5) || (f >= D - 3 && f < D + 2);
-  const n = C.loads.filter((l) => f >= l).length;
-  const drag = n / JOBS.length;
-  const minute = saved ? (f > C.up + 30 ? 11 * 60 : 10 * 60 + 59) : f < C.loads[3] ? 10 * 60 + 52 + Math.floor((f / C.loads[3]) * 5) : 10 * 60 + 58 + (f >= C.clock[1] ? 1 : 0);
-  const clock = `${Math.floor(minute / 60)}:${String(minute % 60).padStart(2, '0')}`;
-  const spin = (f * (14 - 11 * drag)) % 360;
-  const sT = settle(prog(f, D, D + 10), 1.2);
+const Field: React.FC<{ f: number }> = ({ f }) => {
+  const sr = scanRow(f);
+  const settled = f >= D + 76;
   return (
-    <div style={{ position: 'absolute', inset: 0, background: '#0c1411', fontFamily: SANS, color: '#eef3f0', overflow: 'hidden' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 30px', borderBottom: '1px solid rgba(255,255,255,0.08)', background: '#0a100e' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{ width: 34, height: 34, borderRadius: 8, background: GREEN, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 15, color: '#fff', letterSpacing: '-0.02em' }}>Al</div>
-          <span style={{ fontSize: 20, fontWeight: 600 }}>Reassessment · Week 6</span>
-        </div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ ...rec(1, 0, 600), fontSize: 30, color: minute >= 10 * 60 + 58 && !saved ? '#ff8a6b' : '#eef3f0', fontVariantNumeric: 'tabular-nums' }}>{clock}</div>
-          <div style={{ fontSize: 13, color: 'rgba(238,243,240,0.55)' }}>next client 11:00</div>
-        </div>
-      </div>
-      <div style={{ padding: '22px 30px', fontSize: 18, color: 'rgba(238,243,240,0.7)', lineHeight: 2 }}>
-        <div>
-          Client <Redact w={110} /> <Redact w={70} />
-        </div>
-        <div>
-          Progress <Redact w={90} /> <Redact w={140} /> <Redact w={40} />
-        </div>
-      </div>
-      {!saved && n > 0 ? (
-        <div style={{ position: 'absolute', left: 30, right: 30, top: 200 }}>
-          <div style={{ ...rec(1, 0, 600), fontSize: 13, letterSpacing: '0.16em', color: '#ff8a6b', marginBottom: 8 }}>ALSO RUNNING INSIDE THIS REQUEST</div>
-          {JOBS.slice(0, n).map((j, i) => {
-            const a = settle(prog(f, C.loads[i], C.loads[i] + 8), 1.0);
-            return (
-              <div key={j.label} style={{ display: 'flex', alignItems: 'center', gap: 12, height: 44, borderBottom: '1px solid rgba(255,255,255,0.06)', transform: `translateX(${(1 - clamp(a)) * -40}px)`, opacity: clamp(a * 2), fontSize: 22 }}>
-                <span style={{ width: 16, height: 16, borderRadius: 8, border: '2px solid rgba(255,138,107,0.8)', borderTopColor: 'transparent', transform: `rotate(${(f * 9 + i * 50) % 360}deg)` }} />
-                {j.label}
-                {j.phi ? <span style={{ ...rec(1, 0, 600), fontSize: 11, padding: '2px 6px', borderRadius: 4, background: 'rgba(255,87,56,0.18)', color: '#ff8a6b' }}>PHI</span> : null}
-              </div>
-            );
-          })}
-        </div>
-      ) : null}
-      {saved ? (
-        <div style={{ position: 'absolute', left: 30, right: 30, top: 214, opacity: HOUSE(prog(f, D + 6, D + 20)) }}>
-          <div style={{ ...rec(1, 0, 600), fontSize: 13, letterSpacing: '0.16em', color: MINT }}>5 BACKGROUND STAGES QUEUED · AUDITED · REVERSIBLE</div>
-          <div style={{ marginTop: 10, fontSize: 22, color: 'rgba(238,243,240,0.7)' }}>Nothing else runs inside Save.</div>
-        </div>
-      ) : null}
-      <div
-        style={{
-          position: 'absolute',
-          right: 30,
-          bottom: 30,
-          height: 64,
-          minWidth: 190,
-          padding: '0 26px',
-          borderRadius: 14,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 12,
-          background: saved ? MINT : pressed ? '#0e5a41' : '#127a58',
-          color: saved ? '#032017' : '#fff',
-          fontSize: 26,
-          fontWeight: 650,
-          transform: `scale(${pressed ? 0.94 : saved ? mix(0.9, 1, sT) : 1})`,
-          boxShadow: saved ? `0 0 40px rgba(0,229,160,${0.5 * Math.exp(-(f - D) / 20)})` : 'none',
-        }}
-      >
-        {saving ? (
-          <>
-            <span style={{ width: 22, height: 22, borderRadius: 11, border: '3px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', transform: `rotate(${spin}deg)` }} />
-            Saving{'.'.repeat(1 + (Math.floor(f / 20) % 3))}
-          </>
-        ) : saved ? (
-          'Saved ✓'
-        ) : (
-          'Save'
-        )}
-      </div>
-    </div>
-  );
-};
-
-/** The office wall: plaster, a blue-hour window with the city, the door (light under it; open at the end). */
-const Wall: React.FC<{ f: number }> = ({ f }) => {
-  const open = HOUSE(prog(f, C.up + 30, C.lid - 10));
-  const knock = f >= C.knock && f < C.knock + 30 ? Math.exp(-((f - C.knock) % 11) / 3) : 0;
-  return (
-    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, #3a2a1e 0%, #5a4230 45%, #33251a 100%)' }}>
-      <div style={{ position: 'absolute', left: 5600, top: 1200, width: 3200, height: 4200, background: 'radial-gradient(ellipse, rgba(255,190,120,0.35), transparent 65%)' }} />
-      <div style={{ position: 'absolute', left: 3400, top: 2100, width: 2000, height: 3000, background: 'linear-gradient(180deg, #1b2a4a 0%, #3c4f7a 55%, #b9866a 100%)', boxShadow: 'inset 0 0 0 60px #2a1d14' }}>
-        {new Array(70).fill(0).map((_, i) => (
-          <div key={i} style={{ position: 'absolute', left: 80 + random(`wx${i}`) * 1840, top: 1700 + random(`wy${i}`) * 1100, width: 10 + random(`ws${i}`) * 22, height: 10 + random(`ws${i}`) * 22, borderRadius: '50%', background: random(`wc${i}`) > 0.7 ? '#ffd9a0' : '#fff2d8', opacity: 0.5 + 0.5 * random(`wa${i}`), filter: 'blur(3px)' }} />
-        ))}
-        <div style={{ position: 'absolute', left: 970, top: 0, width: 60, bottom: 0, background: '#2a1d14' }} />
-        <div style={{ position: 'absolute', top: 1450, left: 0, right: 0, height: 60, background: '#2a1d14' }} />
-      </div>
-      <div style={{ position: 'absolute', left: 7100, top: 2250, width: 1300, height: 6000, background: '#4a3322', boxShadow: 'inset 0 0 0 40px #3a281a' }}>
-        <div style={{ position: 'absolute', left: 1080, top: 3200, width: 90, height: 90, borderRadius: 45, background: '#c9a46a' }} />
-        <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(90deg, rgba(255,200,130,${0.85 * open}), rgba(255,200,130,${0.4 * open}))`, transformOrigin: '0% 50%', transform: `scaleX(${open})` }} />
-      </div>
-      <div style={{ position: 'absolute', left: 7100, top: 8180, width: 1300, height: 70, background: `rgba(255,205,140,${0.55 + 0.4 * knock})`, boxShadow: `0 0 120px rgba(255,190,120,${0.6 + 0.4 * knock})` }}>
-        {/* someone is waiting: two shadows in the light under the door */}
-        {f >= C.knock - 20 && f < C.up ? [380, 760].map((x) => <div key={x} style={{ position: 'absolute', left: x, top: 0, width: 180, height: 70, background: 'rgba(20,12,6,0.85)', filter: 'blur(14px)', opacity: HOUSE(prog(f, C.knock - 20, C.knock - 4)) }} />) : null}
-      </div>
-    </div>
-  );
-};
-
-/** The mug and its steam: the steam freezes while Save drags, and moves again once saved. */
-const Mug: React.FC<{ f: number }> = ({ f }) => {
-  const frozen = f >= C.loads[2] && f < D;
-  const t = frozen ? C.loads[2] : f;
-  return (
-    <svg width={180} height={260} viewBox="0 0 180 260">
-      {[0, 1, 2].map((k) => (
-        <path key={k} d={`M${60 + k * 28} 110 C${50 + k * 28 + 16 * Math.sin(t / 14 + k)} 80 ${74 + k * 28 - 14 * Math.sin(t / 11 + k)} 50 ${58 + k * 28 + 10 * Math.sin(t / 9 + k)} 10`} stroke={`rgba(255,240,220,${frozen ? 0.25 : 0.5})`} strokeWidth={6} fill="none" strokeLinecap="round" />
-      ))}
-      <rect x={30} y={120} width={110} height={130} rx={16} fill="#e9dfcf" />
-      <path d="M140 150 C175 150 175 215 140 215" stroke="#e9dfcf" strokeWidth={14} fill="none" />
-      <rect x={30} y={120} width={110} height={18} rx={8} fill="#6b4a2e" />
-    </svg>
-  );
-};
-
-const Lamp: React.FC = () => (
-  <svg width={520} height={1120} viewBox="0 0 520 1120">
-    <path d="M110 0 L410 0 L500 300 L20 300 Z" fill="#c8963e" />
-    <path d="M40 300 L480 300" stroke="#ffe2a8" strokeWidth={10} />
-    <rect x={245} y={300} width={30} height={740} fill="#a57a33" />
-    <ellipse cx={260} cy={1080} rx={180} ry={40} fill="#8a6428" />
-  </svg>
-);
-
-const Office: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => {
-  const sf = screenFrame(f);
-  return (
-    <>
-      <Plane cam={cam} c={v3(0, -1500, -3000)} w={12000} h={9000} z={-300000}>
-        <Wall f={f} />
-      </Plane>
-      <Box cam={cam} c={v3(0, 60, -200)} size={[4200, 120, 1700]} color="#3a2616" edge="rgba(0,0,0,0.3)" z={-200000} top={<div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, #4a3020, #6a4630 45%, #4a3020)', backgroundImage: 'repeating-linear-gradient(90deg, rgba(0,0,0,0.08) 0 3px, transparent 3px 60px)' }} />} />
-      <Plane cam={cam} c={v3(-760, -2, -40)} U={v3(0.97, 0, -0.24)} V={v3(0.24, 0, 0.97)} w={260} h={260} z={2000}>
-        <div style={{ position: 'absolute', inset: 0, background: '#f6e27a', padding: 24, fontFamily: SANS, fontSize: 30, color: '#3a3210', lineHeight: 1.25, boxShadow: '0 8px 20px rgba(0,0,0,0.3)' }}>
-          11:00
-          <br />
-          next client
-        </div>
-      </Plane>
-      <Box cam={cam} c={v3(0, -11, -90)} size={[SW + 20, 22, 600]} color="#b9bdc3" edge="rgba(0,0,0,0.25)" z={1000} top={<div style={{ position: 'absolute', inset: 30, borderRadius: 10, background: '#2b2e33' }} />} />
-      <Plane cam={cam} c={sf.center} U={X} V={sf.V} w={SW} h={SH} oneSided z={5000}>
-        <div style={{ position: 'absolute', inset: 0, borderRadius: 18, background: '#16181c', padding: 16 }}>
-          <div style={{ position: 'absolute', inset: 16, borderRadius: 6, overflow: 'hidden' }}>
-            <div style={{ width: SW, height: SH, transform: `scale(${(SW - 32) / SW}, ${(SH - 32) / SH})`, transformOrigin: '0 0', position: 'relative' }}>
-              <Screen f={f} />
-            </div>
-          </div>
-        </div>
-      </Plane>
-      <Plane cam={cam} c={sf.center} U={vscale(X, -1)} V={sf.V} w={SW} h={SH} oneSided z={5000}>
-        <div style={{ position: 'absolute', inset: 0, borderRadius: 18, background: 'linear-gradient(160deg, #cfd3d8, #a9aeb5)' }}>
-          <div style={{ position: 'absolute', left: SW / 2 - 60, top: SH / 2 - 60, width: 120, height: 120, borderRadius: 26, background: GREEN, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: SANS, fontWeight: 700, fontSize: 40 }}>Al</div>
-        </div>
-      </Plane>
-      <Plane cam={cam} c={MUG} w={180} h={260} z={6000}>
-        <Mug f={f} />
-      </Plane>
-      <Plane cam={cam} c={v3(1500, -560, -700)} w={520} h={1120} z={4000}>
-        <Lamp />
-      </Plane>
-    </>
-  );
-};
-
-type JobState = 'lane' | 'ok' | 'fail';
-const Crate: React.FC<{ i: number; state: JobState }> = ({ i, state }) => {
-  const j = JOBS[i];
-  const col = state === 'ok' ? MINT : state === 'fail' ? '#ff6b52' : 'rgba(238,243,240,0.85)';
-  return (
-    <div style={{ position: 'absolute', inset: 0, padding: '18px 22px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', fontFamily: SANS }}>
-      <div style={{ ...rec(1, 0, 600), fontSize: 16, letterSpacing: '0.14em', color: 'rgba(0,229,160,0.7)' }}>CELERY STAGE · DURABLE</div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 34, fontWeight: 650, color: '#eef3f0' }}>
-        {j.label}
-        {j.phi ? <span style={{ ...rec(1, 0, 600), fontSize: 13, padding: '3px 7px', borderRadius: 4, background: 'rgba(255,87,56,0.2)', color: '#ff8a6b' }}>PHI</span> : null}
-        <span style={{ marginLeft: 'auto', color: col, fontSize: state === 'fail' ? 18 : 38, ...(state === 'fail' ? rec(1, 0, 700) : {}) }}>{state === 'ok' ? '✓' : state === 'fail' ? 'RETRY 2/3' : ''}</span>
-      </div>
-    </div>
-  );
-};
-
-const Underworld: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => {
-  const flagOff = f >= C.flagOff && f < C.flagOn;
-  let flowT = 0;
-  for (let k = C.fall[4]; k <= f; k++) if (!(k >= C.flagOff && k < C.flagOn)) flowT++;
-  const lanes = JOBS.map((_, i) => {
-    const pts = [];
-    for (let x = LANE_X0; x <= GATE_X + 900; x += 60) pts.push(project(cam, v3(x, UY, LANE_Z(i))));
-    return pts.filter((p) => p.d > 40);
-  });
-  return (
-    <>
-      <Plane cam={cam} c={v3(0, UY + 2, -1000)} U={X} V={Z} w={9000} h={6000} z={-400000}>
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 55%, #0c4a34 0%, #062b1f 45%, #03150f 100%)', backgroundImage: 'linear-gradient(rgba(0,229,160,0.08) 3px, transparent 3px), linear-gradient(90deg, rgba(0,229,160,0.08) 3px, transparent 3px)', backgroundSize: '300px 300px' }} />
-      </Plane>
-      <Plane cam={cam} c={v3(0, UY - 1500, -4200)} w={14000} h={5000} z={-390000}>
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 70%, rgba(0,229,160,0.35), rgba(3,41,28,0.9) 50%, #03150f 80%)' }} />
-      </Plane>
-      <svg width={1920} height={1080} style={{ position: 'absolute', inset: 0, zIndex: 1, overflow: 'visible' }}>
-        <defs>
-          <filter id="ug" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation={6} />
-          </filter>
-        </defs>
-        {lanes.map((pts, i) => (pts.length > 1 ? <path key={i} d={polyline(pts)} stroke={flagOff ? 'rgba(238,243,240,0.15)' : MINT} strokeWidth={4} strokeDasharray="14 12" fill="none" opacity={0.8} /> : null))}
-        {!flagOff && f >= C.fall[4]
-          ? JOBS.map((_, i) =>
-              [0, 1, 2].map((k) => {
-                const x = LANE_X0 + ((flowT * 11 + k * 700 + i * 233) % (GATE_X + 900 - LANE_X0));
-                const p = project(cam, v3(x, UY - 8, LANE_Z(i)));
-                return p.d > 40 ? <circle key={`${i}${k}`} cx={p.sx} cy={p.sy} r={Math.max(3, 12 * p.s)} fill={x > GATE_X ? MINT : '#eef3f0'} filter="url(#ug)" /> : null;
-              })
-            )
-          : null}
-      </svg>
-      {JOBS.map((_, i) => {
-        const fall = C.fall[i];
-        if (f < fall - 16) return null;
-        const drop = clamp(prog(f, fall - 16, fall) ** 2);
-        const at = GATE_AT[i];
-        let x: number;
-        let state: JobState = 'lane';
-        if (i === 2) {
-          if (f < C.fail) x = mix(LANE_X0, GATE_X - 360, RESOLVE(prog(f, fall, C.fail)));
-          else if (f < C.retry - 30) x = GATE_X - 360 - 160 * settle(prog(f, C.fail, C.fail + 12), 0.4);
-          else x = mix(GATE_X - 520, GATE_X + 700, HOUSE(prog(f, C.retry - 30, C.retry + 50)));
-          state = f >= C.retry ? 'ok' : f >= C.fail ? 'fail' : 'lane';
-        } else {
-          x = f < at ? mix(LANE_X0, GATE_X - 360, RESOLVE(prog(f, fall, at))) : mix(GATE_X - 360, GATE_X + 700, HOUSE(prog(f, at, at + 60)));
-          state = f >= at ? 'ok' : 'lane';
-        }
-        const y = mix(UY - 1600, UY - 90, drop);
-        const edge = state === 'ok' ? 'rgba(0,229,160,0.8)' : state === 'fail' ? 'rgba(255,107,82,0.9)' : 'rgba(238,243,240,0.25)';
-        return <Box key={i} cam={cam} c={v3(x, y, LANE_Z(i))} size={[620, 180, 240]} color="#0e2b21" fog={FOG} face={<Crate i={i} state={state} />} edge={edge} />;
-      })}
-      {JOBS.map((_, i) => {
-        const at = GATE_AT[i];
-        const ok = f >= at;
-        const bad = i === 2 && f >= C.fail && f < C.retry;
-        const flash = ok ? Math.exp(-(f - at) / 8) : bad ? Math.exp(-(f - C.fail) / 6) : 0;
-        const col = bad ? '#ff6b52' : ok ? MINT : 'rgba(238,243,240,0.35)';
+    <div style={{ position: 'absolute', inset: 0 }}>
+      {new Array(COLS * ROWS).fill(0).map((_, i) => {
+        const c = i % COLS;
+        const r = Math.floor(i / COLS);
+        const st = cardState(c, r, f);
+        const hero = c === HERO.c && r === HERO.r;
+        const flipT = st === 'pending' ? 0 : clamp((r - sr) / 1.6);
+        const bg = st === 'pending' ? (hero && f < DASH ? '#fffaf0' : CREAM) : st === 'pass' ? mix(1, 0, flipT) > 0.5 ? CREAM : '#0c3326' : st === 'flag' ? AMBER : RED;
+        const stand = (st === 'flag' || st === 'fail') && settled ? 1 : 0;
         return (
-          <Plane key={`g${i}`} cam={cam} c={v3(GATE_X, UY - 200, LANE_Z(i))} U={vscale(Z, -1)} V={Y} w={300} h={390} fog={FOG}>
-            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', filter: `drop-shadow(0 0 ${30 * flash + 6}px ${col})` }}>
-              <Shield size={280} color={col} check={ok ? HOUSE(prog(f, at, at + 8)) : 0} />
-            </div>
-          </Plane>
+          <div key={i} style={{ position: 'absolute', left: c * PX + (PX - CW) / 2, top: r * PZ + (PZ - CH) / 2, width: CW, height: CH, borderRadius: 8, background: bg, boxShadow: stand ? `0 0 40px ${st === 'fail' ? RED : AMBER}` : '0 3px 0 rgba(0,0,0,0.25)', padding: '14px 16px', opacity: st === 'pass' ? mix(1, 0.75, flipT) : 1 }}>
+            {st === 'pending' || flipT < 0.5 ? (
+              <>
+                <div style={{ height: 9, width: '55%', borderRadius: 4, background: 'rgba(40,40,30,0.45)' }} />
+                <div style={{ height: 6, width: '90%', borderRadius: 3, background: 'rgba(40,40,30,0.2)', marginTop: 12 }} />
+                <div style={{ height: 6, width: '80%', borderRadius: 3, background: 'rgba(40,40,30,0.2)', marginTop: 8 }} />
+                <div style={{ height: 6, width: '66%', borderRadius: 3, background: 'rgba(40,40,30,0.2)', marginTop: 8 }} />
+              </>
+            ) : st === 'pass' ? (
+              <svg width={40} height={40} viewBox="0 0 40 40" style={{ position: 'absolute', right: 14, bottom: 12 }}>
+                <path d="M8 21 L17 30 L33 12" stroke={MINT} strokeWidth={5} fill="none" strokeLinecap="round" strokeLinejoin="round" opacity={0.7} />
+              </svg>
+            ) : (
+              <div style={{ fontFamily: SANS, fontSize: 64, fontWeight: 800, color: '#2a1406', lineHeight: '90px', textAlign: 'center' }}>{st === 'fail' ? '×' : '!'}</div>
+            )}
+          </div>
         );
       })}
-      <Box cam={cam} c={v3(SWITCH.x, SWITCH.y + 30, SWITCH.z)} size={[520, 60, 320]} color="#0e2b21" fog={FOG} edge="rgba(0,229,160,0.4)" />
-      <Plane cam={cam} c={v3(SWITCH.x, SWITCH.y - 130, SWITCH.z + 162)} w={520} h={260} fog={FOG}>
-        <div style={{ position: 'absolute', inset: 0, borderRadius: 30, background: '#0a1d16', boxShadow: `inset 0 0 0 3px ${flagOff ? '#ff6b52' : MINT}`, padding: '26px 32px', fontFamily: SANS }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 22 }}>
-            <div style={{ width: 150, height: 80, borderRadius: 40, background: flagOff ? 'rgba(238,243,240,0.16)' : MINT, position: 'relative' }}>
-              <div style={{ position: 'absolute', top: 8, left: flagOff ? 8 : 78, width: 64, height: 64, borderRadius: 32, background: '#03150f' }} />
+      {/* the scan line */}
+      {f >= D && f < D + 74 ? <div style={{ position: 'absolute', left: -200, right: -200, top: sr * PZ - 6, height: 12, background: MINT, boxShadow: `0 0 60px 20px ${MINT}, 0 0 200px 80px rgba(0,229,160,0.35)` }} /> : null}
+    </div>
+  );
+};
+
+const LampDesk: React.FC<{ cam: Cam; x: number; f: number }> = ({ cam, x, f }) => {
+  const z = FD / 2 + 520;
+  const calm = f >= OUTC;
+  return (
+    <>
+      <Plane cam={cam} c={v3(x, -2, z)} U={X} V={Z} w={1400} h={1400} z={-150000}>
+        <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle, rgba(255,210,140,${calm ? 0.55 : 0.4}) 0%, rgba(255,190,120,0.12) 40%, transparent 70%)` }} />
+      </Plane>
+      <Box cam={cam} c={v3(x, -80, z)} size={[420, 20, 240]} color="#4a3524" edge="rgba(0,0,0,0.3)" top={<div style={{ position: 'absolute', inset: 0, background: '#6b4b31' }} />} />
+      <Box cam={cam} c={v3(x - 150, -260, z - 80)} size={[16, 340, 16]} color="#2a2a2a" />
+      <Plane cam={cam} c={v3(x - 120, -440, z - 80)} w={120} h={70}>
+        <div style={{ position: 'absolute', inset: 0, borderRadius: '60px 60px 10px 10px', background: '#2a2a2a', boxShadow: '0 30px 60px 10px rgba(255,210,140,0.7)' }} />
+      </Plane>
+      {/* the reviewer: a chair back and a silhouette */}
+      <Plane cam={cam} c={v3(x + 40, -200, z + 170)} w={170} h={300}>
+        <svg width={170} height={300} viewBox="0 0 170 300">
+          <circle cx={85} cy={60} r={42} fill="#1b1310" />
+          <path d="M10 300 C10 150 40 110 85 110 C130 110 160 150 160 300 Z" fill="#1b1310" />
+        </svg>
+      </Plane>
+    </>
+  );
+};
+
+const FieldWorld: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => (
+  <>
+    <Plane cam={cam} c={v3(0, -3000, -9000)} w={40000} h={12000} z={-500000}>
+      <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, #020d09 0%, #06261b 55%, #0b3a29 75%, #041a12 100%)` }} />
+    </Plane>
+    <Plane cam={cam} c={v3(0, 4, 0)} U={X} V={Z} w={FW + 12000} h={FD + 12000} z={-400000}>
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 50%, #0a2e21 20%, #03150f 70%)' }} />
+    </Plane>
+    <Plane cam={cam} c={v3(0, 0, 0)} U={X} V={Z} w={FW} h={FD} z={-300000}>
+      <Field f={f} />
+    </Plane>
+    <LampDesk cam={cam} x={-700} f={f} />
+    <LampDesk cam={cam} x={700} f={f} />
+  </>
+);
+
+// ── the Metabase table: reading them one by one
+const TableScene: React.FC<{ f: number }> = ({ f }) => {
+  const scroll = (f - DASH) * 4.2;
+  const hh = handheld(f, 6, 0.35, 2);
+  const rows = new Array(40).fill(0).map((_, i) => {
+    const n = 963 - Math.floor(scroll / 44) - i;
+    return { id: 48213 - n * 7, type: ['Progress note', 'Treatment plan', 'Progress note', 'Reassessment', 'Progress note'][i % 5], clin: `Clinician ${String.fromCharCode(65 + ((i * 7) % 26))}.`, date: `Oct ${1 + ((i * 3) % 28)}` };
+  });
+  return (
+    <AbsoluteFill style={{ background: '#e9eef3' }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transform: `translate(${hh.x}px, ${hh.y}px) rotate(${hh.r}deg) scale(${mix(1.12, 1.24, prog(f, DASH, SPRINT))})`, transformOrigin: '60% 40%', fontFamily: '"Lato", "Helvetica Neue", sans-serif', color: '#4c5773' }}>
+        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 250, background: '#fff', borderRight: '1px solid #eeecec', padding: 24 }}>
+          <div style={{ fontSize: 22, fontWeight: 900, color: '#509ee3' }}>▦ Metabase</div>
+          {['Home', 'Collections', 'Clinical QA', 'Audits'].map((t, i) => (
+            <div key={t} style={{ fontSize: 17, marginTop: 22, fontWeight: i === 3 ? 800 : 500, color: i === 3 ? '#509ee3' : '#4c5773' }}>{t}</div>
+          ))}
+        </div>
+        <div style={{ position: 'absolute', left: 280, right: 40, top: 30 }}>
+          <div style={{ fontSize: 30, fontWeight: 900, color: '#2e353b' }}>Notes pending audit</div>
+          <div style={{ fontSize: 17, marginTop: 6 }}>Clinical QA · October · <b style={{ color: '#ed6e6e' }}>{963 - Math.floor(scroll / 440)} rows</b> · audited this month: 37</div>
+          <div style={{ marginTop: 18, borderRadius: 8, background: '#fff', border: '1px solid #eeecec', height: 860, overflow: 'hidden', position: 'relative' }}>
+            <div style={{ display: 'flex', height: 50, alignItems: 'center', padding: '0 20px', fontSize: 15, fontWeight: 900, color: '#509ee3', borderBottom: '1px solid #eeecec', background: '#fafbfc', position: 'relative', zIndex: 2 }}>
+              {['Note ID', 'Type', 'Clinician', 'Date', 'Status'].map((h, i) => (
+                <span key={h} style={{ width: [160, 280, 280, 180, 300][i] }}>{h}</span>
+              ))}
             </div>
-            <div>
-              <div style={{ ...rec(1, 0, 650), fontSize: 30, color: '#eef3f0' }}>reassessments_v2</div>
-              <div style={{ ...rec(1, 0, 650), fontSize: 20, marginTop: 6, color: flagOff ? '#ff6b52' : MINT }}>{flagOff ? 'OFF · ROLLBACK PATH' : 'ON · REVERSIBLE'}</div>
+            <div style={{ position: 'absolute', left: 0, right: 0, top: 50 - (scroll % 44) }}>
+              {rows.map((r, i) => (
+                <div key={i} style={{ display: 'flex', height: 44, alignItems: 'center', padding: '0 20px', fontSize: 16, borderBottom: '1px solid #f3f3f3' }}>
+                  <span style={{ width: 160, color: '#509ee3' }}>{r.id}</span>
+                  <span style={{ width: 280 }}>{r.type}</span>
+                  <span style={{ width: 280 }}>{r.clin}</span>
+                  <span style={{ width: 180 }}>{r.date}</span>
+                  <span style={{ width: 300, color: '#ed6e6e', fontWeight: 700 }}>Needs review</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </Plane>
-    </>
+      </div>
+      <AbsoluteFill style={{ background: 'radial-gradient(ellipse 70% 70% at 55% 45%, transparent 50%, rgba(3,21,15,0.75))' }} />
+    </AbsoluteFill>
+  );
+};
+
+// ── the sprint: two days, one prototype
+const Sprint: React.FC<{ f: number }> = ({ f }) => {
+  const t1 = HOUSE(prog(f, SPRINT, SPRINT + 12));
+  const t2 = HOUSE(prog(f, SPRINT + 16, SPRINT + 28));
+  const t3 = HOUSE(prog(f, SPRINT + 32, SPRINT + 50));
+  const node = (label: string, sub2: string, x: number, col: string, t: number) => (
+    <div style={{ position: 'absolute', left: x, top: 640, width: 330, padding: '20px 22px', borderRadius: 18, border: `2px solid ${col}`, background: 'rgba(3,21,15,0.8)', opacity: t, transform: `translateY(${(1 - t) * 20}px)` }}>
+      <div style={{ fontFamily: SANS, fontSize: 30, fontWeight: 750, color: '#fff' }}>{label}</div>
+      <div style={{ ...rec(1, 0, 500), fontSize: 18, color: 'rgba(255,255,255,0.6)', marginTop: 6 }}>{sub2}</div>
+    </div>
+  );
+  return (
+    <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 40%, #0a4a33, ${GREEN} 70%)` }}>
+      <div style={{ position: 'absolute', left: 160, top: 200, fontFamily: SANS, fontSize: 150, fontWeight: 800, letterSpacing: '-0.04em', color: '#fff', lineHeight: 1 }}>
+        <div style={{ clipPath: `inset(-10% ${(1 - t1) * 100}% -20% 0)` }}>Two days.</div>
+        <div style={{ clipPath: `inset(-10% ${(1 - t2) * 100}% -20% 0)`, color: MINT }}>One prototype.</div>
+      </div>
+      <div style={{ position: 'absolute', right: 160, top: 240, ...rec(1, 0, 600), fontSize: 32, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.6)', opacity: t2, textAlign: 'right' }}>
+        SAT WITH THE CLINICAL LEAD
+        <br />
+        TO SEE WHAT THE WORK REALLY WAS
+      </div>
+      {node('A note', 'progress note · treatment plan', 160, 'rgba(255,255,255,0.4)', t3)}
+      {node('AI reads first', 'checks every note', 620, MINT, HOUSE(prog(f, SPRINT + 38, SPRINT + 54)))}
+      {node('A clinician judges', 'only what was flagged', 1080, AMBER, HOUSE(prog(f, SPRINT + 44, SPRINT + 60)))}
+      {[490, 950].map((x, i) => (
+        <div key={x} style={{ position: 'absolute', left: x, top: 695, width: 130 * HOUSE(prog(f, SPRINT + 40 + i * 6, SPRINT + 54 + i * 6)), height: 4, background: MINT }} />
+      ))}
+    </AbsoluteFill>
+  );
+};
+
+// ── macro on one flagged card: what the first pass actually checks
+const FlagCard: React.FC<{ f: number; from: number }> = ({ f, from }) => {
+  const checks = [
+    ['Goal', '“Feel less anxious”', 'Not measurable', AMBER],
+    ['Objective', 'no target date', 'Missing', AMBER],
+    ['Reassessment', 'due Oct 14', 'On time', MINT],
+    ['Signature', 'signed', 'Present', MINT],
+  ];
+  const t = settle(prog(f, from, from + 10), 0.8);
+  return (
+    <AbsoluteFill style={{ background: 'rgba(3,21,15,0.82)', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ width: 1100, borderRadius: 26, background: CREAM, color: '#1f1a12', padding: '40px 50px', transform: `scale(${mix(0.9, 1, t)}) rotate(${mix(-3, -1, t)}deg)`, boxShadow: `0 0 0 6px ${AMBER}, 0 40px 120px rgba(0,0,0,0.6)`, fontFamily: SANS }}>
+        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+          <span style={{ fontSize: 40, fontWeight: 800 }}>Treatment plan</span>
+          <span style={{ marginLeft: 'auto', ...rec(1, 0, 600), fontSize: 20, color: '#7a6f5f' }}>ILLUSTRATIVE · NO PATIENT DATA</span>
+        </div>
+        {checks.map(([a, b, c, col], i) => {
+          const on = f >= from + 12 + i * 8;
+          return (
+            <div key={a} style={{ display: 'flex', alignItems: 'center', height: 76, borderTop: '1px solid rgba(0,0,0,0.1)', marginTop: i ? 0 : 20, fontSize: 30 }}>
+              <span style={{ width: 280, fontWeight: 700 }}>{a}</span>
+              <span style={{ flex: 1, color: '#4a4236' }}>{b}</span>
+              <span style={{ padding: '8px 18px', borderRadius: 12, fontSize: 24, fontWeight: 750, background: on ? (col === MINT ? '#0c3326' : '#3a2206') : 'transparent', color: on ? col : 'transparent', transform: `scale(${on ? settle(prog(f, from + 12 + i * 8, from + 20 + i * 8), 1) : 0.6})` }}>{c}</span>
+            </div>
+          );
+        })}
+        <div style={{ marginTop: 18, ...rec(1, 0, 650), fontSize: 22, color: '#8a5a12' }}>→ flagged for a clinician</div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// ── the therapist's compliance hub: the carrot and the stick
+const Hub: React.FC<{ f: number }> = ({ f }) => {
+  const s = f - HUB;
+  const tipT = HOUSE(prog(s, 18, 34));
+  const newNote = s >= 54;
+  const checksOn = [70, 78, 86].map((k) => s >= k);
+  const passed = s >= 96;
+  const streak = passed ? 3 : 2;
+  const strikeFade = HOUSE(prog(s, 100, 124));
+  const card: React.CSSProperties = { borderRadius: 24, background: '#0d1f18', border: '1px solid rgba(0,229,160,0.18)', padding: '30px 34px' };
+  return (
+    <AbsoluteFill style={{ background: `radial-gradient(ellipse at 40% 30%, #0e3a2a, #03150f 75%)`, fontFamily: SANS, color: '#eaf5f0' }}>
+     <AbsoluteFill style={{ transform: `scale(${mix(1.06, 1.14, prog(s, 0, 130))})`, transformOrigin: '50% 40%' }}>
+      <div style={{ position: 'absolute', left: 120, top: 90, display: 'flex', alignItems: 'center', gap: 18 }}>
+        <Shield size={44} color={MINT} stroke={10} />
+        <span style={{ fontSize: 34, fontWeight: 750 }}>Compliance hub</span>
+        <span style={{ ...rec(1, 0, 550), fontSize: 20, color: 'rgba(234,245,240,0.55)', marginLeft: 14 }}>YOUR NOTES · OCTOBER</span>
+      </div>
+      {/* the stick */}
+      <div style={{ position: 'absolute', left: 120, top: 200, width: 760, ...card }}>
+        <div style={{ ...rec(1, 0, 650), fontSize: 18, letterSpacing: '0.14em', color: 'rgba(234,245,240,0.55)' }}>STRIKES TOWARD A VIOLATION</div>
+        <div style={{ display: 'flex', gap: 16, marginTop: 20 }}>
+          {[0, 1, 2].map((i) => (
+            <div key={i} style={{ flex: 1, height: 90, borderRadius: 16, background: i === 0 ? `rgba(255,107,82,${mix(0.9, 0.12, strikeFade)})` : 'rgba(255,255,255,0.06)', border: `2px solid ${i === 0 ? RED : 'rgba(255,255,255,0.12)'}`, opacity: i === 0 ? mix(1, 0.55, strikeFade) : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, fontWeight: 750 }}>
+              {i === 0 ? '1' : ''}
+            </div>
+          ))}
+        </div>
+        <div style={{ fontSize: 24, marginTop: 20, color: '#ffc2b6' }}>Oct 3 · Treatment plan: goal isn’t measurable</div>
+        <div style={{ fontSize: 20, marginTop: 8, color: 'rgba(234,245,240,0.6)' }}>{passed ? 'Clears after 3 clean notes · 3 of 3 ✓' : `Clears after 3 clean notes · ${streak} of 3`}</div>
+      </div>
+      {/* the carrot */}
+      <div style={{ position: 'absolute', left: 940, top: 200, width: 860, ...card, border: `2px solid ${MINT}`, opacity: tipT, transform: `translateY(${(1 - tipT) * 24}px)` }}>
+        <div style={{ ...rec(1, 0, 650), fontSize: 18, letterSpacing: '0.14em', color: MINT }}>COACHING TIP</div>
+        <div style={{ fontSize: 30, fontWeight: 700, marginTop: 14 }}>Make the goal something you can measure.</div>
+        <div style={{ fontSize: 24, marginTop: 18, color: 'rgba(234,245,240,0.5)', textDecoration: 'line-through' }}>“Feel less anxious”</div>
+        <div style={{ fontSize: 26, marginTop: 8, color: '#bff5df' }}>“Panic episodes from 4 a week to 1 by December”</div>
+      </div>
+      {/* the next note */}
+      <div style={{ position: 'absolute', left: 120, top: 600, width: 1680, ...card, opacity: HOUSE(prog(s, 54, 64)), transform: `translateY(${(1 - HOUSE(prog(s, 54, 64))) * 30}px)`, border: `2px solid ${passed ? MINT : 'rgba(255,255,255,0.14)'}`, display: newNote ? 'flex' : 'none', alignItems: 'center', gap: 50 }}>
+        <div>
+          <div style={{ ...rec(1, 0, 600), fontSize: 18, letterSpacing: '0.14em', color: 'rgba(234,245,240,0.55)' }}>NEXT NOTE · OCT 17</div>
+          <div style={{ fontSize: 30, fontWeight: 750, marginTop: 8 }}>Treatment plan</div>
+        </div>
+        {['Goal measurable', 'Target date', 'Signed'].map((c, i) => (
+          <div key={c} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 26, color: checksOn[i] ? '#bff5df' : 'rgba(234,245,240,0.3)' }}>
+            <span style={{ width: 38, height: 38, borderRadius: 19, border: `2px solid ${checksOn[i] ? MINT : 'rgba(255,255,255,0.2)'}`, background: checksOn[i] ? MINT : 'transparent', color: GREEN, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, transform: `scale(${checksOn[i] ? settle(prog(s, 70 + i * 8, 78 + i * 8), 1.2) : 1})` }}>{checksOn[i] ? '✓' : ''}</span>
+            {c}
+          </div>
+        ))}
+        <div style={{ marginLeft: 'auto', padding: '12px 26px', borderRadius: 14, background: passed ? MINT : 'transparent', color: GREEN, fontSize: 28, fontWeight: 800, transform: `scale(${passed ? settle(prog(s, 96, 104), 1.2) : 0.8})`, opacity: passed ? 1 : 0 }}>Passed</div>
+      </div>
+     </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+// ── the wire: two-way, and it survives the partner going quiet
+const Wire: React.FC<{ f: number }> = ({ f }) => {
+  const s = f - WIRE;
+  const quiet = s >= 26 && s < 66;
+  const polling = s >= 34;
+  const alertT = settle(prog(s, 30, 40), 1);
+  const hats = H.hat.filter((h) => h >= WIRE && h < OUTC + 20);
+  const A = { x: 460, y: 540 };
+  const B = { x: 1460, y: 540 };
+  const packets = [...hats, ...beats.filter((b) => b >= WIRE && b < OUTC + 20)].map((h, i) => ({ h, dir: i % 2 ? -1 : 1, poll: h - WIRE >= 34 && h - WIRE < 66 }));
+  return (
+    <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 50%, #0b3627, #02110c 75%)`, fontFamily: SANS, color: '#eaf5f0' }}>
+      <svg width={1920} height={1080} style={{ position: 'absolute', inset: 0 }}>
+        <line x1={A.x + 150} y1={A.y} x2={B.x - 150} y2={B.y} stroke={quiet ? RED : MINT} strokeWidth={6} strokeDasharray={quiet ? '60 30' : undefined} opacity={quiet ? 0.5 : 0.9} />
+        {polling ? <path d={`M${A.x + 120} ${A.y + 90} C ${A.x + 400} ${A.y + 330}, ${B.x - 400} ${B.y + 330}, ${B.x - 120} ${B.y + 90}`} stroke={AMBER} strokeWidth={5} strokeDasharray="12 16" fill="none" strokeDashoffset={-f * 2} opacity={HOUSE(prog(s, 34, 44))} /> : null}
+        {packets.map(({ h, dir, poll }, i) => {
+          const u = (f - h) / 24;
+          if (u < 0 || u > 1) return null;
+          const t = dir > 0 ? u : 1 - u;
+          let x = mix(A.x + 150, B.x - 150, t);
+          let y = A.y;
+          if (poll) {
+            const q = t;
+            x = (1 - q) ** 3 * (A.x + 120) + 3 * (1 - q) ** 2 * q * (A.x + 400) + 3 * (1 - q) * q * q * (B.x - 400) + q ** 3 * (B.x - 120);
+            y = (1 - q) ** 3 * (A.y + 90) + 3 * (1 - q) ** 2 * q * (A.y + 330) + 3 * (1 - q) * q * q * (B.y + 330) + q ** 3 * (B.y + 90);
+          }
+          return <circle key={i} cx={x} cy={y} r={11} fill={poll ? AMBER : MINT} />;
+        })}
+      </svg>
+      <div style={{ position: 'absolute', left: A.x - 150, top: A.y - 150, width: 300, height: 300, borderRadius: 40, background: '#0d1f18', border: `3px solid ${MINT}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+        <Shield size={80} color={MINT} />
+        <div style={{ fontSize: 40, fontWeight: 800 }}>Alma</div>
+      </div>
+      <div style={{ position: 'absolute', left: B.x - 150, top: B.y - 150, width: 300, height: 300, borderRadius: 40, background: '#101a1f', border: `3px solid ${quiet ? RED : 'rgba(255,255,255,0.4)'}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, textAlign: 'center' }}>
+        <div style={{ fontSize: 34, fontWeight: 800, lineHeight: 1.1 }}>Clinical-AI
+          <br />
+          partner</div>
+        <div style={{ ...rec(1, 0, 600), fontSize: 18, color: quiet ? RED : 'rgba(255,255,255,0.5)' }}>{quiet ? 'webhooks quiet' : 'treatment-plan review'}</div>
+      </div>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 250, display: 'flex', justifyContent: 'center', gap: 18 }}>
+        {['OAuth', 'signed · idempotent webhooks', 'HIPAA reassessment ✓'].map((c, i) => (
+          <span key={c} style={{ ...rec(1, 0, 600), fontSize: 22, padding: '10px 20px', borderRadius: 999, border: '1px solid rgba(0,229,160,0.4)', color: '#bff5df', opacity: HOUSE(prog(s, 2 + i * 5, 10 + i * 5)) }}>{c}</span>
+        ))}
+      </div>
+      {polling ? <div style={{ position: 'absolute', left: 960 - 170, top: 790, width: 340, textAlign: 'center', ...rec(1, 0, 650), fontSize: 24, color: AMBER, opacity: HOUSE(prog(s, 36, 46)) }}>polling fallback</div> : null}
+      {s >= 30 ? (
+        <div style={{ position: 'absolute', right: 120, top: 120, padding: '18px 24px', borderRadius: 18, background: '#2a1512', border: `2px solid ${RED}`, transform: `scale(${alertT})`, transformOrigin: '100% 0', fontSize: 24 }}>
+          <b style={{ color: RED }}>Degradation alert</b> → on-call
+        </div>
+      ) : null}
+      <div style={{ position: 'absolute', left: 120, bottom: 150, ...rec(1, 0, 650), fontSize: 30, color: '#bff5df' }}>events lost: 0</div>
+    </AbsoluteFill>
+  );
+};
+
+// ── camera for the field
+const HX = cellX(HERO.c);
+const HZ = cellZ(HERO.r);
+const EDIT = edit([
+  {
+    name: 'rise',
+    from: 0,
+    keys: [
+      [0, HX, 0, HZ, 420, 0, 86, 0, 50],
+      [30, HX, 0, HZ, 700, 0, 86, 0, 50],
+      [110, HX * 0.5, 0, HZ * 0.6, 6200, 8, 62, 0, 35],
+      [DASH, 0, 0, 600, 7400, 14, 34, 0, 28],
+    ],
+    kicks: [{ frames: beats.filter((b) => b > 0 && b < DASH).map(Math.round), tau: 6, punch: 0.01, px: 2 }],
+  },
+  {
+    name: 'scan',
+    from: D,
+    keys: [
+      [D, 0, 0, 800, 6600, 16, 36, 0, 28],
+      [FLAG + 8, 0, 0, 200, 7000, 6, 50, 0, 28],
+    ],
+  },
+  { name: 'above', from: FLAG + 12, keys: [[FLAG + 12, 0, 0, 0, 8200, 0, 88, 0, 32], [FLAG + 26, 0, 0, 0, 7900, 0, 88, 0, 32]] },
+  { name: 'outcome', from: OUTC, keys: [[OUTC, 0, -200, FD / 2 + 300, 3400, 0, 18, 0, 35], [END, 0, -200, FD / 2 + 300, 3900, -4, 16, 0, 35]] },
+]);
+
+const Title: React.FC<{ f: number; from: number; to: number; big: string; small?: string; x?: number; y?: number; size?: number; color?: string; align?: 'left' | 'right' }> = ({ f, from, to, big, small, x = 120, y = 760, size = 96, color = '#fff', align = 'left' }) => {
+  if (f < from - 2 || f > to + 12) return null;
+  const tIn = HOUSE(prog(f, from, from + 14));
+  const tOut = prog(f, to, to + 10);
+  return (
+    <div style={{ position: 'absolute', [align]: x, top: y, zIndex: 906000, opacity: 1 - tOut, fontFamily: SANS, textAlign: align }}>
+      <div style={{ fontSize: size, fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.02, color, clipPath: `inset(-10% ${align === 'left' ? (1 - tIn) * 100 : 0}% -20% ${align === 'right' ? (1 - tIn) * 100 : 0}%)`, textShadow: '0 6px 40px rgba(0,0,0,0.7)' }}>{big}</div>
+      {small ? <div style={{ ...rec(1, 0, 600), fontSize: Math.max(22, size * 0.28), color: 'rgba(255,255,255,0.82)', marginTop: 16, opacity: HOUSE(prog(f, from + 8, from + 20)), textShadow: '0 4px 20px rgba(0,0,0,0.9)' }}>{small}</div> : null}
+    </div>
   );
 };
 
 export const Alma: React.FC = () => {
   const f = useCurrentFrame();
-  const { cam, shot } = EDIT.at(f);
-  const inOffice = !['lanes', 'switch'].includes(shot.name) && !(shot.name === 'crane' && f > C.crane + 24) && !(shot.name === 'up' && f < C.up + 14);
-  const macro = ['save', 'list', 'clock', 'saved'].includes(shot.name);
-  const FOCUS: Record<string, number> = { save: 1440, list: 1620, clock: 1040, saved: 1560, mug: 1400, door: 1600, switch: 1420, office: 3500, waiting: 4100, up: 4500 };
-  const dof = { focus: FOCUS[shot.name] ?? 3500, aperture: macro ? 1.4 : shot.name === 'mug' ? 1.6 : ['lanes', 'switch', 'crane'].includes(shot.name) ? 0.25 : 0.7, max: 12 };
-  const black = f >= C.black && f < D;
-  const typed = 'In Alma, Save only saves.';
-  const typeT = prog(f, C.type[0] - 4, C.type[3] + 2);
-  const lbox = ['waiting', 'door', 'crane', 'lanes', 'up'].includes(shot.name) ? 1 : 0;
-  const label = shot.name === 'lanes' || shot.name === 'switch' ? 'WHAT ACTUALLY RUNS · ALMA BACKEND · HIPAA' : f < D ? 'IF EVERYTHING RODE ON SAVE' : 'IN ALMA';
-  const lamp = project(cam, v3(1500, -700, -700));
+  const fieldShot = f < DASH || (f >= D && f < FLAG + 26) || f >= OUTC;
+  const { cam, focus } = EDIT.at(f);
+  const audited = f < D ? 37 : Math.round(mix(37, 1000 - NEEDS, HOUSE(prog(f, D, D + 74))));
+  const flash = pulse([D, SPRINT, HUB, WIRE], f, 5);
+  const kick = pulse(H.kick.filter((k) => k < DASH), f, 6);
   return (
-    <AbsoluteFill style={{ background: inOffice ? '#1a120c' : '#03150f', overflow: 'hidden' }}>
-      <Blur
-        ranges={[
-          [C.crane + 4, C.fall[4] + 12, 6],
-          [C.up, C.up + 26, 6],
-        ]}
-      >
-        <DofCtx.Provider value={dof}>
-          <AbsoluteFill style={{ isolation: 'isolate' }}>{inOffice ? <Office f={f} cam={cam} /> : <Underworld f={f} cam={cam} />}</AbsoluteFill>
+    <AbsoluteFill style={{ background: '#03150f', overflow: 'hidden' }}>
+      {fieldShot ? (
+        <DofCtx.Provider value={{ focus, aperture: f < 40 ? 1.0 : 0.3 }}>
+          <AbsoluteFill style={{ isolation: 'isolate', transform: `scale(${1 + 0.006 * kick})` }}>
+            <FieldWorld f={f} cam={cam} />
+          </AbsoluteFill>
+          <Dust n={40} seed="al" f={f} color="rgba(255,225,180,0.8)" a={0.3} />
+          <Glow x={960} y={1100} r={900} color="rgba(255,200,140,0.25)" a={0.5} />
         </DofCtx.Provider>
-      </Blur>
-      {inOffice ? (
-        <>
-          {lamp.d > 40 ? <Glow x={lamp.sx} y={lamp.sy} r={900} color="rgba(255,180,107,0.55)" a={0.7} /> : null}
-          <Grade tint={AMBER} a={0.22} />
-        </>
-      ) : (
-        <>
-          <Bokeh n={26} seed="ab" colors={['rgba(0,229,160,0.5)', 'rgba(238,243,240,0.35)']} area={[0, 0, 1920, 700]} size={[10, 40]} f={f} a={0.35} />
-          <Grade tint={MINT} a={0.12} />
-        </>
-      )}
-      {!black && f < C.end ? (
-        <div style={{ position: 'absolute', left: 120, top: 88, ...rec(1, 0, 600), fontSize: 20, letterSpacing: '0.2em', color: f < D ? AMBER : MINT, zIndex: 910000, opacity: f < 30 ? HOUSE(prog(f, 12, 30)) : 1 }}>{label}</div>
       ) : null}
-      {black ? (
-        <AbsoluteFill style={{ background: '#000', justifyContent: 'center', alignItems: 'center', zIndex: 920000 }}>
-          <div style={{ fontFamily: SANS, fontSize: 84, fontWeight: 650, color: '#fff', letterSpacing: '-0.02em', whiteSpace: 'pre' }}>
-            {typed.slice(0, Math.floor(typeT * typed.length))}
-            <span style={{ color: MINT, opacity: Math.floor(f / 10) % 2 }}>▌</span>
+      {f >= DASH && f < SPRINT ? <TableScene f={f} /> : null}
+      {f >= SPRINT && f < D ? <Sprint f={f} /> : null}
+      {f >= FLAG + 26 && f < HUB ? <FlagCard f={f} from={FLAG + 26} /> : null}
+      {f >= HUB && f < WIRE ? <Hub f={f} /> : null}
+      {f >= WIRE && f < OUTC ? <Wire f={f} /> : null}
+
+      {/* the counter: the whole problem in one line */}
+      {fieldShot && f < END ? (
+        <div style={{ position: 'absolute', right: 120, top: 90, textAlign: 'right', zIndex: 906000, fontFamily: SANS, textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}>
+          <div style={{ ...rec(1, 0, 650), fontSize: 20, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.65)' }}>{f < D ? 'AUDITED THIS MONTH' : f < OUTC ? 'READ BY THE FIRST PASS' : 'NEED A CLINICIAN'}</div>
+          <div style={{ fontSize: 88, fontWeight: 800, color: f < D ? '#fff' : MINT, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.03em' }}>
+            {f < OUTC ? audited.toLocaleString('en-US') : NEEDS}
+            <span style={{ fontSize: 44, color: 'rgba(255,255,255,0.5)' }}> / 1,000</span>
           </div>
-        </AbsoluteFill>
+        </div>
       ) : null}
-      <Letterbox t={lbox} />
-      <Flash a={f >= D ? 0.2 * Math.exp(-(f - D) / 5) : 0} color="0,229,160" />
+      <Title f={f} from={70} to={DASH - 6} big="1,000 notes a month to audit." small="Two clinical reviewers." size={92} />
+      <Title f={f} from={DASH + 20} to={SPRINT - 4} big="Read one by one." small="From a Metabase table." size={92} x={120} y={820} color="#fff" />
+      <Title f={f} from={D + 18} to={FLAG + 8} big="The AI reads first." small="Most go quiet. The rest wait for a human." size={84} y={800} />
+      <Title f={f} from={HUB + 110} to={WIRE - 4} big="Coached, not punished." small="Strikes track toward a violation. Tips fix the next note." size={72} y={840} />
+      <Title f={f} from={WIRE + 50} to={OUTC - 2} big="Built for the day the partner goes quiet." size={64} y={880} />
+      <Title f={f} from={OUTC + 4} to={END - 2} big="72% of eligible clinicians." small="And the clinical lead stopped drowning in audits." size={100} y={760} color="#fff" />
+
+      {/* the macro card before the rise: one note */}
+      {f < 40 ? (
+        <div style={{ position: 'absolute', left: 120, bottom: 110, ...rec(1, 0, 600), fontSize: 26, color: 'rgba(255,255,255,0.8)', opacity: 1 - prog(f, 30, 40), zIndex: 906000 }}>
+          {resolveText(''.padEnd(32, ' '), 'Progress note · audit pending', HOUSE(prog(f, 4, 24)), 'alm', f)}
+        </div>
+      ) : null}
+      {/* subliminal: from directly above, CARE — held to the rewatch */}
+      {sub(f, FLAG + 12, 14) ? <div style={{ position: 'absolute', left: 0, right: 0, bottom: 60, textAlign: 'center', ...rec(1, 0, 600), fontSize: 16, letterSpacing: '0.3em', color: 'rgba(255,255,255,0.25)', zIndex: 906000 }}>START WITH THE PERSON</div> : null}
+      <Letterbox t={fieldShot && f < END ? 1 : 0} />
+      <Flash a={0.22 * flash} color="0,229,160" />
       <BrandEnd
         g={g}
-        from={C.end}
+        from={END}
         bg={`radial-gradient(ellipse at 50% 40%, #0a4a33, ${GREEN} 70%)`}
         accent={MINT}
         kicker="HIPAA · PRODUCTION · 2.7 YEARS"
         logo={
           <div style={{ display: 'flex', alignItems: 'center', gap: 36 }}>
-            <Shield size={110} color={MINT} check={HOUSE(prog(f, C.end + 14, C.end + 30))} />
+            <Shield size={110} color={MINT} check={HOUSE(prog(f, END + 14, END + 30))} />
             <div style={{ fontFamily: SANS, fontSize: 190, fontWeight: 700, letterSpacing: '-0.04em', color: '#fff' }}>Alma</div>
           </div>
         }
         line="Clinical systems that had to earn adoption and survive inspection."
       >
-        <div style={{ display: 'flex', gap: 70, marginTop: 10, opacity: RESOLVE(prog(f, C.end + 40, C.end + 70)) }}>
+        <div style={{ display: 'flex', gap: 70, marginTop: 10, opacity: RESOLVE(prog(f, END + 40, END + 70)) }}>
           {[
-            ['72%', 'ADOPTION · SELF-REPORTED'],
-            ['999', 'COMMITS'],
+            ['72%', 'ELIGIBLE CLINICIANS · SELF-REPORTED'],
+            ['2 days', 'TO THE PROTOTYPE'],
             ['2.7 yrs', 'HIPAA PRODUCTION'],
           ].map(([n, l]) => (
             <div key={l} style={{ textAlign: 'center' }}>
-              <div style={{ fontFamily: SANS, fontSize: 56, fontWeight: 700, color: '#fff' }}>{resolveText(''.padEnd(n.length, ' '), n, RESOLVE(prog(f, C.end + 40, C.end + 70)), `al${l}`, f)}</div>
+              <div style={{ fontFamily: SANS, fontSize: 56, fontWeight: 700, color: '#fff' }}>{resolveText(''.padEnd(n.length, ' '), n, RESOLVE(prog(f, END + 40, END + 70)), `al${l}`, f)}</div>
               <div style={{ ...rec(1, 0, 500), fontSize: 15, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.6)', marginTop: 6 }}>{l}</div>
             </div>
           ))}
         </div>
       </BrandEnd>
-      <Dip f={f} at={C.black} len={2} />
       <Vignette s={0.55} />
       <Grain />
       <Audio src={staticFile('audio/alma_mix.wav')} />

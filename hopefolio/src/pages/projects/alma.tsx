@@ -19,8 +19,8 @@ export default function AlmaPage() {
       heroReel={{
         src: "/video/reels/alma.mp4",
         poster: "/video/reels/alma.jpg",
-        label: "Project film · The request path stays narrow",
-        caption: "Ten minutes between clients, and Save is still spinning. In Alma, Save only saves: the work underneath runs as audited, retryable stages behind a reversible flag.",
+        label: "Project film · Two clinicians, a thousand notes",
+        caption: "A thousand therapy notes a month to audit, and two clinical reviewers reading them one by one. After a two-day prototype sprint with the clinical lead, the AI reads first and clinicians judge what’s flagged; therapists are coached, not punished; the workflow survives the partner going quiet. 72% of eligible clinicians adopted it.",
         score: "“Kdila” by Hope Atina",
       }}
       heroProof={{

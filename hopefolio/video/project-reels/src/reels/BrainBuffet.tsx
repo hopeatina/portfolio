@@ -1,249 +1,413 @@
 import React from 'react';
 import { AbsoluteFill, Img, staticFile, useCurrentFrame } from 'remotion';
 import { Audio } from '@remotion/media';
-import { HOUSE, RESOLVE, TRAVEL, clamp, mix, prog, settle } from '../lib/ease';
+import { HOUSE, RESOLVE, clamp, mix, prog, settle } from '../lib/ease';
 import { GRIDS } from '../lib/grid';
 import { rec } from '../lib/theme';
 import { Flash, Grain, Vignette } from '../lib/Frame';
-import { monotone } from '../lib/spline';
-import { Cam, Key, X, Z, edit, spinAbout, v3, vlerp } from '../lib/space';
-import { Blur, Box, DofCtx, Fog, Plane } from '../lib/World';
-import { Bokeh, Glow, Grade, Whip } from '../lib/Env';
+import { resolveText } from '../lib/decode';
 import { BrandEnd } from '../lib/BrandEnd';
-import cues from '../data/cues_brainbuffet.json';
+import { at, pulse, sub } from '../lib/score';
+import hitsJson from '../data/hits_brainbuffet.json';
 
 /**
- * BRAINBUFFET v3: "A buffet, not a search box."
- * In BrainBuffet's own world: the violet horizon glow of the product, a lilac
- * buffet, and the smiling brain hanging over it as the host. Frame 0: a
- * search box answering in one line. Snap zoom out: that answer is a snack on
- * a saucer at the head of a buffet. Food-show grammar: a whip pan to each
- * dish on the beat (topic, what you know, subtopics, a quiz), overhead
- * flat-lays of the tray filling between them. Drop: a low hero angle as the
- * tray stands up into the course outline. Then the real study surface: a
- * note sticks to the lesson, the chapter quiz fills the bar.
+ * BRAINBUFFET v4: "From a question to a course."
+ *
+ * v3's buffet metaphor ate the product. v4 keeps the smiling host and one line
+ * of it ("an answer is a snack"), then gives the film to the real design: the
+ * create flow from the source (topic, expertise, subtopics, expertise quiz,
+ * course preview, chapter, notes), each sub-part lifted out of the dark-plum
+ * app on its beat with the one outcome it gives the learner beside it. On the
+ * drop the course preview arrives; its outline becomes the LearningMountain,
+ * the glowing path from BrainBuffet's own source, and the camera climbs it one
+ * lit point per hat. Outcome: a question to a course plan in under five minutes.
+ *
+ * Brand: BrainBuffet's real theme (#1B1823 / #272334 / #30293e, #8F39FF, #C99FFF,
+ * #f6eeff), the landing's lavender and purple-gradient headline, the purple
+ * night mountain. Subliminal: chapters 1–3 of the outline light their initials:
+ * Y-O-U.
  */
 const g = GRIDS.brainbuffet;
-const C = cues.cue;
-const D = C.drop;
-const VIOLET = '#b57dff';
-const LILAC = '#bea6f8';
-const INK = '#1c1823';
-const SANS = 'system-ui, -apple-system, Helvetica Neue, sans-serif';
-const FOG: Fog = { near: 2600, far: 8000 };
-const DISHES = [
-  { k: 'TOPIC', v: 'Building wealth with passive income', c: '#f4b740', x: 900 },
-  { k: 'YOU KNOW', v: 'A little. Skip the basics.', c: '#5cc8ff', x: 1600 },
-  { k: 'SUBTOPICS', v: 'Affiliate marketing · Picking products', c: '#8ee06a', x: 2300 },
-  { k: 'QUIZ', v: '3 questions to find your edge', c: '#ff7a8a', x: 3000 },
-];
-const CHAPTERS = ['Understanding affiliate marketing', 'Selecting the right products and platforms', 'Chapter quiz, with feedback', 'Your notes, attached to the lesson'];
-const SCREEN = v3(4300, -620, -600);
-const SW = 1770;
-const SH = 996;
-const TRAY_X = monotone([0, C.picks[0] - 30, C.picks[0], C.picks[1], C.picks[2], C.picks[3], D, 900], [520, 520, 900, 1600, 2300, 3000, 3060, 3060]);
-const TRAY_Z = 230;
+const M = g.markers as Record<string, number>;
+const H = { hat: at(hitsJson.hat as [number, number][]), snare: at(hitsJson.snare as [number, number][]), note: hitsJson.note as number[] };
+const LAND = Math.round(M.landing);
+const C1 = Math.round(M.c1);
+const C2 = Math.round(M.c2);
+const C3 = Math.round(M.c3);
+const D = Math.round(M.drop);
+const MTN = Math.round(M.mountain);
+const STUDY = Math.round(M.study);
+const NOTES = Math.round(M.notes);
+const OUT = Math.round(M.outcome);
+const END = Math.round(M.end);
+const beats = g.beats;
 
-const dishShot = (i: number, from: number, to: number): { name: string; from: number; keys: Key[] } => {
-  const d = DISHES[i];
-  return { name: `pick${i}`, from, keys: [[from, d.x - 40, -150, -200, 2000, 24, 16, 0, 50], [to, d.x + 40, -150, -180, 1850, 18, 17, 0, 50]] };
-};
-const flatShot = (from: number, to: number, x0: number, x1: number): { name: string; from: number; keys: Key[] } => ({
-  name: 'flat',
-  from,
-  keys: [[from, x0, -10, TRAY_Z, 1900, 0, 88, 0, 35], [to, x1, -10, TRAY_Z, 1800, 0, 88, 0, 35]],
-});
-const EDIT = edit([
-  { name: 'search', from: 0, keys: [[0, 0, -120, -170, 1500, 0, 6, 0, 85], [C.snap, 0, -120, -170, 1420, 0, 6, 0, 85]] },
-  { name: 'reveal', from: C.snap, keys: [[C.snap, 0, -120, -170, 1420, 0, 6, 0, 85], [C.snap + 14, 800, -260, -300, 2600, -34, 14, 0, 24], [C.picks[0], 1100, -300, -300, 2500, -28, 14, 0, 24]] },
-  dishShot(0, C.picks[0], C.flat[0]),
-  flatShot(C.flat[0], C.picks[1], 900, 1100),
-  dishShot(1, C.picks[1], C.flat[1]),
-  flatShot(C.flat[1], C.picks[2], 1600, 1750),
-  dishShot(2, C.picks[2], C.flat[2]),
-  flatShot(C.flat[2], C.picks[3], 2300, 2400),
-  dishShot(3, C.picks[3], C.flat[3]),
-  { name: 'full', from: C.flat[3], keys: [[C.flat[3], 3060, -10, TRAY_Z, 1700, 0, 70, 0, 35], [D, 3060, -10, TRAY_Z, 1350, 0, 60, 0, 35]] },
-  { name: 'stand', from: D, keys: [[D, 3060, -300, 200, 2300, 0, -8, 0, 35], [D + 30, 3060, -470, 190, 1900, 0, -3, 0, 35], [C.study - 4, 3060, -470, 190, 1800, 0, -2, 0, 35]], kicks: [{ frames: [D], tau: 6, punch: 0.05, px: 10 }] },
-  { name: 'study', from: C.study, keys: [[C.study, 3060, -470, 190, 1800, 0, -2, 0, 35], [C.study + 34, SCREEN.x, SCREEN.y, SCREEN.z, 1380, 0, 0, 0, 35], [C.note - 10, SCREEN.x + 650, SCREEN.y - 240, SCREEN.z, 750, -4, 0, 0, 35], [C.note + 20, SCREEN.x + 650, SCREEN.y - 240, SCREEN.z, 730, -4, 0, 0, 35], [C.quiz - 8, SCREEN.x + 40, SCREEN.y - 360, SCREEN.z, 820, 2, 0, 0, 35], [C.quiz + 18, SCREEN.x + 40, SCREEN.y - 360, SCREEN.z, 800, 2, 0, 0, 35], [C.end, SCREEN.x, SCREEN.y, SCREEN.z, 1500, 0, 0, 0, 35]] },
-]);
+const BG = '#1B1823';
+const CARD = '#272334';
+const CTRL = '#30293e';
+const VIOLET = '#8F39FF';
+const LILAC = '#C99FFF';
+const INK = '#f6eeff';
+const DIMI = 'rgba(246,238,255,0.6)';
+const SANS = '"Hind", "Poppins", system-ui, -apple-system, sans-serif';
 
-const Plate: React.FC<{ c: string; size: number }> = ({ c, size }) => (
-  <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'radial-gradient(circle, #fffaf2 0 58%, #e6dccb 60%, #fffaf2 64%, transparent 66%)', boxShadow: '0 10px 20px rgba(40,20,80,0.25)' }}>
-    <div style={{ position: 'absolute', left: size * 0.22, top: size * 0.22, width: size * 0.56, height: size * 0.56, borderRadius: '50%', background: `radial-gradient(circle at 38% 34%, rgba(255,255,255,0.55), ${c} 45%, rgba(0,0,0,0.25) 100%)` }} />
-  </div>
-);
+const Logo: React.FC<{ size: number }> = ({ size }) => <Img src={staticFile('img/bb-logo.png')} style={{ width: size, height: size }} />;
 
-const Placard: React.FC<{ i: number; taken: boolean }> = ({ i, taken }) => {
-  const d = DISHES[i];
+/** A component lifted off the app with its outcome beside it: the film's grammar. */
+const Callout: React.FC<{ f: number; from: number; to: number; outcome: string; kicker: string; children: React.ReactNode; side?: 'right' | 'left' }> = ({ f, from, to, outcome, kicker, children, side = 'right' }) => {
+  if (f < from - 7 || f >= to) return null;
+  const lift = settle(prog(f, from, from + 14), 0.9);
+  const out = HOUSE(prog(f, to - 7, to)) - (1 - HOUSE(prog(f, from - 7, from + 1)));
+  const textT = HOUSE(prog(f, from + 12, from + 26));
+  const x = side === 'right' ? 110 : 1000;
   return (
-    <div style={{ position: 'absolute', inset: 0, borderRadius: 22, background: '#fff', boxShadow: `0 10px 30px rgba(60,20,120,0.25), inset 0 0 0 4px ${taken ? d.c : '#eee7ff'}`, padding: '20px 26px', fontFamily: SANS }}>
-      <div style={{ ...rec(1, 0, 700), fontSize: 20, letterSpacing: '0.14em', color: '#8a6fd6' }}>{`0${i + 1} ${d.k}`}</div>
-      <div style={{ fontSize: 34, fontWeight: 650, color: INK, marginTop: 8, lineHeight: 1.15 }}>{d.v}</div>
+    <AbsoluteFill style={{ transform: `translateX(${-out * 1920}px)` }}>
+      <div style={{ position: 'absolute', left: x, top: 540, transform: `translateY(-50%) perspective(1600px) rotateY(${mix(side === 'right' ? 18 : -18, side === 'right' ? 5 : -5, lift)}deg) translateZ(${mix(-400, 0, lift)}px) scale(1.18)`, transformOrigin: '0 50%', opacity: clamp(0.4 + lift * 1.5), filter: `drop-shadow(0 ${mix(4, 40, lift)}px ${mix(10, 80, lift)}px rgba(0,0,0,0.6))` }}>{children}</div>
+      <div style={{ position: 'absolute', [side === 'right' ? 'left' : 'right']: side === 'right' ? 1190 : 1010, top: 380, width: 660 }}>
+        <div style={{ ...rec(1, 0, 650), fontSize: 22, letterSpacing: '0.18em', color: LILAC, opacity: textT }}>{kicker}</div>
+        <div style={{ fontFamily: SANS, fontSize: 76, fontWeight: 700, lineHeight: 1.04, letterSpacing: '-0.025em', color: INK, marginTop: 14, clipPath: `inset(-10% ${(1 - textT) * 100}% -20% 0)` }}>{outcome}</div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+const Expertise: React.FC<{ f: number }> = ({ f }) => {
+  const pick = f >= C1 + 20;
+  return (
+    <div style={{ width: 860, padding: 36, borderRadius: 24, background: CARD, fontFamily: SANS, color: INK }}>
+      <div style={{ fontSize: 30, fontWeight: 600 }}>How much do you already know?</div>
+      <div style={{ display: 'flex', gap: 18, marginTop: 26 }}>
+        {[
+          ['🌱', 'Beginner', 'Start from zero'],
+          ['🌿', 'Some experience', 'Skip the basics'],
+          ['🌳', 'Expert', 'Go deep'],
+        ].map(([e, t, d], i) => {
+          const sel = pick && i === 1;
+          return (
+            <div key={t} style={{ flex: 1, height: 224, borderRadius: 14, border: `${sel ? 3 : 2}px solid ${sel ? LILAC : '#5a4c7d'}`, background: sel ? '#5A4C7D' : 'transparent', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, transform: `scale(${sel ? settle(prog(f, C1 + 20, C1 + 28), 1.2) * 0.04 + 1 : 1})` }}>
+              <span style={{ fontSize: 50 }}>{e}</span>
+              <span style={{ fontSize: 26, fontWeight: 600 }}>{t}</span>
+              <span style={{ fontSize: 19, color: DIMI }}>{d}</span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
 
-const Hall: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => {
-  const stand = TRAVEL(prog(f, D, D + 26));
-  const trayX = TRAY_X(f);
-  const V = spinAbout(Z, X, -stand * (Math.PI / 2));
-  const trayC = v3(trayX, mix(-8, -470, stand), mix(TRAY_Z, 190, stand));
-  const answerT = HOUSE(prog(f, C.answer, C.answer + 10));
-  const studyOn = HOUSE(prog(f, C.study - 20, C.study + 14));
-  const noteT = settle(prog(f, C.note - 8, C.note + 4), 1.0);
-  const quizT = RESOLVE(prog(f, C.quiz - 4, C.quiz + 14));
+const Subtopics: React.FC<{ f: number }> = ({ f }) => {
+  const chips = ['Affiliate marketing', 'Digital products', 'Dividend investing', 'Content licensing', 'Rental income', 'Online courses'];
+  const picks = [0, 1, 5];
+  const hats = H.hat.filter((h) => h >= C2 + 8 && h < C3);
   return (
-    <>
-      {/* the room: BrainBuffet's violet horizon */}
-      <Plane cam={cam} c={v3(2000, -1200, -2800)} w={16000} h={6000} z={-400000}>
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, #120c26 0%, #2a1656 45%, #6b2fd6 62%, #f08bff 66%, #3a1f73 70%, #1a0f35 100%)' }} />
-      </Plane>
-      <Plane cam={cam} c={v3(2000, 240, -800)} U={X} V={Z} w={16000} h={7000} z={-390000}>
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 20%, #5a38a8, #2a1a58 60%, #160d30)' }} />
-      </Plane>
-      {/* the host: the smiling brain over the buffet */}
-      <Plane cam={cam} c={v3(1950, -1300, -900)} w={900} h={900} fog={FOG}>
-        <Img src={staticFile('img/bb-logo.png')} style={{ width: 900, height: 900, filter: 'drop-shadow(0 0 60px rgba(190,166,248,0.8))' }} />
-      </Plane>
-      {/* the counter */}
-      <Box cam={cam} c={v3(1800, 110, -120)} size={[4600, 220, 500]} color="#cdbdf5" fog={FOG} edge="rgba(255,255,255,0.4)" z={-200000} top={<div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, #efe8ff, #fbf8ff 50%, #efe8ff)' }} />} />
-      {/* the tray rail */}
-      <Box cam={cam} c={v3(1800, 40, TRAY_Z)} size={[4600, 20, 360]} color="#8f79d9" fog={FOG} z={-150000} top={<div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(90deg, #a893ee 0 30px, #9a84e4 30px 36px)' }} />} />
-      {/* heat lamps */}
-      {DISHES.map((d) => (
-        <Plane key={`h${d.k}`} cam={cam} c={v3(d.x, -560, -120)} w={260} h={120} fog={FOG}>
-          <div style={{ position: 'absolute', inset: 0, borderRadius: '130px 130px 20px 20px', background: '#f5c26b', boxShadow: '0 40px 90px 30px rgba(255,190,110,0.45)' }} />
-        </Plane>
-      ))}
-      {/* the snack: one answer on a saucer */}
-      <Plane cam={cam} c={v3(0, -1, -120)} U={X} V={Z} w={240} h={240} fog={FOG} z={30000}>
-        <Plate c="#6a5a8a" size={240} />
-      </Plane>
-      <Plane cam={cam} c={v3(0, -150, -180)} w={480} h={230} fog={FOG}>
-        <div style={{ position: 'absolute', inset: 0, borderRadius: 22, background: '#fff', padding: '18px 22px', boxShadow: '0 20px 40px rgba(40,20,80,0.35)', fontFamily: SANS }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 16px', borderRadius: 24, background: '#f1edfa', fontSize: 20, color: INK }}>⌕ how do I build passive income?</div>
-          <div style={{ marginTop: 16, fontSize: 22, lineHeight: 1.3, color: INK, opacity: answerT, clipPath: `inset(0 ${(1 - answerT) * 100}% 0 0)` }}>Earn money with little ongoing effort, e.g. affiliate links.</div>
-          <div style={{ marginTop: 10, ...rec(1, 0, 600), fontSize: 13, letterSpacing: '0.14em', color: '#9a91b0', opacity: answerT }}>ONE ANSWER</div>
-        </div>
-      </Plane>
-      {/* the buffet */}
-      {DISHES.map((d, i) => {
-        const at = C.picks[i];
-        const t = TRAVEL(prog(f, at - 12, at + 4));
-        const slot = v3(trayX - 330 + i * 220, 20, TRAY_Z);
-        const home = v3(d.x, -2, -140);
-        const lift = Math.sin(Math.PI * t) * -260;
-        const onTray = f >= at + 4;
-        let p = vlerp(home, slot, t);
-        p = v3(p.x, p.y + lift, p.z);
-        if (onTray) p = slot;
-        const toOutline = HOUSE(prog(f, D + 2 + i * 3, D + 20 + i * 3));
+    <div style={{ width: 860, padding: 36, borderRadius: 24, background: CARD, fontFamily: SANS, color: INK }}>
+      <div style={{ fontSize: 30, fontWeight: 600 }}>Pick what matters to you</div>
+      <div style={{ fontSize: 20, color: DIMI, marginTop: 6 }}>Suggested from your topic and experience</div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 24 }}>
+        {chips.map((c, i) => {
+          const k = picks.indexOf(i);
+          const on = k >= 0 && f >= (hats[k] ?? C2 + 12 + k * 10);
+          return (
+            <span key={c} style={{ padding: '14px 24px', borderRadius: 999, fontSize: 24, fontWeight: 600, border: `2px solid ${on ? LILAC : '#5a4c7d'}`, background: on ? VIOLET : CTRL, color: on ? '#fff' : INK }}>
+              {on ? '✓ ' : '+ '}
+              {c}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+const Quiz: React.FC<{ f: number }> = ({ f }) => {
+  const pick = f >= C3 + 22;
+  const opts = ['A share of revenue when a referred customer buys', 'A flat fee for every visit you send', 'A loan against future sales'];
+  return (
+    <div style={{ width: 860, padding: 36, borderRadius: 24, background: CARD, fontFamily: SANS, color: INK }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ ...rec(1, 0, 600), fontSize: 18, letterSpacing: '0.14em', color: LILAC }}>EXPERTISE QUIZ · 2 OF 3</span>
+        <span style={{ marginLeft: 'auto', display: 'flex', gap: 6 }}>
+          {[0, 1, 2].map((i) => (
+            <span key={i} style={{ width: 40, height: 6, borderRadius: 3, background: i < 2 ? VIOLET : CTRL }} />
+          ))}
+        </span>
+      </div>
+      <div style={{ fontSize: 32, fontWeight: 600, marginTop: 18 }}>What does an affiliate commission pay for?</div>
+      {opts.map((o, i) => {
+        const sel = pick && i === 0;
         return (
-          <React.Fragment key={d.k}>
-            <Plane cam={cam} c={v3(d.x, -200, -340)} w={520} h={170} fog={FOG}>
-              <Placard i={i} taken={f >= at} />
-            </Plane>
-            {toOutline < 1 ? (
-              <Plane cam={cam} c={p} U={X} V={Z} w={210} h={210} fog={FOG} opacity={1 - toOutline} z={onTray || t > 0 ? 60000 : 30000}>
-                <Plate c={d.c} size={210} />
-              </Plane>
-            ) : null}
-          </React.Fragment>
+          <div key={o} style={{ marginTop: 14, padding: '18px 22px', borderRadius: 14, border: `2px solid ${sel ? LILAC : '#5a4c7d'}`, background: sel ? '#5A4C7D' : CTRL, fontSize: 23, display: 'flex', gap: 14 }}>
+            <b style={{ color: LILAC }}>{'ABC'[i]}</b>
+            {o}
+            {sel ? <span style={{ marginLeft: 'auto', color: '#9dffc2' }}>✓</span> : null}
+          </div>
         );
       })}
-      {/* the tray (hero): slides, fills, stands up into the course */}
-      <Plane cam={cam} c={trayC} U={X} V={V} w={mix(900, 1100, stand)} h={mix(320, 620, stand)} fog={FOG} z={stand > 0.3 ? 70000 : 40000}>
-        <div style={{ position: 'absolute', inset: 0, borderRadius: 30, background: stand > 0.5 ? '#fff' : VIOLET, boxShadow: `0 30px 80px rgba(40,10,90,0.45)` }} />
-        {stand > 0.5 ? (
-          <div style={{ position: 'absolute', inset: 0, padding: '36px 46px', fontFamily: SANS }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-              <Img src={staticFile('img/bb-logo.png')} style={{ width: 54, height: 54 }} />
-              <div style={{ ...rec(1, 0, 700), fontSize: 18, letterSpacing: '0.14em', color: '#8a6fd6' }}>YOUR COURSE · INSPECT THE PLAN BEFORE YOU START</div>
+    </div>
+  );
+};
+
+const OUTLINE = ['Your first niche', 'Offers your audience trusts', 'Understanding affiliate marketing', 'Picking the right products', 'Your first digital product', 'Measuring what works'];
+
+const Preview: React.FC<{ f: number }> = ({ f }) => {
+  const you = sub(f, D + 34, 7);
+  return (
+    <div style={{ width: 1240, borderRadius: 16, overflow: 'hidden', fontFamily: SANS, color: INK, boxShadow: '0 60px 160px rgba(80,20,160,0.5)' }}>
+      <div style={{ height: 260, background: 'linear-gradient(135deg, #3b1d7a, #8F39FF 55%, #c99fff)', padding: '0 44px 26px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+        <div style={{ ...rec(1, 0, 600), fontSize: 18, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.8)' }}>YOUR COURSE · READY</div>
+        <div style={{ fontSize: 58, fontWeight: 700, letterSpacing: '-0.02em' }}>Building Wealth with Passive Income</div>
+        <div style={{ fontSize: 22, color: 'rgba(255,255,255,0.85)' }}>⏱ 45 mins learning · 6 chapters · shaped by your answers</div>
+      </div>
+      <div style={{ background: CARD, padding: '30px 44px 40px', display: 'flex', gap: 50 }}>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 26, fontWeight: 700 }}>You’ll be able to</div>
+          {['Pick an affiliate niche that fits you', 'Ship one small digital product', 'Tell good offers from bad ones'].map((o, i) => (
+            <div key={o} style={{ fontSize: 23, marginTop: 14, color: INK, opacity: HOUSE(prog(f, D + 8 + i * 6, D + 16 + i * 6)) }}>
+              <span style={{ color: '#9dffc2' }}>✓</span> {o}
             </div>
-            {CHAPTERS.map((c, i) => {
-              const a = settle(prog(f, C.chapters[i] - 6, C.chapters[i] + 4), 1.0);
-              return (
-                <div key={c} style={{ display: 'flex', alignItems: 'center', gap: 22, padding: '18px 0', borderBottom: '2px solid #f1edfa', opacity: clamp(a), transform: `translateX(${(1 - clamp(a)) * 60}px)` }}>
-                  <span style={{ width: 52, height: 52, borderRadius: 26, background: DISHES[i].c, color: '#fff', fontSize: 28, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i + 1}</span>
-                  <span style={{ fontSize: 34, fontWeight: 650, color: INK }}>{c}</span>
-                </div>
-              );
-            })}
+          ))}
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 26, fontWeight: 700 }}>Chapter outline</div>
+          {OUTLINE.map((o, i) => (
+            <div key={o} style={{ fontSize: 22, marginTop: 10, color: DIMI, opacity: HOUSE(prog(f, D + 12 + i * 4, D + 20 + i * 4)) }}>
+              <span style={{ color: LILAC, marginRight: 12 }}>{i + 1}</span>
+              <span style={{ color: you && i < 3 ? '#fff' : undefined, fontWeight: you && i < 3 ? 800 : undefined, textShadow: you && i < 3 ? '0 0 12px #fff' : undefined }}>{o[0]}</span>
+              {o.slice(1)}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/** The LearningMountain (from BrainBuffet's source): a glowing path up a violet mountain; one lit point per hat. */
+const Mountain: React.FC<{ f: number }> = ({ f }) => {
+  const pts = [
+    [260, 900],
+    [520, 780],
+    [760, 820],
+    [980, 640],
+    [1220, 560],
+    [1460, 420],
+    [1640, 250],
+  ];
+  const hats = H.hat.filter((h) => h >= MTN - 4 && h < STUDY);
+  const lit = (i: number) => f >= (hats[i] ?? MTN + i * 9);
+  const draw = HOUSE(prog(f, MTN, STUDY - 10));
+  const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p[0]} ${p[1]}`).join(' ');
+  const cam = HOUSE(prog(f, MTN, STUDY));
+  return (
+    <AbsoluteFill style={{ background: 'linear-gradient(180deg, #0b0718 0%, #1b0f3a 45%, #3b1d7a 75%, #7c3fd6 100%)', overflow: 'hidden' }}>
+      <AbsoluteFill style={{ transform: `translate(${mix(200, -380, cam)}px, ${mix(180, -140, cam)}px) scale(${mix(1.25, 1.55, cam)})`, transformOrigin: '50% 60%' }}>
+        {new Array(70).fill(0).map((_, i) => (
+          <div key={i} style={{ position: 'absolute', left: (i * 277) % 1920, top: (i * 131) % 420, width: 3, height: 3, borderRadius: 2, background: '#fff', opacity: 0.3 + 0.5 * Math.abs(Math.sin(i + f / 30)) }} />
+        ))}
+        <svg width={1920} height={1080} style={{ position: 'absolute', inset: 0 }}>
+          <path d="M-100 1080 L240 760 L520 640 L760 700 L1040 470 L1300 380 L1640 170 L1900 420 L2100 1080 Z" fill="#241246" />
+          <path d="M-100 1080 L400 820 L700 900 L1100 700 L1500 820 L2100 1080 Z" fill="#170b30" opacity={0.9} />
+          <path d={d} stroke={LILAC} strokeWidth={8} fill="none" strokeLinejoin="round" strokeLinecap="round" pathLength={1} strokeDasharray={`${draw} 1`} style={{ filter: `drop-shadow(0 0 16px ${VIOLET})` }} />
+          {pts.map((p, i) => (
+            <g key={i}>
+              <circle cx={p[0]} cy={p[1]} r={lit(i) ? 20 : 10} fill={lit(i) ? '#fff' : '#5a4c7d'} style={{ filter: lit(i) ? `drop-shadow(0 0 24px ${LILAC})` : undefined }} />
+              {i > 0 && i < 7 ? (
+                <text x={p[0] + 30} y={p[1] - 22} fill={lit(i) ? INK : 'rgba(246,238,255,0.35)'} fontSize={26} fontFamily="Recursive" fontWeight={600}>{`${i}. ${OUTLINE[i - 1]}`}</text>
+              ) : null}
+            </g>
+          ))}
+        </svg>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+/** The chapter: progress track, lesson, video, quiz feedback, notes attached (rebuilt from the product). */
+const Study: React.FC<{ f: number }> = ({ f }) => {
+  const notesPhase = f >= NOTES;
+  const noteT = settle(prog(f, NOTES + 6, NOTES + 18), 1);
+  const quizT = HOUSE(prog(f, STUDY + 30, STUDY + 40));
+  // camera: progress track first, then the notes sidebar
+  const s = mix(mix(1.25, 1.9, HOUSE(prog(f, STUDY, STUDY + 20))), 1.8, HOUSE(prog(f, NOTES - 6, NOTES + 10)));
+  const fx = mix(mix(760, 700, HOUSE(prog(f, STUDY, STUDY + 20))), 1560, HOUSE(prog(f, NOTES - 6, NOTES + 10)));
+  const fy = mix(mix(400, 170, HOUSE(prog(f, STUDY, STUDY + 20))), 330, HOUSE(prog(f, NOTES - 6, NOTES + 10)));
+  const segs = 12;
+  const done = 5 + (f >= STUDY + 34 ? 1 : 0);
+  return (
+    <AbsoluteFill style={{ background: BG }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, transformOrigin: '0 0', transform: `translate(${960 - fx * s}px, ${540 - fy * s}px) scale(${s})`, fontFamily: SANS, color: INK }}>
+        <div style={{ position: 'absolute', left: 60, top: 60, display: 'flex', alignItems: 'center', gap: 12 }}>
+          <Logo size={44} />
+          <span style={{ fontSize: 26, fontWeight: 600, color: LILAC }}>BrainBuffet</span>
+        </div>
+        <div style={{ position: 'absolute', left: 460, top: 50, width: 900 }}>
+          <div style={{ fontSize: 32, fontWeight: 600 }}>← Building Wealth with Passive Income</div>
+          <div style={{ fontSize: 18, color: LILAC, marginTop: 8 }}>Chapter 4 · Affiliate Marketing</div>
+          <div style={{ display: 'flex', gap: 8, marginTop: 14 }}>
+            {new Array(segs).fill(0).map((_, i) => (
+              <span key={i} style={{ flex: 1, height: 8, borderRadius: 4, background: i < done ? VIOLET : i === done ? LILAC : CTRL, boxShadow: i === done - 1 && f < STUDY + 44 ? `0 0 ${14 * pulse([STUDY + 34], f, 8)}px ${LILAC}` : 'none' }} />
+            ))}
           </div>
-        ) : null}
-      </Plane>
-      {/* the real study surface */}
-      <Plane cam={cam} c={SCREEN} w={SW} h={SH} opacity={studyOn} z={-60000}>
-        <Img src={staticFile('img/bb-screen.png')} style={{ width: SW, height: SH, borderRadius: 18, boxShadow: `0 0 160px rgba(181,125,255,${0.5 * studyOn})` }} />
-        {f >= C.note - 8 ? (
-          <div style={{ position: 'absolute', left: 1496, top: 190, width: 250, padding: '14px 16px', borderRadius: 10, background: '#fde68a', color: '#2a2630', fontFamily: SANS, fontSize: 21, fontWeight: 600, lineHeight: 1.25, transform: `translateY(${(1 - clamp(noteT)) * -80}px) rotate(${mix(-8, -2, clamp(noteT))}deg) scale(${mix(0.8, 1, clamp(noteT))})`, opacity: clamp(noteT * 2), boxShadow: '0 10px 30px rgba(0,0,0,0.45)' }}>
-            Pick products my audience already trusts.
-            <div style={{ ...rec(1, 0, 600), fontSize: 12, letterSpacing: '0.12em', marginTop: 8, color: '#7a6a2a' }}>ATTACHED · CH 4</div>
+          <div style={{ marginTop: 14, display: 'inline-block', ...rec(1, 0, 600), fontSize: 18, padding: '6px 14px', borderRadius: 999, background: 'rgba(157,255,194,0.12)', color: '#9dffc2', opacity: quizT }}>✓ chapter quiz · 3 / 3</div>
+          <div style={{ marginTop: 20, borderRadius: 14, background: CARD, padding: '26px 30px' }}>
+            <div style={{ fontSize: 28, fontWeight: 600 }}>Understanding Affiliate Marketing</div>
+            <div style={{ fontSize: 19, lineHeight: 1.6, color: 'rgba(246,238,255,0.8)', marginTop: 12 }}>
+              Affiliate marketing is a way of earning passive income by promoting other people’s products. When someone buys through your referral link, you earn a commission. It hinges on <b>selecting the right products</b>.
+            </div>
           </div>
-        ) : null}
-        <div style={{ position: 'absolute', left: 868, top: 130, width: 78 * quizT, height: 10, borderRadius: 5, background: '#8ee06a', boxShadow: `0 0 ${20 * quizT}px #8ee06a` }} />
-        {quizT > 0.3 ? <div style={{ position: 'absolute', left: 820, top: 160, padding: '6px 12px', borderRadius: 8, background: 'rgba(20,16,30,0.9)', ...rec(1, 0, 600), fontSize: 18, color: '#8ee06a', opacity: HOUSE(prog(f, C.quiz, C.quiz + 12)) }}>✓ chapter quiz · 3/3</div> : null}
-      </Plane>
-    </>
+          <div style={{ marginTop: 16, height: 300, borderRadius: 14, background: 'linear-gradient(135deg, #0f3b33, #135e4d)', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', left: 30, top: 24, fontSize: 20, color: '#dff' }}>How to choose the right affiliate products for your audience</div>
+            <div style={{ position: 'absolute', left: 40, bottom: 40, fontSize: 44, fontWeight: 800, color: '#fff', lineHeight: 1 }}>AFFILIATE
+              <br />
+              MARKETING</div>
+            <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: 90, height: 64, borderRadius: 16, background: '#ff0033', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 30 }}>▶</div>
+          </div>
+        </div>
+        <div style={{ position: 'absolute', left: 1440, top: 56, width: 380 }}>
+          <div style={{ fontSize: 20, fontWeight: 600 }}>Notes</div>
+          <div style={{ marginTop: 16, padding: '12px 0', borderRadius: 999, background: VIOLET, textAlign: 'center', fontSize: 20, fontWeight: 600, transform: `scale(${f >= NOTES && f < NOTES + 5 ? 0.94 : 1})` }}>Add Note +</div>
+          {notesPhase ? (
+            <div style={{ marginTop: 18, padding: '18px 20px', borderRadius: 14, background: '#fbe38e', color: '#2a2210', transform: `translateY(${(1 - noteT) * 30}px) rotate(${mix(-4, -1.5, noteT)}deg)`, opacity: clamp(noteT) }}>
+              <div style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.25 }}>Pick products my audience already trusts.</div>
+              <div style={{ ...rec(1, 0, 600), fontSize: 14, marginTop: 10, color: '#6a5a20' }}>ATTACHED · CH 4 · STEP 2</div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+      {/* the outcome for each read, on the snare */}
+      {f < NOTES ? (
+        <div style={{ position: 'absolute', left: 120, bottom: 110, fontFamily: SANS, fontSize: 64, fontWeight: 700, color: INK, textShadow: '0 6px 30px rgba(0,0,0,0.8)', clipPath: `inset(-10% ${(1 - HOUSE(prog(f, STUDY + 18, STUDY + 32))) * 100}% -20% 0)` }}>You always know where you are.</div>
+      ) : (
+        <div style={{ position: 'absolute', left: 120, bottom: 110, fontFamily: SANS, fontSize: 64, fontWeight: 700, color: INK, textShadow: '0 6px 30px rgba(0,0,0,0.8)', clipPath: `inset(-10% ${(1 - HOUSE(prog(f, NOTES + 14, NOTES + 28))) * 100}% -20% 0)` }}>Your notes come back with the lesson.</div>
+      )}
+    </AbsoluteFill>
   );
 };
 
 export const BrainBuffet: React.FC = () => {
   const f = useCurrentFrame();
-  const { cam, shot, focus } = EDIT.at(f);
-  const macro = shot.name === 'search' || shot.name === 'study';
-  const dof = { focus, aperture: macro ? 0.9 : shot.name === 'flat' || shot.name === 'full' ? 0.5 : 0.6 };
-  const line = (a: number, b: number) => HOUSE(prog(f, a, a + 12)) * (1 - HOUSE(prog(f, b, b + 10)));
-  const words: [string, number][] = [
-    ['An answer is a snack.', line(C.snap + 10, C.picks[0] - 10)],
-    ['A subject is a meal.', line(C.picks[0] + 10, D - 14)],
-    ['Your choices, plated into a course.', line(D + 22, C.study + 30)],
-  ];
-  const whips = C.picks.map((p) => p);
+  const hookType = Math.floor(clamp(prog(f, 6, 40)) * 32);
+  const q = 'how do I build passive income?'.slice(0, hookType);
+  const answerT = settle(prog(f, 46, 58), 0.8);
+  const landT = HOUSE(prog(f, LAND, LAND + 16));
+  const typed = 'how to build passive income'.slice(0, Math.floor(clamp(prog(f, LAND + 10, LAND + 40)) * 27));
+  const go = f >= C1 - 8 && f < C1 - 2;
+  const dropT = settle(prog(f, D, D + 16), 0.8);
+  const kick = pulse(beats.filter((b) => b >= D && b < MTN).map(Math.round), f, 6);
   return (
-    <AbsoluteFill style={{ background: '#1a0f35', overflow: 'hidden' }}>
-      <Blur ranges={[[C.snap, C.snap + 16, 8], [D, D + 20, 6], [C.study, C.study + 34, 6]]}>
-        <DofCtx.Provider value={dof}>
-          <AbsoluteFill style={{ isolation: 'isolate' }}>
-            <Hall f={f} cam={cam} />
-          </AbsoluteFill>
-        </DofCtx.Provider>
-      </Blur>
-      <Glow x={960} y={620} r={1300} color="rgba(240,139,255,0.35)" a={0.5} />
-      <Bokeh n={22} seed="bb" colors={['rgba(255,200,120,0.6)', 'rgba(190,166,248,0.6)', 'rgba(255,255,255,0.5)']} area={[0, 0, 1920, 520]} size={[10, 36]} f={f} a={0.3} />
-      <Grade tint="#b57dff" a={0.14} />
-      {whips.map((w) => (
-        <Whip key={w} f={f} at={w} dir={1} len={6} />
-      ))}
-      {f < C.end ? <div style={{ position: 'absolute', left: 120, top: 88, ...rec(1, 0, 650), fontSize: 20, letterSpacing: '0.2em', color: LILAC, zIndex: 910000 }}>BRAINBUFFET · PERSONAL LEARNING PATHWAYS</div> : null}
-      {words.map(([w, o]) =>
-        o > 0.002 ? (
-          <div key={w} style={{ position: 'absolute', left: 120, bottom: 96, fontFamily: SANS, fontSize: 82, fontWeight: 750, letterSpacing: '-0.03em', color: '#fff', opacity: o, transform: `translateY(${(1 - o) * 30}px)`, textShadow: '0 6px 40px rgba(40,10,90,0.7)', zIndex: 910000 }}>
-            {w}
+    <AbsoluteFill style={{ background: BG, overflow: 'hidden', fontFamily: SANS }}>
+      {/* ── the hook: one answer, one snack */}
+      {f < LAND ? (
+        <AbsoluteFill style={{ background: '#f4f2f7', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ width: 1100, transform: `scale(${mix(1.45, 1.3, HOUSE(prog(f, 0, 60)))}) translateY(-40px)` }}>
+            <div style={{ height: 96, borderRadius: 48, background: '#fff', boxShadow: '0 10px 40px rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', padding: '0 40px', fontSize: 34, color: '#333' }}>
+              🔍&nbsp;&nbsp;{q}
+              <span style={{ width: 3, height: 40, background: '#333', marginLeft: 4, opacity: Math.floor(f / 15) % 2 }} />
+            </div>
+            <div style={{ marginTop: 26, borderRadius: 24, background: '#fff', padding: '30px 40px', boxShadow: '0 10px 40px rgba(0,0,0,0.08)', opacity: clamp(answerT), transform: `translateY(${(1 - answerT) * 30}px)` }}>
+              <div style={{ fontSize: 30, color: '#222' }}>Earn money with little ongoing effort, e.g. affiliate links.</div>
+              <div style={{ ...rec(1, 0, 600), fontSize: 18, letterSpacing: '0.14em', color: '#999', marginTop: 12 }}>ONE ANSWER</div>
+            </div>
           </div>
-        ) : null
-      )}
-      <Flash a={f >= D ? 0.16 * Math.exp(-(f - D) / 5) : 0} color="240,139,255" />
+          <div style={{ position: 'absolute', left: 120, bottom: 110, fontFamily: SANS, fontSize: 78, fontWeight: 700, color: '#1b1823', letterSpacing: '-0.03em', clipPath: `inset(-10% ${(1 - HOUSE(prog(f, 66, 82))) * 100}% -20% 0)` }}>An answer isn’t a subject.</div>
+        </AbsoluteFill>
+      ) : null}
+
+      {/* ── the landing: the real hero, the topic typed in */}
+      {f >= LAND && f < C1 ? (
+        <AbsoluteFill style={{ background: 'linear-gradient(180deg, #fbf7ff, #efe4ff)', justifyContent: 'center', alignItems: 'center', opacity: landT }}>
+          <div style={{ position: 'absolute', left: 80, top: 60, display: 'flex', alignItems: 'center', gap: 14 }}>
+            <Logo size={56} />
+            <span style={{ fontSize: 34, fontWeight: 600, color: '#8b50e8' }}>BrainBuffet</span>
+          </div>
+          <div style={{ textAlign: 'center', transform: `scale(${mix(0.95, 1.05, HOUSE(prog(f, LAND, C1)))})` }}>
+            <div style={{ fontSize: 118, fontWeight: 700, lineHeight: 1.02, letterSpacing: '-0.02em', background: 'linear-gradient(90deg, #8F39FF, #c99fff)', WebkitBackgroundClip: 'text', color: 'transparent' }}>
+              Create your own
+              <br />
+              learning adventure
+            </div>
+            <div style={{ margin: '48px auto 0', width: 900, height: 96, borderRadius: 48, background: BG, display: 'flex', alignItems: 'center', padding: '0 12px 0 36px', fontSize: 32, color: INK }}>
+              ✦&nbsp;&nbsp;{typed}
+              <span style={{ marginLeft: 'auto', padding: '18px 36px', borderRadius: 40, background: VIOLET, fontSize: 28, fontWeight: 600, transform: `scale(${go ? 0.92 : 1})` }}>Let’s Go</span>
+            </div>
+          </div>
+        </AbsoluteFill>
+      ) : null}
+
+      {/* ── the design, part by part, each with its outcome */}
+      {f >= C1 - 2 && f < D ? (
+        <AbsoluteFill style={{ background: `radial-gradient(ellipse at 30% 50%, #2c2240, ${BG} 70%)` }}>
+          <div style={{ position: 'absolute', left: 80, top: 60, display: 'flex', alignItems: 'center', gap: 14 }}>
+            <Logo size={48} />
+            <span style={{ ...rec(1, 0, 600), fontSize: 20, letterSpacing: '0.16em', color: DIMI }}>CREATE A COURSE · {f < C2 ? '2' : f < C3 ? '3' : '4'} OF 4</span>
+          </div>
+          <Callout f={f} from={C1} to={C2} kicker="EXPERTISE" outcome="Skips what you already know.">
+            <Expertise f={f} />
+          </Callout>
+          <Callout f={f} from={C2} to={C3} kicker="SUBTOPICS" outcome="You choose the path. Not a prompt.">
+            <Subtopics f={f} />
+          </Callout>
+          <Callout f={f} from={C3} to={D + 2} kicker="EXPERTISE QUIZ" outcome="Finds where your knowledge stops.">
+            <Quiz f={f} />
+          </Callout>
+        </AbsoluteFill>
+      ) : null}
+
+      {/* ── the drop: the course, and the mountain it becomes */}
+      {f >= D && f < MTN + 8 ? (
+        <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 40%, #3b1d7a, ${BG} 70%)`, justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ transform: `scale(${mix(0.9, 1.3, dropT) * (1 + 0.01 * kick) * mix(1, 1.06, prog(f, D, MTN))}) translateY(${(1 - clamp(dropT)) * 80}px)`, opacity: clamp(dropT * 1.5) * (1 - prog(f, MTN, MTN + 8)) }}>
+            <Preview f={f} />
+          </div>
+        </AbsoluteFill>
+      ) : null}
+      {f >= MTN && f < STUDY ? (
+        <>
+          <Mountain f={f} />
+          <div style={{ position: 'absolute', left: 120, top: 110, fontFamily: SANS, fontSize: 70, fontWeight: 700, color: INK, lineHeight: 1.05, clipPath: `inset(-10% ${(1 - HOUSE(prog(f, MTN + 6, MTN + 20))) * 100}% -20% 0)` }}>
+            A path you can see
+            <br />
+            before you start.
+          </div>
+        </>
+      ) : null}
+      {f >= STUDY && f < OUT ? <Study f={f} /> : null}
+
+      {/* ── the outcome */}
+      {f >= OUT && f < END ? (
+        <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 50%, #3b1d7a, ${BG} 70%)`, justifyContent: 'center', alignItems: 'center', flexDirection: 'column', gap: 30 }}>
+          <Logo size={140} />
+          <div style={{ fontSize: 90, fontWeight: 700, color: INK, letterSpacing: '-0.03em', textAlign: 'center', lineHeight: 1.05 }}>
+            <span style={{ clipPath: `inset(-10% ${(1 - HOUSE(prog(f, OUT + 4, OUT + 20))) * 100}% -20% 0)`, display: 'inline-block' }}>A question to a course</span>
+            <br />
+            <span style={{ clipPath: `inset(-10% ${(1 - HOUSE(prog(f, OUT + 14, OUT + 30))) * 100}% -20% 0)`, display: 'inline-block', color: LILAC }}>in under five minutes.</span>
+          </div>
+          <div style={{ ...rec(1, 0, 600), fontSize: 26, letterSpacing: '0.12em', color: DIMI, opacity: RESOLVE(prog(f, OUT + 30, OUT + 50)) }}>{resolveText(''.padEnd(40, ' '), '250+ COURSES · CREATION TIME −90%', RESOLVE(prog(f, OUT + 30, OUT + 56)), 'bbo', f)}</div>
+        </AbsoluteFill>
+      ) : null}
+
+      <Flash a={0.25 * pulse([D], f, 6)} color="201,159,255" />
+      <Flash a={0.12 * pulse([C1, C2, C3, STUDY, NOTES, OUT], f, 4)} color="143,57,255" />
       <BrandEnd
         g={g}
-        from={C.end}
-        bg="linear-gradient(180deg, #1c1035 0%, #3a1f73 55%, #b57dff 100%)"
+        from={END}
+        bg="linear-gradient(180deg, #1b0f3a 0%, #3b1d7a 60%, #8F39FF 100%)"
         accent={LILAC}
         kicker="PERSONAL LEARNING PATHWAYS"
+        font={SANS}
         wipe="up"
         logo={
-          <div style={{ display: 'flex', alignItems: 'center', gap: 34 }}>
-            <Img src={staticFile('img/bb-logo.png')} style={{ width: 190, height: 190, transform: `rotate(${Math.sin(f / 14) * 3}deg)` }} />
-            <div style={{ fontFamily: SANS, fontSize: 150, fontWeight: 750, letterSpacing: '-0.04em', color: '#fff' }}>BrainBuffet</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
+            <Logo size={150} />
+            <div style={{ fontFamily: SANS, fontSize: 150, fontWeight: 700, letterSpacing: '-0.03em', color: '#fff' }}>BrainBuffet</div>
           </div>
         }
-        line="Each answer makes the next choice more useful."
+        line="Create your own learning adventure."
       />
-      <Vignette s={0.5} />
+      {f >= C1 ? <Vignette s={0.45} /> : null}
       <Grain />
       <Audio src={staticFile('audio/brainbuffet_mix.wav')} />
     </AbsoluteFill>
   );
 };
-

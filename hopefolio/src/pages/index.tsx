@@ -57,7 +57,7 @@ export default function Home() {
             src="/video/reels/highlight.mp4"
             poster="/video/reels/highlight.jpg"
             label="Selected work · the thread"
-            caption="OrgX, Alma, Perf Pulse, OpenClaw, BrainBuffet, Neuromosaic, Chaos Riders, Meridian. Opens on my voice from Figma Config 2021."
+            caption="Eight projects on one thread: each film’s own line carries the next, framed by the value it proves. Opens on my voice from Figma Config 2021; the thread ends by drawing my portrait."
             score="“UBEAT V1” by Hope Atina"
           />
         </section>

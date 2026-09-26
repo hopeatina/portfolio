@@ -6,7 +6,7 @@ import neuromosaic from '../data/grid_neuromosaic.json';
 import chaosriders from '../data/grid_chaosriders.json';
 import meridian from '../data/grid_meridian.json';
 
-export type Grid = { track: string; bpm: number; beatF: number; beats: number[]; downbeats: number[]; drop: number; button: number };
+export type Grid = { track: string; bpm: number; beatF: number; beats: number[]; downbeats: number[]; drop: number; button: number; markers?: Record<string, number> };
 export const GRIDS: Record<string, Grid> = { alma, perfpulse, openclaw, brainbuffet, neuromosaic, chaosriders, meridian } as Record<string, Grid>;
 export const FPS = 60;
 export const DUR = 900;

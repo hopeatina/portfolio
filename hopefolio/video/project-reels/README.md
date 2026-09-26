@@ -35,8 +35,8 @@ within one frame of the measured beat (`tools/onsets.py`).
 npm ci && python3 -m venv .venv && .venv/bin/pip install librosa scipy numpy pillow soundfile
 # tracks (gitignored): music/<soundcloud id>_<name>.wav
 yt-dlp -x --audio-format wav -o "music/%(id)s_<name>.%(ext)s" https://soundcloud.com/hope-atina/<name>
-# 1. the music cut + beat grid, from the window in tools/music-windows.json
-.venv/bin/python tools/score_project.py <proj> "$(python3 -c "import json;print(json.dumps(json.load(open('tools/music-windows.json'))['<proj>']))")"
+# 1. the composed score + beat grid + markers (v4), from tools/compositions.json (tools/bars.py maps a track's sections)
+.venv/bin/python tools/compose.py <proj>
 .venv/bin/python tools/master.py public/audio/<proj>_raw.wav public/audio/<proj>.wav
 # 2. measured kick/snare/hat → src/data/hits_<proj>.json (read these to key src/data/cues_<proj>.json)
 .venv/bin/python tools/hitsheet.py <proj>
@@ -50,6 +50,8 @@ cp out/{Alma,PerfPulse,OpenClaw,BrainBuffet,Neuromosaic,ChaosRiders,Meridian}.mp
 .venv/bin/python tools/score_highlight.py && .venv/bin/python tools/sfx.py highlight && .venv/bin/python tools/master.py public/audio/highlight_mix_raw.wav public/audio/highlight_mix.wav
 ./tools/render_all.sh Highlight
 ```
+
+Chaos Riders also needs `public/cr/` (Cycles renders: `tools/blender/film_orbit.py`, see DIRECTION_v4.md) and `public/clips/cr_gameplay.mp4` (`node tools/capture_chaos.mjs`); fonts `public/fonts/cr/{anton,bebasneue}.woff2` (OFL, Google Fonts). The highlight's portrait line is `src/data/portrait_line.json` (`tools/oneline2.py`).
 
 `public/` (gitignored) needs `fonts/` (from hopefolio/public/fonts), `img/` (the case-study images,
 `bb-screen.png` cropped from `desktop-study.png`, `orgx-logo.png`, and grain tiles from the showreel's

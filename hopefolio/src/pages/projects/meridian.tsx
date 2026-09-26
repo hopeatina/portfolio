@@ -19,8 +19,8 @@ export default function MeridianPage() {
       heroReel={{
         src: "/video/reels/meridian.mp4",
         poster: "/video/reels/meridian.jpg",
-        label: "Project film · The score is not the reason",
-        caption: "On a trading desk at night, 84 lifts off the screen and breaks into its evidence, including the concern it was hiding. Live execution stays disabled.",
+        label: "Project film · The part the score was hiding",
+        caption: "The same signal, twice. On the usual desk: 84, BUY, and CPI takes the stop. In Meridian: open the 84 into its evidence, find the concern it was hiding, change the plan, and keep the reason on the record. Demo values; live execution stays disabled.",
         score: "“Montay” by Hope Atina",
       }}
       heroProof={{

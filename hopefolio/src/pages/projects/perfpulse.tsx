@@ -19,8 +19,8 @@ export default function PerfPulsePage() {
       heroReel={{
         src: "/video/reels/perfpulse.mp4",
         poster: "/video/reels/perfpulse.jpg",
-        label: "Project film · The minute before",
-        caption: "A call freezes mid-sentence. Rewind: this time Crash Guard warns nine minutes earlier, the leak is stopped, and the call never drops.",
+        label: "Project film · Out of memory",
+        caption: "Mid-screen-share, macOS runs out of application memory and the call freezes. Rewind nine minutes: inside the 18 GB, one app never stops growing. Crash Guard forecasts the freeze, warns first, and Stop safely re-checks the process before it acts. 14:39:07, same second, still on the call.",
         score: "“Tues” by Hope Atina",
       }}
       heroProof={{
