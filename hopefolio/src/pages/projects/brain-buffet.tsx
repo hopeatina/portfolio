@@ -16,6 +16,13 @@ export default function BrainBuffetPage() {
         { label: "Experience", value: "Context → course → practice" },
         { label: "Scope", value: "Web application", note: "generation service integrated through an API" },
       ]}
+      heroReel={{
+        src: "/video/reels/brainbuffet.mp4",
+        poster: "/video/reels/brainbuffet.jpg",
+        label: "Project film · From a question to a course",
+        caption: "One answer isn’t a subject. The real create flow, part by part: expertise that skips what you know, subtopics you choose, a quiz that finds where your knowledge stops, a preview of what you’ll be able to do, and a chapter that remembers your notes. A question to a course plan in under five minutes.",
+        score: "“Feeling” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/brain-buffet/desktop-study.png",
         width: 1501,

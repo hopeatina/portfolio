@@ -16,6 +16,13 @@ export default function ChaosRidersPage() {
         { label: "Runtime", value: "Three.js + React", note: "browser prototype" },
         { label: "Interaction", value: "Steer / steady / flow", note: "touch + keyboard controls" },
       ]}
+      heroReel={{
+        src: "/video/reels/chaosriders.mp4",
+        poster: "/video/reels/chaosriders.jpg",
+        label: "Project film · It looked like Lego",
+        caption: "The first taxi looked like Lego. The rebuild is the real Survivor, rendered from its saved Blender geometry, then the fleet, then captured gameplay from the live demo: find the line through the pothole field and hold your nerve. The Blender models aren’t in the game build yet; the demo still drives the older car.",
+        score: "“Drvn” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/chaos-riders/world-market.webp",
         width: 3840,

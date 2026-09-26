@@ -16,6 +16,13 @@ export default function PerfPulsePage() {
         { label: "Runtime", value: "Per-user launchd", note: "no root daemon · no system extension" },
         { label: "Install", value: "brew install perf-pulse", note: "public tap · pinned SHA-256 · real binaries" },
       ]}
+      heroReel={{
+        src: "/video/reels/perfpulse.mp4",
+        poster: "/video/reels/perfpulse.jpg",
+        label: "Project film · Out of memory",
+        caption: "Mid-screen-share, macOS runs out of application memory and the call freezes. Rewind nine minutes: inside the 18 GB, one app never stops growing. Crash Guard forecasts the freeze, warns first, and Stop safely re-checks the process before it acts. 14:39:07, same second, still on the call.",
+        score: "“Tues” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/perf-pulse-crash-guard.jpg",
         width: 1274,

@@ -26,6 +26,12 @@ export default function OrgXPage() {
         command: "npx @useorgx/wizard@latest setup",
         note: "Detects supported clients, pairs auth, and writes managed MCP configuration.",
       }}
+      heroReel={{
+        src: "/video/reels/orgx.mp4",
+        poster: "/video/reels/orgx.jpg",
+        label: "Project film · Motion isn’t progress. Proof is.",
+        caption: "A wall of busy agent runs, a check that holds, and a receipt you accept. Silent cut.",
+      }}
       heroProof={{
         src: "/images/case-studies/orgx-v4/artifact-receipt.png",
         width: 1280,

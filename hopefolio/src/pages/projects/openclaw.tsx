@@ -16,6 +16,13 @@ export default function OrgXForOpenClawPage() {
         { label: "Continuity", value: "persistent state" },
         { label: "Control", value: "live + resumable" },
       ]}
+      heroReel={{
+        src: "/video/reels/openclaw.mp4",
+        poster: "/video/reels/openclaw.jpg",
+        label: "Project film · The lobster that forgot",
+        caption: "Every morning the lobster wakes up asking who it works for, until a bridge to OrgX carries the company in. Then the pixels resolve into the real screens: OpenClaw’s own control UI, the OrgX session, named agents, the activity record, Next Up kept apart from In Progress, and an outage where nothing is lost.",
+        score: "“Ravioli” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",
         width: 2880,

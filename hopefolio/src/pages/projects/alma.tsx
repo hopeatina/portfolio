@@ -16,6 +16,13 @@ export default function AlmaPage() {
         { label: "Reliability", value: "20% fewer errors", note: "self-reported · internal metrics" },
         { label: "Current", value: "Spring Health integration" },
       ]}
+      heroReel={{
+        src: "/video/reels/alma.mp4",
+        poster: "/video/reels/alma.jpg",
+        label: "Project film · Two clinicians, a thousand notes",
+        caption: "A thousand therapy notes a month to audit, and two clinical reviewers reading them one by one. After a two-day prototype sprint with the clinical lead, the AI reads first and clinicians judge what’s flagged; therapists are coached, not punished; the workflow survives the partner going quiet. 72% of eligible clinicians adopted it.",
+        score: "“Kdila” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/projects/alma-system-v4.svg",
         width: 1600,

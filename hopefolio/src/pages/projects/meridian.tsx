@@ -16,6 +16,13 @@ export default function MeridianPage() {
         { label: "Focus", value: "Explainable conviction", note: "signal → evidence → review" },
         { label: "Stage", value: "Research prototype", note: "demo interface · paper-only safety work" },
       ]}
+      heroReel={{
+        src: "/video/reels/meridian.mp4",
+        poster: "/video/reels/meridian.jpg",
+        label: "Project film · The part the score was hiding",
+        caption: "The same signal, twice. On the usual desk: 84, BUY, and CPI takes the stop. In Meridian: open the 84 into its evidence, find the concern it was hiding, change the plan, and keep the reason on the record. Demo values; live execution stays disabled.",
+        score: "“Montay” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/meridian/public-landing.png",
         width: 1200,

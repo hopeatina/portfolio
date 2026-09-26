@@ -1,0 +1,167 @@
+{
+ "cue": {
+  "lego": 18,
+  "sputter": 88,
+  "rebuild": 100,
+  "panels": 150,
+  "glazing": 201,
+  "paint": 251,
+  "fleet": 301,
+  "needle": 313,
+  "tank": 338,
+  "line": 376,
+  "drop": 401,
+  "slow": 521,
+  "nerve": 602,
+  "end": 702,
+  "button": 702,
+  "slams": [
+   150,
+   201,
+   251
+  ],
+  "vehicles": [
+   301,
+   313,
+   338
+  ]
+ },
+ "sfx": [
+  [
+   "lego",
+   "thup",
+   -20,
+   -0.2
+  ],
+  [
+   "sputter",
+   "glitch",
+   -22,
+   0,
+   {
+    "len": 0.25
+   }
+  ],
+  [
+   "rebuild",
+   "whump",
+   -6,
+   null,
+   {
+    "duck": 2
+   }
+  ],
+  [
+   "rebuild",
+   "glint",
+   -24,
+   0.3
+  ],
+  [
+   "slams",
+   "stamp",
+   -14,
+   null,
+   {
+    "spread": [
+     -0.3,
+     0.3
+    ]
+   }
+  ],
+  [
+   "vehicles",
+   "thup",
+   -14,
+   null,
+   {
+    "spread": [
+     -0.5,
+     0.5
+    ]
+   }
+  ],
+  [
+   "line",
+   "air_in",
+   -20,
+   null,
+   {
+    "len": 0.4
+   }
+  ],
+  [
+   "drop",
+   "whump",
+   -5,
+   null,
+   {
+    "duck": 3
+   }
+  ],
+  [
+   "drop",
+   "drop_sub",
+   -10,
+   null
+  ],
+  [
+   "drop",
+   "pass",
+   -16,
+   null,
+   {
+    "len": 0.8,
+    "f0": 300,
+    "f1": 4000,
+    "p0": -0.7,
+    "p1": 0.7
+   }
+  ],
+  [
+   "slow",
+   "air_out",
+   -18,
+   null,
+   {
+    "len": 1.4,
+    "f0": 1800,
+    "f1": 200
+   }
+  ],
+  [
+   "nerve",
+   "stamp",
+   -14,
+   0
+  ],
+  [
+   "nerve",
+   "pass",
+   -18,
+   null,
+   {
+    "len": 0.5,
+    "f0": 400,
+    "f1": 3000,
+    "p0": 0.7,
+    "p1": -0.7
+   }
+  ],
+  [
+   "button",
+   "whump",
+   -15,
+   null
+  ],
+  [
+   "button",
+   "chord",
+   -21,
+   null,
+   {
+    "len": 3.4
+   }
+  ]
+ ]
+}

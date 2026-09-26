@@ -1,0 +1,244 @@
+{
+ "cue": {
+  "freeze": 45,
+  "rewind": 108,
+  "inside": 154,
+  "thru": 226,
+  "grow": [
+   231,
+   257,
+   283,
+   308,
+   334,
+   360,
+   386
+  ],
+  "notify": 386,
+  "drop": 411,
+  "stop": 565,
+  "dashout": 591,
+  "out": 642,
+  "desk2": 662,
+  "end": 720,
+  "button": 720,
+  "initials": 318
+ },
+ "sfx": [
+  [
+   [
+    6,
+    16,
+    26,
+    36
+   ],
+   "tick",
+   -30,
+   0.3,
+   {
+    "st": -2
+   }
+  ],
+  [
+   "freeze",
+   "glitch",
+   -12,
+   0,
+   {
+    "len": 0.25
+   }
+  ],
+  [
+   "freeze",
+   "thup",
+   -12,
+   0
+  ],
+  [
+   "freeze",
+   "beep",
+   -18,
+   -0.3
+  ],
+  [
+   "rewind",
+   "rewind",
+   -8,
+   null,
+   {
+    "at": 108
+   }
+  ],
+  [
+   "inside",
+   "whump_lo",
+   -20,
+   null,
+   {
+    "len": 0.4,
+    "fc": 260
+   }
+  ],
+  [
+   "thru",
+   "air_in",
+   -14,
+   null,
+   {
+    "len": 0.5,
+    "f0": 400,
+    "f1": 7000,
+    "lead": 0.45
+   }
+  ],
+  [
+   "thru",
+   "whump_lo",
+   -14,
+   null,
+   {
+    "len": 0.6,
+    "fc": 220
+   }
+  ],
+  [
+   "grow",
+   "metal",
+   -27,
+   null,
+   {
+    "st": -9,
+    "spread": [
+     -0.5,
+     0.5
+    ],
+    "ramp": 1.0
+   }
+  ],
+  [
+   "initials",
+   "glint",
+   -34,
+   -0.4
+  ],
+  [
+   "notify",
+   "beep",
+   -12,
+   0.4
+  ],
+  [
+   "notify",
+   "thup",
+   -16,
+   0.4
+  ],
+  [
+   "drop",
+   "click",
+   -10,
+   0.3
+  ],
+  [
+   "drop",
+   "whump",
+   -4,
+   null,
+   {
+    "duck": 3
+   }
+  ],
+  [
+   "drop",
+   "drop_sub",
+   -10,
+   null
+  ],
+  [
+   "drop",
+   "chord",
+   -18,
+   null,
+   {
+    "len": 3.0
+   }
+  ],
+  [
+   "stop",
+   "click",
+   -9,
+   -0.2
+  ],
+  [
+   "stop",
+   "stamp",
+   -15,
+   -0.2
+  ],
+  [
+   "stop",
+   "bell",
+   -24,
+   -0.2,
+   {
+    "deg": 7
+   }
+  ],
+  [
+   "dashout",
+   "air_out",
+   -18,
+   null,
+   {
+    "len": 0.9,
+    "f0": 1800,
+    "f1": 200
+   }
+  ],
+  [
+   "dashout",
+   "whump_lo",
+   -15,
+   null,
+   {
+    "len": 0.7,
+    "fc": 220
+   }
+  ],
+  [
+   "desk2",
+   "air_out",
+   -16,
+   null,
+   {
+    "len": 0.5,
+    "f0": 6000,
+    "f1": 500
+   }
+  ],
+  [
+   "desk2",
+   "bell",
+   -27,
+   0,
+   {
+    "deg": 4,
+    "len": 1.4
+   }
+  ],
+  [
+   "button",
+   "whump",
+   -15,
+   null
+  ],
+  [
+   "button",
+   "chord",
+   -21,
+   null,
+   {
+    "len": 3.4
+   }
+  ]
+ ]
+}

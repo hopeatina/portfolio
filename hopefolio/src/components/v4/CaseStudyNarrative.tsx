@@ -1,4 +1,5 @@
 import ProjectVisual, { ProjectVisualProps } from "./ProjectVisual";
+import ProjectReel, { ProjectReelProps } from "./ProjectReel";
 import Head from "next/head";
 import { useState } from "react";
 import Link from "next/link";
@@ -53,6 +54,8 @@ interface CaseStudyNarrativeProps {
   /** Terminal-first signature move: a copyable install/run command in the hero. */
   heroTerminal?: { command: string; note?: string };
   heroProof: NarrativeProof;
+  /** A short project film; when present it takes the hero slot and heroProof moves into the proofs. */
+  heroReel?: Omit<ProjectReelProps, "className">;
   problem: NarrativeBlock;
   insight: NarrativeBlock;
   decision: NarrativeBlock;
@@ -247,7 +250,11 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
             <p className="v4-case-subtitle">{props.subtitle}</p>
           </div>
 
-          <ProjectVisual {...props.heroProof} priority className="v4-case-hero-proof" />
+          {props.heroReel ? (
+            <ProjectReel {...props.heroReel} className="v4-case-hero-proof" />
+          ) : (
+            <ProjectVisual {...props.heroProof} priority className="v4-case-hero-proof" />
+          )}
 
           <div className="v4-case-overview">
             <p className="v4-case-intro">{props.introduction}</p>
@@ -330,10 +337,10 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
 
           <SectionSignal index={proofIndex}>Authentic proof</SectionSignal>
           <div className="v4-proof-grid">
-            {props.proofs.map((proof, index) => (
+            {(props.heroReel ? [props.heroProof, ...props.proofs] : props.proofs).map((proof, index) => (
               <ProjectVisual
                 {...proof}
-                key={proof.src}
+                key={`${proof.src}-${index}`}
                 className={index === 0 ? "v4-proof-primary" : ""}
               />
             ))}
