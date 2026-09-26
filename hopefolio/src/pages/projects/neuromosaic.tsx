@@ -20,8 +20,8 @@ export default function NeuromosaicPage() {
         src: "/video/reels/neuromosaic.mp4",
         poster: "/video/reels/neuromosaic.jpg",
         label: "Project film · A paper, shattered into an architecture",
-        caption: "Scattered architecture choices become named, bounded tiles, then versioned code and a recorded run.",
-        score: "“Synthyrecover” by Hope Atina",
+        caption: "A paper’s architecture shatters into named, bounded tiles, encodes into one vector, and becomes versioned code and a run that traces back to its tiles.",
+        score: "“Macros” by Hope Atina",
       }}
       heroProof={{
         src: "/images/case-studies/neuromosaic/identity.png",

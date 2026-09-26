@@ -1,0 +1,231 @@
+{
+ "cue": {
+  "typed": 2,
+  "answer": 13,
+  "saucer": 70,
+  "picks": [
+   134,
+   259,
+   318,
+   380
+  ],
+  "drop": 436,
+  "chapters": [
+   458,
+   478,
+   488,
+   499
+  ],
+  "study": 512,
+  "note": 563,
+  "quiz": 605,
+  "end": 700,
+  "button": 776
+ },
+ "sfx": [
+  [
+   "answer",
+   "bell",
+   -26,
+   0,
+   {
+    "deg": 7,
+    "len": 0.6
+   }
+  ],
+  [
+   "saucer",
+   "tick",
+   -24,
+   -0.4,
+   {
+    "st": 8
+   }
+  ],
+  [
+   40,
+   "pass",
+   -26,
+   null,
+   {
+    "len": 1.0,
+    "f0": 300,
+    "f1": 1400,
+    "p0": 0.4,
+    "p1": -0.3
+   }
+  ],
+  [
+   "picks",
+   "air_in",
+   -28,
+   null,
+   {
+    "len": 0.2,
+    "lead": 0.18,
+    "spread": [
+     -0.5,
+     0.5
+    ]
+   }
+  ],
+  [
+   "picks",
+   "thup",
+   -16,
+   null,
+   {
+    "spread": [
+     -0.5,
+     0.5
+    ]
+   }
+  ],
+  [
+   "picks",
+   "metal",
+   -24,
+   null,
+   {
+    "st": 2,
+    "spread": [
+     -0.5,
+     0.5
+    ],
+    "ramp": 0
+   }
+  ],
+  [
+   "picks",
+   "bell",
+   -30,
+   null,
+   {
+    "deg": 2,
+    "spread": [
+     -0.5,
+     0.5
+    ]
+   }
+  ],
+  [
+   "drop",
+   "freeze",
+   -22,
+   null
+  ],
+  [
+   "drop",
+   "whump",
+   -5,
+   null,
+   {
+    "duck": 3
+   }
+  ],
+  [
+   "drop",
+   "drop_sub",
+   -11,
+   null
+  ],
+  [
+   "drop",
+   "chord",
+   -17,
+   null,
+   {
+    "len": 3.0
+   }
+  ],
+  [
+   "chapters",
+   "tick",
+   -24,
+   null,
+   {
+    "st": 4,
+    "spread": [
+     -0.3,
+     0.3
+    ]
+   }
+  ],
+  [
+   "chapters",
+   "bell",
+   -29,
+   null,
+   {
+    "deg": 3
+   }
+  ],
+  [
+   "study",
+   "pass",
+   -22,
+   null,
+   {
+    "len": 0.6,
+    "f0": 500,
+    "f1": 2400,
+    "p0": -0.5,
+    "p1": 0.5
+   }
+  ],
+  [
+   "note",
+   "stamp",
+   -18,
+   0.5
+  ],
+  [
+   "note",
+   "bell",
+   -26,
+   0.5,
+   {
+    "deg": 7
+   }
+  ],
+  [
+   "quiz",
+   "metal",
+   -20,
+   0,
+   {
+    "st": 12
+   }
+  ],
+  [
+   "quiz",
+   "bell",
+   -24,
+   0,
+   {
+    "deg": 9
+   }
+  ],
+  [
+   "end",
+   "air_out",
+   -26,
+   null
+  ],
+  [
+   "button",
+   "whump",
+   -15,
+   null
+  ],
+  [
+   "button",
+   "chord",
+   -21,
+   null,
+   {
+    "len": 3.4
+   }
+  ]
+ ]
+}

@@ -20,8 +20,8 @@ export default function OrgXForOpenClawPage() {
         src: "/video/reels/openclaw.mp4",
         poster: "/video/reels/openclaw.jpg",
         label: "Project film · The lobster that forgot",
-        caption: "An OpenClaw agent wakes up without the company every session, until one local bridge carries it in.",
-        score: "“Bop” by Hope Atina",
+        caption: "Every session the lobster wakes up asking who it works for, until one local bridge carries the company in and an outage loses nothing.",
+        score: "“Ravioli” by Hope Atina",
       }}
       heroProof={{
         src: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",

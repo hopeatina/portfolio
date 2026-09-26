@@ -5,7 +5,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 const [outDir, ...specs] = process.argv.slice(2);
 fs.mkdirSync(outDir, { recursive: true });
-const serveUrl = await bundle({ entryPoint: path.resolve('src/index.ts') });
+const serveUrl = await bundle({ entryPoint: path.resolve('src/index.ts'), outDir: path.resolve(`out/.bundle-stills-${process.pid}`) });
 const inputProps = process.env.QUALITY ? { quality: process.env.QUALITY } : {};
 for (const spec of specs) {
   const [id, frames] = spec.split(':');

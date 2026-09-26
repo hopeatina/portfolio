@@ -1,0 +1,26 @@
+{
+  "cue": {
+    "words": [10, 24, 44, 57, 83, 100, 134, 157],
+    "entrance": 257,
+    "arrive": [257, 488, 604, 719, 834, 949, 1064, 1178],
+    "recap": 1294,
+    "recapLights": [1330, 1344, 1359, 1373, 1388, 1402, 1417, 1431],
+    "name": 1525,
+    "button": 1640
+  },
+  "sfx": [
+    [150, "riser", -26, null, {"len": 1.8}],
+    ["entrance", "whump", -8, null, {"duck": 2}],
+    ["entrance", "chord", -20, null, {"len": 2.4}],
+    ["arrive", "pass", -21, null, {"len": 0.5, "off": -18, "f0": 400, "f1": 2400, "spread": [-0.7, 0.7]}],
+    ["arrive", "thup", -20, null, {"spread": [-0.5, 0.5]}],
+    ["arrive", "glint", -32, null, {"off": 4}],
+    ["recap", "pass", -18, null, {"len": 1.2, "f0": 2400, "f1": 300, "p0": 0, "p1": 0}],
+    ["recapLights", "bell", -28, null, {"spread": [-0.8, 0.8]}],
+    ["recapLights", "metal", -32, null, {"st": 9, "spread": [-0.8, 0.8]}],
+    ["name", "whump_lo", -14, null],
+    ["name", "air_in", -24, null, {"len": 0.5}],
+    ["button", "whump", -12, null],
+    ["button", "chord", -18, null, {"len": 3.6}]
+  ]
+}

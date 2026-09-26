@@ -1,0 +1,33 @@
+{
+  "cue": {
+    "through": 89,
+    "ride": 110,
+    "bumps": [140, 254, 304, 317],
+    "swerve": 380,
+    "drop": 406,
+    "dodges": [431, 456, 494, 506, 546, 575],
+    "proto": 608,
+    "end": 646,
+    "button": 711
+  },
+  "sfx": [
+    [0, "pass", -30, null, {"len": 1.4, "f0": 200, "f1": 700, "p0": 0, "p1": 0}],
+    ["through", "air_in", -18, null, {"len": 0.35, "f0": 500, "f1": 7000, "lead": 0.3}],
+    ["through", "whump_lo", -16, null],
+    ["bumps", "whump_lo", -13, null, {"len": 0.35, "fc": 200, "spread": [-0.3, 0.3]}],
+    ["bumps", "tick", -22, null, {"st": -12, "spread": [-0.3, 0.3]}],
+    ["swerve", "pass", -22, null, {"len": 0.4, "f0": 900, "f1": 300, "p0": -0.6, "p1": 0.6}],
+    ["drop", "freeze", -22, null],
+    ["drop", "whump", -4, null, {"duck": 3}],
+    ["drop", "drop_sub", -10, null],
+    ["drop", "chord", -17, null, {"len": 2.6}],
+    ["drop", "glint", -24, null, {"len": 0.6}],
+    ["dodges", "pass", -24, null, {"len": 0.3, "f0": 1500, "f1": 500, "spread": [0.6, -0.6]}],
+    ["dodges", "bell", -32, null, {"deg": 4, "spread": [0.6, -0.6]}],
+    ["proto", "whump", -12, null],
+    ["proto", "pass", -20, null, {"len": 0.7, "f0": 2400, "f1": 400, "p0": 0, "p1": 0}],
+    ["end", "air_out", -26, null],
+    ["button", "whump", -15, null],
+    ["button", "chord", -21, null, {"len": 3.4}]
+  ]
+}

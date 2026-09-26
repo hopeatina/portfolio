@@ -20,7 +20,7 @@ export default function PerfPulsePage() {
         src: "/video/reels/perfpulse.mp4",
         poster: "/video/reels/perfpulse.jpg",
         label: "Project film · The minute before",
-        caption: "Memory climbs until the machine drops frames; Crash Guard warns while there is still room.",
+        caption: "It opens on the freeze, rewinds, and shows Crash Guard warning nine minutes earlier, while there is still room to stop the leak.",
         score: "“Tues” by Hope Atina",
       }}
       heroProof={{

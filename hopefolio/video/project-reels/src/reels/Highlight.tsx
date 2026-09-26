@@ -1,115 +1,209 @@
 import React from 'react';
 import { AbsoluteFill, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { Audio } from '@remotion/media';
-import { HOUSE, RESOLVE, TRAVEL, clamp, mix, prog, settle } from '../lib/ease';
+import { HOUSE, RESOLVE, mix, prog } from '../lib/ease';
 import { T, rec } from '../lib/theme';
 import { Flash, Grain, Vignette } from '../lib/Frame';
 import { resolveText } from '../lib/decode';
-import grid from '../data/grid_highlight.json';
+import { Cam, Key, Vec3, X, Y, keyedCamera, project, spinAbout, v3, vadd, vscale } from '../lib/space';
+import { Blur, Plane, polyline } from '../lib/World';
+import cues from '../data/cues_highlight.json';
 
 /**
- * HOPE ATINA — the thread.
- * Hope's own voice opens it ("I'm less about talk and more about action.",
- * Figma Config 2021) over the textural runway of his own track, UBEAT V1.
- * On the entrance the thread wipes into eight worlds, one bar each, OrgX two:
- * the actual project films, cut at their turns. A recap grid lights all eight
- * on the beat, the thread stitching them, and the name lands on the final hit.
+ * HOPE ATINA v2: the thread.
+ * One world, one camera, one line. Hope's own voice opens it ("I'm less about
+ * talk and more about action.", Figma Config 2021) over the runway of his own
+ * track, UBEAT V1, while a lime thread draws itself out of the dark. On the
+ * entrance a bead of light runs down the thread into the first of eight
+ * screens hung on it, each playing its project film at the turn; on every
+ * downbeat the camera follows the bead to the next world (OrgX gets two
+ * bars). Then the camera pulls back: all eight worlds on one thread, lighting
+ * in order, each showing its title. The name lands on the final hit.
+ * Rewatch: every film has its own version of the thread (Alma's rail, Perf
+ * Pulse's waterline, OpenClaw's bridge, BrainBuffet's tray, Neuromosaic's
+ * threads, Chaos Riders' golden line, Meridian's slices).
  */
 export const HIGHLIGHT_DUR = 1758;
-const DB = grid.downbeats.map(Math.round);
-const beat = grid.beatF;
+const C = cues.cue;
 const LIME = T.signal;
+const VOICE = ["I'm", 'less', 'about', 'talk', 'and', 'more', 'about', 'action.'];
 
-type Shot = { id: string; label: string; accent: string; drop: number; from: number; to: number };
+type Shot = { id: string; label: string; accent: string; from: number; to: number; start: number };
+const A = C.arrive;
 const SHOTS: Shot[] = [
-  { id: 'OrgX', label: '01 · OrgX · proof for AI-delivered work', accent: '#0ad4c4', drop: 424, from: DB[0], to: DB[2] },
-  { id: 'Alma', label: '02 · Alma · clinical production systems', accent: '#48c7ff', drop: 330, from: DB[2], to: DB[3] },
-  { id: 'PerfPulse', label: '03 · Perf Pulse · developer tooling', accent: '#b7f34a', drop: 487, from: DB[3], to: DB[4] },
-  { id: 'OpenClaw', label: '04 · OrgX × OpenClaw · continuity plugin', accent: '#ff4f40', drop: 302, from: DB[4], to: DB[5] },
-  { id: 'BrainBuffet', label: '05 · BrainBuffet · learning product', accent: '#9b7bff', drop: 307, from: DB[5], to: DB[6] },
-  { id: 'Neuromosaic', label: '06 · Neuromosaic · research infrastructure', accent: '#8f6bff', drop: 380, from: DB[6], to: DB[7] },
-  { id: 'ChaosRiders', label: '07 · Chaos Riders · game world', accent: '#ffb02e', drop: 302, from: DB[7], to: DB[8] },
-  { id: 'Meridian', label: '08 · Meridian · decision interfaces', accent: '#3ee6b4', drop: 490, from: DB[8], to: DB[9] },
+  { id: 'OrgX', label: '01 · OrgX · proof for AI-delivered work', accent: '#0ad4c4', from: A[0], to: A[1], start: 380 },
+  { id: 'Alma', label: '02 · Alma · clinical production systems', accent: '#48c7ff', from: A[1], to: A[2], start: 392 },
+  { id: 'PerfPulse', label: '03 · Perf Pulse · developer tooling', accent: '#b7f34a', from: A[2], to: A[3], start: 412 },
+  { id: 'OpenClaw', label: '04 · OrgX × OpenClaw · continuity plugin', accent: '#ff4f40', from: A[3], to: A[4], start: 364 },
+  { id: 'BrainBuffet', label: '05 · BrainBuffet · learning product', accent: '#9b7bff', from: A[4], to: A[5], start: 414 },
+  { id: 'Neuromosaic', label: '06 · Neuromosaic · research infrastructure', accent: '#8f6bff', from: A[5], to: A[6], start: 378 },
+  { id: 'ChaosRiders', label: '07 · Chaos Riders · game world', accent: '#ffb02e', from: A[6], to: A[7], start: 384 },
+  { id: 'Meridian', label: '08 · Meridian · decision interfaces', accent: '#3ee6b4', from: A[7], to: C.recap, start: 398 },
 ];
-const RECAP = [DB[9], DB[11]] as const;
-const END = DB[11];
-const BUTTON = Math.round(grid.button);
-const VOICE = "I'm less about talk and more about action.";
+const SW = 1920;
+const SH = 1080;
+const SPACING = 2700;
+const yawOf = (i: number) => (i % 2 ? -1 : 1) * 0.2;
+const posOf = (i: number): Vec3 => v3(i * SPACING, Math.sin(i * 1.1) * 420, -(i % 2) * 700);
+const axisOf = (i: number) => spinAbout(X, Y, yawOf(i));
+const edge = (i: number, side: -1 | 1) => vadd(posOf(i), vscale(axisOf(i), (side * SW) / 2));
+const START = v3(-4200, -200, 400);
 
-/** The wipe edge: a lime thread crossing the frame, revealing the next world. */
-const Thread: React.FC<{ t: number; color: string }> = ({ t, color }) =>
-  t <= 0 || t >= 1 ? null : (
-    <div style={{ position: 'absolute', top: 0, bottom: 0, left: `${t * 100}%`, width: 4, background: color, boxShadow: `0 0 30px ${color}, 0 0 80px ${color}` }} />
+// the thread: out of the dark, then from each screen's right edge to the next one's left, sagging between
+const threadPts = (): Vec3[] => {
+  const pts: Vec3[] = [];
+  const seg = (a: Vec3, b: Vec3, sag: number) => {
+    for (let s = 0; s <= 20; s++) {
+      const u = s / 20;
+      pts.push(v3(mix(a.x, b.x, u), mix(a.y, b.y, u) + Math.sin(Math.PI * u) * sag, mix(a.z, b.z, u)));
+    }
+  };
+  seg(START, edge(0, -1), 380);
+  for (let i = 0; i < SHOTS.length; i++) {
+    seg(edge(i, -1), edge(i, 1), 0);
+    if (i < SHOTS.length - 1) seg(edge(i, 1), edge(i + 1, -1), 300);
+  }
+  return pts;
+};
+const THREAD = threadPts();
+
+const KEYS: Key[] = [[0, START.x + 900, START.y - 80, START.z, 1500, 0, 0, 0], [C.entrance - 60, START.x + 2200, START.y, START.z - 100, 1700, 8, 2, 0]];
+SHOTS.forEach((s, i) => {
+  const p = posOf(i);
+  const yaw = (yawOf(i) * 180) / Math.PI;
+  KEYS.push([s.from + 6, p.x, p.y, p.z, 1080, yaw, 0, 0]);
+  KEYS.push([s.to - 20, p.x, p.y, p.z, 1010, yaw, 0, 0]);
+});
+const MID = v3(((SHOTS.length - 1) * SPACING) / 2, 0, -350);
+KEYS.push([C.recap + 44, MID.x - 600, MID.y - 420, MID.z, 5200, 50, 2, 0]); // down the thread, three-quarter
+KEYS.push([C.name, MID.x + 300, MID.y - 420, MID.z, 5600, 44, 2, 0]);
+KEYS.push([HIGHLIGHT_DUR, MID.x + 600, MID.y - 420, MID.z, 6200, 40, 3, 0]);
+const CAM = keyedCamera(KEYS, [{ frames: [C.entrance, ...A.slice(1)], tau: 5, punch: 0.02, px: 4 }]);
+
+/** the bead: where the light is on the thread (0..1 of its length), riding it between screens */
+const beadU = (f: number) => {
+  const n = THREAD.length - 1;
+  const segStart = (i: number) => (21 + i * 42) / n; // index of screen i's left edge
+  if (f < C.entrance) return mix(0, segStart(0), HOUSE(prog(f, 120, C.entrance)));
+  for (let i = SHOTS.length - 1; i >= 0; i--) {
+    if (f >= SHOTS[i].from) {
+      const here = mix(segStart(i), segStart(i) + 20 / n, 0.5);
+      if (i === SHOTS.length - 1 || f < SHOTS[i + 1].from - 26) return here;
+      return mix(here, mix(segStart(i + 1), segStart(i + 1) + 20 / n, 0.5), HOUSE(prog(f, SHOTS[i + 1].from - 26, SHOTS[i + 1].from + 4)));
+    }
+  }
+  return 0;
+};
+
+const World: React.FC<{ f: number; cam: Cam }> = ({ f, cam }) => {
+  const drawn = f < C.entrance ? HOUSE(prog(f, 60, C.entrance)) : 1;
+  const n = THREAD.length;
+  const upto = f < C.entrance ? Math.floor(beadU(f) * (n - 1)) + 1 : n;
+  const pts = THREAD.slice(0, Math.max(2, upto)).map((p) => project(cam, p)).filter((p) => p.d > 40);
+  const bu = beadU(f) * (n - 1);
+  const bi = Math.floor(bu);
+  const bp = THREAD[Math.min(n - 1, bi)];
+  const bq = THREAD[Math.min(n - 1, bi + 1)];
+  const bead = project(cam, v3(mix(bp.x, bq.x, bu - bi), mix(bp.y, bq.y, bu - bi), mix(bp.z, bq.z, bu - bi)));
+  const recapT = HOUSE(prog(f, C.recap, C.recap + 40));
+  const nameDim = HOUSE(prog(f, C.name - 10, C.name + 30));
+  return (
+    <>
+      <svg width={1920} height={1080} style={{ position: 'absolute', inset: 0, zIndex: 1, overflow: 'visible' }}>
+        <defs>
+          <filter id="hglow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation={10} />
+          </filter>
+        </defs>
+        {pts.length > 1 ? (
+          <>
+            <path d={polyline(pts)} stroke={LIME} strokeWidth={12} fill="none" opacity={0.35 * drawn} filter="url(#hglow)" />
+            <path d={polyline(pts)} stroke={LIME} strokeWidth={3.5} fill="none" opacity={drawn} />
+          </>
+        ) : null}
+      </svg>
+      {SHOTS.map((s, i) => {
+        const p = posOf(i);
+        const inBar = f >= s.from - 40 && f < s.to + 30;
+        const inRecap = f >= C.recap - 10;
+        const lit = inRecap ? HOUSE(prog(f, C.recapLights[i] - 4, C.recapLights[i] + 10)) : 1;
+        const on = inBar || inRecap;
+        return (
+          <Plane key={s.id} cam={cam} c={p} U={axisOf(i)} V={Y} w={SW} h={SH} z={1000}>
+            <div style={{ position: 'absolute', inset: 0, background: '#050506', boxShadow: `0 0 0 6px ${s.accent}, 0 0 ${inRecap ? 160 * lit : 90}px ${s.accent}55`, opacity: inRecap ? mix(0.55, 1, lit) * (1 - 0.7 * nameDim) : 1 }}>
+              {on && !inRecap ? (
+                <Sequence from={s.from - 40} durationInFrames={s.to - s.from + 70} layout="none">
+                  <OffthreadVideo src={staticFile(`clips/${s.id}.mp4`)} startFrom={s.start - 40} muted style={{ width: SW, height: SH }} />
+                </Sequence>
+              ) : null}
+              {inRecap ? (
+                <Sequence from={C.recap - 10} durationInFrames={HIGHLIGHT_DUR - C.recap + 10} layout="none">
+                  <OffthreadVideo src={staticFile(`clips/${s.id}.mp4`)} startFrom={700} endAt={900} playbackRate={0.42} muted style={{ width: SW, height: SH }} />
+                </Sequence>
+              ) : null}
+            </div>
+            <div style={{ position: 'absolute', left: 0, top: SH + 34, ...rec(1, 0, 650), fontSize: 64, letterSpacing: '0.1em', color: s.accent, whiteSpace: 'nowrap', opacity: inRecap ? recapT * (1 - nameDim) : 0 }}>{s.label.toUpperCase()}</div>
+          </Plane>
+        );
+      })}
+      {bead.d > 40 && f < C.recap && (f < C.entrance + 6 || A.slice(1).some((a) => f >= a - 30 && f < a + 8)) ? (
+        <svg width={1920} height={1080} style={{ position: 'absolute', inset: 0, zIndex: 400000, overflow: 'visible', pointerEvents: 'none' }}>
+          <circle cx={bead.sx} cy={bead.sy} r={Math.max(6, 22 * bead.s)} fill={LIME} filter="url(#hglow)" opacity={0.9} />
+          <circle cx={bead.sx} cy={bead.sy} r={Math.max(3, 8 * bead.s)} fill="#f7ffe6" />
+        </svg>
+      ) : null}
+    </>
   );
+};
 
 export const Highlight: React.FC = () => {
   const f = useCurrentFrame();
-  const introLine = HOUSE(prog(f, 20, 200));
-  const recapOn = f >= RECAP[0] && f < RECAP[1] + 24;
-  const endT = HOUSE(prog(f, END, END + 26));
-  const nameT = HOUSE(prog(f, END + 6, END + 40));
-  const credT = HOUSE(prog(f, BUTTON, BUTTON + 30));
+  const cam = CAM.at(f);
+  const introOut = HOUSE(prog(f, C.entrance - 24, C.entrance));
+  const shot = SHOTS.find((s) => f >= s.from && f < s.to);
+  const labelT = shot ? HOUSE(prog(f, shot.from + 8, shot.from + 22)) * (1 - HOUSE(prog(f, shot.to - 24, shot.to - 12))) : 0;
+  const nameT = HOUSE(prog(f, C.name + 6, C.name + 40));
+  const endT = HOUSE(prog(f, C.name, C.name + 26));
+  const credT = HOUSE(prog(f, C.button, C.button + 30));
+  const moving = A.map((a): [number, number, number] => [a - 26, a + 6, 8]);
   return (
-    <AbsoluteFill style={{ background: T.carbon, overflow: 'hidden' }}>
-      {/* intro: the voice, captioned for sound-off, the thread drawing in */}
-      {f < DB[0] + 16 ? (
+    <AbsoluteFill style={{ background: 'radial-gradient(ellipse 90% 70% at 50% 45%, #0b0c0a, #030303 75%)', overflow: 'hidden' }}>
+      <Blur ranges={[...moving, [C.recap - 4, C.recap + 44, 8]]}>
         <AbsoluteFill>
-          <div style={{ position: 'absolute', left: 160, top: 150, ...rec(1, 0, 600), fontSize: 22, letterSpacing: '0.22em', color: LIME, opacity: HOUSE(prog(f, 10, 30)) }}>HOPE ATINA · SELECTED WORK · 2026</div>
-          <div style={{ position: 'absolute', left: 0, top: 538, width: 1920 * introLine, height: 4, background: LIME, boxShadow: `0 0 24px ${LIME}` }} />
-          <div style={{ position: 'absolute', left: 160, top: 600, width: 1600, fontFamily: T.serif, fontStyle: 'italic', fontSize: 84, color: T.mineral, lineHeight: 1.1 }}>
-            {VOICE.split(' ').map((w, i) => (
-              <span key={i} style={{ opacity: HOUSE(prog(f, 26 + i * 23, 34 + i * 23)) }}>{i === 0 ? '“' : ''}{w}{i === VOICE.split(' ').length - 1 ? '”' : ''} </span>
-            ))}
+          <World f={f} cam={cam} />
+        </AbsoluteFill>
+      </Blur>
+      {/* the voice, captioned for sound-off */}
+      {f < C.entrance + 4 ? (
+        <AbsoluteFill style={{ opacity: 1 - introOut }}>
+          <div style={{ position: 'absolute', left: 160, top: 160, ...rec(1, 0, 600), fontSize: 22, letterSpacing: '0.22em', color: LIME, opacity: 1 }}>HOPE ATINA · SELECTED WORK · 2026</div>
+          <div style={{ position: 'absolute', left: 160, top: 640, width: 1600, fontFamily: T.serif, fontStyle: 'italic', fontSize: 92, color: T.mineral, lineHeight: 1.1 }}>
+            {VOICE.map((w, i) => {
+              const t = HOUSE(prog(f, C.words[i] - 2, C.words[i] + 8));
+              return (
+                <span key={i} style={{ display: 'inline-block', marginRight: 26, opacity: mix(0.16, 1, t), transform: `translateY(${(1 - t) * 10}px)`, textShadow: t > 0.5 ? '0 0 30px rgba(183,243,74,0.15)' : 'none' }}>
+                  {i === 0 ? '“' : ''}
+                  {w}
+                  {i === VOICE.length - 1 ? '”' : ''}
+                </span>
+              );
+            })}
           </div>
-          <div style={{ position: 'absolute', left: 160, top: 720, ...rec(1, 0, 450), fontSize: 20, letterSpacing: '0.16em', color: T.mineral3, opacity: HOUSE(prog(f, 210, 236)) }}>HOPE ATINA · FIGMA CONFIG 2021</div>
+          <div style={{ position: 'absolute', left: 160, top: 770, ...rec(1, 0, 450), fontSize: 20, letterSpacing: '0.16em', color: T.mineral3, opacity: HOUSE(prog(f, 200, 226)) }}>HOPE ATINA · FIGMA CONFIG 2021</div>
         </AbsoluteFill>
       ) : null}
-      {/* eight worlds, one bar each */}
-      {SHOTS.map((s) => {
-        if (f < s.from - 1 || f >= s.to + 16) return null;
-        const wipe = TRAVEL(prog(f, s.from, s.from + 16));
-        return (
-          <AbsoluteFill key={s.id} style={{ clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)` }}>
-            <Sequence from={s.from} layout="none">
-              <OffthreadVideo src={staticFile(`clips/${s.id}.mp4`)} startFrom={Math.max(0, s.drop - 16)} muted style={{ width: 1920, height: 1080 }} />
-            </Sequence>
-            <div style={{ position: 'absolute', left: 60, bottom: 50, padding: '10px 18px', background: 'rgba(8,8,6,0.78)', ...rec(1, 0, 600), fontSize: 22, letterSpacing: '0.1em', color: s.accent, opacity: HOUSE(prog(f, s.from + 10, s.from + 24)) }}>{s.label.toUpperCase()}</div>
-          </AbsoluteFill>
-        );
-      })}
-      {SHOTS.map((s) => <Thread key={s.id} t={TRAVEL(prog(f, s.from, s.from + 16))} color={s.accent} />)}
-      {/* recap: all eight light up on the beat, stitched by the thread */}
-      {recapOn ? (
-        <AbsoluteFill style={{ background: T.carbon, opacity: HOUSE(prog(f, RECAP[0], RECAP[0] + 12)) * (1 - HOUSE(prog(f, RECAP[1], RECAP[1] + 24))) }}>
-          {SHOTS.map((s, i) => {
-            const on = RECAP[0] + Math.round(i * beat);
-            const a = settle(prog(f, on, on + 12), 0.9);
-            const col = i % 4;
-            const row = Math.floor(i / 4);
-            const x = 110 + col * 432;
-            const y = 300 + row * 300;
-            return (
-              <div key={s.id} style={{ position: 'absolute', left: x, top: y, width: 400, height: 225, opacity: clamp(a), transform: `scale(${mix(0.85, 1, a)})`, border: `2px solid ${s.accent}`, overflow: 'hidden' }}>
-                {f >= on ? (
-                  <Sequence from={on} layout="none">
-                    <OffthreadVideo src={staticFile(`clips/${s.id}.mp4`)} startFrom={s.drop + 40} muted style={{ width: 400, height: 225 }} />
-                  </Sequence>
-                ) : null}
-              </div>
-            );
-          })}
-          <svg width={1920} height={1080} style={{ position: 'absolute', inset: 0 }}>
-            <path d={SHOTS.map((_, i) => { const x = 110 + (i % 4) * 432 + 200; const y = 300 + Math.floor(i / 4) * 300 + 112; return `${i ? 'L' : 'M'}${x} ${y}`; }).join(' ')} stroke={LIME} strokeWidth={3} fill="none" pathLength={1} strokeDasharray={`${RESOLVE(prog(f, RECAP[0], RECAP[0] + 8 * beat))} 1`} opacity={0.8} />
-          </svg>
-          <div style={{ position: 'absolute', left: 110, top: 220, ...rec(1, 0, 600), fontSize: 22, letterSpacing: '0.2em', color: T.mineral3 }}>CLINICAL SOFTWARE · DATA PLATFORMS · AI AGENTS · GAME WORLDS</div>
-        </AbsoluteFill>
+      {shot ? (
+        <div style={{ position: 'absolute', left: 64, bottom: 54, padding: '10px 18px', background: 'rgba(8,8,6,0.8)', ...rec(1, 0, 600), fontSize: 22, letterSpacing: '0.1em', color: shot.accent, opacity: labelT }}>{shot.label.toUpperCase()}</div>
+      ) : null}
+      {f >= C.recap + 30 && f < C.name ? (
+        <div style={{ position: 'absolute', left: 120, top: 96, ...rec(1, 0, 600), fontSize: 22, letterSpacing: '0.2em', color: T.mineral3, opacity: HOUSE(prog(f, C.recap + 30, C.recap + 50)) * (1 - HOUSE(prog(f, C.name - 16, C.name))) }}>CLINICAL SOFTWARE · DATA PLATFORMS · AI AGENTS · GAME WORLDS</div>
       ) : null}
       {/* the name, on the final hit */}
-      {f >= END ? (
+      {f >= C.name ? (
         <AbsoluteFill style={{ opacity: endT }}>
-          <div style={{ position: 'absolute', left: 0, top: 538, width: 1920 * HOUSE(prog(f, END, END + 30)), height: 4, background: LIME, boxShadow: `0 0 24px ${LIME}` }} />
+          <div style={{ position: 'absolute', left: 0, top: 538, width: 1920 * HOUSE(prog(f, C.name, C.name + 30)), height: 4, background: LIME, boxShadow: `0 0 24px ${LIME}` }} />
           <div style={{ position: 'absolute', left: 160, top: 300, fontFamily: T.serif, fontSize: 200, lineHeight: 0.95, letterSpacing: '-0.02em', color: T.mineral, clipPath: `inset(0 ${(1 - nameT) * 100}% -20% 0)` }}>Hope Atina</div>
-          <div style={{ position: 'absolute', left: 160, top: 580, ...rec(0.2, 0.4, 440), fontSize: 42, color: T.mineral2 }}>Engineer, founder, product thinker. Also made the beat.</div>
+          <div style={{ position: 'absolute', left: 160, top: 580, ...rec(0.2, 0.4, 440), fontSize: 42, color: T.mineral2, whiteSpace: 'pre' }}>{resolveText(''.padEnd(55, ' '), 'Engineer, founder, product thinker. Also made the beat.', RESOLVE(prog(f, C.name + 20, C.name + 60)), 'hname', f)}</div>
           <div style={{ position: 'absolute', left: 160, bottom: 120, display: 'flex', gap: 36, ...rec(1, 0, 500), fontSize: 22, letterSpacing: '0.14em', color: T.mineral3, opacity: credT }}>
             <span style={{ color: LIME }}>HOPEATINA.COM</span>
             <span>SCORE: “UBEAT V1” BY HOPE ATINA</span>
@@ -117,11 +211,12 @@ export const Highlight: React.FC = () => {
           </div>
         </AbsoluteFill>
       ) : null}
-      <Flash a={f >= DB[0] ? 0.12 * Math.exp(-(f - DB[0]) / 6) : 0} color="183,243,74" />
-      <Flash a={f >= BUTTON ? 0.1 * Math.exp(-(f - BUTTON) / 8) : 0} />
-      <Vignette />
+      <Flash a={f >= C.entrance ? 0.12 * Math.exp(-(f - C.entrance) / 6) : 0} color="183,243,74" />
+      <Flash a={f >= C.button ? 0.1 * Math.exp(-(f - C.button) / 8) : 0} />
+      <Vignette s={0.62} />
       <Grain />
-      <Audio src={staticFile('audio/highlight.wav')} />
+      <Audio src={staticFile('audio/highlight_mix.wav')} />
     </AbsoluteFill>
   );
 };
+

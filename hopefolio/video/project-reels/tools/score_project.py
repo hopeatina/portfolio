@@ -8,6 +8,8 @@ proj, spec = sys.argv[1], json.loads(sys.argv[2])
 f, start, drop = spec['file'], spec['start'], spec['drop']
 y,_=librosa.load(f,sr=SR,mono=False)
 if y.ndim==1: y=np.vstack([y,y])
+# pad so a window that starts at the song's first beat still has onset context
+PAD=2.0; y=np.pad(y,((0,0),(int(PAD*SR),0))); spec['start_s']=start; start+=PAD; drop+=PAD
 mono=y.mean(0)
 oenv=librosa.onset.onset_strength(y=mono[int(start*SR)-SR:int((start+DUR+2)*SR)],sr=SR,hop_length=512)
 _,bf=librosa.beat.beat_track(onset_envelope=oenv,sr=SR,hop_length=512,start_bpm=spec['bpm'])
@@ -34,6 +36,6 @@ out=out/np.max(np.abs(out))*10**(-1/20)
 pcm=(np.clip(out.T,-1,1)*32767).astype('<i2')
 with wave.open(f'public/audio/{proj}_raw.wav','wb') as w: w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
 fr=lambda s: round((s-start)*FPS,2)
-g=dict(track=spec['track'],bpm=round(60/per,2),beatF=round(per*FPS,3),beats=[fr(b) for b in bt],downbeats=[fr(d) for d in down],drop=fr(drop),button=fr(cut),start_s=start)
+g=dict(track=spec['track'],bpm=round(60/per,2),beatF=round(per*FPS,3),beats=[fr(b) for b in bt],downbeats=[fr(d) for d in down],drop=fr(drop),button=fr(cut),start_s=spec['start_s'])
 json.dump(g,open(f'src/data/grid_{proj}.json','w'))
 print(proj,spec['track'],'bpm',g['bpm'],'drop f',g['drop'],'button f',g['button'],'beats',len(bt))

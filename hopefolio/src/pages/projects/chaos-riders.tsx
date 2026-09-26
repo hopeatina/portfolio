@@ -20,7 +20,7 @@ export default function ChaosRidersPage() {
         src: "/video/reels/chaosriders.mp4",
         poster: "/video/reels/chaosriders.jpg",
         label: "Project film · Read the road",
-        caption: "Concept art, then the road: potholes on the beat, and the golden line into flow.",
+        caption: "Through the concept art onto the road: potholes on the snares, then the golden line and flow, then the playable prototype.",
         score: "“Drvn” by Hope Atina",
       }}
       heroProof={{

@@ -20,7 +20,7 @@ export default function MeridianPage() {
         src: "/video/reels/meridian.mp4",
         poster: "/video/reels/meridian.jpg",
         label: "Project film · The score is not the reason",
-        caption: "One conviction score cracks open into its evidence, with live execution disabled.",
+        caption: "The score 84 slices into its ingredients and their evidence, including the concern it hid, with live execution disabled.",
         score: "“Montay” by Hope Atina",
       }}
       heroProof={{

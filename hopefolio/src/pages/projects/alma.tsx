@@ -20,7 +20,7 @@ export default function AlmaPage() {
         src: "/video/reels/alma.mp4",
         poster: "/video/reels/alma.jpg",
         label: "Project film · The request path stays narrow",
-        caption: "Clinical consequence lifts off the request path into audited, reversible stages.",
+        caption: "A therapist presses Save. The consequence riding on it lifts off into audited, retryable stages behind a reversible flag.",
         score: "“Kdila” by Hope Atina",
       }}
       heroProof={{
