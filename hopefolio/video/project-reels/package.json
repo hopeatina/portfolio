@@ -1,0 +1,29 @@
+{
+  "name": "orgx-motion-reel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OrgX 15s motion reel — MOTION ISN'T PROGRESS. PROOF IS.",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts OrgXReel out/orgx_reel.mp4 --codec=h264 --crf=15 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=320k --gl=angle",
+    "still": "remotion still src/index.ts OrgXReel"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "@remotion/fonts": "4.0.529",
+    "@remotion/layout-utils": "^4.0.529",
+    "@remotion/media": "^4.0.529",
+    "@remotion/motion-blur": "4.0.529",
+    "@remotion/noise": "4.0.529",
+    "@remotion/paths": "4.0.529",
+    "@remotion/shapes": "^4.0.529",
+    "@remotion/transitions": "^4.0.529",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}

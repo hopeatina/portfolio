@@ -1,0 +1,9 @@
+{
+  "alma": {"track": "kdila", "file": "music/1283128960_kdila.wav", "drop": 16.98, "start": 10.194, "bpm": 108.8},
+  "perfpulse": {"track": "tues", "file": "music/1263392470_tues.wav", "drop": 54.29, "start": 47.421, "bpm": 139.7},
+  "openclaw": {"track": "ravioli", "file": "music/1191958234_ravioli.wav", "drop": 12.21, "start": 5.602, "bpm": 154.0},
+  "brainbuffet": {"track": "feeling", "file": "music/1239284911_feeling.wav", "drop": 10.36, "start": 4.017, "bpm": 113.6},
+  "neuromosaic": {"track": "macros", "file": "music/912648628_macros.wav", "drop": 6.356, "start": -0.145, "bpm": 147.66},
+  "chaosriders": {"track": "drvn", "file": "music/1310557633_drvn.wav", "drop": 70.16, "start": 63.379, "bpm": 141.6},
+  "meridian": {"track": "montay", "file": "music/990019960_montay.wav", "drop": 79.75, "start": 72.841, "bpm": 147.7}
+}

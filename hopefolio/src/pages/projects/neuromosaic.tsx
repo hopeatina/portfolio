@@ -16,6 +16,13 @@ export default function NeuromosaicPage() {
         { label: "Core", value: "Python + PyTorch" },
         { label: "Surfaces", value: "Explorer + CLI", note: "research prototype; incomplete search strategies" },
       ]}
+      heroReel={{
+        src: "/video/reels/neuromosaic.mp4",
+        poster: "/video/reels/neuromosaic.jpg",
+        label: "Project film · A paper, shattered into an architecture",
+        caption: "Under a desk lamp, a paper’s choices break free as tiles, lock into the Neuromosaic sphere, and become versioned code and a run that traces back to them.",
+        score: "“Macros” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/neuromosaic/identity.png",
         width: 2048,

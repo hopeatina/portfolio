@@ -16,6 +16,13 @@ export default function OrgXForOpenClawPage() {
         { label: "Continuity", value: "persistent state" },
         { label: "Control", value: "live + resumable" },
       ]}
+      heroReel={{
+        src: "/video/reels/openclaw.mp4",
+        poster: "/video/reels/openclaw.jpg",
+        label: "Project film · The lobster that forgot",
+        caption: "Every morning the lobster wakes up asking who it works for, until a bridge to OrgX carries the company in. A storm cuts the Wi-Fi; nothing is lost.",
+        score: "“Ravioli” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/orgx-openclaw-v4/full-dashboard.png",
         width: 2880,

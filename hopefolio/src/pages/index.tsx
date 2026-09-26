@@ -16,6 +16,7 @@ import {
   TextLink,
 } from "@/components/v4/V4Primitives";
 import TechnologyAtlas from "@/components/v5/TechnologyAtlas";
+import ProjectReel from "@/components/v4/ProjectReel";
 
 const clientSurfaces = ["Claude Code", "Codex", "Cursor", "OpenCode", "OpenClaw", "MCP"];
 
@@ -48,6 +49,17 @@ export default function Home() {
           </div>
           <MaterialSpecimen context={materialContexts.home} className="material-home-object" compact />
           <div className="material-home-bottom"><span>Systems with depth.<br />Details with a reason.</span><a href="#material-journey-title">Follow the thread <span aria-hidden="true">↓</span></a><span>Selected work / 2026</span></div>
+        </section>
+
+        <section className="v4-home-reel" aria-labelledby="home-reel-title">
+          <h2 id="home-reel-title" className="v4-home-reel-title">Eight worlds, one thread <span>/ 29 seconds</span></h2>
+          <ProjectReel
+            src="/video/reels/highlight.mp4"
+            poster="/video/reels/highlight.jpg"
+            label="Selected work · the thread"
+            caption="OrgX, Alma, Perf Pulse, OpenClaw, BrainBuffet, Neuromosaic, Chaos Riders, Meridian. Opens on my voice from Figma Config 2021."
+            score="“UBEAT V1” by Hope Atina"
+          />
         </section>
 
         <aside className="material-receipt-strip" aria-label="One receipt, up front">

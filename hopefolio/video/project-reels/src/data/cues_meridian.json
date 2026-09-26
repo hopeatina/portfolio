@@ -1,0 +1,40 @@
+{
+  "cue": {
+    "downs": [14, 112, 210, 309],
+    "snares": [86, 110, 184, 309, 343, 380],
+    "why": 332,
+    "hover": 380,
+    "drop": 406,
+    "split": 418,
+    "evidence": [440, 477, 502, 527, 551, 575],
+    "plan": 614,
+    "stamp": 674,
+    "pullback": 700,
+    "end": 722,
+    "button": 798
+  },
+  "sfx": [
+    ["downs", "whump_lo", -18, null, {"len": 0.4, "fc": 220, "ramp": 1.5}],
+    ["snares", "click", -24, null, {"spread": [-0.4, 0.4]}],
+    ["snares", "tick", -28, 0.3, {"st": -5, "ramp": 0.8}],
+    ["why", "key", -18, 0.2],
+    ["why", "metal", -22, 0.2, {"st": -3}],
+    ["hover", "tick", -22, 0.5, {"st": 3}],
+    ["drop", "freeze", -22, null],
+    ["drop", "air_in", -20, null, {"len": 0.25, "f0": 800, "f1": 6000, "lead": 0.2}],
+    ["split", "whump", -5, null, {"duck": 3}],
+    ["split", "drop_sub", -11, null],
+    ["split", "chord", -17, null, {"len": 3.0}],
+    ["split", "pass", -22, null, {"len": 0.6, "f0": 3000, "f1": 500, "p0": 0, "p1": 0}],
+    ["evidence", "tick", -22, null, {"st": 5, "spread": [0.3, -0.3]}],
+    ["evidence", "bell", -29, null, {"deg": 2, "ramp": 0}],
+    ["evidence", "glitch", -22, 0, {"pick": [5], "len": 0.12}],
+    ["plan", "pass", -24, null, {"len": 0.4, "f0": 800, "f1": 2400, "p0": -0.4, "p1": 0.4}],
+    ["plan", "thup", -18, 0.4],
+    ["stamp", "stamp", -11, 0.4],
+    ["stamp", "whump_lo", -15, 0.4],
+    ["pullback", "air_out", -24, null, {"len": 0.7}],
+    ["button", "whump", -15, null],
+    ["button", "chord", -21, null, {"len": 3.4}]
+  ]
+}

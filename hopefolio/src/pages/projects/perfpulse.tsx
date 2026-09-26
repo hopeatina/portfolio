@@ -16,6 +16,13 @@ export default function PerfPulsePage() {
         { label: "Runtime", value: "Per-user launchd", note: "no root daemon · no system extension" },
         { label: "Install", value: "brew install perf-pulse", note: "public tap · pinned SHA-256 · real binaries" },
       ]}
+      heroReel={{
+        src: "/video/reels/perfpulse.mp4",
+        poster: "/video/reels/perfpulse.jpg",
+        label: "Project film · The minute before",
+        caption: "A call freezes mid-sentence. Rewind: this time Crash Guard warns nine minutes earlier, the leak is stopped, and the call never drops.",
+        score: "“Tues” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/perf-pulse-crash-guard.jpg",
         width: 1274,

@@ -16,6 +16,13 @@ export default function MeridianPage() {
         { label: "Focus", value: "Explainable conviction", note: "signal → evidence → review" },
         { label: "Stage", value: "Research prototype", note: "demo interface · paper-only safety work" },
       ]}
+      heroReel={{
+        src: "/video/reels/meridian.mp4",
+        poster: "/video/reels/meridian.jpg",
+        label: "Project film · The score is not the reason",
+        caption: "On a trading desk at night, 84 lifts off the screen and breaks into its evidence, including the concern it was hiding. Live execution stays disabled.",
+        score: "“Montay” by Hope Atina",
+      }}
       heroProof={{
         src: "/images/case-studies/meridian/public-landing.png",
         width: 1200,
