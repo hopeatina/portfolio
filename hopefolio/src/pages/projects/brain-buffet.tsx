@@ -5,7 +5,7 @@ export default function BrainBuffetPage() {
     <CaseStudyNarrative
       pageTitle="BrainBuffet case study — Hope Atina"
       description="Designing personal learning pathways: learner context, generated course previews, chapter progress, quizzes, and notes in one product."
-      index="Case 05 / learning experience"
+      index="Case 06 / learning experience"
       status="Product prototype · 2024–2025"
       title="BrainBuffet"
       subtitle="Give curiosity somewhere to go."

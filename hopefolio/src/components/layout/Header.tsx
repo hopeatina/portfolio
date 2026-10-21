@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { navItems } from "@/data/portfolio";
+import Logo from "@/components/ui/Logo";
 
 export default function Header() {
   const router = useRouter();
@@ -64,12 +65,9 @@ export default function Header() {
     >
       <nav className="site-header-inner" aria-label="Primary">
         <Link href="/" className="site-logo" aria-label="Hope Atina — home">
-          <span className="site-logo-monogram" aria-hidden="true">
-            HA
-          </span>
+          <Logo className="site-logo-seal" size={30} />
           <span className="site-logo-copy">
             <strong>Hope Atina</strong>
-            <small>systems / product / AI</small>
           </span>
         </Link>
 
@@ -106,10 +104,6 @@ export default function Header() {
           })}
         </div>
 
-        <span className="site-header-availability" aria-label="Available for consequential work">
-          <i aria-hidden="true" />
-          available for consequential work
-        </span>
       </nav>
 
       {isMobileMenuOpen ? (

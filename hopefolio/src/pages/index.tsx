@@ -1,153 +1,64 @@
 import { selectedProjects } from "@/data/selected-projects";
+import { heroLine, leadQuote } from "@/data/quotes";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import MaterialSpecimen from "@/components/material/MaterialSpecimen";
 import MaterialJourney from "@/components/material/MaterialJourney";
-import { materialContexts } from "@/components/material/material-context";
-import { SiFigma } from "react-icons/si";
-import TechnologyMark from "@/components/v5/TechnologyMark";
-import { practiceCapabilities, practiceTools } from "@/data/practice";
-import {
-  CausalFlow,
-  ContinuityPlayhead,
-  EvidenceSpecimen,
-  SectionSignal,
-  TextLink,
-} from "@/components/v4/V4Primitives";
-import TechnologyAtlas from "@/components/v5/TechnologyAtlas";
+import Logo from "@/components/ui/Logo";
+import { ContinuityPlayhead, SectionSignal, TextLink } from "@/components/v4/V4Primitives";
 import ProjectReel from "@/components/v4/ProjectReel";
 
-const clientSurfaces = ["Claude Code", "Codex", "Cursor", "OpenCode", "OpenClaw", "MCP"];
+const orgx = selectedProjects.find((item) => item.slug === "orgx")!;
+const openBecoming = selectedProjects.find((item) => item.slug === "open-becoming")!;
 
 export default function Home() {
-
   return (
     <>
       <Head>
-        <title>Hope Atina — Systems, product, and creative practice</title>
+        <title>Hope Atina — Systems thinker and maker, Houston</title>
         <meta
           name="description"
-          content="Hope Atina builds across production software, data platforms, AI systems, research, interactive 3D, and creative communities."
+          content="Hope Atina thinks in systems and builds in whatever medium the problem needs: clinical software, data pipelines, a Rust tool, a game set in Cameroon, music, a design community, and infrastructure for a company run by one person."
         />
       </Head>
 
       <main id="main-content" className="v4-page v4-home">
         <ContinuityPlayhead />
 
-        <section data-material-form="knot" className="material-home-hero" aria-labelledby="hero-title">
-          <div className="material-home-copy">
-            <span className="material-eyebrow"><i aria-hidden="true" /> Hope Atina / engineer, founder, product thinker</span>
-            <h1 data-thread="" id="hero-title">Intelligence<br />survives the<br /><em>handoff.</em></h1>
-            <p>I build the memory, authority, and proof that keep ambitious systems together. Clinical software, data platforms, AI agents, game worlds.</p>
+        <section className="home-hero" aria-labelledby="hero-title">
+          <div className="home-hero-copy">
+            <span className="material-eyebrow"><i aria-hidden="true" /> Hope Atina · systems thinker, maker · Houston, by way of Cameroon</span>
+            <h1 id="hero-title" className="home-hero-line">“{heroLine.text}”</h1>
+            <span className="home-hero-cite">In my words · {heroLine.date}</span>
+            <p>
+              I think in systems and I build in whatever medium the problem needs. Software for
+              clinics and banks, a Rust tool on a Mac, a browser game about driving in Yaoundé,
+              music, a design community, and lately the tooling that lets one person run a company.
+              The why stays the same. The how is where the creativity goes.
+            </p>
             <div className="material-home-actions">
-              <Link href="/projects" className="material-primary-link">Explore the work <span aria-hidden="true">↗</span></Link>
-              <TextLink href="/proof">See the receipts</TextLink>
-              <TextLink href="#skills">Skills &amp; tools</TextLink>
+              <Link href="/projects" className="material-primary-link">See the work <span aria-hidden="true">↗</span></Link>
+              <TextLink href="/about">The way of seeing</TextLink>
             </div>
-            <span className="material-home-coordinate">Houston, TX · Cameroonian roots · A continuous practice</span>
           </div>
-          <MaterialSpecimen context={materialContexts.home} className="material-home-object" compact />
-          <div className="material-home-bottom"><span>Systems with depth.<br />Details with a reason.</span><a href="#material-journey-title">Follow the thread <span aria-hidden="true">↓</span></a><span>Selected work / 2026</span></div>
-        </section>
-
-        <section className="v4-home-reel" aria-labelledby="home-reel-title">
-          <h2 id="home-reel-title" className="v4-home-reel-title">Eight worlds, one thread <span>/ 29 seconds</span></h2>
           <ProjectReel
             src="/video/reels/highlight.mp4"
             poster="/video/reels/highlight.jpg"
-            label="Selected work · the thread"
-            caption="Eight projects on one thread: each film’s own line carries the next, framed by the value it proves. Opens on my voice from Figma Config 2021; the thread ends by drawing my portrait."
+            label="Eight projects · 29 seconds"
+            caption="Each film’s own line carries the next. Opens on my voice from Figma Config 2021 and ends by drawing my portrait."
             score="“UBEAT V1” by Hope Atina"
+            className="home-hero-reel"
           />
         </section>
 
-        <aside className="material-receipt-strip" aria-label="One receipt, up front">
-          <span>One handoff, in practice</span><p>Decided in Claude <i aria-hidden="true">→</i> inherited by Codex.</p>
-          <Link href="/proof/orgx-mcp-server">The goal, the decision, the evidence. Intact. <span aria-hidden="true">↗</span></Link>
-        </aside>
-
-        <MaterialJourney />
-
-        <section data-material-form="bridge" className="v4-continuity-section v4-motif-backed" aria-labelledby="continuity-title">
-          <SectionSignal index="02">The system I keep building toward</SectionSignal>
-          <div className="v4-continuity-heading">
-            <h2 id="continuity-title">The prompt ends. The work should not.</h2>
-            <p>
-              Autonomy demos well. Carrying the goal, the decisions, and the evidence across tools
-              and people is the hard part.
-            </p>
-          </div>
-          <CausalFlow
-            steps={[
-              { glyph: "context", label: "Carry the why", detail: "The next agent gets the goal, the constraints, and the prior proof in one go." },
-              { glyph: "branch", label: "Use the right client", detail: "Claude, Codex, Cursor, and other specialists keep their native strengths.", tone: "cold" },
-              { glyph: "judgment", label: "Pause at consequence", detail: "Only the high-consequence calls wait for a person.", tone: "heat" },
-              { glyph: "receipt", label: "Teach the next run", detail: "The result returns with enough evidence to improve what happens next." },
-            ]}
-          />
-          <div className="v4-client-rail" aria-label="AI clients and surfaces">
-            <span className="v4-client-rail-label">one operating context / many surfaces</span>
-            {clientSurfaces.map((name) => (
-              <div key={name}>
-                <TechnologyMark name={name} />
-                <span>{name}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="skills" data-material-form="weave" className="v5-tool-section v4-motif-backed">
-          <SectionSignal index="03">The working ecosystem</SectionSignal>
-          <TechnologyAtlas tools={practiceTools} capabilities={practiceCapabilities} title="The range is part of the method." />
-        </section>
-
-        <section data-material-form="knot" className="v4-orgx-home v4-motif-backed" aria-labelledby="orgx-title">
-          <SectionSignal index="04">Flagship / OrgX</SectionSignal>
-          <div className="v4-orgx-home-heading">
-            <div>
-              <span>Founder-built continuity infrastructure</span>
-              <h2 id="orgx-title">The proof layer for AI-delivered work.</h2>
-            </div>
-            <p>
-              OrgX turns agent activity into work you can account for. Decisions, artifacts, and
-              receipts that still make sense after the chat is gone.
-            </p>
-          </div>
-
-          <div className="v4-orgx-proof-grid">
-            <EvidenceSpecimen
-              src="/images/case-studies/orgx-v4/artifact-receipt.png"
-              alt="OrgX artifact viewer showing a lead claim pack with decision provenance and an evidence score"
-              label="Receipt-first artifact viewer"
-              caption="The output, the decision path, the quality bar, and the human boundary live on one proof surface."
-              priority
-              className="v4-proof-primary"
-            />
-            <EvidenceSpecimen
-              src="/images/case-studies/orgx-v4/live-desk.png"
-              alt="OrgX live desk showing an agent's current work, trust state, and recent outcomes"
-              label="Operator desk"
-              caption="Trust shows up as what the agent is allowed to do next."
-            />
-          </div>
-
-          <div className="v4-orgx-home-footer">
-            <p>
-              The big call: make the context work in every client. OrgX stops being a place you go
-              and becomes the layer underneath.
-            </p>
-            <TextLink href="/projects/orgx">Read the OrgX case study</TextLink>
-          </div>
-        </section>
-
-        <section data-material-form="weave" className="v4-range-section v4-motif-backed" aria-labelledby="range-title">
-          <SectionSignal index="05">Range under constraint</SectionSignal>
+        <section className="v4-range-section v4-motif-backed" aria-labelledby="range-title">
+          <SectionSignal index="01">The range</SectionSignal>
           <div className="v4-range-heading">
-            <h2 id="range-title">Eight projects. Different kinds of pressure.</h2>
+            <h2 id="range-title">One way of seeing. Nine kinds of pressure.</h2>
             <p>
-              Learning, research, games, clinical software, markets. Different pressure every time.
-              Same question: does it hold together?
+              Clinical software, bank data, a Rust tool, a game set in Yaoundé, a research workbench,
+              a learning product, a life companion, and the infrastructure for a company run by one
+              person. Same question each time: does it hold, and does it feel right?
             </p>
           </div>
           <div className="v4-range-list">
@@ -169,53 +80,99 @@ export default function Home() {
           </div>
         </section>
 
-        <section data-material-form="weave" className="v4-collaboration-section v4-motif-backed" aria-labelledby="collaboration-title">
-          <SectionSignal index="06">Product taste is collaborative</SectionSignal>
-          <div className="v4-collaboration-grid">
+        <MaterialJourney />
+
+        <aside className="home-receipt" aria-label="One receipt, up front">
+          <div className="home-receipt-paper">
+            <div className="home-receipt-head">
+              <span>Receipt</span>
+              <span>No. 01 / 2026</span>
+            </div>
+            <dl>
+              <div><dt>Decided in</dt><dd>Claude Code</dd></div>
+              <div><dt>Inherited by</dt><dd>Codex</dd></div>
+              <div><dt>Goal</dt><dd>intact</dd></div>
+              <div><dt>Decision</dt><dd>intact</dd></div>
+              <div><dt>Evidence</dt><dd>attached</dd></div>
+            </dl>
+            <Link href="/proof/orgx-mcp-server" className="home-receipt-link">Open the full receipt <span aria-hidden="true">→</span></Link>
+            <Logo className="home-receipt-seal" size={64} tone="var(--v4-heat)" carve="#f2efe4" />
+          </div>
+          <p className="home-receipt-note">
+            One of the hows, as an object: a handoff between two agents with the why still attached
+            on the other side. The same shape as a clinical audit trail or a learner’s notes, built
+            for a company that runs on agents.
+          </p>
+        </aside>
+
+        <section className="home-now v4-motif-backed" aria-labelledby="now-title">
+          <SectionSignal index="02">Building now</SectionSignal>
+          <div className="home-now-heading">
+            <h2 id="now-title">Two products. One question: what does a person keep?</h2>
+            <p>
+              OrgX keeps a company’s decisions and proof when agents do the work. Open Becoming
+              keeps a person’s moments when life does. Same founder, opposite palettes, same spine.
+            </p>
+          </div>
+          <div className="home-now-grid">
+            <Link href={orgx.href} className="home-now-card is-carbon">
+              <div className="home-now-media">
+                <Image src={orgx.heroImage} alt={orgx.heroAlt ?? ""} fill sizes="(min-width: 900px) 46vw, 100vw" />
+              </div>
+              <span>01 / {orgx.status}</span>
+              <h3>{orgx.title}</h3>
+              <p>The artifact is the receipt. Output, provenance, quality bar, and the human boundary on one surface, underneath the AI clients people already use.</p>
+              <b>Read the case <i aria-hidden="true">→</i></b>
+            </Link>
+            <Link href={openBecoming.href} className="home-now-card is-paper">
+              <div className="home-now-media">
+                <Image src={openBecoming.heroImage} alt={openBecoming.heroAlt ?? ""} fill sizes="(min-width: 900px) 46vw, 100vw" />
+              </div>
+              <span>02 / in development</span>
+              <h3>{openBecoming.title}</h3>
+              <p>A Life Clock: years as rings, twelve ways of living as slices, moments as dots. Nib, the pen tip, helps you practise what you care about. Asking for help counts.</p>
+              <b>Read the case <i aria-hidden="true">→</i></b>
+            </Link>
+          </div>
+        </section>
+
+        <section className="home-words v4-motif-backed" aria-labelledby="words-title">
+          <SectionSignal index="03">In my own words</SectionSignal>
+          <h2 id="words-title" className="sr-only">In Hope’s own words</h2>
+          <div className="home-words-grid">
+            <blockquote className="home-quote">
+              <p>“{leadQuote.text}”</p>
+              <cite>{leadQuote.source} · {leadQuote.date}</cite>
+            </blockquote>
             <a
-              className="v4-config-proof"
+              className="home-words-film"
               href="https://www.youtube.com/watch?v=JSpfsuK75j0&t=171s"
               target="_blank"
               rel="noreferrer"
-              aria-label="Watch Hope Atina discuss the origin of Figma and Chill at Config 2021"
+              aria-label="Watch Hope Atina on the origin of Figma and Chill at Config 2021"
             >
               <Image
                 src="/images/evidence/figma-config-2021.jpg"
                 alt="Figma Config 2021 talk cover for Figma and Chill"
                 fill
-                sizes="(min-width: 900px) 54vw, 100vw"
+                sizes="(min-width: 900px) 40vw, 100vw"
               />
-              <span>Config 2021 · watch from 02:51 ↗</span>
+              <span>Config 2021 · Figma &amp; Chill · watch from 02:51 ↗</span>
             </a>
-            <div className="v4-collaboration-copy">
-              <SiFigma aria-hidden="true" />
-              <span>Figma &amp; Chill</span>
-              <h2 id="collaboration-title">Less talk. More action. More people in the file.</h2>
-              <p>
-                I started Figma and Chill because talking about design wasn't enough. It became a
-                global BIPOC design community that learned by making things together.
-              </p>
-              <blockquote>
-                “I’m less about talk and more about action.”
-                <cite>Hope Atina · Config 2021</cite>
-              </blockquote>
-              <div className="v4-ai-proof-row" aria-label="AI-native collaborators">
-                <TechnologyMark name="Claude Code" />
-                <TechnologyMark name="Codex" />
-                <TechnologyMark name="GitHub" />
-                <span>AI is abundant in the process. Judgment remains authored.</span>
-              </div>
-            </div>
           </div>
+          <p className="home-words-more">
+            Figma and Chill started as an empty Clubhouse room and became a global BIPOC design
+            community that learned by making things together. <TextLink href="/about#about-words-title">More, in my words</TextLink>
+          </p>
         </section>
 
-        <section data-material-form="bridge" className="v4-home-close v4-motif-backed">
-          <span>Click anywhere. The thread comes with you.</span>
-          <h2 data-thread="">Everything above has a receipt. Ask for the one you need.</h2>
+        <section className="v4-home-close v4-motif-backed">
+          <span>Any claim above has a receipt behind it.</span>
+          <h2>Ask for the one you need.</h2>
           <div>
-            <TextLink href="/proof">See the receipts</TextLink>
-              <TextLink href="#skills">Skills &amp; tools</TextLink>
-            <TextLink href="mailto:hopeatina@gmail.com" external>Start a conversation</TextLink>
+            <TextLink href="/proof">The ledger</TextLink>
+            <TextLink href="/about#skills">Skills and tools</TextLink>
+            <TextLink href="mailto:hopeatina@gmail.com" external>Email me</TextLink>
           </div>
         </section>
       </main>

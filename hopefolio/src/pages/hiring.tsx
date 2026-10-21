@@ -1,5 +1,3 @@
-import MaterialSpecimen from "@/components/material/MaterialSpecimen";
-import { materialContexts } from "@/components/material/material-context";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,9 +47,8 @@ export default function Hiring() {
         <ContinuityPlayhead label="work with me" />
 
         <header className="v4-hiring-hero v4-motif-backed">
-          <MaterialSpecimen context={materialContexts.home} className="material-inner-object" compact />
           <span>For founders / recruiters / ambitious teams</span>
-          <h1 data-thread="">Systems depth. Product taste. Range that ships.</h1>
+          <h1>Bring me the whole system.</h1>
           <div>
             <p>
               I've owned production systems in healthcare, fintech data, and backend infrastructure.
@@ -162,7 +159,7 @@ export default function Hiring() {
 
         <section className="v4-hiring-close v4-motif-backed">
           <span>A good first conversation is concrete.</span>
-          <h2 data-thread="">Bring the system, the pressure on it, and the part that still won't make sense.</h2>
+          <h2>Tell me the system, the pressure on it, and the part that still won't make sense.</h2>
           <div>
             <TextLink href="https://calendly.com/hopeatina/orgx-discovery" external>Book 30 minutes</TextLink>
             <TextLink href="mailto:hopeatina@gmail.com?subject=Work%20together%20%E2%80%94%20%5Bcompany%5D" external>Email me</TextLink>

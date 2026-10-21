@@ -349,7 +349,7 @@ export default function OrgXPage() {
       }}
       primaryLink={{ href: "https://useorgx.com", label: "View OrgX", external: true }}
       secondaryLink={{ href: "https://github.com/useorgx", label: "Explore the ecosystem", external: true }}
-      next={{ href: "/projects/alma", label: "Next / regulated production", title: "Alma" }}
+      next={{ href: "/projects/open-becoming", label: "Next / a life in twelve ways", title: "Open Becoming" }}
     />
   );
 }

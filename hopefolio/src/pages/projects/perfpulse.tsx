@@ -5,7 +5,7 @@ export default function PerfPulsePage() {
     <CaseStudyNarrative
       pageTitle="Perf Pulse Crash Guard case study — Hope Atina"
       description="A local-first macOS performance suite that warns about runaway memory and shrinking disk headroom, then opens the live Crash Guard dashboard for deliberate intervention."
-      index="Case 03 / developer tooling"
+      index="Case 04 / developer tooling"
       status="Live product · v1.7"
       title="Perf Pulse"
       subtitle="Crash Guard for developer Macs."

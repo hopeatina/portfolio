@@ -2,50 +2,37 @@ import React from "react";
 
 interface LogoProps {
   className?: string;
-  width?: number;
-  height?: number;
+  size?: number;
+  /** The seal's ink. Letters are carved out of it in the page's carbon. */
+  tone?: string;
+  carve?: string;
+  title?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({
-  className = "",
-  width = 50,
-  height = 50,
-}) => {
+/**
+ * The seal. A maker's chop, cut by hand: a square of ink with the corner
+ * notched so it can only sit one way, and the letters H and A carved out of
+ * it sharing a single bar. The bar is the handoff. It is pressed once onto
+ * every receipt on the site, and nowhere else.
+ */
+export default function Logo({ className = "", size = 28, tone = "currentColor", carve = "var(--v4-carbon, #080806)", title }: LogoProps) {
   return (
     <svg
       className={className}
-      width={width}
-      height={height}
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ display: "block", overflow: "visible" }}
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      role={title ? "img" : undefined}
+      aria-hidden={title ? undefined : true}
+      style={{ display: "block", flex: "none" }}
     >
-      {/* Modern architectural motif: an abstract 'H'/'A' intersecting node */}
-      <g>
-        {/* Left vertical pillar */}
-        <rect x="20" y="20" width="12" height="60" rx="4" fill="currentColor" />
-        
-        {/* Right vertical pillar */}
-        <rect x="68" y="20" width="12" height="60" rx="4" fill="currentColor" />
-        
-        {/* Center orbital ring (the node/orchestration concept) */}
-        <path 
-          d="M 50 15 C 69.33 15 85 30.67 85 50 C 85 69.33 69.33 85 50 85 C 30.67 85 15 69.33 15 50" 
-          stroke="var(--color-primary)" 
-          strokeWidth="6" 
-          strokeLinecap="round" 
-        />
-        
-        {/* Central connecting beam */}
-        <rect x="32" y="44" width="36" height="12" rx="2" fill="var(--color-primary)" />
-        
-        {/* Core logic diamond */}
-        <rect x="42" y="42" width="16" height="16" transform="rotate(45 50 50)" fill="var(--color-background)" />
-        <rect x="46" y="46" width="8" height="8" transform="rotate(45 50 50)" fill="currentColor" />
+      {title ? <title>{title}</title> : null}
+      <path d="M6 3h36a3 3 0 0 1 3 3v28.5L34.5 45H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z" fill={tone} />
+      <g fill="none" stroke={carve} strokeWidth="3.4" strokeLinecap="butt" strokeLinejoin="miter">
+        <path d="M12 12v25M20 12v25" />
+        <path d="M28 37l6.2-25 6.2 25" />
+        <path d="M12 26h25.3" />
       </g>
     </svg>
   );
-};
-
-export default Logo;
+}

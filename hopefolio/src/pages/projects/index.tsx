@@ -1,6 +1,5 @@
 import { selectedProjects } from "@/data/selected-projects";
 import { archivedProjects } from "@/data/portfolio";
-import MaterialProjectIndex from "@/components/material/MaterialProjectIndex";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,19 +12,18 @@ export default function Projects() {
         <title>Selected work — Hope Atina</title>
         <meta
           name="description"
-          content="Eight projects by Hope Atina across AI infrastructure, learning, distributed ML, games, market research, clinical systems, and developer tooling."
+          content="Nine projects by Hope Atina across AI infrastructure, a life companion, learning, research, games, market research, clinical systems, and developer tooling."
         />
       </Head>
 
       <main id="main-content" className="v4-page v4-work-page">
         <ContinuityPlayhead label="selected work" />
         <header className="v4-work-hero v4-motif-backed">
-          <MaterialProjectIndex />
           <span>Selected systems / 2017—now</span>
-          <h1 data-thread="">Different worlds. One way of seeing.</h1>
+          <h1>Nine systems, nine kinds of pressure.</h1>
           <p>
-            Agent infrastructure, learning, collective intelligence, games, markets. Eight
-            projects, each under a different kind of pressure.
+            Agent infrastructure, a life companion, clinical software, learning, research, games,
+            markets. Nine projects, each under a different kind of pressure.
           </p>
         </header>
 
@@ -76,7 +74,7 @@ export default function Projects() {
 
         <section className="v4-work-archive v4-motif-backed">
           <span>The earlier experiments still count. They just don't all need the stage.</span>
-          <h2 data-thread="">The archive has the range. This page has the signal.</h2>
+          <h2>The archive has the range. This page has the signal.</h2>
           <TextLink href="/projects/archive">Archive · {archivedProjects.length} systems</TextLink>
         </section>
       </main>

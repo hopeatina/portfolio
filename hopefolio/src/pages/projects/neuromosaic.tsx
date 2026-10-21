@@ -5,7 +5,7 @@ export default function NeuromosaicPage() {
     <CaseStudyNarrative
       pageTitle="Neuromosaic case study — Hope Atina"
       description="A research workbench connecting papers, structured neural architectures, generated model code, and inspectable experiments."
-      index="Case 06 / research systems"
+      index="Case 07 / research systems"
       status="Research prototype · alpha"
       title="Neuromosaic"
       subtitle="Make the space between ideas inspectable."

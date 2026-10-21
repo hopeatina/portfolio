@@ -1,5 +1,3 @@
-import MaterialSpecimen from "@/components/material/MaterialSpecimen";
-import { materialContexts } from "@/components/material/material-context";
 import Head from "next/head";
 import Image from "next/image";
 import {
@@ -8,9 +6,9 @@ import {
   SystemGlyph,
   TextLink,
 } from "@/components/v4/V4Primitives";
-import MaterialThreadField from "@/components/v5/MaterialThreadField";
 import TechnologyAtlas from "@/components/v5/TechnologyAtlas";
 import { practiceCapabilities, practiceTools } from "@/data/practice";
+import { collectedQuotes } from "@/data/quotes";
 
 const practiceThreads = [
   {
@@ -57,22 +55,13 @@ export default function About() {
         <ContinuityPlayhead label="about" />
 
         <header className="v4-about-hero">
-          <Image
-            src="/images/generated/reflection-field.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            aria-hidden="true"
-          />
-          <MaterialSpecimen context={materialContexts.about} className="material-inner-object" compact />
           <div>
-            <span>About / inspection as a creative practice</span>
-            <h1 data-thread="">Every thread I pull should reveal more of what people can become.</h1>
+            <span>About / Houston, by way of Cameroon</span>
+            <h1>Understand a system well enough that a person can move with more agency.</h1>
             <p>
-              Houston builder, Cameroonian roots. What I keep coming back to is amplification.
-              Understand a system well enough that a person, a team, or a generation can move with
-              more agency.
+              Engineer, founder, sometime musician. Bioengineering at Rice, production software in
+              finance and clinical care, then OrgX and Open Becoming. What I keep coming back to is
+              amplification: a person, a team, or a fleet of agents doing more than they could alone.
             </p>
             <TextLink href="#skills">Explore my skills and tools</TextLink>
             <figure className="v4-about-portrait">
@@ -91,20 +80,20 @@ export default function About() {
         </header>
 
         <section className="v4-life-thread" aria-labelledby="life-thread-title">
-          <SectionSignal index="00">One thread, four scales</SectionSignal>
+          <SectionSignal index="00">Four scales</SectionSignal>
           <div className="v4-life-thread-heading">
-            <h2 id="life-thread-title">The biography and the thread are the same drawing.</h2>
+            <h2 id="life-thread-title">Everything I build makes something survive a handoff.</h2>
             <p>
-              Everything I build makes something survive a handoff. I learned each version of that
-              at a different scale.
+              A language, a device, a community, a company. I learned the same lesson four times,
+              each at a bigger scale.
             </p>
           </div>
           <ol className="v4-life-thread-list">
             <li>
               <SystemGlyph name="context" />
               <div>
-                <span>Weave · Cameroonian roots</span>
-                <h3 data-thread="">Meaning has to survive translation.</h3>
+                <span>Cameroonian roots</span>
+                <h3>Meaning has to survive translation.</h3>
                 <p>
                   The same words carry different weight depending on who is listening and what they
                   have lived. Check the structure before you trust the surface.
@@ -114,8 +103,8 @@ export default function About() {
             <li>
               <SystemGlyph name="judgment" />
               <div>
-                <span>Registration · Rice → DermaShift → clinical production</span>
-                <h3 data-thread="">At the human boundary, a dropped handoff costs a person.</h3>
+                <span>Rice → DermaShift → clinical production</span>
+                <h3>At the human boundary, a dropped handoff costs a person.</h3>
                 <p>
                   Bioengineering, then healthcare systems under HIPAA. Make the risk visible, keep the
                   rollout reversible, attach the evidence. The boundary is where the consequence lives.
@@ -125,8 +114,8 @@ export default function About() {
             <li>
               <SystemGlyph name="branch" />
               <div>
-                <span>Branch · Figma &amp; Chill</span>
-                <h3 data-thread="">One thread, many hands, nothing lost in the fork.</h3>
+                <span>Figma &amp; Chill</span>
+                <h3>Many hands on one file, nothing lost.</h3>
                 <p>
                   A community built by making things together. Everyone kept their own strength and
                   the thing still held. Figma platformed it.
@@ -136,10 +125,10 @@ export default function About() {
             <li>
               <SystemGlyph name="receipt" />
               <div>
-                <span>Memory knot · OrgX</span>
-                <h3 data-thread="">The decision returns as a receipt the next run inherits.</h3>
+                <span>OrgX</span>
+                <h3>The decision comes back as a receipt the next run inherits.</h3>
                 <p>
-                  Memory, authority, execution, and proof for agent work. The thread, shipped as
+                  Memory, authority, execution, and proof for agent work. The lesson, shipped as
                   infrastructure.
                 </p>
               </div>
@@ -205,12 +194,17 @@ export default function About() {
               with people where disagreement sharpens the model and evidence settles the next move.
             </p>
           </div>
-          <MaterialThreadField
-            stories={practiceThreads}
-            eyebrow="One practice / different materials"
-            title="A bend can become a break. A break can reveal the next weave."
-            compact
-          />
+          <ol className="about-practice" aria-label="Three instincts">
+            {practiceThreads.map((item, index) => (
+              <li key={item.id} className={`is-${item.tone}`}>
+                <span>0{index + 1} / {item.label}</span>
+                <p className="about-practice-before">{item.before}</p>
+                <p className="about-practice-decision">{item.decision}</p>
+                <p className="about-practice-after">{item.consequence}</p>
+                <small>{item.evidence}</small>
+              </li>
+            ))}
+          </ol>
         </section>
 
         <section id="experience" className="v4-about-experience v4-motif-backed">
@@ -292,11 +286,27 @@ export default function About() {
           <TechnologyAtlas tools={practiceTools} capabilities={practiceCapabilities} title="What I bring to the work." />
         </section>
 
+        <section className="about-words v4-motif-backed" aria-labelledby="about-words-title">
+          <SectionSignal index="05">In my own words</SectionSignal>
+          <h2 id="about-words-title" className="sr-only">In Hope’s own words</h2>
+          <ul className="about-words-list">
+            {collectedQuotes.map((quote) => (
+              <li key={quote.text}>
+                <blockquote>
+                  <p>“{quote.text}”</p>
+                  <cite>{quote.source} · {quote.date}</cite>
+                </blockquote>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <section className="v4-about-now v4-motif-backed">
-          <span>Now / September 2026</span>
-          <h2 data-thread="">Building OrgX in public. Proof for AI-delivered work.</h2>
+          <span>Now / October 2026</span>
+          <h2>Building OrgX in public, and Open Becoming on paper.</h2>
           <p>
-            Open to founder collaborations and senior or staff roles where systems depth, product
+            Proof for AI-delivered work by day; a companion for becoming more in the margins. Open
+            to founder collaborations and senior or staff roles where systems depth, product
             judgment, and AI-native execution all matter at once.
           </p>
           <div>
