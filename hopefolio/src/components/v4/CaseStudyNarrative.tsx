@@ -246,7 +246,7 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
               <span>{props.index}</span>
               <span>{props.status}</span>
             </div>
-            <h1 data-thread="" className={props.title.split(/\s+/).some((word) => word.length > 9) ? "v4-case-title-long" : undefined}>{props.title}</h1>
+            <h1 className={props.title.split(/\s+/).some((word) => word.length > 9) ? "v4-case-title-long" : undefined}>{props.title}</h1>
             <p className="v4-case-subtitle">{props.subtitle}</p>
           </div>
 
@@ -353,7 +353,7 @@ export default function CaseStudyNarrative(props: CaseStudyNarrativeProps) {
         </section>
 
         <footer className="v4-case-next v4-motif-backed">
-          <span data-thread="" data-thread-label={props.next.title}>{props.next.label}</span>
+          <span>{props.next.label}</span>
           <TextLink href={props.next.href}>{props.next.title}</TextLink>
         </footer>
       </main>

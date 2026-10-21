@@ -5,7 +5,7 @@ export default function ChaosRidersPage() {
     <CaseStudyNarrative
       pageTitle="Chaos Riders case study — Hope Atina"
       description="A Cameroon-rooted driving world explored through creative direction, a Three.js browser prototype, and a tactile steer, steady, and flow interaction."
-      index="Case 07 / interactive worlds"
+      index="Case 08 / interactive worlds"
       status="Independent project · playable prototype"
       title="Chaos Riders"
       subtitle="Read the road. Find the line. Hold your nerve."

@@ -110,7 +110,7 @@ export function ContinuityPlayhead({ label = "continuity" }: { label?: string })
 
 export function SectionSignal({ index, children }: { index: string; children: React.ReactNode }) {
   return (
-    <div className="v4-section-signal" data-thread="">
+    <div className="v4-section-signal">
       <span>{index}</span>
       <i aria-hidden="true" />
       <p>{children}</p>

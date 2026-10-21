@@ -5,7 +5,7 @@ export default function MeridianPage() {
     <CaseStudyNarrative
       pageTitle="Meridian case study — Hope Atina"
       description="Designing an explainable trading research desk: inspectable conviction, connected decision paths, and a deliberate boundary between a demo and paper execution."
-      index="Case 08 / decision systems"
+      index="Case 09 / decision systems"
       status="Research prototype"
       title="Meridian"
       subtitle="Make conviction inspectable."

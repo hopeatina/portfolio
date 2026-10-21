@@ -8,7 +8,7 @@ import { MaterialContext, MaterialForm, materialContextForPath } from "./materia
 /** The three strands, in geometry order. The green inlay rides execution. */
 const STRANDS = [
   { name: "Memory", line: "What the next run inherits. The goal, the decisions, the proof so far." },
-  { name: "Execution", line: "Where the work runs. Claude, Codex, Cursor. The green line rides it through every handoff." },
+  { name: "Execution", line: "Where the work runs. People, tools, agents. The green line rides it through every handoff." },
   { name: "Authority", line: "What an agent can do alone, and where a person has to say yes." },
 ];
 

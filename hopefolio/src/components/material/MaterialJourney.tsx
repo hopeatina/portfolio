@@ -5,13 +5,13 @@ import { materialContexts, MaterialContext } from "./material-context";
 
 const chapters: Array<{ label: string; title: string; body: string; context: MaterialContext }> = [
   { label: "Memory", title: "Carry what matters.",
-    body: "The next run inherits the goal, the decisions, and the prior proof. Distinct strands become context that can travel together.",
+    body: "Whatever moves next inherits the goal, the decisions, and the proof so far. A clinic’s audit trail, a learner’s notes, an agent’s context: distinct strands that have to travel together.",
     context: { ...materialContexts.home, id: "memory", name: "Memory / the weave", form: "weave", principle: "Context travels as a whole.", detail: "Separate histories become a shared starting point. The signal is carried by the structure around it." } },
   { label: "Authority", title: "Give the boundary a shape.",
-    body: "Agents act inside bounded permissions. High-consequence work waits for the right person. The boundary is part of the system.",
+    body: "Where a mistake costs a person, the boundary is part of the design. A clinical rollout, a trade before it executes, an agent before it merges: the high-consequence step waits for the right person.",
     context: { ...materialContexts.alma, id: "authority", href: "/projects/alma", link: "Explore Alma" } },
   { label: "Execution", title: "Cross without losing the thread.",
-    body: "Claude, Codex, Cursor, and OpenClaw keep their native strengths. One operating context connects the work between them.",
+    body: "Different tools, different hands, and now agents keep their native strengths. One shared context connects the work between them.",
     context: { ...materialContexts.orgx, id: "execution", index: "03", href: "/projects/orgx", link: "Explore OrgX" } },
   { label: "Proof", title: "Bring the result back.",
     body: "A result should leave the next person something they can inspect: a baseline, a measured change, and an honest account of what failed.",
@@ -46,14 +46,14 @@ export default function MaterialJourney() {
 
   return (
     <section className="material-journey" ref={root} aria-labelledby="material-journey-title" data-material-form={chapters[active].context.form}>
-      <header className="material-journey-header"><span data-thread="" data-thread-label="The shape of how I work">01 / A working philosophy, in four forms</span>
+      <header className="material-journey-header"><span>A working philosophy, in four forms</span>
         <h2 id="material-journey-title">The shape of<br /><em>how I work.</em></h2>
-        <p>One material. Different constraints.<br />Follow the thread as the work changes.</p>
+        <p>One object. Four forms.<br />It changes shape as you read.</p>
       </header>
       <div className="material-journey-grid">
         <div className="material-chapters">
           {chapters.map((chapter, index) => <article key={chapter.label} id={`chapter-${chapter.label.toLowerCase()}`} data-material-chapter={index} className={active === index ? "is-active" : ""}>
-            <span className="material-chapter-index" data-thread="">0{index + 1} / {chapter.label}</span>
+            <span className="material-chapter-index">0{index + 1} / {chapter.label}</span>
             <h3>{chapter.title}</h3><p>{chapter.body}</p>
             <Link href={chapter.context.href}>{chapter.context.link} <span aria-hidden="true">↗</span></Link>
           </article>)}

@@ -1,17 +1,14 @@
 import React from "react";
-import ThreadLedger from "@/components/v5/thread/ThreadLedger";
+import Logo from "@/components/ui/Logo";
 
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <ThreadLedger />
       <div className="site-footer-inner">
         <div className="site-footer-thesis">
-          <div className="site-footer-signature" aria-hidden="true">
-            <i /><span>The thread continues</span>
-          </div>
+          <Logo className="site-footer-seal" size={44} title="Hope Atina's seal" />
           <span>Hope Atina</span>
-          <p>Engineer, founder, and product thinker making ambitious systems coherent.</p>
+          <p>Engineer and founder. Houston, by way of Cameroon.</p>
         </div>
         <div className="site-footer-links" aria-label="External links">
           <a href="https://github.com/hopeatina" target="_blank" rel="noreferrer">GitHub</a>
@@ -21,14 +18,8 @@ export default function Footer() {
           <a href="mailto:hopeatina@gmail.com">Email</a>
         </div>
         <p className="site-footer-meta">
-          Houston · Cameroonian roots · © {new Date().getFullYear()} ·{" "}
-          <a
-            href="https://github.com/hopeatina/portfolio"
-            target="_blank"
-            rel="noreferrer"
-          >
-            source
-          </a>
+          Set in Newsreader and Recursive · © {new Date().getFullYear()} ·{" "}
+          <a href="https://github.com/hopeatina/portfolio" target="_blank" rel="noreferrer">source</a>
         </p>
       </div>
     </footer>

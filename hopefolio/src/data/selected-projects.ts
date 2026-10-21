@@ -30,7 +30,20 @@ export const selectedProjects: SelectedProject[] = [
     secondaryHref: "https://useorgx.com", secondaryLabel: "View live platform",
   },
   {
-    slug: "alma", index: "02", title: "Alma", selectorLabel: "Alma",
+    slug: "open-becoming", index: "02", title: "Open Becoming", selectorLabel: "Open Becoming",
+    status: "Experimental", stageLabel: "In development", tier: "supporting", shortLabel: "A companion for becoming more",
+    role: "Founder · product · design system",
+    summary: "A companion that maps a life across twelve ways of living and helps a person practise what they care about.",
+    description: "Open Becoming turns notes, photos, and spoken moments into a Life Clock: rings for years, slices for the twelve ways, dots for moments that mattered. The pen is Nib, a companion that reflects, pushes back, or stays quiet.",
+    thesis: "Becoming more includes knowing when to ask for help.",
+    tension: "a life, not a score", evidence: "clock / ways / practice", tone: "paper",
+    proof: ["Life Clock engine", "Design system v3", "Twelve pigments, one gap"],
+    heroImage: "/images/case-studies/open-becoming/home-hero.jpg",
+    heroAlt: "Open Becoming homepage: Become more of who you are, beside a Life Clock with moment photographs pinned into its slices",
+    href: "/projects/open-becoming", primaryCta: "Read case study",
+  },
+  {
+    slug: "alma", index: "03", title: "Alma", selectorLabel: "Alma",
     status: "Shipped in production", tier: "supporting", shortLabel: "Production systems",
     role: "Production backend engineering",
     summary: "HIPAA-constrained backend systems for reassessments, notes, audits, and document workflows.",
@@ -42,7 +55,7 @@ export const selectedProjects: SelectedProject[] = [
     href: "/projects/alma", primaryCta: "Read case study",
   },
   {
-    slug: "perfpulse", index: "03", title: "Perf Pulse", selectorLabel: "Perf Pulse",
+    slug: "perfpulse", index: "04", title: "Perf Pulse", selectorLabel: "Perf Pulse",
     status: "Live tool", tier: "supporting", shortLabel: "Developer tooling",
     role: "Product engineering · Rust",
     summary: "Crash Guard for runaway memory and shrinking disk headroom on developer Macs.",
@@ -55,7 +68,7 @@ export const selectedProjects: SelectedProject[] = [
     secondaryHref: "https://github.com/hopeatina/homebrew-perf-pulse", secondaryLabel: "Homebrew tap",
   },
   {
-    slug: "openclaw", index: "04", title: "OrgX for OpenClaw", selectorLabel: "OpenClaw",
+    slug: "openclaw", index: "05", title: "OrgX for OpenClaw", selectorLabel: "OpenClaw",
     status: "Live tool", tier: "supporting", shortLabel: "Continuity plugin",
     role: "Plugin architecture · agent operations",
     summary: "Persistent organizational memory and coordinated execution for OpenClaw agents.",
@@ -68,7 +81,7 @@ export const selectedProjects: SelectedProject[] = [
     secondaryHref: "https://github.com/useorgx/openclaw-plugin", secondaryLabel: "View source",
   },
   {
-    slug: "brain-buffet", index: "05", title: "BrainBuffet", selectorLabel: "BrainBuffet",
+    slug: "brain-buffet", index: "06", title: "BrainBuffet", selectorLabel: "BrainBuffet",
     status: "Experimental", stageLabel: "Product prototype", tier: "supporting", shortLabel: "Personal learning",
     role: "Product design · full-stack engineering",
     summary: "Personal learning pathways shaped by a learner's goals, prior knowledge, and interests.",
@@ -81,7 +94,7 @@ export const selectedProjects: SelectedProject[] = [
     secondaryHref: "https://app.brainbuffet.co", secondaryLabel: "View BrainBuffet",
   },
   {
-    slug: "neuromosaic", index: "06", title: "Neuromosaic", selectorLabel: "Neuromosaic",
+    slug: "neuromosaic", index: "07", title: "Neuromosaic", selectorLabel: "Neuromosaic",
     status: "Experimental", stageLabel: "Research prototype", tier: "supporting", shortLabel: "Research workbench",
     role: "ML systems · product engineering",
     summary: "A research workbench connecting papers, neural architectures, generated model code, and experiments.",
@@ -94,7 +107,7 @@ export const selectedProjects: SelectedProject[] = [
     secondaryHref: "https://neuromosaic.vercel.app", secondaryLabel: "View project site",
   },
   {
-    slug: "chaos-riders", index: "07", title: "Chaos Riders", selectorLabel: "Chaos Riders",
+    slug: "chaos-riders", index: "08", title: "Chaos Riders", selectorLabel: "Chaos Riders",
     status: "Experimental", stageLabel: "Playable prototype", tier: "supporting", shortLabel: "Game world",
     role: "Creative direction · game engineering",
     summary: "A Cameroon-rooted driving world, made tangible through a short browser prototype.",
@@ -106,7 +119,7 @@ export const selectedProjects: SelectedProject[] = [
     href: "/projects/chaos-riders", primaryCta: "Read case study",
   },
   {
-    slug: "meridian", index: "08", title: "Meridian", selectorLabel: "Meridian",
+    slug: "meridian", index: "09", title: "Meridian", selectorLabel: "Meridian",
     status: "Experimental", stageLabel: "Research prototype", tier: "supporting", shortLabel: "Decision systems",
     role: "Product design · engineering",
     summary: "An explainable trading-research interface connecting market signals, inspectable conviction, and deliberate review.",

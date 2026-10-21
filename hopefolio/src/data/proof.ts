@@ -139,6 +139,7 @@ export const proofReceipts: ProofReceipt[] = [
       { date: "2026-07-15", note: "Published. Merged as PR #24." },
       { date: "2026-07-16", note: "Occlusion defect found on the live site (.site-shell opaque background) and fixed; failure section updated." },
       { date: "2026-09-23", note: "Superseded. PR #31 replaced this canvas with the material knot, so the component no longer runs on the live site and the demo link no longer shows it. Its job moved to the page thread: one strand sewn through every page, carried across route changes." },
+      { date: "2026-10-21", note: "Retired for good. The page thread was cut in the October design refresh: a motif that repeats identically on every page is wallpaper, not continuity. The material object now appears once, on the home journey, where it progresses through four forms. The claim this receipt tested is no longer made by the site." },
     ],
     next: "Page-transition FLIP handoff: the lit node slides through the door into the case-study spine instead of easing in place.",
   },

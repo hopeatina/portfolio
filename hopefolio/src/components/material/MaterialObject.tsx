@@ -156,20 +156,22 @@ export default function MaterialObject(props: MaterialObjectProps) {
         scene.environmentIntensity = ambient ? 0.85 : 0.95;
 
         const silver = own(new THREE.MeshPhysicalMaterial({
-          color: 0xb6bdb2,
-          metalness: 1,
-          roughness: ambient ? 0.38 : 0.34,
-          clearcoat: ambient ? 0.06 : 0.12,
-          clearcoatRoughness: 0.35,
-          envMapIntensity: 1.1,
+          // Cast, not chromed: a bone-coloured body with a matte, slightly
+          // chalky surface. Light sits on it instead of sliding off.
+          color: 0xd6d0bf,
+          metalness: 0.06,
+          roughness: ambient ? 0.7 : 0.64,
+          clearcoat: 0,
+          clearcoatRoughness: 0.6,
+          envMapIntensity: 0.9,
           vertexColors: true,
         }));
         const paleSilver = own(silver.clone());
-        paleSilver.color.set(0xc5cabe);
-        paleSilver.roughness = ambient ? 0.36 : 0.32;
+        paleSilver.color.set(0xe4dfcf);
+        paleSilver.roughness = ambient ? 0.68 : 0.62;
         const graphite = own(silver.clone());
-        graphite.color.set(0x899285);
-        graphite.roughness = ambient ? 0.4 : 0.36;
+        graphite.color.set(0x6f7067);
+        graphite.roughness = ambient ? 0.72 : 0.66;
         // Match the form reflections used by material-atmosphere.css. Colors
         // are blended in Three's linear working space with the shape weights.
         const inlayColors = {
@@ -179,18 +181,19 @@ export default function MaterialObject(props: MaterialObjectProps) {
           orbit: new THREE.Color(0xd6e1c7),
         };
         const inlay = own(new THREE.MeshPhysicalNodeMaterial({
+          // Painted on, not lit from inside.
           color: inlayColors.knot,
-          metalness: 0.3,
-          roughness: 0.27,
-          clearcoat: 0.6,
+          metalness: 0.02,
+          roughness: 0.52,
+          clearcoat: 0.08,
         }));
         // The signal travels: two pulses of light run the length of the inlay,
         // the thing that has to survive every handoff, moving through the knot.
         const inlayTint = TSL.uniform(inlayColors.knot.clone());
-        const pulseGain = TSL.uniform(ambient ? 0.9 : 1.6);
+        const pulseGain = TSL.uniform(ambient ? 0.5 : 0.9);
         const phase = TSL.fract(TSL.uv().x.mul(2).sub(TSL.time.mul(ambient ? 0.05 : 0.11)));
         const pulse = TSL.smoothstep(0, 0.05, phase).mul(TSL.smoothstep(0.16, 0.05, phase));
-        inlay.emissiveNode = inlayTint.mul(TSL.float(ambient ? 0.12 : 0.16).add(pulse.mul(pulseGain)));
+        inlay.emissiveNode = inlayTint.mul(TSL.float(ambient ? 0.05 : 0.07).add(pulse.mul(pulseGain)));
         const groups: InstanceType<ThreeModule['Group']>[] = [];
         const meshes: InstanceType<ThreeModule['Mesh']>[] = [];
         const strandOf = new Map<unknown, number>();

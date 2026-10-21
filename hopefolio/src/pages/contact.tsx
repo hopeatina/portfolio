@@ -1,5 +1,3 @@
-import MaterialSpecimen from "@/components/material/MaterialSpecimen";
-import { materialContexts } from "@/components/material/material-context";
 import Head from "next/head";
 import { ContinuityPlayhead, TextLink } from "@/components/v4/V4Primitives";
 
@@ -17,9 +15,8 @@ export default function Contact() {
       <main id="main-content" className="v4-page v4-contact-page">
         <ContinuityPlayhead label="contact" />
         <section className="v4-contact-hero v4-motif-backed">
-          <MaterialSpecimen context={materialContexts.home} className="material-inner-object" compact />
-          <span>Contact / Houston, CT</span>
-          <h1 data-thread="">Bring me the system that doesn't hold together yet.</h1>
+          <span>Contact / Houston, TX</span>
+          <h1>Tell me what's pressing on the system.</h1>
           <p>
             Tell me the company, the system, what's pressing on it, and why now. Serious notes get
             a serious reply.

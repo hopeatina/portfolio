@@ -5,7 +5,7 @@ export default function OrgXForOpenClawPage() {
     <CaseStudyNarrative
       pageTitle="OrgX for OpenClaw case study — Hope Atina"
       description="How OrgX for OpenClaw adds persistent organizational memory, coordinated execution, and proof to OpenClaw agents."
-      index="Case 04 / plugin architecture"
+      index="Case 05 / plugin architecture"
       status="Published plugin · active"
       title="OrgX for OpenClaw"
       subtitle="Persistent organizational memory and coordinated execution inside OpenClaw."

@@ -5,7 +5,7 @@ export default function AlmaPage() {
     <CaseStudyNarrative
       pageTitle="Alma case study — Hope Atina"
       description="Production backend engineering under HIPAA constraints: reassessments, compliant workflows, observability, and reversible rollout."
-      index="Case 02 / regulated production"
+      index="Case 03 / regulated production"
       status="Production ownership · 2.7 years"
       title="Alma"
       subtitle="Clinical systems that had to earn adoption and survive inspection."
