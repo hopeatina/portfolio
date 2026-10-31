@@ -1672,6 +1672,26 @@ body::before {
   font-size: clamp(2.8rem, 5.3vw, 5.8rem);
 }
 
+.v4-about-archive {
+  width: min(100%, 30rem);
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+  scroll-margin-top: 7rem;
+}
+
+.v4-about-archive img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--v4-rule-strong);
+}
+
+.v4-about-archive figcaption {
+  margin-top: 0.8rem;
+  color: var(--v4-mineral-soft);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
 .v4-about-origin-grid > div p:first-child {
   margin-top: 0;
 }
