@@ -139,7 +139,19 @@ export default function About() {
         <section id="origins" className="v4-about-origin v4-motif-backed">
           <SectionSignal index="01">The root system</SectionSignal>
           <div className="v4-about-origin-grid">
-            <h2>Multidisciplinary from the first serious problem.</h2>
+            <div>
+              <h2>Multidisciplinary from the first serious problem.</h2>
+              <figure id="high-school-archive" className="v4-about-archive">
+                <Image
+                  src="/images/evidence/high-school-hope.jpg"
+                  alt="HOPE spelled in glowing lights in a photograph from my high-school years"
+                  width={706}
+                  height={451}
+                  sizes="(min-width: 900px) 480px, (min-width: 560px) 70vw, 100vw"
+                />
+                <figcaption>A little hope, from the high-school archives.</figcaption>
+              </figure>
+            </div>
             <div>
               <p>
                 My Cameroonian roots were my first lesson in translation. The same thing can mean
