@@ -1,6 +1,6 @@
-# OrgX carousel learning report — 2026-11-16
+# OrgX carousel learning report — 2026-11-25
 
-_generated 2026-11-16T15:37:05.671Z • lookback 30d • metric: engagement_rate_
+_generated 2026-11-25T18:43:26.379Z • lookback 30d • metric: engagement_rate_
 
 ## Status: warming up (0 post(s) with metrics)
 
@@ -9,6 +9,6 @@ The loop is wired and waiting on data. To start learning:
 2. Approve the queued **Ideas** in Buffer so they actually publish.
 3. Metrics lag ~24h; the learner will fold them in on its next run.
 
-**Experiments logged:** 37 • **rendered/queued but no metrics yet:** 37
+**Experiments logged:** 44 • **rendered/queued but no metrics yet:** 44
 **Seed concepts still unused:** 0/15
 
